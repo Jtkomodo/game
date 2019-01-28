@@ -1,0 +1,45 @@
+package gameEngine;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.HashMap;
+
+public class World {
+
+	private static File file=new File(System.getProperty("user.dir"));
+	private HashMap<Integer,Byte> Data= new HashMap<Integer,Byte>();  	
+	private int i=0;
+	public World(String name) {
+		
+		try {
+			BufferedReader map= new BufferedReader(new FileReader(file.getAbsolutePath()+"/src/"+name+"Data/"));
+			int c,k=0;
+			while((c= map.read())!= -1) {
+				Data.put(k, (byte) c);
+				
+				k++;
+			}
+			map.close();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for(int i=0;i<Data.size();i++) {
+			System.out.println(String.format(i/4+"%2x", Data.get(i)));
+			
+		}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

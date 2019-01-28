@@ -1,0 +1,30 @@
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+
+import gameEngine.Math;
+
+public class Test {
+
+	public static void main(String[] args) {
+		
+		Matrix4f matrix;
+		Matrix4f n;
+		
+		
+		matrix=Math.getMatrix(new Vector2f(0,0), 0, 0);
+		n= Math.getMatrix(new Vector2f(23,3),0, 0);
+		if(n.equals(matrix)) {
+			System.out.println("yes");
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,18 @@
+package Data;
+
+public enum textures {
+
+	Player("");
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

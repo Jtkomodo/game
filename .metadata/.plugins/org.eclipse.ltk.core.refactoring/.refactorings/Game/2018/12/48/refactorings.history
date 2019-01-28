@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Game/src/Shaders/fragment.sh&apos; to &apos;shader.fs&apos;" description="Rename resource &apos;fragment.sh&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/Shaders/fragment.sh" name="shader.fs" stamp="1543629593445" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;Game/src/Shaders/vertex.sh&apos; to &apos;shader.vs&apos;" description="Rename resource &apos;vertex.sh&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/Shaders/vertex.sh" name="shader.vs" stamp="1543629617358" updateReferences="true"/>
+</session>

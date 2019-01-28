@@ -1,0 +1,79 @@
+package gameEngine;
+
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+import java.lang.*;
+public class Math {
+
+	private static Matrix4f matrix=new Matrix4f().identity();
+	private static Matrix4f lastScale,lastAngle,lastTranslation;
+	private static float lscale,langle;
+	private static Vector2f lTran;
+	public static Matrix4f getMatrix(Vector2f translation,float angle,float scale) {
+		//load the identity matrix
+		
+		
+		
+		matrix.identity();
+		if(lscale==scale) {
+			matrix=lastScale;
+			if(lTran==translation) {
+				matrix=lastTranslation;
+				
+			if(langle==angle) {
+				
+				return lastAngle;
+				
+			}
+			else {
+				matrix.rotateZ((float) java.lang.Math.toRadians(angle));	;
+				lastAngle=matrix;
+			}
+			
+			
+			}
+			else {
+				matrix.translate(translation.x,translation.y,0);		
+				lastTranslation=matrix;
+				matrix.rotateZ((float) java.lang.Math.toRadians(angle));	
+				lastAngle=matrix;
+			}
+			
+			
+			
+		}
+		else {
+			matrix.scale(scale);
+			lastScale=matrix;
+			matrix.translate(translation.x,translation.y,0);
+			lastTranslation=matrix;
+			matrix.rotateZ((float) java.lang.Math.toRadians(angle));	
+			lastAngle=matrix;
+			
+		}
+		lscale=scale;
+		langle=angle;
+		lTran=translation;
+		
+		
+		
+		System.out.println(matrix);
+		
+		return matrix;
+	}
+	
+	
+	public static Matrix4f mirror(Matrix4f matrix) {
+		matrix.scale(-1,1,1);
+		return matrix;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

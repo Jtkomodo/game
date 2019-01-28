@@ -1,0 +1,25 @@
+package gameEngine;
+
+import java.util.HashMap;
+
+import org.joml.Vector2f;
+
+public class RenderTIles {
+
+	private static int last;
+	private static ShaderProgram lastShaderBinded;
+	private static Texture Lasttex;
+	public static void Draw(Tiles Currenttile,Vector2f translation,float angle,float scale) {
+	
+		Currenttile.setTranslation(translation);
+		Currenttile.draw();
+	    
+	
+		
+		
+	}
+	
+	
+	
+	
+}

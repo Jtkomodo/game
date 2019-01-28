@@ -1,0 +1,64 @@
+package gameEngine;
+import static org.lwjgl.stb.STBImage.*;
+import static  org.lwjgl.opengl.GL13.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+
+import org.lwjgl.BufferUtils;
+import org.lwjgl.stb.STBImage;
+
+
+public class Texture {
+public static int TEXid;
+public static File file=new File(System.getProperty("user.dir"));
+	public Texture(String path) {
+		IntBuffer width=BufferUtils.createIntBuffer(1);
+
+		IntBuffer height=BufferUtils.createIntBuffer(1);
+	
+		IntBuffer comp=BufferUtils.createIntBuffer(1);
+		System.out.println(file.getAbsolutePath().toString()+"/src/res/"+path+".png");
+	
+		try {
+		ByteBuffer data=stbi_load(file.getAbsolutePath().toString()+"/src/res/"+path+".png",width,height,comp,4);
+		if(data==null) {
+			throw new IOException(STBImage.stbi_failure_reason());
+		}
+		
+		int w = width.get();
+		System.out.println(w);
+		int h= height.get();
+		System.out.println(h);
+	    this.TEXid = glGenTextures();
+	    
+	    glBindTexture(GL_TEXTURE_2D,TEXid);//binds
+	    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+	    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
+        glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,w,h,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
+        glBindTexture(GL_TEXTURE_2D,0);//unbinds
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	
+	}
+	
+	
+	
+	public void bind(int sampler) {
+		  
+		if(sampler>=0 && sampler<=31) {
+		glActiveTexture(GL_TEXTURE0+sampler);
+		
+		glBindTexture(GL_TEXTURE_2D,TEXid);
+		   
+		} 
+		  
+		  
+	}
+	
+	
+	
+}

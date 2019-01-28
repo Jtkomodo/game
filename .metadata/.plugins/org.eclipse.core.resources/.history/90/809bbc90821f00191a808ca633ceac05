@@ -1,0 +1,60 @@
+package gameEngine;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.HashMap;
+
+public class World {
+
+	private static File file=new File(System.getProperty("user.dir"));
+	private HashMap<Integer,Byte> Data= new HashMap<Integer,Byte>();  	
+	private int i=0;
+	public World(String name) {
+		
+		try {
+			BufferedReader map= new BufferedReader(new FileReader(file.getAbsolutePath()+"/src/"+name+"Data/"));
+			int c,k=0;
+			while((c= map.read())!= -1) {
+				Data.put(k, (byte) c);
+				
+				k++;
+			}
+			map.close();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int h=64;
+		int w=64;
+		
+		 for(int i=0;i<h;i++) {
+			 
+		 
+		for(int j=0;j<w*4;j+=4) {  
+			  byte r=Data.get((i*w*4)+j);
+			  byte g=Data.get((i*w*4)+(j+1));
+		   	  byte b=Data.get((i*w*4)+(j+2));
+		   	  byte a=Data.get((i*w*4)+(j+3)); 
+		   	System.out.print(" pixel["+String.format("%2d",j/4)+"]"+"["+String.format("%2d",i)+"]"+String.format(" "+"%2x",r)+String.format(" "+"%2x",g)+String.format(" "+"%2x",b)+String.format(" "+"%2x",a));
+			if(j/4==w-1) {
+				System.out.print("\n");
+			}
+			
+			
+			}
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+}

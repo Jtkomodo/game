@@ -1,9 +1,5 @@
 package gameEngine;
-import static org.lwjgl.opengl.GL11.*;
-
 import java.io.IOException;
-
-import static org.lwjgl.glfw.GLFW.*;
 
 import org.joml.Matrix4f;
 import  org.joml.Vector2f;
@@ -72,7 +68,7 @@ public class Start {
 			Projection=s.makeLocation("projection");
 			RTS=s.makeLocation("rts");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -144,7 +140,7 @@ public class Start {
    
 	
 	    
-	    drawmap(10000,10000,t);
+	    drawmap(100,100,t);
       
 
 		    w.render();
@@ -185,7 +181,7 @@ public class Start {
 				System.out.println("yes");
 				tex.createFile(false,"map1");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+			
 				e.printStackTrace();
 			}
 		}

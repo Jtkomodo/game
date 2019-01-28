@@ -24,8 +24,11 @@ import org.lwjgl.opengl.GL20;
 public  class ShaderProgram {
 private int program,vs,fs;
 private File file=new File(System.getProperty("user.dir"));	
+
 	     //make our shader
 	public ShaderProgram(String path) {
+	
+	System.out.print(file.getAbsolutePath());
 		program=glCreateProgram();
 		createShaders(path);
 		Locations();
@@ -41,7 +44,7 @@ private File file=new File(System.getProperty("user.dir"));
 		BufferedReader br;
 		
 		try{
-			br=new BufferedReader(new FileReader(new File(file.getAbsolutePath()+"/src/Shaders/"+path)));
+			br=new BufferedReader(new FileReader(new File(file.getAbsolutePath()+"/Game/src/Shaders/"+path)));
 			String line;
 			while((line= br.readLine())!= null) {
 				string.append(line);

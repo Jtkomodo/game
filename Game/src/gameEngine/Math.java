@@ -2,12 +2,11 @@ package gameEngine;
 
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
-import java.lang.*;
 public class Math {
 
 	private static Matrix4f matrix=new Matrix4f().identity();
-	private static Matrix4f lastScale;
-	public static Matrix4f getMatrix(Vector2f translation,float angle,float scale) {
+	
+	public static Matrix4f getMatrix(Vector2f translation, float angle, float scale) {
 		//load the identity matrix
 		
 		matrix.identity();

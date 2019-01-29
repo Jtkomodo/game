@@ -56,12 +56,15 @@ private int width,height;
 		return glfwWindowShouldClose(window);
 	}
 	public void update() {
+		fullscreen=glfwGetWindowMonitor(window);
 		glfwPollEvents();
 		int[] width=new int[1], height=new int[1];
 glfwGetWindowSize(window, width, height);
-
+if(fullscreen==0) {
 glViewport(0, 0, width[0], height[0]);
-
+}else{
+	glViewport(0, 0, vidmode.width(), vidmode.height()); 
+}
 
 }
 	public void destroy() {

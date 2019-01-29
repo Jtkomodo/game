@@ -47,23 +47,36 @@ public class Tiles {
     // render bounds  
  // System.out.println(Leftcornerx);
   
-  boolean leftBounds=(Rightcornerx<(camLeft)); 
-  boolean rightBounds=(Leftcornerx>(camRight-128));
+  boolean leftBounds=(Rightcornerx<(camLeft)-128); 
+  boolean rightBounds=(Leftcornerx>(camRight));
   boolean topBounds=(Bottomcornery>(camTop));
-  boolean bottomBounds=(Topcornery<(camBottom));  	
+  boolean bottomBounds=(Topcornery<(camBottom)-128);  	
  
 if(rightBounds) {
 	 	  Start.norenderR=false;
  }
-if(!leftBounds) {
+ else{
+	 Start.norenderR=true;
+ }
+if(leftBounds) {
 	  Start.norenderL=false;
+}else{
+Start.norenderL=true;
 }
 
 
-if(!topBounds) {
+if(topBounds) {
 	Start.norenderT=false;
+}else{
+
+	Start.norenderT=true;
 }
-	  
+if(bottomBounds) {
+	Start.norenderB=false;
+}else{
+
+	Start.norenderB=true;
+}	  
  // }
   
   

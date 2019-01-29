@@ -1,28 +1,29 @@
 package gameEngine;
-import static org.lwjgl.stb.STBImage.*;
-import static  org.lwjgl.opengl.GL13.*;
 
-import java.awt.Image;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
+import static org.lwjgl.opengl.GL11.GL_NEAREST;
+import static org.lwjgl.opengl.GL11.GL_RGBA;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
+import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
+import static org.lwjgl.opengl.GL11.glBindTexture;
+import static org.lwjgl.opengl.GL11.glGenTextures;
+import static org.lwjgl.opengl.GL11.glTexImage2D;
+import static org.lwjgl.opengl.GL11.glTexParameterf;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
+import static org.lwjgl.stb.STBImage.stbi_load;
+
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-
-import org.lwjgl.stb.STBImageWrite;
-import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-import java.nio.file.Files;
 import java.util.HashMap;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.stb.STBImage;
-import org.newdawn.slick.opengl.ImageData;
 
 
 public class Texture {

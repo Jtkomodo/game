@@ -13,7 +13,7 @@ public class Start {
     public static ShaderProgram s;
     public static Camera cam;
     public static Input I;
-    public static boolean canRender,norenderR=true,norenderT=true,norenderL=true;
+    public static boolean canRender,norenderR=true,norenderT=true,norenderL=true,norenderB=true;
     public static double framCap,time,time2,passed,unproccesed,frameTime;
     public static Texture tex,map;
     public static float x2,y2;
@@ -140,7 +140,7 @@ public class Start {
    
 	
 	    
-	    drawmap(100,100,t);
+	    drawmap(10000,10000,t);
       
 
 		    w.render();
@@ -261,10 +261,30 @@ public class Start {
 		
 	}
 	private static void drawmap(int Mapwidth,int Mapheight,Tiles t) {
-	for(int i=0; i<Mapwidth;i++) {
-		for(int j=0;j<Mapheight;j++) {
+	int jstart=0;
+
+		i:for(int i=0; i<Mapwidth;i++) {
+		j:for(int j=jstart;j<Mapheight;j++) {
+			
 			t.setTranslation(new Vector2f(j,i));
 			t.draw();
+			if(!norenderR){
+              
+              break;
+			}
+			if(!norenderT){
+               break;
+			}
+			if(!norenderB){
+				i++;
+				continue i;
+			
+			}
+			if(!norenderL){
+			j++;
+				continue j;
+			}
+			
 		}
 		
 	}

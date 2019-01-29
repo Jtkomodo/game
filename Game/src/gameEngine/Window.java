@@ -15,6 +15,7 @@ private  Long fullscreen;
 private GLFWVidMode vidmode;
 private int width,height;
 
+
 	public Window(int width, int height) {
 		this.width=width;
 		this.height=height;
@@ -27,6 +28,7 @@ private int width,height;
 		}
 		glfwWindowHint(GLFW_VISIBLE,GLFW_FALSE);
 		glfwWindowHint(GLFW_DECORATED,GLFW_TRUE);
+		glfwWindowHint(GLFW_RESIZABLE,GLFW_TRUE);
 		window=glfwCreateWindow(width,height,"Game",0,0);
 		if(window==0) {
 			throw new IllegalStateException("failed to create window");
@@ -55,8 +57,13 @@ private int width,height;
 	}
 	public void update() {
 		glfwPollEvents();
-		
-	}
+		int[] width=new int[1], height=new int[1];
+glfwGetWindowSize(window, width, height);
+
+glViewport(0, 0, width[0], height[0]);
+
+
+}
 	public void destroy() {
 		glfwDestroyWindow(window);
 		
@@ -75,14 +82,17 @@ private int width,height;
     public void toggleFullscreen() {
     	fullscreen=glfwGetWindowMonitor(window);
     	if(fullscreen==0) {
-    		glfwSetWindowMonitor(window,glfwGetPrimaryMonitor(),0,0,vidmode.width(),vidmode.height(),vidmode.refreshRate());
-    	System.out.println(fullscreen);
+		
+			glfwSetWindowMonitor(window,glfwGetPrimaryMonitor(),0,0,vidmode.width(),vidmode.height(),vidmode.refreshRate());// this allows fullscreen window the thing that actually changes if fullscreen is used is the second argument
+				
+			glViewport(0, 0, vidmode.width(), vidmode.height()); //this changes the view to the size of the monitor so that it won't be small
+				System.out.println(fullscreen);
     	}
     	else {
     		
     		glfwSetWindowMonitor(window,0,(vidmode.width()-width)/2,(vidmode.height()-height)/2,width,height,vidmode.refreshRate());
-    		
-    	}
+			glViewport(0,0,width,height);
+		}
     		
     	
     }

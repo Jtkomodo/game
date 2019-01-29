@@ -44,7 +44,7 @@ private File file=new File(System.getProperty("user.dir"));
 		BufferedReader br;
 		
 		try{
-			br=new BufferedReader(new FileReader(new File(file.getAbsolutePath()+"/src/Shaders/"+path)));
+			br=new BufferedReader(new FileReader(new File(file.getAbsolutePath()+"/Game/src/Shaders/"+path)));
 			String line;
 			while((line= br.readLine())!= null) {
 				string.append(line);

@@ -8,14 +8,14 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 public class Callback extends  GLFWKeyCallback {
 
 	
-	public static boolean[] keys= new boolean[2560];
+	public static boolean[] keys= new boolean[65537];
 	
 	
 	@Override
 	public void invoke(long window, int key, int scancode, int action , int mods ) {
-		
+	if(key!=-1){	
 		keys[key]=action !=GLFW.GLFW_RELEASE;
-		
+	}
 	
 	}
 

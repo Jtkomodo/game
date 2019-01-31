@@ -91,12 +91,10 @@ unbindBuffers();
 	}
 	
 	public void  changeUV(float[] data) {
-		
-		 
-	    glBindBuffer(GL_ARRAY_BUFFER,tex_id);
+		  glBindBuffer(GL_ARRAY_BUFFER,tex_id);
 		  glBufferData(GL_ARRAY_BUFFER,makeBuffer(data),GL_DYNAMIC_DRAW);
-		  glBindBuffer(GL_ARRAY_BUFFER,0);	
-		  
-		
-	}
+		  glBindBuffer(GL_ARRAY_BUFFER,0);
+			}
+
+
 }

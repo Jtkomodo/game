@@ -213,7 +213,7 @@ for(int i=0;i<h;i++) {
 d.flush();
 d.close();
 	}
-File f2=new File(file.getAbsolutePath()+"/Game/src/"+path+"Data");	
+File f2=new File(file.getAbsolutePath()+"/src/"+path+"Data");	
 DataOutputStream data=new DataOutputStream(new FileOutputStream(f2));
 for(int i=0;i<imageData.size();i++ ) {
 	data.writeByte(imageData.get(i).byteValue());

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="WorkbenchPreferenceDialogSettings">
-		<item value="481" key="DIALOG_X_ORIGIN"/>
+		<item value="199" key="DIALOG_X_ORIGIN"/>
 		<item value="116" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="org.eclipse.ui.preferences.keysPreferencePage">
@@ -20,32 +20,39 @@
 		<list key="textEntries">
 			<item value="1"/>
 			<item value="1"/>
-			<item value="2"/>
+			<item value="1"/>
+			<item value="1"/>
+			<item value="1"/>
 			<item value="1"/>
 			<item value="1"/>
 			<item value="1"/>
 		</list>
 		<list key="orderedElements">
+			<item value="org.eclipse.ui.window.preferences(preferencePageId=org.eclipse.jdt.debug.ui.JavaPrimitivesPreferencePage)"/>
+			<item value="org.eclipse.ui.preferencePages.Views"/>
+			<item value="org.eclipse.ui.preferencePages.ColorsAndFonts"/>
 			<item value="org.eclipse.jdt.ui.preferences.ClasspathVariablesPreferencePage"/>
 			<item value="org.eclipse.ui.console.ConsoleView"/>
-			<item value="org.eclipse.ui.preferencePages.Views"/>
 			<item value="org.eclipse.ui.resourcePerspective"/>
 			<item value="org.eclipse.help.ui.HelpView"/>
 			<item value="org.eclipse.epp.mpc.ui.command.showInstalled"/>
 		</list>
 		<list key="orderedProviders">
+			<item value="org.eclipse.ui.commands"/>
+			<item value="org.eclipse.ui.preferences"/>
+			<item value="org.eclipse.ui.preferences"/>
 			<item value="org.eclipse.ui.preferences"/>
 			<item value="org.eclipse.e4.ui.parts"/>
-			<item value="org.eclipse.ui.preferences"/>
 			<item value="org.eclipse.ui.perspectives"/>
 			<item value="org.eclipse.e4.ui.parts"/>
 			<item value="org.eclipse.ui.commands"/>
 		</list>
 		<list key="textArray">
+			<item value="debug op"/>
+			<item value="th"/>
+			<item value="theme"/>
 			<item value="class"/>
 			<item value="c"/>
-			<item value="theme"/>
-			<item value="th"/>
 			<item value="res"/>
 			<item value="vh"/>
 			<item value="plu"/>

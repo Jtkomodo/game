@@ -1,11 +1,16 @@
 package gameEngine;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
-
+import java.io.EOFException;
+import Data.Tiles;
 import org.joml.Math;
 
 public class World {
@@ -25,10 +30,20 @@ public class World {
 				this.height=height;
 				this.cam=cam;
 		try {
-			BufferedReader map= new BufferedReader(new FileReader(file.getAbsolutePath()+"/src/"+name+"Data/"));
-			int c,k=0;
-			while((c= map.read())!= -1) {
-				Data.put(k, (byte) c);
+		
+		  File file2= new File(file.getAbsolutePath()+"/src/"+name+"Data");
+		  DataInputStream map=new DataInputStream(new FileInputStream(file2));
+		  byte c;
+			int k=0;
+			while(true) {
+				try{
+				c=map.readByte();	
+				}catch(EOFException e){
+                   break;
+
+				}
+				Data.put(k,  c);
+				
 				
 				k++;
 			}
@@ -47,28 +62,38 @@ public class World {
 		int y=0;
 			for(int i=0;i<height;i++) {
 				for(int j=0;j<width*4;j+=4) {  
+				
 					  byte r=Data.get((i*width*4)+j);
 					  byte g=Data.get((i*width*4)+(j+1));
 				   	  byte b=Data.get((i*width*4)+(j+2));
 				   	  byte a=Data.get((i*width*4)+(j+3)); 
-				   	
-				   	  
-				   	  if(r==Tile1rgba[0] && g==Tile1rgba[1] && b==Tile1rgba[2] &&  a==Tile1rgba[3]) {
-				   		  map[j/4][i]=1;
+				   
+				
+				   	  if(r==Tiles.Dirt.getColorR() &&  g==Tiles.Dirt.getColorG() && b==Tiles.Dirt.getColorB()) {
+							
+						map[j/4][i]=1;
 				   		  
 				   		
-				   	  }
-				   	  else if(r==(byte)0xff && g==(byte)0xff && b==(byte)0xff &&  a==(byte)0xff){
+						 }
+						
+				   	  else if(r==Tiles.Grassw.getColorR() && g==Tiles.Grassw.getColorG() && b==Tiles.Grassw.getColorB()){
 				   		  map[j/4][i]=2;
 				   	  }
+				   	  else if(r==Tiles.Water.getColorR() && g==Tiles.Water.getColorG() && b==Tiles.Water.getColorB()){
+						map[j/4][i]=3;
+					}
+					else if(r==Tiles.Grass.getColorR() &&  g==Tiles.Grass.getColorG() && b==Tiles.Grass.getColorB()) {
+							
+						map[j/4][i]=4;
+							 
+						   
+						 }
+				   	  
+				   	 
 				   	  
 				   	  
-				   	  else {
-				   		  map[j/4][i]=0;
-				   	  }
-				   	  
-				   	  }
 		}
+	}
 			return map;
 			}
 	

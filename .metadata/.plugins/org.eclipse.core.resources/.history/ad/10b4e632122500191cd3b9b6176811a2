@@ -1,0 +1,56 @@
+package gameEngine;
+import org.lwjgl.system.Pointer.Default;
+
+import Data.Tiles;;
+
+public class Map{
+   private int[][] mapData;
+   private Tilepositions[][] tileData;
+
+    public Map(int[][] mapData){
+    tileData= new Tiles[mapData.length][mapData[0].length];       
+     this.mapData=mapData;
+         for(int i=0;i<mapData.length;i++){
+            for(int j=0;j<mapData[i].length/4;j+=4){
+                switch(mapData[j][i]){
+                  
+                   case 1:
+                      tileData[j][i]=new Tilepositions((float)j,(float) i,128f, 128f,Tiles.Dirt);
+                   case 2:
+                      tileData[j][i]=new Tilepositions((float)j, (float)i, 128f, 128f,Tiles.Grassw);
+                   case 3:
+                      tileData[j][i]= new Tilepositions((float)j, (float)i, 128f, 128f, Tiles.Water);
+                   case 4:
+                     tileData[j][i]= new Tilepositions((float)j, (float)i, 128f, 128f, Tiles.Grass);
+                   
+
+
+
+
+
+
+                }
+               
+               
+
+
+
+         }
+     
+    
+    
+    }
+     
+
+
+
+
+
+
+
+
+
+
+
+}
+}

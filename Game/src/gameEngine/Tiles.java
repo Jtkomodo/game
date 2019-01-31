@@ -1,6 +1,5 @@
 package gameEngine;
-
- import org.joml.Matrix4f;
+import org.joml.Matrix4f;
 import org.joml.Vector2f;
 
 public class Tiles {
@@ -47,35 +46,35 @@ public class Tiles {
     // render bounds  
  // System.out.println(Leftcornerx);
   
-  boolean leftBounds=(Rightcornerx<(camLeft)-128); 
+  boolean leftBounds=(Rightcornerx<(camLeft)-scale); 
   boolean rightBounds=(Leftcornerx>(camRight));
-  boolean topBounds=(Bottomcornery>(camTop));
-  boolean bottomBounds=(Topcornery<(camBottom)-128);  	
+  boolean topBounds=(Bottomcornery>(camTop)+scale);
+  boolean bottomBounds=(Topcornery<(camBottom)-scale);  	
  
 if(rightBounds) {
-	 	  Start.norenderR=false;
+	 	  Map.norenderR=false;
  }
  else{
-	 Start.norenderR=true;
+	 Map.norenderR=true;
  }
 if(leftBounds) {
-	  Start.norenderL=false;
+	  Map.norenderL=false;
 }else{
-Start.norenderL=true;
+Map.norenderL=true;
 }
 
 
 if(topBounds) {
-	Start.norenderT=false;
+	Map.norenderT=false;
 }else{
 
-	Start.norenderT=true;
+	Map.norenderT=true;
 }
 if(bottomBounds) {
-	Start.norenderB=false;
+	Map.norenderB=false;
 }else{
 
-	Start.norenderB=true;
+	Map.norenderB=true;
 }	  
  // }
   

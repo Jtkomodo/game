@@ -30,7 +30,7 @@ import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glViewport;
 
-import org.lwjgl.glfw.GLFW;
+import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
@@ -54,6 +54,7 @@ private int width,height;
 		glfwWindowHint(GLFW_VISIBLE,GLFW_FALSE);
 		glfwWindowHint(GLFW_DECORATED,GLFW_TRUE);
 		glfwWindowHint(GLFW_RESIZABLE,GLFW_TRUE);
+		
 		window=glfwCreateWindow(width,height,"Game",0,0);
 		if(window==0) {
 			throw new IllegalStateException("failed to create window");
@@ -97,7 +98,7 @@ glViewport(0, 0, width[0], height[0]);
 		
 	}
 	public void render() {
-		GLFW.glfwSwapBuffers(window);
+		glfwSwapBuffers(window);
 	}
 	public void clear() {
 		glClear(GL_COLOR_BUFFER_BIT);

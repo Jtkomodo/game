@@ -234,7 +234,7 @@ public class Start {
 		unproccesed=0;
 	    frameTime=0;
 	    frames=0;
-		framCap=1.0/60;
+		framCap=1.0/6000;
 		
 		
 	}

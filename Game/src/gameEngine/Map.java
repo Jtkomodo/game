@@ -7,8 +7,7 @@ public class Map{
    private int[][] mapData;
    private Tiles[][] tileData;
    public static  boolean norenderR=true,norenderT=true,norenderL=true,norenderB=true;
-   
-   
+   private float lastU,lastV ,Texwidth=256,Texheight=256,wi=64,h=64,Texx=64,Texy=0;   
    
    public Map(int[][] mapData){
     tileData= new Tiles[mapData.length][mapData[0].length];       
@@ -53,25 +52,19 @@ public class Map{
       i:for(int i=Mapwidth; i>-1;i--) {
          j:for(int j=0;j<Mapheight;j++) {
             tile=tileData[j][Mapwidth-i];
-         	
-            float Texwidth=256;
-            float Texheight=256;		
-            float wi=64;
-            float h=64;
-            float Texx=tile.getU();
-            float Texy=tile.getV();		
-            
+         lastU=Texx;
+         lastV=Texy;
+           Texx=tile.getU();
+           Texy=tile.getV();		
+         if(lastU!=Texx || lastV!=Texy){   
             float[] uv={
                   Texx/Texwidth,Texy/Texheight,
                   (Texx+wi)/Texwidth,Texy/Texheight,
                   (Texx+wi)/Texwidth,(Texy+h)/Texheight,
                   Texx/Texwidth,(Texy+h)/Texheight
                   };
-               
-        
-           
-           t.getModel().changeUV(uv);
-           
+             t.getModel().changeUV(uv);
+               }
             t.setTranslation(new Vector2f(j,i));
             t.draw();
             if(!norenderR){

@@ -8,10 +8,11 @@ public class Map{
    private Tiles[][] tileData;
    public static  boolean norenderR=true,norenderT=true,norenderL=true,norenderB=true;
    private float lastU,lastV ,Texwidth=256,Texheight=256,wi=64,h=64,Texx=64,Texy=0;   
-   
-   public Map(int[][] mapData){
+   private gameEngine.Tiles t;
+   public Map(int[][] mapData,gameEngine.Tiles tile){
     tileData= new Tiles[mapData.length][mapData[0].length];       
-     this.mapData=mapData;
+    this. t=tile;
+    this.mapData=mapData;
          for(int i=0;i<mapData.length;i++){
             for(int j=0;j<mapData[i].length;j++){
               // System.out.println(j+" "+i);
@@ -32,16 +33,15 @@ public class Map{
 
                 
                     }}}
-         
-          
-         
-   
-   
-   
-   
-   }
+                  
+                  
+      
+                  }
 
-   public void Draw(gameEngine.Tiles t){
+   public void Draw(){
+     
+      t.Bind(0);
+		t.setScale(128);
       int Mapwidth= tileData[0].length-1;
       int Mapheight=tileData.length;
 

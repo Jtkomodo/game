@@ -112,7 +112,7 @@ glViewport(0, 0, width[0], height[0]);
     	fullscreen=glfwGetWindowMonitor(window);
     	if(fullscreen==0) {
 		
-			glfwSetWindowMonitor(window,glfwGetPrimaryMonitor(),0,0,vidmode.width(),vidmode.height(),vidmode.refreshRate());// this allows fullscreen window the thing that actually changes if fullscreen is used is the second argument
+			glfwSetWindowMonitor(window,glfwGetPrimaryMonitor(),0,0,vidmode.width(),vidmode.height(),vidmode.refreshRate());// this allows fullscreen window .the value that actually changes if fullscreen is used is the second argument
 				
 			glViewport(0, 0, vidmode.width(), vidmode.height()); //this changes the view to the size of the monitor so that it won't be small
 				System.out.println(fullscreen);

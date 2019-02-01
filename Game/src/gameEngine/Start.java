@@ -17,7 +17,7 @@ public class Start {
     public static boolean canRender;
     public static double framCap,time,time2,passed,unproccesed,frameTime;
     public static Texture tex,MAP;
-    public static float x2,y2;
+    public static float x2,y2,camx,camy,x,y,Palyerscale=100;
 	public static void main(String[] args) {
 		float[] vert={
 				-0.5f,+0.5f,
@@ -44,6 +44,25 @@ public class Start {
 			2,3,0	
 				
 		};
+	   Texwidth=256;
+	   Texheight=256;		
+	   wi=64;
+	   h=64;
+	   Texx=0;
+	   Texy=0;	
+
+
+
+       float[] uvPlayer={
+		Texx/Texwidth,Texy/Texheight,
+		(Texx+wi)/Texwidth,Texy/Texheight,
+		(Texx+wi)/Texwidth,(Texy+h)/Texheight,
+		Texx/Texwidth,(Texy+h)/Texheight  };
+
+
+
+
+
 		for(int i=0;i<8;i++) {
 		System.out.println(uv[i]);
 		} 
@@ -56,11 +75,11 @@ public class Start {
 		//Define textures
 	    
 		tex=new Texture("newsprite");
-		MAP=new Texture("map3");
+		Texture playerTex= new Texture("playerSprites");
 		//map=new Texture("map1"); 
 		//Define models
-		Model m=new Model(vert,uv,ind);
-		
+		Model m=new Model(vert,uv,ind);//model for tiles
+		Model player= new Model(vert,uvPlayer,ind);
 		//set camera
 		cam= new Camera(width,height);
 		
@@ -75,14 +94,14 @@ public class Start {
 		}
 		World world=new World("map", 64,64, cam);
 		Tiles t=new Tiles(tex, m, s, cam, location, Projection,RTS);
-	    gameEngine.Map grid=new gameEngine.Map(world.Getmap());
+	    gameEngine.Map grid=new gameEngine.Map(world.Getmap(),t);
 	
 		
 		
 		
 		 boolean map=true;
 		initializeFPS();
-		float x=0,scale=0;
+		float x=0;
 		int y=0;	
 	
 //----------------------game loop------------------------------
@@ -90,56 +109,20 @@ public class Start {
 	
 		fps();
 	    t.unbind();
-		if(canRender) {
-		
 	
-	if((dKeys>>4 &0x01)==1) {	
-		if((dKeys & 0x01)==1) {
-			y-=10;
-			
-		}
-		if((dKeys>>1 & 0b001)==1) {
-			y+=10;
-			
-		}if((dKeys>>2 & 0b001)==1) {
-			x-=10;
-			
-		}if((dKeys>>3 & 0b001)==1) {
-			x+=10;
-			
-		}
-	}else {
-		if((dKeys & 0x01)==1) {
-			scale+=1;
-			
-		}
-		if((dKeys>>1 & 0b001)==1) {
-			scale-=1;
-			if(scale<0) {scale=0;}
-			
-		}
-		
-	}
+	
 	//=cam.getPosition().x;	
-		
-		frames++;
-		
-		
-		
-	    cam.setPosition((new Vector2f(x,y)));
-		//System.out.println("x:"+x+"  y"+y+" scale"+scale);
-       
-	    t.Bind(0);
-        t.setScale(128);
-   
+	if(canRender) {
 	
-	    
-	  grid.Draw(t);
-      
+		 frames++;
+		 cam.setPosition((new Vector2f(camx,camy)));
+		 grid.Draw();
+		
+		
+		 PlayerUpdate(player,playerTex);     
 
 		    w.render();
-		  
-			w.clear();
+		    w.clear();
 			
 		}
 		}
@@ -186,10 +169,40 @@ public class Start {
 	    dKeys=I.getDirectionalInput();
 		byte stateofFullscreen=I.stateOfFullscreen();
 	      if(stateofFullscreen==1) {//if the fuscreenCode is just pressed toggle full screen
-			 w.toggleFullscreen();
-			 
+			 w.toggleFullscreen();}
+		
 	
-		 }
+				if((dKeys>>4 &0x01)==1) {//if c is pushed
+					if((dKeys & 0x01)==1) {//up
+						camy-=10;
+						
+					}
+					if((dKeys>>1 & 0b001)==1) {//down
+						camy+=10;
+						
+					}if((dKeys>>2 & 0b001)==1) {//left
+						camx-=10;
+						
+					}if((dKeys>>3 & 0b001)==1) {//right
+						camx+=10;}	 
+					}else{ 
+						if((dKeys & 0x01)==1) {//up
+							y+=5;
+							
+						}
+						if((dKeys>>1 & 0b001)==1) {//down
+							y-=5;
+							
+						}if((dKeys>>2 & 0b001)==1) {//left
+							x+=5;
+							
+						}if((dKeys>>3 & 0b001)==1) {//right
+							x-=5;}	 
+					camx=-x;
+					camy=-y;
+					
+						}
+		 
 		 
 		 
 		 
@@ -229,12 +242,28 @@ public class Start {
 			}
 		
 	}
+private static void PlayerUpdate(Model player,Texture tex){
+   s.bind();
+   tex.bind(0);
+   Matrix4f target=Math.getMatrix(new Vector2f(x/Palyerscale,y/Palyerscale),0,Palyerscale);
+       s.loadInt(location, 0);
+  	   s.loadMat(Projection,cam.getProjection());
+		 s.loadMat(RTS, target);
+	player.draw();	 
+
+
+
+}
+
+
+
+
 	private static void initializeFPS() {
 		time=Timer.getTIme();
 		unproccesed=0;
 	    frameTime=0;
 	    frames=0;
-		framCap=1.0/6000;
+		framCap=1.0/60;
 		
 		
 	}

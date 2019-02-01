@@ -6,9 +6,11 @@ import Data.Tiles;;
 public class Map{
    private int[][] mapData;
    private Tiles[][] tileData;
-   public static  boolean norenderR=true,norenderT=true,norenderL=true,norenderB=true;
-   private float lastU,lastV ,Texwidth=256,Texheight=256,wi=64,h=64,Texx=64,Texy=0;   
+   private float[] uv=Tiles.Grass.getUVcoords(),lastuv;
+   public static  boolean norenderR=true,norenderT=true,norenderL=true,norenderB=true;   
    private gameEngine.Tiles t;
+
+
    public Map(int[][] mapData,gameEngine.Tiles tile){
     tileData= new Tiles[mapData.length][mapData[0].length];       
     this. t=tile;
@@ -52,20 +54,13 @@ public class Map{
       i:for(int i=Mapwidth; i>-1;i--) {
          j:for(int j=0;j<Mapheight;j++) {
             tile=tileData[j][Mapwidth-i];
-         lastU=Texx;
-         lastV=Texy;
-           Texx=tile.getU();
-           Texy=tile.getV();		
-         if(lastU!=Texx || lastV!=Texy){   
-            float[] uv={
-                  Texx/Texwidth,Texy/Texheight,
-                  (Texx+wi)/Texwidth,Texy/Texheight,
-                  (Texx+wi)/Texwidth,(Texy+h)/Texheight,
-                  Texx/Texwidth,(Texy+h)/Texheight
-                  };
+             lastuv=uv;
+             uv=tile.getUVcoords();
+
+if(lastuv !=uv){
              t.getModel().changeUV(uv);
-               }
-            t.setTranslation(new Vector2f(j,i));
+           
+}  t.setTranslation(new Vector2f(j,i));
             t.draw();
             if(!norenderR){
                  

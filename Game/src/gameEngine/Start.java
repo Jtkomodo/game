@@ -48,7 +48,7 @@ public class Start {
 	   Texheight=256;		
 	   wi=64;
 	   h=64;
-	   Texx=0;
+	   Texx=64;
 	   Texy=0;	
 
 
@@ -111,7 +111,7 @@ public class Start {
 	    t.unbind();
 	
 	
-	//=cam.getPosition().x;	
+
 	if(canRender) {
 	
 		 frames++;
@@ -210,11 +210,7 @@ public class Start {
 	
 	
 	
-	private static void ShaderUpdate(Vector2f tanslation,float angle,float scale) {
-		Matrix4f target=Math.getMatrix(tanslation, angle, scale);
-	    s.loadInt(location, 1);
-	    s.loadMat(Projection, cam.getProjection().mul(target));
-	}
+	
 	private static void fps() {
 		    canRender=false;//don't allow rendering until time
 			time2=Timer.getTIme();//gets current time
@@ -246,9 +242,9 @@ private static void PlayerUpdate(Model player,Texture tex){
    s.bind();
    tex.bind(0);
    Matrix4f target=Math.getMatrix(new Vector2f(x/Palyerscale,y/Palyerscale),0,Palyerscale);
-       s.loadInt(location, 0);
+   s.loadInt(location, 0);
   	   s.loadMat(Projection,cam.getProjection());
-		 s.loadMat(RTS, target);
+       s.loadMat(RTS, target);
 	player.draw();	 
 
 

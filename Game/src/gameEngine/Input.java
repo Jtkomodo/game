@@ -110,7 +110,6 @@ public class Input {
 			throw new IndexOutOfBoundsException("sorry there is no"+key+"key");
 		}}
  
-	
 	public byte stateOfFullscreen() {
 		if((Keys[1] &0x40)!=0){
 			check=true;

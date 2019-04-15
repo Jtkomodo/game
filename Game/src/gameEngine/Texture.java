@@ -24,6 +24,7 @@ import java.util.HashMap;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.stb.STBImage;
+import org.lwjgl.stb.STBTruetype;
 
 
 public class Texture {
@@ -43,15 +44,14 @@ public Texture(String path) {
          height=BufferUtils.createIntBuffer(1);
 	     comp=BufferUtils.createIntBuffer(1);
 		
-		
-	    
+			    
 	                                   //load our texture 
 		try {
 		data=stbi_load(file.getAbsolutePath().toString()+"/src/res/"+path+".png",width,height,comp,4);
 		if(data==null) {
 			throw new IOException(STBImage.stbi_failure_reason());
 		}
-	    System.out.println(data.capacity()/4);
+	 
 	    
 	    loadMapWithBuffer(data);
 	  
@@ -61,7 +61,6 @@ public Texture(String path) {
 		
 		//get the width and height of the image
 		 w = width.get();
-		 System.out.println(w);
 		 h= height.get();
 	
 	    this.TEXid = glGenTextures();

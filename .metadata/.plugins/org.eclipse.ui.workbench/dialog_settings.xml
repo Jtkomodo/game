@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="WorkbenchPreferenceDialogSettings">
-		<item value="199" key="DIALOG_X_ORIGIN"/>
-		<item value="116" key="DIALOG_Y_ORIGIN"/>
+		<item value="395" key="DIALOG_X_ORIGIN"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="org.eclipse.ui.preferences.keysPreferencePage">
 		<item value="true" key="actionSetFilter"/>
@@ -19,6 +19,9 @@
 		<item value="585" key="dialogWidth"/>
 		<list key="textEntries">
 			<item value="1"/>
+			<item value="2"/>
+			<item value="2"/>
+			<item value="2"/>
 			<item value="1"/>
 			<item value="1"/>
 			<item value="1"/>
@@ -28,9 +31,12 @@
 			<item value="1"/>
 		</list>
 		<list key="orderedElements">
-			<item value="org.eclipse.ui.window.preferences(preferencePageId=org.eclipse.jdt.debug.ui.JavaPrimitivesPreferencePage)"/>
-			<item value="org.eclipse.ui.preferencePages.Views"/>
+			<item value="org.eclipse.team.ui.GenericHistoryView"/>
+			<item value="org.eclipse.debug.ui.VariableView"/>
 			<item value="org.eclipse.ui.preferencePages.ColorsAndFonts"/>
+			<item value="org.eclipse.jdt.ui.preferences.CodeAssistPreferenceAdvanced"/>
+			<item value="dynamicHelp"/>
+			<item value="org.eclipse.ui.preferencePages.Views"/>
 			<item value="org.eclipse.jdt.ui.preferences.ClasspathVariablesPreferencePage"/>
 			<item value="org.eclipse.ui.console.ConsoleView"/>
 			<item value="org.eclipse.ui.resourcePerspective"/>
@@ -38,8 +44,11 @@
 			<item value="org.eclipse.epp.mpc.ui.command.showInstalled"/>
 		</list>
 		<list key="orderedProviders">
-			<item value="org.eclipse.ui.commands"/>
+			<item value="org.eclipse.e4.ui.parts"/>
+			<item value="org.eclipse.e4.ui.parts"/>
 			<item value="org.eclipse.ui.preferences"/>
+			<item value="org.eclipse.ui.preferences"/>
+			<item value="org.eclipse.ui.actions"/>
 			<item value="org.eclipse.ui.preferences"/>
 			<item value="org.eclipse.ui.preferences"/>
 			<item value="org.eclipse.e4.ui.parts"/>
@@ -48,9 +57,15 @@
 			<item value="org.eclipse.ui.commands"/>
 		</list>
 		<list key="textArray">
-			<item value="debug op"/>
-			<item value="th"/>
+			<item value="is"/>
+			<item value="variab"/>
+			<item value="debug"/>
 			<item value="theme"/>
+			<item value="colo"/>
+			<item value="comple"/>
+			<item value="content"/>
+			<item value="help"/>
+			<item value="th"/>
 			<item value="class"/>
 			<item value="c"/>
 			<item value="res"/>
@@ -59,7 +74,7 @@
 		</list>
 	</section>
 	<section name="NewWizardAction">
-		<item value="org.eclipse.ui.editors.wizards.UntitledTextFileWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<item value="org.eclipse.ui.wizards.new.folder" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 			<item value="org.eclipse.ui.Basic"/>
 		</list>

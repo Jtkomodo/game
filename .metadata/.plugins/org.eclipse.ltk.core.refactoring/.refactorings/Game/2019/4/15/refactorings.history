@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;aakar.png&apos; to &apos;map2.png&apos;&#x0A;- Original project: &apos;Game&apos;&#x0A;- Destination element: &apos;map2.png&apos;&#x0A;- Original element: &apos;aakar.png&apos;" description="Copy file" element1="src/res/fonts/aakar.png" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1554598745419" target="/Game/src/res/map2.png" units="0" version="1.0"/>
+</session>

@@ -1,5 +1,6 @@
 package gameEngine;
 import java.io.IOException;
+import static org.lwjgl.glfw.GLFW.*;
 import java.util.Map;
 
 import org.joml.Matrix4f;
@@ -9,15 +10,19 @@ public class Start {
 	
 	public static Window w;	
 	public static final int width=640,height=480;
-    public static int location,Projection,RTS,frames,j=0,i=0;
-    public static byte dKeys;
+    public static int location,Projection,RTS,frames,j=0,i=0,fps;
+    public static byte dKeys,testKey;
     public static ShaderProgram s;
     public static Camera cam;
+    public static float screencoordx=0,screencoordy=0;
     public static Input I;
-    public static boolean canRender;
+    public static Text font;
+    public static boolean canRender,overworld=true;
     public static double framCap,time,time2,passed,unproccesed,frameTime;
-    public static Texture tex,MAP;
-    public static float x2,y2,camx,camy,x,y,Palyerscale=100;
+    public static Texture tex,MAP,bg,playerTex;
+    public static float x2,y2,camx,camy,x,y,Playerscale=64;
+    public static Model background,player;
+    
 	public static void main(String[] args) {
 		float[] vert={
 				-0.5f,+0.5f,
@@ -25,6 +30,13 @@ public class Start {
 				0.5f,-0.5f,
 				-0.5f,-0.5f
 			};
+		
+		
+		
+		
+		
+		
+		
 		float Texwidth=256;
 		float Texheight=256;		
 		float wi=64;
@@ -38,6 +50,28 @@ public class Start {
 				(Texx+wi)/Texwidth,(Texy+h)/Texheight,
 				Texx/Texwidth,(Texy+h)/Texheight
 				};
+		
+		
+		float[] uvBg={
+				0,0,
+				1,0,
+				1,1,
+				0,1
+				
+				};
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 			
 		int[] ind= {
 			0,1,2,
@@ -46,11 +80,21 @@ public class Start {
 		};
 	   Texwidth=256;
 	   Texheight=256;		
-	   wi=64;
-	   h=64;
-	   Texx=64;
+	   wi=32;
+	   h=44;
+	   Texx=0;
 	   Texy=0;	
 
+
+	   float[] vertPlayer={
+             -0.5f,1,
+			 1,1,
+			 1,-0.5f,
+			 -0.5f,-0.5f
+
+
+	   };
+	   
 
 
        float[] uvPlayer={
@@ -63,9 +107,9 @@ public class Start {
 
 
 
-		for(int i=0;i<8;i++) {
-		System.out.println(uv[i]);
-		} 
+		//for(int i=0;i<8;i++) {
+		///System.out.println(uv[i]);
+		//} 
 		
 		
 		//make our window and attach shaders
@@ -75,11 +119,20 @@ public class Start {
 		//Define textures
 	    
 		tex=new Texture("newsprite");
-		Texture playerTex= new Texture("playerSprites");
+		bg= new Texture("testBackground");
+	   font=new Text("aakar",512);
+		
+		
+		
+	//	MAP=new Texture("map3");
+	    playerTex= new Texture("playerSprite2s");
 		//map=new Texture("map1"); 
 		//Define models
 		Model m=new Model(vert,uv,ind);//model for tiles
-		Model player= new Model(vert,uvPlayer,ind);
+		player= new Model(vertPlayer,uvPlayer,ind);
+	    background=new Model(vert,uvBg,ind);
+		
+		
 		//set camera
 		cam= new Camera(width,height);
 		
@@ -94,6 +147,7 @@ public class Start {
 		}
 		World world=new World("map", 64,64, cam);
 		Tiles t=new Tiles(tex, m, s, cam, location, Projection,RTS);
+		
 	    gameEngine.Map grid=new gameEngine.Map(world.Getmap(),t);
 	
 		
@@ -101,8 +155,8 @@ public class Start {
 		
 		 boolean map=true;
 		initializeFPS();
-		float x=0;
-		int y=0;	
+		x=0;
+		y=0;	
 	
 //----------------------game loop------------------------------
 		while(!w.isExited() && !I.IsEscapePushed()) {
@@ -110,16 +164,33 @@ public class Start {
 		fps();
 	    t.unbind();
 	
-	
 
 	if(canRender) {
+	  // TextureUpdate(MAP)
+		frames++;
+if(overworld==true) {		 
+		 
+	    screencoordx=-camx;
+	    screencoordy=-camy;
+	    		
+	    		
+	     cam.setPosition((new Vector2f(camx,camy)));s.bind();
+		 grid.Draw();	 
+		 
+		 font.text("x="+x+" y="+y,screencoordx-300,screencoordy-220,.24f);//prints the x and y positions on the screen	  
+		
+		 SpriteUpdate(player,playerTex,x,y,Playerscale,true);
+		
+}else {
+	//---------------------battle loop---------------------
+	battleupdate();
+    screencoordx=0;
+	screencoordy=0;
 	
-		 frames++;
-		 cam.setPosition((new Vector2f(camx,camy)));
-		 grid.Draw();
-		
-		
-		 PlayerUpdate(player,playerTex);     
+	
+}
+
+font.text("fps="+(int)fps,(640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 
 		    w.render();
 		    w.clear();
@@ -167,11 +238,38 @@ public class Start {
 		w.update();//this is needed to actually poll events from keyboard 
 		I.findKeys();
 	    dKeys=I.getDirectionalInput();
+	    
+	   testKey=I.getStateofButton(GLFW_KEY_T);
+	   float speed=1;
+	    		
 		byte stateofFullscreen=I.stateOfFullscreen();
 	      if(stateofFullscreen==1) {//if the fuscreenCode is just pressed toggle full screen
 			 w.toggleFullscreen();}
 		
+	if(testKey==2) {
+		if (overworld==false) {
+			overworld=true;
+			
+		}else {
+			overworld=false;
+			
+		}
+		
+	}
 	
+	
+	if(overworld==true) {
+		        if(I.getStateofButton(GLFW_KEY_W)==1 || I.getStateofButton(GLFW_KEY_W)==3) {
+		        	speed=5;
+		        	
+		        	
+		        }else {
+		        	speed=1;
+		        	
+		        	
+		        }
+		
+		
 				if((dKeys>>4 &0x01)==1) {//if c is pushed
 					if((dKeys & 0x01)==1) {//up
 						camy-=10;
@@ -187,29 +285,44 @@ public class Start {
 						camx+=10;}	 
 					}else{ 
 						if((dKeys & 0x01)==1) {//up
-							y+=5;
+							y+=5*speed;
 							
 						}
 						if((dKeys>>1 & 0b001)==1) {//down
-							y-=5;
+							y-=5*speed;
 							
 						}if((dKeys>>2 & 0b001)==1) {//left
-							x+=5;
+							x+=5*speed;
 							
 						}if((dKeys>>3 & 0b001)==1) {//right
-							x-=5;}	 
+							x-=5*speed;}	 
 					camx=-x;
 					camy=-y;
 					
 						}
 		 
-		 
+	}
 		 
 		 
 			 }
 	
 	
-	
+   private static void battleupdate() {
+	   cam.setPosition(new Vector2f(0,0));
+		s.bind();
+		bg.bind(0);
+		  s.loadInt(location, 0);
+		  cam.setPosition(new Vector2f(0,0));
+	 	   s.loadMat(Projection,cam.getProjection());
+	 	  s.loadMat(RTS,Math.getMatrix(new Vector2f(0,0),0,64*40));//change rotation and scale with this
+	 	  background.draw();
+	 	  SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
+	 	  SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
+	 	  SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
+	 	   s.loadInt(location, 0);
+	   
+	   
+   }
 	
 	private static void fps() {
 		    canRender=false;//don't allow rendering until time
@@ -228,8 +341,9 @@ public class Start {
 			     
 			      if(frameTime>=1.0) {//if a second has passed print fps
 			    	 
-			    	  System.out.println("FPS:"+frames+"-------------------------------");
-			      
+			    	 // System.out.println("FPS:"+frames+"-------------------------------");
+			    	 
+                      fps=frames;
 			    	//reset frame time and frames  
 			    	  
 			    	  frameTime=0;
@@ -238,10 +352,13 @@ public class Start {
 			}
 		
 	}
-private static void PlayerUpdate(Model player,Texture tex){
+private static void SpriteUpdate(Model player,Texture tex,float x,float y,float Playerscale,boolean mirror){
    s.bind();
    tex.bind(0);
-   Matrix4f target=Math.getMatrix(new Vector2f(x/Palyerscale,y/Palyerscale),0,Palyerscale);
+   Matrix4f target=Math.getMatrix(new Vector2f(x/Playerscale,y/Playerscale),0,Playerscale);
+   if(mirror==true)
+   Math.mirror(target);
+   
    s.loadInt(location, 0);
   	   s.loadMat(Projection,cam.getProjection());
        s.loadMat(RTS, target);

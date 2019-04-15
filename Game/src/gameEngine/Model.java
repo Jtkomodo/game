@@ -53,19 +53,15 @@ glEnableVertexAttribArray(1);
 		
     glBindBuffer(GL_ARRAY_BUFFER,tex_id);
 	  glVertexAttribPointer(1,2,GL_FLOAT,false,0,0);
-		
-		
+			
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
       glDrawElements(GL_TRIANGLES,drawCount,GL_UNSIGNED_INT,0);
-		
     //unbind and disable
 
 glDisableVertexAttribArray(0);
 glDisableVertexAttribArray(1);
 unbindBuffers();	
-}
-	
-	
+	}
 	
 	
 	//make buffers and put data in them
@@ -95,6 +91,10 @@ unbindBuffers();
 		  glBufferData(GL_ARRAY_BUFFER,makeBuffer(data),GL_DYNAMIC_DRAW);
 		  glBindBuffer(GL_ARRAY_BUFFER,0);
 			}
-
-
+	public void  changeVert(float[] data) {
+		  glBindBuffer(GL_ARRAY_BUFFER,v_id);
+		  glBufferData(GL_ARRAY_BUFFER,makeBuffer(data),GL_DYNAMIC_DRAW);
+		  glBindBuffer(GL_ARRAY_BUFFER,0);
+			}
+	
 }

@@ -59,7 +59,7 @@ public class Map{
 
 if(lastuv !=uv){
              t.getModel().changeUV(uv);
-           
+             
 }  t.setTranslation(new Vector2f(j,i));
             t.draw();
             if(!norenderR){

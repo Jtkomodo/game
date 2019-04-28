@@ -54,7 +54,7 @@ private int width,height;
 		glfwWindowHint(GLFW_VISIBLE,GLFW_FALSE);
 		glfwWindowHint(GLFW_DECORATED,GLFW_TRUE);
 		glfwWindowHint(GLFW_RESIZABLE,GLFW_TRUE);
-		
+
 		window=glfwCreateWindow(width,height,"Game",0,0);
 		if(window==0) {
 			throw new IllegalStateException("failed to create window");
@@ -67,6 +67,7 @@ private int width,height;
 		glfwSetWindowTitle(window,"game");
 		glfwShowWindow(window);
 		glfwMakeContextCurrent(window);
+		glfwSwapInterval( 0 ); //this is for the vsync uncomment this when testing frame rates 
 		GL.createCapabilities();
 		glEnable(GL_TEXTURE_2D);
 		//glClearColor(.0f, 0.0f, 0.0f, 0.0f);
@@ -115,7 +116,7 @@ glViewport(0, 0, width[0], height[0]);
 			glfwSetWindowMonitor(window,glfwGetPrimaryMonitor(),0,0,vidmode.width(),vidmode.height(),vidmode.refreshRate());// this allows fullscreen window .the value that actually changes if fullscreen is used is the second argument
 				
 			glViewport(0, 0, vidmode.width(), vidmode.height()); //this changes the view to the size of the monitor so that it won't be small
-				System.out.println(fullscreen);
+				//System.out.println(fullscreen);
     	}
     	else {
     		

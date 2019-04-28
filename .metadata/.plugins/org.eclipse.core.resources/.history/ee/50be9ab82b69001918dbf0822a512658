@@ -1,0 +1,97 @@
+package textrendering;
+
+import org.joml.*;
+
+import gameEngine.BatchedModel;
+import gameEngine.Math;
+import gameEngine.Start;
+
+public class TextBuilder extends Fontloader{
+
+	private String text;
+	private BatchedModel textModel;
+	
+	
+	
+	
+	
+	public TextBuilder(String Font, float AtlusSize) {
+		super(Font, AtlusSize);
+	    textModel=new BatchedModel();
+	    
+	}
+	
+	
+	
+	public void setString(String text) {
+		
+		textModel.flushBuffers();
+		
+		this.text=text;
+		 Vector2f offset=new Vector2f(0,0);
+		float[] l;
+		float[]  v;
+	    Vector2f cursor=new Vector2f(0,0);
+		
+		
+		for(int i=0;i<text.length();i++) {
+			int a=text.charAt(i);
+			Float[] val=super.Values.get(a);
+			float x=val[0];
+			float y=val[1];
+			float width=val[2];
+			float height=val[3];
+			float xoff=val[4];
+			float yoff=val[5];
+	         offset.x=xoff;
+			 offset.y=-yoff;
+			float xadv=val[6];
+			float Xz=x/Texwidth;
+			float Yz=y/Texheight;
+			float Xo=(x+width)/Texwidth;
+			float Yo=(y+height)/Texheight;
+			 float height2=height/2;
+			 float width2=(width/2);
+			 cursor.add(offset);
+			 l=new float[]{
+					Xz,Yz,
+					Xo,Yz,
+					Xo,Yo,
+					Xz,Yo
+					};
+			
+			v=new float[]{
+				   cursor.x+ -width2,cursor.y+height2,
+				   cursor.x+width2, cursor.y+height2,
+				   cursor.x+width2,cursor.y-height2,
+				   cursor.x+-width2,cursor.y-height2
+				};
+			textModel.addvaluestoVBO(v, l);
+			//cursor.x=cursor.x+xadv;
+			 cursor.add(xadv,yoff);
+			
+		}
+		
+		
+		
+		
+		
+	}
+	public void drawString(float x,float y,float scale) {
+		Start.s.bind();
+		super.tex.bind(2);
+		
+		Matrix4f target= Math.getMatrix(new Vector2f(x,y), 0,scale);
+		 Start.s.loadInt(Start.location, 2);
+	  	 Start.s.loadMat(Start.Projection,Start.cam.getProjection());
+	     Start.s.loadMat(Start.RTS, target);
+		textModel.draw();
+		
+		
+	}
+	
+	
+	
+	
+
+}

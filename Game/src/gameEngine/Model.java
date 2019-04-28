@@ -16,7 +16,7 @@ public class Model {
 		
 		      drawCount=indices.length;
 		
-		            //make buffers
+		            //make buffer
 		   v_id=glGenBuffers();//for vertices		
 		   tex_id=glGenBuffers();//for uv Coords
 			ind_id=glGenBuffers();//for indices  
@@ -25,7 +25,7 @@ public class Model {
 		            //bind buffers and store the data in them
 
 		glBindBuffer(GL_ARRAY_BUFFER,v_id);
-		  glBufferData(GL_ARRAY_BUFFER,makeBuffer(vertices),GL_STATIC_DRAW);
+		  glBufferData(GL_ARRAY_BUFFER,makeBuffer(vertices),GL_DYNAMIC_DRAW);
 		
 		 
 	    glBindBuffer(GL_ARRAY_BUFFER,tex_id);
@@ -42,25 +42,15 @@ public class Model {
 	}
 	
 	public void draw() {
-  //enable  Attributes
-glEnableVertexAttribArray(0);
-glEnableVertexAttribArray(1);
-		
-	               //time to use those	
 		
 	glBindBuffer(GL_ARRAY_BUFFER,v_id);//bind so we can use 
 	  glVertexAttribPointer(0,2,GL_FLOAT,false,0,0);
 		
-    glBindBuffer(GL_ARRAY_BUFFER,tex_id);
+   glBindBuffer(GL_ARRAY_BUFFER,tex_id);
 	  glVertexAttribPointer(1,2,GL_FLOAT,false,0,0);
 			
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
       glDrawElements(GL_TRIANGLES,drawCount,GL_UNSIGNED_INT,0);
-    //unbind and disable
-
-glDisableVertexAttribArray(0);
-glDisableVertexAttribArray(1);
-unbindBuffers();	
 	}
 	
 	
@@ -87,14 +77,25 @@ unbindBuffers();
 	}
 	
 	public void  changeUV(float[] data) {
-		  glBindBuffer(GL_ARRAY_BUFFER,tex_id);
-		  glBufferData(GL_ARRAY_BUFFER,makeBuffer(data),GL_DYNAMIC_DRAW);
+		 glBindBuffer(GL_ARRAY_BUFFER,tex_id);
+		  glBufferSubData(GL_ARRAY_BUFFER, 0, makeBuffer(data));
 		  glBindBuffer(GL_ARRAY_BUFFER,0);
 			}
 	public void  changeVert(float[] data) {
 		  glBindBuffer(GL_ARRAY_BUFFER,v_id);
-		  glBufferData(GL_ARRAY_BUFFER,makeBuffer(data),GL_DYNAMIC_DRAW);
+		  glBufferSubData(GL_ARRAY_BUFFER, 0, makeBuffer(data));
 		  glBindBuffer(GL_ARRAY_BUFFER,0);
 			}
 	
+
+   public static void enable() {
+	   glEnableVertexAttribArray(0);
+	   glEnableVertexAttribArray(1);
+   }
+   public static void disable() {
+	   glDisableVertexAttribArray(0);
+       glDisableVertexAttribArray(1);
+   }
+
 }
+

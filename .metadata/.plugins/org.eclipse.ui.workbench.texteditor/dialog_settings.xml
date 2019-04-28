@@ -6,12 +6,19 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="d" key="selection"/>
+		<item value="textB" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="textB"/>
+			<item value="testm"/>
+			<item value="have"/>
+			<item value="fram"/>
+			<item value="frame"/>
+			<item value="frames"/>
+			<item value="system"/>
 			<item value="c"/>
 			<item value="b"/>
 			<item value="a"/>
@@ -19,14 +26,7 @@
 			<item value="d"/>
 			<item value="e"/>
 			<item value=" font.text(&quot;ad bd cd dd ed fd gd hd id jd kd ld md nd od pd qd rd sd td ud vd wd xd yd zd&quot;,0,-400,1);"/>
-			<item value="system"/>
 			<item value="/109/"/>
-			<item value="y/Texheight"/>
-			<item value="(y+height)/Texheight"/>
-			<item value="(x+width)/Texwidth"/>
-			<item value="float Xz=x/Texwidth;&#x0A;&#x09; float Yz=y/Texheight;&#x0A;&#x09; float Xo=(x+width)/Texwidth;&#x0A;&#x09; float Yo=(y+height)/Texheight;"/>
-			<item value="x/Texwidth"/>
-			<item value="x/T"/>
 		</list>
 		<list key="replacehistory">
 			<item value="d"/>
@@ -50,7 +50,7 @@
 		<item value="365" key="DIALOG_WIDTH"/>
 		<item value="1|Waree|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 		<item value="520" key="DIALOG_HEIGHT"/>
-		<item value="-227" key="DIALOG_X_ORIGIN"/>
-		<item value="0" key="DIALOG_Y_ORIGIN"/>
+		<item value="1406" key="DIALOG_X_ORIGIN"/>
+		<item value="83" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

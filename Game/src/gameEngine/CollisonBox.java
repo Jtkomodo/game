@@ -1,7 +1,7 @@
 package gameEngine;
 
 import org.joml.Vector2f;
-
+//this is not working yet just somthing a started and havn't finished yet
 public class CollisonBox {
 	private float x,y,width,height,resistance;//resistance is the amount of push away the box will have on the player
 	

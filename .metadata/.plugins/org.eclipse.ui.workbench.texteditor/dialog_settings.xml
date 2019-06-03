@@ -6,12 +6,15 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="textB" key="selection"/>
+		<item value="makeLocation" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="makelocation"/>
+			<item value=".enable()"/>
+			<item value=".enable("/>
 			<item value="textB"/>
 			<item value="testm"/>
 			<item value="have"/>
@@ -24,9 +27,6 @@
 			<item value="a"/>
 			<item value="font.text(&quot;aa ab ac ad ae af ag ah ai aj ak al am an ao ap aq ar as at au av aw ax ay az&quot;,0,-400,1);"/>
 			<item value="d"/>
-			<item value="e"/>
-			<item value=" font.text(&quot;ad bd cd dd ed fd gd hd id jd kd ld md nd od pd qd rd sd td ud vd wd xd yd zd&quot;,0,-400,1);"/>
-			<item value="/109/"/>
 		</list>
 		<list key="replacehistory">
 			<item value="d"/>

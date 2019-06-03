@@ -2,6 +2,7 @@ package gameEngine;
 import java.io.IOException;
 import static org.lwjgl.glfw.GLFW.*;
 import java.util.Map;
+import static java.lang.Math.*;
 
 
 import org.joml.Matrix4f;
@@ -14,9 +15,11 @@ public class Start {
 	
 	public static Window w;
 	public static final int width=640,height=480;
-    public static int location,Projection,RTS,frames,j=0,i=0,fps;
+    public static int location,Projection,RTS,frames,j=0,i=0,fps,gridx,gridy;
     public static byte dKeys,testKey;
     public static ShaderProgram s;
+    public static float scaleOfMapTiles=128;
+    public static int amountWidth=Math.round((width/scaleOfMapTiles)),amountHeight=Math.round((height/scaleOfMapTiles));
     public static Camera cam;
     public static float screencoordx=0,screencoordy=0;
     public static Input I;
@@ -27,7 +30,7 @@ public class Start {
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
     public static Model background,player;
     public static BatchedModel testM;
-    public static TextBuilder textB,textA;
+    public static TextBuilder textB,textA,textC;
     
 	public static void main(String[] args) {
 		float[] vert={
@@ -66,7 +69,7 @@ public class Start {
 				
 				};
 		
-		
+	
 		
 		
 		
@@ -135,6 +138,7 @@ public class Start {
 		bg= new Texture("testBackground");
 	    textB= new TextBuilder("aakar",512); 
 		textA= new TextBuilder("aakar",512);
+		textC= new TextBuilder("aakar",512);
 		testM= new BatchedModel();
 		
 	//	MAP=new Texture("map3");
@@ -158,28 +162,28 @@ public class Start {
 			
 			e.printStackTrace();
 		}
-		World world=new World("map", 64,64, cam);
+		WorldLoader worldLoader=new WorldLoader("map", 64,64, cam);
+		MapLoader loader=new MapLoader(worldLoader.Getmap(),scaleOfMapTiles);
+        PositionTest postest=new PositionTest(worldLoader.Getmap(),scaleOfMapTiles);	
+		
 		Tiles t=new Tiles(tex, m, s, cam, location, Projection,RTS);
 		
-	    gameEngine.Map grid=new gameEngine.Map(world.Getmap(),t);
+	
 	
 		
 		
 		
-		 boolean map=true;
+		
 		initializeFPS();
 		x=0;
 		y=0;	
-	testM.addvaluestoVBO(vertPlayer, uvPlayer);
-    testM.addvaluestoVBO(vertPlayer2, uvPlayer);
-  
- 
-    //----------------------game loop------------------------------
+	
+    //----------------------GAME--LOOP------------------------------
 		while(!w.isExited() && !I.IsEscapePushed()) {
 	
 		fps();
 	    t.unbind();
-	
+	    
 	    
 	if(canRender) {
 	  // TextureUpdate(MAP)
@@ -191,14 +195,33 @@ if(overworld==true) {
 		 
 	    screencoordx=-camx;
 	    screencoordy=-camy;
-		
+	    
 	    		
 	     cam.setPosition((new Vector2f(camx,camy)));s.bind();
-	      grid.Draw();	 
+	    
+	     
+	     
+	     
+//	grid.Draw();
+	   
+	  
+	   
 	      textB.setString("x="+x+" y="+y);
-		 //font.text("x="+x+" y="+y,screencoordx-300,screencoordy-220,.24f);//prints the x and y positions on the screen	  
+	      
+	      Vector2f newvec=postest.findPositionOnMap(x, y);
+	      gridx= Math.round(newvec.x);gridy=Math.round(newvec.y);
+	    drawmap(loader);		     
+	   
+	      textC.setString("xmap="+gridx+" ymap="+gridy);
+	      
+	      
+	      
+		 
 		 SpriteUpdate(player,playerTex,x,y,Playerscale,true);
 		textB.drawString(screencoordx-300,screencoordy-220,.24f);
+		textC.drawString(screencoordx,screencoordy-220,.24f);
+	
+
 }else {
 	//---------------------battle loop---------------------
 	battleupdate();
@@ -210,11 +233,11 @@ if(overworld==true) {
 textA.setString("fps="+(int)fps);
 textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 
-//font.text("fps="+(int)fps,(640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 
 		}
 		    w.render();
 		    w.clear();
+		    loader.flushModel();
 			
 		}
 		}
@@ -336,7 +359,7 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 		  s.loadInt(location, 0);
 		  cam.setPosition(new Vector2f(0,0));
 	 	   s.loadMat(Projection,cam.getProjection());
-	 	  s.loadMat(RTS,Math.getMatrix(new Vector2f(0,0),0,64*40));//change rotation and scale with this
+	 	  s.loadMat(RTS,MatrixMath.getMatrix(new Vector2f(0,0),0,64*40));//change rotation and scale with this
 	 	  background.draw();
 	 	  SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
 	 	  SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
@@ -378,19 +401,15 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 private static void SpriteUpdate(Model player,Texture tex,float x,float y,float Playerscale,boolean mirror){
    s.bind();
    tex.bind(0);
-   Matrix4f target=Math.getMatrix(new Vector2f(x/Playerscale,y/Playerscale),0,Playerscale);
+   Matrix4f target=MatrixMath.getMatrix(new Vector2f(x/Playerscale,y/Playerscale),0,Playerscale);
    if(mirror==true)
-   Math.mirror(target);
+   MatrixMath.mirror(target);
    
    s.loadInt(location, 0); 
   	   s.loadMat(Projection,cam.getProjection());
        s.loadMat(RTS, target);
 	player.draw();	 
-
-   
-    
-    
-    
+	
     
     
     
@@ -398,7 +417,17 @@ private static void SpriteUpdate(Model player,Texture tex,float x,float y,float 
     
     
 }
-
+private static void drawmap(MapLoader loader) {
+	
+	for(int i=-amountHeight+2;i<amountHeight-1;i++) {
+		for(int j=-amountWidth+2;j<amountHeight;j++) {
+			   loader.loadTile(gridx+j,gridy+i);
+			    }
+	}
+ 
+	loader.drawtiles(tex);
+	
+}
 
 
 

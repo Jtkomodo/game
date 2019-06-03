@@ -11,8 +11,13 @@ import  org.lwjgl.BufferUtils;
 public class Model {
     private int drawCount;
 	private int v_id,tex_id,ind_id;
-	
+	private static  boolean draw=true;
+	private float[] vertices,uv_coords;
+	private int[] indeces;
 	public Model(float[] vertices,float[] uv_coords,int[] indices) {
+		this.vertices=vertices;
+		this.uv_coords=uv_coords;
+		this.indeces=indices;
 		
 		      drawCount=indices.length;
 		
@@ -41,8 +46,32 @@ public class Model {
 
 	}
 	
+	public float[] getVertices() {
+		return vertices;
+	}
+
+	public void setVertices(float[] vertices) {
+		this.vertices = vertices;
+	}
+
+	public float[] getUv_coords() {
+		return uv_coords;
+	}
+
+	public void setUv_coords(float[] uv_coords) {
+		this.uv_coords = uv_coords;
+	}
+
+	public int[] getIndeces() {
+		return indeces;
+	}
+
+	public void setIndeces(int[] indeces) {
+		this.indeces = indeces;
+	}
+
 	public void draw() {
-		
+	if(draw) {	
 	glBindBuffer(GL_ARRAY_BUFFER,v_id);//bind so we can use 
 	  glVertexAttribPointer(0,2,GL_FLOAT,false,0,0);
 		
@@ -50,7 +79,7 @@ public class Model {
 	  glVertexAttribPointer(1,2,GL_FLOAT,false,0,0);
 			
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
-      glDrawElements(GL_TRIANGLES,drawCount,GL_UNSIGNED_INT,0);
+      glDrawElements(GL_TRIANGLES,drawCount,GL_UNSIGNED_INT,0);}
 	}
 	
 	
@@ -91,10 +120,12 @@ public class Model {
    public static void enable() {
 	   glEnableVertexAttribArray(0);
 	   glEnableVertexAttribArray(1);
+	   draw=true;
    }
    public static void disable() {
 	   glDisableVertexAttribArray(0);
        glDisableVertexAttribArray(1);
+       draw=false;
    }
 
 }

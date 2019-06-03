@@ -81,7 +81,7 @@ if(bottomBounds) {
   
   if((!leftBounds) && (!rightBounds) && (!topBounds) && (!bottomBounds)){
 	  
-        Matrix4f target=Math.getMatrix(Translation, angle, scale);
+        Matrix4f target=MatrixMath.getMatrix(Translation, angle, scale);
   	   s.loadInt(texlocation, sampler);
   	   s.loadMat(ShaderProjectionLocation,cam.getProjection());
   	   s.loadMat(l, target);

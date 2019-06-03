@@ -1,18 +1,18 @@
 package gameEngine;
 import org.lwjgl.system.Pointer.Default;
 import org.joml.*;
-import Data.Tiles;;
+import Data.TilesData;;
 
 public class Map{
    private int[][] mapData;
-   private Tiles[][] tileData;
-   private float[] uv=Tiles.Grass.getUVcoords(),lastuv;
+   private TilesData[][] tileData;
+   private float[] uv=TilesData.Grass.getUVcoords(),lastuv;
    public static  boolean norenderR=true,norenderT=true,norenderL=true,norenderB=true;   
    private gameEngine.Tiles t;
 
 
    public Map(int[][] mapData,gameEngine.Tiles tile){
-    tileData= new Tiles[mapData.length][mapData[0].length];       
+    tileData= new TilesData[mapData.length][mapData[0].length];       
     this. t=tile;
     this.mapData=mapData;
          for(int i=0;i<mapData.length;i++){
@@ -21,16 +21,16 @@ public class Map{
                switch(mapData[j][i]){
                
                    case 1:
-                       tileData[j][i]=Tiles.Dirt;
+                       tileData[j][i]=TilesData.Dirt;
                    break;
                        case 2:
-                   tileData[j][i]=Tiles.Grassw;
+                   tileData[j][i]=TilesData.Grassw;
                    break;
                    case 3:
-                   tileData[j][i]=Tiles.Water;
+                   tileData[j][i]=TilesData.Water;
                    break;
                    case 4:
-                   tileData[j][i]=Tiles.Grass;
+                   tileData[j][i]=TilesData.Grass;
                    break;
 
                 
@@ -48,12 +48,13 @@ public class Map{
       int Mapheight=tileData.length;
 
 
-      Tiles tile;
+      TilesData tile;
 
 
       i:for(int i=Mapwidth; i>-1;i--) {
          j:for(int j=0;j<Mapheight;j++) {
-            tile=tileData[j][Mapwidth-i];
+            Model.enable();
+        	 tile=tileData[j][Mapwidth-i];
              lastuv=uv;
              uv=tile.getUVcoords();
 
@@ -63,26 +64,29 @@ if(lastuv !=uv){
 }  t.setTranslation(new Vector2f(j,i));
             t.draw();
             if(!norenderR){
-                 
+            	 Model.disable();
                  break;
             }
             if(!norenderT){
-                
+            	 Model.disable();
                i--;
                continue i;
             }
             if(!norenderB){
-             return;
+            	 Model.enable();
+            	return;
             
             }
             if(!norenderL){
-            j++;
+            	 Model.disable();
+            	j++;
                continue j;
             }
             
          }
          
       }
+      Model.enable();
       }
 
 

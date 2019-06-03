@@ -10,7 +10,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector2f;
 
 import gameEngine.*;
-import gameEngine.Math;
+import gameEngine.MatrixMath;
 public class Fontloader {
 private String Font="aakar";
 
@@ -31,123 +31,7 @@ protected HashMap<Integer,Float[]> Values=new HashMap<Integer,Float[]>();
 	 
  }
  
- /*This was the old way it makes too many draw calls only keeping it here to look at later if something goes wrong in the other way 
-  * it 
-  * 
-  * 
-  * public void text(String text,float lx,float ly,float scale) {
-	if(text.isEmpty()!=true) { 
-	 char a=text.charAt(0);
-	
-	 Vector2f cursor=new Vector2f(lx/scale,ly/scale);
-	
-	 float[] l={
-				0,0,
-				1,0,
-				1,1,
-				0,1
-				};
-		float[] v={
-				0,1,
-				1,1,
-				1,0,
-				0,0
-			};
-		
-		
-		int[] ind= {
-			0,1,2,
-			2,3,0	
-				
-		};
-		
-		Start.s.bind();
-		tex.bind(2);
-		 Model m=new Model(v,l,ind);
-		 Matrix4f target=Math.getMatrix(cursor,0f,0f);
-	float lastwidth=0,lastx=0;
-	float lastheight=0,lasty=0;
-	 float x,y,width,height,xoff,yoff;
-	 Vector2f offset=new Vector2f(0,0);
-	 float xadv,Xz,Yz, Xo,Yo;	
-	//for(int i=0;i<text.length();i++) {
-	 int i=0;	
-while(i<text.length()) {
-	 
-
-	 a=text.charAt(i);
-		 Float[] val=Values.get((int)a);
-		 x=val[0];
-		 y=val[1];
-		 width=val[2];
-		 height=val[3];
-		 xoff=val[4];
-		 yoff=val[5];
-         offset.x=xoff;
-		 offset.y=-yoff;
-		 xadv=val[6];
-		 Xz=x/Texwidth;
-		 Yz=y/Texheight;
-		 Xo=(x+width)/Texwidth;
-		 Yo=(y+height)/Texheight;
-if(lastx!=x || lasty!=y) {		
-
-	if(lastwidth!=width || lastheight!=height) {	 
-	l=new float[]{
-					Xz,Yz,
-					Xo,Yz,
-					Xo,Yo,
-					Xz,Yo
-					};
- m.changeUV(l);	
-}
-}
-	if(lastwidth!=width || lastheight!=height) {	  
-		 float height2=height/2;
-		 float width2=width/2;
-		 	
-		v=new float[]{
-					-width2,+height2,
-					width2,height2,
-					width2,-height2,
-					-width2,-height2
-				};
-			m.changeVert(v);		
-	}
-		  
-		  
-
-	
-		 
-		 
-	
-		 cursor.add(offset);
-		 
-		 target=Math.getMatrix(cursor,0,scale);
-		 Start.s.loadInt(Start.location, 2);
-	  	 Start.s.loadMat(Start.Projection,Start.cam.getProjection());
-	     Start.s.loadMat(Start.RTS, target);
-		 m.draw();
-		 cursor.add(xadv, yoff);
-		 lastwidth=width;
-		 lastheight=height;
-		 lastx=x;lasty=y;
-		 i++;
-		
-	}
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}
- }
-*/   
+  
  
  
  

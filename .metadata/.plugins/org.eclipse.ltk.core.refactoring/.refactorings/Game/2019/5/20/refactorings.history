@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;gameEngine.Math&apos; to &apos;MatrixMath&apos;&#x0A;- Original project: &apos;Game&apos;&#x0A;- Original element: &apos;gameEngine.Math&apos;&#x0A;- Renamed element: &apos;gameEngine.MatrixMath&apos;&#x0A;- Update references to refactored element&#x0A;- Rename similarly named elements&#x0A;- Update fully qualified names in &apos;*&apos; files&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Math&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;gameEngine{Math.java[Math" matchStrategy="1" name="MatrixMath" patterns="*" qualified="true" references="true" similarDeclarations="true" stamp="1557935799293" textual="true" version="1.0"/>
+</session>

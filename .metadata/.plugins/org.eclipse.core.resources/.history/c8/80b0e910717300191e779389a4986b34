@@ -1,0 +1,67 @@
+package gameEngine;
+
+import java.util.HashMap;
+
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+
+public class MapBuilder extends MapLoader {
+	private HashMap<Integer,float[]> tilePosData=new HashMap<Integer,float[]>();
+	private HashMap<Integer,float[]> tileUVData=new HashMap<Integer,float[]>();
+    private float ViewWidth,ViewHeight,sizeOfEachTile;
+	private Camera Camera;
+	private BatchedModel model;
+	private Texture tex;
+	
+	public MapBuilder(int[][] map, float sizeOfEachTile,Camera Camera,Texture tex) {
+		super(map, sizeOfEachTile);
+		this.tilePosData=super.tilePosData;
+		this.tileUVData=super.tileUVData;
+		this.Camera=Camera;
+		this.sizeOfEachTile=sizeOfEachTile;
+		this.tex=tex;
+		this.model=new BatchedModel();
+	}
+
+	
+	public void viewMap() {
+		
+		model.flushBuffers();
+		
+		Vector2f  camPos=this.Camera.getPosition();
+		float leftSideOfScreen=camPos.x-(this.Camera.getWidth()/2);
+		float rightSideOfScreen=leftSideOfScreen+this.Camera.getWidth();
+		float topOfScreen=camPos.y+(this.Camera.getHeight()/2);
+		float bottomOfScreen=topOfScreen-this.Camera.getHeight();
+	for(int i=(int)(leftSideOfScreen/sizeOfEachTile);i<(int)(rightSideOfScreen/sizeOfEachTile);i++) {
+		for(int j=(int)(bottomOfScreen/sizeOfEachTile);j<(int)(topOfScreen/sizeOfEachTile);j++) {
+			int key=(i+1)*(j+1);
+			  float[] vert=super.tilePosData.get(key);
+			  float[] uv=super.tileUVData.get(key);   		
+			
+			  model.addvaluestoVBO(vert, uv);
+			
+			
+		}
+	}
+	
+	
+
+	}
+	
+	
+	public void drawMap(float x,float y) {
+		Start.s.bind();
+		tex.bind(2);
+		
+		Matrix4f target= Math.getMatrix(new Vector2f(x/sizeOfEachTile,y/sizeOfEachTile), 0,sizeOfEachTile);
+		 Start.s.loadInt(Start.location, 2);
+	  	 Start.s.loadMat(Start.Projection,Start.cam.getProjection());
+	     Start.s.loadMat(Start.RTS, target);
+		model.draw();
+		
+		
+		
+	}
+	
+}

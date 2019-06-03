@@ -109,6 +109,7 @@ private File file=new File(System.getProperty("user.dir"));
 	glValidateProgram(program);
 	if(glGetProgrami(program,GL_VALIDATE_STATUS)!=1) {
 		System.err.println(glGetProgramInfoLog(program));
+		System.err.println("program Validate failed");
 		System.exit(1);
 	}
 	

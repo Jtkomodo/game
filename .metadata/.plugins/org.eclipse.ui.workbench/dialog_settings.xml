@@ -20,6 +20,7 @@
 		<list key="textEntries">
 			<item value="1"/>
 			<item value="1"/>
+			<item value="1"/>
 			<item value="2"/>
 			<item value="2"/>
 			<item value="2"/>
@@ -32,8 +33,9 @@
 			<item value="1"/>
 		</list>
 		<list key="orderedElements">
-			<item value="org.eclipse.ui.file.import"/>
+			<item value="org.eclipse.ui.preferencePages.FileStates"/>
 			<item value="org.eclipse.team.ui.GenericHistoryView"/>
+			<item value="org.eclipse.ui.file.import"/>
 			<item value="org.eclipse.debug.ui.VariableView"/>
 			<item value="org.eclipse.ui.preferencePages.ColorsAndFonts"/>
 			<item value="org.eclipse.jdt.ui.preferences.CodeAssistPreferenceAdvanced"/>
@@ -46,8 +48,9 @@
 			<item value="org.eclipse.epp.mpc.ui.command.showInstalled"/>
 		</list>
 		<list key="orderedProviders">
-			<item value="org.eclipse.ui.commands"/>
+			<item value="org.eclipse.ui.preferences"/>
 			<item value="org.eclipse.e4.ui.parts"/>
+			<item value="org.eclipse.ui.commands"/>
 			<item value="org.eclipse.e4.ui.parts"/>
 			<item value="org.eclipse.ui.preferences"/>
 			<item value="org.eclipse.ui.preferences"/>
@@ -60,8 +63,9 @@
 			<item value="org.eclipse.ui.commands"/>
 		</list>
 		<list key="textArray">
-			<item value="impo"/>
+			<item value="local"/>
 			<item value="is"/>
+			<item value="impo"/>
 			<item value="variab"/>
 			<item value="debug"/>
 			<item value="theme"/>

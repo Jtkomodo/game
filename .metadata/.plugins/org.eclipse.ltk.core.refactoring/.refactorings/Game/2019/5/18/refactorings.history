@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;gameEngine.MapBuilder&apos; to &apos;MapLoader&apos;&#x0A;- Original project: &apos;Game&apos;&#x0A;- Original element: &apos;gameEngine.MapBuilder&apos;&#x0A;- Renamed element: &apos;gameEngine.MapLoader&apos;&#x0A;- Update references to refactored element&#x0A;- Rename similarly named elements&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;MapBuilder&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;gameEngine{MapBuilder.java[MapBuilder" matchStrategy="1" name="MapLoader" qualified="false" references="true" similarDeclarations="true" stamp="1556860723372" textual="true" version="1.0"/>
+</session>

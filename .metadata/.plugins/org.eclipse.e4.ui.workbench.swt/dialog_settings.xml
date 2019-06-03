@@ -3,7 +3,7 @@
 	<section name="ShowViewDialog">
 		<item value="435" key="DIALOG_WIDTH"/>
 		<item value="1|Waree|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
-		<item value="org.eclipse.debug.ui.VariableView" key="ShowViewDialog.STORE_SELECTED_VIEW_ID"/>
+		<item value="org.eclipse.debug.ui.RegisterView" key="ShowViewDialog.STORE_SELECTED_VIEW_ID"/>
 		<item value="498" key="DIALOG_HEIGHT"/>
 		<item value="292" key="DIALOG_X_ORIGIN"/>
 		<item value="225" key="DIALOG_Y_ORIGIN"/>

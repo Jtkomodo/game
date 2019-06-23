@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Encapsulate field &apos;gameEngine.BatchedModel.DrawMethod&apos; in &apos;gameEngine.BatchedModel&apos;&#x0D;&#x0A;- Original project: &apos;Game&apos;&#x0D;&#x0A;- Original element: &apos;gameEngine.BatchedModel.DrawMethod&apos;&#x0D;&#x0A;- Getter method name: &apos;getDrawMethod&apos;&#x0D;&#x0A;- Setter method name: &apos;setDrawMethod&apos;&#x0D;&#x0A;- Field visibility: &apos;public&apos;&#x0D;&#x0A;- Use getter and setter methods in declaring type" comments="false" declaring="true" description="Encapsulate field &apos;DrawMethod&apos;" flags="589830" getter="getDrawMethod" id="org.eclipse.jdt.ui.self.encapsulate" input="/src&lt;gameEngine{BatchedModel.java[BatchedModel^DrawMethod" insertion="11" setter="setDrawMethod" stamp="1561229197099" version="1.0" visibility="1"/>
+</session>

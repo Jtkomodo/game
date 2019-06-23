@@ -6,12 +6,18 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="makeLocation" key="selection"/>
+		<item value="if" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="if"/>
+			<item value="new Shader"/>
+			<item value="s="/>
+			<item value="Input"/>
+			<item value="input"/>
+			<item value="grid"/>
 			<item value="makelocation"/>
 			<item value=".enable()"/>
 			<item value=".enable("/>
@@ -21,12 +27,6 @@
 			<item value="fram"/>
 			<item value="frame"/>
 			<item value="frames"/>
-			<item value="system"/>
-			<item value="c"/>
-			<item value="b"/>
-			<item value="a"/>
-			<item value="font.text(&quot;aa ab ac ad ae af ag ah ai aj ak al am an ao ap aq ar as at au av aw ax ay az&quot;,0,-400,1);"/>
-			<item value="d"/>
 		</list>
 		<list key="replacehistory">
 			<item value="d"/>
@@ -47,9 +47,9 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="365" key="DIALOG_WIDTH"/>
-		<item value="1|Waree|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
-		<item value="520" key="DIALOG_HEIGHT"/>
+		<item value="336" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="454" key="DIALOG_HEIGHT"/>
 		<item value="1406" key="DIALOG_X_ORIGIN"/>
 		<item value="83" key="DIALOG_Y_ORIGIN"/>
 	</section>

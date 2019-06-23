@@ -12,6 +12,10 @@ public class MapLoader {
 	
 	private float sizeOfEachTile;
 	private BatchedModel model=new BatchedModel(); 
+	
+
+
+
 	private int[][] map,keychart;
 	protected HashMap<Integer,float[]> tilePosData=new HashMap<Integer,float[]>();
 	protected HashMap<Integer,float[]> tileUVData=new HashMap<Integer,float[]>();
@@ -141,7 +145,9 @@ public class MapLoader {
 	}
 	
 	
-	
+	public BatchedModel getModel() {
+		return model;
+	}
 	
 	
 	

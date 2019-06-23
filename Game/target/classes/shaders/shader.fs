@@ -5,8 +5,7 @@ varying vec2 tex;
 
 
 
-void main(){
-     
+void main(){     
 gl_FragColor=texture2D(sampler,tex);
 
 

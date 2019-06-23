@@ -67,7 +67,7 @@ private int width,height;
 		glfwSetWindowTitle(window,"game");
 		glfwShowWindow(window);
 		glfwMakeContextCurrent(window);
-		//glfwSwapInterval( 0 ); //this is for the vsync uncomment this when testing frame rates 
+		//glfwSwapInterval( 0 );System.out.println("vsnc off"); //this is for the vsync uncomment this when testing frame rates 
 		GL.createCapabilities();
 		glEnable(GL_TEXTURE_2D);
 		//glClearColor(.0f, 0.0f, 0.0f, 0.0f);
@@ -75,7 +75,7 @@ private int width,height;
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		//allow gfwKeycallbacks for Callback
 		
-
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
 		}
 

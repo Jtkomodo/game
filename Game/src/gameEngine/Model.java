@@ -10,7 +10,7 @@ import  org.lwjgl.BufferUtils;
 
 public class Model {
     private int drawCount;
-	private int v_id,tex_id,ind_id;
+	private int v_id,tex_id,ind_id,DrawMethod=GL_TRIANGLES;
 	private static  boolean draw=true;
 	private float[] vertices,uv_coords;
 	private int[] indeces;
@@ -79,7 +79,7 @@ public class Model {
 	  glVertexAttribPointer(1,2,GL_FLOAT,false,0,0);
 			
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
-      glDrawElements(GL_TRIANGLES,drawCount,GL_UNSIGNED_INT,0);}
+      glDrawElements(DrawMethod,drawCount,GL_UNSIGNED_INT,0);}
 	}
 	
 	
@@ -127,6 +127,13 @@ public class Model {
        glDisableVertexAttribArray(1);
        draw=false;
    }
+
+public void setDrawMethod(int drawMethod) {
+	if((drawMethod==GL_TRIANGLES) ||(drawMethod==GL_LINES)||(drawMethod==GL_POINTS)) {
+		if(drawMethod!=DrawMethod) {  
+		System.out.println("Switching Draw Method to "+drawMethod );
+		DrawMethod = drawMethod;}}
+}
 
 }
 

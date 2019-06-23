@@ -1,0 +1,275 @@
+package gameEngine;
+
+import org.joml.Math;
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+//06d7ea
+public class AABB {
+	private float widthR,heightR,resistance;//resistance is the amount of push away the box will have on the player
+	private Vector2f position,lc=new Vector2f(0,0),rc=new Vector2f(0,0),r;
+	private Model aabb;
+	private boolean DebugColisions=Start.DEBUGCOLISIONS;
+	
+	
+	public AABB(Vector2f position ,float widthR,float heightR,float resistance) {
+	 this.widthR=widthR;
+	 this.heightR=heightR;
+	 
+	 this.position=position;
+	 this.resistance=resistance;	
+	 this.r=new Vector2f(this.widthR,this.heightR);
+	
+	 this.position.sub(this.r,this.lc);
+	 this.position.add(this.r,this.rc); 
+	 if(DebugColisions) {
+		 float[] Vert= {
+				 -widthR,+heightR,
+					widthR,heightR,
+					widthR,-heightR,
+					-widthR,-heightR
+				 };
+			float[] uvBg={
+					0,0,
+					1,0,
+					1,1,
+					0,1
+					
+					};
+			int[] ind= {
+					0,1,2,
+					2,3,0	
+						
+				};
+			aabb= new Model(Vert,uvBg,ind);
+		    
+		
+		 
+	 }
+	
+		
+		
+	}
+	
+
+	public boolean AABBwAABB(AABB box) {
+		Vector2f lcB=new Vector2f(0,0);
+		Vector2f rcB=new Vector2f(0,0);
+		Vector2f lcA=new Vector2f(0,0);
+		Vector2f rcA=new Vector2f(0,0);
+		
+		
+		lcA=this.lc;
+		rcA=this.rc;
+		lcB=box.getLc();
+		rcB=box.getRc();
+		
+		
+		
+		
+	
+		
+	
+		
+		/*
+		     lc_____________
+		       |           |        
+		       |     A     |     
+		       |___________|
+                            rc		       
+		     lc_____________
+		       |           | 
+		       |     B     |     
+		       |___________|
+                            rc		
+		
+		
+		*/
+		if((rcA.x<lcB.x) || (rcB.x<lcA.x)) {// if the right side of A comes before the left side of B or vice versa return false(they can not be colliding)
+			return false;
+		}
+		else if((rcA.y<lcB.y) || (rcB.y<lcA.y)) {//if the Bottom side of A comes before the top side of B or vice versa return false
+			return false;
+		}
+		
+		else {//if both all sides have been checked and not resulted in no collision then there must be a collision
+			return true;
+		}
+	  
+		
+		
+		
+		
+		
+	
+	}
+	
+	
+   public Vector2f findVector(Vector2f position, Vector2f movement,Vector2f direction,AABB box) {
+	   
+	   Vector2f lc=new Vector2f(0,0);
+	   Vector2f rc=new Vector2f(0,0);
+	   position.sub(this.r,lc);
+	   position.add(this.r,rc); 
+	   Vector2f currentmovement=new Vector2f(0,0);movement.add(new Vector2f(position.x,position.y),currentmovement);
+	   Vector2f newMOvement=new Vector2f(0,0); 
+	   Vector2f penetration=new Vector2f(0,0);
+	   
+	   
+	   float amount=box.resistance;
+
+	   
+	
+	   
+	  
+	   if(amount!=0 && amount!=1) {     
+		 
+			
+		   newMOvement=VectorMath.lerp(position,currentmovement, amount);
+	
+	   }else if(amount==0) {
+		
+			   
+			   
+		 //  newMOvement=currentmovement;
+			   
+	   }else {
+		   newMOvement=currentmovement;
+		   
+		  
+		   
+	   }
+	   
+	   
+	   
+	    return newMOvement;
+	   
+	   
+	   
+	
+   }
+   
+   private static float clamp(float value,float min,float max) {
+	   
+	   if(value<min) {
+		   return min;
+		   
+	   }
+	   
+	   else if(value>max) {
+		   return max;
+	   }else {
+		   
+		   return value;
+	   }
+	   }
+	   
+	  
+   public void debug() {
+	   if(DebugColisions) {
+		  Start.s.bind();
+		   Start.COLTEX.bind(5);
+		   Matrix4f target=MatrixMath.getMatrix(new Vector2f(this.position.x,this.position.y),0,1);
+		   
+		   Start.s.loadInt(Start.location, 5); 
+		   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
+		   Start.s.loadMat(Start.RTS, target);
+		   aabb.draw();	
+		   
+		   
+		   
+	   }
+	   
+	   
+	   
+	   
+   }
+   
+   
+   
+	
+	
+	
+//--------------getters--and--setters---------------------------------------------------	
+	
+	
+	
+
+
+
+
+	public float getWidthR() {
+		return widthR;
+	}
+
+
+
+	public Vector2f getPosition() {
+		return position;
+	}
+
+	public void setPosition(Vector2f position) {
+		this.position = position;
+		 
+		position.sub(this.r,this.lc);
+		position.add(this.r,this.rc); 
+		 
+		
+	}
+
+	public void setWidthR(float widthR) {
+		this.widthR = widthR;
+	}
+
+
+
+	public float getHeighR() {
+		return heightR;
+	}
+
+
+
+	public void setHeightR(float height) {
+		this.heightR = height;
+	}
+
+
+
+	public float getResistance() {
+		return resistance;
+	}
+
+
+
+	public void setResistance(float resistance) {
+		this.resistance = resistance;
+	}
+	
+	
+	public Vector2f getLc() {
+		return lc;
+	}
+
+	public void setLc(Vector2f lc) {
+		this.lc = lc;
+	}
+
+	public Vector2f getRc() {
+		return rc;
+	}
+
+	public void setRc(Vector2f rc) {
+		this.rc = rc;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

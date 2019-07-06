@@ -1,103 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<section name="WorkbenchPreferenceDialogSettings">
-		<item value="395" key="DIALOG_X_ORIGIN"/>
-		<item value="0" key="DIALOG_Y_ORIGIN"/>
-	</section>
-	<section name="org.eclipse.ui.preferences.keysPreferencePage">
-		<item value="true" key="actionSetFilter"/>
-		<item value="true" key="uncategorizedFilter"/>
-		<item value="true" key="internalFilter"/>
-	</section>
-	<section name="EditorSelectionDialog">
-		<item value="true" key="EditorSelectionDialog.STORE_ID_INTERNAL_EXTERNAL"/>
-		<item value=".png" key="EditorSelectionDialog.STORE_ID_FILE_EXTENSION"/>
-		<item value="GNU Image Manipulation Program" key="EditorSelectionDialog.STORE_ID_DESCR"/>
-	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
-		<item value="979" key="dialogHeight"/>
-		<item value="585" key="dialogWidth"/>
+		<item value="-1" key="dialogHeight"/>
+		<item value="-1" key="dialogWidth"/>
 		<list key="textEntries">
-			<item value="1"/>
-			<item value="1"/>
-			<item value="1"/>
-			<item value="1"/>
-			<item value="2"/>
-			<item value="2"/>
-			<item value="2"/>
-			<item value="1"/>
-			<item value="1"/>
-			<item value="1"/>
-			<item value="1"/>
-			<item value="1"/>
-			<item value="1"/>
-			<item value="1"/>
 		</list>
 		<list key="orderedElements">
-			<item value="org.eclipse.debug.ui.BreakpointView"/>
-			<item value="org.eclipse.ui.preferencePages.FileStates"/>
-			<item value="org.eclipse.team.ui.GenericHistoryView"/>
-			<item value="org.eclipse.ui.file.import"/>
-			<item value="org.eclipse.debug.ui.VariableView"/>
-			<item value="org.eclipse.ui.preferencePages.ColorsAndFonts"/>
-			<item value="org.eclipse.jdt.ui.preferences.CodeAssistPreferenceAdvanced"/>
-			<item value="dynamicHelp"/>
-			<item value="org.eclipse.ui.preferencePages.Views"/>
-			<item value="org.eclipse.jdt.ui.preferences.ClasspathVariablesPreferencePage"/>
-			<item value="org.eclipse.ui.console.ConsoleView"/>
-			<item value="org.eclipse.ui.resourcePerspective"/>
-			<item value="org.eclipse.help.ui.HelpView"/>
-			<item value="org.eclipse.epp.mpc.ui.command.showInstalled"/>
 		</list>
 		<list key="orderedProviders">
-			<item value="org.eclipse.e4.ui.parts"/>
-			<item value="org.eclipse.ui.preferences"/>
-			<item value="org.eclipse.e4.ui.parts"/>
-			<item value="org.eclipse.ui.commands"/>
-			<item value="org.eclipse.e4.ui.parts"/>
-			<item value="org.eclipse.ui.preferences"/>
-			<item value="org.eclipse.ui.preferences"/>
-			<item value="org.eclipse.ui.actions"/>
-			<item value="org.eclipse.ui.preferences"/>
-			<item value="org.eclipse.ui.preferences"/>
-			<item value="org.eclipse.e4.ui.parts"/>
-			<item value="org.eclipse.ui.perspectives"/>
-			<item value="org.eclipse.e4.ui.parts"/>
-			<item value="org.eclipse.ui.commands"/>
 		</list>
 		<list key="textArray">
-			<item value="s"/>
-			<item value="local"/>
-			<item value="is"/>
-			<item value="impo"/>
-			<item value="variab"/>
-			<item value="debug"/>
-			<item value="theme"/>
-			<item value="colo"/>
-			<item value="comple"/>
-			<item value="content"/>
-			<item value="help"/>
-			<item value="th"/>
-			<item value="class"/>
-			<item value="c"/>
-			<item value="res"/>
-			<item value="vh"/>
-			<item value="plu"/>
 		</list>
-	</section>
-	<section name="NewWizardAction">
-		<item value="org.eclipse.ui.wizards.new.folder" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
-		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
-			<item value="org.eclipse.ui.Basic"/>
-		</list>
-	</section>
-	<section name="InstallationDialogSettings">
-		<item value="934" key="DIALOG_WIDTH"/>
-		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="982" key="DIALOG_HEIGHT"/>
-		<item value="83" key="DIALOG_X_ORIGIN"/>
-		<item value="-44" key="DIALOG_Y_ORIGIN"/>
-	</section>
-	<section name="ImportExportAction">
 	</section>
 </section>

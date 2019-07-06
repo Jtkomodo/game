@@ -1,7 +1,0 @@
-if(testcol) {
-							Vector2f new2=playerCol.findVector(new Vector2f(x,y),c2,direction,Col);
-							//newvec.sub(new2);
-							x=new2.x;
-							y=new2.y;
-							
-						}

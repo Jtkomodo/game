@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="if" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="coler"/>
+			<item value="color"/>
+			<item value="input"/>
+			<item value="oldpos"/>
+			<item value="position"/>
+			<item value="f"/>
 			<item value="if"/>
 			<item value="new Shader"/>
 			<item value="s="/>
 			<item value="Input"/>
-			<item value="input"/>
 			<item value="grid"/>
 			<item value="makelocation"/>
 			<item value=".enable()"/>
 			<item value=".enable("/>
 			<item value="textB"/>
-			<item value="testm"/>
-			<item value="have"/>
-			<item value="fram"/>
-			<item value="frame"/>
-			<item value="frames"/>
 		</list>
 		<list key="replacehistory">
 			<item value="d"/>
@@ -50,7 +50,7 @@
 		<item value="336" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="454" key="DIALOG_HEIGHT"/>
-		<item value="1406" key="DIALOG_X_ORIGIN"/>
-		<item value="83" key="DIALOG_Y_ORIGIN"/>
+		<item value="111" key="DIALOG_X_ORIGIN"/>
+		<item value="130" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

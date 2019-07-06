@@ -24,9 +24,9 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static Input I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,LOG=true,DEBUGCOLISIONS=true;
+    public static boolean canRender,overworld=true,test=false,testcol,LOG=false,DEBUGCOLISIONS=true;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0;
-    public static Texture tex,MAP,bg,playerTex,COLTEX,piont;
+    public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
     public static Model background,player;
     public static BatchedModel testM;
@@ -150,9 +150,12 @@ public class Start {
 		textC= new TextBuilder("aakar",512);
 		testM= new BatchedModel();
 		piont= new Texture("Point");
+
+		piont2= new Texture("Point2");
 	//	MAP=new Texture("map3");
 	    playerTex= new Texture("playerSprite2s_1");
 	    COLTEX= new Texture("ColTex");
+	    col2= new Texture("ColTex2");
 		//map=new Texture("map1"); 
 		//Define models
 	    if(LOG==true)
@@ -185,6 +188,7 @@ public class Start {
 		
 		if(LOG==true)
 		System.out.println("Settign Colisions....");
+		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		Col=new AABB(new Vector2f(0,0),64,64,0);
 	
@@ -203,12 +207,13 @@ public class Start {
 		System.out.println("Starting Game loop.....");
     //----------------------GAME--LOOP------------------------------
 		while(!w.isExited() && !I.IsEscapePushed()) {
-	
+			oldpos=new Vector2f(x,y);
 		fps();
 	    t.unbind();
 	    
 	    
 	if(canRender) {
+		
 	  // TextureUpdate(MAP)
 Model.enable();
 BatchedModel.enable();
@@ -216,14 +221,19 @@ BatchedModel.enable();
 		if(test==false) {
 if(overworld==true) {		 
 		playerCol.setPosition(new Vector2f(x,y));
+		Vector2f currentpos=new Vector2f(x,y);
 		   testcol=playerCol.AABBwAABB(Col); 
-		if(testcol) {
+	
 				Vector2f new2=playerCol.findVector(oldpos,c2,direction,Col);//old position,the new movement,the normalized vector of the direction the player is going,th aaabb box that we are checking colision with 
 				//newvec.sub(new2);
-				x=new2.x;
-				y=new2.y;
+				Vector2f a=new Vector2f(0,0);
+				new2.sub(currentpos,a);
+				if(testcol) {
+			      x+=a.x;
+				  y+=a.y;
 				   camx=-x;
 					camy=-y;
+					playerCol.setPosition(new Vector2f(x,y));
 			
 			//x=oldpos.x;
 			//y=oldpos.y;
@@ -256,7 +266,7 @@ if(overworld==true) {
 	      
 	      
 		 
-		 SpriteUpdate(player,playerTex,x,y,Playerscale,true);
+		 //SpriteUpdate(player,playerTex,x,y,Playerscale,true);
 		textB.drawString(screencoordx-300,screencoordy-220,.24f);
 		textC.drawString(screencoordx,screencoordy-220,.24f);
 		
@@ -349,7 +359,7 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 		
 	}
 	if(overworld==true) {
-		oldpos=new Vector2f(x,y);
+		
 		        if(I.getStateofButton(GLFW_KEY_W)==1 || I.getStateofButton(GLFW_KEY_W)==3) {
 		        	speed=5;
 		        	
@@ -401,6 +411,7 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 						
 						Vector2f velocity=new Vector2f(direction.x*speed,direction.y*speed);
 						direction.add(velocity,newvec);
+						direction=new Vector2f(speedx,speedy);
 						c2=newvec;//this is the movement that needs to be added to the position vector
 					
 						 

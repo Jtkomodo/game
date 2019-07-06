@@ -12,7 +12,7 @@
 	<section name="EditorSelectionDialog">
 		<item value="true" key="EditorSelectionDialog.STORE_ID_INTERNAL_EXTERNAL"/>
 		<item value=".png" key="EditorSelectionDialog.STORE_ID_FILE_EXTENSION"/>
-		<item value="paint.net Image" key="EditorSelectionDialog.STORE_ID_DESCR"/>
+		<item value="GNU Image Manipulation Program" key="EditorSelectionDialog.STORE_ID_DESCR"/>
 	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
 		<item value="979" key="dialogHeight"/>

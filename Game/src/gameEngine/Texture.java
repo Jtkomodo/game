@@ -160,30 +160,7 @@ public void changeImageData(int x,int y,byte red,byte green,byte blue,byte Alpha
 	
 }
 
-public void changeColor(byte red,byte green,byte blue,byte Alpha,byte nr,byte ng,byte nb,byte na ) {
-	for(int i=0; i<data.capacity();i+=4) {
-		byte R=imageData.get(i);
-		byte G=imageData.get(i+1);
-		byte B=imageData.get(i+2);
-		byte A=imageData.get(i+3);
-		
-		if(R==red && G==green && B==blue && A==Alpha ) {
-			data.limit(data.capacity());
-			
-			data.put(i, nr);
-			data.put(i+1, ng);
-			data.put(i+2, nb);
-			data.put(i+3,na);
-			}
-		
-	}
- data.flip();
-  data.limit(data.capacity());
-  
-   loadMapWithBuffer(data);
-   data.flip();
-   loadTexture(data);
-}
+
 
 public void createFile(boolean createReadable,String path) throws IOException {
 

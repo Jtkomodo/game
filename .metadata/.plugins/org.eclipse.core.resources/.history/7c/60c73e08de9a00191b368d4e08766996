@@ -1,0 +1,15 @@
+#version 120
+
+uniform sampler2D sampler;
+varying vec2 tex;
+varying vec4 colr;
+
+
+void main(){ 
+if(tex=<(0,0))
+gl_FragColor=texture2D(sampler,tex)+colr;
+
+
+
+
+}

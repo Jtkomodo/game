@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.lwjgl.opengl.GL13C"/>
 <fullyQualifiedTypeName name="java.io.BufferedReader"/>
 <fullyQualifiedTypeName name="gameEngine.Texture"/>
 <fullyQualifiedTypeName name="java.nio.FloatBuffer"/>
@@ -49,7 +48,6 @@
 <fullyQualifiedTypeName name="gameEngine.Model"/>
 <fullyQualifiedTypeName name="Data.TilesData"/>
 <fullyQualifiedTypeName name="gameEngine.Camera"/>
-<fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="org.joml.Vector3f"/>
 <fullyQualifiedTypeName name="org.joml.Math"/>
 <fullyQualifiedTypeName name="gameEngine.Timer"/>
@@ -59,5 +57,7 @@
 <fullyQualifiedTypeName name="org.lwjgl.opengl.GL30"/>
 <fullyQualifiedTypeName name="org.lwjgl.opengl.GL31"/>
 <fullyQualifiedTypeName name="gameEngine.Start"/>
+<fullyQualifiedTypeName name="java.lang.Float"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
 </qualifiedTypeNameHistroy>

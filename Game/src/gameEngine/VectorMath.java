@@ -10,7 +10,7 @@ public class VectorMath {
 	
 	public static Vector2f normalize(Vector2f vector) {
 		Vector2f normal;
-	if((vector.x !=0) && (vector.y!=0)){
+	if((vector.x !=0) || (vector.y!=0)){//this is so we don't have a divided by zero problem
 		float mag=getMagnitude(vector);
 		float newx=vector.x/mag;
 		float newy=vector.y/mag;

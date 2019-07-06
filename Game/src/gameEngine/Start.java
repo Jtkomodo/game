@@ -190,7 +190,7 @@ public class Start {
 		System.out.println("Settign Colisions....");
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		playerCol=new AABB(new Vector2f(0,0),15,44,0);
-		Col=new AABB(new Vector2f(0,0),64,64,0);
+		Col=new AABB(new Vector2f(128,0),64,64,0);
 	
 		
 		

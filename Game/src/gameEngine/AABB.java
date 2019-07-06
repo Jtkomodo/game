@@ -21,7 +21,10 @@ public class AABB {
 	 this.r=new Vector2f(this.widthR,this.heightR);
 	
 	 this.position.sub(this.r,this.lc);
+	// System.out.println("lc= "+lc);
 	 this.position.add(this.r,this.rc); 
+	// System.out.println("lc= "+rc);
+	 
 	 if(DebugColisions) {
 		 float[] Vert= {
 				 -widthR,+heightR,
@@ -154,9 +157,10 @@ public class AABB {
 	
 	   }else if(amount==0) {
 		Vector2f d= new Vector2f(0,0);position.sub(box.position,d);
+	
 	    Vector2f closest;
-		closest=new Vector2f(clamp(d.x,box.lc.x,box.rc.x),clamp(d.y,box.lc.y,box.rc.y));
-		
+		closest=new Vector2f(clamp(box.position.x+d.x,box.lc.x,box.rc.x),clamp(box.position.y+d.y,box.lc.y,box.rc.y));
+	//	System.out.println(d"before "+d+"after "+closest);
 		//currentmovement.sub(pen,newMOvement);
 		
 		this.Pposition=closest;

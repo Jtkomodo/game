@@ -92,7 +92,7 @@ public class TextBuilder extends Fontloader{
 	     Start.s.loadVec4(Start.Color,color);
 		textModel.draw();// calls our draw call which actually does all the gpu commands 
 		
-		Start.s.loadVec4(Start.Color,new Vector4f(1,1,1,1));
+		Start.s.loadVec4(Start.Color,new Vector4f(0,0,0,0));
 	}
 	
 	public void drawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale

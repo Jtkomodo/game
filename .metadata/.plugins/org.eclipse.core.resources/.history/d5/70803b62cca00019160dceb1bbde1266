@@ -1,0 +1,179 @@
+package gameEngine;
+
+import static java.lang.Math.*;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
+
+public class VectorMath {
+
+	
+	
+	public static Vector2f normalize(Vector2f vector) {
+		Vector2f normal;
+	if((vector.x !=0) || (vector.y!=0)){//this is so we don't have a divided by zero problem
+		float mag=getMagnitude(vector);
+		float newx=vector.x/mag;
+		float newy=vector.y/mag;
+		
+		normal= new Vector2f(newx,newy);
+	}
+	else {
+		normal=vector;
+	}
+	
+
+		return normal;
+		
+	}
+	
+	public static float getMagnitude(Vector2f vector) {
+		float magnitude;
+		magnitude=(float) sqrt(pow(vector.x, 2)+pow(vector.y,2));
+		
+		return magnitude;
+		
+	}
+	
+	
+	public static boolean  MagIsGreater(Vector2f a,Vector2f b) {
+		float lA=(float)((float)pow(a.x,2)+pow(a.y,2));
+		float lB=(float)((float)pow(b.x,2)+pow(b.y,2));
+	     boolean check;
+	     if(lA>lB) {
+	    	 check=true;
+	    	 
+	     }
+	     else {
+	    	 check=false;
+	     }
+		return check;
+		
+	}
+	
+	public static boolean  MagIsLessThan(Vector2f a,Vector2f b) {
+		float lA=(float)((float)pow(a.x,2)+pow(a.y,2));
+		float lB=(float)((float)pow(b.x,2)+pow(b.y,2));
+	     boolean check;
+	     if(lA<lB) {
+	    	 check=true;
+	    	 
+	     }
+	     else {
+	    	 check=false;
+	     }
+		return check;
+		
+	}
+	
+	
+	
+	public static boolean  MagIsEqual(Vector2f a,Vector2f b) {
+		float lA=(float)((float)pow(a.x,2)+pow(a.y,2));
+		float lB=(float)((float)pow(b.x,2)+pow(b.y,2));
+	     boolean check;
+	     if(lA==lB) {
+	    	 check=true;
+	    	 
+	     }
+	     else {
+	    	 check=false;
+	     }
+		return check;
+		
+	}
+	
+	
+	public static float dotProduct(Vector2f a,Vector2f b) {
+		float dot=(a.x*b.x)+(a.y*b.y);
+		return dot;
+		
+	}
+   
+	public static float AngleBeteen(Vector2f a,Vector2f b){
+		float dot=dotProduct(a,b);
+		float Maga=getMagnitude(a);
+		float Magb=getMagnitude(b);
+		float newmag=Maga*Magb;
+		float n=dot/newmag;
+		
+		float angle=(float) acos(n);
+		angle=(float)toDegrees(angle);
+		return angle;
+		
+		
+		
+		
+	}
+	
+	public static float AngleBeteenNormalized(Vector2f a,Vector2f b){
+		float dot=dotProduct(a,b); 
+		float angle=(float) acos(dot);
+		angle=(float)toDegrees(angle);
+		return angle;
+		
+		
+		
+		
+	}
+	
+	//x->y->z->x
+	//xyzzy
+	//ab-ab
+	
+	public static Vector3f crossProduct(Vector2f a,Vector2f b) {
+		Vector3f newA=new Vector3f(a,0);
+		Vector3f newB=new Vector3f(b,0);
+		Vector3f cross;
+		
+		float crossx=newA.y*newB.z-newA.z*newB.y;
+		float crossy=newA.z*newB.x-newA.x-newB.z;
+		float crossz=newA.x*newB.y-newA.y-newB.x;
+		
+		
+		cross=new Vector3f(crossx,crossy,crossz);
+		
+		return cross;
+		
+	}
+	
+	public static Vector2f lerp(Vector2f a,Vector2f b,float amount) {
+		Vector2f lerpa=a.mul((1-amount));
+		Vector2f  lerpb=b.mul(amount);
+		
+		Vector2f lerp=lerpa.add(lerpb);
+		
+		
+		return lerp;
+		
+		
+		
+		
+	}
+		
+	
+	public static Vector2f ProjectionV(Vector2f a,Vector2f b) {
+        float dot=dotProduct(a,b); 
+		float ls=(float) (pow(b.x, 2)+pow(b.y,2));
+		float n=dot/ls;
+		
+		
+		Vector2f d=b.mul(n);
+         
+        return d;
+		
+	}
+	
+	public static float ProjectionS(Vector2f a,Vector2f b) {
+		 float dot=dotProduct(a,b);
+		 float magB=getMagnitude(b);		
+		
+		
+		float d=dot/magB;
+	     
+	     return d;
+		
+	}
+	
+	
+	
+}

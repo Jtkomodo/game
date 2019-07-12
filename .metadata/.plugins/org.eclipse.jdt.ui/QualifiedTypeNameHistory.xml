@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="gameEngine.Start"/>
+<fullyQualifiedTypeName name="gameEngine.Model"/>
+<fullyQualifiedTypeName name="org.joml.Vector4f"/>
+<fullyQualifiedTypeName name="org.joml.Vector2f"/>
+</qualifiedTypeNameHistroy>

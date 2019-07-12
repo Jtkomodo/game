@@ -9,6 +9,7 @@ import java.nio.FloatBuffer;
 
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
+import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
 
@@ -138,10 +139,17 @@ private File file=new File(System.getProperty("user.dir"));
 		
 	}
 	
-	public void loadVec(int location,Vector2f vec) {
+	public void loadVec2(int location,Vector2f vec) {
 	     	glUniform2f(location,vec.x,vec.y);
 			
 }
+	
+	public void loadVec4(int location,Vector4f vec) {
+     	glUniform4f(location,vec.x,vec.y,vec.z,vec.w);
+		
+}	
+	
+	
 	public void loadMat(int location,Matrix4f matrix) {
          FloatBuffer matrixBuffer=BufferUtils.createFloatBuffer(16);	
          matrix.get(matrixBuffer);

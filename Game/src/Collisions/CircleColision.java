@@ -1,0 +1,124 @@
+package Collisions;
+import org.joml.*;
+
+import gameEngine.MatrixMath;
+import gameEngine.Model;
+import gameEngine.Start;
+import gameEngine.VectorMath;
+
+
+public class CircleColision extends CollisionFunctions {
+private float r;
+private Vector2f position;
+private Model Circle,piont;
+	
+	
+	public CircleColision(Vector2f position,float r) {
+		
+		this.r=r;
+		this.position=position;
+		 float[] Vert= {
+				 -r,+r,
+					r,r,
+					r,-r,
+					-r,-r
+				 };
+		int[] ind= {
+				0,1,2,
+				2,3,0	
+					
+			};float[] vert={
+					-0.5f,+0.5f,
+					0.5f,0.5f,
+					0.5f,-0.5f,
+					-0.5f,-0.5f
+				};	float[] uv={
+						0,0,
+						1,0,
+						1,1,
+						0,1
+						
+						};
+			
+			 this.Circle=new Model(Vert,uv,ind);
+			
+			
+	}
+	@Override
+	protected boolean vsAABB(AABB box) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public boolean vsCircle(CircleColision b) {
+		Vector2f d=new Vector2f(0,0);
+		b.position.sub(this.position,d);
+		float mag=VectorMath.getMagnitude(d);
+		if(mag>this.r) {
+			return false;
+		}
+		else {
+		return false;
+		}
+	}
+	
+	
+	
+	@Override
+	public Vector2f findVector(Vector2f position, Vector2f movement, Vector2f direction, CircleColision circle) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Vector2f findVector(Vector2f position, Vector2f movement, Vector2f direction, AABB box) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	public void debug() {
+		
+		
+		  Start.s.bind();
+		   Start.circleCol1.bind(5);
+		   Matrix4f target=MatrixMath.getMatrix(new Vector2f(this.position.x,this.position.y),0,1);
+		   
+		   Start.s.loadInt(Start.location, 5); 
+		   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
+		   Start.s.loadMat(Start.RTS, target);
+		   Circle.draw();
+	
+	
+	}
+
+	public float getR() {
+		return r;
+	}
+
+	public void setR(float r) {
+		this.r = r;
+	}
+
+	public Vector2f getPosition() {
+		return position;
+	}
+
+	public void setPosition(Vector2f position) {
+		this.position = position;
+	}
+
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,30 @@
+package gameEngine;
+//this is not done yet it is just somthing I started
+import java.util.HashMap;
+
+import org.joml.Vector2f;
+
+public abstract class CollisionFunctions extends VectorMath {
+ public boolean 
+	
+	abstract void debug();
+	abstract public Vector2f findVector(Vector2f position, Vector2f movement,Vector2f direction,CircleColision circle); 
+	abstract public Vector2f findVector(Vector2f position, Vector2f movement,Vector2f direction,AABB box); 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

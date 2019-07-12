@@ -223,7 +223,7 @@ public class Start {
 		System.out.println("Starting Game loop.....");
 		
 		
-		s.loadVec4(Color, new Vector4f(1,1,1,1));
+		s.loadVec4(Color, new Vector4f(0,0,0,0));
     //----------------------GAME--LOOP------------------------------
 		while(!w.isExited() && !I.IsEscapePushed()) {
 			oldpos=new Vector2f(x,y);

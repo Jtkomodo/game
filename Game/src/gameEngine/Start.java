@@ -13,6 +13,7 @@ import Collisions.AABB;
 import Collisions.CircleColision;
 import textrendering.Fontloader;
 import textrendering.TextBuilder;
+import Data.Constants;
 public class Start {
     
 	
@@ -27,16 +28,16 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static Input I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,LOG=false,DEBUGCOLISIONS=true;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=false,DEBUGCOLISIONS=true;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0;
-    public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,textbox;
+    public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
     public static Model background,player,textboxM;
     public static BatchedModel testM;
-    public static TextBuilder textB,textA,textC,text1;
+    public static TextBuilder textB,textA,textC,textD,text1;
     public static Vector2f currentmovement,c2,oldpos,direction;
     public static AABB playerCol,Col;
-    public static CircleColision circle1;
+    public static CircleColision circle1, circle2;
     
 	public static void main(String[] args) {
 	
@@ -158,6 +159,7 @@ public class Start {
 	    textB= new TextBuilder("aakar",512); 
 		textA= new TextBuilder("aakar",512);
 		textC= new TextBuilder("aakar",512);
+		textD= new TextBuilder("aakar",512);
 		text1= new TextBuilder("aakar",512);
 		testM= new BatchedModel();
 		piont= new Texture("Point");
@@ -178,7 +180,7 @@ public class Start {
 	    textboxM=new Model(vertText,uvtextbox,ind);
 		
 	    if(LOG==true)
-	    System.out.println("MAking Camera....");
+	    System.out.println("Making Camera....");
 		//set camera
 		cam= new Camera(width,height);
 		if(LOG==true)
@@ -205,7 +207,8 @@ public class Start {
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		Col=new AABB(new Vector2f(1280,180),64,64,0);
-		circle1=new CircleColision(new Vector2f(0,0),64);
+		circle1=new CircleColision(new Vector2f(256,256),64);
+		circle2=new CircleColision(new Vector2f(0,0),32);
 		
 	
 		
@@ -223,7 +226,7 @@ public class Start {
 		System.out.println("Starting Game loop.....");
 		
 		
-		s.loadVec4(Color, new Vector4f(1,1,1,1));
+		s.loadVec4(Color, new Vector4f(0,0,0,0));
     //----------------------GAME--LOOP------------------------------
 		while(!w.isExited() && !I.IsEscapePushed()) {
 			oldpos=new Vector2f(x,y);
@@ -244,7 +247,9 @@ BatchedModel.enable();
 if(overworld==true) {		 
 		playerCol.setPosition(new Vector2f(x,y));
 		Vector2f currentpos=new Vector2f(x,y);
-		   testcol=playerCol.vsAABB(Col); 
+		circle2.setPosition(currentpos);
+		   testcol=playerCol.vsAABB(Col);
+		   circCol=circle2.vsCircle(circle1);
 	
 				Vector2f new2=playerCol.findVector(oldpos,c2,direction,Col);//old position,the new movement,the normalized vector of the direction the player is going,th aaabb box that we are checking colision with 
 				//newvec.sub(new2);
@@ -284,6 +289,8 @@ if(overworld==true) {
 	    Col.debug();
 	    playerCol.debug();
 	    circle1.debug();
+	    circle2.debug();
+	      textD.setString("circCol:"+circCol);
 	      textC.setString("xmap="+gridx+" ymap="+gridy+" col:  "+testcol);
 	      
 	      
@@ -292,6 +299,7 @@ if(overworld==true) {
 		 //SpriteUpdate(player,playerTex,x,y,Playerscale,true);
 		textB.drawString(screencoordx-300,screencoordy-220,.24f);
 		textC.drawString(screencoordx,screencoordy-220,.24f);
+		textD.drawString(screencoordx, screencoordy-200, .24f);
 		
 	
 
@@ -498,8 +506,7 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 	 	  
 	 	  
 	 	  text1.setString("moves");
-	 	  text1.drawString(positiont.x-15,positiont.y+15, .15f,new Vector4f((0x00),(0x00),(0x00),0xff));
-	 	  
+	 	  text1.drawString(positiont.x-15,positiont.y+15, .15f, Constants.BLACK);
 	 	  
 	 	  
 	 	  

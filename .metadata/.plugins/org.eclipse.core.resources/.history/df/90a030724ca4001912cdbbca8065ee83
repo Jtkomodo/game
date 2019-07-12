@@ -2,11 +2,11 @@
 
 uniform sampler2D sampler;
 varying vec2 tex;
-uniform vec4 color;
+unifor vec4 color;
 
 
 void main(){     
-gl_FragColor=texture2D(sampler,tex)-color;
+gl_FragColor=texture2D(sampler,tex)*color;
 
 
 

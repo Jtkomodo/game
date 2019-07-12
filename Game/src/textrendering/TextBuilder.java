@@ -84,7 +84,7 @@ public class TextBuilder extends Fontloader{
 	public void drawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
 		Start.s.bind();// binds our shader program
 		super.tex.bind(2);//binds our texture to texture2d 
-		color.mul(0.01f);
+		//color.mul(0.01f);
 		Matrix4f target= MatrixMath.getMatrix(new Vector2f(x/scale,y/scale), 0,scale);//this creates our matrix to multiply with the projection matrix to place in the correct coords
 		 Start.s.loadInt(Start.location, 2);//this loads the texture binded to the second location into the fragment shader program so it can be used
 	  	 Start.s.loadMat(Start.Projection,Start.cam.getProjection());// loads our projection matrix to the vertex shader
@@ -92,7 +92,7 @@ public class TextBuilder extends Fontloader{
 	     Start.s.loadVec4(Start.Color,color);
 		textModel.draw();// calls our draw call which actually does all the gpu commands 
 		
-		Start.s.loadVec4(Start.Color,new Vector4f(1,1,1,1));
+		Start.s.loadVec4(Start.Color,new Vector4f(0,0,0,0));
 	}
 	
 	public void drawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale

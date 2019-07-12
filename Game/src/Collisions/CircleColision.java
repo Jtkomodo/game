@@ -53,12 +53,13 @@ private Model Circle,piont;
 	public boolean vsCircle(CircleColision b) {
 		Vector2f d=new Vector2f(0,0);
 		b.position.sub(this.position,d);
+		float collisionDistance = this.r+b.r;
 		float mag=VectorMath.getMagnitude(d);
-		if(mag>this.r) {
+		if(mag>collisionDistance) {
 			return false;
 		}
 		else {
-		return false;
+			return true;
 		}
 	}
 	

@@ -2,7 +2,7 @@
 
 uniform sampler2D sampler;
 varying vec2 tex;
-unifor vec4 color;
+uniform vec4 color;
 
 
 void main(){     

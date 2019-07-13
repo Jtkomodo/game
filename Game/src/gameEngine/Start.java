@@ -168,7 +168,7 @@ public class Start {
 		circleCol1=new Texture("Circle");
 	//	MAP=new Texture("map3");
 	    playerTex= new Texture("playerSprite2s_1");
-	    COLTEX= new Texture("ColTex");
+	    COLTEX= new Texture("whitebox");
 	    col2= new Texture("ColTex2");
 		//map=new Texture("map1"); 
 		//Define models
@@ -226,7 +226,7 @@ public class Start {
 		System.out.println("Starting Game loop.....");
 		
 		
-		s.loadVec4(Color, new Vector4f(0,0,0,0));
+		s.loadVec4(Color, new Vector4f(1,1,1,1));
     //----------------------GAME--LOOP------------------------------
 		while(!w.isExited() && !I.IsEscapePushed()) {
 			oldpos=new Vector2f(x,y);
@@ -496,17 +496,17 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 		  cam.setPosition(new Vector2f(0,0));
 	 	   s.loadMat(Projection,cam.getProjection());
 	 	  s.loadMat(RTS,MatrixMath.getMatrix(new Vector2f(0,0),0,64*40));//change rotation and scale with this
-	 	  background.draw();
-	 	  SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
-	 	  SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
-	 	  SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
-	 	  SpriteUpdate(textboxM,textbox,positiont.x,positiont.y,1,false);
+	 	 background.draw();
+	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
+	 	 SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
+	 	 SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
+	 	 SpriteUpdate(textboxM,textbox,positiont.x,positiont.y,1,false);
 	 	 
 	 	  
 	 	  
 	 	  
 	 	  text1.setString("moves");
-	 	  text1.drawString(positiont.x-15,positiont.y+15, .15f, Constants.BLACK);
+	 	  text1.drawString(positiont.x-15,positiont.y+15, .15f, Constants.TEST_COLOR);
 	 	  
 	 	  
 	 	  

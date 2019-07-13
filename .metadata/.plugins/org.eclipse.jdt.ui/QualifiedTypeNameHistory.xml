@@ -4,4 +4,5 @@
 <fullyQualifiedTypeName name="gameEngine.Model"/>
 <fullyQualifiedTypeName name="org.joml.Vector4f"/>
 <fullyQualifiedTypeName name="org.joml.Vector2f"/>
+<fullyQualifiedTypeName name="Data.Constants"/>
 </qualifiedTypeNameHistroy>

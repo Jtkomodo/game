@@ -4,6 +4,7 @@ import static org.lwjgl.opengl.GL11.*;
 import org.joml.Math;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
+import org.joml.Vector4f;
 
 import gameEngine.MatrixMath;
 import gameEngine.Model;
@@ -266,15 +267,20 @@ public class AABB extends CollisionFunctions{
 	  
    public void debug() {
 	   if(DebugColisions) {
-		  Start.s.bind();
+		   Vector4f newcolor=new Vector4f(0,0,0,0);
+		   Data.Constants.COL_COLOR_RED.div(255,newcolor);
+		   Start.s.bind();
 		   Start.COLTEX.bind(5);
+		
 		   Matrix4f target=MatrixMath.getMatrix(new Vector2f(this.position.x,this.position.y),0,1);
 		   
 		   Start.s.loadInt(Start.location, 5); 
 		   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
 		   Start.s.loadMat(Start.RTS, target);
+		   Start.s.loadVec4(Start.Color,newcolor);	  
+		 
 		   aabb.draw();	
-		  
+		   Start.s.loadVec4(Start.Color,Data.Constants.DEFAULT_COLOR);	  
 		  // Start.s.bind();
 		   if(this.COLIDECHECK) {
 		  /* Start.COLTEX.bind(5);

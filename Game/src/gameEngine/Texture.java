@@ -23,8 +23,10 @@ import java.nio.IntBuffer;
 import java.util.HashMap;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.stb.STBTruetype;
+import org.newdawn.slick.opengl.PNGDecoder;
 
 
 public class Texture {
@@ -47,27 +49,48 @@ public Texture(String path) {
 			    
 	                                   //load our texture 
 		try {
-		data=stbi_load(file.getAbsolutePath().toString()+"/src/res/"+path+".png",width,height,comp,4);
+			
+			String location=new String("/res/"+path+".png");
+			
+		//data=stbi_load(location,width,height,comp,4);
+			 PNGDecoder decoder = new PNGDecoder(getClass().getResourceAsStream(location));
+			 
+
+			    //create a byte buffer big enough to store RGBA values
+			    data = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
+
+			    //decode
+			    decoder.decode(data, decoder.getWidth() * 4, PNGDecoder.RGBA);
+
 		if(data==null) {
-			throw new IOException(STBImage.stbi_failure_reason());
+			throw new IOException();
 		}
 	 
 	    
 	 //   loadMapWithBuffer(data);
+		
+		
+		
+		
+		
+		
+		
+		
 	  
-	  data.flip();
+	     data.flip();
 	  
 	    
 		
 		//get the width and height of the image
-		 w = width.get();
-		 h= height.get();
+		 w =decoder.getWidth();
+		 h= decoder.getHeight();
 	
 	    this.TEXid = glGenTextures();
 	    
 	  loadTexture(data);
 	  } catch (IOException e) {
 			System.out.println(e.getMessage());
+			System.out.println("didn't work");
 		}
 		
 		
@@ -132,6 +155,7 @@ public void PrintImageData() {
 private void loadTexture(ByteBuffer data) {
 	
 	  glBindTexture(GL_TEXTURE_2D,TEXid);//binds
+	  GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
       glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
       glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
       glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,w,h,0,GL_RGBA,GL_UNSIGNED_BYTE,data);

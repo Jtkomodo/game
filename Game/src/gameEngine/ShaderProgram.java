@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
 
 import org.joml.Matrix4f;
@@ -24,7 +26,7 @@ import org.lwjgl.opengl.GL20;
 */
 public  class ShaderProgram {
 private int program,vs,fs;
-private File file=new File(System.getProperty("user.dir"));	
+//private File file=new File(System.getProperty("user.dir"));	
 
 	     //make our shader
 	public ShaderProgram(String path) {
@@ -45,7 +47,9 @@ private File file=new File(System.getProperty("user.dir"));
 		BufferedReader br;
 		
 		try{
-			br=new BufferedReader(new FileReader(new File(file.getAbsolutePath()+"/src/shaders/"+path)));
+			InputStream i=getClass().getResourceAsStream("/shaders/"+path);
+			  InputStreamReader isr = new InputStreamReader(i);
+			br=new BufferedReader(isr);
 			String line;
 			while((line= br.readLine())!= null) {
 				string.append(line);

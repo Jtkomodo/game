@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.io.EOFException;
@@ -30,9 +32,9 @@ public class WorldLoader {
 				this.height=height;
 				this.cam=cam;
 		try {
-		
-		  File file2= new File(file.getAbsolutePath()+"/src/"+name+"Data");
-		  DataInputStream map=new DataInputStream(new FileInputStream(file2));
+	      InputStream i=getClass().getResourceAsStream("/"+name+"Data");
+	 
+		  DataInputStream map=new DataInputStream(i);
 		  byte c;
 			int k=0;
 			while(true) {

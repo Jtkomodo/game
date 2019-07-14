@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import org.joml.Matrix4f;
@@ -57,7 +59,12 @@ protected HashMap<Integer,Float[]> Values=new HashMap<Integer,Float[]>();
 		BufferedReader br;
 		
 		try{
-			br=new BufferedReader(new FileReader(new File(file.getAbsolutePath()+"/src/res/fonts/"+Font+".fnt")));
+			
+			
+			
+			InputStream ist=getClass().getResourceAsStream("/res/fonts/"+Font+".fnt");
+			InputStreamReader isr = new InputStreamReader(ist);
+			br=new BufferedReader(isr);
 			String line="";
 			int i=0;
 			int collums=0;

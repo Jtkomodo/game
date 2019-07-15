@@ -28,8 +28,8 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static Input I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=false,DEBUGCOLISIONS=true;
-    public static double framCap,time,time2,passed,unproccesed,frameTime=0;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true;
+    public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
     public static Model background,player,textboxM;
@@ -218,7 +218,7 @@ public class Start {
 		x=100;
 		y=100;	
 		double ENDTime=Timer.getTIme();
-		double timeTaken=startTime-ENDTime;
+		double timeTaken=ENDTime-startTime;
 		if(LOG==true)
 		System.out.println("Tiem to load--- "+timeTaken+" seconds");
 		
@@ -239,7 +239,7 @@ public class Start {
 	  // TextureUpdate(MAP)
 Model.enable();
 BatchedModel.enable();
-		frames++;
+	
 		
 		if(test==false) {
 	
@@ -450,11 +450,14 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 						Vector2f velocity=new Vector2f(direction.x*speed,direction.y*speed);
 						direction.add(velocity,newvec);
 						direction=new Vector2f(speedx,speedy);
-						c2=newvec;//this is the movement that needs to be added to the position vector
-					
+											
 						 
+						newvec.mul(50);
 						
+						newvec=new Vector2f((newvec.x*(float)DeltaTime),(newvec.y*(float)DeltaTime));
 						
+						c2=newvec;//this is the movement that needs to be added to the position vector
+
 					    x=x+newvec.x;
 						y=y+newvec.y;
 						
@@ -525,14 +528,17 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 			unproccesed+=passed;//this is the time that we have not rendered anything
 			frameTime+=passed;//this is the time since the last second
 			time=time2;
-			while(unproccesed>=framCap) {//when the time we have not rendered is greater than or equal to our frame target we allow rendering
-				
+			if(unproccesed>=framCap) {//when the time we have not rendered is greater than or equal to our frame target we allow rendering
+				DeltaTime=Timer.getTIme()-lastFrame;
+				//System.out.println(DeltaTime);
 				unproccesed-=framCap;//this is like reseting but instead if it is way over for some reason it makes sure to allow all rendering missed 
 			       
 				//take input
 				 Inputupdate();
+				 
 			     canRender=true;//now we render	
-			    
+			 	frames++;
+			 	lastFrame=Timer.getTIme();
 			      if(frameTime>=1.0) {//if a second has passed print fps
 			    	 
 			    	 // System.out.println("FPS:"+frames+"-------------------------------");
@@ -543,7 +549,7 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 			    	  frameTime=0;
 			    	  frames=0;
 			      }
-			
+			   
 			}
 	}
 private static void SpriteUpdate(Model sprite,Texture tex,float x,float y,float spritescale,boolean mirror){

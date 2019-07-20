@@ -265,6 +265,22 @@ if(overworld==true) {
 			//x=oldpos.x;
 			//y=oldpos.y;
 			}
+				
+				Vector2f new3=circle2.findVector(oldpos,c2,direction,circle1);
+				new3.sub(currentpos,a);
+				if(circCol) {
+				      x+=a.x;
+					  y+=a.y;
+					   camx=-x;
+						camy=-y;
+						circle2.setPosition(new Vector2f(x,y));
+				
+				//x=oldpos.x;
+				//y=oldpos.y;
+				}	
+				
+				
+				
 		screencoordx=-camx;
 	    screencoordy=-camy;
 	    

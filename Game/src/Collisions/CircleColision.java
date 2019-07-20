@@ -9,7 +9,7 @@ import gameEngine.VectorMath;
 
 public class CircleColision extends CollisionFunctions {
 private float r;
-private Vector2f position,closest=new Vector2f(0,0);
+private Vector2f position,closest=new Vector2f(0,0),d=new Vector2f(0,0);
 private boolean isCheccked=false;
 private Model Circle,piont;
 	
@@ -53,7 +53,7 @@ private Model Circle,piont;
 	}
 	
 	public boolean vsCircle(CircleColision b) {
-		Vector2f d=new Vector2f(0,0);
+	
 		position.sub(b.position,d);
 	    Vector2f normal=VectorMath.normalize(d);
 	    normal.mul(b.r,closest);
@@ -74,9 +74,19 @@ private Model Circle,piont;
 	
 	
 	@Override
-	public Vector2f findVector(Vector2f position, Vector2f movement, Vector2f direction, CircleColision circle) {
-		// TODO Auto-generated method stub
-		return null;
+	public Vector2f findVector(Vector2f oldposition, Vector2f movement, Vector2f direction, CircleColision circle) {
+		Vector2f currentmovement=new Vector2f(0,0);
+		
+		Vector2f c=new Vector2f(0,0);
+	    Vector2f normal=VectorMath.normalize(d);
+	    
+	    normal.mul(-r,c);
+	    closest.sub(c,currentmovement);
+	    
+	    currentmovement.sub(movement.mul(0.0001f,new Vector2f(0,0)));
+		   
+		
+		return currentmovement;
 	}
 
 	@Override

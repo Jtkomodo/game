@@ -9,7 +9,8 @@ import gameEngine.VectorMath;
 
 public class CircleColision extends CollisionFunctions {
 private float r;
-private Vector2f position;
+private Vector2f position,closest=new Vector2f(0,0);
+private boolean isCheccked=false;
 private Model Circle,piont;
 	
 	
@@ -41,6 +42,7 @@ private Model Circle,piont;
 						};
 			
 			 this.Circle=new Model(Vert,uv,ind);
+			 this.piont=new Model(vert,uv,ind); 
 			
 			
 	}
@@ -52,7 +54,13 @@ private Model Circle,piont;
 	
 	public boolean vsCircle(CircleColision b) {
 		Vector2f d=new Vector2f(0,0);
-		b.position.sub(this.position,d);
+		position.sub(b.position,d);
+	    Vector2f normal=VectorMath.normalize(d);
+	    normal.mul(b.r,closest);
+	    closest.add(b.position);
+	    this.isCheccked=true;
+		
+		
 		float collisionDistance = this.r+b.r;
 		float mag=VectorMath.getMagnitude(d);
 		if(mag>collisionDistance) {
@@ -89,6 +97,20 @@ private Model Circle,piont;
 		   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
 		   Start.s.loadMat(Start.RTS, target);
 		   Circle.draw();
+		 
+		   if(this.isCheccked){
+		   Start.s.loadVec4(Start.Color,Data.Constants.YELLOW);;	  
+		   Start.COLTEX.bind(5);
+		   target=MatrixMath.getMatrix(new Vector2f(this.closest.x/3,this.closest.y/3),0,3);
+		   Start.s.loadMat(Start.RTS, target);
+		   piont.draw();
+		  Start.s.loadVec4(Start.Color,Data.Constants.DEFAULT_COLOR);;	 
+		 }
+			  
+		  
+		   
+		   
+		   
 	
 	
 	}

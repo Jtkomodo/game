@@ -268,7 +268,7 @@ public class AABB extends CollisionFunctions{
    public void debug() {
 	   if(DebugColisions) {
 		   Vector4f newcolor=new Vector4f(0,0,0,0);
-		   Data.Constants.COL_COLOR_RED.div(255,newcolor);
+		   Data.Constants.COL_COLOR_BLUE.div(255,newcolor);
 		   Start.s.bind();
 		   Start.COLTEX.bind(5);
 		
@@ -282,7 +282,7 @@ public class AABB extends CollisionFunctions{
 		   aabb.draw();	
 		   Start.s.loadVec4(Start.Color,Data.Constants.DEFAULT_COLOR);	  
 		  // Start.s.bind();
-		   if(this.COLIDECHECK) {
+		   if(this.colide) {
 		  /* Start.COLTEX.bind(5);
 		   target=MatrixMath.getMatrix(new Vector2f(this.beforeCol.x,this.beforeCol.y),0,1);
 		   

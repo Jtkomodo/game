@@ -9,8 +9,8 @@ import gameEngine.VectorMath;
 
 public class CircleColision extends CollisionFunctions {
 private float r;
-private Vector2f position,closest=new Vector2f(0,0),d=new Vector2f(0,0);
-private boolean isCheccked=false;
+private Vector2f position,closest=new Vector2f(0,0),d=new Vector2f(0,0),closest2=new Vector2f(0,0);
+private boolean isCheccked=false,debug=Start.DEBUGCOLISIONS;
 private Model Circle,piont;
 	
 	
@@ -47,8 +47,28 @@ private Model Circle,piont;
 			
 	}
 	@Override
-	protected boolean vsAABB(AABB box) {
-		// TODO Auto-generated method stub
+	public boolean vsAABB(AABB box) {
+		Vector2f boxPosition=box.getPosition();
+		Vector2f boxlc=box.getLc();
+		Vector2f boxrc=box.getRc();
+	    Vector2f closest;
+	    Vector2f d= new Vector2f(0,0);position.sub(boxPosition,d);
+			closest=new Vector2f(clamp(boxPosition.x+d.x,boxlc.x,boxrc.x),clamp(boxPosition.y+d.y,boxlc.y,boxrc.y));
+			if(closest.x<(boxlc.x)) {
+				closest.x=boxlc.x;
+				
+			}
+			
+			
+			
+		this.closest2=closest;	
+		
+		
+		
+		
+		
+		
+		
 		return false;
 	}
 	
@@ -83,7 +103,7 @@ private Model Circle,piont;
 	    normal.mul(-r,c);
 	    closest.sub(c,currentmovement);
 	    
-	    currentmovement.sub(movement.mul(0.0001f,new Vector2f(0,0)));
+	    currentmovement.sub(movement.mul(0.001f,new Vector2f(0,0)));
 		   
 		
 		return currentmovement;
@@ -97,7 +117,7 @@ private Model Circle,piont;
 	
 	
 	public void debug() {
-		
+		if(debug) {
 		
 		  Start.s.bind();
 		   Start.circleCol1.bind(5);
@@ -118,10 +138,15 @@ private Model Circle,piont;
 		 }
 			  
 		  
+		   Start.s.loadVec4(Start.Color,Data.Constants.YELLOW);;	  
+		   Start.COLTEX.bind(5);
+		   target=MatrixMath.getMatrix(new Vector2f(this.closest2.x,this.closest2.y),0,1);
+		   Start.s.loadMat(Start.RTS, target);
+		   piont.draw();
+		  Start.s.loadVec4(Start.Color,Data.Constants.DEFAULT_COLOR);;	    
 		   
 		   
-		   
-	
+		}
 	
 	}
 

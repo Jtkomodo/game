@@ -197,7 +197,7 @@ public class Start {
 		}
 		if(LOG==true)
 		System.out.println("Loading world....");
-		WorldLoader worldLoader=new WorldLoader("map", 64,64, cam);
+		WorldLoader worldLoader=new WorldLoader("map3", 64,64, cam);
 		MapLoader loader=new MapLoader(worldLoader.Getmap(),scaleOfMapTiles);
         PositionTest postest=new PositionTest(worldLoader.Getmap(),scaleOfMapTiles);	
 		
@@ -250,8 +250,10 @@ if(overworld==true) {
 		circle2.setPosition(currentpos);
 		   testcol=playerCol.vsAABB(Col);
 		   circCol=circle2.vsCircle(circle1);
-	
-				Vector2f new2=playerCol.findVector(oldpos,c2,direction,Col);//old position,the new movement,the normalized vector of the direction the player is going,th aaabb box that we are checking colision with 
+	       boolean colT=circle2.vsAABB(Col);				
+	       Vector2f new2=playerCol.findVector(oldpos,c2,direction,Col);//old position,the new movement,the normalized vector of the direction the player is going,th aaabb box that we are checking colision with 
+				
+				
 				//newvec.sub(new2);
 				Vector2f a=new Vector2f(0,0);
 				new2.sub(currentpos,a);
@@ -476,6 +478,7 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 
 					    x=x+newvec.x;
 						y=y+newvec.y;
+						
 						
 						
 					camx=-x;

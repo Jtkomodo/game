@@ -6,6 +6,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
+import Data.Constants;
 import gameEngine.MatrixMath;
 import gameEngine.Model;
 import gameEngine.Start;
@@ -73,8 +74,19 @@ public class AABB extends CollisionFunctions{
 	}
 	
 	@Override
-	protected boolean vsCircle(CircleColision circle) {
-		// TODO Auto-generated method stub
+	public boolean vsCircle(CircleColision circle) {
+                Vector2f circlePosition=circle.getPosition();
+                float  r=circle.getR();
+                
+                
+          
+		
+		
+		
+		
+		
+		
+		
 		return false;
 	}
 
@@ -137,7 +149,17 @@ public class AABB extends CollisionFunctions{
 	}
 	@Override
 	public Vector2f findVector(Vector2f position, Vector2f movement, Vector2f direction, CircleColision circle) {
-		// TODO Auto-generated method stub
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		return null;
 	}
 	
@@ -152,8 +174,8 @@ public class AABB extends CollisionFunctions{
 	  
 	   Vector2f currentmovement=new Vector2f(0,0);movement.add(new Vector2f(position.x,position.y),currentmovement);//this is the current position after addition of the movement
 	 
-	   currentmovement.sub(this.r,lc);//this is the bottom left corner of the cuurent box
-	   currentmovement.add(this.r,rc); //this is the top right corner
+	  currentmovement.sub(this.r,lc);//this is the bottom left corner of the cuurent box
+	  currentmovement.add(this.r,rc); //this is the top right corner
 	   if(this.colide) {
 		
 		  this.beforeCol=currentmovement;//this is just a position value so i can know exactly where the box is before change if a colision has happend
@@ -178,6 +200,12 @@ public class AABB extends CollisionFunctions{
 	
 	    Vector2f closest;
 		closest=new Vector2f(clamp(box.position.x+d.x,box.lc.x,box.rc.x),clamp(box.position.y+d.y,box.lc.y,box.rc.y));
+		Vector2f newd=new Vector2f(0,0);
+		closest.sub(position,newd);
+		edgen=new Vector2f(clamp(position.x+newd.x,lc.x,rc.x),clamp(position.y+newd.y,lc.y,rc.y));
+		position.sub(edgen,newd);
+	
+		
 	//	System.out.println(d"before "+d+"after "+closest);
 		//currentmovement.sub(pen,newMOvement);
 		
@@ -185,11 +213,11 @@ public class AABB extends CollisionFunctions{
 				   
 		
 	if(this.colide) {
-			Vector2f pen=new Vector2f(0,0);closest.sub(position,pen);
+		  Vector2f pen=new Vector2f(0,0);closest.sub(position,pen);
 			
 		   Vector2f norm=new Vector2f(0,0);pen.normalize(norm);
 		   float dot=dotProduct(norm, new Vector2f(0,1));
-		  
+		
 		if(Math.abs(direction.x)!=Math.abs(direction.y)){
 		   
 			
@@ -244,6 +272,9 @@ public class AABB extends CollisionFunctions{
 		   
 		   
 		   edgep.sub(movement.mul(0.0001f,new Vector2f(0,0)));
+		   
+		   
+		 
 		   
 				newMOvement=edgep;
 	   }else {
@@ -304,13 +335,26 @@ public class AABB extends CollisionFunctions{
 		   }
 		   //if(amount==0) {
 			  // Start.s.bind();
-			   Start.piont2.bind(5);
+			   Start.COLTEX.bind(5);
 			   target=MatrixMath.getMatrix(new Vector2f(this.Pposition.x,this.Pposition.y),0,1);
 			   
 			   Start.s.loadInt(Start.location, 5); 
 			   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
 			   Start.s.loadMat(Start.RTS, target);
+			   Start.s.loadVec4(Start.Color,Constants.YELLOW);	  
+
 			  this.piont.draw();	
+			  target=MatrixMath.getMatrix(new Vector2f(this.edgen.x/3,this.edgen.y/3),0,3);
+			   
+			   Start.s.loadInt(Start.location, 5); 
+			   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
+			   Start.s.loadMat(Start.RTS, target);
+ 
+			  
+			  this.piont.draw();
+			  
+			  
+			   Start.s.loadVec4(Start.Color,Data.Constants.DEFAULT_COLOR);	  
 		  // }
 			  Start.piont.bind(5);
 			   target=MatrixMath.getMatrix(new Vector2f(this.position.x,this.position.y),0,1);

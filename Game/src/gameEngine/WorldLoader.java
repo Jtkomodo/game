@@ -10,10 +10,12 @@ import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.io.EOFException;
 import Data.TilesData;
 import org.joml.Math;
+import org.newdawn.slick.opengl.PNGDecoder;
 
 public class WorldLoader {
 
@@ -31,17 +33,31 @@ public class WorldLoader {
 				this.width=width;
 				this.height=height;
 				this.cam=cam;
+		
+				String location=new String("/res/Maps/"+name+".png");
+				
+				
 		try {
-	      InputStream i=getClass().getResourceAsStream("/"+name+"Data");
+			PNGDecoder decoder = new PNGDecoder(getClass().getResourceAsStream(location));
+			 
+
+		    //create a byte buffer big enough to store RGBA values
+		   ByteBuffer data = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
+
+		    //decode
+		    decoder.decode(data, decoder.getWidth() * 4, PNGDecoder.RGBA);
+
 	 
-		  DataInputStream map=new DataInputStream(i);
+		 data.flip();
 		  byte c;
 			int k=0;
-			while(true) {
+			while(data.position()<data.capacity()) {
 				try{
-				c=map.readByte();	
-				}catch(EOFException e){
-                   break;
+				c=data.get();	
+				}catch(Exception e){
+                   
+					System.out.println(e);
+					break;
 
 				}
 				Data.put(k,  c);
@@ -49,7 +65,7 @@ public class WorldLoader {
 				
 				k++;
 			}
-			map.close();
+			data.clear();
 		
 		} catch (Exception e) {
 			e.printStackTrace();

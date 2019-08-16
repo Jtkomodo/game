@@ -161,6 +161,7 @@ public class Start {
 		textC= new TextBuilder("aakar",512);
 		textD= new TextBuilder("aakar",512);
 		text1= new TextBuilder("aakar",512);
+		TextBuilder textCircle= new TextBuilder("aakar",512);
 		testM= new BatchedModel();
 		piont= new Texture("Point");
 
@@ -206,7 +207,7 @@ public class Start {
 		System.out.println("Settign Colisions....");
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		playerCol=new AABB(new Vector2f(0,0),15,44,0);
-		Col=new AABB(new Vector2f(1280,180),64,64,0);
+		Col=new AABB(new Vector2f(1280,180),64,64,1);
 		circle1=new CircleColision(new Vector2f(256,256),64);
 		circle2=new CircleColision(new Vector2f(0,0),32);
 		
@@ -241,11 +242,12 @@ Model.enable();
 BatchedModel.enable();
 	
 		
-		if(test==false) {
+	//if(test==false) {
 	
 			
 if(overworld==true) {		 
-		playerCol.setPosition(new Vector2f(x,y));
+		
+	    playerCol.setPosition(new Vector2f(x,y));
 		Vector2f currentpos=new Vector2f(x,y);
 		circle2.setPosition(currentpos);
 		   testcol=playerCol.vsAABB(Col);
@@ -281,6 +283,16 @@ if(overworld==true) {
 				//y=oldpos.y;
 				}	
 				
+				new2=circle2.findVector(oldpos, c2, direction,Col);
+				new2.sub(currentpos,a);
+				if(colT) {
+					 x+=a.x;
+					  y+=a.y;
+					   camx=-x;
+						camy=-y;
+						circle2.setPosition(new Vector2f(x,y));
+					
+				}
 				
 				
 		screencoordx=-camx;
@@ -310,15 +322,15 @@ if(overworld==true) {
 	    circle2.debug();
 	      textD.setString("circCol:"+circCol);
 	      textC.setString("xmap="+gridx+" ymap="+gridy+" col:  "+testcol);
-	      
-	      
+	      textCircle.setString("CIrcleVSAABB: "+colT);
+	    
 	      
 		 
 		 //SpriteUpdate(player,playerTex,x,y,Playerscale,true);
 		textB.drawString(screencoordx-300,screencoordy-220,.24f);
 		textC.drawString(screencoordx,screencoordy-220,.24f);
 		textD.drawString(screencoordx, screencoordy-200, .24f);
-		
+		textCircle.drawString(screencoordx-300, screencoordy-200, .24f);
 	
 
 }else {
@@ -340,7 +352,7 @@ textA.setString("fps="+(int)fps);
 textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 
 
-		}
+		
 		    w.render();
 		    w.clear();
 		    loader.flushModel();
@@ -460,6 +472,8 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 						
 						   speedx=-1;	
 						}	
+						//speedx*=(float)DeltaTime;
+						//speedy*=(float)DeltaTime;
 					
 						Vector2f newvec=new Vector2f(0,0);
 						direction=(VectorMath.normalize(new Vector2f(speedx,speedy)));

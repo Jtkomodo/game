@@ -1,5 +1,6 @@
 package Collisions;
 import org.joml.*;
+import org.joml.Math;
 
 import gameEngine.MatrixMath;
 import gameEngine.Model;
@@ -9,8 +10,8 @@ import gameEngine.VectorMath;
 
 public class CircleColision extends CollisionFunctions {
 private float r;
-private Vector2f position,closest=new Vector2f(0,0),d=new Vector2f(0,0),closest2=new Vector2f(0,0);
-private boolean isCheccked=false,debug=Start.DEBUGCOLISIONS;
+private Vector2f position,closest=new Vector2f(0,0),d=new Vector2f(0,0),closest2=new Vector2f(0,0),closest3=new Vector2f(0);
+private boolean isCheccked=false,debug=Start.DEBUGCOLISIONS,lastResult=false;
 private Model Circle,piont;
 	
 	
@@ -51,25 +52,32 @@ private Model Circle,piont;
 		Vector2f boxPosition=box.getPosition();
 		Vector2f boxlc=box.getLc();
 		Vector2f boxrc=box.getRc();
+		Vector2f vector=new Vector2f(0);
 	    Vector2f closest;
 	    Vector2f d= new Vector2f(0,0);position.sub(boxPosition,d);
 			closest=new Vector2f(clamp(boxPosition.x+d.x,boxlc.x,boxrc.x),clamp(boxPosition.y+d.y,boxlc.y,boxrc.y));
-			if(closest.x<(boxlc.x)) {
-				closest.x=boxlc.x;
-				
-			}
+		
+			
+		
+		 closest.sub(this.position,vector);
+		float mag=VectorMath.getMagnitude(vector);
+	
+		if(lastResult==false) {
+			this.closest2=closest;		
+			
+			
+		}
+		if(mag<this.r) {
 			
 			
 			
-		this.closest2=closest;	
-		
-		
-		
-		
-		
-		
-		
+			lastResult=true;
+			return true;
+		}else {
+		lastResult=false;
 		return false;
+		
+		}
 	}
 	
 	public boolean vsCircle(CircleColision b) {
@@ -87,7 +95,9 @@ private Model Circle,piont;
 			return false;
 		}
 		else {
+			
 			return true;
+			
 		}
 	}
 	
@@ -103,7 +113,7 @@ private Model Circle,piont;
 	    normal.mul(-r,c);
 	    closest.sub(c,currentmovement);
 	    
-	    currentmovement.sub(movement.mul(0.001f,new Vector2f(0,0)));
+	 
 		   
 		
 		return currentmovement;
@@ -111,8 +121,50 @@ private Model Circle,piont;
 
 	@Override
 	public Vector2f findVector(Vector2f position, Vector2f movement, Vector2f direction, AABB box) {
-		// TODO Auto-generated method stub
-		return null;
+		Vector2f result=new Vector2f(0);
+		Vector2f v=new Vector2f(0);
+		Vector2f Vnormalized=new Vector2f(0);
+	
+	  if(Math.abs(direction.x)!=Math.abs(direction.y)){
+	    Vnormalized=VectorMath.normalize(movement);
+	    Vnormalized.mul(r,v);
+		closest2.sub(v,result);
+		
+		
+		
+		
+		
+		
+	  }else {
+		  
+		 
+	  //Vector2f r=new Vector2f(0);
+	  //closest2.sub(this.position,r);
+	  //r.mul(2);
+		  
+		  if(closest2.x==box.getLc().x) {
+				
+				 closest2.sub(r,0,result);
+				 
+			   }else if(closest2.x==box.getRc().x) {
+					
+					 closest2.add(r,0,result);
+					 
+				   } if(closest2.y==box.getLc().y) {
+						 
+						 closest2.sub(0,r,result);
+						 
+					   }else if(closest2.y==box.getRc().y) {
+							
+							 closest2.add(0,r,result);
+		
+					   }}		
+		  
+	  this.lastResult=false;//very important otherwise sliding will not work
+	  
+	    result.sub(movement.mul(0.01f,new Vector2f(0,0)));
+  //  result=this.position;
+		return result;
 	}
 	
 	
@@ -138,11 +190,18 @@ private Model Circle,piont;
 		 }
 			  
 		  
-		   Start.s.loadVec4(Start.Color,Data.Constants.YELLOW);;	  
+		   Start.s.loadVec4(Start.Color,Data.Constants.BLACK);;	  
 		   Start.COLTEX.bind(5);
-		   target=MatrixMath.getMatrix(new Vector2f(this.closest2.x,this.closest2.y),0,1);
+		   target=MatrixMath.getMatrix(new Vector2f(this.closest2.x/2,this.closest2.y/2),0,2);
 		   Start.s.loadMat(Start.RTS, target);
 		   piont.draw();
+		   
+		   Start.s.loadVec4(Start.Color,Data.Constants.BLACK);;	  
+		   Start.COLTEX.bind(5);
+		   target=MatrixMath.getMatrix(new Vector2f(this.closest3.x/2,this.closest3.y/2),0,2);
+		   Start.s.loadMat(Start.RTS, target);
+		   piont.draw();
+		   
 		  Start.s.loadVec4(Start.Color,Data.Constants.DEFAULT_COLOR);;	    
 		   
 		   

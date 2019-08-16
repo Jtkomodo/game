@@ -2,12 +2,17 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="loadMap" key="selection"/>
+		<item value="result" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="edgep"/>
+			<item value="closest"/>
+			<item value="closest2"/>
+			<item value="callback"/>
+			<item value="abs"/>
 			<item value="loadmap"/>
 			<item value="edgen"/>
 			<item value="batchedmodedel"/>
@@ -18,13 +23,9 @@
 			<item value="["/>
 			<item value="position"/>
 			<item value="position="/>
-			<item value="x="/>
-			<item value="projection"/>
-			<item value="uniform"/>
-			<item value="window"/>
-			<item value="heightR"/>
 		</list>
 		<list key="replacehistory">
+			<item value="result"/>
 			<item value=""/>
 			<item value="r"/>
 		</list>
@@ -33,7 +34,7 @@
 		<item value="336" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="454" key="DIALOG_HEIGHT"/>
-		<item value="801" key="DIALOG_X_ORIGIN"/>
-		<item value="247" key="DIALOG_Y_ORIGIN"/>
+		<item value="-335" key="DIALOG_X_ORIGIN"/>
+		<item value="382" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

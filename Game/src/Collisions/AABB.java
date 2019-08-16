@@ -217,7 +217,10 @@ public class AABB extends CollisionFunctions{
 			
 		   Vector2f norm=new Vector2f(0,0);pen.normalize(norm);
 		   float dot=dotProduct(norm, new Vector2f(0,1));
-		
+		   Vector2f tryv=new Vector2f(0);
+			edgen.sub(position,tryv);
+			
+			
 		if(Math.abs(direction.x)!=Math.abs(direction.y)){
 		   
 			
@@ -226,44 +229,46 @@ public class AABB extends CollisionFunctions{
 			
 			
 			
-			
-			
-			
-		
-		 if(closest.x==box.lc.x) {
-			
-			 closest.sub(r.x,0,edgep);
+		if(Math.abs(direction.x)==1) {
+		 if(closest.x==box.lc.x ) {
 			 
-		   }else if(closest.x==box.rc.x) {
-		
-				 closest.add(r.x,0,edgep);
-				 
-			   } if(closest.y==box.lc.y) {
+			 
+			
+			 closest.sub(r.x,tryv.y,edgep);
+			 
+		   }else if(closest.x==box.rc.x) { closest.add(r.x,-tryv.y,edgep);
+			 
+		   }
+		   }else if(Math.abs(direction.y)==1) {
+			   
+			   
+			   
+				if(closest.y==box.lc.y ) {
 					
-					 closest.sub(0,r.y,edgep);
+					 closest.sub(tryv.x,r.y,edgep);
 					 
 				   }else if(closest.y==box.rc.y) {
 						
-						 closest.add(0,r.y,edgep);
+						 closest.add(-tryv.x,r.y,edgep);
 						 
-					   }
+					   }}
 		}else {
 			
 			   if(closest.x==box.lc.x) {
 				
-					 closest.sub(r.x,-movement.y*Math.abs(direction.y),edgep);
+					 closest.sub(r.x,(-movement.y*Math.abs(direction.y))+tryv.y,edgep);
 					 
 				   }else if(closest.x==box.rc.x) {
 						
-						 closest.add(r.x,movement.y*Math.abs(direction.y),edgep);
+						 closest.add(r.x,(movement.y*Math.abs(direction.y))-tryv.y,edgep);
 						 
 					   } if(closest.y==box.lc.y) {
 							 
-							 closest.sub(-movement.x*Math.abs(direction.x),r.y,edgep);
+							 closest.sub((-movement.x*Math.abs(direction.x))+tryv.x,r.y,edgep);
 							 
 						   }else if(closest.y==box.rc.y) {
 								
-								 closest.add(movement.x*Math.abs(direction.x),r.y,edgep);
+								 closest.add((movement.x*Math.abs(direction.x))-tryv.x,r.y,edgep);
 			
 			
 						   }
@@ -284,7 +289,8 @@ public class AABB extends CollisionFunctions{
 		   
 	   }
 	   
-	   }
+	   }else {
+		   newMOvement=currentmovement;}
 	   
 	    return newMOvement;
 	   

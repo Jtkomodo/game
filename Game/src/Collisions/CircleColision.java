@@ -123,45 +123,39 @@ private Model Circle,piont;
 	public Vector2f findVector(Vector2f position, Vector2f movement, Vector2f direction, AABB box) {
 		Vector2f result=new Vector2f(0);
 		Vector2f v=new Vector2f(0);
-		Vector2f Vnormalized=new Vector2f(0);
 	
-	  if(Math.abs(direction.x)!=Math.abs(direction.y)){
-	    Vnormalized=VectorMath.normalize(movement);
-	    Vnormalized.mul(r,v);
-		closest2.sub(v,result);
+	
+	result.add(closest2,v);  
 		
-		
-		
-		
-		
-		
-	  }else {
-		  
-		 
+
 	  //Vector2f r=new Vector2f(0);
 	  //closest2.sub(this.position,r);
 	  //r.mul(2);
-		  
-		  if(closest2.x==box.getLc().x) {
-				
-				 closest2.sub(r,0,result);
-				 
-			   }else if(closest2.x==box.getRc().x) {
-					
-					 closest2.add(r,0,result);
-					 
-				   } if(closest2.y==box.getLc().y) {
-						 
-						 closest2.sub(0,r,result);
-						 
-					   }else if(closest2.y==box.getRc().y) {
-							
-							 closest2.add(0,r,result);
 		
-					   }}		
-		  
+	
+		  if(v.x==box.getLc().x) {
+				
+				 v.sub(r,0,v);
+				 
+			   }else if(v.x==box.getRc().x) {
+					
+					v.add(r,0,v);
+					 
+				   } if(v.y==box.getLc().y) {
+						 
+						 v.sub(0,r,v);
+						 
+					   }else if(v.y==box.getRc().y) {
+							
+							 v.add(0,r,v);
+		
+					   }		
+				   
+				   
+				   
+		result=v;  
 	  this.lastResult=false;//very important otherwise sliding will not work
-	  
+	
 	    result.sub(movement.mul(0.01f,new Vector2f(0,0)));
   //  result=this.position;
 		return result;

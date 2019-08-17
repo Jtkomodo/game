@@ -131,27 +131,30 @@ private Model Circle,piont;
 	  //Vector2f r=new Vector2f(0);
 	  //closest2.sub(this.position,r);
 	  //r.mul(2);
-		
+	//boolean lcx=false,rcx=false;
+	Vector2f m=new Vector2f(0);
+	Vector2f mN=new Vector2f(0);
 	
 		  if(v.x==box.getLc().x) {
-				
-				 v.sub(r,0,v);
+				m.x=-1;
+				 //v.sub(r,0,v);
 				 
 			   }else if(v.x==box.getRc().x) {
-					
-					v.add(r,0,v);
+					m.x=1;
+					//v.add(r,0,v);
 					 
 				   } if(v.y==box.getLc().y) {
-						 
-						 v.sub(0,r,v);
+						m.y=-1;
+						// v.sub(0,r,v);
 						 
 					   }else if(v.y==box.getRc().y) {
-							
-							 v.add(0,r,v);
+							m.y=1;
+							 //v.add(0,r,v);
+							}
 		
-					   }		
-				   
-				   
+			mN=VectorMath.normalize(m);		   		
+			mN.mul(r,m);	   
+			v.add(m);	   
 				   
 		result=v;  
 	  this.lastResult=false;//very important otherwise sliding will not work

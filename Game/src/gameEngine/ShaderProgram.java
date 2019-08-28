@@ -25,7 +25,7 @@ import org.lwjgl.opengl.GL20;
 *
 */
 public  class ShaderProgram {
-private int program,vs,fs;
+private int program,vs,fs,locationSlot;
 //private File file=new File(System.getProperty("user.dir"));	
 
 	     //make our shader
@@ -34,7 +34,7 @@ private int program,vs,fs;
 	//System.out.print(file.getAbsolutePath());
 		program=glCreateProgram();
 		createShaders(path);
-		Locations();
+	    Locations();
 	    linkandValidate();
 	
 	}
@@ -100,10 +100,10 @@ private int program,vs,fs;
 		 glBindAttribLocation(program,0,"vertices");
 		 glBindAttribLocation(program,1,"textureCoords");
 			
-		   
+		   locationSlot=2;
 	   }
 
-   private void linkandValidate() {
+   private  void linkandValidate() {
 	
 	glLinkProgram(program);
 	if(glGetProgrami(program,GL_LINK_STATUS)!=1) {
@@ -175,7 +175,12 @@ private int program,vs,fs;
 	    	
 	 return location;  
 	 }
-	
+	public void makeNewLocation(String location) {
+		
+		 glBindAttribLocation(program,locationSlot,location);
+		 linkandValidate();
+		 locationSlot++;
+	}
 
 	
 

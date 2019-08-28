@@ -2,8 +2,10 @@ package Collisions;
 import org.joml.*;
 import org.joml.Math;
 
+import Data.Constants;
 import gameEngine.MatrixMath;
 import gameEngine.Model;
+import gameEngine.Renderer;
 import gameEngine.Start;
 import gameEngine.VectorMath;
 
@@ -159,7 +161,7 @@ private Model Circle,piont;
 		result=v;  
 	  this.lastResult=false;//very important otherwise sliding will not work
 	
-	    result.sub(movement.mul(0.01f,new Vector2f(0,0)));
+	    result.sub(direction.mul(0.01f,new Vector2f(0,0)));
   //  result=this.position;
 		return result;
 	}
@@ -168,40 +170,19 @@ private Model Circle,piont;
 	public void debug() {
 		if(debug) {
 		
-		  Start.s.bind();
-		   Start.circleCol1.bind(5);
-		   Matrix4f target=MatrixMath.getMatrix(new Vector2f(this.position.x,this.position.y),0,1);
+		
+		   Renderer.draw(Circle, position, 0, 1,Start.circleCol1);
 		   
-		   Start.s.loadInt(Start.location, 5); 
-		   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
-		   Start.s.loadMat(Start.RTS, target);
-		   Circle.draw();
 		 
-		   if(this.isCheccked){
-		   Start.s.loadVec4(Start.Color,Data.Constants.YELLOW);;	  
-		   Start.COLTEX.bind(5);
-		   target=MatrixMath.getMatrix(new Vector2f(this.closest.x/3,this.closest.y/3),0,3);
-		   Start.s.loadMat(Start.RTS, target);
-		   piont.draw();
-		  Start.s.loadVec4(Start.Color,Data.Constants.DEFAULT_COLOR);;	 
-		 }
+		  if(this.isCheccked)
+		  Renderer.draw(piont, closest,0, 3, Start.COLTEX,Constants.YELLOW);
+		  
 			  
 		  
-		   Start.s.loadVec4(Start.Color,Data.Constants.BLACK);;	  
-		   Start.COLTEX.bind(5);
-		   target=MatrixMath.getMatrix(new Vector2f(this.closest2.x/2,this.closest2.y/2),0,2);
-		   Start.s.loadMat(Start.RTS, target);
-		   piont.draw();
-		   
-		   Start.s.loadVec4(Start.Color,Data.Constants.BLACK);;	  
-		   Start.COLTEX.bind(5);
-		   target=MatrixMath.getMatrix(new Vector2f(this.closest3.x/2,this.closest3.y/2),0,2);
-		   Start.s.loadMat(Start.RTS, target);
-		   piont.draw();
-		   
-		  Start.s.loadVec4(Start.Color,Data.Constants.DEFAULT_COLOR);;	    
-		   
-		   
+		 
+		   Renderer.draw(piont, closest2,0, 2, Start.COLTEX,Constants.BLACK);
+		   Renderer.draw(piont, closest3,0, 2, Start.COLTEX,Constants.BLACK);
+	   
 		}
 	
 	}

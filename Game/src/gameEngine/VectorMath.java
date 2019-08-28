@@ -151,9 +151,9 @@ public class VectorMath {
 	}
 		
 	
-	public static Vector2f ProjectionV(Vector2f a,Vector2f b) {
+	public static Vector2f ProjectionV(Vector2f a,Vector2f b) {//projecting b onto a
         float dot=dotProduct(a,b); 
-		float ls=(float) (pow(b.x, 2)+pow(b.y,2));
+		float ls=dotProduct(a,a);
 		float n=dot/ls;
 		
 		
@@ -163,16 +163,6 @@ public class VectorMath {
 		
 	}
 	
-	public static float ProjectionS(Vector2f a,Vector2f b) {
-		 float dot=dotProduct(a,b);
-		 float magB=getMagnitude(b);		
-		
-		
-		float d=dot/magB;
-	     
-	     return d;
-		
-	}
 	
 	
 	

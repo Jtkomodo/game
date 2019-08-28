@@ -14,6 +14,8 @@ import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
 import static org.lwjgl.stb.STBImage.stbi_load;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,6 +23,9 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.HashMap;
+
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -60,6 +65,8 @@ public Texture(String path) {
 			    data = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
 
 			    //decode
+			    
+			    
 			    decoder.decode(data, decoder.getWidth() * 4, PNGDecoder.RGBA);
 
 		if(data==null) {
@@ -115,43 +122,13 @@ public Texture(String path) {
 	public void  unbind() {
 		glBindTexture(GL_TEXTURE_2D,0);
 	}
-private void loadMapWithBuffer(ByteBuffer data) {
-	 
-    for(int i=0;i<data.capacity();i++) {
-    	imageData.put(i,data.get(i));
-    	
-    	
-    }
-	
-	
-}
 
 
 
 
 
-public void PrintImageData() {
-    for(int i=0;i<h;i++) {
-    	
-   	 
-	for(int j=0;j<w*4;j+=4) {  
-	  byte r=imageData.get((i*w*4)+j);
-	  byte g=imageData.get((i*w*4)+(j+1));
-   	  byte b=imageData.get((i*w*4)+(j+2));
-   	  byte a=imageData.get((i*w*4)+(j+3)); 
-   	System.out.print(" pixel["+String.format("%2d",j/4)+"]"+"["+String.format("%2d",i)+"]"+String.format(" "+"%2x",r)+String.format(" "+"%2x",g)+String.format(" "+"%2x",b)+String.format(" "+"%2x",a));
-	if(j/4==w-1) {
-		System.out.print("\n");
-	}
-	
-	
-	}
-	
-		
-		
-	}
-   	  
-}
+
+
 private void loadTexture(ByteBuffer data) {
 	
 	  glBindTexture(GL_TEXTURE_2D,TEXid);//binds
@@ -161,70 +138,13 @@ private void loadTexture(ByteBuffer data) {
       glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,w,h,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
    
    glBindTexture(GL_TEXTURE_2D,0);//unbinds
-	
-	
-}
-public void changeImageData(int x,int y,byte red,byte green,byte blue,byte Alpha) {
-	int collum=(y*w*4),row=x*4;
-	data.limit(data.capacity());
-	data.flip();
-	data.limit(data.capacity());
-    System.out.println(row + collum);
-	data.put(row+collum, red);
-	data.put(row+collum+1, green);
-	data.put(row+collum+2, blue);
-	data.put(row+collum+3, Alpha);
-	data.flip();
-	data.limit(data.capacity());
-	  
-	loadMapWithBuffer(data);
-	data.flip();
-	loadTexture(data);
-	
-	
+   
+  
 }
 
 
 
-public void createFile(boolean createReadable,String path) throws IOException {
 
-	
-	if(createReadable) {
-	File f=new File(file.getAbsolutePath()+"/src/"+path+"Readable");
 
-DataOutputStream d=new DataOutputStream(new FileOutputStream(f));
 
-for(int i=0;i<h;i++) {
-	for(int j=0;j<w*4;j+=4) {  
-		  byte r=imageData.get((i*w*4)+j);
-		  byte g=imageData.get((i*w*4)+(j+1));
-	   	  byte b=imageData.get((i*w*4)+(j+2));
-	   	  byte a=imageData.get((i*w*4)+(j+3)); 
-	   	d.writeChars(" pixel["+String.format("%2d",j/4)+"]"+"["+String.format("%2d",i)+"]"+String.format(" "+"%2x",r)+String.format(" "+"%2x",g)+String.format(" "+"%2x",b)+String.format(" "+"%2x",a));
-		if(j/4==w-1) {
-			d.writeChars("\n");
-		}	
-	
-}
-
-	
-	
-}
-d.flush();
-d.close();
-	}
-File f2=new File(file.getAbsolutePath()+"/src/"+path+"Data");	
-DataOutputStream data=new DataOutputStream(new FileOutputStream(f2));
-for(int i=0;i<imageData.size();i++ ) {
-	data.writeByte(imageData.get(i).byteValue());
-	
-	
-}
-
-  data.flush();
-  data.close();
-    
-	
-	
-}
 }

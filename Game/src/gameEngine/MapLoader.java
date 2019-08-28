@@ -123,15 +123,8 @@ public class MapLoader {
 		
 	}
 	public void drawtiles(Texture tex) {
-		Start.s.bind();// binds our shader program
-		tex.bind(2);//binds our texture to texture2d 
-		
-		Matrix4f target= MatrixMath.getMatrix(new Vector2f(0/this.sizeOfEachTile,0/this.sizeOfEachTile), 0,this.sizeOfEachTile);//this creates our matrix to multiply with the projection matrix to place in the correct coords
-		 Start.s.loadInt(Start.location, 2);//this loads the texture binded to the second location into the fragment shader program so it can be used
-	  	 Start.s.loadMat(Start.Projection,Start.cam.getProjection());// loads our projection matrix to the vertex shader
-	     Start.s.loadMat(Start.RTS, target);//loads our position matrix into the vertex shader
-		model.draw();// calls our draw call which actually does all the gpu commands 
-		
+	
+		Renderer.draw(model,new Vector2f(0),0, sizeOfEachTile,tex);
 		
 	}
 	

@@ -19,7 +19,7 @@ public class Start {
 	
 	public static Window w;
 	public static final int width=640,height=480;
-    public static int location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy;
+    public static int location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;;
     public static byte dKeys,testKey;
     public static ShaderProgram s;
     public static float scaleOfMapTiles=128,Rendercamx,Rendercamy;
@@ -29,12 +29,12 @@ public class Start {
     public static Input I;
     public static Fontloader font;
     public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true;
-    public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime;
+    public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
     public static Model background,player,textboxM;
     public static BatchedModel testM;
-    public static TextBuilder textB,textA,textC,textD,text1;
+    public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls;
     public static Vector2f currentmovement,c2,oldpos,direction;
     public static AABB playerCol,Col;
     public static CircleColision circle1, circle2;
@@ -100,10 +100,7 @@ public class Start {
 					wi,-h,
 					-wi,-h};
 
-		
-		
-		
-		
+	
 		
 		
 		
@@ -161,6 +158,7 @@ public class Start {
 		textC= new TextBuilder("aakar",512);
 		textD= new TextBuilder("aakar",512);
 		text1= new TextBuilder("aakar",512);
+		textDrawCalls= new TextBuilder("aakar",512);
 		TextBuilder textCircle= new TextBuilder("aakar",512);
 		testM= new BatchedModel();
 		piont= new Texture("Point");
@@ -207,12 +205,12 @@ public class Start {
 		System.out.println("Settign Colisions....");
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		playerCol=new AABB(new Vector2f(0,0),15,44,0);
-		Col=new AABB(new Vector2f(1280,180),64,64,1);
+		Col=new AABB(new Vector2f(4078+(2001),1026),2048,64,0);
 		circle1=new CircleColision(new Vector2f(256,256),64);
 		circle2=new CircleColision(new Vector2f(0,0),32);
 		
 	
-		
+	   
 		
 		
 		initializeFPS();
@@ -228,6 +226,9 @@ public class Start {
 		
 		
 		s.loadVec4(Color, new Vector4f(1,1,1,1));
+     
+		
+			
     //----------------------GAME--LOOP------------------------------
 		while(!w.isExited() && !I.IsEscapePushed()) {
 			oldpos=new Vector2f(x,y);
@@ -300,7 +301,7 @@ if(overworld==true) {
 	    
 	    		
 	     cam.setPosition((new Vector2f(camx,camy)));s.bind();
-	     cam.setPosition((new Vector2f(camx,camy)));s.bind();
+	     //cam.setPosition((new Vector2f(camx,camy)));s.bind();
 		
 		       
 		    //   testcol=playerCol.AABBwAABB(Col); 
@@ -318,20 +319,24 @@ if(overworld==true) {
 	    drawmap(loader,gridx,gridy);		     
 	    Col.debug();
 	    playerCol.debug();
+	    
 	    circle1.debug();
 	    circle2.debug();
 	      textD.setString("circCol:"+circCol);
 	      textC.setString("xmap="+gridx+" ymap="+gridy+" col:  "+testcol);
-	      textCircle.setString("CIrcleVSAABB: "+colT);
+	    
+	  
+	      textCircle.setString("CircleVSAABB: "+colT);
 	    
 	      
-		 
-		 //SpriteUpdate(player,playerTex,x,y,Playerscale,true);
+		if(DEBUGCOLISIONS==false) 
+		SpriteUpdate(player,playerTex,x,y,Playerscale,true);
+		
 		textB.drawString(screencoordx-300,screencoordy-220,.24f);
 		textC.drawString(screencoordx,screencoordy-220,.24f);
 		textD.drawString(screencoordx, screencoordy-200, .24f);
 		textCircle.drawString(screencoordx-300, screencoordy-200, .24f);
-	
+
 
 }else {
 	//---------------------battle loop---------------------
@@ -348,9 +353,11 @@ if(overworld==true) {
 
 
 }
+
+textDrawCalls.setString("Drawcalls(S:"+drawcalls+ " F:"+drawcallsFrame+")");
 textA.setString("fps="+(int)fps);
 textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
-
+textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 
 		
 		    w.render();
@@ -367,22 +374,7 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 		
 	}
 
-	private static void createMapfromtex(Texture tex) {
-
-		byte b=I.getDirectionalInput();
-		
-			if(b==0x0001) {
-			try {
-				System.out.println("yes");
-				tex.createFile(true,"map");
-			} catch (IOException e) {
-			
-				e.printStackTrace();
-			}
-		}
-		}
-		
-		
+	
 		
 	
 
@@ -394,6 +386,7 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 	 if(LOG==true)
 	 System.out.println("Making Shader Program....");
 		s= new ShaderProgram(Shader);
+		
 		//bind shader
 		s.bind();	
 		
@@ -526,13 +519,12 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 	   
 	   }
 	   
-		s.bind();
-		bg.bind(0);
-		  s.loadInt(location, 0);
+	
 		  cam.setPosition(new Vector2f(0,0));
-	 	   s.loadMat(Projection,cam.getProjection());
-	 	  s.loadMat(RTS,MatrixMath.getMatrix(new Vector2f(0,0),0,64*40));//change rotation and scale with this
-	 	 background.draw();
+	 	 
+	 	Renderer.draw(background,new Vector2f(0),0,64*40,bg); 
+	 	 
+	 	 
 	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
 	 	 SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
 	 	 SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
@@ -542,9 +534,9 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 	 	  
 	 	  
 	 	  text1.setString("moves");
-	 	  text1.drawString(positiont.x-15,positiont.y+15, .15f, Constants.TEST_COLOR);
+	 	  text1.drawString(positiont.x-15,positiont.y+15, .15f, Constants.COL_COLOR_RED);
 	 	  
-	 	  
+	 	 
 	 	  
 	 	  s.loadInt(location, 0);
 	 	   
@@ -559,8 +551,15 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 			time2=Timer.getTIme();//gets current time
 		    passed=time2-time;//this is the time since the last time through the loop
 			unproccesed+=passed;//this is the time that we have not rendered anything
+			Ti+=passed;
+			TT+=passed;
 			frameTime+=passed;//this is the time since the last second
 			time=time2;
+			
+			
+			
+			
+		
 			if(unproccesed>=framCap) {//when the time we have not rendered is greater than or equal to our frame target we allow rendering
 				DeltaTime=Timer.getTIme()-lastFrame;
 				//System.out.println(DeltaTime);
@@ -574,30 +573,38 @@ textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 			 	lastFrame=Timer.getTIme();
 			      if(frameTime>=1.0) {//if a second has passed print fps
 			    	 
-			    	 // System.out.println("FPS:"+frames+"-------------------------------");
+			    	  System.out.println("FPS:"+frames+"-------------------------------");
 			    	 
                       fps=frames;
 			    	//reset frame time and frames  
 			    	  
+			    	
+			    	  drawcalls=Renderer.getDrawcalls();
+			    
+			    	  drawcallsFrame=drawcalls/frames;
+			    	  Renderer.resetDrawCalls();
 			    	  frameTime=0;
-			    	  frames=0;
+			    	  frames=0;  
 			      }
+			      
+			      if(TT>=animateTime) {
+						TT-=animateTime;
+						Aframes++;
+		            if(Ti>=seconds) {
+		              
+		            	System.out.println(Aframes);
+                         Ti=0;
+                         Aframes=0;
+		            }
+					}
 			   
 			}
 	}
 private static void SpriteUpdate(Model sprite,Texture tex,float x,float y,float spritescale,boolean mirror){
-   s.bind();
-   tex.bind(0);
-   Matrix4f target=MatrixMath.getMatrix(new Vector2f(x/spritescale,y/spritescale),0,spritescale);
-   if(mirror==true)
-   MatrixMath.mirror(target);
-   
-   s.loadInt(location, 0); 
-  	   s.loadMat(Projection,cam.getProjection());
-       s.loadMat(RTS, target);
-	sprite.draw();	 
+if(mirror)
+Renderer.Mirror();
 	
-    
+Renderer.draw(sprite,new Vector2f(x,y), 0, spritescale, tex);
     
     
     
@@ -606,27 +613,38 @@ private static void SpriteUpdate(Model sprite,Texture tex,float x,float y,float 
 }
 private static void drawmap(MapLoader loader,int gridx,int gridy) {
 	  loader.loadTile(0,0);
-	for(int i=-amountHeight+2;i<amountHeight-1;i++) {
+
+	  for(int i=-amountHeight+2;i<amountHeight-1;i++) {
 		for(int j=-amountWidth+2;j<amountHeight;j++) {
 			   loader.loadTile(gridx+j,gridy+i);
 			    }
 	}
-  
+ //   loader.getModel().setDrawMethod(GL_LINES);
 	loader.drawtiles(tex);
-	
+
 }
 
 
 
-	private static void initializeFPS() {
+
+
+
+
+
+private static void initializeFPS() {
 		time=Timer.getTIme();
 		unproccesed=0;
 	    frameTime=0;
 	    frames=0;
 		framCap=1.0/60.0;
-		
+		seconds=1.0;
+		amountInSeconds=2;
+		animateTime=seconds/amountInSeconds;
 		
 	}
+	
+	
+	
 
 	
 		

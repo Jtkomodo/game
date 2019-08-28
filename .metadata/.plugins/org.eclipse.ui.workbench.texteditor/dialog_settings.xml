@@ -2,29 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="result" key="selection"/>
+		<item value="callback" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="callback"/>
+			<item value=".findkeys"/>
+			<item value="fps"/>
+			<item value=".draw"/>
+			<item value="shader"/>
+			<item value="SpriteU"/>
+			<item value="target"/>
+			<item value="data"/>
 			<item value="edgep"/>
 			<item value="closest"/>
 			<item value="closest2"/>
-			<item value="callback"/>
 			<item value="abs"/>
 			<item value="loadmap"/>
 			<item value="edgen"/>
 			<item value="batchedmodedel"/>
-			<item value="color"/>
-			<item value="VectorMAth."/>
-			<item value="VectorMAth"/>
-			<item value="{"/>
-			<item value="["/>
-			<item value="position"/>
-			<item value="position="/>
 		</list>
 		<list key="replacehistory">
+			<item value="rts"/>
 			<item value="result"/>
 			<item value=""/>
 			<item value="r"/>
@@ -34,7 +35,7 @@
 		<item value="336" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="454" key="DIALOG_HEIGHT"/>
-		<item value="-335" key="DIALOG_X_ORIGIN"/>
-		<item value="382" key="DIALOG_Y_ORIGIN"/>
+		<item value="912" key="DIALOG_X_ORIGIN"/>
+		<item value="260" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

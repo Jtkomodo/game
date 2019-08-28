@@ -9,6 +9,7 @@ import org.joml.Vector4f;
 import Data.Constants;
 import gameEngine.MatrixMath;
 import gameEngine.Model;
+import gameEngine.Renderer;
 import gameEngine.Start;
 import gameEngine.VectorMath;
 //06d7ea
@@ -256,19 +257,19 @@ public class AABB extends CollisionFunctions{
 			
 			   if(closest.x==box.lc.x) {
 				
-					 closest.sub(r.x,(-movement.y*Math.abs(direction.y))+tryv.y,edgep);
+					 closest.sub(r.x,(-direction.y*Math.abs(direction.y))+tryv.y,edgep);
 					 
 				   }else if(closest.x==box.rc.x) {
 						
-						 closest.add(r.x,(movement.y*Math.abs(direction.y))-tryv.y,edgep);
+						 closest.add(r.x,(direction.y*Math.abs(direction.y))-tryv.y,edgep);
 						 
 					   } if(closest.y==box.lc.y) {
 							 
-							 closest.sub((-movement.x*Math.abs(direction.x))+tryv.x,r.y,edgep);
+							 closest.sub((-direction.x*Math.abs(direction.x))+tryv.x,r.y,edgep);
 							 
 						   }else if(closest.y==box.rc.y) {
 								
-								 closest.add((movement.x*Math.abs(direction.x))-tryv.x,r.y,edgep);
+								 closest.add((direction.x*Math.abs(direction.x))-tryv.x,r.y,edgep);
 			
 			
 						   }
@@ -276,7 +277,7 @@ public class AABB extends CollisionFunctions{
 		}
 		   
 		   
-		   edgep.sub(movement.mul(0.0001f,new Vector2f(0,0)));
+		   edgep.sub(direction.mul(0.0001f,new Vector2f(0,0)));
 		   
 		   
 		 
@@ -304,71 +305,25 @@ public class AABB extends CollisionFunctions{
 	  
    public void debug() {
 	   if(DebugColisions) {
-		   Vector4f newcolor=new Vector4f(0,0,0,0);
-		   Data.Constants.COL_COLOR_BLUE.div(255,newcolor);
-		   Start.s.bind();
-		   Start.COLTEX.bind(5);
 		
-		   Matrix4f target=MatrixMath.getMatrix(new Vector2f(this.position.x,this.position.y),0,1);
 		   
-		   Start.s.loadInt(Start.location, 5); 
-		   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
-		   Start.s.loadMat(Start.RTS, target);
-		   Start.s.loadVec4(Start.Color,newcolor);	  
-		 
-		   aabb.draw();	
-		   Start.s.loadVec4(Start.Color,Data.Constants.DEFAULT_COLOR);	  
+		   Renderer.draw(aabb, position, 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE);
 		  // Start.s.bind();
 		   if(this.colide) {
-		  /* Start.COLTEX.bind(5);
-		   target=MatrixMath.getMatrix(new Vector2f(this.beforeCol.x,this.beforeCol.y),0,1);
-		   
-		   Start.s.loadInt(Start.location, 5); 
-		   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
-		   Start.s.loadMat(Start.RTS, target);
-		   aabb.draw();*/
-		   
-		   Start.col2.bind(5);
-		   target=MatrixMath.getMatrix(new Vector2f(this.edgep.x,this.edgep.y),0,1);
-		   
-		   Start.s.loadInt(Start.location, 5); 
-		   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
-		   Start.s.loadMat(Start.RTS, target);
-		  this.aabb.draw();
-		  
+		 
+		      Renderer.draw(aabb, edgep, 0, 1,Start.col2);
 		 
 		  
 		   }
-		   //if(amount==0) {
-			  // Start.s.bind();
-			   Start.COLTEX.bind(5);
-			   target=MatrixMath.getMatrix(new Vector2f(this.Pposition.x,this.Pposition.y),0,1);
-			   
-			   Start.s.loadInt(Start.location, 5); 
-			   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
-			   Start.s.loadMat(Start.RTS, target);
-			   Start.s.loadVec4(Start.Color,Constants.YELLOW);	  
-
-			  this.piont.draw();	
-			  target=MatrixMath.getMatrix(new Vector2f(this.edgen.x/3,this.edgen.y/3),0,3);
-			   
-			   Start.s.loadInt(Start.location, 5); 
-			   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
-			   Start.s.loadMat(Start.RTS, target);
- 
+		 
 			  
-			  this.piont.draw();
+			  Renderer.draw(piont, Pposition, 0, 1,Start.COLTEX,Constants.YELLOW);
+			
+			  Renderer.draw(piont, edgen, 0, 3,Start.COLTEX,Constants.YELLOW);
 			  
-			  
-			   Start.s.loadVec4(Start.Color,Data.Constants.DEFAULT_COLOR);	  
+			
 		  // }
-			  Start.piont.bind(5);
-			   target=MatrixMath.getMatrix(new Vector2f(this.position.x,this.position.y),0,1);
-			   
-			   Start.s.loadInt(Start.location, 5); 
-			   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
-			   Start.s.loadMat(Start.RTS, target);
-			  this.piont.draw();	
+			 
 		   
 	   }
 	   

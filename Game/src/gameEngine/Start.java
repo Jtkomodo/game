@@ -38,6 +38,7 @@ public class Start {
     public static Vector2f currentmovement,c2,oldpos,direction;
     public static AABB playerCol,Col;
     public static CircleColision circle1, circle2;
+    public static Animate a1;
     
 	public static void main(String[] args) {
 	
@@ -546,21 +547,25 @@ textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
    }
 	
 	private static void fps() {
+	
 		    Model.disable();
 		    canRender=false;//don't allow rendering until time
 			time2=Timer.getTIme();//gets current time
 		    passed=time2-time;//this is the time since the last time through the loop
-			unproccesed+=passed;//this is the time that we have not rendered anything
+			a1.updateTime(passed);   		
+			
+		    unproccesed+=passed;//this is the time that we have not rendered anything
 			Ti+=passed;
 			TT+=passed;
 			frameTime+=passed;//this is the time since the last second
 			time=time2;
-			
+		
 			
 			
 			
 		
 			if(unproccesed>=framCap) {//when the time we have not rendered is greater than or equal to our frame target we allow rendering
+				
 				DeltaTime=Timer.getTIme()-lastFrame;
 				//System.out.println(DeltaTime);
 				unproccesed-=framCap;//this is like reseting but instead if it is way over for some reason it makes sure to allow all rendering missed 
@@ -571,6 +576,7 @@ textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 			     canRender=true;//now we render	
 			 	frames++;
 			 	lastFrame=Timer.getTIme();
+			 
 			      if(frameTime>=1.0) {//if a second has passed print fps
 			    	 
 			    	  System.out.println("FPS:"+frames+"-------------------------------");
@@ -587,18 +593,10 @@ textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 			    	  frames=0;  
 			      }
 			      
-			      if(TT>=animateTime) {
-						TT-=animateTime;
-						Aframes++;
-		            if(Ti>=seconds) {
-		              
-		            	System.out.println(Aframes);
-                         Ti=0;
-                         Aframes=0;
-		            }
+			     
 					}
-			   
-			}
+			
+			
 	}
 private static void SpriteUpdate(Model sprite,Texture tex,float x,float y,float spritescale,boolean mirror){
 if(mirror)
@@ -640,7 +638,7 @@ private static void initializeFPS() {
 		seconds=1.0;
 		amountInSeconds=2;
 		animateTime=seconds/amountInSeconds;
-		
+		a1=new Animate(2);
 	}
 	
 	

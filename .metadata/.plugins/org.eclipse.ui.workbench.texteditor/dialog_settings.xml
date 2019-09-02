@@ -2,12 +2,14 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="callback" key="selection"/>
+		<item value="unprocc" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="unprocc"/>
+			<item value="bind"/>
 			<item value="callback"/>
 			<item value=".findkeys"/>
 			<item value="fps"/>
@@ -21,8 +23,6 @@
 			<item value="closest2"/>
 			<item value="abs"/>
 			<item value="loadmap"/>
-			<item value="edgen"/>
-			<item value="batchedmodedel"/>
 		</list>
 		<list key="replacehistory">
 			<item value="rts"/>

@@ -2,15 +2,17 @@ package gameEngine;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL30.*;
 
 import java.nio.*;
 
 import  org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL30;
 
 
 public class Model {
     private int drawCount;
-	private int v_id,tex_id,ind_id,DrawMethod=GL_TRIANGLES;
+	private int vao_id,v_id,tex_id,ind_id,DrawMethod=GL_TRIANGLES;
 	private static  boolean draw=true;
 	private float[] vertices,uv_coords;
 	private int[] indeces;
@@ -20,7 +22,8 @@ public class Model {
 		this.indeces=indices;
 		
 		      drawCount=indices.length;
-		
+		vao_id=glGenVertexArrays();
+		glBindVertexArray(vao_id);
 		            //make buffer
 		   v_id=glGenBuffers();//for vertices		
 		   tex_id=glGenBuffers();//for uv Coords
@@ -40,9 +43,23 @@ public class Model {
 	    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
 	      glBufferData(GL_ELEMENT_ARRAY_BUFFER,makeBuffer(indices),GL_STATIC_DRAW);
 
-		    
+	 
+	      enableAtributes();
+	      
+	      glBindBuffer(GL_ARRAY_BUFFER,v_id);//bind so we can use     
+		  glVertexAttribPointer(0,2,GL_FLOAT,false,0,0);
+		  glBindBuffer(GL_ARRAY_BUFFER,tex_id);
+		  glVertexAttribPointer(1,2,GL_FLOAT,false,0,0);
+				
+	     	    
 		   //unbind buffers
-	      unbindBuffers();
+			glBindBuffer(GL_ARRAY_BUFFER,0);	     
+	  	glBindVertexArray(0);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);		
+			
+	
+		
 
 	}
 	
@@ -72,14 +89,17 @@ public class Model {
 
 	public void draw() {
 	if(draw) {	
-	glBindBuffer(GL_ARRAY_BUFFER,v_id);//bind so we can use 
-	  glVertexAttribPointer(0,2,GL_FLOAT,false,0,0);
 		
-   glBindBuffer(GL_ARRAY_BUFFER,tex_id);
-	  glVertexAttribPointer(1,2,GL_FLOAT,false,0,0);
-			
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
-      glDrawElements(DrawMethod,drawCount,GL_UNSIGNED_INT,0);}
+		
+		glBindVertexArray(vao_id);
+	
+		enableAtributes();
+	
+	
+		   glDrawElements(DrawMethod,drawCount,GL_UNSIGNED_INT,0);			
+      disableAtributes();
+  	glBindVertexArray(0);  
+	}
 	}
 	
 	
@@ -99,13 +119,7 @@ public class Model {
 		
 	}
 	
-	private static void unbindBuffers() {
-		glBindBuffer(GL_ARRAY_BUFFER,0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);		
-		
-	}
-	
-	public void  changeUV(float[] data) {
+		public void  changeUV(float[] data) {
 		 glBindBuffer(GL_ARRAY_BUFFER,tex_id);
 		  glBufferSubData(GL_ARRAY_BUFFER, 0, makeBuffer(data));
 		  glBindBuffer(GL_ARRAY_BUFFER,0);
@@ -118,15 +132,22 @@ public class Model {
 	
 
    public static void enable() {
-	   glEnableVertexAttribArray(0);
-	   glEnableVertexAttribArray(1);
+	   
 	   draw=true;
    }
    public static void disable() {
-	   glDisableVertexAttribArray(0);
-       glDisableVertexAttribArray(1);
+	   
        draw=false;
    }
+private void enableAtributes() {
+	glEnableVertexAttribArray(0);
+	   glEnableVertexAttribArray(1);
+}
+private void disableAtributes() {
+	glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
+}
+
 
 public void setDrawMethod(int drawMethod) {
 	if((drawMethod==GL_TRIANGLES) ||(drawMethod==GL_LINES)||(drawMethod==GL_POINTS)) {

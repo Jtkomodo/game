@@ -243,9 +243,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="container">
         <div class="row">
           <div class="col-sm-24">
-            <h2><strong>Register for EclipseCon Europe 2019 today! </strong></h2>
-            <p>Register now and save! Early Bird pricing ends October 1.</p>
-            <a class='btn btn-primary btn-lg' href='https://www.eclipsecon.org/europe2019/registration?utm_source=eclipse.org&utm_medium=featured-story&utm_campaign=ECE2019_REGISTRATION'>Register</a>
+            <h2 class='margin-top-30'><strong>Eclipse IDE 2019-06</strong></h2>
+            <p>Get the latest version of the Eclipse IDE.</p>
+            <a class='btn btn-primary btn-lg' href='https://www.eclipse.org/go/PROMO_ECLIPSEIDE_FOOTER@FEATURED_STORY?utm_source=eclipse_foundation&utm_medium=featured_story&utm_campaign=eclipse_ide_2019_06'>Download</a> <a class='btn btn-primary btn-lg' href='/eclipseide/'>Learn More</a>
           </div>
           
         </div>

@@ -8,6 +8,7 @@ public final class Constants {
 	public static Vector4f WHITE = new Vector4f(0xff,0xff,0xff,0xff);
 	public static Vector4f BLUE = new Vector4f((0x00),(0x00),(0xff),0xff);
 	public static Vector4f YELLOW=new Vector4f(0xff,0xff,0x00,0xff);
+	public static Vector4f RED=new Vector4f(0xff,0x00,0x00,0xff);
 	public static Vector4f TEST_COLOR = new Vector4f(0xfb,0xad,0xfe,0x7f);
 	//A7 58 55 90
 	//7B C9 C3 9d

@@ -11,6 +11,7 @@ import gameEngine.Start;
 public class TextBuilder extends Fontloader{
 
 	private String text;
+	private boolean DebugPrint=Start.DebugdrawString;
 	private BatchedModel textModel;
 	
 	
@@ -87,6 +88,16 @@ public class TextBuilder extends Fontloader{
 		
 		 Renderer.draw(textModel,new Vector2f(x,y),0,scale,super.tex,color);
 	
+	}
+	public void DebugdrawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.draw(textModel,new Vector2f(x,y),0,scale,super.tex,color);
+		}
+	}
+	public void DebugdrawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.draw(textModel,new Vector2f(x,y),0,scale,super.tex);
+		}
 	}
 	
 	public void drawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale

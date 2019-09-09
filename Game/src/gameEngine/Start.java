@@ -28,7 +28,7 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static Input I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=false,DebugdrawString=true,showFps=false;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
@@ -39,11 +39,16 @@ public class Start {
     public static AABB playerCol,Col;
     public static CircleColision circle1, circle2;
     public static Animate a1;
+    public static SpriteSheetLoader sloader;
+    public static boolean facingLeft,running;
     
 	public static void main(String[] args) {
 	
-		if(LOG==true)
-		System.out.println("Starting.....");
+	
+		
+		sloader= new SpriteSheetLoader("playerSpriteSheet",138);//loads the sprite sheet info
+		
+		DebugPrint("Starting.....");
 	double startTime=Timer.getTIme();
 	
 	
@@ -53,8 +58,8 @@ public class Start {
 	
 	
 	
-	if(LOG==true)
-	System.out.println("intialzing vars....");
+	
+	DebugPrint("intialzing vars....");
 	float[] vert={
 				-0.5f,+0.5f,
 				0.5f,0.5f,
@@ -143,12 +148,10 @@ public class Start {
 		//for(int i=0;i<8;i++) {
 		///System.out.println(uv[i]);
 		//} 
-       if(LOG==true)
-       System.out.println("Creating window....");
+        DebugPrint("Creating window....");
 		//make our window and attach shaders
 		createWindow("shader");
-		if(LOG==true)
-		   System.out.println("Making Textures....");
+		DebugPrint("Making Textures....");
 		//Define texturesbr.close();
 		//font=new Fontloader("aakar",512);    
 		tex=new Texture("newsprite");
@@ -167,24 +170,21 @@ public class Start {
 		piont2= new Texture("Point2");
 		circleCol1=new Texture("Circle");
 	//	MAP=new Texture("map3");
-	    playerTex= new Texture("playerSprite2s_1");
-	    COLTEX= new Texture("whitebox");
+	    playerTex= new Texture("SpriteSheets/playerSpriteSheet");
 	    col2= new Texture("ColTex2");
+	    COLTEX=new Texture("Whitebox");
 		//map=new Texture("map1"); 
 		//Define models
-	    if(LOG==true)
-	    System.out.println("Making Models....");
+	   DebugPrint("Making Models....");
 		
 		player= new Model(vertPlayer,uvPlayer,ind);
 	    background=new Model(vert,uvBg,ind);
 	    textboxM=new Model(vertText,uvtextbox,ind);
 		
-	    if(LOG==true)
-	    System.out.println("Making Camera....");
+	   DebugPrint("Making Camera....");
 		//set camera
 		cam= new Camera(width,height);
-		if(LOG==true)
-		 System.out.println("Making Shader Uniforms....");
+		DebugPrint("Making Shader Uniforms....");
 		//make shader locations so we can use uniforms
 		try {
 			location=s.makeLocation("sampler");
@@ -195,15 +195,13 @@ public class Start {
 			
 			e.printStackTrace();
 		}
-		if(LOG==true)
-		System.out.println("Loading world....");
+		DebugPrint("Loading world....");
 		WorldLoader worldLoader=new WorldLoader("map3", 64,64, cam);
 		MapLoader loader=new MapLoader(worldLoader.Getmap(),scaleOfMapTiles);
         PositionTest postest=new PositionTest(worldLoader.Getmap(),scaleOfMapTiles);	
 		
 	
-		if(LOG==true)
-		System.out.println("Settign Colisions....");
+		DebugPrint("Settign Colisions....");
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		Col=new AABB(new Vector2f(4078+(2001),1026),2048,64,0);
@@ -219,11 +217,9 @@ public class Start {
 		y=100;	
 		double ENDTime=Timer.getTIme();
 		double timeTaken=ENDTime-startTime;
-		if(LOG==true)
-		System.out.println("Tiem to load--- "+timeTaken+" seconds");
+		DebugPrint("Tiem to load--- "+timeTaken+" seconds");
 		
-		if(LOG==true)
-		System.out.println("Starting Game loop.....");
+		DebugPrint("Starting Game loop.....");
 		
 		
 		s.loadVec4(Color, new Vector4f(1,1,1,1));
@@ -330,13 +326,13 @@ if(overworld==true) {
 	      textCircle.setString("CircleVSAABB: "+colT);
 	    
 	      
-		if(DEBUGCOLISIONS==false) 
-		SpriteUpdate(player,playerTex,x,y,Playerscale,true);
-		
-		textB.drawString(screencoordx-300,screencoordy-220,.24f);
-		textC.drawString(screencoordx,screencoordy-220,.24f);
-		textD.drawString(screencoordx, screencoordy-200, .24f);
-		textCircle.drawString(screencoordx-300, screencoordy-200, .24f);
+		if(HideSprite==false) 
+		SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
+	
+		textB.DebugdrawString(screencoordx-300,screencoordy-220,.24f);
+		textC.DebugdrawString(screencoordx,screencoordy-220,.24f);
+		textD.DebugdrawString(screencoordx, screencoordy-200, .24f);
+		textCircle.DebugdrawString(screencoordx-300, screencoordy-200, .24f);
 
 
 }else {
@@ -357,8 +353,9 @@ if(overworld==true) {
 
 textDrawCalls.setString("Drawcalls(S:"+drawcalls+ " F:"+drawcallsFrame+")");
 textA.setString("fps="+(int)fps);
+if(showFps)
 textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
-textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
+textDrawCalls.DebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 
 		
 		    w.render();
@@ -368,8 +365,7 @@ textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 		}
 		}
 //--------------------------------------------------------------	
-		if(LOG==true)
-		System.out.println("Closing.....");
+		DebugPrint("Closing.....");
 		w.destroy();
 		
 		
@@ -384,8 +380,7 @@ textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 		w=new Window(width,height);
 	 I=new Input(w);	
        //load our shaders 
-	 if(LOG==true)
-	 System.out.println("Making Shader Program....");
+	 DebugPrint("Making Shader Program....");
 		s= new ShaderProgram(Shader);
 		
 		//bind shader
@@ -395,6 +390,7 @@ textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 	}
 
 	private static void Inputupdate() {
+		
 		w.update();//this is needed to actually poll events from keyboard 
 		I.findKeys();
 	    dKeys=I.getDirectionalInput();
@@ -414,6 +410,7 @@ textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 			
 		}else {
 			overworld=false;
+			a1.Stop();
 			
 		}
 		
@@ -424,12 +421,12 @@ textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 		
 		        if(I.getStateofButton(GLFW_KEY_W)==1 || I.getStateofButton(GLFW_KEY_W)==3) {
 		        	speed=5;
-		        	
+		        	running=true;
 		        	
 		        }else {
-		        	speed=.5f;
-		        	
-		        	
+		        	speed=1f;
+		        	a1.changefps(7);
+		        	running=false;
 		        }
 		     float speedx=0,speedy=0;
 		
@@ -449,23 +446,40 @@ textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 					}if((dKeys>>3 & 0b001)==1) {//right
 						camx+=10;}	 
 					}else{ 
+						
+						
+						
 						if((dKeys & 0x01)==1) {//up
 						
 							speedy=1;
+							 a1.Play();
 							
 						}
 						if((dKeys>>1 & 0b001)==1) {//down
 						
 							speedy=-1;
+							 a1.Play();
 									
 						}if((dKeys>>2 & 0b001)==1) {//left
-					
+					        facingLeft=true;
+					        a1.Play();
 							speedx=1;
 							
 						}if((dKeys>>3 & 0b001)==1) {//right
 						
-						   speedx=-1;	
+						   speedx=-1;
+						   a1.Play();
+						   facingLeft=false;
+						   
 						}	
+						if(speedx==0&&speedy==0) {
+							a1.Stop();
+						}else if(running==true) {
+							a1.changefps(12);
+						}
+						
+						
+						
 						//speedx*=(float)DeltaTime;
 						//speedy*=(float)DeltaTime;
 					
@@ -552,7 +566,7 @@ textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 		    canRender=false;//don't allow rendering until time
 			time2=Timer.getTIme();//gets current time
 		    passed=time2-time;//this is the time since the last time through the loop
-			a1.updateTime(passed);   		
+			a1.updateTime();  		
 			
 		    unproccesed+=passed;//this is the time that we have not rendered anything
 			Ti+=passed;
@@ -579,7 +593,7 @@ textDrawCalls.drawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 			 
 			      if(frameTime>=1.0) {//if a second has passed print fps
 			    	 
-			    	  System.out.println("FPS:"+frames+"-------------------------------");
+			    	  DebugPrint("FPS:"+frames+"-------------------------------");
 			    	 
                       fps=frames;
 			    	//reset frame time and frames  
@@ -635,16 +649,14 @@ private static void initializeFPS() {
 	    frameTime=0;
 	    frames=0;
 		framCap=1.0/60.0;
-		seconds=1.0;
-		amountInSeconds=2;
-		animateTime=seconds/amountInSeconds;
-		a1=new Animate(2);
+	
+		a1=new Animate(7,player,sloader,0,7);
 	}
 	
 	
-	
-
-	
+public static void DebugPrint(String string) {
+if(DebugPrint)	
+System.out.println(string);}	
 		
 		
 	

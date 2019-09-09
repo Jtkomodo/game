@@ -2,29 +2,31 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="unprocc" key="selection"/>
+		<item value="textCircle" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="textCircle"/>
+			<item value="setstring"/>
+			<item value="drawstring"/>
+			<item value="drawString"/>
+			<item value="running"/>
+			<item value="coltex"/>
+			<item value="facingRight"/>
+			<item value="Spriteupdate"/>
+			<item value="split"/>
+			<item value="playersprite"/>
+			<item value="if(log"/>
+			<item value="playertex"/>
+			<item value="playerscale"/>
 			<item value="unprocc"/>
 			<item value="bind"/>
-			<item value="callback"/>
-			<item value=".findkeys"/>
-			<item value="fps"/>
-			<item value=".draw"/>
-			<item value="shader"/>
-			<item value="SpriteU"/>
-			<item value="target"/>
-			<item value="data"/>
-			<item value="edgep"/>
-			<item value="closest"/>
-			<item value="closest2"/>
-			<item value="abs"/>
-			<item value="loadmap"/>
 		</list>
 		<list key="replacehistory">
+			<item value="DebugdrawString"/>
+			<item value="facingLeft"/>
 			<item value="rts"/>
 			<item value="result"/>
 			<item value=""/>

@@ -19,8 +19,10 @@
 <fullyQualifiedTypeName name="org.joml.Vector2f"/>
 <fullyQualifiedTypeName name="org.joml.Matrix4f"/>
 <fullyQualifiedTypeName name="org.joml.Vector4f"/>
-<fullyQualifiedTypeName name="Data.Constants"/>
 <fullyQualifiedTypeName name="gameEngine.Renderer"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="org.lwjgl.opengl.GL30"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="javafx.animation.Animation"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="Data.Constants"/>
 </qualifiedTypeNameHistroy>

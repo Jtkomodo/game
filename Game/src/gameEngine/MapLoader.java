@@ -6,17 +6,19 @@ import org.joml.Matrix4f;
 import org.joml.Vector2f;
 
 import Data.TilesData;
+import textrendering.TextBuilder;
 
 public class MapLoader {
 
 	
 	private float sizeOfEachTile;
 	private BatchedModel model=new BatchedModel(); 
-	
+	private TextBuilder text=new TextBuilder("aakar",512);
 
 
 
 	private int[][] map,keychart;
+	private int a=0;
 	protected HashMap<Integer,float[]> tilePosData=new HashMap<Integer,float[]>();
 	protected HashMap<Integer,float[]> tileUVData=new HashMap<Integer,float[]>();
 	protected HashMap<Integer,int[]> test2=new HashMap<Integer,int[]>();
@@ -109,7 +111,8 @@ public class MapLoader {
 	//test method
 	public void loadTile(int tilex,int tiley) {
 		//model.flushBuffers();
-	if((tilex<map.length && tilex>=0)&&(tiley<map[0].length && tiley>=0))	{
+	
+		if((tilex<map.length && tilex>=0)&&(tiley<map[0].length && tiley>=0))	{
 		int key=keychart[tiley][tilex];
 		
 		float[] uv=tileUVData.get(key);		
@@ -117,15 +120,21 @@ public class MapLoader {
 		
 		
 		model.addvaluestoVBO(vert, uv);
+		a++;	  
 		
+    }
+	
 		
-	}
+	
 		
 	}
 	public void drawtiles(Texture tex) {
 	
 		Renderer.draw(model,new Vector2f(0),0, sizeOfEachTile,tex);
+text.setString("Tiles: "+a);
+text.UIDebugdrawString(Start.screencoordx,(480/2)+Start.screencoordy-20,.24f);
 		
+		a=0;
 	}
 	
 	

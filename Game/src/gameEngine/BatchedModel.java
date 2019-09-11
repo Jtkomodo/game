@@ -22,9 +22,9 @@ public class BatchedModel {
 	 private int drawCount,drawCount2;
 		private int v_id,tex_id,ind_id;//made these public so that we can get to them from another method to change values
 	private int indBase,pionter,sections,DrawMethod=GL_TRIANGLES;
-	private long Texsize=10000;//size of the amount of space to allocate for the buffers 
-	private long Indsize=10000;
-	private long Vertsize=10000;
+	private long Texsize=1000000;//size of the amount of space to allocate for the buffers 
+	private long Indsize=1000000;
+	private long Vertsize=1000000;
 	public BatchedModel() {
 		
 		//setting everything to 0 

@@ -35,16 +35,22 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
 public class Window {
+
 private long window;
 private  Long fullscreen;
 private GLFWVidMode vidmode;
 private int width,height;
+private int dH,dW;
+private float aspectRatio;
+private Camera camera;
 
-
-	public Window(int width, int height) {
+	public Window(int width, int height,Camera camera) {
+		this.camera=camera;
 		this.width=width;
 		this.height=height;
-		
+		dH=height;
+		dW=width;
+		aspectRatio=width/height;
 		
 		
 		if(!glfwInit()) {
@@ -54,7 +60,8 @@ private int width,height;
 		glfwWindowHint(GLFW_VISIBLE,GLFW_FALSE);//this makes it so that we don't show the window till it is ready
 		glfwWindowHint(GLFW_DECORATED,GLFW_TRUE);//this makes it so the top bar is there if this is set to false  it will not show it
 		glfwWindowHint(GLFW_RESIZABLE,GLFW_TRUE);//this allows the window to be resized by the user
-
+		glfwWindowHint(GLFW_FOCUSED,GLFW_TRUE);
+		
 		window=glfwCreateWindow(width,height,"Game",0,0);//creats the glfw window to be draw to
 		if(window==0) {
 			throw new IllegalStateException("failed to create window");//this is just a error message if somehow window creation failed		
@@ -76,7 +83,9 @@ private int width,height;
 		//allow gfwKeycallbacks for Callback
 		
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-
+		
+		glfwSetWindowSizeLimits(window,width,height,GLFW_DONT_CARE,GLFW_DONT_CARE);
+		glfwSetWindowAspectRatio(window, width, height);
 		}
 
 	public boolean isExited() {
@@ -88,11 +97,27 @@ private int width,height;
 	public void update() {
 		fullscreen=glfwGetWindowMonitor(window);
 		glfwPollEvents();
-		int[] width=new int[1], height=new int[1];
-glfwGetWindowSize(window, width, height);
+		int[] wi=new int[1], he=new int[1];
+glfwGetWindowSize(window, wi, he);
+int h=he[0],w=wi[0];
 
+
+
+
+if(h!=height || w!=width) {
+	
+	
+	
+glViewport(0, 0,w ,h);
+width=w;height=h;
 
 }
+
+}
+	
+	
+	
+	
 	public void destroy() {
 		glfwDestroyWindow(window);
 		
@@ -105,31 +130,49 @@ glfwGetWindowSize(window, width, height);
 	}
 
 
-    public long geWindow() {
-    	return window;
-    }
-    public void toggleFullscreen() {	
-    	fullscreen=glfwGetWindowMonitor(window);
+   
+
+	
+	public void toggleFullscreen() {	
+    	fullscreen=glfwGetWindowMonitor(window);    	
+    	
     	if(fullscreen==0) {
 		
 			glfwSetWindowMonitor(window,glfwGetPrimaryMonitor(),0,0,vidmode.width(),vidmode.height(),vidmode.refreshRate());// this allows fullscreen window .the value that actually changes if fullscreen is used is the second argument
 		//	glViewport(0,0,width,height);	
 			glViewport(0, 0, vidmode.width(),vidmode.height()); //this changes the view to the size of the monitor so that it won't be small
 				//System.out.println(fullscreen);
-		
+			width=vidmode.width();height=vidmode.height();
+			camera.setSize(width/2.5f, height/2.5f);
+		  
     	}
     	else {
     		
-    		glfwSetWindowMonitor(window,0,(vidmode.width()-width)/2,(vidmode.height()-height)/2,width,height,vidmode.refreshRate());
-    		glViewport(0,0,width,height);
+    		glfwSetWindowMonitor(window,0,(vidmode.width()-dW)/2,(vidmode.height()-dH)/2,dW,dH,vidmode.refreshRate());
+    		glViewport(0,0,dW,dH);
+    		width=dW;height=dH;
+    		camera.setSize(width, height);
     	
+   			
 		}
     		
     	
     }
 
+	 public long geWindow() {
+	    	return window;
+	    }
+	    public int getWidth() {
+			return width;
+		}
 
+		
+		public int getHeight() {
+			return height;
+		}
 
-
+		public void changeCamera(Camera camera) {
+			this.camera=camera;
+		}
 
 }

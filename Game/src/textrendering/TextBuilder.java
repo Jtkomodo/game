@@ -84,6 +84,71 @@ public class TextBuilder extends Fontloader{
 		
 		
 	}
+	public void UIdrawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),0,scale,super.tex,color);
+	
+	}
+	public void UIDebugdrawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),0,scale,super.tex,color);
+		}
+	}
+	public void UIDebugdrawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),0,scale,super.tex);
+		}
+	}
+	
+	public void UIdrawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+	
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),0,scale,super.tex);
+		
+	}
+	
+	public void UIdrawString(float x,float y,float angle,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),angle,scale,super.tex,color);
+	
+	}
+	public void UIDebugdrawString(float x,float y,float angle,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),angle,scale,super.tex,color);
+		}
+	}
+	public void UIDebugdrawString(float x,float y,float angle,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),angle,scale,super.tex);
+		}
+	}
+	
+	public void UIdrawString(float x,float y,float angle,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+	
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),angle,scale,super.tex);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void drawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
 		
 		 Renderer.draw(textModel,new Vector2f(x,y),0,scale,super.tex,color);
@@ -106,6 +171,26 @@ public class TextBuilder extends Fontloader{
 		
 	}
 	
+	public void drawString(float x,float y,float angle,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		
+		 Renderer.draw(textModel,new Vector2f(x,y),angle,scale,super.tex,color);
 	
+	}
+	public void DebugdrawString(float x,float y,float angle,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.draw(textModel,new Vector2f(x,y),angle,scale,super.tex,color);
+		}
+	}
+	public void DebugdrawString(float x,float y,float angle,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.draw(textModel,new Vector2f(x,y),angle,scale,super.tex);
+		}
+	}
+	
+	public void drawString(float x,float y,float angle,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+	
+		 Renderer.draw(textModel,new Vector2f(x,y),angle,scale,super.tex);
+		
+	}
 
 }

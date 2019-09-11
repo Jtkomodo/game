@@ -19,7 +19,7 @@ public class Renderer {
 		color.div(255,newcolor);
 		 s.bind();
 		   texture.bind(0);
-		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),0,scale);
+		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
 		   if(mirror) {
 			   
 			   MatrixMath.mirror(rts);
@@ -42,6 +42,8 @@ public class Renderer {
 	}
 	
 	
+	
+	
 	public static void draw(Model model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
 
 	Vector4f newcolor=new Vector4f(0);
@@ -51,7 +53,7 @@ public class Renderer {
 		
 		 s.bind();
 		   texture.bind(0);
-		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),0,scale);
+		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
  if(mirror) {
 			   
 			   MatrixMath.mirror(rts);
@@ -86,7 +88,7 @@ public class Renderer {
 		
 		 s.bind();
 		   texture.bind(0);
-		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),0,scale);
+		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
  if(mirror) {
 			   
 			   MatrixMath.mirror(rts);
@@ -116,7 +118,7 @@ public class Renderer {
 		
 		 s.bind();
 		   texture.bind(0);
-		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),0,scale);
+		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
  if(mirror) {
 			   
 			   MatrixMath.mirror(rts);
@@ -131,8 +133,63 @@ public class Renderer {
 			
 		
 	}
+   public static void UIdraw(BatchedModel model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
+		
+		Vector4f newcolor=new Vector4f(0);
+		
+		color.div(255,newcolor);
+		 s.bind();
+		   texture.bind(0);
+		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
+		   if(mirror) {
+			   
+			   MatrixMath.mirror(rts);
+		   }
+		   
+		   s.loadInt(Location, 0); 
+		  	   s.loadMat(Projection,cam.getUIProjection());
+		       s.loadMat(Rts, rts);
+		       s.loadVec4(Color,newcolor);;	  
+		  model.draw();	 
+			
+		    
+		
+		  Start.s.loadVec4(Color,Data.Constants.DEFAULT_COLOR);;	 
+		drawcalls++;
+		
+		mirror=false;
 	
-	
+		
+	}
+	public static void UIdraw(BatchedModel model,Vector2f position,float angle,float scale,Texture texture) {
+
+		
+		
+		 s.bind();
+		   texture.bind(0);
+		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
+if(mirror) {
+			   
+			   MatrixMath.mirror(rts);
+		   }
+		   
+		   s.loadInt(Location, 0); 
+		  	   s.loadMat(Projection,cam.getUIProjection());
+		       s.loadMat(Rts, rts);
+		  model.draw();	 
+			
+		    
+		
+		
+		
+		
+		
+		
+			drawcalls++;
+			mirror=false;
+			
+	}
+ 
 	
 	public static void changeShader(ShaderProgram shader) {
 		

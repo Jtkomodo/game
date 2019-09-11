@@ -5,7 +5,7 @@ import org.joml.*;
 public class Camera {
 
 	private Vector3f position;
-	private Matrix4f projection;
+	private Matrix4f projection,UIprojection;
 	private float width,height;
 	
 	
@@ -13,8 +13,12 @@ public class Camera {
 		this.width=width;
 		this.height=height;
 		
+		
 		position= new Vector3f(0,0,0);
 		projection=new Matrix4f().setOrtho2D(-width/2, width/2,-height/2, height/2);
+	
+		UIprojection=projection;
+		;
 		}
 	
 	public void addVector(Vector2f vector ) {
@@ -41,6 +45,13 @@ public class Camera {
 		target=projection.mul(pos,target);
 	return target;
 	}
+	
+	public Matrix4f getUIProjection() {
+		Matrix4f target= new Matrix4f();
+		Matrix4f pos= new Matrix4f().setTranslation(position);
+		target=UIprojection.mul(pos,target);
+	return target;
+	}
 
 	public float getWidth() {
 		return width;
@@ -48,6 +59,7 @@ public class Camera {
 
 	public void setWidth(float width) {
 		this.width = width;
+		
 		projection=new Matrix4f().setOrtho2D(-width/2, width/2,-height/2, height/2);
 	}
 
@@ -57,7 +69,19 @@ public class Camera {
 
 	public void setHeight(float height) {
 		this.height = height;
+	
 		projection=new Matrix4f().setOrtho2D(-width/2, width/2,-height/2, height/2);
+		
+	}
+	
+	public void setSize(float width,float height) {
+		this.height=height;
+		this.width=width;
+		
+		
+		
+		projection=new Matrix4f().setOrtho2D(-width/2, width/2,-height/2, height/2);
+		
 	}
 	
 	

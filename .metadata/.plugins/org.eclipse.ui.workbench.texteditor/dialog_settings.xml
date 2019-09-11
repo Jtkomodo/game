@@ -2,34 +2,38 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="textCircle" key="selection"/>
+		<item value="fps" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="fps"/>
+			<item value="&quot;tiles"/>
+			<item value="   cam.BattleProjection();"/>
+			<item value=".drawstring"/>
+			<item value=".DebugdrawString"/>
+			<item value=".debugdrawstring"/>
+			<item value="debugdrawstring"/>
+			<item value="UI"/>
+			<item value=".draw"/>
+			<item value="camera"/>
+			<item value="spriteupdate"/>
+			<item value="sprite"/>
+			<item value="Sprite"/>
 			<item value="textCircle"/>
 			<item value="setstring"/>
-			<item value="drawstring"/>
-			<item value="drawString"/>
-			<item value="running"/>
-			<item value="coltex"/>
-			<item value="facingRight"/>
-			<item value="Spriteupdate"/>
-			<item value="split"/>
-			<item value="playersprite"/>
-			<item value="if(log"/>
-			<item value="playertex"/>
-			<item value="playerscale"/>
-			<item value="unprocc"/>
-			<item value="bind"/>
 		</list>
 		<list key="replacehistory">
+			<item value=".UIDebugdrawString"/>
+			<item value=".UIDebugdrawstring"/>
+			<item value=""/>
+			<item value=".UIdraw"/>
+			<item value=".U"/>
 			<item value="DebugdrawString"/>
 			<item value="facingLeft"/>
 			<item value="rts"/>
 			<item value="result"/>
-			<item value=""/>
 			<item value="r"/>
 		</list>
 	</section>
@@ -37,7 +41,7 @@
 		<item value="336" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="454" key="DIALOG_HEIGHT"/>
-		<item value="912" key="DIALOG_X_ORIGIN"/>
-		<item value="260" key="DIALOG_Y_ORIGIN"/>
+		<item value="1316" key="DIALOG_X_ORIGIN"/>
+		<item value="281" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

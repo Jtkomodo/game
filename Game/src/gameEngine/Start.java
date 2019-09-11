@@ -14,6 +14,7 @@ import Collisions.CircleColision;
 import textrendering.Fontloader;
 import textrendering.TextBuilder;
 import Data.Constants;
+import sun.security.util.Debug;
 public class Start {
     
 	
@@ -23,16 +24,16 @@ public class Start {
     public static byte dKeys,testKey;
     public static ShaderProgram s;
     public static float scaleOfMapTiles=128,Rendercamx,Rendercamy;
-    public static int amountWidth=Math.round((width/scaleOfMapTiles)),amountHeight=Math.round((height/scaleOfMapTiles));
+    public static int amountWidth=Math.round((width/scaleOfMapTiles)),amountHeight=Math.round((height/scaleOfMapTiles)),sprite;
     public static Camera cam;
     public static float screencoordx=0,screencoordy=0;
     public static Input I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=false,DebugdrawString=true,showFps=false;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=false,DebugdrawString=true,showFps=true;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds;
-    public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox;
+    public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
-    public static Model background,player,textboxM;
+    public static Model background,player,textboxM,Arrow;
     public static BatchedModel testM;
     public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls;
     public static Vector2f currentmovement,c2,oldpos,direction;
@@ -134,6 +135,8 @@ public class Start {
 
 
 	   };
+	   
+	   
 
        float[] uvPlayer={
 		Texx/Texwidth,Texy/Texheight,
@@ -141,7 +144,20 @@ public class Start {
 		(Texx+wi)/Texwidth,(Texy+h)/Texheight,
 		Texx/Texwidth,(Texy+h)/Texheight  };
 
-
+       Texwidth=128;
+	   Texheight=128;		
+	   wi=62;
+	   h=64;
+	   Texx=66;
+	   Texy=0;	
+	    height2=h;
+	    width2=wi;     
+	 
+	    float[] uvArrow={
+	    		Texx/Texwidth,Texy/Texheight,
+	    		(Texx+wi)/Texwidth,Texy/Texheight,
+	    		(Texx+wi)/Texwidth,(Texy+h)/Texheight,
+	    		Texx/Texwidth,(Texy+h)/Texheight  };
 
 
 
@@ -173,6 +189,7 @@ public class Start {
 	    playerTex= new Texture("SpriteSheets/playerSpriteSheet");
 	    col2= new Texture("ColTex2");
 	    COLTEX=new Texture("Whitebox");
+	    testSprite=new Texture("testSprites");
 		//map=new Texture("map1"); 
 		//Define models
 	   DebugPrint("Making Models....");
@@ -180,10 +197,9 @@ public class Start {
 		player= new Model(vertPlayer,uvPlayer,ind);
 	    background=new Model(vert,uvBg,ind);
 	    textboxM=new Model(vertText,uvtextbox,ind);
+	    Arrow=new Model(vert,uvArrow,ind);
 		
-	   DebugPrint("Making Camera....");
-		//set camera
-		cam= new Camera(width,height);
+	
 		DebugPrint("Making Shader Uniforms....");
 		//make shader locations so we can use uniforms
 		try {
@@ -329,10 +345,10 @@ if(overworld==true) {
 		if(HideSprite==false) 
 		SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
 	
-		textB.DebugdrawString(screencoordx-300,screencoordy-220,.24f);
-		textC.DebugdrawString(screencoordx,screencoordy-220,.24f);
-		textD.DebugdrawString(screencoordx, screencoordy-200, .24f);
-		textCircle.DebugdrawString(screencoordx-300, screencoordy-200, .24f);
+		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.24f);
+		textC.UIDebugdrawString(screencoordx,screencoordy-220,.24f);
+		textD.UIDebugdrawString(screencoordx, screencoordy-200, .24f);
+		textCircle.UIDebugdrawString(screencoordx-300, screencoordy-200, .24f);
 
 
 }else {
@@ -354,8 +370,8 @@ if(overworld==true) {
 textDrawCalls.setString("Drawcalls(S:"+drawcalls+ " F:"+drawcallsFrame+")");
 textA.setString("fps="+(int)fps);
 if(showFps)
-textA.drawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
-textDrawCalls.DebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
+textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
+textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 
 		
 		    w.render();
@@ -376,8 +392,10 @@ textDrawCalls.DebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.
 	
 
 	private static void createWindow(String Shader) {
-	
-		w=new Window(width,height);
+		   DebugPrint("Making Camera....");
+			//set camera
+			cam= new Camera(width,height);
+		w=new Window(width,height,cam);
 	 I=new Input(w);	
        //load our shaders 
 	 DebugPrint("Making Shader Program....");
@@ -407,17 +425,19 @@ textDrawCalls.DebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.
 	//	x=0;y=0;
 		if (overworld==false) {
 			overworld=true;
+	
 			
 		}else {
 			overworld=false;
 			a1.Stop();
+			
 			
 		}
 		
 		
 		
 	}
-	if(overworld==true) {
+	if(overworld) {
 		
 		        if(I.getStateofButton(GLFW_KEY_W)==1 || I.getStateofButton(GLFW_KEY_W)==3) {
 		        	speed=5;
@@ -508,6 +528,37 @@ textDrawCalls.DebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.
 					
 						}
 		 
+	}else {
+		
+	
+		if(I.getStateofButton(GLFW_KEY_S)==1) {
+		     if(sprite==0) {
+		    	 sprite=1;
+		     }else {
+		    	 sprite=0;
+		     }
+		
+		}
+		
+		
+		if((dKeys & 0x01)==1) {//up
+		
+			
+		}
+		if((dKeys>>1 & 0b001)==1) {//down
+		
+		
+					
+		}
+		if((dKeys>>2 & 0b001)==1) {//left
+	       
+		}if((dKeys>>3 & 0b001)==1) {//right
+		
+		
+		}	
+		
+		
+		
 	}
 		 
 		 
@@ -515,25 +566,29 @@ textDrawCalls.DebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.
 	
 	
    private static void battleupdate() {
+	 //  cam.BattleProjection();
 	   Vector2f position1=new Vector2f(-90,40);
 	   Vector2f position2=new Vector2f(-110,-98);
 	   Vector2f positiont;
 	   cam.setPosition(new Vector2f(0,0));
-	   int sprite=0;
+	 
+	   float angle;
 	   switch(sprite) {
 	   case 0:
 		   positiont=position1;
+		   angle=5;
 	   break;
 	   case 1:
 		   positiont=position2;
+		   angle=-5;
 		break;   
 		   
 		   
 		default:
 			 positiont=position1;
-	   
+	         angle=5;
 	   }
-	   
+	   angle=0;
 	
 		  cam.setPosition(new Vector2f(0,0));
 	 	 
@@ -543,13 +598,13 @@ textDrawCalls.DebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.
 	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
 	 	 SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
 	 	 SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
-	 	 SpriteUpdate(textboxM,textbox,positiont.x,positiont.y,1,false);
-	 	 
+	 	 SpriteUpdate(textboxM,textbox,positiont.x,positiont.y,angle,1,false);
+	 	 SpriteUpdate(Arrow,testSprite,positiont.x-(17+16),positiont.y+15,angle,16,false);
 	 	  
 	 	  
 	 	  
 	 	  text1.setString("moves");
-	 	  text1.drawString(positiont.x-15,positiont.y+15, .15f, Constants.COL_COLOR_RED);
+	 	  text1.drawString(positiont.x-17,positiont.y+15,angle, .15f, Constants.BLACK);
 	 	  
 	 	 
 	 	  
@@ -623,14 +678,38 @@ Renderer.draw(sprite,new Vector2f(x,y), 0, spritescale, tex);
     
     
 }
+private static void SpriteUpdate(Model sprite,Texture tex,float x,float y,float angle,float spritescale,boolean mirror){
+if(mirror)
+Renderer.Mirror();
+	
+Renderer.draw(sprite,new Vector2f(x,y), angle, spritescale, tex);
+    
+    
+    
+    
+    
+}
+private static void SpriteUpdate(Model sprite,Texture tex,float x,float y,float angle,float spritescale,Vector4f color,boolean mirror){
+if(mirror)
+Renderer.Mirror();
+	
+Renderer.draw(sprite,new Vector2f(x,y), angle, spritescale, tex,color);
+    
+    
+    
+    
+    
+}
 private static void drawmap(MapLoader loader,int gridx,int gridy) {
-	  loader.loadTile(0,0);
+	 // loader.loadTile(0,0);
 
 	  for(int i=-amountHeight+2;i<amountHeight-1;i++) {
-		for(int j=-amountWidth+2;j<amountHeight;j++) {
+		for(int j=-amountWidth+2;j<amountWidth-1;j++) {
 			   loader.loadTile(gridx+j,gridy+i);
+		
 			    }
 	}
+	
  //   loader.getModel().setDrawMethod(GL_LINES);
 	loader.drawtiles(tex);
 
@@ -648,7 +727,7 @@ private static void initializeFPS() {
 		unproccesed=0;
 	    frameTime=0;
 	    frames=0;
-		framCap=1.0/60.0;
+		framCap=1.0/60;
 	
 		a1=new Animate(7,player,sloader,0,7);
 	}

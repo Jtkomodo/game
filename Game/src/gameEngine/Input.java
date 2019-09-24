@@ -16,15 +16,17 @@ public class Input {
 
 	private byte[] Keys=new byte[3];
 	private boolean check,last=false;
+	private Callback call;
 	
 	private HashMap<Integer,Boolean> lastKeyState=new HashMap<Integer,Boolean>();
 	public Input(Window window ) {
-	glfwSetKeyCallback(window.geWindow(),new Callback());
+		
+	call=new Callback();
+	glfwSetKeyCallback(window.geWindow(),call);
 	}
 	 public void findKeys() {
 		     //Directional keys
 		
-
 		if(Find(GLFW_KEY_UP)) {
 			Keys[0] |= 0x01;
 			Keys[0] &= 0xfd;

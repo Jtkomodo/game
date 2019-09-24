@@ -10,8 +10,31 @@
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.opengl.PNGDecoder.Format"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.opengl.PNGDecoder"/>
+<<<<<<< Updated upstream
 <fullyQualifiedTypeName name="java.lang.System"/>
+=======
+<fullyQualifiedTypeName name="org.joml.Math"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="com.sun.imageio.plugins.png.PNGImageWriter"/>
+<fullyQualifiedTypeName name="javax.imageio.stream.ImageInputStream"/>
+<fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
+<fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
+<fullyQualifiedTypeName name="org.joml.Vector2f"/>
+<fullyQualifiedTypeName name="org.joml.Matrix4f"/>
+<fullyQualifiedTypeName name="org.joml.Vector4f"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="javafx.animation.Animation"/>
+<fullyQualifiedTypeName name="Data.Constants"/>
+<fullyQualifiedTypeName name="sun.security.util.Debug"/>
+<fullyQualifiedTypeName name="textrendering.TextBuilder"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="gameEngine.Start"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GL30"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GL31"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
+<fullyQualifiedTypeName name="gameEngine.Renderer"/>
+<fullyQualifiedTypeName name="com.sun.javafx.tk.FontLoader"/>
+>>>>>>> Stashed changes
 </qualifiedTypeNameHistroy>

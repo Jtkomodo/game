@@ -2,12 +2,17 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
+<<<<<<< Updated upstream
 		<item value="Color" key="selection"/>
+=======
+		<item value="font" key="selection"/>
+>>>>>>> Stashed changes
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+<<<<<<< Updated upstream
 			<item value="color"/>
 			<item value="VectorMAth."/>
 			<item value="VectorMAth"/>
@@ -24,6 +29,29 @@
 			<item value="width"/>
 		</list>
 		<list key="replacehistory">
+=======
+			<item value="font"/>
+			<item value="super"/>
+			<item value="a++"/>
+			<item value="a="/>
+			<item value="drawstring"/>
+			<item value="draw"/>
+			<item value="&quot;"/>
+			<item value="tiles"/>
+			<item value="(5)"/>
+			<item value="making"/>
+			<item value="fps"/>
+			<item value="&quot;tiles"/>
+			<item value="   cam.BattleProjection();"/>
+			<item value=".drawstring"/>
+			<item value=".DebugdrawString"/>
+		</list>
+		<list key="replacehistory">
+			<item value="loader"/>
+			<item value="(3)"/>
+			<item value=".UIDebugdrawString"/>
+			<item value=".UIDebugdrawstring"/>
+>>>>>>> Stashed changes
 			<item value=""/>
 			<item value="r"/>
 		</list>
@@ -32,7 +60,12 @@
 		<item value="336" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="454" key="DIALOG_HEIGHT"/>
+<<<<<<< Updated upstream
 		<item value="801" key="DIALOG_X_ORIGIN"/>
 		<item value="247" key="DIALOG_Y_ORIGIN"/>
+=======
+		<item value="939" key="DIALOG_X_ORIGIN"/>
+		<item value="281" key="DIALOG_Y_ORIGIN"/>
+>>>>>>> Stashed changes
 	</section>
 </section>

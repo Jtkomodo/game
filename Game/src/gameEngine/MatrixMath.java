@@ -13,6 +13,7 @@ public class MatrixMath {
 		
 		
 		matrix.scale(scale);
+
 		matrix.translate(translation.x,translation.y,0);
 		matrix.rotateZ((float) java.lang.Math.toRadians(angle));
 		//System.out.println(matrix);

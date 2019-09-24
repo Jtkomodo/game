@@ -13,7 +13,7 @@ import gameEngine.VectorMath;
 //06d7ea
 public class AABB extends CollisionFunctions{
 	private float widthR,heightR,resistance,amount;//resistance is the amount of push away the box will have on the player
-	private Vector2f position,lc=new Vector2f(0,0),rc=new Vector2f(0,0),r,Pposition=new Vector2f(0,0),beforeCol=new Vector2f(0,0),edgep=new Vector2f(0,0),edgen=new Vector2f(0,0);
+	private Vector2f position=new Vector2f(0),lc=new Vector2f(0,0),rc=new Vector2f(0,0),r,Pposition=new Vector2f(0,0),beforeCol=new Vector2f(0,0),edgep=new Vector2f(0,0),edgen=new Vector2f(0,0);
 	private Model aabb,piont;
 	private boolean colide=false,COLIDECHECK=false;
 	
@@ -22,7 +22,10 @@ public class AABB extends CollisionFunctions{
 	 this.widthR=widthR;
 	 this.heightR=heightR;
 	 
-	 this.position=position;
+	 
+	 
+	 position.add(widthR, heightR,this.position);
+	 
 	 this.resistance=resistance;	
 	 this.r=new Vector2f(this.widthR,this.heightR);
 	
@@ -223,7 +226,26 @@ public class AABB extends CollisionFunctions{
 			
 			   if(closest.x==box.lc.x) {
 				
+<<<<<<< Updated upstream
 					 closest.sub(r.x,-movement.y*Math.abs(direction.y),edgep);
+=======
+					 closest.sub(r.x,0,edgep);
+					 
+				   }else if(closest.x==box.rc.x) {
+						
+						 closest.add(r.x,-0,edgep);
+						 
+					   } if(closest.y==box.lc.y) {
+							 
+							 closest.sub(0,r.y,edgep);
+							 
+						   }else if(closest.y==box.rc.y) {
+								
+								 closest.add(0,r.y,edgep);
+			
+			
+						/*	 closest.sub(r.x,(-direction.y*Math.abs(direction.y))+tryv.y,edgep);
+>>>>>>> Stashed changes
 					 
 				   }else if(closest.x==box.rc.x) {
 						
@@ -235,11 +257,30 @@ public class AABB extends CollisionFunctions{
 							 
 						   }else if(closest.y==box.rc.y) {
 								
+<<<<<<< Updated upstream
 								 closest.add(movement.x*Math.abs(direction.x),r.y,edgep);
+=======
+								 closest.add((direction.x*Math.abs(direction.x))-tryv.x,r.y,edgep);
+			*/
+						   
+						   
+						   
+	   }
+>>>>>>> Stashed changes
 			
-			
-						   }
-			
+					   
+					   
+					   
+					   
+					   
+					   
+					   
+					   
+					   
+					   
+					   
+					   
+					   
 		}
 		   
 		   
@@ -274,6 +315,7 @@ public class AABB extends CollisionFunctions{
 		
 		   Matrix4f target=MatrixMath.getMatrix(new Vector2f(this.position.x,this.position.y),0,1);
 		   
+<<<<<<< Updated upstream
 		   Start.s.loadInt(Start.location, 5); 
 		   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
 		   Start.s.loadMat(Start.RTS, target);
@@ -311,6 +353,18 @@ public class AABB extends CollisionFunctions{
 			   Start.s.loadMat(Start.Projection,Start.cam.getProjection());
 			   Start.s.loadMat(Start.RTS, target);
 			  this.piont.draw();	
+=======
+		   Renderer.draw(aabb, position, 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE);
+		  // Start.s.bind();
+		
+		 
+			  
+			  Renderer.draw(piont, Pposition, 0, 1,Start.COLTEX,Constants.YELLOW);
+			
+			  Renderer.draw(piont, edgen, 0, 3,Start.COLTEX,Constants.YELLOW);
+			  
+			
+>>>>>>> Stashed changes
 		  // }
 			  Start.piont.bind(5);
 			   target=MatrixMath.getMatrix(new Vector2f(this.position.x,this.position.y),0,1);

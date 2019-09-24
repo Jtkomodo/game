@@ -2,24 +2,41 @@ package textrendering;
 
 import org.joml.*;
 
+<<<<<<< Updated upstream
+=======
+import com.sun.javafx.tk.FontLoader;
+
+import Data.Constants;
+>>>>>>> Stashed changes
 import gameEngine.BatchedModel;
 import gameEngine.MatrixMath;
 import gameEngine.Start;
 
-public class TextBuilder extends Fontloader{
+public class TextBuilder{
 
 	private String text;
 	private BatchedModel textModel;
-	
+	private Fontloader loader;
 	
 	
 	
 	
 	public TextBuilder(String Font, float AtlusSize) {
-		super(Font, AtlusSize);//actually loads the the font file to be used
+		loader=new Fontloader(Font, AtlusSize);//actually loads the the font file to be used
 	    textModel=new BatchedModel();
 	    
 	}
+	
+	
+	public TextBuilder(Fontloader loader) {
+		this.loader=loader;//actually loads the the font file to be used
+	    
+		
+		textModel=new BatchedModel();
+	    
+	}	
+	
+	
 	
 	
 	
@@ -38,7 +55,7 @@ public class TextBuilder extends Fontloader{
 	//actually make the model from values in font file	
 		for(int i=0;i<text.length();i++) {//simple for loop
 			int a=text.charAt(i);//this gets each char in order and uses it as the key to the hexmap that has all the info we need to draw in the correct place  
-			Float[] val=super.Values.get(a);// this gets all the values for the current char
+			Float[] val=loader.Values.get(a);// this gets all the values for the current char
 			float x=val[0];// x value of the topleft hand corner
 			float y=val[1];//y value of the topleft hand corner
 			float width=val[2];//this is the width of the char used for both find the correct uv values and vert
@@ -50,10 +67,10 @@ public class TextBuilder extends Fontloader{
 			 offset.y=-yoff;
 			float xadv=val[6];//how much the cursor needs to advance for the next char
 			//makes easy reading 
-			float Xz=x/Texwidth;
-			float Yz=y/Texheight;
-			float Xo=(x+width)/Texwidth;
-			float Yo=(y+height)/Texheight;
+			float Xz=x/loader.Texwidth;
+			float Yz=y/loader.Texheight;
+			float Xo=(x+width)/loader.Texwidth;
+			float Yo=(y+height)/loader.Texheight;
 			 float height2=height/2;
 			 float width2=(width/2);
 			 cursor.add(offset);//adds the offset to the cursor
@@ -75,17 +92,88 @@ public class TextBuilder extends Fontloader{
 			 cursor.add(xadv,yoff);//moves the cursor for the next char
 			
 		}
+		
 		}
 		
 		
 		
 		
 	}
+<<<<<<< Updated upstream
+=======
+
+	public void UIdrawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),0,scale,loader.tex,color);
+	
+	}
+	public void UIDebugdrawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),0,scale,loader.tex,color);
+		}
+	}
+	public void UIDebugdrawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),0,scale,loader.tex);
+		}
+	}
+	
+	public void UIdrawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+	
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),0,scale,loader.tex);
+		
+	}
+	
+	public void UIdrawString(float x,float y,float angle,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),angle,scale,loader.tex,color);
+	
+	}
+	public void UIDebugdrawString(float x,float y,float angle,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),angle,scale,loader.tex,color);
+		}
+	}
+	public void UIDebugdrawString(float x,float y,float angle,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),angle,scale,loader.tex);
+		}
+	}
+	
+	public void UIdrawString(float x,float y,float angle,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+	
+		 Renderer.UIdraw(textModel,new Vector2f(x,y),angle,scale,loader.tex);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+>>>>>>> Stashed changes
 	public void drawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
 		Start.s.bind();// binds our shader program
 		super.tex.bind(2);//binds our texture to texture2d 
 		Vector4f newcolor=new Vector4f(0,0,0,0);
 		
+<<<<<<< Updated upstream
 		color.div(255,newcolor);
 		Matrix4f target= MatrixMath.getMatrix(new Vector2f(x/scale,y/scale), 0,scale);//this creates our matrix to multiply with the projection matrix to place in the correct coords
 		 Start.s.loadInt(Start.location, 2);//this loads the texture binded to the second location into the fragment shader program so it can be used
@@ -107,10 +195,50 @@ public class TextBuilder extends Fontloader{
 	     Start.s.loadMat(Start.RTS, target);//loads our position matrix into the vertex shader
 	     
 		textModel.draw();// calls our draw call which actually does all the gpu commands 
+=======
+		 Renderer.draw(textModel,new Vector2f(x,y),0,scale,loader.tex,color);
+	
+	}
+	public void DebugdrawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.draw(textModel,new Vector2f(x,y),0,scale,loader.tex,color);
+		}
+	}
+	public void DebugdrawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.draw(textModel,new Vector2f(x,y),0,scale,loader.tex);
+		}
+	}
+	
+	public void drawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+	
+		 Renderer.draw(textModel,new Vector2f(x,y),0,scale,loader.tex);
+>>>>>>> Stashed changes
 		
 		
+<<<<<<< Updated upstream
+=======
+		 Renderer.draw(textModel,new Vector2f(x,y),angle,scale,loader.tex,color);
+	
+	}
+	public void DebugdrawString(float x,float y,float angle,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.draw(textModel,new Vector2f(x,y),angle,scale,loader.tex,color);
+		}
+	}
+	public void DebugdrawString(float x,float y,float angle,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
+		if(DebugPrint) {
+		 Renderer.draw(textModel,new Vector2f(x,y),angle,scale,loader.tex);
+		}
+>>>>>>> Stashed changes
 	}
 	
 	
+<<<<<<< Updated upstream
+=======
+		 Renderer.draw(textModel,new Vector2f(x,y),angle,scale,loader.tex);
+		
+	}
+>>>>>>> Stashed changes
 
 }

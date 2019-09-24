@@ -17,6 +17,10 @@ public class MapLoader {
 
 
 	private int[][] map,keychart;
+<<<<<<< Updated upstream
+=======
+	private int a=0,tilesRenderd=0;
+>>>>>>> Stashed changes
 	protected HashMap<Integer,float[]> tilePosData=new HashMap<Integer,float[]>();
 	protected HashMap<Integer,float[]> tileUVData=new HashMap<Integer,float[]>();
 	protected HashMap<Integer,int[]> test2=new HashMap<Integer,int[]>();
@@ -117,12 +121,17 @@ public class MapLoader {
 		
 		
 		model.addvaluestoVBO(vert, uv);
+<<<<<<< Updated upstream
+=======
+		this.a++;	  
+>>>>>>> Stashed changes
 		
 		
 	}
 		
 	}
 	public void drawtiles(Texture tex) {
+<<<<<<< Updated upstream
 		Start.s.bind();// binds our shader program
 		tex.bind(2);//binds our texture to texture2d 
 		
@@ -133,6 +142,12 @@ public class MapLoader {
 		model.draw();// calls our draw call which actually does all the gpu commands 
 		
 		
+=======
+	
+		Renderer.draw(model,new Vector2f(0),0, sizeOfEachTile,tex);
+tilesRenderd=a;
+		a=0;
+>>>>>>> Stashed changes
 	}
 	
 	
@@ -149,7 +164,10 @@ public class MapLoader {
 		return model;
 	}
 	
-	
+	public int getTilesrenderd() {
+		
+		return this.tilesRenderd;
+	}
 	
 	
 }

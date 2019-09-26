@@ -10,7 +10,6 @@
 <fullyQualifiedTypeName name="org.newdawn.slick.opengl.PNGDecoder.Format"/>
 <fullyQualifiedTypeName name="org.newdawn.slick.opengl.PNGDecoder"/>
 <fullyQualifiedTypeName name="org.joml.Math"/>
-<fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="com.sun.imageio.plugins.png.PNGImageWriter"/>
 <fullyQualifiedTypeName name="javax.imageio.stream.ImageInputStream"/>
 <fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
@@ -27,4 +26,6 @@
 <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="gameEngine.Start"/>
+<fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
 </qualifiedTypeNameHistroy>

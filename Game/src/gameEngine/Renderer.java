@@ -17,7 +17,7 @@ public class Renderer {
 		Vector4f newcolor=new Vector4f(0);
 		
 		color.div(255,newcolor);
-		 s.bind();
+		 
 		   texture.bind(0);
 		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
 		   if(mirror) {
@@ -51,7 +51,7 @@ public class Renderer {
 		color.div(255,newcolor);
 
 		
-		 s.bind();
+		 
 		   texture.bind(0);
 		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
  if(mirror) {
@@ -86,7 +86,7 @@ public class Renderer {
 
 		
 		
-		 s.bind();
+		 
 		   texture.bind(0);
 		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
  if(mirror) {
@@ -116,7 +116,7 @@ public class Renderer {
    public static void draw(Model model,Vector2f position,float angle,float scale,Texture texture) {
 		drawcalls++;
 		
-		 s.bind();
+		 
 		   texture.bind(0);
 		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
  if(mirror) {
@@ -138,7 +138,7 @@ public class Renderer {
 		Vector4f newcolor=new Vector4f(0);
 		
 		color.div(255,newcolor);
-		 s.bind();
+		 
 		   texture.bind(0);
 		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
 		   if(mirror) {
@@ -165,7 +165,7 @@ public class Renderer {
 
 		
 		
-		 s.bind();
+		 
 		   texture.bind(0);
 		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
 if(mirror) {

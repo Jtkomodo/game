@@ -8,9 +8,11 @@ import static org.lwjgl.opengl.GL11.*;
 import org.joml.Matrix4f;
 import  org.joml.Vector2f;
 import org.joml.Vector4f;
+import org.lwjgl.glfw.GLFW;
 
 import Collisions.AABB;
 import Collisions.CircleColision;
+import Collisions.ColisionHandeler;
 import textrendering.Fontloader;
 import textrendering.TextBuilder;
 import Data.Constants;
@@ -22,14 +24,18 @@ public class Start {
 	public static final int width=640,height=480;
     public static int location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;;
     public static byte dKeys,testKey;
+    
+    private static int battleState,sprite,arrowPosition;
+    
+    
     public static ShaderProgram s;
     public static float scaleOfMapTiles=128,Rendercamx,Rendercamy;
-    public static int amountWidth=Math.round((width/scaleOfMapTiles)),amountHeight=Math.round((height/scaleOfMapTiles)),sprite;
+    public static int amountWidth=Math.round((width/scaleOfMapTiles)),amountHeight=Math.round((height/scaleOfMapTiles));
     public static Camera cam;
     public static float screencoordx=0,screencoordy=0;
     public static Input I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=false,DebugdrawString=true,showFps=true;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=false,DebugdrawString=true,showFps=true,Debug=false;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
@@ -37,11 +43,21 @@ public class Start {
     public static BatchedModel testM;
     public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls;
     public static Vector2f currentmovement,c2,oldpos,direction;
-    public static AABB playerCol,Col;
+ 
     public static CircleColision circle1, circle2;
+   
+  
+
+    
+    public static AABB playerCol,Col,COl2;
     public static Animate a1;
     public static SpriteSheetLoader sloader;
+    
+    public static Fontloader aakar;
+    
     public static boolean facingLeft,running;
+    
+    
     
 	public static void main(String[] args) {
 	
@@ -173,11 +189,16 @@ public class Start {
 		tex=new Texture("newsprite");
 		textbox=new Texture("textbox");
 		bg= new Texture("testBackground");
-	    textB= new TextBuilder("aakar",512); 
-		textA= new TextBuilder("aakar",512);
-		textC= new TextBuilder("aakar",512);
-		textD= new TextBuilder("aakar",512);
-		text1= new TextBuilder("aakar",512);
+		
+		
+		
+		aakar=new Fontloader("aakar",512);    
+		TextBuilder textforTILES=new TextBuilder(aakar);
+	    textB= new TextBuilder(aakar); 
+		textA= new TextBuilder(aakar);
+		textC= new TextBuilder(aakar);
+		textD= new TextBuilder(aakar);
+		text1= new TextBuilder(aakar);
 		textDrawCalls= new TextBuilder("aakar",512);
 		TextBuilder textCircle= new TextBuilder("aakar",512);
 		testM= new BatchedModel();
@@ -220,10 +241,8 @@ public class Start {
 		DebugPrint("Settign Colisions....");
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		playerCol=new AABB(new Vector2f(0,0),15,44,0);
-		Col=new AABB(new Vector2f(4078+(2001),1026),2048,64,0);
-		circle1=new CircleColision(new Vector2f(256,256),64);
-		circle2=new CircleColision(new Vector2f(0,0),32);
-		
+		Col=new AABB(new Vector2f(3968-64,1280-64),64,128,0);
+        COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
 	
 	   
 		
@@ -262,52 +281,19 @@ BatchedModel.enable();
 if(overworld==true) {		 
 		
 	    playerCol.setPosition(new Vector2f(x,y));
-		Vector2f currentpos=new Vector2f(x,y);
-		circle2.setPosition(currentpos);
-		   testcol=playerCol.vsAABB(Col);
-		   circCol=circle2.vsCircle(circle1);
-	       boolean colT=circle2.vsAABB(Col);				
-	       Vector2f new2=playerCol.findVector(oldpos,c2,direction,Col);//old position,the new movement,the normalized vector of the direction the player is going,th aaabb box that we are checking colision with 
-				
-				
-				//newvec.sub(new2);
-				Vector2f a=new Vector2f(0,0);
-				new2.sub(currentpos,a);
-				if(testcol) {
-			      x+=a.x;
-				  y+=a.y;
-				   camx=-x;
-					camy=-y;
-					playerCol.setPosition(new Vector2f(x,y));
+	
+			Vector2f vector=updateColisions();
 			
-			//x=oldpos.x;
-			//y=oldpos.y;
-			}
-				
-				Vector2f new3=circle2.findVector(oldpos,c2,direction,circle1);
-				new3.sub(currentpos,a);
-				if(circCol) {
-				      x+=a.x;
-					  y+=a.y;
-					   camx=-x;
-						camy=-y;
-						circle2.setPosition(new Vector2f(x,y));
-				
-				//x=oldpos.x;
-				//y=oldpos.y;
-				}	
-				
-				new2=circle2.findVector(oldpos, c2, direction,Col);
-				new2.sub(currentpos,a);
-				if(colT) {
-					 x+=a.x;
-					  y+=a.y;
-					   camx=-x;
-						camy=-y;
-						circle2.setPosition(new Vector2f(x,y));
-					
-				}
-				
+			x=vector.x; 
+			y=vector.y;	
+			     
+				    camx=-x;
+					camy=-y;
+							
+		screencoordx=-camx;
+	    screencoordy=-camy;
+	   
+	     cam.setPosition((new Vector2f(camx,camy)));
 				
 		screencoordx=-camx;
 	    screencoordy=-camy;
@@ -333,23 +319,20 @@ if(overworld==true) {
 	    Col.debug();
 	    playerCol.debug();
 	    
-	    circle1.debug();
-	    circle2.debug();
+
+	    COl2.debug();
 	      textD.setString("circCol:"+circCol);
-	      textC.setString("xmap="+gridx+" ymap="+gridy+" col:  "+testcol);
+	      textC.setString("xmap="+gridx+" ymap="+gridy);
 	    
 	  
-	      textCircle.setString("CircleVSAABB: "+colT);
 	    
 	      
 		if(HideSprite==false) 
 		SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
-	
+		textforTILES.setString("Tiles: "+loader.getTilesrenderd());
 		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.24f);
-		textC.UIDebugdrawString(screencoordx,screencoordy-220,.24f);
-		textD.UIDebugdrawString(screencoordx, screencoordy-200, .24f);
-		textCircle.UIDebugdrawString(screencoordx-300, screencoordy-200, .24f);
-
+		textC.UIDebugdrawString(screencoordx+100,screencoordy-220,.24f);
+         textforTILES.UIDebugdrawString(screencoordx,(480/2)+ screencoordy-20, .24f);
 
 }else {
 	//---------------------battle loop---------------------
@@ -420,7 +403,74 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		byte stateofFullscreen=I.stateOfFullscreen();
 	      if(stateofFullscreen==1) {//if the fuscreenCode is just pressed toggle full screen
 			 w.toggleFullscreen();}
+	  
 		
+		
+		if( I.getStateofButton(GLFW_KEY_F1)==1) {
+	if(Start.Debug==false) {
+			DEBUGCOLISIONS=true;DebugdrawString=true;showFps=true;
+	Start.Debug=true;
+	}
+
+	else{
+		DEBUGCOLISIONS=false;DebugdrawString=false;showFps=false;
+	Start.Debug=false;
+	}
+
+	}
+		
+		if( I.getStateofButton(GLFW_KEY_F2)==1) {
+			if(Start.DebugPrint==false) {
+				
+			Start.DebugPrint=true;
+			}
+
+			else{
+				
+			Start.DebugPrint=false;
+			}
+
+			}
+		
+		if( I.getStateofButton(GLFW_KEY_F3)==1) {
+			if(Start.DEBUGCOLISIONS==false) {
+				
+			Start.DEBUGCOLISIONS=true;
+			}
+
+			else{
+				
+			Start.DEBUGCOLISIONS=false;
+			}
+
+			}
+		
+		if( I.getStateofButton(GLFW_KEY_F4)==1) {
+			if(Start.DebugdrawString==false) {
+				
+			Start.DebugdrawString=true;
+			}
+
+			else{
+					
+			Start.DebugdrawString=false;
+			}
+
+			}
+		if( I.getStateofButton(GLFW_KEY_F12)==1) {
+			if(showFps==false) {
+				showFps=true;
+			
+			}
+
+			else{
+				showFps=false;	
+			
+			}
+
+			}
+					
+			
 	if(testKey==2) {
 	//	x=0;y=0;
 		if (overworld==false) {
@@ -430,13 +480,20 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		}else {
 			overworld=false;
 			a1.Stop();
-			
+			battleState=0;
+			arrowPosition=0;
+			sprite=0;
 			
 		}
 		
 		
 		
 	}
+	
+
+	
+	
+	
 	if(overworld) {
 		
 		        if(I.getStateofButton(GLFW_KEY_W)==1 || I.getStateofButton(GLFW_KEY_W)==3) {
@@ -532,89 +589,224 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		
 	
 		if(I.getStateofButton(GLFW_KEY_S)==1) {
-		     if(sprite==0) {
-		    	 sprite=1;
-		     }else {
-		    	 sprite=0;
-		     }
-		
+			   if(sprite==0) {
+			    	 sprite=1;
+			    	 
+			     }else {
+			    	 sprite=0;
+			     }
+			arrowPosition=0;
+			battleState=0;
 		}
 		
 		
-		if((dKeys & 0x01)==1) {//up
-		
+		if(I.getStateofButton(GLFW_KEY_UP)==1) //up
+		BattleInputUp();
 			
-		}
-		if((dKeys>>1 & 0b001)==1) {//down
 		
+		if(I.getStateofButton(GLFW_KEY_DOWN)==1) //down
+			BattleInputDown();
 		
+		if(I.getStateofButton(GLFW_KEY_LEFT)==1) //left
+			BattleInputleft();
+			
+		if(I.getStateofButton(GLFW_KEY_RIGHT)==1) //right
+			BattleInputRight();
+		
+		if(I.getStateofButton(GLFW_KEY_ENTER)==1) //up
+			BattleInputSelect();
+				
+		if(I.getStateofButton(GLFW_KEY_BACKSPACE)==1) //up
+			BattleInputBack();
 					
-		}
-		if((dKeys>>2 & 0b001)==1) {//left
-	       
-		}if((dKeys>>3 & 0b001)==1) {//right
-		
-		
-		}	
-		
 		
 		
 	}
-		 
 		 
 			 }
 	
 	
    private static void battleupdate() {
-	 //  cam.BattleProjection();
-	   Vector2f position1=new Vector2f(-90,40);
-	   Vector2f position2=new Vector2f(-110,-98);
-	   Vector2f positiont;
 	   cam.setPosition(new Vector2f(0,0));
-	 
-	   float angle;
-	   switch(sprite) {
-	   case 0:
-		   positiont=position1;
-		   angle=5;
-	   break;
-	   case 1:
-		   positiont=position2;
-		   angle=-5;
-		break;   
-		   
-		   
-		default:
-			 positiont=position1;
-	         angle=5;
-	   }
-	   angle=0;
-	
-		  cam.setPosition(new Vector2f(0,0));
-	 	 
-	 	Renderer.draw(background,new Vector2f(0),0,64*40,bg); 
-	 	 
-	 	 
-	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
-	 	 SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
-	 	 SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
-	 	 SpriteUpdate(textboxM,textbox,positiont.x,positiont.y,angle,1,false);
-	 	 SpriteUpdate(Arrow,testSprite,positiont.x-(17+16),positiont.y+15,angle,16,false);
-	 	  
-	 	  
-	 	  
-	 	  text1.setString("moves");
-	 	  text1.drawString(positiont.x-17,positiont.y+15,angle, .15f, Constants.BLACK);
-	 	  
-	 	 
-	 	  
-	 	  s.loadInt(location, 0);
+		 
+	   
+	   
+	   
+	 		Renderer.draw(background,new Vector2f(0),0,64*40,bg); 
+	 	   
+	 	 	 
+	 	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
+	 	 	 SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
+	 	 	 SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
+	 	   
+	 	   
+	 	   switch(battleState) {
+	 	   case 0:
+	 	   BattleUISTATE0(arrowPosition);
+	 	
+	 	   break;
+	 	   
+	 	   case 1:
+	 		  BattleUISTATE1(arrowPosition);
+	 		break;  
+	 	   
+	 	   
+	 	   }
 	 	   
 	 	  
 	   
 	   
    }
 	
+	 	   
+	 	   
+
+private static void BattleUISTATE1(int arrowPosition) {
+	 Vector2f position1=new Vector2f(-90,40);
+	   Vector2f position2=new Vector2f(-110,-98);
+	   Vector2f positiont;
+	   Vector2f arrowpos = new Vector2f(0);
+	   float angle=0;
+	   switch(sprite) {
+	   case 0:
+		   positiont=position1;
+	
+	   break;
+	   case 1:
+		   positiont=position2;
+		
+		break;   
+		   
+		   
+		default:
+			 positiont=position1;
+	      
+	   }
+	   switch(arrowPosition) {
+	   case 0:
+		   positiont.add(new Vector2f(-54,5),arrowpos);
+		 
+	   break;
+	   case 1:
+	
+		   positiont.add(new Vector2f(15,5),arrowpos);
+		
+		   
+		break;   
+	   case 2:
+		   positiont.add(new Vector2f(-54,-8),arrowpos);
+		  
+		break;     
+		   
+	   case 3:
+			 positiont.add(new Vector2f(15,-8),arrowpos);
+			 
+		break;	 
+	   }
+	   
+	   
+        
+	 SpriteUpdate(textboxM,textbox,positiont.x,positiont.y,angle,1,false);
+	 SpriteUpdate(Arrow,testSprite,arrowpos.x,arrowpos.y,angle,10,false);
+	 
+	 
+	 text1.setString("---moves--");
+ 	 text1.drawString(positiont.x-29-.5f,positiont.y+23,angle, .15f, Constants.BLACK); 
+   
+   
+	
+	
+}
+
+
+
+
+
+private static void BattleUISTATE0(int arrowposition) {
+	
+	
+	   Vector2f position1=new Vector2f(-90,40);
+	   Vector2f position2=new Vector2f(-110,-98);
+	   Vector2f positiont;
+	   Vector2f arrowpos = new Vector2f(0);
+	
+	   float angle;
+	   switch(sprite) {
+	   case 0:
+		   positiont=position1;
+		   angle=2;
+	   break;
+	   case 1:
+		   positiont=position2;
+		   angle=-2;
+		break;   
+		   
+		   
+		default:
+			 positiont=position1;
+	         angle=2;
+	   }
+	   
+	   switch(arrowPosition) {
+	   case 0:
+		   positiont.add(new Vector2f(-24,15),arrowpos);
+		 
+	   break;
+	   case 1:
+		   
+		  positiont.add(new Vector2f(-43,-5),arrowpos);
+		   
+		break;   
+	   case 2:
+		   positiont.add(new Vector2f(5,-5),arrowpos);
+		  
+		break;     
+		   
+		default:
+			 positiont.add(new Vector2f(-24,15),arrowpos);
+	   }
+	   
+	   
+	   
+	  angle=0;
+	
+		  cam.setPosition(new Vector2f(0,0));
+	 	 
+	 
+	 	 
+
+	 	 SpriteUpdate(textboxM,textbox,positiont.x,positiont.y,angle,1,false);
+	 	 SpriteUpdate(Arrow,testSprite,arrowpos.x,arrowpos.y,angle,10,false);
+	 	 
+	 	 
+	 	 
+	 	 
+	 	  
+	 	  
+	 	 
+	 	  text1.setString("moves");
+	 	  text1.drawString(positiont.x-17,positiont.y+15,angle, .15f, Constants.BLACK);
+	 	  text1.setString("bag");
+	 	  text1.drawString(positiont.x-35,positiont.y-5,angle, .15f, Constants.BLACK);
+	 	  text1.setString("specials");
+	 	 text1.drawString(positiont.x+10,positiont.y-5,angle, .15f, Constants.BLACK);
+	 	 
+	 	  
+	 	
+}	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
 	private static void fps() {
 	
 		    Model.disable();
@@ -718,28 +910,220 @@ private static void drawmap(MapLoader loader,int gridx,int gridy) {
 
 
 
-
-
-
-
-private static void initializeFPS() {
-		time=Timer.getTIme();
-		unproccesed=0;
-	    frameTime=0;
-	    frames=0;
-		framCap=1.0/60;
+private static Vector2f updateColisions() {
 	
-		a1=new Animate(7,player,sloader,0,7);
-	}
+	  Vector2f cs=new Vector2f(x,y);
+    
+   
+	   cs =ColisionHandeler.CheckAndGetResponse(playerCol,COl2,cs,oldpos, c2, direction);
+	    
+	   cs =ColisionHandeler.CheckAndGetResponse(playerCol, Col,cs,oldpos, c2, direction);
+	   cs =ColisionHandeler.CheckAndGetResponse(playerCol,COl2,cs,oldpos, c2, direction);
+
+	   
+	   
+	   return cs;
+}
+
+
+
+
+
+
+
+
+
 	
 	
 public static void DebugPrint(String string) {
 if(DebugPrint)	
 System.out.println(string);}	
 		
+private static void BattleInputUp() {
+	
+	
+	switch(battleState) {
+	
+	case 0:
+	if(arrowPosition==2 || arrowPosition==1) {
+		arrowPosition=0;
+	}
+	break;
+	
+	case 1:
+		if(arrowPosition==2) {
+			arrowPosition=0;
+			
+		}
 		
+		if(arrowPosition==3) {
+			arrowPosition=1;
+			
+		}
+		
+		
+		
+	break;	
 	
 	
 	
+	}
+}
+
+private static void BattleInputDown() {
+switch(battleState) {
+
+case 0:
+if(arrowPosition==0) {
+	arrowPosition=1;
+}
+
+break;	
+
+case 1:
+	if(arrowPosition==0) {
+		arrowPosition=2;
+	}
+	if (arrowPosition==1) {
+		arrowPosition=3;
+	}
+	
+	
+break;	
+
+
+	
+	}
+	
+	
+}
+
+private static void BattleInputleft() {
+switch(battleState) {
+case 0:
+if(arrowPosition==0) {
+	arrowPosition=1;
+}  else if(arrowPosition==2) {
+	arrowPosition=1;
+}
+break;
+
+case 1:
+	if(arrowPosition==1) {
+		arrowPosition=0;
+		
+	}
+	if(arrowPosition==3) {
+		arrowPosition=2;
+	}
+	
+	
+break;	
+
+
+
+	
+	}
+	
+}
+	
+private static void BattleInputRight() {
+	
+switch(battleState) {
+case 0:
+if(arrowPosition==1 || arrowPosition==0) {
+	arrowPosition=2;
+	
+}
+break;
+
+case 1:
+	if( arrowPosition==0) {
+		arrowPosition=1;
+		
+	}
+	if(arrowPosition==2) {
+		arrowPosition=3;
+	}
+	
+	
+break;	
+	
+	
+
+
+
+
+
+	}
+}
+
+
+private static void BattleInputSelect() {
+	
+switch(battleState) {
+
+case 0:
+	
+BattleInputSelect0();
+break;
+
+
+
+
+	
+	
+	}
+}	
+
+private static void BattleInputBack() {
+switch(battleState) {
+case 1:
+	battleState=0;
+	arrowPosition=0;
+break;	
+
+	
+	
+	
+	}
+	
+}		
+
+
+
+
+private static void BattleInputSelect0() {//this is for the select from the main screen case ) means we are on moves 2 bag 3 specials
+	
+switch(arrowPosition) {
+
+case 0:
+	battleState=1;
+	arrowPosition=0;
+break;	
+
+
+
+
+	
+	
+	}
+}	
+
+
+
+
+
+
+	
+private static void initializeFPS() {
+	time=Timer.getTIme();
+	unproccesed=0;
+    frameTime=0;
+    frames=0;
+	framCap=1.0/60;
+
+	a1=new Animate(7,player,sloader,0,7);
+}	
 	
 }

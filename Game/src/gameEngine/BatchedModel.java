@@ -76,7 +76,6 @@ public void addvaluestoVBO(float[] v,float[] uv) {//used to add a new model to t
 	 
 	glBindBuffer(GL_ARRAY_BUFFER, tex_id);
 	 glBufferSubData(GL_ARRAY_BUFFER, pionter, makeBuffer(uv));//adds the uv values to the uv buffer
-	glBindBuffer(GL_ARRAY_BUFFER,0);//unbinds the buffer
 		
 int[] indeces= new int[] {
 			indBase,indBase+1,indBase+2,
@@ -96,7 +95,7 @@ int[] indeces= new int[] {
 	indBase=indBase+4;//this makes sure that the indeces are loaded in right other wise it will  draw the same model multiple times
 	 pionter=pionter+(8*4);//pionter to the next value in the vertex and uv buffers so that it won't write over the old ones
 	sections++; //this is for the method change values
-	unbindBuffers();
+	
 	
 	}
 	

@@ -1,21 +1,23 @@
 package Collisions;
 
+
 import static org.lwjgl.opengl.GL11.*;
 import org.joml.Math;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
-import Data.Constants;
+
 import gameEngine.MatrixMath;
 import gameEngine.Model;
+import Data.Constants;
 import gameEngine.Renderer;
 import gameEngine.Start;
 import gameEngine.VectorMath;
 //06d7ea
 public class AABB extends CollisionFunctions{
 	private float widthR,heightR,resistance,amount;//resistance is the amount of push away the box will have on the player
-	private Vector2f position,lc=new Vector2f(0,0),rc=new Vector2f(0,0),r,Pposition=new Vector2f(0,0),beforeCol=new Vector2f(0,0),edgep=new Vector2f(0,0),edgen=new Vector2f(0,0);
+	private Vector2f position=new Vector2f(0),lc=new Vector2f(0,0),rc=new Vector2f(0,0),r,Pposition=new Vector2f(0,0),beforeCol=new Vector2f(0,0),edgep=new Vector2f(0,0),edgen=new Vector2f(0,0),ActualPosition=new Vector2f(0);
 	private Model aabb,piont;
 	private boolean colide=false,COLIDECHECK=false;
 	
@@ -24,7 +26,10 @@ public class AABB extends CollisionFunctions{
 	 this.widthR=widthR;
 	 this.heightR=heightR;
 	 
-	 this.position=position;
+     ActualPosition=position;
+
+     position.add(widthR,-heightR,this.position);
+	
 	 this.resistance=resistance;	
 	 this.r=new Vector2f(this.widthR,this.heightR);
 	
@@ -75,19 +80,8 @@ public class AABB extends CollisionFunctions{
 	}
 	
 	@Override
-	public boolean vsCircle(CircleColision circle) {
-                Vector2f circlePosition=circle.getPosition();
-                float  r=circle.getR();
-                
-                
-          
-		
-		
-		
-		
-		
-		
-		
+	protected boolean vsCircle(CircleColision circle) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -150,17 +144,7 @@ public class AABB extends CollisionFunctions{
 	}
 	@Override
 	public Vector2f findVector(Vector2f position, Vector2f movement, Vector2f direction, CircleColision circle) {
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		// TODO Auto-generated method stub
 		return null;
 	}
 	
@@ -175,8 +159,8 @@ public class AABB extends CollisionFunctions{
 	  
 	   Vector2f currentmovement=new Vector2f(0,0);movement.add(new Vector2f(position.x,position.y),currentmovement);//this is the current position after addition of the movement
 	 
-	  currentmovement.sub(this.r,lc);//this is the bottom left corner of the cuurent box
-	  currentmovement.add(this.r,rc); //this is the top right corner
+	   currentmovement.sub(this.r,lc);//this is the bottom left corner of the cuurent box
+	   currentmovement.add(this.r,rc); //this is the top right corner
 	   if(this.colide) {
 		
 		  this.beforeCol=currentmovement;//this is just a position value so i can know exactly where the box is before change if a colision has happend
@@ -201,12 +185,6 @@ public class AABB extends CollisionFunctions{
 	
 	    Vector2f closest;
 		closest=new Vector2f(clamp(box.position.x+d.x,box.lc.x,box.rc.x),clamp(box.position.y+d.y,box.lc.y,box.rc.y));
-		Vector2f newd=new Vector2f(0,0);
-		closest.sub(position,newd);
-		edgen=new Vector2f(clamp(position.x+newd.x,lc.x,rc.x),clamp(position.y+newd.y,lc.y,rc.y));
-		position.sub(edgen,newd);
-	
-		
 	//	System.out.println(d"before "+d+"after "+closest);
 		//currentmovement.sub(pen,newMOvement);
 		
@@ -214,14 +192,11 @@ public class AABB extends CollisionFunctions{
 				   
 		
 	if(this.colide) {
-		  Vector2f pen=new Vector2f(0,0);closest.sub(position,pen);
+			Vector2f pen=new Vector2f(0,0);closest.sub(position,pen);
 			
 		   Vector2f norm=new Vector2f(0,0);pen.normalize(norm);
 		   float dot=dotProduct(norm, new Vector2f(0,1));
-		   Vector2f tryv=new Vector2f(0);
-			edgen.sub(position,tryv);
-			
-			
+		  
 		if(Math.abs(direction.x)!=Math.abs(direction.y)){
 		   
 			
@@ -230,57 +205,71 @@ public class AABB extends CollisionFunctions{
 			
 			
 			
-		if(Math.abs(direction.x)==1) {
-		 if(closest.x==box.lc.x ) {
-			 
-			 
 			
-			 closest.sub(r.x,tryv.y,edgep);
+			
+			
+		
+		 if(closest.x==box.lc.x) {
+			
+			 closest.sub(r.x,0,edgep);
 			 
-		   }else if(closest.x==box.rc.x) { closest.add(r.x,-tryv.y,edgep);
-			 
-		   }
-		   }else if(Math.abs(direction.y)==1) {
-			   
-			   
-			   
-				if(closest.y==box.lc.y ) {
+		   }else if(closest.x==box.rc.x) {
+		
+				 closest.add(r.x,0,edgep);
+				 
+			   } if(closest.y==box.lc.y) {
 					
-					 closest.sub(tryv.x,r.y,edgep);
+					 closest.sub(0,r.y,edgep);
 					 
 				   }else if(closest.y==box.rc.y) {
 						
-						 closest.add(-tryv.x,r.y,edgep);
+						 closest.add(0,r.y,edgep);
 						 
-					   }}
+					   }
 		}else {
 			
 			   if(closest.x==box.lc.x) {
 				
-					 closest.sub(r.x,(-direction.y*Math.abs(direction.y))+tryv.y,edgep);
+
+					 closest.sub(r.x,0,edgep);
 					 
 				   }else if(closest.x==box.rc.x) {
 						
-						 closest.add(r.x,(direction.y*Math.abs(direction.y))-tryv.y,edgep);
+						 closest.add(r.x,-0,edgep);
 						 
 					   } if(closest.y==box.lc.y) {
 							 
-							 closest.sub((-direction.x*Math.abs(direction.x))+tryv.x,r.y,edgep);
+							 closest.sub(0,r.y,edgep);
 							 
 						   }else if(closest.y==box.rc.y) {
 								
-								 closest.add((direction.x*Math.abs(direction.x))-tryv.x,r.y,edgep);
+								 closest.add(0,r.y,edgep);
 			
 			
-						   }
+
+						   
+						   
+						   
+	   }
+
 			
+					   
+					   
+					   
+					   
+					   
+					   
+					   
+					   
+					   
+					   
+					   
+					   
+					   
 		}
 		   
 		   
-		   edgep.sub(direction.mul(0.0001f,new Vector2f(0,0)));
-		   
-		   
-		 
+		   edgep.sub(movement.mul(0.0001f,new Vector2f(0,0)));
 		   
 				newMOvement=edgep;
 	   }else {
@@ -290,8 +279,7 @@ public class AABB extends CollisionFunctions{
 		   
 	   }
 	   
-	   }else {
-		   newMOvement=currentmovement;}
+	   }
 	   
 	    return newMOvement;
 	   
@@ -304,27 +292,21 @@ public class AABB extends CollisionFunctions{
 	   
 	  
    public void debug() {
-	   if(DebugColisions) {
+	   if(Start.DEBUGCOLISIONS) {
 		
-		   
+
 		   Renderer.draw(aabb, position, 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE);
 		  // Start.s.bind();
-		   if(this.colide) {
-		 
-		      Renderer.draw(aabb, edgep, 0, 1,Start.col2);
-		 
-		  
-		   }
+		   Renderer.draw(piont, ActualPosition, 0, 6,Start.COLTEX,Constants.RED);
 		 
 			  
 			  Renderer.draw(piont, Pposition, 0, 1,Start.COLTEX,Constants.YELLOW);
 			
 			  Renderer.draw(piont, edgen, 0, 3,Start.COLTEX,Constants.YELLOW);
 			  
-			
+
 		  // }
-			 
-		   
+			
 	   }
 	   
 	   
@@ -414,13 +396,6 @@ public class AABB extends CollisionFunctions{
 
 
 
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

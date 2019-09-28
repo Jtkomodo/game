@@ -2,8 +2,8 @@ package Data;
 
 public enum Moves {
 
-	punch(5,false,0,false),//damage,special,cost,healing move
-	heal(20,true,25,true);
+	punch("punch",5,false,0,false),//damage,special,cost,healing move
+	heal("heal",20,true,25,true);
 	
 	
 	
@@ -11,11 +11,11 @@ public enum Moves {
 	
 	private float damage,cost;
 	private boolean specailMove,health;
+	private String name;
 	
 	
-	
-	Moves(float damage,boolean specailMove,float cost,boolean health){
-		
+	Moves(String name,float damage,boolean specailMove,float cost,boolean health){
+		this.name=name;
 		this.damage=damage;
 		this.cost=cost;
 		this.health=health;
@@ -25,6 +25,14 @@ public enum Moves {
 		
 	}	
 	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public float getDamage() {
 		return damage;
 	}

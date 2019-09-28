@@ -86,8 +86,7 @@ public class Animate {
 		
 		currentframe=start;//resets the animation
 	}
-	Start.DebugPrint("currentFrame="+this.currentframe);
-		
+	
 	}
 	
 	
@@ -122,8 +121,7 @@ public class Animate {
 	     }	
 		
 	
-	Start.DebugPrint("currentFrame="+this.currentframe);
-		
+
 	}
 	
 	

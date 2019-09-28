@@ -44,7 +44,8 @@ private int dH,dW;
 private float aspectRatio;
 private Camera camera;
 
-	public Window(int width, int height,Camera camera) {
+public Window(int width, int height,Camera camera,String name) {
+	
 		this.camera=camera;
 		this.width=width;
 		this.height=height;
@@ -57,12 +58,12 @@ private Camera camera;
 			throw new IllegalStateException("failed to initialize window");
 			
 		}
-		glfwWindowHint(GLFW_VISIBLE,GLFW_FALSE);//this makes it so that we don't show the window till it is ready
+		glfwWindowHint(GLFW_VISIBLE,GLFW_TRUE);//this makes it so that we don't show the window till it is ready
 		glfwWindowHint(GLFW_DECORATED,GLFW_TRUE);//this makes it so the top bar is there if this is set to false  it will not show it
 		glfwWindowHint(GLFW_RESIZABLE,GLFW_TRUE);//this allows the window to be resized by the user
-		glfwWindowHint(GLFW_FOCUSED,GLFW_TRUE);
+	//	glfwWindowHint(GLFW_FOCUSED,GLFW_TRUE);
 		
-		window=glfwCreateWindow(width,height,"Game",0,0);//creats the glfw window to be draw to
+		window=glfwCreateWindow(width,height,name,0,0);//creats the glfw window to be draw to
 		if(window==0) {
 			throw new IllegalStateException("failed to create window");//this is just a error message if somehow window creation failed		
 			}
@@ -71,7 +72,7 @@ private Camera camera;
 	
 		
 		glfwSetWindowPos(window,(vidmode.width()-width)/2,(vidmode.height()-height)/2);//sets it in the center of the screen
-		glfwSetWindowTitle(window,"game");
+		glfwSetWindowTitle(window,name);
 		glfwShowWindow(window);
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval( 0 );Start.DebugPrint("vsnc off"); //this is for the vsync uncomment this when testing frame rates 
@@ -175,4 +176,6 @@ width=w;height=h;
 			this.camera=camera;
 		}
 
+
+		
 }

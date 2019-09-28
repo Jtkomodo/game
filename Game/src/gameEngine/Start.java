@@ -16,13 +16,17 @@ import Collisions.ColisionHandeler;
 import textrendering.Fontloader;
 import textrendering.TextBuilder;
 import Data.Constants;
+import Data.Moves;
+import battleClasses.Player;
 import sun.security.util.Debug;
+import Data.Pcs;
 public class Start {
     
 	
 	public static Window w;
 	public static final int width=640,height=480;
-    public static int location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;;
+ 
+	public static int location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;;
     public static byte dKeys,testKey;
     
     private static int battleState,sprite,arrowPosition;
@@ -31,9 +35,9 @@ public class Start {
     public static ShaderProgram s;
     public static float scaleOfMapTiles=128,Rendercamx,Rendercamy;
     public static int amountWidth=Math.round((width/scaleOfMapTiles)),amountHeight=Math.round((height/scaleOfMapTiles));
-    public static Camera cam;
+    public static Camera cam,DebugCam;
     public static float screencoordx=0,screencoordy=0;
-    public static Input I;
+    public static Input I,DebugI;
     public static Fontloader font;
     public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=false,DebugdrawString=true,showFps=true,Debug=false;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds;
@@ -43,7 +47,7 @@ public class Start {
     public static BatchedModel testM;
     public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls;
     public static Vector2f currentmovement,c2,oldpos,direction;
- 
+    public static Player p;
     public static CircleColision circle1, circle2;
    
   
@@ -259,14 +263,15 @@ public class Start {
 		
 		s.loadVec4(Color, new Vector4f(1,1,1,1));
      
+		 p=new Player(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getMoves());
+		
+		
 		
 			
     //----------------------GAME--LOOP------------------------------
 		while(!w.isExited() && !I.IsEscapePushed()) {
 			oldpos=new Vector2f(x,y);
-		fps();
-	   
-	    
+		fps();    
 	    
 	if(canRender) {
 		
@@ -375,10 +380,15 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	
 
 	private static void createWindow(String Shader) {
-		   DebugPrint("Making Camera....");
+		
+
+		
+		DebugPrint("Making Camera....");
 			//set camera
 			cam= new Camera(width,height);
-		w=new Window(width,height,cam);
+		w=new Window(width,height,cam,"Game");
+		
+		
 	 I=new Input(w);	
        //load our shaders 
 	 DebugPrint("Making Shader Program....");
@@ -667,6 +677,13 @@ private static void BattleUISTATE1(int arrowPosition) {
 	   Vector2f positiont;
 	   Vector2f arrowpos = new Vector2f(0);
 	   float angle=0;
+	   
+	   Moves[] moves=p.getmoves();
+	   int amountOfMoves=moves.length;
+	   
+	   
+	   
+	   DebugPrint("moves number "+amountOfMoves);
 	   switch(sprite) {
 	   case 0:
 		   positiont=position1;
@@ -1112,6 +1129,17 @@ break;
 
 
 
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

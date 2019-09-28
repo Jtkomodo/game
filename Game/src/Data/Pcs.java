@@ -63,6 +63,14 @@ public enum Pcs {
 	public int getAmountOfMoves() {
 		return amountOfMoves;
 	}
+
+	public Moves[] getMoves() {
+		return moves;
+	}
+
+	public void setMoves(Moves[] moves) {
+		this.moves = moves;
+	}
 	
 	
 	

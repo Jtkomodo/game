@@ -12,6 +12,9 @@ public class Renderer {
 	private static Camera cam=Start.cam;
 	
 	
+	
+
+
 	public static void draw(BatchedModel model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
 		
 		Vector4f newcolor=new Vector4f(0);
@@ -222,7 +225,18 @@ if(mirror) {
 	
 	
 	
-	
+	public static Camera getCam() {
+		return cam;
+	}
+
+
+
+
+	public static void setCam(Camera cam) {
+		Renderer.cam = cam;
+	}
+
+
 	
 	
 	

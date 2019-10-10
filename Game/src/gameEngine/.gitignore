@@ -18,3 +18,7 @@
 /Animate.class
 /SpriteSheetLoader.class
 /ColisionHandeler.class
+/UIElement.class
+/UIBox.class
+/UIStringElement.class
+/UIBoxState.class

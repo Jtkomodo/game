@@ -46,9 +46,12 @@ public class Start {
     public static Model background,player,textboxM,Arrow;
     public static BatchedModel testM;
     public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls;
-    public static Vector2f currentmovement,c2,oldpos,direction;
+    public static Vector2f currentmovement,c2,oldpos,direction,BattleBoxPosition;
     public static Player p;
     public static CircleColision circle1, circle2;
+    public static float[] uvtextbox,uvArrow,vert; 
+    public static UIBox battleBox;
+   
    
   
 
@@ -81,7 +84,7 @@ public class Start {
 	
 	
 	DebugPrint("intialzing vars....");
-	float[] vert={
+	vert=new float[]{
 				-0.5f,+0.5f,
 				0.5f,0.5f,
 				0.5f,-0.5f,
@@ -114,7 +117,7 @@ public class Start {
 		float  Texx=0;
 		float Texy=0;		
 		
-		float[] uvtextbox={
+		 uvtextbox=new float[]{
 				Texx/Texwidth,Texy/Texheight,
 				(Texx+wi)/Texwidth,Texy/Texheight,
 				(Texx+wi)/Texwidth,(Texy+h)/Texheight,
@@ -173,7 +176,7 @@ public class Start {
 	    height2=h;
 	    width2=wi;     
 	 
-	    float[] uvArrow={
+	     uvArrow=new float[]{
 	    		Texx/Texwidth,Texy/Texheight,
 	    		(Texx+wi)/Texwidth,Texy/Texheight,
 	    		(Texx+wi)/Texwidth,(Texy+h)/Texheight,
@@ -265,9 +268,21 @@ public class Start {
      
 		 p=new Player(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getMoves());
 		
-		
-		
+		UIStringElement elements[]= {new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK),
+				new UIStringElement("bag",new Vector2f(-35,-5), .15f,Constants.BLACK),
+				new UIStringElement("specials",new Vector2f(10,-5), .15f,Constants.BLACK)
+		};
+		UIStringElement elements2[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK,false),
+				new UIStringElement(" ",new Vector2f(-54,5), .15f,Constants.BLACK),new UIStringElement(" ",new Vector2f(15,5), .15f,Constants.BLACK),
+				new UIStringElement(" ",new Vector2f(-54,-8), .15f,Constants.BLACK),new UIStringElement(" ",new Vector2f(15,-8), .15f,Constants.BLACK)
 			
+		};
+		
+		
+		UIBoxState boxs[]= {new UIBoxState(new Vector2f(),71,28,elements,textbox,true),new UIBoxState(new Vector2f(100,10f),71,28,elements2,textbox)
+		};
+		
+		battleBox=new UIBox(new Vector2f(100,0),boxs);//this is the UIbox for the battle UI
     //----------------------GAME--LOOP------------------------------
 		while(!w.isExited() && !I.IsEscapePushed()) {
 			oldpos=new Vector2f(x,y);
@@ -282,8 +297,7 @@ BatchedModel.enable();
 		
 	//if(test==false) {
 	
-			
-if(overworld==true) {		 
+	if(overworld==true) {		 
 		
 	    playerCol.setPosition(new Vector2f(x,y));
 	
@@ -361,7 +375,6 @@ if(showFps)
 textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
 textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
 
-		
 		    w.render();
 		    w.clear();
 		    loader.flushModel();
@@ -640,7 +653,8 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	   cam.setPosition(new Vector2f(0,0));
 		 
 	   
-	   
+	   Vector2f position1=new Vector2f(-90,40);
+	   Vector2f position2=new Vector2f(-110,-98);
 	   
 	 		Renderer.draw(background,new Vector2f(0),0,64*40,bg); 
 	 	   
@@ -648,21 +662,34 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	 	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
 	 	 	 SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
 	 	 	 SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
+	 	    
+	 	 	 battleBox.drawAndSetState(battleState);
+	 	     battleBox.getUIState().setOffsetPositionOnlist(arrowPosition);   	   
 	 	   
-	 	   
-	 	   switch(battleState) {
-	 	   case 0:
-	 	   BattleUISTATE0(arrowPosition);
-	 	
-	 	   break;
-	 	   
-	 	   case 1:
-	 		  BattleUISTATE1(arrowPosition);
-	 		break;  
-	 	   
-	 	   
-	 	   }
-	 	   
+	 	    
+	 	    
+	 	    
+	 	   switch(sprite) {
+		   case 0:
+			 BattleBoxPosition=position1;
+			   
+		   break;
+		   case 1:
+			   BattleBoxPosition=position2;
+			  
+			break;   
+			   
+			   
+			default:
+				 BattleBoxPosition=position1;
+		       
+		   }
+	 	    
+	 	  battleBox.setPosition(BattleBoxPosition);
+	 	    
+	 	    
+	 	    
+	 
 	 	  
 	   
 	   
@@ -671,147 +698,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	 	   
 	 	   
 
-private static void BattleUISTATE1(int arrowPosition) {
-	 Vector2f position1=new Vector2f(-90,40);
-	   Vector2f position2=new Vector2f(-110,-98);
-	   Vector2f positiont;
-	   Vector2f arrowpos = new Vector2f(0);
-	   float angle=0;
-	   
-	   Moves[] moves=p.getmoves();
-	   int amountOfMoves=moves.length;
-	   
-	   
-	   
-	   DebugPrint("moves number "+amountOfMoves);
-	   switch(sprite) {
-	   case 0:
-		   positiont=position1;
-	
-	   break;
-	   case 1:
-		   positiont=position2;
-		
-		break;   
-		   
-		   
-		default:
-			 positiont=position1;
-	      
-	   }
-	   switch(arrowPosition) {
-	   case 0:
-		   positiont.add(new Vector2f(-54,5),arrowpos);
-		 
-	   break;
-	   case 1:
-	
-		   positiont.add(new Vector2f(15,5),arrowpos);
-		
-		   
-		break;   
-	   case 2:
-		   positiont.add(new Vector2f(-54,-8),arrowpos);
-		  
-		break;     
-		   
-	   case 3:
-			 positiont.add(new Vector2f(15,-8),arrowpos);
-			 
-		break;	 
-	   }
-	   
-	   
-        
-	 SpriteUpdate(textboxM,textbox,positiont.x,positiont.y,angle,1,false);
-	 SpriteUpdate(Arrow,testSprite,arrowpos.x,arrowpos.y,angle,10,false);
-	 
-	 
-	 text1.setString("---moves--");
- 	 text1.drawString(positiont.x-29-.5f,positiont.y+23,angle, .15f, Constants.BLACK); 
-   
-   
-	
-	
-}
 
-
-
-
-
-private static void BattleUISTATE0(int arrowposition) {
-	
-	
-	   Vector2f position1=new Vector2f(-90,40);
-	   Vector2f position2=new Vector2f(-110,-98);
-	   Vector2f positiont;
-	   Vector2f arrowpos = new Vector2f(0);
-	
-	   float angle;
-	   switch(sprite) {
-	   case 0:
-		   positiont=position1;
-		   angle=2;
-	   break;
-	   case 1:
-		   positiont=position2;
-		   angle=-2;
-		break;   
-		   
-		   
-		default:
-			 positiont=position1;
-	         angle=2;
-	   }
-	   
-	   switch(arrowPosition) {
-	   case 0:
-		   positiont.add(new Vector2f(-24,15),arrowpos);
-		 
-	   break;
-	   case 1:
-		   
-		  positiont.add(new Vector2f(-43,-5),arrowpos);
-		   
-		break;   
-	   case 2:
-		   positiont.add(new Vector2f(5,-5),arrowpos);
-		  
-		break;     
-		   
-		default:
-			 positiont.add(new Vector2f(-24,15),arrowpos);
-	   }
-	   
-	   
-	   
-	  angle=0;
-	
-		  cam.setPosition(new Vector2f(0,0));
-	 	 
-	 
-	 	 
-
-	 	 SpriteUpdate(textboxM,textbox,positiont.x,positiont.y,angle,1,false);
-	 	 SpriteUpdate(Arrow,testSprite,arrowpos.x,arrowpos.y,angle,10,false);
-	 	 
-	 	 
-	 	 
-	 	 
-	 	  
-	 	  
-	 	 
-	 	  text1.setString("moves");
-	 	  text1.drawString(positiont.x-17,positiont.y+15,angle, .15f, Constants.BLACK);
-	 	  text1.setString("bag");
-	 	  text1.drawString(positiont.x-35,positiont.y-5,angle, .15f, Constants.BLACK);
-	 	  text1.setString("specials");
-	 	 text1.drawString(positiont.x+10,positiont.y-5,angle, .15f, Constants.BLACK);
-	 	 
-	 	  
-	 	
-}	 	   
-	 	   
 	 	   
 	 	   
 	 	   

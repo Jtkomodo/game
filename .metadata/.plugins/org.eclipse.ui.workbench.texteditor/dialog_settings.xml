@@ -2,12 +2,17 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Find" key="selection"/>
+		<item value="offsetPosition" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="position"/>
+			<item value="Position"/>
+			<item value="Left"/>
+			<item value="making"/>
+			<item value="models"/>
 			<item value="find"/>
 			<item value="start"/>
 			<item value="window"/>
@@ -18,13 +23,11 @@
 			<item value="s.bind();"/>
 			<item value="s.bind"/>
 			<item value="tiles"/>
-			<item value="arrow"/>
-			<item value="fps"/>
-			<item value="&quot;tiles"/>
-			<item value="   cam.BattleProjection();"/>
-			<item value=".drawstring"/>
 		</list>
 		<list key="replacehistory">
+			<item value="offsetPosition"/>
+			<item value="offset"/>
+			<item value="back"/>
 			<item value="Start.DebugdrawString"/>
 			<item value=""/>
 			<item value=".UIDebugdrawString"/>

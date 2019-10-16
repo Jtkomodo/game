@@ -18,6 +18,9 @@ import textrendering.TextBuilder;
 import Data.Constants;
 import Data.Moves;
 import battleClasses.Player;
+import guis.UIBox;
+import guis.UIBoxState;
+import guis.UIStringElement;
 import sun.security.util.Debug;
 import Data.Pcs;
 public class Start {
@@ -49,9 +52,10 @@ public class Start {
     public static Vector2f currentmovement,c2,oldpos,direction,BattleBoxPosition;
     public static Player p;
     public static CircleColision circle1, circle2;
+    public static float PHP;
     public static float[] uvtextbox,uvArrow,vert; 
     public static UIBox battleBox;
-   
+   public static int amountOfMoves,amountOfSPMoves,function;
    
   
 
@@ -268,22 +272,39 @@ public class Start {
      
 		 p=new Player(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getMoves());
 		
-		UIStringElement elements[]= {new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK),
-				new UIStringElement("bag",new Vector2f(-35,-5), .15f,Constants.BLACK),
-				new UIStringElement("specials",new Vector2f(10,-5), .15f,Constants.BLACK)
+		UIStringElement MenuElements[]= {new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK,true,1),
+				new UIStringElement("bag",new Vector2f(-35,-5), .15f,Constants.BLACK,true,2),
+				new UIStringElement("specials",new Vector2f(10,-5), .15f,Constants.BLACK,true,3)
 		};
-		UIStringElement elements2[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK,false),
-				new UIStringElement(" ",new Vector2f(-54,5), .15f,Constants.BLACK),new UIStringElement(" ",new Vector2f(15,5), .15f,Constants.BLACK),
-				new UIStringElement(" ",new Vector2f(-54,-8), .15f,Constants.BLACK),new UIStringElement(" ",new Vector2f(15,-8), .15f,Constants.BLACK)
+		UIStringElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
+				new UIStringElement(p.getmoves()[0].getName(),new Vector2f(-54,5), .15f,Constants.BLACK,false,UIBox.USE_MOVE),new UIStringElement("test ",new Vector2f(15,5), .15f,Constants.BLACK,false,UIBox.USE_MOVE),
+				new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK,false,UIBox.USE_MOVE),new UIStringElement("test ",new Vector2f(15,-8), .15f,Constants.BLACK,false,UIBox.USE_MOVE)
+			
+		};
+		
+		UIStringElement BagElements[]= {new UIStringElement("-------bag------",new Vector2f(-38,40), .15f,Constants.BLACK),
+				new UIStringElement("test",new Vector2f(-54,5), .15f,Constants.BLACK,false,UIBox.USE_ITEM),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK,false,UIBox.USE_ITEM),
+				new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK,false,UIBox.USE_ITEM),new UIStringElement("test",new Vector2f(15,-8), .15f,Constants.BLACK,false,UIBox.USE_ITEM)
+			
+		};
+		
+		UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
+				new UIStringElement(p.getspmoves()[0].getName()+" "+(p.getspmoves()[0]).getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,false,UIBox.USE_SP_MOVE),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK,false,UIBox.USE_SP_MOVE),
+				new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK,false,UIBox.USE_SP_MOVE),new UIStringElement("test ",new Vector2f(15,-8), .15f,Constants.BLACK,false,UIBox.USE_SP_MOVE)
 			
 		};
 		
 		
-		UIBoxState boxs[]= {new UIBoxState(new Vector2f(),71,28,elements,textbox,true),new UIBoxState(new Vector2f(100,10f),71,28,elements2,textbox)
+		UIBoxState boxs[]= {new UIBoxState(new Vector2f(),71,28,MenuElements,textbox,true),new UIBoxState(new Vector2f(150,10f),71,28,MoveElements,textbox),
+				new UIBoxState(new Vector2f(150,10),71,50,BagElements,Start.COLTEX,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,29,50))),new UIBoxState(new Vector2f(150,10f),71,28,SPElements,textbox)
 		};
 		
+		
+		
 		battleBox=new UIBox(new Vector2f(100,0),boxs);//this is the UIbox for the battle UI
-    //----------------------GAME--LOOP------------------------------
+
+	
+		//----------------------GAME--LOOP------------------------------
 		while(!w.isExited() && !I.IsEscapePushed()) {
 			oldpos=new Vector2f(x,y);
 		fps();    
@@ -624,29 +645,48 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		
 		
 		if(I.getStateofButton(GLFW_KEY_UP)==1) //up
-		BattleInputUp();
+		     battleBox.GoUp();
 			
 		
 		if(I.getStateofButton(GLFW_KEY_DOWN)==1) //down
-			BattleInputDown();
+			battleBox.GoDown();
 		
 		if(I.getStateofButton(GLFW_KEY_LEFT)==1) //left
-			BattleInputleft();
+			battleBox.GoLeft();
 			
 		if(I.getStateofButton(GLFW_KEY_RIGHT)==1) //right
-			BattleInputRight();
+		   battleBox.GoRight();
 		
-		if(I.getStateofButton(GLFW_KEY_ENTER)==1) //up
-			BattleInputSelect();
-				
-		if(I.getStateofButton(GLFW_KEY_BACKSPACE)==1) //up
-			BattleInputBack();
-					
+		if(I.getStateofButton(GLFW_KEY_ENTER)==1) { //up
+			function=battleBox.Select();
+		   
+		}
+		if(I.getStateofButton(GLFW_KEY_BACKSPACE)==1) { //up
+			battleBox.GoBack();
 		
-		
+		}
 	}
 		 
 			 }
+	
+	
+	
+	private static void StartBattle(Player Player) {
+		
+		amountOfMoves=Player.getAmountofMoves();
+		amountOfSPMoves=Player.getAmountofSPMoves();
+	    PHP=Player.getHp();
+	    
+		
+	}
+	
+private static void EndBattle(Player Player) {
+		
+		
+	    Player.setHp(PHP);;
+	    
+		
+	}
 	
 	
    private static void battleupdate() {
@@ -663,8 +703,8 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	 	 	 SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
 	 	 	 SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
 	 	    
-	 	 	 battleBox.drawAndSetState(battleState);
-	 	     battleBox.getUIState().setOffsetPositionOnlist(arrowPosition);   	   
+	 	 	 battleBox.draw();;
+	 	     //battleBox.getUIState().setOffsetPositionOnlist(arrowPosition);   	   
 	 	   
 	 	    
 	 	    
@@ -843,184 +883,7 @@ public static void DebugPrint(String string) {
 if(DebugPrint)	
 System.out.println(string);}	
 		
-private static void BattleInputUp() {
-	
-	
-	switch(battleState) {
-	
-	case 0:
-	if(arrowPosition==2 || arrowPosition==1) {
-		arrowPosition=0;
-	}
-	break;
-	
-	case 1:
-		if(arrowPosition==2) {
-			arrowPosition=0;
-			
-		}
-		
-		if(arrowPosition==3) {
-			arrowPosition=1;
-			
-		}
-		
-		
-		
-	break;	
-	
-	
-	
-	}
-}
 
-private static void BattleInputDown() {
-switch(battleState) {
-
-case 0:
-if(arrowPosition==0) {
-	arrowPosition=1;
-}
-
-break;	
-
-case 1:
-	if(arrowPosition==0) {
-		arrowPosition=2;
-	}
-	if (arrowPosition==1) {
-		arrowPosition=3;
-	}
-	
-	
-break;	
-
-
-	
-	}
-	
-	
-}
-
-private static void BattleInputleft() {
-switch(battleState) {
-case 0:
-if(arrowPosition==0) {
-	arrowPosition=1;
-}  else if(arrowPosition==2) {
-	arrowPosition=1;
-}
-break;
-
-case 1:
-	if(arrowPosition==1) {
-		arrowPosition=0;
-		
-	}
-	if(arrowPosition==3) {
-		arrowPosition=2;
-	}
-	
-	
-break;	
-
-
-
-	
-	}
-	
-}
-	
-private static void BattleInputRight() {
-	
-switch(battleState) {
-case 0:
-if(arrowPosition==1 || arrowPosition==0) {
-	arrowPosition=2;
-	
-}
-break;
-
-case 1:
-	if( arrowPosition==0) {
-		arrowPosition=1;
-		
-	}
-	if(arrowPosition==2) {
-		arrowPosition=3;
-	}
-	
-	
-break;	
-	
-	
-
-
-
-
-
-	}
-}
-
-
-private static void BattleInputSelect() {
-	
-switch(battleState) {
-
-case 0:
-	
-BattleInputSelect0();
-break;
-
-
-
-
-	
-	
-	}
-}	
-
-private static void BattleInputBack() {
-switch(battleState) {
-case 1:
-	battleState=0;
-	arrowPosition=0;
-break;	
-
-	
-	
-	
-	}
-	
-}		
-
-
-
-
-private static void BattleInputSelect0() {//this is for the select from the main screen case ) means we are on moves 2 bag 3 specials
-	
-switch(arrowPosition) {
-
-case 0:
-	battleState=1;
-	arrowPosition=0;
-break;	
-
-
-
-
-	
-	
-	}
-}	
-
-
-
-
-
-	
-	
-	
 	
 	
 	

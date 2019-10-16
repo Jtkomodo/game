@@ -1,4 +1,4 @@
-package gameEngine;
+package guis;
 
 
 import java.util.ArrayList;
@@ -7,10 +7,11 @@ import java.util.List;
 import org.joml.Vector2f;
 
 public class UIBox {
-
+public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3;
+	private int currentState=0,lastState=0;
 	
-	private int currentState=0;
 	private boolean left=false,right=false,up=false,down=false,select=false,back=false,isActive=true;
+	
 	private Vector2f position;
 	
 	private List<UIBoxState> statelist=new ArrayList<UIBoxState>();	
@@ -33,7 +34,7 @@ public class UIBox {
 		
 	}
 	
-	
+
 	
 	public void setPosition(Vector2f position) {
 		this.position=position;
@@ -86,91 +87,60 @@ public class UIBox {
 	}
 	
 	public void GoLeft() {
-		this.left=true;
-		
-	}
-	
-	public boolean checkStateOfleft() {
-		
-		boolean result= this.left;
-		this.left=false;
-		return result;
-		
+		statelist.get(currentState).DecreasePositionIndeX();		
 		
 	}
 	
 	
 	public void GoRight() {
-		this.right=true;
+		statelist.get(currentState).IncreasePositionIndexX();		
 		
 	}
 	
-	public boolean checkStateOfRight() {
-		
-		boolean result= this.right;
-		this.right=false;
-		return result;
-		
-		
-	}
+	
 	
 	public void GoUp() {
-		this.up=true;
-		
+		statelist.get(currentState).IncreasePositionIndexY();		
 	}
 	
-	public boolean checkStateOfUp() {
-		
-		boolean result= this.up;
-		this.up=false;
-		return result;
-		
-		
-	}
 	
 	public void GoDown() {
-		this.down=true;
-		
-	}
-	
-	public boolean checkStateOfDown() {
-		
-		boolean result= this.down;
-		this.down=false;
-		return result;
-		
+		statelist.get(currentState).DecreasePositionIndexY();		
 		
 	}
 	
 	
-	public void Select() {
-		this.select=true;
+	
+	
+	public int Select() {//will return -1 if this changes state otherwise returns a value for us to tell what function is used
+		int returnValue=-1;
+		UIBoxState state=this.statelist.get(currentState);
+		int liststate=state.getOffsetPositionOnlist();
+		int stateToChangeTo=state.getStringElement(liststate).getState();//this is just telling us what happens if this string element is clicked on
+		if(stateToChangeTo!=-1) {//-1 means this is not a element that goes to another state
+			setCurrentState(stateToChangeTo);
+			
+		}
 		
+		
+		
+		
+		return returnValue;
 	}
 	
-	public boolean checkStateOfSelect() {
-		
-		boolean result= this.select;
-		this.select=false;
-		return select;
-		
-		
-	}
+
 	
 	
 	public void GoBack() {
-		this.back=true;
 		
+		
+			setCurrentState(lastState);
+		
+		   this.lastState=this.currentState;
+		   
 	}
 	
-	public boolean checkStateOfBack() {
-		
-		boolean result= this.back;
-		this.back=false;
-		return result;
-		
-		
-	}
+
 
 
 
@@ -193,9 +163,11 @@ public class UIBox {
 	}
 
     public void setCurrentState(int currentState) {
-    	statelist.get(this.currentState).setHasarrow(false);
+    	this.lastState=this.currentState;
+        statelist.get(this.currentState).setHasarrow(false);
     	this.currentState = currentState;
-		statelist.get(currentState).setHasarrow(true);
+    	statelist.get(currentState).setOffsetPositionOnlist(0);
+        statelist.get(currentState).setHasarrow(true);
 	}
     
     public UIBoxState getUIState() {

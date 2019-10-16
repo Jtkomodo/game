@@ -27,14 +27,16 @@
 <fullyQualifiedTypeName name="battleClasses.Player"/>
 <fullyQualifiedTypeName name="javafx.scene.chart.PieChart.Data"/>
 <fullyQualifiedTypeName name="Data.Pcs"/>
-<fullyQualifiedTypeName name="Data.Moves"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="gameEngine.Start"/>
 <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
 <fullyQualifiedTypeName name="gameEngine.UIBox"/>
-<fullyQualifiedTypeName name="org.joml.Vector4f"/>
-<fullyQualifiedTypeName name="Data.Constants"/>
 <fullyQualifiedTypeName name="org.joml.Vector2f"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.joml.Vector4f"/>
+<fullyQualifiedTypeName name="Data.Constants"/>
+<fullyQualifiedTypeName name="Data.Moves"/>
+<fullyQualifiedTypeName name="guis.UIBox"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
 </qualifiedTypeNameHistroy>

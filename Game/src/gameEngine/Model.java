@@ -53,10 +53,10 @@ public class Model {
 				
 	     	    
 		   //unbind buffers
-			glBindBuffer(GL_ARRAY_BUFFER,0);	     
-	  	glBindVertexArray(0);
+	//		glBindBuffer(GL_ARRAY_BUFFER,0);	     
+		glBindVertexArray(0);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);		
+  //  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);		
 			
 	
 		
@@ -93,11 +93,11 @@ public class Model {
 		
 		glBindVertexArray(vao_id);
 	
-		enableAtributes();
+	//	enableAtributes();
 	
 	
 		   glDrawElements(DrawMethod,drawCount,GL_UNSIGNED_INT,0);			
-      disableAtributes();
+    //  disableAtributes();
   	glBindVertexArray(0);  
 	}
 	}

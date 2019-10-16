@@ -9,12 +9,13 @@ public enum Moves {
 	
 	
 	
-	private float damage,cost;
+	private int cost;
+	private float damage;
 	private boolean specailMove,health;
 	private String name;
 	
 	
-	Moves(String name,float damage,boolean specailMove,float cost,boolean health){
+	Moves(String name,float damage,boolean specailMove,int cost,boolean health){
 		this.name=name;
 		this.damage=damage;
 		this.cost=cost;
@@ -38,7 +39,7 @@ public enum Moves {
 	}
 
 
-	public float getCost() {
+	public int getCost() {
 		return cost;
 	}
 

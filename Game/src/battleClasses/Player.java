@@ -8,6 +8,7 @@ import Data.Moves;
 public class Player {
 
 	private float atk,def,hp;
+	private float maxATK,maxDEF,maxHP;
 	private List<Moves> movelist= new ArrayList<Moves>();
 	private List<Moves> spmovelist=new ArrayList<Moves>();;
 	
@@ -17,7 +18,9 @@ public class Player {
     this.atk=atk;
     this.def=def;
     this.hp=hp;
-    
+    this.maxATK=atk;
+    this.maxDEF=def;
+    this.maxHP=hp;
     
     
 	for(int i=0;i<moves.length;i++) {
@@ -36,6 +39,30 @@ public class Player {
 		
 	}
 	
+	public float getMaxATK() {
+		return maxATK;
+	}
+
+	public void setMaxATK(float maxATK) {
+		this.maxATK = maxATK;
+	}
+
+	public float getMaxDEF() {
+		return maxDEF;
+	}
+
+	public void setMaxDEF(float maxDEF) {
+		this.maxDEF = maxDEF;
+	}
+
+	public float getMaxHP() {
+		return maxHP;
+	}
+
+	public void setMaxHP(float maxHP) {
+		this.maxHP = maxHP;
+	}
+
 	public float getAtk() {
 		return atk;
 	}
@@ -64,7 +91,13 @@ public class Player {
 	
 	public void  addMove(Moves move) {
 		
-		movelist.add(move);
+		if(move.isSpecailMove()) {
+			spmovelist.add(move);
+		}else {
+		     movelist.add(move);
+		     }
+		     
+		
 		
 	}
 	
@@ -72,10 +105,12 @@ public class Player {
    public void  addMoves(Moves moves[]) {
 		
 		for(int i=0;i<moves.length;i++) {
-			movelist.add(moves[i]);
+			if(moves[i].isSpecailMove()) {
+				spmovelist.add(moves[i]);
+			}else {
+			     movelist.add(moves[i]);}
+			     }
 			
-		}
-		
 		
 	}
 	
@@ -99,9 +134,16 @@ public Moves[] getspmoves() {
 	}
 	
 	
+public int  getAmountofMoves() {
+	return this.movelist.size();
 	
+}
 	
+public int  getAmountofSPMoves() {
+	return this.spmovelist.size();
 	
+}
+		
 	
 	
 	

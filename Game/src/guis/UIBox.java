@@ -2,20 +2,24 @@ package guis;
 
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.List;
+import java.util.Stack;
 
 import org.joml.Vector2f;
 
 public class UIBox {
-public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3;
+public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3,CLOSE_WINDOW=100;
 	private int currentState=0,lastState=0;
 	
-	private boolean left=false,right=false,up=false,down=false,select=false,back=false,isActive=true;
+	
+	private boolean isActive=true;
 	
 	private Vector2f position;
 	
 	private List<UIBoxState> statelist=new ArrayList<UIBoxState>();	
 	private List<UIBoxState> alwaysShownStateList=new ArrayList<UIBoxState>();	
+	private Stack<Integer> backStack=new Stack<Integer>();//this is a stack that just sores the previous states
 	
 	public UIBox(Vector2f position,UIBoxState[] states) {
 		
@@ -116,10 +120,14 @@ public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3;
 		int returnValue=-1;
 		UIBoxState state=this.statelist.get(currentState);
 		int liststate=state.getOffsetPositionOnlist();
-		int stateToChangeTo=state.getStringElement(liststate).getState();//this is just telling us what happens if this string element is clicked on
+		int stateToChangeTo=state.getStringActiveElement(liststate).getState();//this is just telling us what happens if this string element is clicked on
 		if(stateToChangeTo!=-1) {//-1 means this is not a element that goes to another state
+			backStack.push(this.currentState);
 			setCurrentState(stateToChangeTo);
 			
+		}else {
+			
+			returnValue=state.getStringActiveElement(liststate).getFunction();
 		}
 		
 		
@@ -132,15 +140,17 @@ public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3;
 	
 	
 	public void GoBack() {
-		
-		
-			setCurrentState(lastState);
-		
-		   this.lastState=this.currentState;
-		   
+		try{
+		    int lastState=backStack.pop();
+			
+		    setCurrentState(lastState);}
+	catch(EmptyStackException e) {
+	
+	
+ 
 	}
 	
-
+	}
 
 
 
@@ -156,17 +166,20 @@ public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3;
 	 return isActive;
  }
 
-
+  public  void reset() {
+	setCurrentState(getUIState(currentState).getBeginElement());
+	 this.lastState=0; 
+  }
 
 	public int getCurrentState() {
 		return currentState;
 	}
 
     public void setCurrentState(int currentState) {
-    	this.lastState=this.currentState;
+    	
         statelist.get(this.currentState).setHasarrow(false);
     	this.currentState = currentState;
-    	statelist.get(currentState).setOffsetPositionOnlist(0);
+    	statelist.get(currentState).setOffsetPositionOnlist(getUIState(currentState).getBeginElement());
         statelist.get(currentState).setHasarrow(true);
 	}
     

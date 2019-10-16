@@ -19,7 +19,6 @@
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="javafx.animation.Animation"/>
 <fullyQualifiedTypeName name="sun.security.util.Debug"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
 <fullyQualifiedTypeName name="gameEngine.Renderer"/>
@@ -39,4 +38,7 @@
 <fullyQualifiedTypeName name="Data.Moves"/>
 <fullyQualifiedTypeName name="guis.UIBox"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.util.Stack"/>
+<fullyQualifiedTypeName name="java.util.EmptyStackException"/>
 </qualifiedTypeNameHistroy>

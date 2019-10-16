@@ -12,6 +12,7 @@ public class UIStringElement {
 	private TextBuilder text=new TextBuilder(Start.aakar); 
 	private String string;
 	private float scale;
+	private int amountOfmoves=0;
     private int state=-1,function=-1;//this is the number to specify which state to switch to when this element is selected
 	private boolean hasColor=false,active=false;//active means this element can be clicked on
 	private Vector4f color;
@@ -49,7 +50,9 @@ public class UIStringElement {
 			this.function=function_OR_State;
 		}else {
 			this.state=function_OR_State;
+
 		}
+		
 	  
 	}
 	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,boolean changeState,int function_OR_State) {//active color
@@ -64,8 +67,9 @@ public class UIStringElement {
 			this.function=function_OR_State;
 		}else {
 			this.state=function_OR_State;
+			
 		}
-	  
+		
 	}
 	
 	

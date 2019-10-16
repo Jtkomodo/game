@@ -19,11 +19,14 @@ public class UIBoxState {
 
 	
 	private float width,height;//width and height of the UI box;
+	private int beginElement=0;
 	private int amountOfElements,offsetPositionOnlist=0;
 	private List<UIStringElement> elementlist=new ArrayList<UIStringElement>();//all of the string elements
 	private List<UIStringElement> Activeelementlist=new ArrayList<UIStringElement>();//only the string elements that have a action associated with it
 	protected HashMap<Vector2f,Integer> Values=new HashMap<Vector2f,Integer>();//this is a way to get the index of the element from the position 
 	protected HashMap<Integer,Vector2f> ValuesInverse=new HashMap<Integer,Vector2f>();
+	protected HashMap<Float,Integer> Amountx=new HashMap<Float,Integer>();//this is to tell how many times the x value is used to know when to delete it from the list
+	protected HashMap<Float,Integer> Amounty=new HashMap<Float,Integer>();//same as x but for y
 	private List<Float> sortx=new ArrayList<Float>();//this is all the x values in the positions in order if we move right then we get increase the index if left decrease
 	private List<Float> sorty=new ArrayList<Float>();//this is all the y values in order if the we go up then increase index if down then increase
 	private Vector2f offsetPosition;//position in relation to the middle of the box
@@ -107,18 +110,109 @@ public class UIBoxState {
 	
 	public void addElement(UIStringElement e) {
 		elementlist.add(e);
+	    
+	
+		if(e.isActive()) {
+			if((e.getoffset().x<=ValuesInverse.get(0).x) && ( e.getoffset().y<=ValuesInverse.get(0).y)) {
+		    	this.beginElement=this.Activeelementlist.size();
+		    	
+		    }
+				
+				
+			Activeelementlist.add(e);
+			Vector2f Vector=e.getoffset();
+	        Values.put(Vector,this.Activeelementlist.size()-1);
+	        ValuesInverse.put(this.Activeelementlist.size()-1,Vector);
+	        if(!sortx.contains(Vector.x))
+	        sortx.add(Vector.x);
+	        if(!sorty.contains(Vector.y))
+	        sorty.add(Vector.y);
+	        }
+		Collections.sort(sortx);
+		Collections.sort(sorty);
+
 		
+		Vector2f first=elementlist.get(0).getoffset();
+
+		this.PositionIndexX=sortx.indexOf(first.x);
+		this.PositionIndexY=sorty.indexOf(first.y);
+	
 		this.amountOfElements++;
+	
 	}
 	public void removeElement(int index) {
+	
+		if(index<=this.amountOfElements) {
+		
+		UIStringElement e=elementlist.get(index);
 		
 		elementlist.remove(index);
 		this.amountOfElements--;
+		if(e.isActive()) {
+			
+			
+			
+		
+			Vector2f Vector=e.getoffset();
+	        Values.remove(Vector);
+	        ValuesInverse.remove(index);
+	        Activeelementlist.remove(e);  
+	       int x=Amountx.get(Vector.x);
+	       int y=Amounty.get(Vector.y); 
+	       if(x==1) {
+	    	  sortx.remove(Vector.x); 
+	    	  Amountx.remove(Vector.x);
+	    	  
+	       }else {
+	    	  Amountx.put(Vector.x,x-1);
+	       }
+	       if(y==1) {
+		    	  sorty.remove(Vector.y);
+		    	  Amounty.remove(Vector.y);
+		       }else{
+		    	   Amounty.put(Vector.y,y-1);
+		       }
+	       
+		
+		for(int i=index;i<this.amountOfElements;i++) {
+			 e=elementlist.get(i);
+			
+			 if(e.isActive()) {
+
+					 Vector=e.getoffset();
+			        int value=Values.get(Vector);
+			        Values.put(Vector, value-1);
+			        ValuesInverse.put(value-1,Vector);
+				 
+			 }
+			
+		}
+		
+		
+		Collections.sort(sortx);
+		Collections.sort(sorty);
+		this.offsetPositionOnlist=0;
+		
+		Vector2f first=elementlist.get(0).getoffset();
+
+		this.PositionIndexX=sortx.indexOf(first.x);
+		this.PositionIndexY=sorty.indexOf(first.y);
+	
+	
+		
+	
+		}
+		
+		}
+		
 	}
 	
-	public void replaceElemnt(UIStringElement e,int index) {
+	public void replaceElement(UIStringElement e,int index) {
 		
-		this.elementlist.set(index, e);
+	     removeElement(index);
+	     addElement(e);
+		
+		
 	}
 	
 	
@@ -193,6 +287,8 @@ public class UIBoxState {
 		
 		Vector2f first=elements[0].getoffset();
 		int i2=0;
+		boolean start=false;
+		
 		for(int i=0;i<elements.length;i++) {
 		UIStringElement e=elements[i];
 		
@@ -200,15 +296,28 @@ public class UIBoxState {
 		
 		elementlist.add(e);
 		if(e.isActive()) {
+		if(!start) {
+			this.beginElement=i2;
+			start=true;
+		}
 			
+			
+		
+		
 		Activeelementlist.add(e);
 		Vector2f Vector=e.getoffset();
         Values.put(Vector,i2);
         ValuesInverse.put(i2,Vector);
-        if(!sortx.contains(Vector.x))
-        sortx.add(Vector.x);
-        if(!sorty.contains(Vector.y))
-        sorty.add(Vector.y);
+        
+        
+        int x=this.Amountx.getOrDefault(Vector.x,0);
+        int y=this.Amounty.getOrDefault(Vector.y,0);
+        Amountx.put(Vector.x,x+1);
+        Amounty.put(Vector.y,y+1);
+        if(!sortx.contains(Vector.x)) {
+        sortx.add(Vector.x);}
+        if(!sorty.contains(Vector.y)) {
+        sorty.add(Vector.y);}
         i2++;
 		
 		}
@@ -219,10 +328,11 @@ public class UIBoxState {
 		
 		Collections.sort(sortx);
 		Collections.sort(sorty);
-		
-		
+	
+
 		this.PositionIndexX=sortx.indexOf(first.x);
 		this.PositionIndexY=sorty.indexOf(first.y);
+	
 	
 	}
 	
@@ -230,6 +340,10 @@ public class UIBoxState {
 	
 
 	
+
+	public int getBeginElement() {
+		return beginElement;
+	}
 
 	public int getPositionIndexX() {
 		return PositionIndexX;
@@ -360,11 +474,14 @@ public class UIBoxState {
 		}
 	}
 	public UIStringElement getStringElement(int index) {
-		
 		return elementlist.get(index);
+		
 	}
 	
-	
+	public UIStringElement getStringActiveElement(int index) {
+		return Activeelementlist.get(index);
+		
+	}
 	
 	public UIStringElement getStringActiveElement(Vector2f position) {
 		return this.Activeelementlist.get(Values.get(position));

@@ -92,7 +92,9 @@ public Window(int width, int height,Camera camera,String name) {
 	public boolean isExited() {
 		return glfwWindowShouldClose(window);
 	}
-	
+	public void CloseWIndow() {
+	 glfwSetWindowShouldClose(window, true);
+	}
 	
 	
 	public void update() {
@@ -101,7 +103,6 @@ public Window(int width, int height,Camera camera,String name) {
 		int[] wi=new int[1], he=new int[1];
 glfwGetWindowSize(window, wi, he);
 int h=he[0],w=wi[0];
-
 
 
 

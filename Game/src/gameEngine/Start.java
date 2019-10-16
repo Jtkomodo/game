@@ -42,7 +42,7 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static Input I,DebugI;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=false,DebugdrawString=true,showFps=true,Debug=false;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=false,DebugdrawString=true,showFps=true,Debug=false,StateOfStartBOx=false;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
@@ -54,7 +54,7 @@ public class Start {
     public static CircleColision circle1, circle2;
     public static float PHP;
     public static float[] uvtextbox,uvArrow,vert; 
-    public static UIBox battleBox;
+    public static UIBox battleBox,StartBox;
    public static int amountOfMoves,amountOfSPMoves,function;
    
   
@@ -272,6 +272,30 @@ public class Start {
      
 		 p=new Player(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getMoves());
 		
+		
+		 
+	UIStringElement StartElements[] ={
+		
+		new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,false,UIBox.USE_MOVE),
+		new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,false,UIBox.USE_MOVE),
+		new UIStringElement("Save",new Vector2f(-17,-5),.2f,Constants.BLACK,false,UIBox.USE_MOVE),
+		new UIStringElement("Quit",new Vector2f(-17,-25),.2f,Constants.BLACK,false,UIBox.CLOSE_WINDOW)
+	};
+		 
+	UIBoxState StartBoxs[]= {
+			new UIBoxState(new Vector2f(0,0),30,50,StartElements,Start.COLTEX,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,-50),new Vector4f(0)))
+			
+	};
+		 
+		 
+		 
+   StartBox=new UIBox(new Vector2f(screencoordx,screencoordy),StartBoxs); 
+		 
+		 
+		 
+		 
+		 
+		 
 		UIStringElement MenuElements[]= {new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK,true,1),
 				new UIStringElement("bag",new Vector2f(-35,-5), .15f,Constants.BLACK,true,2),
 				new UIStringElement("specials",new Vector2f(10,-5), .15f,Constants.BLACK,true,3)
@@ -296,16 +320,22 @@ public class Start {
 		
 		
 		UIBoxState boxs[]= {new UIBoxState(new Vector2f(),71,28,MenuElements,textbox,true),new UIBoxState(new Vector2f(150,10f),71,28,MoveElements,textbox),
-				new UIBoxState(new Vector2f(150,10),71,50,BagElements,Start.COLTEX,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,29,50))),new UIBoxState(new Vector2f(150,10f),71,28,SPElements,textbox)
+				new UIBoxState(new Vector2f(150,10),71,50,BagElements,Start.COLTEX,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,29,50),new Vector4f(0))),new UIBoxState(new Vector2f(150,10f),71,28,SPElements,textbox)
 		};
 		
 		
 		
+		
+		
+		
+		
 		battleBox=new UIBox(new Vector2f(100,0),boxs);//this is the UIbox for the battle UI
-
-	
+	  
+		
+		
+		
 		//----------------------GAME--LOOP------------------------------
-		while(!w.isExited() && !I.IsEscapePushed()) {
+		while(!w.isExited()) {
 			oldpos=new Vector2f(x,y);
 		fps();    
 	    
@@ -364,7 +394,7 @@ BatchedModel.enable();
 	      textD.setString("circCol:"+circCol);
 	      textC.setString("xmap="+gridx+" ymap="+gridy);
 	    
-	  
+	   
 	    
 	      
 		if(HideSprite==false) 
@@ -373,6 +403,10 @@ BatchedModel.enable();
 		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.24f);
 		textC.UIDebugdrawString(screencoordx+100,screencoordy-220,.24f);
          textforTILES.UIDebugdrawString(screencoordx,(480/2)+ screencoordy-20, .24f);
+         if(StateOfStartBOx) {
+        	 StartBox.setPosition(new Vector2f(screencoordx+300,screencoordy));
+        	StartBox.draw(); 
+         }
 
 }else {
 	//---------------------battle loop---------------------
@@ -463,6 +497,11 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 
 	}
 		
+		
+	
+		
+		
+		
 		if( I.getStateofButton(GLFW_KEY_F2)==1) {
 			if(Start.DebugPrint==false) {
 				
@@ -524,6 +563,8 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		}else {
 			overworld=false;
 			a1.Stop();
+			StartBox.reset();
+			StateOfStartBOx=false;
 			battleState=0;
 			arrowPosition=0;
 			sprite=0;
@@ -539,6 +580,22 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	
 	
 	if(overworld) {
+		
+		
+	if(I.getStateofButton(GLFW_KEY_ESCAPE)==1) {
+			if(StateOfStartBOx) {
+				StateOfStartBOx=false;
+			}else {
+				StateOfStartBOx=true;
+				a1.Stop();
+			    StartBox.reset();
+			}
+			
+		}
+		
+		if(!StateOfStartBOx) {
+		
+		
 		
 		        if(I.getStateofButton(GLFW_KEY_W)==1 || I.getStateofButton(GLFW_KEY_W)==3) {
 		        	speed=5;
@@ -626,8 +683,39 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 						
 					camx=-x;
 					camy=-y;
+					}
+		}else {
+				
+				if(I.getStateofButton(GLFW_KEY_UP)==1) //up
+				     StartBox.GoUp();
 					
-						}
+				
+				if(I.getStateofButton(GLFW_KEY_DOWN)==1) //down
+					StartBox.GoDown();
+				
+				if(I.getStateofButton(GLFW_KEY_LEFT)==1) //left
+					StartBox.GoLeft();
+					
+				if(I.getStateofButton(GLFW_KEY_RIGHT)==1) //right
+				   StartBox.GoRight();
+				
+				if(I.getStateofButton(GLFW_KEY_ENTER)==1) { //up
+					function=StartBox.Select();
+					if(function==UIBox.CLOSE_WINDOW) {
+						w.CloseWIndow();
+					}
+				   
+				}
+				
+				if(I.getStateofButton(GLFW_KEY_BACKSPACE)==1) { //up
+					StartBox.GoBack();
+				
+				}
+				
+				
+				
+					
+		}			
 		 
 	}else {
 		
@@ -639,8 +727,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 			     }else {
 			    	 sprite=0;
 			     }
-			arrowPosition=0;
-			battleState=0;
+			   battleBox.reset();
 		}
 		
 		
@@ -659,6 +746,11 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		
 		if(I.getStateofButton(GLFW_KEY_ENTER)==1) { //up
 			function=battleBox.Select();
+			if(function==UIBox.USE_MOVE) {
+               
+				
+				
+			}
 		   
 		}
 		if(I.getStateofButton(GLFW_KEY_BACKSPACE)==1) { //up
@@ -885,7 +977,10 @@ System.out.println(string);}
 		
 
 	
+public static void UseMove(Moves move) {
+	System.out.println("move "+move.name());
 	
+}
 	
 	
 	

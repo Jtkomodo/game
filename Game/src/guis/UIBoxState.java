@@ -357,27 +357,69 @@ public class UIBoxState {
 	public void  IncreasePositionIndexX() {
 		if(PositionIndexX!=sortx.size()-1) {
 			PositionIndexX++;
-			
+			//first just check if that position exist on our map
 		
 		float x=this.sortx.get(this.PositionIndexX);
 		float y=this.sorty.get(this.PositionIndexY);
 		
 		Vector2f vector=new Vector2f(x,y);
 		
-		if(!Values.containsKey(vector)) {
-		for(int i=0;i<sorty.size();i++) {
-			 x=this.sortx.get(this.PositionIndexX);
-			 y=this.sorty.get(i);
-			
-			 vector=new Vector2f(x,y);
-			
-			if(Values.containsKey(vector)) {
-				this.PositionIndexY=i;
+		
+		
+		
+		if(!Values.containsKey(vector)) {//if it doesn't then we check on the line for another element
+		boolean found=false;	//this is a boolean to tell if we found a Element
+		
+		//check on and below line
+		
+		for(int v=this.PositionIndexY;v>=0;v--) {
+			for(int i=PositionIndexX;i<sortx.size();i++) {
+				 x=this.sortx.get(i);
+				 y=this.sorty.get(v);
+				
+				 vector=new Vector2f(x,y);
+				
+				if(Values.containsKey(vector)) {
+					this.PositionIndexX=i;
+					this.PositionIndexY=v;
+					found=true;
+					break;
+					
+				}}
+			if(found) {
 				break;
 			}
+			}
+		
+		
+		
+		
+		
+		
+		
+		//check above line
+		if(!found) {
+			for(int v=this.PositionIndexY;v<sorty.size();v++) {
+				for(int i=PositionIndexX;i<sortx.size();i++) {
+					 x=this.sortx.get(i);
+					 y=this.sorty.get(v);
+					
+					 vector=new Vector2f(x,y);
+					
+					if(Values.containsKey(vector)) {
+						this.PositionIndexX=i;
+						this.PositionIndexY=v;
+						found=true;
+						break;
+						
+					}}
+				if(found) {
+					break;
+				}
+				}
 		}
 		}
-		changeOffsetPositionOnList();
+		changeOffsetPositionOnList();//after we got the values set we now change the position on the list
 		
 		}
 	}
@@ -426,7 +468,7 @@ public class UIBoxState {
 		if(!Values.containsKey(vector)) {
 		
 		
-		for(int i=0;i<sorty.size();i++) {
+		for(int i=0;i<sortx.size();i++) {
 			 x=this.sortx.get(i);
 			 y=this.sorty.get(this.PositionIndexY);
 			
@@ -456,19 +498,56 @@ public class UIBoxState {
 			
 		
 		
-		
-		for(int i=0;i<sorty.size();i++) {
-			 x=this.sortx.get(this.PositionIndexX);
-			 y=this.sorty.get(i);
+			boolean found=false;	//this is a boolean to tell if we found a Element
 			
-			 vector=new Vector2f(x,y);
+			//check on and below line
 			
-			if(Values.containsKey(vector)) {
-				this.PositionIndexY=i;
-				break;
+			for(int v=this.PositionIndexY;v>=0;v--) {
+				for(int i=PositionIndexX;i>=0;i--) {
+					 x=this.sortx.get(i);
+					 y=this.sorty.get(v);
+					
+					 vector=new Vector2f(x,y);
+					
+					if(Values.containsKey(vector)) {
+						this.PositionIndexX=i;
+						this.PositionIndexY=v;
+						found=true;
+						break;
+						
+					}}
+				if(found) {
+					break;
+				}
+				}
+			
+			
+			
+			
+			
+			
+			
+			//check above line
+			if(!found) {
+				for(int v=this.PositionIndexY;v<sorty.size();v++) {
+					for(int i=PositionIndexX;i>=0;i--) {
+						 x=this.sortx.get(i);
+						 y=this.sorty.get(v);
+						
+						 vector=new Vector2f(x,y);
+						
+						if(Values.containsKey(vector)) {
+							this.PositionIndexX=i;
+							this.PositionIndexY=v;
+							found=true;
+							break;
+							
+						}}
+					if(found) {
+						break;
+					}
+					}
 			}
-		}
-		
 		}
 		changeOffsetPositionOnList();
 		}

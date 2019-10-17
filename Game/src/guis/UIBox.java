@@ -9,9 +9,8 @@ import java.util.Stack;
 import org.joml.Vector2f;
 
 public class UIBox {
-public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3,CLOSE_WINDOW=100;
-	private int currentState=0,lastState=0;
-	
+public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3,CLOSE_WINDOW=100,SAVE_GAME=406;
+	private int currentState=0;
 	
 	private boolean isActive=true;
 	
@@ -168,7 +167,7 @@ public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3,CLOSE_WINDOW=100;
 
   public  void reset() {
 	setCurrentState(getUIState(currentState).getBeginElement());
-	 this.lastState=0; 
+	backStack.clear();
   }
 
 	public int getCurrentState() {

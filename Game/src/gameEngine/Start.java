@@ -277,28 +277,37 @@ public class Start {
 	UIStringElement StartElements[] ={
 		
 		new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,false,UIBox.USE_MOVE),
-		new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,false,UIBox.USE_MOVE),
-		new UIStringElement("Save",new Vector2f(-17,-5),.2f,Constants.BLACK,false,UIBox.USE_MOVE),
+		new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,true,1),
+		new UIStringElement("Save",new Vector2f(-17,-5),.2f,Constants.BLACK,false,UIBox.SAVE_GAME),
 		new UIStringElement("Quit",new Vector2f(-17,-25),.2f,Constants.BLACK,false,UIBox.CLOSE_WINDOW)
+	};
+	
+	
+	
+	
+	UIStringElement BagElements[]= {new UIStringElement("-------bag------",new Vector2f(-38,40), .15f,Constants.BLACK),
+			new UIStringElement("test",new Vector2f(-54,5), .15f,Constants.BLACK,false,UIBox.USE_ITEM),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK,false,UIBox.USE_ITEM),
+			new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK,false,UIBox.USE_ITEM),new UIStringElement("test",new Vector2f(15,-8), .15f,Constants.BLACK,false,UIBox.USE_ITEM)
+		
 	};
 		 
 	UIBoxState StartBoxs[]= {
-			new UIBoxState(new Vector2f(0,0),30,50,StartElements,Start.COLTEX,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,-50),new Vector4f(0)))
-			
+			new UIBoxState(new Vector2f(0,0),30,50,StartElements,Start.COLTEX,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,-50),new Vector4f(0))),
+			new UIBoxState(new Vector2f(-200,0),w.getWidth()-200,w.getHeight()-200,BagElements,Start.textbox,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,80),new Vector4f(0)))
 	};
 		 
 		 
 		 
    StartBox=new UIBox(new Vector2f(screencoordx,screencoordy),StartBoxs); 
-		 
-		 
+ 
+
 		 
 		 
 		 
 		 
 		UIStringElement MenuElements[]= {new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK,true,1),
 				new UIStringElement("bag",new Vector2f(-35,-5), .15f,Constants.BLACK,true,2),
-				new UIStringElement("specials",new Vector2f(10,-5), .15f,Constants.BLACK,true,3)
+				new UIStringElement("specials",new Vector2f(1,-5), .15f,Constants.BLACK,true,3)
 		};
 		UIStringElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
 				new UIStringElement(p.getmoves()[0].getName(),new Vector2f(-54,5), .15f,Constants.BLACK,false,UIBox.USE_MOVE),new UIStringElement("test ",new Vector2f(15,5), .15f,Constants.BLACK,false,UIBox.USE_MOVE),
@@ -306,11 +315,7 @@ public class Start {
 			
 		};
 		
-		UIStringElement BagElements[]= {new UIStringElement("-------bag------",new Vector2f(-38,40), .15f,Constants.BLACK),
-				new UIStringElement("test",new Vector2f(-54,5), .15f,Constants.BLACK,false,UIBox.USE_ITEM),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK,false,UIBox.USE_ITEM),
-				new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK,false,UIBox.USE_ITEM),new UIStringElement("test",new Vector2f(15,-8), .15f,Constants.BLACK,false,UIBox.USE_ITEM)
-			
-		};
+		
 		
 		UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
 				new UIStringElement(p.getspmoves()[0].getName()+" "+(p.getspmoves()[0]).getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,false,UIBox.USE_SP_MOVE),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK,false,UIBox.USE_SP_MOVE),
@@ -330,7 +335,7 @@ public class Start {
 		
 		
 		battleBox=new UIBox(new Vector2f(100,0),boxs);//this is the UIbox for the battle UI
-	  
+
 		
 		
 		

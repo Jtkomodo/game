@@ -38,12 +38,29 @@ public class Texture {
 private  int TEXid;
 private ByteBuffer data;
 private  File file=new File(System.getProperty("user.dir"));
-public  int h,w;
+private int h,w;
 private IntBuffer width,height,comp;
-private HashMap<Integer,Byte> imageData= new HashMap<Integer,Byte>();  
+private HashMap<Integer,Byte> imageData= new HashMap<Integer,Byte>();
+private String Path;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 public Texture(String path) {
 		
-		
+		Path=path;
 	
 		
 		//create buffers for stbi to use
@@ -128,7 +145,6 @@ public Texture(String path) {
 
 
 
-
 private void loadTexture(ByteBuffer data) {
 	
 	  glBindTexture(GL_TEXTURE_2D,TEXid);//binds
@@ -140,6 +156,48 @@ private void loadTexture(ByteBuffer data) {
    glBindTexture(GL_TEXTURE_2D,0);//unbinds
    
   
+}
+
+
+public void makeImage(String name) {//this will be very useful later we can anything from make new sprite sheets to taking a screen shot by using FBOs(frame buffer objects)
+	
+	BufferedImage image = new BufferedImage(this.w, this.h, BufferedImage.TYPE_INT_ARGB);
+	for (int x = 0; x < w; ++x) {
+	    for (int y = 0; y < h; ++y) {
+	        int i = (x + y * w) * 4;
+
+	        int r = this.data.get(i) & 0xFF;
+	        int g = this.data.get(i + 1) & 0xFF;
+	        int b = this.data.get(i + 2) & 0xFF;
+	        int a = this.data.get(i+3)&0xFF;
+	   
+
+	        image.setRGB(x, y, (a << 24) | (r << 16) | (g << 8) | b);
+	    }
+	}
+	
+	try {
+		ImageIO.write(image, "PNG", new File(file.getAbsolutePath()+"/src/res/"+Path+name+".png"));
+	
+	Start.DebugPrint("made png");
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+}
+
+
+
+
+public int getH() {
+	return h;
+}
+
+
+
+public int getW() {
+	return w;
 }
 
 

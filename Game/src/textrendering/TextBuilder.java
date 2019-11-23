@@ -49,8 +49,13 @@ public class TextBuilder{
 	    Vector2f cursor=new Vector2f(0,0);// the curent cursor position 
 		
 	//actually make the model from values in font file	
+	    
 		for(int i=0;i<text.length();i++) {//simple for loop
+			
 			int a=text.charAt(i);//this gets each char in order and uses it as the key to the hexmap that has all the info we need to draw in the correct place  
+		  
+		   
+			
 			Float[] val=loader.Values.get(a);// this gets all the values for the current char
 			float x=val[0];// x value of the topleft hand corner
 			float y=val[1];//y value of the topleft hand corner
@@ -70,6 +75,7 @@ public class TextBuilder{
 			 float height2=height/2;
 			 float width2=(width/2);
 			 cursor.add(offset);//adds the offset to the cursor
+				if((char)a!='\n'){
 			 l=new float[]{// loads in the correct uv coords
 					Xz,Yz,
 					Xo,Yz,
@@ -84,8 +90,20 @@ public class TextBuilder{
 				   cursor.x+-width2,cursor.y-height2
 				};
 			textModel.addvaluestoVBO(v, l);//this is what actually adds the char into the batched model with the correct uv and vertex pionts
+		}
 			
-			 cursor.add(xadv,yoff);//moves the cursor for the next char
+				else {
+				 yoff-=100;
+				cursor=new Vector2f(0,cursor.y);
+				 
+			}
+					
+			
+			
+			
+			
+			 cursor.add(xadv,yoff);//moves the cursor for the next char		 
+			 
 			
 		}
 		

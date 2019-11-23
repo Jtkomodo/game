@@ -39,6 +39,17 @@ private int program,vs,fs,locationSlot;
 	
 	}
 	
+	public ShaderProgram(String vertShader,String fragShader) {
+		program=glCreateProgram();
+		createShaders(vertShader,fragShader);
+	    Locations();
+	    linkandValidate();
+		
+	}
+	
+	
+	
+	
 	//turning our text file into a string 
 	
 	private String readFile(String path) {//just the method to store our file contents in a string
@@ -87,7 +98,33 @@ private int program,vs,fs,locationSlot;
 	
 		
 	}
+	//attach our shaders to the program
+	glAttachShader(program,vs);
+	glAttachShader(program,fs);
 	
+	}
+private  void createShaders(String path1,String path2) {
+		
+		vs=glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(vs,readFile(path1+".vs"));//tells opengl where the source code is and loads it
+	glCompileShader(vs);//compiles the shader so it can be used by the graphics card
+	if(glGetShaderi(vs,GL_COMPILE_STATUS)!=1) {//print out any compile errors
+		System.err.println(glGetShaderInfoLog(vs));
+		System.err.println("shader vs not compiled");//this tells us which shader failed
+		System.exit(1);
+	}
+	
+	fs=glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(fs,readFile(path2+".fs"));
+	
+	glCompileShader(fs);
+	if(glGetShaderi(fs,GL_COMPILE_STATUS)!=1) {
+		System.err.println(glGetShaderInfoLog(fs));
+		System.err.println("shader fs not compiled");
+		System.exit(1);
+	
+		
+	}
 	
 	//attach our shaders to the program
 	glAttachShader(program,vs);

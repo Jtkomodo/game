@@ -2,29 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="update" key="selection"/>
+		<item value="Debug" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="update"/>
-			<item value=",Constants.black"/>
-			<item value="Constants.blaxk"/>
-			<item value="battlebox"/>
-			<item value="position"/>
-			<item value="Position"/>
-			<item value="Left"/>
-			<item value="making"/>
-			<item value="models"/>
-			<item value="find"/>
-			<item value="start"/>
-			<item value="window"/>
-			<item value=".w"/>
-			<item value="createw"/>
-			<item value="DebugPrint"/>
+			<item value="debug"/>
+			<item value="baseclass"/>
+			<item value="debugPrint"/>
+			<item value="select"/>
+			<item value="arguments"/>
+			<item value="player"/>
+			<item value="punch"/>
+			<item value="null"/>
+			<item value="usemove"/>
+			<item value="use"/>
+			<item value="usefunction"/>
+			<item value=".makeimage"/>
+			<item value="UseF"/>
+			<item value="{Integer.class}"/>
+			<item value="shader"/>
 		</list>
 		<list key="replacehistory">
+			<item value="{Player.class,String.class}"/>
 			<item value=""/>
 			<item value="offsetPosition"/>
 			<item value="offset"/>
@@ -45,7 +46,7 @@
 		<item value="336" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="454" key="DIALOG_HEIGHT"/>
-		<item value="1266" key="DIALOG_X_ORIGIN"/>
-		<item value="135" key="DIALOG_Y_ORIGIN"/>
+		<item value="1194" key="DIALOG_X_ORIGIN"/>
+		<item value="473" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

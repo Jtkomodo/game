@@ -1,6 +1,7 @@
 package battleClasses;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import Data.Moves;
@@ -11,7 +12,7 @@ public class Player {
 	private float maxATK,maxDEF,maxHP;
 	private List<Moves> movelist= new ArrayList<Moves>();
 	private List<Moves> spmovelist=new ArrayList<Moves>();;
-	
+	private HashMap<String,Moves> moveStrings=new HashMap<String,Moves>();
 	
 	public Player(float atk,float def,float hp,Moves[] moves) {
 		
@@ -24,10 +25,12 @@ public class Player {
     
     
 	for(int i=0;i<moves.length;i++) {
-	if(moves[i].isSpecailMove()) {
-		spmovelist.add(moves[i]);
+	    Moves move=moves[i];
+		moveStrings.put(move.getName(),move);
+	if(move.isSpecailMove()) {
+		spmovelist.add(move);
 	}else {
-	     movelist.add(moves[i]);}
+	     movelist.add(move);}
 	     }
 	
 	
@@ -145,7 +148,11 @@ public int  getAmountofSPMoves() {
 }
 		
 	
+public Moves getmoveFromString(String name) {
 	
+	return moveStrings.get(name);
+	
+}
 	
 	
 }

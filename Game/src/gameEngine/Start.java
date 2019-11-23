@@ -1,5 +1,7 @@
 package gameEngine;
 import java.io.IOException;
+import java.lang.reflect.Method;
+
 import static org.lwjgl.glfw.GLFW.*;
 import java.util.Map;
 import static java.lang.Math.*;
@@ -18,6 +20,7 @@ import textrendering.TextBuilder;
 import Data.Constants;
 import Data.Moves;
 import battleClasses.Player;
+import guis.GUIMEthods;
 import guis.UIBox;
 import guis.UIBoxState;
 import guis.UIStringElement;
@@ -42,7 +45,7 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static Input I,DebugI;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=false,DebugdrawString=true,showFps=true,Debug=false,StateOfStartBOx=false;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,DebugdrawString=true,showFps=true,Debug=false,StateOfStartBOx=false;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
@@ -74,7 +77,7 @@ public class Start {
 	
 	
 		
-		sloader= new SpriteSheetLoader("playerSpriteSheet",138);//loads the sprite sheet info
+		
 		
 		DebugPrint("Starting.....");
 	double startTime=Timer.getTIme();
@@ -197,6 +200,7 @@ public class Start {
 		DebugPrint("Making Textures....");
 		//Define texturesbr.close();
 		//font=new Fontloader("aakar",512);    
+		sloader= new SpriteSheetLoader("playerSpriteSheet",138);//loads the sprite sheet info
 		tex=new Texture("newsprite");
 		textbox=new Texture("textbox");
 		bg= new Texture("testBackground");
@@ -211,7 +215,7 @@ public class Start {
 		textD= new TextBuilder(aakar);
 		text1= new TextBuilder(aakar);
 		textDrawCalls= new TextBuilder("aakar",512);
-		TextBuilder textCircle= new TextBuilder("aakar",512);
+	//	TextBuilder textCircle= new TextBuilder("aakar",512);
 		testM= new BatchedModel();
 		piont= new Texture("Point");
 
@@ -226,10 +230,10 @@ public class Start {
 		//Define models
 	   DebugPrint("Making Models....");
 		
-		player= new Model(vertPlayer,uvPlayer,ind);
-	    background=new Model(vert,uvBg,ind);
-	    textboxM=new Model(vertText,uvtextbox,ind);
-	    Arrow=new Model(vert,uvArrow,ind);
+		player= new Model(vertPlayer,uvPlayer);
+	    background=new Model(vert,uvBg);
+	    textboxM=new Model(vertText,uvtextbox);
+	    Arrow=new Model(vert,uvArrow);
 		
 	
 		DebugPrint("Making Shader Uniforms....");
@@ -272,22 +276,21 @@ public class Start {
      
 		 p=new Player(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getMoves());
 		
-		
+		try {
 		 
 	UIStringElement StartElements[] ={
 		
-		new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,false,UIBox.USE_MOVE),
-		new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,true,1),
-		new UIStringElement("Save",new Vector2f(-17,-5),.2f,Constants.BLACK,false,UIBox.SAVE_GAME),
-		new UIStringElement("Quit",new Vector2f(-17,-25),.2f,Constants.BLACK,false,UIBox.CLOSE_WINDOW)
-	};
-	
+		new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,"DebugPrint",new Object[] {"stats"},new Class[] {String.class},Start.class),
+		new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,1),
+		new UIStringElement("Save",new Vector2f(-17,-5),.2f,Constants.BLACK,GUIMEthods.saveGAME,null),
+		new UIStringElement("Quit",new Vector2f(-17,-25),.2f,Constants.BLACK,GUIMEthods.exitWINDOW,null)
+		};
 	
 	
 	
 	UIStringElement BagElements[]= {new UIStringElement("-------bag------",new Vector2f(-38,40), .15f,Constants.BLACK),
-			new UIStringElement("test",new Vector2f(-54,5), .15f,Constants.BLACK,false,UIBox.USE_ITEM),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK,false,UIBox.USE_ITEM),
-			new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK,false,UIBox.USE_ITEM),new UIStringElement("test",new Vector2f(15,-8), .15f,Constants.BLACK,false,UIBox.USE_ITEM)
+			new UIStringElement("test",new Vector2f(-54,5), .15f,Constants.BLACK),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK),
+			new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK),new UIStringElement("test",new Vector2f(15,-8), .15f,Constants.BLACK)
 		
 	};
 		 
@@ -299,27 +302,27 @@ public class Start {
 		 
 		 
    StartBox=new UIBox(new Vector2f(screencoordx,screencoordy),StartBoxs); 
- 
+	
 
 		 
 		 
 		 
 		 
-		UIStringElement MenuElements[]= {new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK,true,1),
-				new UIStringElement("bag",new Vector2f(-35,-5), .15f,Constants.BLACK,true,2),
-				new UIStringElement("specials",new Vector2f(1,-5), .15f,Constants.BLACK,true,3)
+		UIStringElement MenuElements[]= {new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK,1),
+				new UIStringElement("bag",new Vector2f(-35,-5), .15f,Constants.BLACK,2),
+				new UIStringElement("specials",new Vector2f(1,-5), .15f,Constants.BLACK,3)
 		};
 		UIStringElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
-				new UIStringElement(p.getmoves()[0].getName(),new Vector2f(-54,5), .15f,Constants.BLACK,false,UIBox.USE_MOVE),new UIStringElement("test ",new Vector2f(15,5), .15f,Constants.BLACK,false,UIBox.USE_MOVE),
-				new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK,false,UIBox.USE_MOVE),new UIStringElement("test ",new Vector2f(15,-8), .15f,Constants.BLACK,false,UIBox.USE_MOVE)
+				new UIStringElement(p.getmoves()[0].getName(),new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,p.getmoves()[0].name()}),new UIStringElement("test ",new Vector2f(15,5), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,"test"}),
+				new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,"test"}),new UIStringElement("test ",new Vector2f(15,-8), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,"test"})
 			
 		};
 		
 		
 		
 		UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
-				new UIStringElement(p.getspmoves()[0].getName()+" "+(p.getspmoves()[0]).getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,false,UIBox.USE_SP_MOVE),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK,false,UIBox.USE_SP_MOVE),
-				new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK,false,UIBox.USE_SP_MOVE),new UIStringElement("test ",new Vector2f(15,-8), .15f,Constants.BLACK,false,UIBox.USE_SP_MOVE)
+				new UIStringElement(p.getspmoves()[0].getName()+" "+(p.getspmoves()[0]).getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK),
+				new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK),new UIStringElement("test ",new Vector2f(15,-8), .15f,Constants.BLACK)
 			
 		};
 		
@@ -336,7 +339,12 @@ public class Start {
 		
 		battleBox=new UIBox(new Vector2f(100,0),boxs);//this is the UIbox for the battle UI
 
-		
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.exit(300);
+		}
+			
 		
 		
 		//----------------------GAME--LOOP------------------------------
@@ -403,7 +411,8 @@ BatchedModel.enable();
 	    
 	      
 		if(HideSprite==false) 
-		SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
+		a1.drawAnimatedModel(new Vector2f(x,y),0,Playerscale,facingLeft);	
+		//SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
 		textforTILES.setString("Tiles: "+loader.getTilesrenderd());
 		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.24f);
 		textC.UIDebugdrawString(screencoordx+100,screencoordy-220,.24f);
@@ -429,7 +438,7 @@ BatchedModel.enable();
 
 }
 
-textDrawCalls.setString("Drawcalls(S:"+drawcalls+ " F:"+drawcallsFrame+")");
+textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")");
 textA.setString("fps="+(int)fps);
 if(showFps)
 textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
@@ -592,7 +601,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 				StateOfStartBOx=false;
 			}else {
 				StateOfStartBOx=true;
-				a1.Stop();
+				a1.Pause();
 			    StartBox.reset();
 			}
 			
@@ -660,9 +669,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 						}else if(running==true) {
 							a1.changefps(12);
 						}
-						
-						
-						
+					
 						//speedx*=(float)DeltaTime;
 						//speedy*=(float)DeltaTime;
 					
@@ -705,10 +712,8 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 				   StartBox.GoRight();
 				
 				if(I.getStateofButton(GLFW_KEY_ENTER)==1) { //up
-					function=StartBox.Select();
-					if(function==UIBox.CLOSE_WINDOW) {
-						w.CloseWIndow();
-					}
+					StartBox.Select();
+				
 				   
 				}
 				
@@ -750,12 +755,8 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		   battleBox.GoRight();
 		
 		if(I.getStateofButton(GLFW_KEY_ENTER)==1) { //up
-			function=battleBox.Select();
-			if(function==UIBox.USE_MOVE) {
-               
-				
-				
-			}
+			 battleBox.Select();
+		
 		   
 		}
 		if(I.getStateofButton(GLFW_KEY_BACKSPACE)==1) { //up
@@ -870,8 +871,7 @@ private static void EndBattle(Player Player) {
 				
 				DeltaTime=Timer.getTIme()-lastFrame;
 				//System.out.println(DeltaTime);
-				unproccesed-=framCap;//this is like reseting but instead if it is way over for some reason it makes sure to allow all rendering missed 
-			       
+				unproccesed-=framCap;//this is like reseting 
 				//take input
 				 Inputupdate();
 				 
@@ -881,7 +881,7 @@ private static void EndBattle(Player Player) {
 			 
 			      if(frameTime>=1.0) {//if a second has passed print fps
 			    	 
-			    	  DebugPrint("FPS:"+frames+"-------------------------------");
+			    	  //DebugPrint("FPS:"+frames+"-------------------------------");
 			    	 
                       fps=frames;
 			    	//reset frame time and frames  
@@ -987,7 +987,8 @@ public static void UseMove(Moves move) {
 	
 }
 	
-	
+
+
 	
 	
 
@@ -1002,6 +1003,7 @@ private static void initializeFPS() {
 	framCap=1.0/60;
 
 	a1=new Animate(7,player,sloader,0,7);
+
 }	
 	
 }

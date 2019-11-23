@@ -11,11 +11,13 @@ public class SpriteSheetLoader {
     private HashMap<Integer,float[]> Values=new HashMap<Integer,float[]>();//this is the frame(the int) and the correct u and v coords,width and height
     private int lastFrame;
     private float size;
+    private Texture texture;
 
 	
 	
 	public SpriteSheetLoader(String name,float size) {
 		ReadFile(name);
+		texture=new Texture("SpriteSheets/"+name);
 		this.size=size;
 		
 	}
@@ -30,6 +32,8 @@ public class SpriteSheetLoader {
 	private void  ReadFile(String name) {
 		
 		InputStream ist=getClass().getResourceAsStream("/res/SpriteSheets/"+name+".data");//loads the spriter sheet data file
+		
+		
 		
 		if(ist==null) {
 		 System.out.println("SpriteSheet "+name+" can't be found");
@@ -55,11 +59,11 @@ public class SpriteSheetLoader {
 			int id=0;//sets the id to 0 at first
 			for(int i=0;i<valuest.length;i++) {//this is just a loop that reads the data and stores it into a array
 				if(i!=0) {
-					Start.DebugPrint("ln "+lineNumber+" i="+(i-1)+" "+valuest[i-1]);
+					
 				v[i-1]=Float.parseFloat(valuest[i]);//loads in the data to our array
 				}else {
 					id=Integer.parseInt(valuest[i]);//the first number in the data for a single sprite is it's id this allows for easy switching
-					Start.DebugPrint("ln "+lineNumber+" i="+i+" id= "+valuest[i]);
+					
 				}
 			}
 			
@@ -120,6 +124,18 @@ public class SpriteSheetLoader {
 
 	public void setSize(float size) {
 		this.size = size;
+	}
+
+
+
+	public Texture getTexture() {
+		return texture;
+	}
+
+
+
+	public void setTexture(Texture texture) {
+		this.texture = texture;
 	}
 	
 	

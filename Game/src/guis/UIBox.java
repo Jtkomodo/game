@@ -8,12 +8,16 @@ import java.util.Stack;
 
 import org.joml.Vector2f;
 
+import battleClasses.Player;
+import gameEngine.Start;
+
 public class UIBox {
-public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3,CLOSE_WINDOW=100,SAVE_GAME=406;
+
 	private int currentState=0;
 	
 	private boolean isActive=true;
-	
+	private Player p=Start.p;
+
 	private Vector2f position;
 	
 	private List<UIBoxState> statelist=new ArrayList<UIBoxState>();	
@@ -115,24 +119,34 @@ public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3,CLOSE_WINDOW=100,SAV
 	
 	
 	
-	public int Select() {//will return -1 if this changes state otherwise returns a value for us to tell what function is used
-		int returnValue=-1;
+	public void Select() {//will return -1 if this changes state otherwise returns a value for us to tell what function is used
+	
 		UIBoxState state=this.statelist.get(currentState);
 		int liststate=state.getOffsetPositionOnlist();
-		int stateToChangeTo=state.getStringActiveElement(liststate).getState();//this is just telling us what happens if this string element is clicked on
+	    UIStringElement e=state.getStringActiveElement(liststate);
+			
+	if(e!=null) {	
+		int stateToChangeTo=e.getState();//this is just telling us what happens if this string element is clicked on
 		if(stateToChangeTo!=-1) {//-1 means this is not a element that goes to another state
 			backStack.push(this.currentState);
 			setCurrentState(stateToChangeTo);
 			
-		}else {
+		}else if(e.isHasFunction()) {
+			try {
+				e.invokeMethod();
+			} catch (Exception e1) {
 			
-			returnValue=state.getStringActiveElement(liststate).getFunction();
+				e1.printStackTrace();
+			}
+		
+		
+		}
 		}
 		
 		
 		
 		
-		return returnValue;
+	
 	}
 	
 
@@ -175,12 +189,13 @@ public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3,CLOSE_WINDOW=100,SAV
 	}
 
     public void setCurrentState(int currentState) {
-    	
+   
         statelist.get(this.currentState).setHasarrow(false);
     	this.currentState = currentState;
     	statelist.get(currentState).setOffsetPositionOnlist(getUIState(currentState).getBeginElement());
         statelist.get(currentState).setHasarrow(true);
-	}
+    
+    }
     
     public UIBoxState getUIState() {
     	return this.statelist.get(currentState);
@@ -191,3 +206,4 @@ public static final int USE_MOVE=1,USE_ITEM=2,USE_SP_MOVE=3,CLOSE_WINDOW=100,SAV
     	
     }
 }
+	

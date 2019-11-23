@@ -1,6 +1,7 @@
 package gameEngine;
 
-import javafx.animation.Animation;
+import org.joml.Vector2f;
+
 
 public class Animate {
 
@@ -11,19 +12,19 @@ public class Animate {
     private Model model;
     private SpriteSheetLoader animation;
 	private boolean going=true;
-	
+	private Texture texture;
 	
 	
 	public Animate(double fps,Model model,SpriteSheetLoader animation,int start,int end) {
 		this.fps=fps;
 		this.frameTiming=1.0/fps;
 		this.time=Timer.getTIme();
-		this.model=model;
+		this.model=new Model(model.getVertices(),model.getUv_coords());
 		
 		this.finalFrame=animation.getLastFrame();
 		
 		SetStartAndEnd(start,end);
-		
+		texture=animation.getTexture();
 	
 		this.animation=animation;
 	}
@@ -158,6 +159,7 @@ public class Animate {
 		}else {
 			this.end=finalFrame;
 		}
+		this.currentframe=start;
 		
 	}
 	
@@ -165,17 +167,30 @@ public class Animate {
 		this.fps=fps;
 		this.frameTiming=1.0/fps;
 		this.time=Timer.getTIme();
-		this.model=model;
+		this.model=new Model(model.getVertices(),model.getUv_coords());
 		
 		this.finalFrame=animation.getLastFrame();
 		
 		SetStartAndEnd(start,end);
+		texture=animation.getTexture();
 		
 	
 		this.animation=animation;
 	}
+	public void drawAnimatedModel(Vector2f position,float angle,float scale) {
+		Renderer.draw(model, position, angle, scale,texture);
+		
+		
+		
+	}
 	
-	
-	
+	public void drawAnimatedModel(Vector2f position,float angle,float scale,boolean mirror) {
+		if(mirror)
+		Renderer.Mirror();
+		Renderer.draw(model, position, angle, scale,texture);
+		
+		
+		
+	}
 	
 }

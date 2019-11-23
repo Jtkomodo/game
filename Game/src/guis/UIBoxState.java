@@ -8,21 +8,24 @@ import java.util.List;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
-import Data.Moves;
+
 import gameEngine.Model;
 import gameEngine.Renderer;
 import gameEngine.Start;
 import gameEngine.Texture;
-import textrendering.TextBuilder;
+
 
 public class UIBoxState {
 
-	
+	private boolean anyActive=false;
 	private float width,height;//width and height of the UI box;
+	
 	private int beginElement=0;
 	private int amountOfElements,offsetPositionOnlist=0;
 	private List<UIStringElement> elementlist=new ArrayList<UIStringElement>();//all of the string elements
 	private List<UIStringElement> Activeelementlist=new ArrayList<UIStringElement>();//only the string elements that have a action associated with it
+
+	
 	protected HashMap<Vector2f,Integer> Values=new HashMap<Vector2f,Integer>();//this is a way to get the index of the element from the position 
 	protected HashMap<Integer,Vector2f> ValuesInverse=new HashMap<Integer,Vector2f>();
 	protected HashMap<Float,Integer> Amountx=new HashMap<Float,Integer>();//this is to tell how many times the x value is used to know when to delete it from the list
@@ -43,6 +46,8 @@ public class UIBoxState {
 	construct(offsetPosition,width,height,elements,tex);
 	}
 	
+	
+
 	public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,boolean alwaysShown) {
 		this.alwaysShown=alwaysShown;
 		construct(offsetPosition,width,height,elements,tex);
@@ -60,6 +65,28 @@ public class UIBoxState {
 			}
 	
 	
+		public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,float u,float v) {
+			
+		construct(offsetPosition,width,height,elements,tex,u,v);
+		}
+		
+		
+
+		public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,boolean alwaysShown,float u,float v) {
+			this.alwaysShown=alwaysShown;
+			construct(offsetPosition,width,height,elements,tex,u,v);
+			}
+			
+		public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,Vector4f color,float u,float v) {
+			this.color=color;
+			construct(offsetPosition,width,height,elements,tex,u,v);
+			}
+			
+			public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,boolean alwaysShown,Vector4f color,float u,float v) {
+				this.color=color;
+				this.alwaysShown=alwaysShown;
+				construct(offsetPosition,width,height,elements,tex,u,v);
+				}
 		
 		
 		
@@ -94,11 +121,13 @@ public class UIBoxState {
 
 
 	public void setOffsetPositionOnlist(int offsetPositionOnlist) {
+		if(this.anyActive) {
 		this.offsetPositionOnlist=offsetPositionOnlist;
 		Vector2f vector=ValuesInverse.get(offsetPositionOnlist);
 		this.PositionIndexX=sortx.indexOf(vector.x);
 		this.PositionIndexY=sorty.indexOf(vector.y);
-	}
+		}
+		}
 
 
 
@@ -107,18 +136,21 @@ public class UIBoxState {
 		
 	return this.amountOfElements;	
 	}
+	public void setUv(float[] uv) {
+		this.uv = uv;
+	}
 	
 	public void addElement(UIStringElement e) {
 		elementlist.add(e);
 	    
 	
 		if(e.isActive()) {
+			this.anyActive=true;
 			if((e.getoffset().x<=ValuesInverse.get(0).x) && ( e.getoffset().y<=ValuesInverse.get(0).y)) {
 		    	this.beginElement=this.Activeelementlist.size();
 		    	
 		    }
-				
-				
+			
 			Activeelementlist.add(e);
 			Vector2f Vector=e.getoffset();
 	        Values.put(Vector,this.Activeelementlist.size()-1);
@@ -151,7 +183,7 @@ public class UIBoxState {
 		if(e.isActive()) {
 			
 			
-			
+			this.anyActive=true;
 		
 			Vector2f Vector=e.getoffset();
 	        Values.remove(Vector);
@@ -178,7 +210,13 @@ public class UIBoxState {
 			 e=elementlist.get(i);
 			
 			 if(e.isActive()) {
-
+					
+				
+						
+				 
+				 
+				 
+				    this.anyActive=true;
 					 Vector=e.getoffset();
 			        int value=Values.get(Vector);
 			        Values.put(Vector, value-1);
@@ -234,7 +272,8 @@ public class UIBoxState {
     	
     	
     }
- if(currentlyActive) {
+ if(currentlyActive && this.anyActive) {
+	 
     Vector2f pos=new Vector2f(Activeelementlist.get(offsetPositionOnlist).getoffset());
     
    Vector2f pos2=new Vector2f(0);
@@ -256,15 +295,80 @@ public class UIBoxState {
 	}
 	
 	
+private void construct(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,float u,float v) {
+		
+		this.tex=tex;
+		this.offsetPosition=offsetPosition;
+		this.width=width;
+		this.height=height;
+		this.amountOfElements=elements.length;
+		
+		m=new Model(width, height, u, v, tex.getW(),tex.getH());
+		arrow=new Model(vert,Auv);
+		
+		loadList(elements);
+		
+}
+	
+private void loadList(UIStringElement elements[]) {
+	Vector2f first=elements[0].getoffset();
+	int i2=0;
+	boolean start=false;
+	
+	for(int i=0;i<elements.length;i++) {
+	UIStringElement e=elements[i];
 	
 	
 	
+	elementlist.add(e);
+	if(e.isActive()) {
+		this.anyActive=true;
+	if(!start) {
+		this.beginElement=i2;
+		start=true;
+	}
+		
+		
+	
+	
+		
+	Activeelementlist.add(e);
+	Vector2f Vector=e.getoffset();
+    Values.put(Vector,i2);
+    ValuesInverse.put(i2,Vector);
+    
+    
+    int x=this.Amountx.getOrDefault(Vector.x,0);
+    int y=this.Amounty.getOrDefault(Vector.y,0);
+    Amountx.put(Vector.x,x+1);
+    Amounty.put(Vector.y,y+1);
+    if(!sortx.contains(Vector.x)) {
+    sortx.add(Vector.x);}
+    if(!sorty.contains(Vector.y)) {
+    sorty.add(Vector.y);}
+    i2++;
+	
+	}
+
+	}
+	
+	
+	
+	Collections.sort(sortx);
+	Collections.sort(sorty);
+
+
+	this.PositionIndexX=sortx.indexOf(first.x);
+	this.PositionIndexY=sorty.indexOf(first.y);
+	
+	
+	
+	
+}
+
+
+
 	private void construct(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex) {
-		int[] ind= {
-				0,1,2,
-				2,3,0	
-					
-			};
 		
 		this.tex=tex;
 		this.offsetPosition=offsetPosition;
@@ -282,56 +386,10 @@ public class UIBoxState {
 		 
 
 		
-		m=new Model(vertText,uv,ind);
-		arrow=new Model(vert,Auv,ind);
+		m=new Model(vertText,uv);
+		arrow=new Model(vert,Auv);
 		
-		Vector2f first=elements[0].getoffset();
-		int i2=0;
-		boolean start=false;
-		
-		for(int i=0;i<elements.length;i++) {
-		UIStringElement e=elements[i];
-		
-		
-		
-		elementlist.add(e);
-		if(e.isActive()) {
-		if(!start) {
-			this.beginElement=i2;
-			start=true;
-		}
-			
-			
-		
-		
-		Activeelementlist.add(e);
-		Vector2f Vector=e.getoffset();
-        Values.put(Vector,i2);
-        ValuesInverse.put(i2,Vector);
-        
-        
-        int x=this.Amountx.getOrDefault(Vector.x,0);
-        int y=this.Amounty.getOrDefault(Vector.y,0);
-        Amountx.put(Vector.x,x+1);
-        Amounty.put(Vector.y,y+1);
-        if(!sortx.contains(Vector.x)) {
-        sortx.add(Vector.x);}
-        if(!sorty.contains(Vector.y)) {
-        sorty.add(Vector.y);}
-        i2++;
-		
-		}
-	
-		}
-		
-		
-		
-		Collections.sort(sortx);
-		Collections.sort(sorty);
-	
-
-		this.PositionIndexX=sortx.indexOf(first.x);
-		this.PositionIndexY=sorty.indexOf(first.y);
+		loadList(elements);
 	
 	
 	}
@@ -355,7 +413,7 @@ public class UIBoxState {
 	}
 
 	public void  IncreasePositionIndexX() {
-		if(PositionIndexX!=sortx.size()-1) {
+		if(PositionIndexX!=sortx.size()-1 && this.anyActive ) {
 			PositionIndexX++;
 			//first just check if that position exist on our map
 		
@@ -426,7 +484,7 @@ public class UIBoxState {
 
 	
 	public void DecreasePositionIndexY() {
-		if(PositionIndexY!=0) {
+		if(PositionIndexY!=0 && this.anyActive) {
 		PositionIndexY--;
 		
 		
@@ -455,7 +513,7 @@ public class UIBoxState {
 	}
 	
 	public void  IncreasePositionIndexY() {
-		if(PositionIndexY!=sorty.size()-1) {
+		if(PositionIndexY!=sorty.size()-1 && this.anyActive) {
 			PositionIndexY++;
 			
 		
@@ -486,7 +544,7 @@ public class UIBoxState {
 
 	
 	public void DecreasePositionIndeX() {
-		if(PositionIndexX!=0) {
+		if(PositionIndexX!=0 && this.anyActive) {
 		PositionIndexX--;
 		
 		float x=this.sortx.get(this.PositionIndexX);
@@ -558,8 +616,12 @@ public class UIBoxState {
 	}
 	
 	public UIStringElement getStringActiveElement(int index) {
-		return Activeelementlist.get(index);
+		if(this.Activeelementlist.size()!=0) {
 		
+		
+		return Activeelementlist.get(index);
+		}
+		else return null;
 	}
 	
 	public UIStringElement getStringActiveElement(Vector2f position) {
@@ -576,5 +638,14 @@ public class UIBoxState {
 		this.offsetPositionOnlist=this.Values.get(vector);
 	}
 	
+	
+	
+	public boolean isAnyActive() {
+		return anyActive;
+	}
+
+
+
+
 	
 }

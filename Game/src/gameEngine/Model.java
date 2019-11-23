@@ -15,8 +15,69 @@ public class Model {
 	private int vao_id,v_id,tex_id,ind_id,DrawMethod=GL_TRIANGLES;
 	private static  boolean draw=true;
 	private float[] vertices,uv_coords;
-	private int[] indeces;
-	public Model(float[] vertices,float[] uv_coords,int[] indices) {
+	private int[] indeces= {
+			0,1,2,
+			2,3,0	
+				
+		};;
+		
+
+		
+
+		
+		
+public Model(float width,float height,float u,float v,float texWidth,float texHeight) {
+		  float  Texwidth=texWidth;
+			float Texheight=texHeight;		
+			float  wi=width;
+			float  h=height;
+			float  Texx=u;
+			float Texy=v;		
+			
+			float[]  uv=new float[]{
+					Texx/Texwidth,Texy/Texheight,
+					(Texx+wi)/Texwidth,Texy/Texheight,
+					(Texx+wi)/Texwidth,(Texy+h)/Texheight,
+					Texx/Texwidth,(Texy+h)/Texheight
+					};
+			
+			float[] vert={
+					   -wi,+h,
+						wi,h,
+						wi,-h,
+						-wi,-h};
+			
+			MakeModel(vert,uv,indeces);
+			
+			
+		
+	}
+		
+		
+		
+		
+		
+	public Model(float[] vertices,float[] uv_coords) {
+		
+	 MakeModel(vertices,uv_coords,indeces);
+		
+	}
+		
+		
+	public Model(float[] vertices,float[] uv_coords,int[] indeces) {
+		
+		 MakeModel(vertices,uv_coords,indeces);
+			
+		}
+				
+		
+		
+		
+		
+		
+		
+		
+	private void MakeModel(float[] vertices,float[] uv_coords,int[] indices) {
 		this.vertices=vertices;
 		this.uv_coords=uv_coords;
 		this.indeces=indices;

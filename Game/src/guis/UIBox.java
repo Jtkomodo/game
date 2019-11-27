@@ -18,7 +18,7 @@ public class UIBox {
 	private int currentState=0;
 	
 	private boolean isActive=false;
-	private Player p=Start.p;
+    private Player p=Start.p;
 
 	private Vector2f position;
 	private static boolean isAnyOpened;
@@ -211,16 +211,19 @@ public void Update(GetInput I) {
 
 
   public void show() {
-	isActive=true;
+	if(!isActive) {
+		
+	  isActive=true;
 	isAnyOpened=true;
-	opended.add(this);
+	opended.add(this);}
   }
   
   public void hide() {
 	  if(isActive) {
+		  
 	  isActive=false;
 	  opended.remove(this);
-	  isAnyOpened=!opended.isEmpty();}
+	  isAnyOpened=!(opended.isEmpty());}
   }
  public boolean isActive() {
 	 

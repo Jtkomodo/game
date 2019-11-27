@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.joml.Vector2f;
+
 import Data.Moves;
 
 public class Player {
@@ -13,6 +15,8 @@ public class Player {
 	private List<Moves> movelist= new ArrayList<Moves>();
 	private List<Moves> spmovelist=new ArrayList<Moves>();;
 	private HashMap<String,Moves> moveStrings=new HashMap<String,Moves>();
+	
+	
 	
 	public Player(float atk,float def,float hp,Moves[] moves) {
 		

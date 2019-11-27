@@ -1,5 +1,6 @@
 package ScripterCommands;
 
+import Scripter.Proccesor;
 import gameEngine.Timer;
 
 public class Wait extends Commands {
@@ -26,7 +27,7 @@ public class Wait extends Commands {
 	public void Update(double time2) {
 		if((time2-StartTime)>=time) {
 		this.completed=true;
-		gameEngine.Start.DebugPrint("the wait is over");
+		gameEngine.Start.DebugPrint("the wait is over",this.getClass());
 		this.hasBeenStarted=false;
 		}
 	}

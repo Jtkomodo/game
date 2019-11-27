@@ -20,6 +20,7 @@ import textrendering.TextBuilder;
 import Data.Constants;
 import Data.Moves;
 import battleClasses.Player;
+import entitys.DynamicEntity;
 import guis.GUIMEthods;
 import guis.TextureElement;
 import guis.UIBox;
@@ -31,6 +32,8 @@ import sun.security.util.Debug;
 import Data.Pcs;
 import  Scripter.Proccesor;
 import ScripterCommands.Wait;
+import animation.Animate;
+import animation.AnimationHandler;
 public class Start {
     
 	
@@ -63,6 +66,7 @@ public class Start {
     public static float PHP;
     public static float[] uvtextbox,uvArrow,vert; 
     public static UIBox battleBox,StartBox;
+    public static DynamicEntity Ply;
    public static int amountOfMoves,amountOfSPMoves,function;
    
   
@@ -502,17 +506,49 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	    F12=I.getStateofButton(GLFW_KEY_F12),C=I.getStateofButton(GLFW_KEY_C),Y=I.getStateofButton(GLFW_KEY_Y),W=I.getStateofButton(GLFW_KEY_W)
 		,ESCAPE=I.getStateofButton(GLFW_KEY_ESCAPE),ENTER=I.getStateofButton(GLFW_KEY_ENTER),
 		BACKSPACE=I.getStateofButton(GLFW_KEY_BACKSPACE),S=I.getStateofButton(GLFW_KEY_S),CONTROLRIGHT=I.getStateofButton(GLFW_KEY_RIGHT_CONTROL),
-		CONTROLLEFT=I.getStateofButton(GLFW_KEY_LEFT_CONTROL),F=I.getStateofButton(GLFW_KEY_F);
+		CONTROLLEFT=I.getStateofButton(GLFW_KEY_LEFT_CONTROL),F=I.getStateofButton(GLFW_KEY_F),H=I.getStateofButton(GLFW_KEY_H);
 		
 		
 		
 		
 		
 		
+	    if(H==1) {
+	    	if(a1.exists()) {
+	    		a1.removeAnimation();
+	    	}
+	    	else {
+	    		a1.addAnimation();
+	    	}
+	    }
+	    
+	    
+	    
 		
 		
 		
-		
+		if(testKey==2) {
+			//	x=0;y=0;
+				if (overworld==false) {
+					overworld=true;
+			         battleBox.hide();
+					
+				}else {
+					overworld=false;
+					a1.Stop();
+					StartBox.reset();
+					StateOfStartBOx=false;
+					battleState=0;
+					arrowPosition=0;
+					sprite=0;
+					battleBox.show();
+				
+				}
+				
+				
+				
+			}
+			
 		
 		
 		
@@ -611,27 +647,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 			}
 					
 			
-	if(testKey==2) {
-	//	x=0;y=0;
-		if (overworld==false) {
-			overworld=true;
-	
-			
-		}else {
-			overworld=false;
-			a1.Stop();
-			StartBox.reset();
-			StateOfStartBOx=false;
-			battleState=0;
-			arrowPosition=0;
-			sprite=0;
-			
-		}
-		
-		
-		
-	}
-	
+
 
 	
 	
@@ -767,7 +783,7 @@ private static void EndBattle(Player Player) {
 	 	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
 	 	 	 SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
 	 	 	 SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
-	 	    battleBox.show();	    
+	 
 	 	 	 battleBox.draw();
 	 	     //battleBox.getUIState().setOffsetPositionOnlist(arrowPosition);   	   
 	 	   
@@ -822,7 +838,7 @@ private static void EndBattle(Player Player) {
 		    canRender=false;//don't allow rendering until time
 			time2=Timer.getTIme();//gets current time
 		    passed=time2-time;//this is the time since the last time through the loop
-			a1.updateTime();  		
+			AnimationHandler.update();
 			
 		    unproccesed+=passed;//this is the time that we have not rendered anything
 			Ti+=passed;
@@ -953,6 +969,10 @@ public static void DebugPrint(String string) {
 if(DebugPrint)	
 System.out.println(string);}	
 		
+public static void DebugPrint(String string,Class calledFrom) {
+if(DebugPrint)	
+System.out.println("["+calledFrom.getName()+"]---"+string);}	
+		
 
 	
 public static void UseMove(Moves move) {
@@ -976,6 +996,7 @@ private static void initializeFPS() {
 	framCap=1.0/60;
 
 	a1=new Animate(7,player,sloader,0,7);
+ 
 
 }	
 	

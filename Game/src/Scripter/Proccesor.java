@@ -16,7 +16,7 @@ public class Proccesor {
 	
 	public static void addComandtoQueue(Commands command) {
 		Commands.add(command);
-		Start.DebugPrint("added command");
+		Start.DebugPrint("added command",Proccesor.class);
 	}
 	public static void proccesQueue(double time2) {
 		           
@@ -34,6 +34,8 @@ public class Proccesor {
 		
 		
 	}else {//if it has been completed remove it from the queue
+		
+		Start.DebugPrint("removed command "+Commands.peek().getClass().getName(),Proccesor.class);
 		Commands.poll();
 		
 	}

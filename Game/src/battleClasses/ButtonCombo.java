@@ -1,6 +1,6 @@
 package battleClasses;
 
-import gameEngine.Animate;
+import animation.Animate;
 
 public class ButtonCombo {
 
@@ -26,7 +26,7 @@ public class ButtonCombo {
 		
 	}
 	
-	
+   
 	
 	
 	

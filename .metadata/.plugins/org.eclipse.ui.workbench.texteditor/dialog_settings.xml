@@ -2,12 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="battleupdate" key="selection"/>
+		<item value="AnimationHandler" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="AnimationHandler"/>
+			<item value="a1"/>
+			<item value="a1."/>
+			<item value=".remove"/>
+			<item value=".show()"/>
+			<item value="show"/>
+			<item value="startBox.hide"/>
+			<item value="a1.draw"/>
 			<item value="battleUpdate"/>
 			<item value="battleBox"/>
 			<item value="battlebox"/>
@@ -15,21 +23,13 @@
 			<item value="up="/>
 			<item value="facingLeft"/>
 			<item value="UIStringElement"/>
-			<item value=".enable"/>
-			<item value="Model "/>
-			<item value="ModelFramework"/>
-			<item value="Model"/>
-			<item value="BatchedModel"/>
-			<item value="batchedModel"/>
-			<item value="inputupdate"/>
-			<item value="a1."/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 			<item value="UIElement"/>
 			<item value="ModelFramework "/>
 			<item value="ModelFramework"/>
 			<item value="{Player.class,String.class}"/>
-			<item value=""/>
 			<item value="offsetPosition"/>
 			<item value="offset"/>
 			<item value="back"/>

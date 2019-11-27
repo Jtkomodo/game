@@ -3,9 +3,10 @@ package guis;
 import org.joml.Vector2f;
 
 import gameEngine.Model;
+import gameEngine.Renderer;
 import gameEngine.Texture;
 
-public class TextureElement {
+public class TextureElement extends UIElement {
 
 	private Model model;
 	private Texture texture;
@@ -32,6 +33,12 @@ public class TextureElement {
 		
 		
 		
+		
+	}
+
+	@Override
+	public void drawElement(Vector2f Position) {
+	Renderer.draw(model, Position,0, scale, texture);
 		
 	}
 	

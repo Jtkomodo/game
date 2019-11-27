@@ -21,11 +21,15 @@ import Data.Constants;
 import Data.Moves;
 import battleClasses.Player;
 import guis.GUIMEthods;
+import guis.TextureElement;
 import guis.UIBox;
 import guis.UIBoxState;
+import guis.UIElement;
 import guis.UIStringElement;
 import sun.security.util.Debug;
 import Data.Pcs;
+import  Scripter.Proccesor;
+import Scripter.Wait;
 public class Start {
     
 	
@@ -312,9 +316,9 @@ public class Start {
 				new UIStringElement("bag",new Vector2f(-35,-5), .15f,Constants.BLACK,2),
 				new UIStringElement("specials",new Vector2f(1,-5), .15f,Constants.BLACK,3)
 		};
-		UIStringElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
+		UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
 				new UIStringElement(p.getmoves()[0].getName(),new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,p.getmoves()[0].name()}),new UIStringElement("test ",new Vector2f(15,5), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,"test"}),
-				new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,"test"}),new UIStringElement("test ",new Vector2f(15,-8), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,"test"})
+				new TextureElement(playerTex,32,46,new Vector2f(-54,-8),new Vector2f(0,0),.15f),new UIStringElement("test ",new Vector2f(15,-8), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,"test"})
 			
 		};
 		
@@ -355,8 +359,8 @@ public class Start {
 	if(canRender) {
 		
 	  // TextureUpdate(MAP)
-Model.enable();
-BatchedModel.enable();
+Renderer.enable();//enables render
+
 	
 		
 	//if(test==false) {
@@ -483,7 +487,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	}
 
 	private static void Inputupdate() {
-		
+	
 		w.update();//this is needed to actually poll events from keyboard 
 		I.findKeys();
 	    dKeys=I.getDirectionalInput();
@@ -513,7 +517,9 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		
 		
 	
-		
+		if( I.getStateofButton(GLFW_KEY_Y)==1) {
+			Proccesor.addComandtoQueue(new Wait(10d));
+			}
 		
 		
 		if( I.getStateofButton(GLFW_KEY_F2)==1) {
@@ -851,7 +857,7 @@ private static void EndBattle(Player Player) {
 	 	   
 	private static void fps() {
 	
-		    Model.disable();
+		    Renderer.disable();
 		    canRender=false;//don't allow rendering until time
 			time2=Timer.getTIme();//gets current time
 		    passed=time2-time;//this is the time since the last time through the loop
@@ -873,7 +879,13 @@ private static void EndBattle(Player Player) {
 				//System.out.println(DeltaTime);
 				unproccesed-=framCap;//this is like reseting 
 				//take input
-				 Inputupdate();
+				
+				Proccesor.proccesQueue(time);
+				
+				if(Proccesor.isUserInputallowed()) {
+				 Inputupdate();}else {
+						w.update();//this is needed to still allow exiting
+				 }
 				 
 			     canRender=true;//now we render	
 			 	frames++;

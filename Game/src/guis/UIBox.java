@@ -123,7 +123,7 @@ public class UIBox {
 	
 		UIBoxState state=this.statelist.get(currentState);
 		int liststate=state.getOffsetPositionOnlist();
-	    UIStringElement e=state.getStringActiveElement(liststate);
+	    UIElement e=state.getStringActiveElement(liststate);
 			
 	if(e!=null) {	
 		int stateToChangeTo=e.getState();//this is just telling us what happens if this string element is clicked on

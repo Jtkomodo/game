@@ -10,23 +10,13 @@ import org.joml.Vector4f;
 import gameEngine.Start;
 import textrendering.TextBuilder;
 
-public class UIStringElement {
+public class UIStringElement extends UIElement{
 	
-    private Class baseCLass=GUIMEthods.class;
-    private Object objToCallfrom;
-	private Vector2f offset;
+    
 	private TextBuilder text=new TextBuilder(Start.aakar); 
 	private String string;
-	private Object[] arguments;
 	private float scale;
-    private int state=-1;//this is the number to specify which state to switch to when this element is selected
 	private Vector4f color;
-	private boolean HasFunction=false,hasColor=false,active=false,ChangesState=false;
-	
-
-
-
-	private Method Function;
 	
 	
 	public UIStringElement(String string,Vector2f offset,float scale) {//not active no color
@@ -233,12 +223,8 @@ public class UIStringElement {
 	
 	
 	
-	public boolean isHasFunction() {
-		return HasFunction;
-	}
-	public boolean isActive() {
-		return active;
-	}
+
+	@Override
 	public void drawElement(Vector2f Position) {
 	
 	Vector2f noffset=new Vector2f();offset.add(Position,noffset);
@@ -252,13 +238,7 @@ public class UIStringElement {
 		
 	}
 
-	public Vector2f getoffset() {
-		return offset;
-	}
-
-	public void setoffset(Vector2f offset) {
-		this.offset = offset;
-	}
+	
 
 	public String getString() {
 		return string;
@@ -279,70 +259,7 @@ public class UIStringElement {
 	
 	
 	
-	public int getState() {
-		return state;
-	}
 	
-	
-	
-public void invokeMethod() throws Exception {
-		
-	Start.DebugPrint(this.string);
-	this.Function.invoke(this.objToCallfrom,this.arguments);
-	
-		
-	}
 	
 
-	
-	
-private void loadFunction(String functionName,Class[] argumentTypes) {
-	
-	try {
-		this.HasFunction=true;
-		this.Function=this.baseCLass.getMethod(functionName,argumentTypes);
-		
-	} catch (NoSuchMethodException e) {
-		
-		e.printStackTrace();
-		System.exit(3007);	
-	} catch (SecurityException e) {
-		
-		e.printStackTrace();
-		System.exit(3002);
-	}
-	
-}
-
-
-
-
-public boolean isChangesState() {
-	return ChangesState;
-}
-public void setChangesState(boolean changesState) {
-	ChangesState = changesState;
-}
-
-public void changeMethod(String functionName,Object[] arguments) {
-	Class[] cArg; 
-	if(arguments!=null) {
-		 cArg= new Class[arguments.length];
-		
-		 for(int i=0;i<arguments.length;i++) {
-			 cArg[i]=arguments[i].getClass();
-		 }
-	}else {
-		cArg=null;
-	}
-    
-    loadFunction(functionName, cArg);
-    
-
-}
-public void changeParameters(Object[] arguments) {
-     this.arguments=arguments;
-}
-
-	
 }

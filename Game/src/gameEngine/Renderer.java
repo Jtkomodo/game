@@ -9,46 +9,14 @@ public class Renderer {
 	private static int drawcalls=0,Location=Start.location,Rts=Start.RTS,Color=Start.Color,Projection=Start.Projection;
 	private static ShaderProgram s=Start.s;
 	private static boolean mirror=false;
+	private static boolean  draw=true;
 	private static Camera cam=Start.cam;
 	
 	
 	
-
-
-	public static void draw(BatchedModel model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
-		
-		Vector4f newcolor=new Vector4f(0);
-		
-		color.div(255,newcolor);
-		 
-		   texture.bind(0);
-		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
-		   if(mirror) {
-			   
-			   MatrixMath.mirror(rts);
-		   }
-		   
-		   s.loadInt(Location, 0); 
-		  	   s.loadMat(Projection,cam.getProjection());
-		       s.loadMat(Rts, rts);
-		       s.loadVec4(Color,newcolor);;	  
-		  model.draw();	 
-			
-		    
-		
-		  Start.s.loadVec4(Color,Data.Constants.DEFAULT_COLOR);;	 
-		drawcalls++;
-		
-		mirror=false;
 	
-		
-	}
-	
-	
-	
-	
-	public static void draw(Model model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
-
+	public static void draw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
+if(draw) {
 	Vector4f newcolor=new Vector4f(0);
 		
 		color.div(255,newcolor);
@@ -76,7 +44,7 @@ public class Renderer {
 		  Start.s.loadVec4(Color,Data.Constants.DEFAULT_COLOR);;	 		
 			drawcalls++;
 		
-			mirror=false;
+			mirror=false;}
 				
 	}
 	
@@ -85,39 +53,13 @@ public class Renderer {
 	
 	
 	
-	public static void draw(BatchedModel model,Vector2f position,float angle,float scale,Texture texture) {
-
-		
-		
-		 
-		   texture.bind(0);
-		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
- if(mirror) {
-			   
-			   MatrixMath.mirror(rts);
-		   }
-		   
-		   s.loadInt(Location, 0); 
-		  	   s.loadMat(Projection,cam.getProjection());
-		       s.loadMat(Rts, rts);
-		  model.draw();	 
-			
-		    
-		
-		
-		
-		
-		
-		
-			drawcalls++;
-			mirror=false;
-			
-	}
 	
 	
 	
-   public static void draw(Model model,Vector2f position,float angle,float scale,Texture texture) {
-		drawcalls++;
+	
+   public static void draw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture) {
+	   if(draw) {	
+	   drawcalls++;
 		
 		 
 		   texture.bind(0);
@@ -133,11 +75,11 @@ public class Renderer {
 		  model.draw();	 
 			
 			mirror=false;
-			
+	   }
 		
 	}
-   public static void UIdraw(BatchedModel model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
-		
+   public static void UIdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
+	   if(draw) {
 		Vector4f newcolor=new Vector4f(0);
 		
 		color.div(255,newcolor);
@@ -161,11 +103,11 @@ public class Renderer {
 		drawcalls++;
 		
 		mirror=false;
-	
+	   }
 		
 	}
-	public static void UIdraw(BatchedModel model,Vector2f position,float angle,float scale,Texture texture) {
-
+	public static void UIdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture) {
+		if(draw) {
 		
 		
 		 
@@ -189,7 +131,7 @@ if(mirror) {
 		
 		
 			drawcalls++;
-			mirror=false;
+			mirror=false;}
 			
 	}
  
@@ -235,6 +177,17 @@ if(mirror) {
 	public static void setCam(Camera cam) {
 		Renderer.cam = cam;
 	}
+
+
+	 public static void enable() {
+		   
+		   draw=true;
+	   }
+	   public static void disable() {
+		   
+	       draw=false;
+	   }
+	
 
 
 	

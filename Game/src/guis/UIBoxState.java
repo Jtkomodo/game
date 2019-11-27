@@ -22,8 +22,8 @@ public class UIBoxState {
 	
 	private int beginElement=0;
 	private int amountOfElements,offsetPositionOnlist=0;
-	private List<UIStringElement> elementlist=new ArrayList<UIStringElement>();//all of the string elements
-	private List<UIStringElement> Activeelementlist=new ArrayList<UIStringElement>();//only the string elements that have a action associated with it
+	private List<UIElement> elementlist=new ArrayList<UIElement>();//all of the string elements
+	private List<UIElement> Activeelementlist=new ArrayList<UIElement>();//only the string elements that have a action associated with it
 
 	
 	protected HashMap<Vector2f,Integer> Values=new HashMap<Vector2f,Integer>();//this is a way to get the index of the element from the position 
@@ -41,48 +41,48 @@ public class UIBoxState {
 	private int PositionIndexX=0,PositionIndexY=0;
 	
 	
-	public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex) {
+	public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex) {
 		
 	construct(offsetPosition,width,height,elements,tex);
 	}
 	
 	
 
-	public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,boolean alwaysShown) {
+	public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,boolean alwaysShown) {
 		this.alwaysShown=alwaysShown;
 		construct(offsetPosition,width,height,elements,tex);
 		}
 		
-	public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,Vector4f color) {
+	public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,Vector4f color) {
 		this.color=color;
 		construct(offsetPosition,width,height,elements,tex);
 		}
 		
-		public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,boolean alwaysShown,Vector4f color) {
+		public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,boolean alwaysShown,Vector4f color) {
 			this.color=color;
 			this.alwaysShown=alwaysShown;
 			construct(offsetPosition,width,height,elements,tex);
 			}
 	
 	
-		public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,float u,float v) {
+		public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,float u,float v) {
 			
 		construct(offsetPosition,width,height,elements,tex,u,v);
 		}
 		
 		
 
-		public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,boolean alwaysShown,float u,float v) {
+		public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,boolean alwaysShown,float u,float v) {
 			this.alwaysShown=alwaysShown;
 			construct(offsetPosition,width,height,elements,tex,u,v);
 			}
 			
-		public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,Vector4f color,float u,float v) {
+		public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,Vector4f color,float u,float v) {
 			this.color=color;
 			construct(offsetPosition,width,height,elements,tex,u,v);
 			}
 			
-			public UIBoxState(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,boolean alwaysShown,Vector4f color,float u,float v) {
+			public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,boolean alwaysShown,Vector4f color,float u,float v) {
 				this.color=color;
 				this.alwaysShown=alwaysShown;
 				construct(offsetPosition,width,height,elements,tex,u,v);
@@ -140,7 +140,7 @@ public class UIBoxState {
 		this.uv = uv;
 	}
 	
-	public void addElement(UIStringElement e) {
+	public void addElement(UIElement e) {
 		elementlist.add(e);
 	    
 	
@@ -176,7 +176,7 @@ public class UIBoxState {
 	
 		if(index<=this.amountOfElements) {
 		
-		UIStringElement e=elementlist.get(index);
+		UIElement e=elementlist.get(index);
 		
 		elementlist.remove(index);
 		this.amountOfElements--;
@@ -245,7 +245,7 @@ public class UIBoxState {
 		
 	}
 	
-	public void replaceElement(UIStringElement e,int index) {
+	public void replaceElement(UIElement e,int index) {
 		
 	     removeElement(index);
 	     addElement(e);
@@ -265,7 +265,7 @@ public class UIBoxState {
     		Renderer.draw(m, noffsetPosition, 0, 1,tex,color);
     	}
     for(int i=0;i<this.amountOfElements;i++) {
-    	UIStringElement element=this.elementlist.get(i);
+    	UIElement element=this.elementlist.get(i);
     	
     	
     	element.drawElement(noffsetPosition);
@@ -295,7 +295,7 @@ public class UIBoxState {
 	}
 	
 	
-private void construct(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex,float u,float v) {
+private void construct(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,float u,float v) {
 		
 		this.tex=tex;
 		this.offsetPosition=offsetPosition;
@@ -310,13 +310,13 @@ private void construct(Vector2f offsetPosition,float width,float height,UIString
 		
 }
 	
-private void loadList(UIStringElement elements[]) {
+private void loadList(UIElement elements[]) {
 	Vector2f first=elements[0].getoffset();
 	int i2=0;
 	boolean start=false;
 	
 	for(int i=0;i<elements.length;i++) {
-	UIStringElement e=elements[i];
+	UIElement e=elements[i];
 	
 	
 	
@@ -368,7 +368,7 @@ private void loadList(UIStringElement elements[]) {
 
 
 
-	private void construct(Vector2f offsetPosition,float width,float height,UIStringElement[] elements,Texture tex) {
+	private void construct(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex) {
 		
 		this.tex=tex;
 		this.offsetPosition=offsetPosition;
@@ -610,12 +610,12 @@ private void loadList(UIStringElement elements[]) {
 		changeOffsetPositionOnList();
 		}
 	}
-	public UIStringElement getStringElement(int index) {
+	public UIElement getStringElement(int index) {
 		return elementlist.get(index);
 		
 	}
 	
-	public UIStringElement getStringActiveElement(int index) {
+	public UIElement getStringActiveElement(int index) {
 		if(this.Activeelementlist.size()!=0) {
 		
 		
@@ -624,7 +624,7 @@ private void loadList(UIStringElement elements[]) {
 		else return null;
 	}
 	
-	public UIStringElement getStringActiveElement(Vector2f position) {
+	public UIElement getStringActiveElement(Vector2f position) {
 		return this.Activeelementlist.get(Values.get(position));
 	}
 	

@@ -10,9 +10,9 @@ import  org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL30;
 
 
-public class Model {
+public class Model extends ModelFramwork{
     private int drawCount;
-	private int vao_id,v_id,tex_id,ind_id,DrawMethod=GL_TRIANGLES;
+	private int vao_id,v_id,tex_id,ind_id;
 	private static  boolean draw=true;
 	private float[] vertices,uv_coords;
 	private int[] indeces= {
@@ -192,14 +192,7 @@ public Model(float width,float height,float u,float v,float texWidth,float texHe
 			}
 	
 
-   public static void enable() {
-	   
-	   draw=true;
-   }
-   public static void disable() {
-	   
-       draw=false;
-   }
+  
 private void enableAtributes() {
 	glEnableVertexAttribArray(0);
 	   glEnableVertexAttribArray(1);
@@ -210,12 +203,7 @@ private void disableAtributes() {
 }
 
 
-public void setDrawMethod(int drawMethod) {
-	if((drawMethod==GL_TRIANGLES) ||(drawMethod==GL_LINES)||(drawMethod==GL_POINTS)) {
-		if(drawMethod!=DrawMethod) {  
-		System.out.println("Switching Draw Method to "+drawMethod );
-		DrawMethod = drawMethod;}}
-}
+
 
 }
 

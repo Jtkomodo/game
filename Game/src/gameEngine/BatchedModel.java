@@ -18,10 +18,10 @@ import org.lwjgl.opengl.GL;
    either v_id,tex_id,or ind_id and lastly the data in float array and integer array for v_id,tex_id and ind_id.  
 */
 
-public class BatchedModel {
+public class BatchedModel extends ModelFramwork{
 	 private int drawCount,drawCount2;
 		private int v_id,tex_id,ind_id;//made these public so that we can get to them from another method to change values
-	private int indBase,pionter,sections,DrawMethod=GL_TRIANGLES;
+	private int indBase,pionter,sections;
 	private long Texsize=1000000;//size of the amount of space to allocate for the buffers 
 	private long Indsize=1000000;
 	private long Vertsize=1000000;
@@ -46,7 +46,7 @@ public class BatchedModel {
 		init();
 		}
 	
-	
+	@Override
 	public void draw() {
 		
 		glBindBuffer(GL_ARRAY_BUFFER,v_id);
@@ -120,11 +120,11 @@ private static IntBuffer makeBuffer(int[] array ) {
 }	
 	
 	
-public static void enable() {
+public void enable() {
 	   glEnableVertexAttribArray(0);
 	   glEnableVertexAttribArray(1);
 }
-public static void disable() {
+public void disable() {
 	   glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
 }
@@ -176,7 +176,7 @@ public void flushBuffers() {//clears all the buffers and moves the pionter back 
 	
 }	
 private void init() {
-	
+	enable();
 	
 	glBindBuffer(GL_ARRAY_BUFFER,v_id);
 	  glBufferData(GL_ARRAY_BUFFER,Vertsize,GL_DYNAMIC_DRAW);
@@ -196,10 +196,8 @@ unbindBuffers();
 
 
 
-public void setDrawMethod(int drawMethod) {
-	if((drawMethod==GL_TRIANGLES) ||(drawMethod==GL_LINES)||(drawMethod==GL_POINTS)) {
-       if(drawMethod!=DrawMethod) {
-		System.out.println("Switching to Drawmethod "+drawMethod );
-		DrawMethod = drawMethod;}}
-}
+
+
+
+
 }

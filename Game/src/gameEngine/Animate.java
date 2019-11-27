@@ -8,10 +8,12 @@ public class Animate {
 	
 	private double time,time2,timepassed,frametime=0;
 	private double frameTiming,unp=0,fps;
+	private int frameAnmount;
 	private int currentframe=0,finalFrame,start,end;
+	private int[] HowlongEachFrameLasts;
     private Model model;
     private SpriteSheetLoader animation;
-	private boolean going=true;
+	private boolean going=true,eachTimed=false;
 	private Texture texture;
 	
 	
@@ -30,6 +32,31 @@ public class Animate {
 	}
 	
 	
+	
+	
+	
+	
+	
+	public Animate(double fps,Model model,SpriteSheetLoader animation,int[] HowlongEachFramelasts/*in frames one integer value for each frame*/,int start) {
+		this.fps=fps;
+		this.frameTiming=1.0/fps;
+		this.time=Timer.getTIme();
+	    this.HowlongEachFrameLasts=HowlongEachFramelasts;
+		this.eachTimed=true;
+		
+		
+		this.model=new Model(model.getVertices(),model.getUv_coords());
+		
+		this.finalFrame=animation.getLastFrame();
+		
+		SetStartAndEnd(start,(start+HowlongEachFramelasts.length)-1);
+		texture=animation.getTexture();
+	
+		this.animation=animation;
+	}
+	
+	
+	
 	public void updateTime() {
 	
 	    time2=Timer.getTIme();
@@ -41,7 +68,20 @@ public class Animate {
 		
 		 if(unp>=frameTiming) {//if the time since the last frame time has reached our target time change frame
 				unp-=frameTiming;//resets the time in a way it doesn't lose frames
+				
+				
+				
+				if(this.eachTimed) {
+				
+				if(frameAnmount>=this.HowlongEachFrameLasts[this.currentframe]) {
 				changeFrame();//change the sprite
+				this.frameAnmount=0;
+				}
+				this.frameAnmount++;
+				
+				}else {
+					changeFrame();//change the sprite
+				}
 				if(frametime>=1.0) {
                   
 					frametime=0;
@@ -82,8 +122,10 @@ public class Animate {
 	     }	
 		
 	if(currentframe!=end) {
-	  currentframe++;//sets the next frame
-	}else {
+	 
+			currentframe++;//sets the next frame
+		
+		}else {
 		
 		currentframe=start;//resets the animation
 	}
@@ -168,7 +210,7 @@ public class Animate {
 		this.frameTiming=1.0/fps;
 		this.time=Timer.getTIme();
 		this.model=new Model(model.getVertices(),model.getUv_coords());
-		
+		this.eachTimed=false;
 		this.finalFrame=animation.getLastFrame();
 		
 		SetStartAndEnd(start,end);
@@ -177,6 +219,25 @@ public class Animate {
 	
 		this.animation=animation;
 	}
+	
+	public void ChangeAnimation(double fps,Model model,SpriteSheetLoader animation,int[] HowlongEachFramelasts/*in frames one integer value for each frame*/,int start) {
+		this.fps=fps;
+		this.frameTiming=1.0/fps;
+		this.time=Timer.getTIme();
+	    this.HowlongEachFrameLasts=HowlongEachFramelasts;
+		this.eachTimed=true;
+		
+		
+		this.model=new Model(model.getVertices(),model.getUv_coords());
+		
+		this.finalFrame=animation.getLastFrame();
+		
+		SetStartAndEnd(start,(start+HowlongEachFramelasts.length)-1);
+		texture=animation.getTexture();
+	
+		this.animation=animation;
+	}
+	
 	public void drawAnimatedModel(Vector2f position,float angle,float scale) {
 		Renderer.draw(model, position, angle, scale,texture);
 		
@@ -190,6 +251,12 @@ public class Animate {
 		Renderer.draw(model, position, angle, scale,texture);
 		
 		
+		
+	}
+	
+	
+	public int getCurrentframe() {
+		return this.currentframe;
 		
 	}
 	

@@ -26,10 +26,11 @@ import guis.UIBox;
 import guis.UIBoxState;
 import guis.UIElement;
 import guis.UIStringElement;
+import input.GetInput;
 import sun.security.util.Debug;
 import Data.Pcs;
 import  Scripter.Proccesor;
-import Scripter.Wait;
+import ScripterCommands.Wait;
 public class Start {
     
 	
@@ -47,7 +48,7 @@ public class Start {
     public static int amountWidth=Math.round((width/scaleOfMapTiles)),amountHeight=Math.round((height/scaleOfMapTiles));
     public static Camera cam,DebugCam;
     public static float screencoordx=0,screencoordy=0;
-    public static Input I,DebugI;
+    public static GetInput I;
     public static Fontloader font;
     public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,DebugdrawString=true,showFps=true,Debug=false,StateOfStartBOx=false;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds;
@@ -317,7 +318,7 @@ public class Start {
 				new UIStringElement("specials",new Vector2f(1,-5), .15f,Constants.BLACK,3)
 		};
 		UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
-				new UIStringElement(p.getmoves()[0].getName(),new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,p.getmoves()[0].name()}),new UIStringElement("test ",new Vector2f(15,5), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,"test"}),
+				new UIStringElement(p.getmoves()[0].getName(),new Vector2f(-54,5),.15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,p.getmoves()[0].name()}),new UIStringElement("test ",new Vector2f(15,5), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,"test"}),
 				new TextureElement(playerTex,32,46,new Vector2f(-54,-8),new Vector2f(0,0),.15f),new UIStringElement("test ",new Vector2f(15,-8), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,"test"})
 			
 		};
@@ -415,13 +416,13 @@ Renderer.enable();//enables render
 	    
 	      
 		if(HideSprite==false) 
-		a1.drawAnimatedModel(new Vector2f(x,y),0,Playerscale,facingLeft);	
+		a1.drawAnimatedModel(new Vector2f(x,y),0,Playerscale,!facingLeft);	
 		//SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
 		textforTILES.setString("Tiles: "+loader.getTilesrenderd());
 		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.24f);
 		textC.UIDebugdrawString(screencoordx+100,screencoordy-220,.24f);
          textforTILES.UIDebugdrawString(screencoordx,(480/2)+ screencoordy-20, .24f);
-         if(StateOfStartBOx) {
+         if(StartBox.isActive()) {
         	 StartBox.setPosition(new Vector2f(screencoordx+300,screencoordy));
         	StartBox.draw(); 
          }
@@ -475,7 +476,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		w=new Window(width,height,cam,"Game");
 		
 		
-	 I=new Input(w);	
+	 I=new GetInput(w);	
        //load our shaders 
 	 DebugPrint("Making Shader Program....");
 		s= new ShaderProgram(Shader);
@@ -489,20 +490,48 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	private static void Inputupdate() {
 	
 		w.update();//this is needed to actually poll events from keyboard 
-		I.findKeys();
-	    dKeys=I.getDirectionalInput();
-	    
-	   testKey=I.getStateofButton(GLFW_KEY_T);
+		
+		battleBox.Update(I);
+		StartBox.Update(I);
+	   
+	    int UP=I.getStateofButton(GLFW_KEY_UP),DOWN=I.getStateofButton(GLFW_KEY_DOWN),
+	    LEFT=I.getStateofButton(GLFW_KEY_LEFT),RIGHT=I.getStateofButton(GLFW_KEY_RIGHT),
+		
+		F1=I.getStateofButton(GLFW_KEY_F1),F2=I.getStateofButton(GLFW_KEY_F2),
+		F3=I.getStateofButton(GLFW_KEY_F3),F4=I.getStateofButton(GLFW_KEY_F4),
+	    F12=I.getStateofButton(GLFW_KEY_F12),C=I.getStateofButton(GLFW_KEY_C),Y=I.getStateofButton(GLFW_KEY_Y),W=I.getStateofButton(GLFW_KEY_W)
+		,ESCAPE=I.getStateofButton(GLFW_KEY_ESCAPE),ENTER=I.getStateofButton(GLFW_KEY_ENTER),
+		BACKSPACE=I.getStateofButton(GLFW_KEY_BACKSPACE),S=I.getStateofButton(GLFW_KEY_S),CONTROLRIGHT=I.getStateofButton(GLFW_KEY_RIGHT_CONTROL),
+		CONTROLLEFT=I.getStateofButton(GLFW_KEY_LEFT_CONTROL),F=I.getStateofButton(GLFW_KEY_F);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		testKey=I.getStateofButton(GLFW_KEY_T);
 	   
 	   float speed=1;
 	    		
-		byte stateofFullscreen=I.stateOfFullscreen();
-	      if(stateofFullscreen==1) {//if the fuscreenCode is just pressed toggle full screen
+		
+	      if(((CONTROLRIGHT==1 || CONTROLRIGHT==3)||(CONTROLLEFT==1||CONTROLLEFT==3)) && (F==1)) {//if the fuscreenCode is just pressed toggle full screen
 			 w.toggleFullscreen();}
 	  
 		
 		
-		if( I.getStateofButton(GLFW_KEY_F1)==1) {
+		if( F1==1) {
 	if(Start.Debug==false) {
 			DEBUGCOLISIONS=true;DebugdrawString=true;showFps=true;
 	Start.Debug=true;
@@ -516,13 +545,21 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	}
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
 	
-		if( I.getStateofButton(GLFW_KEY_Y)==1) {
-			Proccesor.addComandtoQueue(new Wait(10d));
+		if(Y==1) {
+			Proccesor.addComandtoQueue(new Wait(2d));
 			}
 		
 		
-		if( I.getStateofButton(GLFW_KEY_F2)==1) {
+		if(F2==1) {
 			if(Start.DebugPrint==false) {
 				
 			Start.DebugPrint=true;
@@ -535,7 +572,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 
 			}
 		
-		if( I.getStateofButton(GLFW_KEY_F3)==1) {
+		if( F3==1) {
 			if(Start.DEBUGCOLISIONS==false) {
 				
 			Start.DEBUGCOLISIONS=true;
@@ -548,7 +585,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 
 			}
 		
-		if( I.getStateofButton(GLFW_KEY_F4)==1) {
+		if(F4==1) {
 			if(Start.DebugdrawString==false) {
 				
 			Start.DebugdrawString=true;
@@ -560,7 +597,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 			}
 
 			}
-		if( I.getStateofButton(GLFW_KEY_F12)==1) {
+		if( F12==1) {
 			if(showFps==false) {
 				showFps=true;
 			
@@ -602,22 +639,22 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	if(overworld) {
 		
 		
-	if(I.getStateofButton(GLFW_KEY_ESCAPE)==1) {
-			if(StateOfStartBOx) {
-				StateOfStartBOx=false;
+	if(ESCAPE==1) {
+			if(StartBox.isActive()) {
+				StartBox.hide();
 			}else {
-				StateOfStartBOx=true;
+				StartBox.show();
 				a1.Pause();
 			    StartBox.reset();
 			}
 			
 		}
 		
-		if(!StateOfStartBOx) {
+		if(!UIBox.isOpened()) {
 		
 		
 		
-		        if(I.getStateofButton(GLFW_KEY_W)==1 || I.getStateofButton(GLFW_KEY_W)==3) {
+		        if(W==1 ||W==3) {
 		        	speed=5;
 		        	running=true;
 		        	
@@ -629,43 +666,29 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		     float speedx=0,speedy=0;
 		
 		     speed=5*speed;
-				if((dKeys>>4 &0x01)==1) {//if c is pushed
-					if((dKeys & 0x01)==1) {//up
-						camy-=10;
-
-						
-					}
-					if((dKeys>>1 & 0b001)==1) {//down
-						camy+=10;
-						
-					}if((dKeys>>2 & 0b001)==1) {//left
-						camx-=10;
-						
-					}if((dKeys>>3 & 0b001)==1) {//right
-						camx+=10;}	 
-					}else{ 
+				{ 
 						
 						
 						
-						if((dKeys & 0x01)==1) {//up
+						if(UP==1 || UP==3) {//up
 						
 							speedy=1;
 							 a1.Play();
 							
 						}
-						if((dKeys>>1 & 0b001)==1) {//down
-						
+						if(DOWN==1||DOWN==3) {//down
 							speedy=-1;
+							
 							 a1.Play();
 									
-						}if((dKeys>>2 & 0b001)==1) {//left
+						}if(LEFT==1||LEFT==3) {//left
 					        facingLeft=true;
 					        a1.Play();
-							speedx=1;
+							speedx=-1;
 							
-						}if((dKeys>>3 & 0b001)==1) {//right
+						}if(RIGHT==1||RIGHT==3) {//right
 						
-						   speedx=-1;
+						   speedx=1;
 						   a1.Play();
 						   facingLeft=false;
 						   
@@ -702,74 +725,12 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 					camx=-x;
 					camy=-y;
 					}
-		}else {
-				
-				if(I.getStateofButton(GLFW_KEY_UP)==1) //up
-				     StartBox.GoUp();
+		}
 					
 				
-				if(I.getStateofButton(GLFW_KEY_DOWN)==1) //down
-					StartBox.GoDown();
-				
-				if(I.getStateofButton(GLFW_KEY_LEFT)==1) //left
-					StartBox.GoLeft();
-					
-				if(I.getStateofButton(GLFW_KEY_RIGHT)==1) //right
-				   StartBox.GoRight();
-				
-				if(I.getStateofButton(GLFW_KEY_ENTER)==1) { //up
-					StartBox.Select();
-				
-				   
-				}
-				
-				if(I.getStateofButton(GLFW_KEY_BACKSPACE)==1) { //up
-					StartBox.GoBack();
-				
-				}
-				
-				
-				
-					
-		}			
 		 
-	}else {
-		
-	
-		if(I.getStateofButton(GLFW_KEY_S)==1) {
-			   if(sprite==0) {
-			    	 sprite=1;
-			    	 
-			     }else {
-			    	 sprite=0;
-			     }
-			   battleBox.reset();
-		}
-		
-		
-		if(I.getStateofButton(GLFW_KEY_UP)==1) //up
-		     battleBox.GoUp();
-			
-		
-		if(I.getStateofButton(GLFW_KEY_DOWN)==1) //down
-			battleBox.GoDown();
-		
-		if(I.getStateofButton(GLFW_KEY_LEFT)==1) //left
-			battleBox.GoLeft();
-			
-		if(I.getStateofButton(GLFW_KEY_RIGHT)==1) //right
-		   battleBox.GoRight();
-		
-		if(I.getStateofButton(GLFW_KEY_ENTER)==1) { //up
-			 battleBox.Select();
-		
-		   
-		}
-		if(I.getStateofButton(GLFW_KEY_BACKSPACE)==1) { //up
-			battleBox.GoBack();
-		
-		}
 	}
+	
 		 
 			 }
 	
@@ -780,7 +741,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		amountOfMoves=Player.getAmountofMoves();
 		amountOfSPMoves=Player.getAmountofSPMoves();
 	    PHP=Player.getHp();
-	    
+	 
 		
 	}
 	
@@ -806,8 +767,8 @@ private static void EndBattle(Player Player) {
 	 	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
 	 	 	 SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
 	 	 	 SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
-	 	    
-	 	 	 battleBox.draw();;
+	 	    battleBox.show();	    
+	 	 	 battleBox.draw();
 	 	     //battleBox.getUIState().setOffsetPositionOnlist(arrowPosition);   	   
 	 	   
 	 	    

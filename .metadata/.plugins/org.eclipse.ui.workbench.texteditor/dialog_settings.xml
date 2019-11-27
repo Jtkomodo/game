@@ -2,12 +2,18 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="UIElement" key="selection"/>
-		<item value="true" key="casesensitive"/>
+		<item value="battleupdate" key="selection"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="battleUpdate"/>
+			<item value="battleBox"/>
+			<item value="battlebox"/>
+			<item value="startbox"/>
+			<item value="up="/>
+			<item value="facingLeft"/>
 			<item value="UIStringElement"/>
 			<item value=".enable"/>
 			<item value="Model "/>
@@ -17,12 +23,6 @@
 			<item value="batchedModel"/>
 			<item value="inputupdate"/>
 			<item value="a1."/>
-			<item value="get"/>
-			<item value="debug"/>
-			<item value="baseclass"/>
-			<item value="debugPrint"/>
-			<item value="select"/>
-			<item value="arguments"/>
 		</list>
 		<list key="replacehistory">
 			<item value="UIElement"/>

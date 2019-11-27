@@ -3,6 +3,7 @@ package Scripter;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import ScripterCommands.Commands;
 import gameEngine.Start;
 
 public class Proccesor {

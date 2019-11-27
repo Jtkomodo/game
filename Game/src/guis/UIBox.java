@@ -5,21 +5,24 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
-
+import static org.lwjgl.glfw.GLFW.*;
 import org.joml.Vector2f;
 
 import battleClasses.Player;
 import gameEngine.Start;
+import input.GetInput;
+
 
 public class UIBox {
 
 	private int currentState=0;
 	
-	private boolean isActive=true;
+	private boolean isActive=false;
 	private Player p=Start.p;
 
 	private Vector2f position;
-	
+	private static boolean isAnyOpened;
+	private static List<UIBox> opended=new ArrayList<UIBox>();
 	private List<UIBoxState> statelist=new ArrayList<UIBoxState>();	
 	private List<UIBoxState> alwaysShownStateList=new ArrayList<UIBoxState>();	
 	private Stack<Integer> backStack=new Stack<Integer>();//this is a stack that just sores the previous states
@@ -80,6 +83,46 @@ public class UIBox {
     	
 		
 	}
+    
+    
+    
+public void Update(GetInput I) {
+	if(isActive) {
+		
+	int up=I.getStateofButton(GLFW_KEY_UP),down=I.getStateofButton(GLFW_KEY_DOWN)
+	,left=I.getStateofButton(GLFW_KEY_LEFT),right=I.getStateofButton(GLFW_KEY_RIGHT),
+    Enter=I.getStateofButton(GLFW_KEY_ENTER),backspace=I.getStateofButton(GLFW_KEY_BACKSPACE);
+	
+	
+	if(up==1) 
+	    GoUp();
+	if(down==1)	
+	     GoDown();
+	if(left==1)
+		  GoLeft();
+	if(right==1)
+		  GoRight();
+	if(Enter==1)
+		    Select();
+	if(backspace==1)
+		     GoBack();
+	
+	}
+	
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
  public void drawAndSetState(int state) {
 		
     	setCurrentState(state);
@@ -168,11 +211,16 @@ public class UIBox {
 
 
   public void show() {
-	isActive=true;  
+	isActive=true;
+	isAnyOpened=true;
+	opended.add(this);
   }
   
   public void hide() {
+	  if(isActive) {
 	  isActive=false;
+	  opended.remove(this);
+	  isAnyOpened=!opended.isEmpty();}
   }
  public boolean isActive() {
 	 
@@ -205,5 +253,15 @@ public class UIBox {
     	return this.statelist.get(index);
     	
     }
+
+
+
+	public static  boolean isOpened() {
+		return isAnyOpened;
+	}
+
+
+
+	
 }
 	

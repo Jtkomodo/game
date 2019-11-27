@@ -10,7 +10,7 @@ public class TextureElement extends UIElement {
 
 	private Model model;
 	private Texture texture;
-	private Vector2f offset;
+
 	private float scale;
 	private float width,height;
 	
@@ -26,7 +26,7 @@ public class TextureElement extends UIElement {
 		this.scale=scale;
 		this.width=width;
 		this.height=height;
-		
+		this.active=true;
 		 
 		this.model=new Model(width,height,uv.x,uv.y,texture.getW(),texture.getH());//makes the model for the texture
 		
@@ -38,7 +38,9 @@ public class TextureElement extends UIElement {
 
 	@Override
 	public void drawElement(Vector2f Position) {
-	Renderer.draw(model, Position,0, scale, texture);
+		Vector2f noffset=new Vector2f();offset.add(Position,noffset);
+		
+	Renderer.draw(model,noffset,0, scale, texture);
 		
 	}
 	

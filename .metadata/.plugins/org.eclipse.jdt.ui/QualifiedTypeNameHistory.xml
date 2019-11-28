@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.newdawn.slick.opengl.PNGDecoder.Format"/>
-    <fullyQualifiedTypeName name="org.newdawn.slick.opengl.PNGDecoder"/>
     <fullyQualifiedTypeName name="org.joml.Math"/>
     <fullyQualifiedTypeName name="com.sun.imageio.plugins.png.PNGImageWriter"/>
     <fullyQualifiedTypeName name="javax.imageio.stream.ImageInputStream"/>
@@ -37,7 +35,6 @@
     <fullyQualifiedTypeName name="java.util.Queue"/>
     <fullyQualifiedTypeName name="Scripter.Proccesor"/>
     <fullyQualifiedTypeName name="Scripter.Wait"/>
-    <fullyQualifiedTypeName name="gameEngine.Timer"/>
     <fullyQualifiedTypeName name="guis.TextureElement"/>
     <fullyQualifiedTypeName name="guis.UIElement"/>
     <fullyQualifiedTypeName name="gameEngine.Window"/>
@@ -49,15 +46,18 @@
     <fullyQualifiedTypeName name="jdk.internal.util.xml.impl.Input"/>
     <fullyQualifiedTypeName name="input.GetInput"/>
     <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
-    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="gameEngine.Model"/>
-    <fullyQualifiedTypeName name="gameEngine.Renderer"/>
     <fullyQualifiedTypeName name="gameEngine.Texture"/>
     <fullyQualifiedTypeName name="entitys.DynamicEntity"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="animation.Animate"/>
+    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
+    <fullyQualifiedTypeName name="gameEngine.Timer"/>
+    <fullyQualifiedTypeName name="ScripterCommands.animate"/>
+    <fullyQualifiedTypeName name="animation.AnimationHandler"/>
+    <fullyQualifiedTypeName name="jdk.nashorn.internal.runtime.Debug"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="gameEngine.Renderer"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="animation.Animate"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
-    <fullyQualifiedTypeName name="animation.AnimationHandler"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
 </qualifiedTypeNameHistroy>

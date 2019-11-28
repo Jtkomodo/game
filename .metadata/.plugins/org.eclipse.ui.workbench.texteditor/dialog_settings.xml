@@ -2,27 +2,27 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="AnimationHandler" key="selection"/>
+		<item value="a1." key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="a1."/>
+			<item value="a1.draw"/>
+			<item value="postest"/>
+			<item value="positiontest"/>
 			<item value="AnimationHandler"/>
 			<item value="a1"/>
-			<item value="a1."/>
 			<item value=".remove"/>
 			<item value=".show()"/>
 			<item value="show"/>
 			<item value="startBox.hide"/>
-			<item value="a1.draw"/>
 			<item value="battleUpdate"/>
 			<item value="battleBox"/>
 			<item value="battlebox"/>
 			<item value="startbox"/>
 			<item value="up="/>
-			<item value="facingLeft"/>
-			<item value="UIStringElement"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

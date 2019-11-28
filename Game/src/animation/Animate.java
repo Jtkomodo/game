@@ -1,18 +1,22 @@
 package animation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.joml.Vector2f;
 
 import gameEngine.Model;
 import gameEngine.Renderer;
 import gameEngine.SpriteSheetLoader;
+import gameEngine.Start;
 import gameEngine.Texture;
 import gameEngine.Timer;
 
 
 public class Animate {
 
-	private static int NumberOfAnimations=0;
-	private int Key;
+    private static long NumberOfAnimations=0;
+	private long Key;
 	private double time,time2,timepassed,frametime=0;
 	private double frameTiming,unp=0,fps;
 	private int frameAnmount;
@@ -257,6 +261,7 @@ public class Animate {
 		
 		if(AnimationHandler.exsits(this.Key)){
 		Renderer.draw(model, position, angle, scale,texture);
+	
 		}
 		
 		
@@ -266,8 +271,9 @@ public class Animate {
 		
 		
 		if(AnimationHandler.exsits(this.Key)){
-		if(mirror)
+		if(mirror)	
 		Renderer.Mirror();
+
 		Renderer.draw(model, position, angle, scale,texture);
 		}
 		
@@ -289,7 +295,7 @@ public class Animate {
 
 
     public void addAnimation() {
-    	if(!AnimationHandler.exsits(this.Key))
+    	if(!(AnimationHandler.exsits(this.Key)))
     	AnimationHandler.addAnimation(this);
     }
     public boolean exists() {
@@ -297,7 +303,7 @@ public class Animate {
     }
 
 
-	public int getKey() {
+	public long getKey() {
 		return Key;
 	}
 

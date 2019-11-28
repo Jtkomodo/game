@@ -18,8 +18,11 @@ public class Wait extends Commands {
 	@Override
 	public void Start() {
 		this.hasBeenStarted=true;
-		this.StartTime=Timer.getTIme();
+	
 		
+		
+		this.StartTime=Timer.getTIme();
+		gameEngine.Start.DebugPrint("the wait for"+this.time+" seconds command has started at aprox "+(this.StartTime-gameEngine.Start.startTime)+" seconds into the program",this.getClass());
 	}
 
 
@@ -27,7 +30,7 @@ public class Wait extends Commands {
 	public void Update(double time2) {
 		if((time2-StartTime)>=time) {
 		this.completed=true;
-		gameEngine.Start.DebugPrint("the wait is over",this.getClass());
+		gameEngine.Start.DebugPrint("the wait is over waited "+(time2-this.StartTime)+" seconds",this.getClass());
 		this.hasBeenStarted=false;
 		}
 	}

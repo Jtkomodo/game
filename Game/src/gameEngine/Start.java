@@ -32,6 +32,7 @@ import sun.security.util.Debug;
 import Data.Pcs;
 import  Scripter.Proccesor;
 import ScripterCommands.Wait;
+import ScripterCommands.animate;
 import animation.Animate;
 import animation.AnimationHandler;
 public class Start {
@@ -69,7 +70,7 @@ public class Start {
     public static DynamicEntity Ply;
    public static int amountOfMoves,amountOfSPMoves,function;
    
-  
+   public static double startTime;
 
     
     public static AABB playerCol,Col,COl2;
@@ -89,7 +90,7 @@ public class Start {
 		
 		
 		DebugPrint("Starting.....");
-	double startTime=Timer.getTIme();
+	 startTime=Timer.getTIme();
 	
 	
 	
@@ -446,7 +447,7 @@ Renderer.enable();//enables render
 
 
 }
-
+	Proccesor.proccesCommands(time);
 textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")");
 textA.setString("fps="+(int)fps);
 if(showFps)
@@ -514,12 +515,9 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		
 		
 	    if(H==1) {
-	    	if(a1.exists()) {
-	    		a1.removeAnimation();
-	    	}
-	    	else {
-	    		a1.addAnimation();
-	    	}
+	    	
+	    	Animate animation=new Animate(7,player, sloader, 0, 7);
+	         Proccesor.addComandtoItorator(new animate(animation,oldpos, 0,32,12,false));
 	    }
 	    
 	    
@@ -591,7 +589,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		
 	
 		if(Y==1) {
-			Proccesor.addComandtoQueue(new Wait(2d));
+			Proccesor.addComandtoQueue(new Wait(12d));
 			}
 		
 		
@@ -838,7 +836,7 @@ private static void EndBattle(Player Player) {
 		    canRender=false;//don't allow rendering until time
 			time2=Timer.getTIme();//gets current time
 		    passed=time2-time;//this is the time since the last time through the loop
-			AnimationHandler.update();
+		    AnimationHandler.update();
 			
 		    unproccesed+=passed;//this is the time that we have not rendered anything
 			Ti+=passed;
@@ -857,7 +855,7 @@ private static void EndBattle(Player Player) {
 				unproccesed-=framCap;//this is like reseting 
 				//take input
 				
-				Proccesor.proccesQueue(time);
+				
 				
 				if(Proccesor.isUserInputallowed()) {
 				 Inputupdate();}else {

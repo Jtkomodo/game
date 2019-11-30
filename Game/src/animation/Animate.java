@@ -15,8 +15,8 @@ import gameEngine.Timer;
 
 public class Animate {
 
-    private static long NumberOfAnimations=0;
-	private long Key;
+ 
+
 	private double time,time2,timepassed,frametime=0;
 	private double frameTiming,unp=0,fps;
 	private int frameAnmount;
@@ -31,8 +31,7 @@ public class Animate {
 	public Animate(double fps,Model model,SpriteSheetLoader animation,int start,int end) {
 		addAnimation();
 		this.fps=fps;
-		this.Key=NumberOfAnimations;
-		NumberOfAnimations++;
+		
 		this.frameTiming=1.0/fps;
 		this.time=Timer.getTIme();
 		this.model=new Model(model.getVertices(),model.getUv_coords());
@@ -57,8 +56,6 @@ public class Animate {
 		
 		this.fps=fps;
 		this.frameTiming=1.0/fps;
-		this.Key=NumberOfAnimations;
-		NumberOfAnimations++;
 		this.time=Timer.getTIme();
 	    this.HowlongEachFrameLasts=HowlongEachFramelasts;
 		this.eachTimed=true;
@@ -259,7 +256,7 @@ public class Animate {
 	
 	public void drawAnimatedModel(Vector2f position,float angle,float scale) {
 		
-		if(AnimationHandler.exsits(this.Key)){
+		if(AnimationHandler.exsits(this)){
 		Renderer.draw(model, position, angle, scale,texture);
 	
 		}
@@ -270,7 +267,7 @@ public class Animate {
 	public void drawAnimatedModel(Vector2f position,float angle,float scale,boolean mirror) {
 		
 		
-		if(AnimationHandler.exsits(this.Key)){
+		if(AnimationHandler.exsits(this)){
 		if(mirror)	
 		Renderer.Mirror();
 
@@ -287,24 +284,24 @@ public class Animate {
 	}
 
     public void removeAnimation() {
-    	if(AnimationHandler.exsits(this.Key)) {
-    	AnimationHandler.RemoveAnimatin(this.Key);
+    	if(AnimationHandler.exsits(this)) {
+    	AnimationHandler.RemoveAnimatin(this);
         this.Stop();
     	}
     }
 
 
     public void addAnimation() {
-    	if(!(AnimationHandler.exsits(this.Key)))
+    	if(!(AnimationHandler.exsits(this)))
     	AnimationHandler.addAnimation(this);
     }
     public boolean exists() {
-    	return AnimationHandler.exsits(this.Key);
+    	return AnimationHandler.exsits(this);
     }
 
 
 	public long getKey() {
-		return Key;
+		return AnimationHandler.getIndex(this);
 	}
 
     

@@ -53,6 +53,7 @@ public class animate extends Commands {
 	   
 		if(((time2-StartTime)>=time)) {
 			this.completed=true;
+			animation.removeAnimation();
 			this.hasBeenStarted=false;
 		
 			

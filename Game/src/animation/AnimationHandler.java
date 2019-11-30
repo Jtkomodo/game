@@ -2,6 +2,7 @@ package animation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -10,39 +11,46 @@ import gameEngine.Start;
 public class AnimationHandler {
 
 	
-	private static HashMap<Long,Animate> animations=new HashMap<Long,Animate>();
+	private static List<Animate> animations=new LinkedList<Animate>();
 	
 	
 	
 	protected static void  addAnimation(Animate animation) {
+		
+		animations.add(animation);
 		Start.DebugPrint("added animation "+animation.getKey(),AnimationHandler.class);
-		animations.put(animation.getKey(),animation);
+	}
+	
+	
+	
+	
+	
+	protected static void RemoveAnimatin(Animate key) {
+		Start.DebugPrint("Removed animation "+key.getKey(),AnimationHandler.class);
+		animations.remove(key);
 		
 	}
 	
-	
-	
-	
-	
-	protected static void RemoveAnimatin(long key) {
-		Start.DebugPrint("Removed animation "+key,AnimationHandler.class);
-		animations.remove(key);
+	protected static boolean exsits(Animate animation) {
+		return animations.contains(animation);
 	}
 	
-	protected static boolean exsits(long key) {
-		return animations.containsKey(key);
+	public static int getIndex(Animate animation) {
+		return animations.indexOf(animation);
 	}
+	
+	
 	
 	public static void update() {
 		
-		for (Entry<Long, Animate> entry : animations.entrySet()) {
-		    entry.getValue().updateTime();
+		for (int i=0;i<animations.size();i++) {
+		    animations.get(i).updateTime();
 		}
 
 	}
 	
 	
-	public static int amountInMap() {
+	public static int amountInList() {
 		return animations.size();
 	}
 	

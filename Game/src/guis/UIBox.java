@@ -11,6 +11,7 @@ import org.joml.Vector2f;
 import battleClasses.Player;
 import gameEngine.Start;
 import input.GetInput;
+import input.InputHandler;
 
 
 public class UIBox {
@@ -86,12 +87,12 @@ public class UIBox {
     
     
     
-public void Update(GetInput I) {
+public void Update() {
 	if(isActive) {
 		
-	int up=I.getStateofButton(GLFW_KEY_UP),down=I.getStateofButton(GLFW_KEY_DOWN)
-	,left=I.getStateofButton(GLFW_KEY_LEFT),right=I.getStateofButton(GLFW_KEY_RIGHT),
-    Enter=I.getStateofButton(GLFW_KEY_ENTER),backspace=I.getStateofButton(GLFW_KEY_BACKSPACE);
+	int up=InputHandler.getStateofButton(GLFW_KEY_UP),down=InputHandler.getStateofButton(GLFW_KEY_DOWN)
+	,left=InputHandler.getStateofButton(GLFW_KEY_LEFT),right=InputHandler.getStateofButton(GLFW_KEY_RIGHT),
+    Enter=InputHandler.getStateofButton(GLFW_KEY_ENTER),backspace=InputHandler.getStateofButton(GLFW_KEY_BACKSPACE);
 	
 	
 	if(up==1) 
@@ -215,7 +216,10 @@ public void Update(GetInput I) {
 		
 	  isActive=true;
 	isAnyOpened=true;
-	opended.add(this);}
+	opended.add(this);
+	
+	InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ENTER,GLFW_KEY_BACKSPACE});
+	}
   }
   
   public void hide() {

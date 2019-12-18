@@ -14,6 +14,39 @@ public class Renderer {
 	
 	
 	
+	public static void Debugdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
+		
+		if(Start.Debugdraw)
+			draw(model,position,angle,scale,texture,color);
+	}
+	
+	
+	
+   public static void Debugdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture) {
+		
+		if(Start.Debugdraw)
+			draw(model,position,angle,scale,texture);
+	}
+	
+
+	public static void DebugUIdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
+		
+		if(Start.Debugdraw)
+			UIdraw(model,position,angle,scale,texture,color);
+	}
+	
+	
+	
+  public static void DebugUIdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture) {
+		
+		if(Start.Debugdraw)
+			UIdraw(model,position,angle,scale,texture);
+	}
+	
+	
+	
+	
+	
 	
 	public static void draw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
 if(draw) {

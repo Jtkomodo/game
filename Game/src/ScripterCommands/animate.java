@@ -6,7 +6,7 @@ import animation.Animate;
 import animation.AnimationHandler;
 import gameEngine.Renderer;
 import gameEngine.Timer;
-import jdk.nashorn.internal.runtime.Debug;
+
 
 public class animate extends Commands {
 
@@ -35,9 +35,7 @@ public class animate extends Commands {
 		
 	}
 	
-	
-	
-	
+
 	
 	
 	@Override
@@ -60,10 +58,9 @@ public class animate extends Commands {
 		}
 		
 	    
-		if(Draw) {
-			
-			animation.drawAnimatedModel(position,angle, scale,false);
-		}
+		if(Draw) 
+		animation.drawAnimatedModel(position,angle, scale,false);
+		
 	
 		
 	}

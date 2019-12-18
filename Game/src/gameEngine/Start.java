@@ -1,16 +1,14 @@
 package gameEngine;
-import java.io.IOException;
-import java.lang.reflect.Method;
+
+
 
 import static org.lwjgl.glfw.GLFW.*;
-import java.util.Map;
-import static java.lang.Math.*;
 
-import static org.lwjgl.opengl.GL11.*;
-import org.joml.Matrix4f;
+
+
 import  org.joml.Vector2f;
 import org.joml.Vector4f;
-import org.lwjgl.glfw.GLFW;
+
 
 import Collisions.AABB;
 import Collisions.CircleColision;
@@ -20,15 +18,15 @@ import textrendering.TextBuilder;
 import Data.Constants;
 import Data.Moves;
 import battleClasses.Player;
+import battleClasses.TimedButtonPress;
 import entitys.DynamicEntity;
 import guis.GUIMEthods;
 import guis.TextureElement;
 import guis.UIBox;
 import guis.UIBoxState;
-import guis.UIElement;
-import guis.UIStringElement;
-import input.GetInput;
-import sun.security.util.Debug;
+import guis.UIElement;import guis.UIStringElement;
+import input.InputHandler;
+import input.InputHandler;
 import Data.Pcs;
 import  Scripter.Proccesor;
 import ScripterCommands.Wait;
@@ -40,22 +38,25 @@ public class Start {
 	
 	public static Window w;
 	public static final int width=640,height=480;
- 
-	public static int location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;;
+    public static int lowFPS=60,HighFPs=0;
+	
+	
+	public static int location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;
     public static byte dKeys,testKey;
     
     private static int battleState,sprite,arrowPosition;
     
-    
+    public static boolean JustStarted=true,MoveInprogress=false ;
+    public static TimedButtonPress Button;
     public static ShaderProgram s;
     public static float scaleOfMapTiles=128,Rendercamx,Rendercamy;
     public static int amountWidth=Math.round((width/scaleOfMapTiles)),amountHeight=Math.round((height/scaleOfMapTiles));
     public static Camera cam,DebugCam;
     public static float screencoordx=0,screencoordy=0;
-    public static GetInput I;
+    public static InputHandler I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,DebugdrawString=true,showFps=true,Debug=false,StateOfStartBOx=false;
-    public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=true,showFps=true,Debug=false,StateOfStartBOx=false;
+    public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds,TARGETFPS=60;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
     public static Model background,player,textboxM,Arrow;
@@ -91,8 +92,6 @@ public class Start {
 		
 		DebugPrint("Starting.....");
 	 startTime=Timer.getTIme();
-	
-	
 	
 	
 	
@@ -268,8 +267,7 @@ public class Start {
 		playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		Col=new AABB(new Vector2f(3968-64,1280-64),64,128,0);
         COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
-	
-	   
+	 
 		
 		
 		initializeFPS();
@@ -331,7 +329,7 @@ public class Start {
 		
 		
 		UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
-				new UIStringElement(p.getspmoves()[0].getName()+" "+(p.getspmoves()[0]).getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK),
+				new UIStringElement(p.getspmoves()[0].getName()+" "+(p.getspmoves()[0]).getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useSpMove,new Object[] {p,p.getspmoves()[0].name()}),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK),
 				new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK),new UIStringElement("test ",new Vector2f(15,-8), .15f,Constants.BLACK)
 			
 		};
@@ -424,13 +422,10 @@ Renderer.enable();//enables render
 		a1.drawAnimatedModel(new Vector2f(x,y),0,Playerscale,!facingLeft);	
 		//SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
 		textforTILES.setString("Tiles: "+loader.getTilesrenderd());
-		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.24f);
-		textC.UIDebugdrawString(screencoordx+100,screencoordy-220,.24f);
-         textforTILES.UIDebugdrawString(screencoordx,(480/2)+ screencoordy-20, .24f);
-         if(StartBox.isActive()) {
-        	 StartBox.setPosition(new Vector2f(screencoordx+300,screencoordy));
-        	StartBox.draw(); 
-         }
+		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.2f);
+		textC.UIDebugdrawString(screencoordx+100,screencoordy-220,.2f);
+         textforTILES.UIDebugdrawString(screencoordx,(480/2)+ screencoordy-20, .2f);
+       
 
 }else {
 	//---------------------battle loop---------------------
@@ -447,12 +442,19 @@ Renderer.enable();//enables render
 
 
 }
+	  if(StartBox.isActive()) {
+     	 StartBox.setPosition(new Vector2f(screencoordx+300,screencoordy));
+     	StartBox.draw(); 
+      }
 	Proccesor.proccesCommands(time);
-textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")");
-textA.setString("fps="+(int)fps);
+textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")\nAnimations: "+AnimationHandler.amountInList());
+textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
 if(showFps)
-textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.24f);
-textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.24f);
+textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.2f);
+textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.2f);
+
+
+
 
 		    w.render();
 		    w.clear();
@@ -462,6 +464,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		}
 //--------------------------------------------------------------	
 		DebugPrint("Closing.....");
+		DebugPrint("Highest fps="+HighFPs+" Lowest fps="+lowFPS);
 		w.destroy();
 		
 		
@@ -481,7 +484,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		w=new Window(width,height,cam,"Game");
 		
 		
-	 I=new GetInput(w);	
+	
        //load our shaders 
 	 DebugPrint("Making Shader Program....");
 		s= new ShaderProgram(Shader);
@@ -496,18 +499,23 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	
 		w.update();//this is needed to actually poll events from keyboard 
 		
-		battleBox.Update(I);
-		StartBox.Update(I);
-	   
-	    int UP=I.getStateofButton(GLFW_KEY_UP),DOWN=I.getStateofButton(GLFW_KEY_DOWN),
-	    LEFT=I.getStateofButton(GLFW_KEY_LEFT),RIGHT=I.getStateofButton(GLFW_KEY_RIGHT),
 		
-		F1=I.getStateofButton(GLFW_KEY_F1),F2=I.getStateofButton(GLFW_KEY_F2),
-		F3=I.getStateofButton(GLFW_KEY_F3),F4=I.getStateofButton(GLFW_KEY_F4),
-	    F12=I.getStateofButton(GLFW_KEY_F12),C=I.getStateofButton(GLFW_KEY_C),Y=I.getStateofButton(GLFW_KEY_Y),W=I.getStateofButton(GLFW_KEY_W)
-		,ESCAPE=I.getStateofButton(GLFW_KEY_ESCAPE),ENTER=I.getStateofButton(GLFW_KEY_ENTER),
-		BACKSPACE=I.getStateofButton(GLFW_KEY_BACKSPACE),S=I.getStateofButton(GLFW_KEY_S),CONTROLRIGHT=I.getStateofButton(GLFW_KEY_RIGHT_CONTROL),
-		CONTROLLEFT=I.getStateofButton(GLFW_KEY_LEFT_CONTROL),F=I.getStateofButton(GLFW_KEY_F),H=I.getStateofButton(GLFW_KEY_H);
+		StartBox.Update();
+		battleBox.Update();
+		
+		
+		
+		
+	   
+	    int UP=InputHandler.getStateofButton(GLFW_KEY_UP),DOWN=InputHandler.getStateofButton(GLFW_KEY_DOWN),
+	    LEFT=InputHandler.getStateofButton(GLFW_KEY_LEFT),RIGHT=InputHandler.getStateofButton(GLFW_KEY_RIGHT),
+		
+		F1=InputHandler.getStateofButton(GLFW_KEY_F1),F2=InputHandler.getStateofButton(GLFW_KEY_F2),
+		F3=InputHandler.getStateofButton(GLFW_KEY_F3),F4=InputHandler.getStateofButton(GLFW_KEY_F4),
+	    F12=InputHandler.getStateofButton(GLFW_KEY_F12),C=InputHandler.getStateofButton(GLFW_KEY_C),Y=InputHandler.getStateofButton(GLFW_KEY_Y),W=InputHandler.getStateofButton(GLFW_KEY_W)
+		,ESCAPE=InputHandler.getStateofButton(GLFW_KEY_ESCAPE),ENTER=InputHandler.getStateofButton(GLFW_KEY_ENTER),
+		BACKSPACE=InputHandler.getStateofButton(GLFW_KEY_BACKSPACE),S=InputHandler.getStateofButton(GLFW_KEY_S),CONTROLRIGHT=InputHandler.getStateofButton(GLFW_KEY_RIGHT_CONTROL),
+		CONTROLLEFT=InputHandler.getStateofButton(GLFW_KEY_LEFT_CONTROL),F=InputHandler.getStateofButton(GLFW_KEY_F),H=InputHandler.getStateofButton(GLFW_KEY_H);
 		
 		
 		
@@ -519,7 +527,19 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	    	Animate animation=new Animate(7,player, sloader, 0, 7);
 	         Proccesor.addComandtoItorator(new animate(animation,oldpos, 0,32,12,false));
 	    }
-	    
+	    if(ESCAPE==1) {
+			if(StartBox.isActive()) {
+				StartBox.hide();
+				InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
+	
+			}else {
+				StartBox.show();
+				a1.Pause();
+			    InputHandler.DisableAllBut(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_BACKSPACE,GLFW_KEY_ENTER});
+			    StartBox.reset();
+			}
+			
+		}
 	    
 	    
 		
@@ -529,11 +549,13 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 			//	x=0;y=0;
 				if (overworld==false) {
 					overworld=true;
+					a1.addAnimation();
 			         battleBox.hide();
 					
 				}else {
 					overworld=false;
-					a1.Stop();
+					battleBox.reset();
+					a1.removeAnimation();
 					StartBox.reset();
 					StateOfStartBOx=false;
 					battleState=0;
@@ -555,7 +577,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		
 		
 		
-		testKey=I.getStateofButton(GLFW_KEY_T);
+		testKey=InputHandler.getStateofButton(GLFW_KEY_T);
 	   
 	   float speed=1;
 	    		
@@ -567,12 +589,12 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		
 		if( F1==1) {
 	if(Start.Debug==false) {
-			DEBUGCOLISIONS=true;DebugdrawString=true;showFps=true;
+			DEBUGCOLISIONS=true;Debugdraw=true;showFps=true;
 	Start.Debug=true;
 	}
 
 	else{
-		DEBUGCOLISIONS=false;DebugdrawString=false;showFps=false;
+		DEBUGCOLISIONS=false;Debugdraw=false;showFps=false;
 	Start.Debug=false;
 	}
 
@@ -620,14 +642,14 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 			}
 		
 		if(F4==1) {
-			if(Start.DebugdrawString==false) {
+			if(Start.Debugdraw==false) {
 				
-			Start.DebugdrawString=true;
+			Start.Debugdraw=true;
 			}
 
 			else{
 					
-			Start.DebugdrawString=false;
+			Start.Debugdraw=false;
 			}
 
 			}
@@ -651,20 +673,11 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	
 	
 	if(overworld) {
+	
 		
+	
 		
-	if(ESCAPE==1) {
-			if(StartBox.isActive()) {
-				StartBox.hide();
-			}else {
-				StartBox.show();
-				a1.Pause();
-			    StartBox.reset();
-			}
-			
-		}
-		
-		if(!UIBox.isOpened()) {
+		if(!StartBox.isActive()) {
 		
 		
 		
@@ -779,8 +792,7 @@ private static void EndBattle(Player Player) {
 	 	   
 	 	 	 
 	 	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
-	 	 	 SpriteUpdate(player,playerTex,-222,-128-20,64*1.5f,true);
-	 	 	 SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
+	 	    SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
 	 
 	 	 	 battleBox.draw();
 	 	     //battleBox.getUIState().setOffsetPositionOnlist(arrowPosition);   	   
@@ -788,25 +800,34 @@ private static void EndBattle(Player Player) {
 	 	    
 	 	    
 	 	    
-	 	   switch(sprite) {
-		   case 0:
-			 BattleBoxPosition=position1;
-			   
-		   break;
-		   case 1:
-			   BattleBoxPosition=position2;
-			  
-			break;   
-			   
-			   
-			default:
-				 BattleBoxPosition=position1;
-		       
-		   }
+	 	 
 	 	    
-	 	  battleBox.setPosition(BattleBoxPosition);
+	 	  battleBox.setPosition(position1);
 	 	    
-	 	    
+	 	   if(Start.MoveInprogress) {
+	 		   
+	 		   battleBox.hide();
+	 		   
+	 		  int State= Start.Button.update();
+	 		   if(State!=TimedButtonPress.NOTPUSHED) {
+	 			   Start.MoveInprogress=false;
+	 			   battleBox.show();
+	 			   
+	 			   if(State==TimedButtonPress.HIT) {
+	 				 DebugPrint("HIT");
+	 			   }else if(State==TimedButtonPress.MISS) {
+	 				  DebugPrint("MISS");
+	 			   }
+	 				   
+	 			   
+	 			   
+	 		   }
+	 		   
+	 		   
+	 		   
+	 		   
+	 		   
+	 	   }
 	 	    
 	 
 	 	  
@@ -868,18 +889,35 @@ private static void EndBattle(Player Player) {
 			 
 			      if(frameTime>=1.0) {//if a second has passed print fps
 			    	 
-			    	  //DebugPrint("FPS:"+frames+"-------------------------------");
+			    	  
+			    	  
+			    	  
+			    	if(!JustStarted) {
 			    	 
                       fps=frames;
-			    	//reset frame time and frames  
-			    	  
+                    
+                      if(fps<lowFPS)
+                    	  lowFPS=fps;
+                      if(fps>HighFPs)
+                    	  HighFPs=fps;  
+                    	  
+                      
+                      //reset frame time and frames  
+			    	}else {
+			    		JustStarted=false;
+			    	}
 			    	
 			    	  drawcalls=Renderer.getDrawcalls();
 			    
 			    	  drawcallsFrame=drawcalls/frames;
+			    	 
+			    	  
 			    	  Renderer.resetDrawCalls();
 			    	  frameTime=0;
 			    	  frames=0;  
+			    	  
+			    	  
+			    	  
 			      }
 			      
 			     
@@ -991,7 +1029,16 @@ private static void initializeFPS() {
 	unproccesed=0;
     frameTime=0;
     frames=0;
-	framCap=1.0/60;
+	framCap=1.0/TARGETFPS;
+	
+	
+	
+	InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
+	
+	
+	
+	
+	
 
 	a1=new Animate(7,player,sloader,0,7);
  

@@ -17,7 +17,8 @@ public class TimedButtonHold extends TimedButton {
 		this.time1=time1;
 		this.time2=time2;
 		this.Going=false;
-		this.model.setString("Hold");
+		this.ButtonName=Start.buttonNamses.getNameofKey(button);
+		this.model.setString("Hold "+this.ButtonName);
 	}
 	
 	
@@ -34,12 +35,14 @@ public class TimedButtonHold extends TimedButton {
 	public void start() {
 		this.Going=true;
 	   this.StartTime=Timer.getTIme();
-	   InputHandler.DisableAllBut(new int[] {Button});
+	   InputHandler.DisableAll();
 
 	}
 
 	@Override
 	public int update() {
+		 InputHandler.EnableButton(Button);
+
 		double TimeNow=Timer.getTIme();
 		double TimeSince=Math.max(0,TimeNow-StartTime);
 		
@@ -49,7 +52,7 @@ public class TimedButtonHold extends TimedButton {
 		int result=NOTPUSHED;
 		
 		 if(TimeSince>=time1) {
-				this.model.setString("HOLD");
+				this.model.setString("HOLD "+this.ButtonName+" "+StateOfButton);
 			
 				
 				drawEndicator();
@@ -137,6 +140,9 @@ public class TimedButtonHold extends TimedButton {
 			this.hasBeenPushed=false;
 		this.timePressed=0;
 			this.Going=false;
+		}else {
+			 InputHandler.DisableAll();
+
 		}
 		
 		return result;

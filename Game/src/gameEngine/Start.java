@@ -26,6 +26,7 @@ import guis.TextureElement;
 import guis.UIBox;
 import guis.UIBoxState;
 import guis.UIElement;import guis.UIStringElement;
+import input.BIndingNameParser;
 import input.InputHandler;
 import input.InputHandler;
 import Data.Pcs;
@@ -34,6 +35,7 @@ import ScripterCommands.Wait;
 import ScripterCommands.animate;
 import animation.Animate;
 import animation.AnimationHandler;
+import animation.SpriteSheetLoader;
 public class Start {
     
 	
@@ -46,7 +48,7 @@ public class Start {
     public static byte dKeys,testKey;
     
     private static int battleState,sprite,arrowPosition;
-    
+    public static BIndingNameParser buttonNamses;
     public static boolean JustStarted=true,MoveInprogress=false;
     public static TimedButton Button;
     public static ShaderProgram s;
@@ -268,7 +270,7 @@ public class Start {
 		playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		Col=new AABB(new Vector2f(3968-64,1280-64),64,128,0);
         COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
-	 
+	    buttonNamses = new BIndingNameParser("GLFW");
 		
 		
 		initializeFPS();
@@ -800,8 +802,7 @@ private static void EndBattle(Player Player) {
 	 	   
 	 	    
 	 	    
-	 	    
-	 	 
+	 	
 	 	    
 	 	  battleBox.setPosition(position1);
 	 	    

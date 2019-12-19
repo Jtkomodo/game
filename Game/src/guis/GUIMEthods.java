@@ -18,8 +18,8 @@ public abstract class GUIMEthods {
 	public static Window window=Start.w;
 	public static Player player=Start.p;
 	public static String useSpMove="UseSPmove",useMOVE="Usemove",exitWINDOW="ExitWindow",saveGAME="SaveGame";
-	private static TimedButtonPress button=new TimedButtonPress(2,4,GLFW_KEY_SPACE);
-	private static TimedButtonHold buttonHold=new TimedButtonHold(2,4,2,GLFW_KEY_SPACE);
+	private static TimedButtonPress button=new TimedButtonPress(2,4,GLFW_KEY_RIGHT);
+	private static TimedButtonHold buttonHold=new TimedButtonHold(2,4,2,GLFW_KEY_RIGHT);
 	private static TimedButtonCombo buttonCombo=new TimedButtonCombo(new TimedButton[]{button,buttonHold,button,buttonHold},4,2);
 	
 	 public static void UseSPmove(Player p,String move) {

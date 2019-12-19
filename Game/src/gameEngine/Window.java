@@ -14,6 +14,8 @@ import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
+import input.Callback;
+
 public class Window {
 
 private long window;

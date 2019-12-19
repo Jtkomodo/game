@@ -10,6 +10,7 @@ public class InputHandler {
 	
 	private static List<Integer> Buttons=new LinkedList<Integer>();
 	
+	
 	public static byte getStateofButton(int Button) {
 		if(Buttons.contains(Button)) {
 			return GetInput.getStateofButton(Button);
@@ -47,7 +48,7 @@ public class InputHandler {
 	public static void DisableAllBut(int[] buttons) {
 		
 		Buttons.clear();
-	EnableButtons(buttons);
+	   EnableButtons(buttons);
 		
 	}
 	

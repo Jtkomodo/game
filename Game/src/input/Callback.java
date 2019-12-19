@@ -1,4 +1,4 @@
-package gameEngine;
+package input;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWKeyCallback;

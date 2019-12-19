@@ -12,4 +12,6 @@
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="input.GetInput"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
 </qualifiedTypeNameHistroy>

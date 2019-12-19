@@ -1,16 +1,6 @@
 package battleClasses;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_F;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_H;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_T;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
+
 
 import gameEngine.Start;
 import gameEngine.Timer;
@@ -31,7 +21,7 @@ public class TimedButtonPress extends TimedButton {
 		this.time2=time2;
 		this.Going=false;
 		this.Button=Button;
-		
+		this.ButtonName=Start.buttonNamses.getNameofKey(Button);
 	}
 	
 	
@@ -39,11 +29,13 @@ public class TimedButtonPress extends TimedButton {
    public void start() {
 		this.Going=true;
 	   this.StartTime=Timer.getTIme();
-	   InputHandler.DisableAllBut(new int[] {Button});
+	   InputHandler.DisableAll();
 	   
    }
 	@Override
 	public int update() {
+		 InputHandler.EnableButton(Button);
+
 		double TimeNow=Timer.getTIme();
 		double TimeSince=Math.max(0,TimeNow-StartTime);
 		
@@ -74,7 +66,7 @@ public class TimedButtonPress extends TimedButton {
 			
 			
 		}else if(TimeSince>=time1) {
-			this.model.setString("PRESS");
+			this.model.setString("PRESS "+this.ButtonName + " "+StateOfButton);
 			drawEndicator();
 			
 		}
@@ -92,6 +84,8 @@ public class TimedButtonPress extends TimedButton {
 		
 			enableButtons();
 			this.Going=false;
+		}else {
+			 InputHandler.DisableAll();
 		}
 		
 		

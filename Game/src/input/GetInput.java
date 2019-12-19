@@ -3,14 +3,11 @@ package input;
 
 import java.util.HashMap;
 
-import gameEngine.Callback;
-
 
 public class GetInput {
    
 	
 	private static HashMap<Integer,Boolean> lastKeyState=new HashMap<Integer,Boolean>();
-	
 		
 	private static boolean Find(int key) {
 		try {

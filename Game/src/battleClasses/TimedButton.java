@@ -33,7 +33,7 @@ public abstract class TimedButton {
 	protected double time1,time2,StartTime;
 	protected int Button;
 	protected boolean Going=false,iscombo=false;
-	
+	protected String ButtonName;
 	
 	public abstract void start();
 	public abstract int update(); 

@@ -52,7 +52,7 @@ public class TimedButtonHold extends TimedButton {
 		int result=NOTPUSHED;
 		
 		 if(TimeSince>=time1) {
-				this.model.setString("HOLD "+this.ButtonName+" "+StateOfButton);
+				this.model.setString("HOLD "+this.ButtonName);
 			
 				
 				drawEndicator();

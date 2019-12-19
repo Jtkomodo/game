@@ -277,6 +277,30 @@ public class Animate {
 	}
 	
 	
+public void drawAnimatedModel(Vector2f position,float angle,Vector2f scale) {
+		
+		if(AnimationHandler.exsits(this)){
+		Render.draw(model, position, angle, scale,texture);
+	
+		}
+		
+		
+	}
+	
+	public void drawAnimatedModel(Vector2f position,float angle,Vector2f scale,boolean mirror) {
+		
+		
+		if(AnimationHandler.exsits(this)){
+		if(mirror)	
+		Render.Mirror();
+
+		Render.draw(model, position, angle, scale,texture);
+		}
+		
+		
+	}
+	
+	
 	public int getCurrentframe() {
 		return this.currentframe;
 		

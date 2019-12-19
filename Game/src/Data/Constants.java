@@ -6,6 +6,7 @@ public final class Constants {
     
 	public static Vector4f BLACK = new Vector4f((0x00),(0x00),(0x00),0xff);
 	public static Vector4f WHITE = new Vector4f(0xff,0xff,0xff,0xff);
+	public static Vector4f GREEN=new Vector4f(0,0,0xff,0xff);
 	public static Vector4f BLUE = new Vector4f((0x00),(0x00),(0xff),0xff);
 	public static Vector4f YELLOW=new Vector4f(0xff,0xff,0x00,0xff);
 	public static Vector4f RED=new Vector4f(0xff,0x00,0x00,0xff);
@@ -14,6 +15,9 @@ public final class Constants {
 	//7B C9 C3 9d
 	public static Vector4f COL_COLOR_RED = new Vector4f(0xA7,0x58,0x55,0x90);
 	public static Vector4f COL_COLOR_BLUE = new Vector4f(0x7b,0xc9,0xc3,0x9d);
+	//22 F8 B6
+	public static Vector4f BAR_COLOR_GREEN = new Vector4f(0x22,0xf8,0xb6,0xff);
+	
 	
 	public static Vector4f DEFAULT_COLOR = new Vector4f(1,1,1,1);
 	

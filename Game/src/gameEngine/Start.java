@@ -17,6 +17,7 @@ import textrendering.Fontloader;
 import textrendering.TextBuilder;
 import Data.Constants;
 import Data.Moves;
+import battleClasses.HpBar;
 import battleClasses.Player;
 import battleClasses.TimedButton;
 import battleClasses.TimedButtonCombo;
@@ -60,7 +61,7 @@ public class Start {
     public static Fontloader font;
     public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=true,showFps=true,Debug=false,StateOfStartBOx=false;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds,TARGETFPS=60;
-    public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite;
+    public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite,HealthBarBackground;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
     public static Model background,player,textboxM,Arrow;
     public static BatchedModel testM;
@@ -72,9 +73,9 @@ public class Start {
     public static float[] uvtextbox,uvArrow,vert; 
     public static UIBox battleBox,StartBox;
     public static DynamicEntity Ply;
-   public static int amountOfMoves,amountOfSPMoves,function;
-   
-   public static double startTime;
+    public static int amountOfMoves,amountOfSPMoves,function;
+   public static HpBar playersHpBar;
+    public static double startTime;
 
     
     public static AABB playerCol,Col,COl2;
@@ -216,7 +217,7 @@ public class Start {
 		tex=new Texture("newsprite");
 		textbox=new Texture("textbox");
 		bg= new Texture("testBackground");
-		
+		HealthBarBackground=new Texture("HealthBarBackground");
 		
 		
 		aakar=new Fontloader("aakar",512);    
@@ -356,6 +357,8 @@ public class Start {
 			System.exit(300);
 		}
 			
+		playersHpBar=new HpBar(100,50,new Vector2f(100,20),HealthBarBackground, COLTEX);
+		
 		
 		
 		//----------------------GAME--LOOP------------------------------
@@ -805,7 +808,10 @@ private static void EndBattle(Player Player) {
 	 	
 	 	    
 	 	  battleBox.setPosition(position1);
-	 	    
+	 	  playersHpBar.draw(new Vector2f(position1.x-100,position1.y+50));
+	 	  text1.setString("HP: "+Math.round(playersHpBar.getValue())+"/"+Math.round(playersHpBar.getMax()));
+	 	 
+	 	   text1.drawString(position1.x-130,position1.y+69,.12f);
 	 	   if(Start.MoveInprogress) {
 	 		   
 	 		   battleBox.hide();

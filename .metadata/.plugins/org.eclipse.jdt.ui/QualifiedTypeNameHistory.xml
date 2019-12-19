@@ -8,10 +8,12 @@
     <fullyQualifiedTypeName name="battleClasses.TimedButtonCombo"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
     <fullyQualifiedTypeName name="gameEngine.Model"/>
-    <fullyQualifiedTypeName name="gameEngine.Texture"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="input.GetInput"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="gameEngine.Texture"/>
+    <fullyQualifiedTypeName name="battleClasses.HpBar"/>
+    <fullyQualifiedTypeName name="Data.Constants"/>
 </qualifiedTypeNameHistroy>

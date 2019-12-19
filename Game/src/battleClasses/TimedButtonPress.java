@@ -66,7 +66,7 @@ public class TimedButtonPress extends TimedButton {
 			
 			
 		}else if(TimeSince>=time1) {
-			this.model.setString("PRESS "+this.ButtonName + " "+StateOfButton);
+			this.model.setString("PRESS "+this.ButtonName);
 			drawEndicator();
 			
 		}

@@ -6,7 +6,7 @@ import java.util.List;
 import org.joml.Vector2f;
 
 import gameEngine.Model;
-import gameEngine.Renderer;
+import gameEngine.Render;
 import gameEngine.SpriteSheetLoader;
 import gameEngine.Start;
 import gameEngine.Texture;
@@ -257,7 +257,7 @@ public class Animate {
 	public void drawAnimatedModel(Vector2f position,float angle,float scale) {
 		
 		if(AnimationHandler.exsits(this)){
-		Renderer.draw(model, position, angle, scale,texture);
+		Render.draw(model, position, angle, scale,texture);
 	
 		}
 		
@@ -269,9 +269,9 @@ public class Animate {
 		
 		if(AnimationHandler.exsits(this)){
 		if(mirror)	
-		Renderer.Mirror();
+		Render.Mirror();
 
-		Renderer.draw(model, position, angle, scale,texture);
+		Render.draw(model, position, angle, scale,texture);
 		}
 		
 		

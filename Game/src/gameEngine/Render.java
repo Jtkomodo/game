@@ -4,13 +4,17 @@ import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
-public class Renderer {
+public class Render {
 
 	private static int drawcalls=0,Location=Start.location,Rts=Start.RTS,Color=Start.Color,Projection=Start.Projection;
 	private static ShaderProgram s=Start.s;
 	private static boolean mirror=false;
 	private static boolean  draw=true;
 	private static Camera cam=Start.cam;
+	
+	
+	
+	
 	
 	
 	
@@ -171,7 +175,7 @@ if(mirror) {
 	
 	public static void changeShader(ShaderProgram shader) {
 		
-		Renderer.s=shader;
+		Render.s=shader;
 		
 	}
 	
@@ -188,13 +192,13 @@ if(mirror) {
 
 
 	public static void setDrawcalls(int drawcalls) {
-		Renderer.drawcalls = drawcalls;
+		Render.drawcalls = drawcalls;
 	}
 
 
 	public static void Mirror() {
 		
-		Renderer.mirror = true;
+		Render.mirror = true;
 	}
 	
 	
@@ -208,7 +212,7 @@ if(mirror) {
 
 
 	public static void setCam(Camera cam) {
-		Renderer.cam = cam;
+		Render.cam = cam;
 	}
 
 

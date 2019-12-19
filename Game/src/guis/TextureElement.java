@@ -3,7 +3,7 @@ package guis;
 import org.joml.Vector2f;
 
 import gameEngine.Model;
-import gameEngine.Renderer;
+import gameEngine.Render;
 import gameEngine.Texture;
 
 public class TextureElement extends UIElement {
@@ -40,7 +40,7 @@ public class TextureElement extends UIElement {
 	public void drawElement(Vector2f Position) {
 		Vector2f noffset=new Vector2f();offset.add(Position,noffset);
 		
-	Renderer.draw(model,noffset,0, scale, texture);
+	Render.draw(model,noffset,0, scale, texture);
 		
 	}
 	

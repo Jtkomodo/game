@@ -10,7 +10,7 @@ import org.joml.Vector4f;
 
 
 import gameEngine.Model;
-import gameEngine.Renderer;
+import gameEngine.Render;
 import gameEngine.Start;
 import gameEngine.Texture;
 
@@ -260,9 +260,9 @@ public class UIBoxState {
     		position.add(this.offsetPosition,noffsetPosition);
     	
     	if(color==null) {	
-    	Renderer.draw(m, noffsetPosition, 0, 1,tex);}
+    	Render.draw(m, noffsetPosition, 0, 1,tex);}
     	else {
-    		Renderer.draw(m, noffsetPosition, 0, 1,tex,color);
+    		Render.draw(m, noffsetPosition, 0, 1,tex,color);
     	}
     for(int i=0;i<this.amountOfElements;i++) {
     	UIElement element=this.elementlist.get(i);
@@ -278,7 +278,7 @@ public class UIBoxState {
     
    Vector2f pos2=new Vector2f(0);
    pos.add(noffsetPosition,pos2);
-    Renderer.draw(arrow, pos2.sub(5,0,new Vector2f(0)),0,10,ArrowTex);
+    Render.draw(arrow, pos2.sub(5,0,new Vector2f(0)),0,10,ArrowTex);
  }
     	
     	

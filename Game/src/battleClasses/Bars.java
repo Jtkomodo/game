@@ -3,7 +3,7 @@ package battleClasses;
 import org.joml.Vector2f;
 
 import gameEngine.Model;
-import gameEngine.Renderer;
+import gameEngine.Render;
 import gameEngine.Texture;
 
 public abstract class Bars {
@@ -47,7 +47,7 @@ public abstract class Bars {
 
 	public void draw(Vector2f position,float scale,Texture texture) {
 		
-		Renderer.draw(model, position, 0 ,scale, texture);
+		Render.draw(model, position, 0 ,scale, texture);
 		
 	}
 	

@@ -3,7 +3,7 @@ package entitys;
 import org.joml.Vector2f;
 
 import gameEngine.Model;
-import gameEngine.Renderer;
+import gameEngine.Render;
 import gameEngine.Texture;
 
 public class Entity {
@@ -17,7 +17,7 @@ public class Entity {
 
 
 	public void draw() {
-		Renderer.draw(model, position, angle, scale,texture);
+		Render.draw(model, position, angle, scale,texture);
 	}
 	
 	public void setAngle(float angle) {

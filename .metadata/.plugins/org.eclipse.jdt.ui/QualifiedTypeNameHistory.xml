@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="gameEngine.Timer"/>
     <fullyQualifiedTypeName name="input.InputHandler"/>
+    <fullyQualifiedTypeName name="battleClasses.TimedButtonHold"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
+    <fullyQualifiedTypeName name="battleClasses.TimedButtonCombo"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
+    <fullyQualifiedTypeName name="gameEngine.Model"/>
+    <fullyQualifiedTypeName name="gameEngine.Texture"/>
+    <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
+    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="gameEngine.Start"/>
 </qualifiedTypeNameHistroy>

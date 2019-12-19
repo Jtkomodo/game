@@ -11,7 +11,7 @@ import org.joml.Vector4f;
 import gameEngine.MatrixMath;
 import gameEngine.Model;
 import Data.Constants;
-import gameEngine.Renderer;
+import gameEngine.Render;
 import gameEngine.Start;
 import gameEngine.VectorMath;
 //06d7ea
@@ -295,14 +295,14 @@ public class AABB extends CollisionFunctions{
 	   if(Start.DEBUGCOLISIONS) {
 		
 
-		   Renderer.draw(aabb, position, 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE);
+		   Render.draw(aabb, position, 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE);
 		  // Start.s.bind();
-		   Renderer.draw(piont, ActualPosition, 0, 6,Start.COLTEX,Constants.RED);
+		   Render.draw(piont, ActualPosition, 0, 6,Start.COLTEX,Constants.RED);
 		 
 			  
-			  Renderer.draw(piont, Pposition, 0, 1,Start.COLTEX,Constants.YELLOW);
+			  Render.draw(piont, Pposition, 0, 1,Start.COLTEX,Constants.YELLOW);
 			
-			  Renderer.draw(piont, edgen, 0, 3,Start.COLTEX,Constants.YELLOW);
+			  Render.draw(piont, edgen, 0, 3,Start.COLTEX,Constants.YELLOW);
 			  
 
 		  // }

@@ -5,7 +5,7 @@ import org.joml.Math;
 import Data.Constants;
 import gameEngine.MatrixMath;
 import gameEngine.Model;
-import gameEngine.Renderer;
+import gameEngine.Render;
 import gameEngine.Start;
 import gameEngine.VectorMath;
 
@@ -171,17 +171,17 @@ private Model Circle,piont;
 		if(debug) {
 		
 		
-		   Renderer.draw(Circle, position, 0, 1,Start.circleCol1);
+		   Render.draw(Circle, position, 0, 1,Start.circleCol1);
 		   
 		 
 		  if(this.isCheccked)
-		  Renderer.draw(piont, closest,0, 3, Start.COLTEX,Constants.YELLOW);
+		  Render.draw(piont, closest,0, 3, Start.COLTEX,Constants.YELLOW);
 		  
 			  
 		  
 		 
-		   Renderer.draw(piont, closest2,0, 2, Start.COLTEX,Constants.BLACK);
-		   Renderer.draw(piont, closest3,0, 2, Start.COLTEX,Constants.BLACK);
+		   Render.draw(piont, closest2,0, 2, Start.COLTEX,Constants.BLACK);
+		   Render.draw(piont, closest3,0, 2, Start.COLTEX,Constants.BLACK);
 	   
 		}
 	

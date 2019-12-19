@@ -129,7 +129,7 @@ public class MapLoader {
 	}
 	public void drawtiles(Texture tex) {
 
-		Renderer.draw(model,new Vector2f(0),0, sizeOfEachTile,tex);
+		Render.draw(model,new Vector2f(0),0, sizeOfEachTile,tex);
 tilesRenderd=a;
 		a=0;
 

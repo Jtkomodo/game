@@ -16,17 +16,14 @@ import gameEngine.Start;
 import gameEngine.Timer;
 import input.InputHandler;
 
-public class TimedButtonPress {
+public class TimedButtonPress extends TimedButton {
 
   	//trying a actual timed based idea time1 and time two is the range that the button can be hit in once started(in seconds)
 	//Button is the actual glfw button we are looking for
 	
 	
-	public static final int HIT=2,MISS=1,NOTPUSHED=0;
-	private double time1,time2,StartTime;
-	private int Button;
-	private boolean Going;
-	
+
+
 	
 	public TimedButtonPress(double time1,double time2,int Button) {
 		
@@ -38,28 +35,28 @@ public class TimedButtonPress {
 	}
 	
 	
-	
+	@Override
    public void start() {
-		 Start.MoveInprogress=true;
-		 Start.Button=this;
+		this.Going=true;
 	   this.StartTime=Timer.getTIme();
 	   InputHandler.DisableAllBut(new int[] {Button});
 	   
    }
-	
+	@Override
 	public int update() {
 		double TimeNow=Timer.getTIme();
 		double TimeSince=Math.max(0,TimeNow-StartTime);
 		
 		byte StateOfButton=InputHandler.getStateofButton(Button);
 		Start.DebugPrint("TimeForButtonPress="+TimeSince+"("+time1+"/"+time2+")");
+		int result=NOTPUSHED;
 		
-		
-		int result;
+	
 		
 		if(TimeSince>=time2) {
 			
 			result= MISS;
+			
 			}
 	   
 		else if(StateOfButton==1) {//just pressed
@@ -67,22 +64,38 @@ public class TimedButtonPress {
 			if(TimeSince>=time1 && TimeSince<=time2) {
 				
 				result= HIT;
+		
 			}else {
 			
 				result= MISS;
+				
 			}
 			
 			
 			
-		}else {
-			result= NOTPUSHED;
+		}else if(TimeSince>=time1) {
+			this.model.setString("PRESS");
+			drawEndicator();
+			
 		}
 		
 		if(result!=NOTPUSHED) {
-			
+			if(result==MISS) {
+				this.model.setString("miss");
+				drawEndicator();
+				Start.DebugPrint("miss");
+			}else if(result==HIT) {
+	
+				Start.DebugPrint("hit");
+				
+			}
+		
 			enableButtons();
 			this.Going=false;
 		}
+		
+		
+		
 		
 		return result;
 		
@@ -94,8 +107,5 @@ public class TimedButtonPress {
 	
 	
 	
-	private void enableButtons() {
-		InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
-		
-	}
+
 }

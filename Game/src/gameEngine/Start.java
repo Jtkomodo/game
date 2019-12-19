@@ -18,7 +18,8 @@ import textrendering.TextBuilder;
 import Data.Constants;
 import Data.Moves;
 import battleClasses.Player;
-import battleClasses.TimedButtonPress;
+import battleClasses.TimedButton;
+import battleClasses.TimedButtonCombo;
 import entitys.DynamicEntity;
 import guis.GUIMEthods;
 import guis.TextureElement;
@@ -46,8 +47,8 @@ public class Start {
     
     private static int battleState,sprite,arrowPosition;
     
-    public static boolean JustStarted=true,MoveInprogress=false ;
-    public static TimedButtonPress Button;
+    public static boolean JustStarted=true,MoveInprogress=false;
+    public static TimedButton Button;
     public static ShaderProgram s;
     public static float scaleOfMapTiles=128,Rendercamx,Rendercamy;
     public static int amountWidth=Math.round((width/scaleOfMapTiles)),amountHeight=Math.round((height/scaleOfMapTiles));
@@ -363,7 +364,7 @@ public class Start {
 	if(canRender) {
 		
 	  // TextureUpdate(MAP)
-Renderer.enable();//enables render
+Render.enable();//enables render
 
 	
 		
@@ -786,9 +787,9 @@ private static void EndBattle(Player Player) {
 		 
 	   
 	   Vector2f position1=new Vector2f(-90,40);
-	   Vector2f position2=new Vector2f(-110,-98);
+	  
 	   
-	 		Renderer.draw(background,new Vector2f(0),0,64*40,bg); 
+	 		Render.draw(background,new Vector2f(0),0,64*40,bg); 
 	 	   
 	 	 	 
 	 	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
@@ -807,28 +808,27 @@ private static void EndBattle(Player Player) {
 	 	   if(Start.MoveInprogress) {
 	 		   
 	 		   battleBox.hide();
-	 		   
+	 		
+	 	 
 	 		  int State= Start.Button.update();
-	 		   if(State!=TimedButtonPress.NOTPUSHED) {
+	 		   if(State!=TimedButton.NOTPUSHED) {
 	 			   Start.MoveInprogress=false;
+	 			   battleBox.reset();
 	 			   battleBox.show();
-	 			   
-	 			   if(State==TimedButtonPress.HIT) {
-	 				 DebugPrint("HIT");
-	 			   }else if(State==TimedButtonPress.MISS) {
-	 				  DebugPrint("MISS");
-	 			   }
-	 				   
+	 			
 	 			   
 	 			   
 	 		   }
+	 			   
+	 			   
+	 		   
 	 		   
 	 		   
 	 		   
 	 		   
 	 		   
 	 	   }
-	 	    
+	 		     
 	 
 	 	  
 	   
@@ -853,7 +853,7 @@ private static void EndBattle(Player Player) {
 	 	   
 	private static void fps() {
 	
-		    Renderer.disable();
+		    Render.disable();
 		    canRender=false;//don't allow rendering until time
 			time2=Timer.getTIme();//gets current time
 		    passed=time2-time;//this is the time since the last time through the loop
@@ -907,12 +907,12 @@ private static void EndBattle(Player Player) {
 			    		JustStarted=false;
 			    	}
 			    	
-			    	  drawcalls=Renderer.getDrawcalls();
+			    	  drawcalls=Render.getDrawcalls();
 			    
 			    	  drawcallsFrame=drawcalls/frames;
 			    	 
 			    	  
-			    	  Renderer.resetDrawCalls();
+			    	  Render.resetDrawCalls();
 			    	  frameTime=0;
 			    	  frames=0;  
 			    	  
@@ -927,9 +927,9 @@ private static void EndBattle(Player Player) {
 	}
 private static void SpriteUpdate(Model sprite,Texture tex,float x,float y,float spritescale,boolean mirror){
 if(mirror)
-Renderer.Mirror();
+Render.Mirror();
 	
-Renderer.draw(sprite,new Vector2f(x,y), 0, spritescale, tex);
+Render.draw(sprite,new Vector2f(x,y), 0, spritescale, tex);
     
     
     
@@ -938,9 +938,9 @@ Renderer.draw(sprite,new Vector2f(x,y), 0, spritescale, tex);
 }
 private static void SpriteUpdate(Model sprite,Texture tex,float x,float y,float angle,float spritescale,boolean mirror){
 if(mirror)
-Renderer.Mirror();
+Render.Mirror();
 	
-Renderer.draw(sprite,new Vector2f(x,y), angle, spritescale, tex);
+Render.draw(sprite,new Vector2f(x,y), angle, spritescale, tex);
     
     
     
@@ -949,9 +949,9 @@ Renderer.draw(sprite,new Vector2f(x,y), angle, spritescale, tex);
 }
 private static void SpriteUpdate(Model sprite,Texture tex,float x,float y,float angle,float spritescale,Vector4f color,boolean mirror){
 if(mirror)
-Renderer.Mirror();
+Render.Mirror();
 	
-Renderer.draw(sprite,new Vector2f(x,y), angle, spritescale, tex,color);
+Render.draw(sprite,new Vector2f(x,y), angle, spritescale, tex,color);
     
     
     

@@ -6,6 +6,9 @@ import static org.lwjgl.glfw.GLFW.*;
 
 import battleClasses.Enemy;
 import battleClasses.Player;
+import battleClasses.TimedButton;
+import battleClasses.TimedButtonCombo;
+import battleClasses.TimedButtonHold;
 import battleClasses.TimedButtonPress;
 import gameEngine.Start;
 import gameEngine.Window;
@@ -16,8 +19,8 @@ public abstract class GUIMEthods {
 	public static Player player=Start.p;
 	public static String useSpMove="UseSPmove",useMOVE="Usemove",exitWINDOW="ExitWindow",saveGAME="SaveGame";
 	private static TimedButtonPress button=new TimedButtonPress(2,4,GLFW_KEY_SPACE);
-	
-	
+	private static TimedButtonHold buttonHold=new TimedButtonHold(2,4,2,GLFW_KEY_SPACE);
+	private static TimedButtonCombo buttonCombo=new TimedButtonCombo(new TimedButton[]{button,buttonHold,button,buttonHold},4,2);
 	
 	 public static void UseSPmove(Player p,String move) {
 		
@@ -29,8 +32,9 @@ public abstract class GUIMEthods {
 			
 			 Start.DebugPrint("used move "+m.getName()+"--");
 		
-			 button.start();
-			 
+			 buttonCombo.start();
+			 Start.MoveInprogress=true;
+			 Start.Button=buttonCombo;
 			 
 			 
 			 
@@ -56,6 +60,10 @@ public abstract class GUIMEthods {
 		 Start.DebugPrint("used move "+m.getName()+"--");
 		 
 		 button.start();
+		 Start.MoveInprogress=true;
+		 Start.Button=button;
+		 
+		 
 		 }else {
 			 
 			 

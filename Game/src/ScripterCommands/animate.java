@@ -4,7 +4,7 @@ import org.joml.Vector2f;
 
 import animation.Animate;
 import animation.AnimationHandler;
-import gameEngine.Renderer;
+import gameEngine.Render;
 import gameEngine.Timer;
 
 

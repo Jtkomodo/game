@@ -8,7 +8,7 @@ import java.util.Stack;
 import static org.lwjgl.glfw.GLFW.*;
 import org.joml.Vector2f;
 
-import battleClasses.Player;
+import battleClasses.BattleEntity;
 import gameEngine.Start;
 import input.GetInput;
 import input.InputHandler;
@@ -19,7 +19,7 @@ public class UIBox {
 	private int currentState=0;
 	
 	private boolean isActive=false;
-    private Player p=Start.p;
+    private BattleEntity p=Start.p;
 
 	private Vector2f position;
 	private static boolean isAnyOpened;

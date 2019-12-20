@@ -1,6 +1,7 @@
 package battleClasses;
 
 import org.joml.Vector2f;
+import org.joml.Vector4f;
 
 import Data.Constants;
 import gameEngine.Model;
@@ -66,15 +67,29 @@ public abstract class Bars {
 	abstract public void draw(Vector2f position);//must make draw otherwise we can't draw the bars
 
 	protected void draw(Vector2f position,Texture texture) {
-		float scaleX=Math.round((this.value/this.max)*this.backgroundScale.x);
+		
+		
+		Vector4f color=new Vector4f(0);
+		float percentage=(this.value/this.max);
+		if(percentage<.10f) {
+			Constants.RED.add( new Vector4f(-50,0,0,0),color);
+		}else {
+			color=Constants.BAR_COLOR_GREEN;
+		}
+		
+		
+		float scaleX=Math.round(percentage*this.backgroundScale.x);
 		if(scaleX<0)
 			scaleX=0;
 		if(scaleX>backgroundScale.x) {
 			scaleX=backgroundScale.x;
 		}
 		
+		
+		
+		
 		Render.draw(model, position,0,new Vector2f(backgroundScale.x+2,backgroundScale.y+2),background);
-		Render.draw(model, new Vector2f(position.x-((this.backgroundScale.x-(scaleX))/2),position.y), 0 ,new Vector2f(scaleX,backgroundScale.y), texture,Constants.BAR_COLOR_GREEN);
+		Render.draw(model, new Vector2f(position.x-((this.backgroundScale.x-(scaleX))/2),position.y), 0 ,new Vector2f(scaleX,backgroundScale.y), texture,color);
 		
 	}
 	

@@ -4,7 +4,7 @@ package gameEngine;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-
+import Items.Item;
 
 import  org.joml.Vector2f;
 import org.joml.Vector4f;
@@ -18,7 +18,7 @@ import textrendering.TextBuilder;
 import Data.Constants;
 import Data.Moves;
 import battleClasses.HpBar;
-import battleClasses.Player;
+import battleClasses.BattleEntity;
 import battleClasses.TimedButton;
 import battleClasses.TimedButtonCombo;
 import entitys.DynamicEntity;
@@ -31,6 +31,8 @@ import input.BIndingNameParser;
 import input.InputHandler;
 import input.InputHandler;
 import Data.Pcs;
+import Items.Item;
+import Items.Items;
 import  Scripter.Proccesor;
 import ScripterCommands.Wait;
 import ScripterCommands.animate;
@@ -67,14 +69,14 @@ public class Start {
     public static BatchedModel testM;
     public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls;
     public static Vector2f currentmovement,c2,oldpos,direction,BattleBoxPosition;
-    public static Player p;
+    public static BattleEntity p;
     public static CircleColision circle1, circle2;
     public static float PHP;
     public static float[] uvtextbox,uvArrow,vert; 
     public static UIBox battleBox,StartBox;
     public static DynamicEntity Ply;
     public static int amountOfMoves,amountOfSPMoves,function;
-   public static HpBar playersHpBar;
+   public static HpBar playersHpBar,EnemysHPBar;
     public static double startTime;
 
     
@@ -286,7 +288,7 @@ public class Start {
 		
 		s.loadVec4(Color, new Vector4f(1,1,1,1));
      
-		 p=new Player(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getMoves());
+		 p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getMoves());
 		
 		try {
 		 
@@ -301,9 +303,8 @@ public class Start {
 	
 	
 	UIStringElement BagElements[]= {new UIStringElement("-------bag------",new Vector2f(-38,40), .15f,Constants.BLACK),
-			new UIStringElement("test",new Vector2f(-54,5), .15f,Constants.BLACK),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK),
-			new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK),new UIStringElement("test",new Vector2f(15,-8), .15f,Constants.BLACK)
-		
+			new UIStringElement(Items.hpPotion.toString(),new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,Items.hpPotion.Item},new Class[] {p.getClass(),Item.class})
+    ,	new UIStringElement(Items.SuperHpPotion.toString(),new Vector2f(-54,-8), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,Items.SuperHpPotion.Item},new Class[] {p.getClass(),Item.class})
 	};
 		 
 	UIBoxState StartBoxs[]= {
@@ -356,8 +357,9 @@ public class Start {
 			e.printStackTrace();
 			System.exit(300);
 		}
+		p.setHp(50);
 			
-		playersHpBar=new HpBar(100,50,new Vector2f(100,20),HealthBarBackground, COLTEX);
+		playersHpBar=new HpBar(p.getMaxHP(),p.getHp(),new Vector2f(100,20),HealthBarBackground, COLTEX);
 		
 		
 		
@@ -769,7 +771,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	
 	
 	
-	private static void StartBattle(Player Player) {
+	private static void StartBattle(BattleEntity Player) {
 		
 		amountOfMoves=Player.getAmountofMoves();
 		amountOfSPMoves=Player.getAmountofSPMoves();
@@ -778,7 +780,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		
 	}
 	
-private static void EndBattle(Player Player) {
+private static void EndBattle(BattleEntity Player) {
 		
 		
 	    Player.setHp(PHP);;
@@ -808,6 +810,7 @@ private static void EndBattle(Player Player) {
 	 	
 	 	    
 	 	  battleBox.setPosition(position1);
+	 	  playersHpBar.setValue(p.getHp());
 	 	  playersHpBar.draw(new Vector2f(position1.x-100,position1.y+50));
 	 	  text1.setString("HP: "+Math.round(playersHpBar.getValue())+"/"+Math.round(playersHpBar.getMax()));
 	 	 

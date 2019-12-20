@@ -122,7 +122,7 @@ public class UIStringElement extends UIElement{
 		
 	}
 	
-	public UIStringElement(String string,Vector2f offset,float scale,String functionName,Object[] arguments,Class[] argumentTypes,Class baseCLass) {//active function no color base class 
+	public UIStringElement(String string,Vector2f offset,float scale,String functionName,Object[] arguments,Class[] argumentTypes) {//active function no color base class 
 		this.string=string;
 		this.scale=scale;
 		this.baseCLass=baseCLass;
@@ -151,10 +151,38 @@ public class UIStringElement extends UIElement{
 		
 	  
 	}
+	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,String functionName,Object[] arguments,Class[] argumentTypes) {//active function color base class
+		this.string=string;
+		this.scale=scale;
+	
+		this.text.setString(string);
+		this.offset=offset;
+		this.active=true;
+		this.arguments=arguments;
+		this.color=color;
+		this.hasColor=true;
+		this.HasFunction=true;
+	    
+		Class[] cArg; 
+		if(arguments!=null) {
+			 cArg= new Class[argumentTypes.length];
+			
+			 for(int i=0;i<argumentTypes.length;i++) {
+				 cArg[i]=argumentTypes[i];
+			 }
+		}else {
+			cArg=null;
+		}
+	    
+	    loadFunction(functionName, cArg);
+	    
+	    
+		
+	}
 	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,String functionName,Object[] arguments,Class[] argumentTypes,Class baseclass) {//active function color base class
 		this.string=string;
 		this.scale=scale;
-		this.baseCLass=baseclass;
+	    this.baseCLass=baseclass;
 		this.text.setString(string);
 		this.offset=offset;
 		this.active=true;

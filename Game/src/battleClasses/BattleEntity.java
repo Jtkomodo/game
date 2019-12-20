@@ -8,7 +8,7 @@ import org.joml.Vector2f;
 
 import Data.Moves;
 
-public class Player {
+public class BattleEntity {
 
 	private float atk,def,hp;
 	private float maxATK,maxDEF,maxHP;
@@ -18,7 +18,7 @@ public class Player {
 	
 	
 	
-	public Player(float atk,float def,float hp,Moves[] moves) {
+	public BattleEntity(float atk,float def,float hp,Moves[] moves) {
 		
     this.atk=atk;
     this.def=def;
@@ -92,6 +92,24 @@ public class Player {
 
 	public void setHp(float hp) {
 		this.hp = hp;
+	}
+	public void IncreseHp(float hp) {
+		float newhp=this.hp+hp;
+		if(newhp>this.maxHP) {
+			newhp=this.maxHP;
+		}
+		
+		this.hp=newhp;
+		
+	}
+	public void decreseHp(float hp) {
+		float newhp=this.hp-hp;
+		if(newhp<0) {
+			newhp=0;
+		}
+		
+		this.hp=newhp;
+		
 	}
 
 	

@@ -1,15 +1,18 @@
 package guis;
 
-import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.joml.Vector2f;
+import org.joml.Vector2fc;
 import org.joml.Vector4f;
 
 
 import gameEngine.Model;
+import gameEngine.ModelFramwork;
 import gameEngine.Render;
 import gameEngine.Start;
 import gameEngine.Texture;
@@ -18,634 +21,806 @@ import gameEngine.Texture;
 public class UIBoxState {
 
 	private boolean anyActive=false;
-	private float width,height;//width and height of the UI box;
+	private boolean alwaysShown=false;	
+	private boolean hasArrow=false;
 	
-	private int beginElement=0;
-	private int amountOfElements,offsetPositionOnlist=0;
-	private List<UIElement> elementlist=new ArrayList<UIElement>();//all of the string elements
-	private List<UIElement> Activeelementlist=new ArrayList<UIElement>();//only the string elements that have a action associated with it
-
+	private UIElement beginElement,ActiveElement;
+	private int amountOfElements=0,offsetPositionOnlist=0;
 	
-	protected HashMap<Vector2f,Integer> Values=new HashMap<Vector2f,Integer>();//this is a way to get the index of the element from the position 
-	protected HashMap<Integer,Vector2f> ValuesInverse=new HashMap<Integer,Vector2f>();
-	protected HashMap<Float,Integer> Amountx=new HashMap<Float,Integer>();//this is to tell how many times the x value is used to know when to delete it from the list
-	protected HashMap<Float,Integer> Amounty=new HashMap<Float,Integer>();//same as x but for y
-	private List<Float> sortx=new ArrayList<Float>();//this is all the x values in the positions in order if we move right then we get increase the index if left decrease
-	private List<Float> sorty=new ArrayList<Float>();//this is all the y values in order if the we go up then increase index if down then increase
-	private Vector2f offsetPosition;//position in relation to the middle of the box
-	private Vector4f color=null;//color of the box
-	private Texture tex,ArrowTex=Start.testSprite;//textures for the box and the arrow
-    private Model m,arrow;//models for drawing the box and the arrow 
-    private float[] uv=Start.uvtextbox,Auv=Start.uvArrow,vert=Start.vert;
-    private boolean currentlyActive=false/*this tells us if this box is the currently used one*/,alwaysShown=false;
-	private int PositionIndexX=0,PositionIndexY=0;
 	
+	private List<UIElement> elementlist=new LinkedList<UIElement>();//all of the string elements
+	private List<UIElement> Activeelementlist=new LinkedList<UIElement>();//only the string elements that have a action associated with it
+	
+	
+	private HashMap<Float,Integer> AmountOfXpos=new HashMap<Float,Integer>();//holds the amount of each xpositions there are
+	private HashMap<Float,Integer> AmountOfYpos=new HashMap<Float,Integer>();//same but for y
+	
+    private List<Float> xPos=new LinkedList<Float>();//list of each unique xPosition sorted	
+    private List<Float> yPos=new LinkedList<Float>();//list of each unique yPosition sorted
+    
+    private HashMap<Vector2f,UIElement> values=new HashMap<Vector2f,UIElement>();//holds every active element with it's position as the key 
+    
+    
+	
+    //these are for detecting what position to move the cursor on based by direction so if we need to go down for instance we just take currentindexpositiony-1
+    private int CurrentIndexPositionX;//this is the index of the xPos list we are currently on 
+    private int CurrentIndexPositionY;//this is the index of the yPos list we are currently on
+    
+    
+	private Vector4f color=null;
+	private Vector2fc offsetPosition;
+	private Texture tex=Start.textbox,ArrowTex=Start.testSprite;
+	private float[] uv=Start.uvtextbox,Auv=Start.uvArrow,vert=Start.vert;
+	private ModelFramwork m,arrow;;
+	private boolean currentlyActive;
+	
+	
+	
+	//CONSTRUCTORS__________________________________________________________________________________________________________________________________
 	
 	public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex) {
 		
-	construct(offsetPosition,width,height,elements,tex);
-	}
-	
+		construct(offsetPosition,width,height,elements,tex);
+		}
+		
+		
+
 	
 
-	public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,boolean alwaysShown) {
-		this.alwaysShown=alwaysShown;
-		construct(offsetPosition,width,height,elements,tex);
-		}
-		
-	public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,Vector4f color) {
-		this.color=color;
-		construct(offsetPosition,width,height,elements,tex);
-		}
-		
-		public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,boolean alwaysShown,Vector4f color) {
-			this.color=color;
+
+		public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,boolean alwaysShown) {
 			this.alwaysShown=alwaysShown;
 			construct(offsetPosition,width,height,elements,tex);
 			}
-	
-	
-		public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,float u,float v) {
 			
-		construct(offsetPosition,width,height,elements,tex,u,v);
-		}
-		
-		
-
-		public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,boolean alwaysShown,float u,float v) {
-			this.alwaysShown=alwaysShown;
-			construct(offsetPosition,width,height,elements,tex,u,v);
-			}
-			
-		public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,Vector4f color,float u,float v) {
+		public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,Vector4f color) {
 			this.color=color;
+			construct(offsetPosition,width,height,elements,tex);
+			}
+			
+			public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,boolean alwaysShown,Vector4f color) {
+				this.color=color;
+				this.alwaysShown=alwaysShown;
+				construct(offsetPosition,width,height,elements,tex);
+				}
+		
+		
+			public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,float u,float v) {
+				
 			construct(offsetPosition,width,height,elements,tex,u,v);
 			}
 			
-			public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,boolean alwaysShown,Vector4f color,float u,float v) {
-				this.color=color;
+			
+
+
+
+
+
+
+			public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,boolean alwaysShown,float u,float v) {
 				this.alwaysShown=alwaysShown;
 				construct(offsetPosition,width,height,elements,tex,u,v);
 				}
-		
-		
-		
-		
-		
-		
-		
-		
-	public boolean isAlwaysShown() {
-		return alwaysShown;
-	}
-
-	public Vector2f getoffsetPosition() {
-		return offsetPosition;
-	}
-
-
-
-
-	public void setoffsetPosition(Vector2f offsetPosition) {
-		this.offsetPosition = offsetPosition;
-	}
-
-
-
-
-	public int getOffsetPositionOnlist() {
-		return offsetPositionOnlist;
-	}
-
-
-
-
-	public void setOffsetPositionOnlist(int offsetPositionOnlist) {
-		if(this.anyActive) {
-		this.offsetPositionOnlist=offsetPositionOnlist;
-		Vector2f vector=ValuesInverse.get(offsetPositionOnlist);
-		this.PositionIndexX=sortx.indexOf(vector.x);
-		this.PositionIndexY=sorty.indexOf(vector.y);
-		}
-		}
-
-
-
-
-	public int getAmouuntOfelements() {
-		
-	return this.amountOfElements;	
-	}
-	public void setUv(float[] uv) {
-		this.uv = uv;
-	}
-	
-	public void addElement(UIElement e) {
-		elementlist.add(e);
-	    
-	
-		if(e.isActive()) {
-			this.anyActive=true;
-			if((e.getoffset().x<=ValuesInverse.get(0).x) && ( e.getoffset().y<=ValuesInverse.get(0).y)) {
-		    	this.beginElement=this.Activeelementlist.size();
-		    	
-		    }
-			
-			Activeelementlist.add(e);
-			Vector2f Vector=e.getoffset();
-	        Values.put(Vector,this.Activeelementlist.size()-1);
-	        ValuesInverse.put(this.Activeelementlist.size()-1,Vector);
-	        if(!sortx.contains(Vector.x))
-	        sortx.add(Vector.x);
-	        if(!sorty.contains(Vector.y))
-	        sorty.add(Vector.y);
-	        }
-		Collections.sort(sortx);
-		Collections.sort(sorty);
-
-		
-		Vector2f first=elementlist.get(0).getoffset();
-
-		this.PositionIndexX=sortx.indexOf(first.x);
-		this.PositionIndexY=sorty.indexOf(first.y);
-	
-		this.amountOfElements++;
-	
-	}
-	public void removeElement(int index) {
-	
-		if(index<=this.amountOfElements) {
-		
-		UIElement e=elementlist.get(index);
-		
-		elementlist.remove(index);
-		this.amountOfElements--;
-		if(e.isActive()) {
-			
-			
-			this.anyActive=true;
-		
-			Vector2f Vector=e.getoffset();
-	        Values.remove(Vector);
-	        ValuesInverse.remove(index);
-	        Activeelementlist.remove(e);  
-	       int x=Amountx.get(Vector.x);
-	       int y=Amounty.get(Vector.y); 
-	       if(x==1) {
-	    	  sortx.remove(Vector.x); 
-	    	  Amountx.remove(Vector.x);
-	    	  
-	       }else {
-	    	  Amountx.put(Vector.x,x-1);
-	       }
-	       if(y==1) {
-		    	  sorty.remove(Vector.y);
-		    	  Amounty.remove(Vector.y);
-		       }else{
-		    	   Amounty.put(Vector.y,y-1);
-		       }
-	       
-		
-		for(int i=index;i<this.amountOfElements;i++) {
-			 e=elementlist.get(i);
-			
-			 if(e.isActive()) {
-					
 				
-						
-				 
-				 
-				 
-				    this.anyActive=true;
-					 Vector=e.getoffset();
-			        int value=Values.get(Vector);
-			        Values.put(Vector, value-1);
-			        ValuesInverse.put(value-1,Vector);
-				 
-			 }
+			public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,Vector4f color,float u,float v) {
+				this.color=color;
+				construct(offsetPosition,width,height,elements,tex,u,v);
+				}
+				
+				public UIBoxState(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,boolean alwaysShown,Vector4f color,float u,float v) {
+					this.color=color;
+					this.alwaysShown=alwaysShown;
+					construct(offsetPosition,width,height,elements,tex,u,v);
+					}
 			
-		}
-		
-		
-		Collections.sort(sortx);
-		Collections.sort(sorty);
-		this.offsetPositionOnlist=0;
-		
-		Vector2f first=elementlist.get(0).getoffset();
-
-		this.PositionIndexX=sortx.indexOf(first.x);
-		this.PositionIndexY=sorty.indexOf(first.y);
-	
-	
-		
-	
-		}
-		
-		}
-		
-	}
-	
-	public void replaceElement(UIElement e,int index) {
-		
-	     removeElement(index);
-	     addElement(e);
-		
-		
-	}
-	
-	
-    public void drawBox(Vector2f position) {
-    	Vector2f noffsetPosition= new Vector2f();
-    
-    		position.add(this.offsetPosition,noffsetPosition);
-    	
-    	if(color==null) {	
-    	Render.draw(m, noffsetPosition, 0, 1,tex);}
-    	else {
-    		Render.draw(m, noffsetPosition, 0, 1,tex,color);
-    	}
-    for(int i=0;i<this.amountOfElements;i++) {
-    	UIElement element=this.elementlist.get(i);
-    	
-    	
-    	element.drawElement(noffsetPosition);
-    	
-    	
-    }
- if(currentlyActive && this.anyActive) {
-	 
-    Vector2f pos=new Vector2f(Activeelementlist.get(offsetPositionOnlist).getoffset());
-    
-   Vector2f pos2=new Vector2f(0);
-   pos.add(noffsetPosition,pos2);
-    Render.draw(arrow, pos2.sub(5,0,new Vector2f(0)),0,10,ArrowTex);
- }
-    	
-    	
-    	
-    }
-
-
-
-
-	
-
-	public void setHasarrow(boolean hasarrow) {
-		this.currentlyActive = hasarrow;
-	}
-	
-	
-private void construct(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex,float u,float v) {
-		
-		this.tex=tex;
-		this.offsetPosition=offsetPosition;
-		this.width=width;
-		this.height=height;
-		this.amountOfElements=elements.length;
-		
-		m=new Model(width, height, u, v, tex.getW(),tex.getH());
-		arrow=new Model(vert,Auv);
-		
-		loadList(elements);
-		
-}
-	
-private void loadList(UIElement elements[]) {
-	Vector2f first=elements[0].getoffset();
-	int i2=0;
-	boolean start=false;
-	
-	for(int i=0;i<elements.length;i++) {
-	UIElement e=elements[i];
-	
-	
-	
-	elementlist.add(e);
-	if(e.isActive()) {
-		this.anyActive=true;
-	if(!start) {
-		this.beginElement=i2;
-		start=true;
-	}
-		
-		
-	
-	
-		
-	Activeelementlist.add(e);
-	Vector2f Vector=e.getoffset();
-    Values.put(Vector,i2);
-    ValuesInverse.put(i2,Vector);
-    
-    
-    int x=this.Amountx.getOrDefault(Vector.x,0);
-    int y=this.Amounty.getOrDefault(Vector.y,0);
-    Amountx.put(Vector.x,x+1);
-    Amounty.put(Vector.y,y+1);
-    if(!sortx.contains(Vector.x)) {
-    sortx.add(Vector.x);}
-    if(!sorty.contains(Vector.y)) {
-    sorty.add(Vector.y);}
-    i2++;
-	
-	}
-
-	}
-	
-	
-	
-	Collections.sort(sortx);
-	Collections.sort(sorty);
-
-
-	this.PositionIndexX=sortx.indexOf(first.x);
-	this.PositionIndexY=sorty.indexOf(first.y);
-	
-	
-	
-	
-}
-
-
-
-	private void construct(Vector2f offsetPosition,float width,float height,UIElement[] elements,Texture tex) {
-		
-		this.tex=tex;
-		this.offsetPosition=offsetPosition;
-		this.width=width;
-		this.height=height;
-		this.amountOfElements=elements.length;
-		
-		 float[] vertText={
-				   -width,+height,
-					width,height,
-					width,-height,
-					-width,-height};
-		 
-		 
-		 
-
-		
-		m=new Model(vertText,uv);
-		arrow=new Model(vert,Auv);
-		
-		loadList(elements);
-	
-	
-	}
-	
-	
-	
-
-	
-
-	public int getBeginElement() {
-		return beginElement;
-	}
-
-	public int getPositionIndexX() {
-		return PositionIndexX;
-	}
-
-	
-	public int getPositionIndexY() {
-		return PositionIndexY;
-	}
-
-	public void  IncreasePositionIndexX() {
-		if(PositionIndexX!=sortx.size()-1 && this.anyActive ) {
-			PositionIndexX++;
-			//first just check if that position exist on our map
-		
-		float x=this.sortx.get(this.PositionIndexX);
-		float y=this.sorty.get(this.PositionIndexY);
-		
-		Vector2f vector=new Vector2f(x,y);
-		
-		
-		
-		
-		if(!Values.containsKey(vector)) {//if it doesn't then we check on the line for another element
-		boolean found=false;	//this is a boolean to tell if we found a Element
-		
-		//check on and below line
-		
-		for(int v=this.PositionIndexY;v>=0;v--) {
-			for(int i=PositionIndexX;i<sortx.size();i++) {
-				 x=this.sortx.get(i);
-				 y=this.sorty.get(v);
+			
+			
+			
+			
+			
 				
-				 vector=new Vector2f(x,y);
 				
-				if(Values.containsKey(vector)) {
-					this.PositionIndexX=i;
-					this.PositionIndexY=v;
-					found=true;
+				private void construct(Vector2f offsetPosition, float width, float height, UIElement[] elements, Texture tex) {
+				this.offsetPosition=offsetPosition;
+				this.tex=tex;
+				
+				//make the models
+				 float[] vertText={
+						   -width,+height,
+							width,height,
+							width,-height,
+							-width,-height};
+				 
+				 
+				
+
+				
+				m=new Model(vertText,uv);
+				arrow=new Model(vert,Auv);
+				
+				
+				//look for the first element that is active it to begin
+				for(int i=0;i<elements.length;i++) {
+				
+				if(elements[i].isActive()) {
+					this.beginElement=elements[i];
 					break;
 					
-				}}
-			if(found) {
-				break;
-			}
-			}
-		
-		
-		
-		
-		
-		
-		
-		//check above line
-		if(!found) {
-			for(int v=this.PositionIndexY;v<sorty.size();v++) {
-				for(int i=PositionIndexX;i<sortx.size();i++) {
-					 x=this.sortx.get(i);
-					 y=this.sorty.get(v);
-					
-					 vector=new Vector2f(x,y);
-					
-					if(Values.containsKey(vector)) {
-						this.PositionIndexX=i;
-						this.PositionIndexY=v;
-						found=true;
-						break;
-						
-					}}
-				if(found) {
-					break;
 				}
 				}
-		}
-		}
-		changeOffsetPositionOnList();//after we got the values set we now change the position on the list
-		
-		}
-	}
+				
+				
+				loadList(elements);
+				setActiveElement(beginElement);
+				}
+			
+				
 
-	
-	public void DecreasePositionIndexY() {
-		if(PositionIndexY!=0 && this.anyActive) {
-		PositionIndexY--;
-		
-		
-		float x=this.sortx.get(this.PositionIndexX);
-		float y=this.sorty.get(this.PositionIndexY);
-		
-		Vector2f vector=new Vector2f(x,y);
-		
-		if(!Values.containsKey(vector)) {
-		
-		for(int i=0;i<sorty.size();i++) {
-			 x=this.sortx.get(i);
-			 y=this.sorty.get(this.PositionIndexY);
-			
-			 vector=new Vector2f(x,y);
-			
-			if(Values.containsKey(vector)) {
-				this.PositionIndexX=i;
-				break;
-			}
-		}
-		}
-		changeOffsetPositionOnList();
-	
-		}
-	}
-	
-	public void  IncreasePositionIndexY() {
-		if(PositionIndexY!=sorty.size()-1 && this.anyActive) {
-			PositionIndexY++;
-			
-		
-		
-		float x=this.sortx.get(this.PositionIndexX);
-		float y=this.sorty.get(this.PositionIndexY);
-		
-		Vector2f vector=new Vector2f(x,y);
-		
-		if(!Values.containsKey(vector)) {
-		
-		
-		for(int i=0;i<sortx.size();i++) {
-			 x=this.sortx.get(i);
-			 y=this.sorty.get(this.PositionIndexY);
-			
-			vector=new Vector2f(x,y);
-			
-			if(Values.containsKey(vector)) {
-				this.PositionIndexX=i;
-				break;
-			}
-		}
-		}
-		changeOffsetPositionOnList();
-		}
-	}
-
-	
-	public void DecreasePositionIndeX() {
-		if(PositionIndexX!=0 && this.anyActive) {
-		PositionIndexX--;
-		
-		float x=this.sortx.get(this.PositionIndexX);
-		float y=this.sorty.get(this.PositionIndexY);
-		
-		Vector2f vector=new Vector2f(x,y);
-		
-		if(!Values.containsKey(vector)) {
-			
-		
-		
-			boolean found=false;	//this is a boolean to tell if we found a Element
-			
-			//check on and below line
-			
-			for(int v=this.PositionIndexY;v>=0;v--) {
-				for(int i=PositionIndexX;i>=0;i--) {
-					 x=this.sortx.get(i);
-					 y=this.sorty.get(v);
+				private void construct(Vector2f offsetPosition, float width, float height, UIElement[] elements,
+						Texture tex, float u, float v) {
+					this.offsetPosition=offsetPosition;
+					this.tex=tex;
+					//make the models
 					
-					 vector=new Vector2f(x,y);
+					m=new Model(width, height, u, v, tex.getW(),tex.getH());	
+					arrow=new Model(vert,Auv);
 					
-					if(Values.containsKey(vector)) {
-						this.PositionIndexX=i;
-						this.PositionIndexY=v;
-						found=true;
-						break;
-						
-					}}
-				if(found) {
-					break;
-				}
-				}
-			
-			
-			
-			
-			
-			
-			
-			//check above line
-			if(!found) {
-				for(int v=this.PositionIndexY;v<sorty.size();v++) {
-					for(int i=PositionIndexX;i>=0;i--) {
-						 x=this.sortx.get(i);
-						 y=this.sorty.get(v);
-						
-						 vector=new Vector2f(x,y);
-						
-						if(Values.containsKey(vector)) {
-							this.PositionIndexX=i;
-							this.PositionIndexY=v;
-							found=true;
+					
+					//look for the first element that is active it to begin
+					for(int i=0;i<elements.length;i++) {
+						if(elements[i].isActive()) {
+							this.beginElement=elements[i];
 							break;
 							
-						}}
-					if(found) {
-						break;
+						}
+						}	
+					
+					loadList(elements);
+					setActiveElement(this.beginElement);
+				}
+
+				
+				
+				
+				
+				
+				
+			
+
+
+
+
+//___________load___list__and ___unload
+
+				private void loadList(UIElement[] elements) {
+					
+					for(int i=0;i<elements.length;i++) {
+					UIElement e=elements[i];
+						this.elementlist.add(e);//add to element list
+						
+						//if__Active_______________________________________________________________
+						if(e.isActive()) {
+							this.Activeelementlist.add(e);//add to active element list if active
+						
+							if(this.beginElement==null) {
+								this.beginElement=e;
+								
+							}
+							Vector2f vector=e.getoffset();//get the offset of the vector								
+							Vector2f vector2=this.beginElement.getoffset();
+							
+							//if this element is before the begin element from left to right up to down then it becomes the new begin element
+							if(vector.y>vector2.y) {
+								
+								
+								this.beginElement=e;
+								
+							}else if(vector.y==vector2.y) {
+								if(vector.x<vector2.x) {
+									this.beginElement=e;
+								}
+								
+							}
+							//load in the Vector and Element to the Values map
+							
+							this.values.put(vector, e);
+							float x=vector.x;
+							float y=vector.y;
+							
+							if(!this.xPos.contains(vector.x))//add this x position if unique to the xPosition list
+								xPos.add(vector.x);
+						
+							if(!this.yPos.contains(vector.y))
+								yPos.add(vector.y);
+							
+							
+							
+								
+							
+							//now add to the amount of each position chord in respected map 
+							
+							this.AmountOfXpos.put(x,(AmountOfXpos.getOrDefault(x,0))+1);
+							this.AmountOfYpos.put(y,(AmountOfYpos.getOrDefault(y,0))+1);
+							
+							
+							
+						}
+					 //____________________________________________________________________________________
 					}
+					
+					
+					//sort the two so that we can easily find the next position to go to based on direction
+					Collections.sort(this.xPos);
+					Collections.sort(this.yPos);
+					
+					
+					
+					this.anyActive=!Activeelementlist.isEmpty();
+					if(this.ActiveElement==null && this.anyActive)
+						setActiveElement(this.Activeelementlist.get(0));
+					this.amountOfElements=this.elementlist.size();
+			      
+				}
+				
+				public void unloadList(int[] indexs) {
+					
+					int amount=0;
+					for(int i=0;i<indexs.length;i++) {
+						
+						if((indexs[i]-amount)<this.elementlist.size() && (indexs[i]-amount)>0) {
+						UIElement e=this.elementlist.get(indexs[i]-amount);//get the element by the index making sure to account for ones already deleted in this loop
+							this.elementlist.remove(e);//remove from element list
+							amount++;
+							if(e.isActive()) {
+								this.Activeelementlist.remove(e);//remove from active element list if active
+							    
+								if(this.beginElement==e) {
+							this.beginElement=null;
+                                    for(int yi=0;yi<this.yPos.size();yi++) {
+                                     for(int xi=0;xi<this.xPos.size();xi++) {
+                                          	float x=xPos.get(xi);
+                                          	float y=yPos.get(yi);
+                                          	
+                                          	Vector2f vector=new Vector2f(x,y);
+                                          	if(this.values.containsKey(vector)) {
+                                          		this.beginElement=values.get(vector);
+                                          		
+                                          	}
+                                          	
+                                          	
+                                          }	
+                                    	
+                                    	
+                                    	
+                                    }
+							}
+								
+								
+								Vector2f vector=e.getoffset();
+								//unload the Vector and Element to the Values map
+								
+								this.values.remove(vector);
+								float x=vector.x;
+								float y=vector.y;
+								
+								int amountx=this.AmountOfXpos.get(x);
+								int amounty=this.AmountOfYpos.get(y);
+								
+								
+								if(amountx==1) {//remove this x position if there is only 1
+									xPos.remove(vector.x);
+								   this.AmountOfXpos.remove(vector.x);
+								}else {
+									this.AmountOfXpos.put(vector.x, amountx-1);
+								}
+								
+								
+								if(amounty==1) {
+									yPos.remove(vector.y);
+									 this.AmountOfYpos.remove(vector.y);
+								}else {
+									
+									this.AmountOfYpos.put(vector.y, amounty-1);
+								}
+								
+								
+									
+								
+							
+								
+								
+							}
+						}
+						}
+					if(!this.elementlist.contains(this.ActiveElement)) {
+					      this.setActiveElement(this.beginElement);	
 					}
+					
+					this.anyActive=!Activeelementlist.isEmpty();
+						this.amountOfElements=this.elementlist.size();
+					
+				}
+				
+				
+				
+		//____________________Adding____and___Removing_______________	
+				 
+				
+				
+				
+				  public void addElements(UIElement[] elements) {
+					
+					loadList(elements);
+				}
+	          public void addElement(UIElement element) {
+					
+					loadList(new UIElement[] {element});
+				}
+				
+			 public void removeElements(int[] indexs) {
+				 
+				 unloadList(indexs);
+				 
+			 }
+			public void removeElement(int index) {
+				unloadList(new int[] {index});
 			}
+				
+			  public void removeAllActiveELements() {
+		            int amount=0;
+		        
+		         
+		            	for(int i=0;i<this.amountOfElements;i++) {
+							
+							UIElement e=this.elementlist.get(i-amount);
+						
+								
+							if(e.isActive()) {
+									this.Activeelementlist.remove(e);//remove from active element list if active
+									this.elementlist.remove(e);//remove from element list if active
+								
+		                         amount++;   
+								}
+							
+							}
+							
+		            	this.amountOfElements=this.elementlist.size();
+		            	this.anyActive=!Activeelementlist.isEmpty();
+		            	this.anyActive=false;
+		            	this.xPos.clear();
+		            	this.yPos.clear();
+		            	this.AmountOfXpos.clear();
+		            	this.AmountOfYpos.clear();
+		            	this.values.clear();
+		            	this.ActiveElement=null;
+		            }
+			
+
+
+	
+
+
+
+//______________STATE__MOVEMENT________________
+	public void DecreasePositionIndeX() {
+		//go left
+		
+	
+		if(this.CurrentIndexPositionX!=0 && this.anyActive) {
+			int xI=this.CurrentIndexPositionX-1;
+			
+			
+			//first check if there is one that exist on the same line
+			
+			float x=this.xPos.get(xI);
+			float y=this.yPos.get(this.CurrentIndexPositionY);
+			
+			Vector2f vector=new Vector2f(x,y);
+			if(this.values.containsKey(vector)) {
+				
+				setActiveElement(this.values.get(vector));
+				}else {
+					boolean found=false;//this is to tell if we found a value
+					
+			
+				      ///check below line 
+				
+				        for(int i=this.CurrentIndexPositionY;i>=0;i--) {//this is the y position of the "line"
+				        	
+				        	 for(int v=xI;v>=0;v--) {//this is the x position of the "line"
+						        	
+				        		   x=this.xPos.get(v);
+				        		   y=this.yPos.get(i);
+				        		 
+				        		 
+						        	vector=new Vector2f(x,y);
+						        	
+						        	if(this.values.containsKey(vector)) {
+						        		found=true;
+						        		setActiveElement(this.values.get(vector));
+						        	     break;
+						        	}
+						        	
+						        	
+				        	 }
+						        	
+				        	
+				        	
+				        }
+				
+				
+				
+				
+				      //above line
+				if(!found) {
+				
+				        for(int i=this.CurrentIndexPositionY;i<this.yPos.size();i++) {//this is the y position of the "line"
+				        	
+				        	 for(int v=xI;v>=0;v--) {//this is the x position of the "line"
+						        	
+				        		   x=this.xPos.get(v);
+				        		   y=this.yPos.get(i);
+				        		 
+				        		 
+						        	vector=new Vector2f(x,y);
+						        	
+						        	if(this.values.containsKey(vector)) {
+						        		found=true;
+						        		setActiveElement(this.values.get(vector));
+						        	     break;
+						        	}
+						        	
+						        	
+				        	 }
+						        	
+				        	
+				        	
+				        }
+				
+				}
+				
+				
+				
+				
+				
+				
+				}
+			}
+		
+		
+		
+		
+	}
+
+
+
+
+
+	public void IncreasePositionIndexX() {
+	//go right
+		
+		//if this is the last x position
+	
+		if(this.CurrentIndexPositionX!=this.xPos.size()-1 && this.anyActive) {
+			int xI=this.CurrentIndexPositionX+1;
+			
+			
+			//first check if there is one that exist on the same line
+			
+			float x=this.xPos.get(xI);
+			float y=this.yPos.get(this.CurrentIndexPositionY);
+			
+			Vector2f vector=new Vector2f(x,y);
+			if(this.values.containsKey(vector)) {
+				setActiveElement(this.values.get(vector));
+				}else {
+					boolean found=false;//this is to tell if we found a value
+					
+			
+				   
+					//check on and below line
+					  for(int i=this.CurrentIndexPositionY;i>=0;i--) {//this is the y position of the "line"
+				        	
+					    	
+					    	 for(int v=xI ;v<this.xPos.size();v++) {//this is the x position of the "line"
+						        	
+				        		   x=this.xPos.get(v);
+				        		   y=this.yPos.get(i);
+				        		 
+				        		 
+						        	vector=new Vector2f(x,y);
+						        	
+						        	if(this.values.containsKey(vector)) {
+						        		
+						        		found=true;
+						        		setActiveElement(this.values.get(vector));
+						        	     break;
+						        	}
+						        	
+						        	
+				        	 }
+						        	
+				        	
+				        	
+				        }
+				      
+				
+				
+				
+				      //above line
+				if(found==false) {
+				  
+					for(int i=this.CurrentIndexPositionY;i<this.yPos.size();i++) {//this is the y position of the "line"
+			        	
+			        	 for(int v=xI;v<this.xPos.size();v++) {//this is the x position of the "line"
+					        	
+			        		   x=this.xPos.get(v);
+			        		   y=this.yPos.get(i);
+			        		 
+			        		 
+					        	vector=new Vector2f(x,y);
+					        	
+					        	if(this.values.containsKey(vector)) {
+					        		found=true;
+					        		setActiveElement(this.values.get(vector));
+					        	     break;
+					        	}
+					        	
+					        	
+			        	 }
+					        	
+			        	
+			        	
+			        }
+			
+			
+				        
+				}
+	        		 
+	        		 
+	        	 }
+				
+				
+				
+				
+				
+				
+				}
+		
+		
+	}
+
+
+
+
+
+	public void IncreasePositionIndexY() {
+	//this stands for bringing the cursor up
+		
+		
+		
+		//if this is the last y position
+		
+		if(this.CurrentIndexPositionY!=this.yPos.size()-1 && this.anyActive) {
+			int yI=this.CurrentIndexPositionY+1;
+			
+			
+			//first check if there is one that exist on the same line
+			
+			float x=this.xPos.get(this.CurrentIndexPositionX);
+			float y=this.yPos.get(yI);
+			
+			Vector2f vector=new Vector2f(x,y);
+			if(this.values.containsKey(vector)) {
+				setActiveElement(this.values.get(vector));
+				}else {
+				
+					//check above line
+			
+			        	 for(int i=0;i<this.xPos.size();i++) {//this is the x position of the "line"
+					        	
+			        		   x=this.xPos.get(i);
+			        		   y=this.yPos.get(yI);
+			        		 
+			        		 
+					        	vector=new Vector2f(x,y);
+					        	
+					        	if(this.values.containsKey(vector)) {
+					        		
+					        		setActiveElement(this.values.get(vector));
+					        	     break;
+					        	}
+					        	
+					        	
+			        	 
+					        	
+			        	
+			        	
+					}
+					       	
+			        	
+			   }
 		}
-		changeOffsetPositionOnList();
+		
+	}
+
+
+
+
+
+	public void DecreasePositionIndexY() {
+		//this stands for bringing the cursor down
+		
+		
+		
+	
+		if(this.CurrentIndexPositionY!=0 && this.anyActive) {
+			int yI=this.CurrentIndexPositionY-1;
+			
+			
+			//first check if there is one that exist on the same line
+			
+			float x=this.xPos.get(this.CurrentIndexPositionX);
+			float y=this.yPos.get(yI);
+			
+			Vector2f vector=new Vector2f(x,y);
+			if(this.values.containsKey(vector)) {
+				setActiveElement(this.values.get(vector));
+				}else {
+					
+					
+			
+				  
+					
+					//check above line
+			
+			        	 for(int i=0;i>=0;i--) {//this is the x position of the "line"
+					        	
+			        		   x=this.xPos.get(i);
+			        		   y=this.yPos.get(yI);
+			        		 
+			        		 
+					        	vector=new Vector2f(x,y);
+					        	
+					        	if(this.values.containsKey(vector)) {
+					        		
+					        		setActiveElement(this.values.get(vector));
+					        	     break;
+					        	}
+					        	
+					        	
+			        	 
+					        	
+			        	
+			        	
+					}
+					       	
+			        	
+			   }
 		}
-	}
-	public UIElement getStringElement(int index) {
-		return elementlist.get(index);
 		
 	}
+
+
+
+
+//_____________DRAW_______________________________________
+	public void drawBox(Vector2f position) {
+		
+		Vector2f noffsetPosition= new Vector2f(0);//new position
+	    
+		position.add(this.offsetPosition,noffsetPosition);//new position=position+the offset position
 	
-	public UIElement getStringActiveElement(int index) {
-		if(this.Activeelementlist.size()!=0) {
 		
 		
-		return Activeelementlist.get(index);
-		}
-		else return null;
-	}
-	
-	public UIElement getStringActiveElement(Vector2f position) {
-		return this.Activeelementlist.get(Values.get(position));
-	}
-	
-	private void changeOffsetPositionOnList() {
-		float x=this.sortx.get(this.PositionIndexX);
-		float y=this.sorty.get(this.PositionIndexY);
-		
-		Vector2f vector=new Vector2f(x,y);
-		
-	
-		this.offsetPositionOnlist=this.Values.get(vector);
+	//draw the actual box first	
+	if(color==null) {	
+	Render.draw(m, noffsetPosition, 0, 1,tex);}
+	else {
+		Render.draw(m, noffsetPosition, 0, 1,tex,color);
 	}
 	
 	
+	//Iterate through the elements and draw each one with this new position
+for(int i=0;i<this.amountOfElements;i++) {
+	UIElement element=this.elementlist.get(i);
 	
+	
+	element.drawElement(noffsetPosition);
+	
+	
+}
+
+//now draw the arrow before the currently active element
+if(currentlyActive && this.anyActive) {//check if this state is currently active first and that there even is a active element
+	 
+    Vector2f pos=this.ActiveElement.getoffset();//get the position
+    
+   Vector2f pos2=new Vector2f(0);//placeholder
+   pos.add(noffsetPosition,pos2);
+    Render.draw(arrow, pos2.sub(5,0,new Vector2f(0)),0,10,ArrowTex);//draw the arrow
+ }
+		
+		
+	}
+	
+	
+	
+	
+	
+
+
+
+	
+
+
+//Setters____________________________________________
+
+   
+    private void setActiveElement(UIElement e) {
+    	
+    if(e!=null) {	
+    	Vector2f vector=e.getoffset();
+    	
+    	this.CurrentIndexPositionX=this.xPos.indexOf(vector.x);
+    	this.CurrentIndexPositionY=this.yPos.indexOf(vector.y);
+    	this.ActiveElement=e;
+  
+    	
+    }else {
+       this.ActiveElement=null;
+      
+    		   
+    }
+    	
+    }
+    public void setActiveElement(int value) {
+    	
+    	if(value<this.elementlist.size()) {
+    	UIElement e=this.elementlist.get(value);
+    	
+        if(e!=null) {	
+        	Vector2f vector=e.getoffset();
+        	
+        	this.CurrentIndexPositionX=this.xPos.indexOf(vector.x);
+        	this.CurrentIndexPositionY=this.yPos.indexOf(vector.y);
+        	this.ActiveElement=e;
+      
+        	
+        }
+    	}
+        }
+	
+	
+	public void setActive(boolean b) {
+		this.hasArrow=b;
+		this.currentlyActive=b;
+		reset();
+	}
+	
+	public void reset() {
+		setActiveElement(this.beginElement);
+		
+	}
+	
+	
+	
+	
+//Getters___________________________________________	
 	public boolean isAnyActive() {
 		return anyActive;
 	}
-
-
-
-
 	
+	
+	
+	public UIElement getActiveEllement() {
+		
+		return this.ActiveElement;
+	}
+    public boolean isAlwaysShown() {
+		
+		return this.alwaysShown;
+	}
+
 }
+

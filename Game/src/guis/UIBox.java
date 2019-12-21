@@ -41,7 +41,7 @@ public class UIBox {
 			
 			}
 			
-		statelist.get(0).setHasarrow(true);
+		statelist.get(0).setActive(true);
 		
 	}
 	
@@ -57,6 +57,7 @@ public class UIBox {
 		
 		if(isActive) {
 		UIBoxState UIstate=statelist.get(currentState);
+		
 		
 		for(int i=0;i<alwaysShownStateList.size();i++) {
 			UIBoxState	UIstates=alwaysShownStateList.get(i);
@@ -166,10 +167,10 @@ public void Update() {
 	public void Select() {//will return -1 if this changes state otherwise returns a value for us to tell what function is used
 	
 		UIBoxState state=this.statelist.get(currentState);
-		int liststate=state.getOffsetPositionOnlist();
-	    UIElement e=state.getStringActiveElement(liststate);
+	
+	    UIElement e=state.getActiveEllement();
 			
-	if(e!=null) {	
+	if(e!=null && state.isAnyActive()) {	
 		int stateToChangeTo=e.getState();//this is just telling us what happens if this string element is clicked on
 		if(stateToChangeTo!=-1) {//-1 means this is not a element that goes to another state
 			backStack.push(this.currentState);
@@ -235,21 +236,27 @@ public void Update() {
  }
 
   public  void reset() {
-	setCurrentState(getUIState(currentState).getBeginElement());
-	backStack.clear();
+       
+       getUIState().reset();
+       setCurrentState(0);
+	  this.backStack.clear();
+	  
+	  
   }
 
 	public int getCurrentState() {
 		return currentState;
 	}
 
-    public void setCurrentState(int currentState) {
+    public void setCurrentState(int newState) {
    
-        statelist.get(this.currentState).setHasarrow(false);
-    	this.currentState = currentState;
-    	statelist.get(currentState).setOffsetPositionOnlist(getUIState(currentState).getBeginElement());
-        statelist.get(currentState).setHasarrow(true);
-    
+    	getUIState().setActive(false);
+    	
+    	this.currentState=newState;
+    	getUIState().setActive(true);
+    	
+    	
+      
     }
     
     public UIBoxState getUIState() {

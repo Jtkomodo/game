@@ -4,6 +4,7 @@ package gameEngine;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+import Items.Inventory;
 import Items.Item;
 
 import  org.joml.Vector2f;
@@ -76,9 +77,9 @@ public class Start {
     public static UIBox battleBox,StartBox;
     public static DynamicEntity Ply;
     public static int amountOfMoves,amountOfSPMoves,function;
-   public static HpBar playersHpBar,EnemysHPBar;
+    public static HpBar playersHpBar,EnemysHPBar;
     public static double startTime;
-
+    public static Inventory playersInventory;
     
     public static AABB playerCol,Col,COl2;
     public static Animate a1;
@@ -289,6 +290,15 @@ public class Start {
 		s.loadVec4(Color, new Vector4f(1,1,1,1));
      
 		 p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getMoves());
+		 
+		 
+		 
+		 playersInventory= new Inventory(new Item[] {Items.hpPotion.Item,Items.hpPotion.Item,Items.SuperHpPotion.Item});
+		 
+		 
+		 
+		
+		 
 		
 		try {
 		 
@@ -302,9 +312,7 @@ public class Start {
 	
 	
 	
-	UIStringElement BagElements[]= {new UIStringElement("-------bag------",new Vector2f(-38,40), .15f,Constants.BLACK),
-			new UIStringElement(Items.hpPotion.toString(),new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,Items.hpPotion.Item},new Class[] {p.getClass(),Item.class})
-    ,	new UIStringElement(Items.SuperHpPotion.toString(),new Vector2f(-54,-8), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,Items.SuperHpPotion.Item},new Class[] {p.getClass(),Item.class})
+	UIStringElement BagElements[]= {new UIStringElement("-------bag------",new Vector2f(-38,40), .15f,Constants.BLACK)
 	};
 		 
 	UIBoxState StartBoxs[]= {
@@ -321,8 +329,9 @@ public class Start {
 		 
 		 
 		 
-		UIStringElement MenuElements[]= {new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK,1),
+		UIStringElement MenuElements[]= {
 				new UIStringElement("bag",new Vector2f(-35,-5), .15f,Constants.BLACK,2),
+				new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK,1),
 				new UIStringElement("specials",new Vector2f(1,-5), .15f,Constants.BLACK,3)
 		};
 		UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
@@ -360,11 +369,24 @@ public class Start {
 		p.setHp(50);
 			
 		playersHpBar=new HpBar(p.getMaxHP(),p.getHp(),new Vector2f(100,20),HealthBarBackground, COLTEX);
-		
-		
-		
+
+		Item[] ITM= playersInventory.getItems();		
+	UIElement[] elementlist=new UIElement[ITM.length];	
+	
+	for(int i=0;i<ITM.length;i++) {
+		elementlist[i]=new UIStringElement(ITM[i].getName(),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Item.class});
+	}
+
+	
+ 	
 		//----------------------GAME--LOOP------------------------------
-		while(!w.isExited()) {
+	
+	
+	battleBox.getUIState(2).addElements(elementlist);
+
+	
+  
+	while(!w.isExited()) {
 			oldpos=new Vector2f(x,y);
 		fps();    
 	    
@@ -437,7 +459,9 @@ Render.enable();//enables render
 
 }else {
 	//---------------------battle loop---------------------
+
 	battleupdate();
+	
     screencoordx=0;
 	screencoordy=0;
 	
@@ -815,6 +839,12 @@ private static void EndBattle(BattleEntity Player) {
 	 	  text1.setString("HP: "+Math.round(playersHpBar.getValue())+"/"+Math.round(playersHpBar.getMax()));
 	 	 
 	 	   text1.drawString(position1.x-130,position1.y+69,.12f);
+	 	  text1.setString("current state "+battleBox.getCurrentState());
+	 	 text1.drawString(position1.x,position1.y+69,.12f);
+	 	 
+	 
+	 	
+	 	  
 	 	   if(Start.MoveInprogress) {
 	 		   
 	 		   battleBox.hide();

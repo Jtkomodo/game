@@ -14,7 +14,7 @@ public abstract class Item {
 	private Model model;
 	private float basePrice;
 	
-	public Item(String name,String textureName,float basePrice) {
+	protected Item(String name,String textureName,float basePrice) {
 		
 		this.name=name;
 		this.basePrice=basePrice;

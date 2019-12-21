@@ -2,27 +2,31 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Enemy" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="enemy"/>
-			<item value="right"/>
-			<item value="Player"/>
-			<item value="float scale"/>
-			<item value="ESCAPE"/>
-			<item value="miss"/>
-			<item value="hit"/>
-			<item value="coliision"/>
-			<item value="StartBox"/>
-			<item value="statBox"/>
-			<item value="I."/>
-			<item value="GetInput"/>
-			<item value="I"/>
+			<item value="debugprint"/>
+			<item value="reset"/>
+			<item value="v"/>
+			<item value="this.Activeelement="/>
+			<item value="this.Active"/>
+			<item value="this.cur"/>
+			<item value="this.currentl"/>
+			<item value="x"/>
+			<item value="isan"/>
+			<item value="addElement"/>
+			<item value="&#x09;Start.DebugPrint(&quot;&quot;+this.amountOfElements"/>
+			<item value="addElements"/>
+			<item value="set"/>
+			<item value="this.positionindex"/>
+			<item value="this"/>
 		</list>
 		<list key="replacehistory">
+			<item value="setActiveElement()"/>
+			<item value="y"/>
 			<item value="Vector2f scale"/>
 			<item value="InputHandler."/>
 			<item value="InputHandler"/>
@@ -34,7 +38,7 @@
 		<item value="336" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="454" key="DIALOG_HEIGHT"/>
-		<item value="928" key="DIALOG_X_ORIGIN"/>
-		<item value="383" key="DIALOG_Y_ORIGIN"/>
+		<item value="874" key="DIALOG_X_ORIGIN"/>
+		<item value="189" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

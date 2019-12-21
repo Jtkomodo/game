@@ -4,7 +4,6 @@
     <fullyQualifiedTypeName name="input.InputHandler"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButtonHold"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButtonCombo"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
@@ -18,6 +17,8 @@
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="gameEngine.Render"/>
     <fullyQualifiedTypeName name="gameEngine.Model"/>
-    <fullyQualifiedTypeName name="Items.Items"/>
     <fullyQualifiedTypeName name="Items.Item"/>
+    <fullyQualifiedTypeName name="Items.Items"/>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
 </qualifiedTypeNameHistroy>

@@ -201,7 +201,9 @@ public class UIBoxState {
 						//if__Active_______________________________________________________________
 						if(e.isActive()) {
 							this.Activeelementlist.add(e);//add to active element list if active
-						
+						     this.anyActive=true;
+							
+							
 							if(this.beginElement==null) {
 								this.beginElement=e;
 								
@@ -254,10 +256,10 @@ public class UIBoxState {
 					Collections.sort(this.yPos);
 					
 					
-					
-					this.anyActive=!Activeelementlist.isEmpty();
-					if(this.ActiveElement==null && this.anyActive)
-						setActiveElement(this.Activeelementlist.get(0));
+			
+					if(this.ActiveElement==null && this.anyActive) {
+						  Start.DebugPrint("yes");     	
+						setActiveElement(this.beginElement);}
 					this.amountOfElements=this.elementlist.size();
 			      
 				}
@@ -332,7 +334,13 @@ public class UIBoxState {
 							}
 						}
 						}
-					if(!this.elementlist.contains(this.ActiveElement)) {
+					
+					Collections.sort(this.xPos);
+					Collections.sort(this.yPos);
+					
+					
+			
+					if(!this.Activeelementlist.contains(this.ActiveElement)) {  	
 					      this.setActiveElement(this.beginElement);	
 					}
 					
@@ -366,8 +374,9 @@ public class UIBoxState {
 				unloadList(new int[] {index});
 			}
 				
-			  public void removeAllActiveELements() {
-		            int amount=0;
+			  private void removeAllActiveELements() {
+		       
+				  int amount=0;
 		        
 		         
 		            	for(int i=0;i<this.amountOfElements;i++) {
@@ -376,26 +385,32 @@ public class UIBoxState {
 						
 								
 							if(e.isActive()) {
-									this.Activeelementlist.remove(e);//remove from active element list if active
+								
 									this.elementlist.remove(e);//remove from element list if active
 								
 		                         amount++;   
 								}
 							
 							}
-							
+						
+		            	
 		            	this.amountOfElements=this.elementlist.size();
-		            	this.anyActive=!Activeelementlist.isEmpty();
 		            	this.anyActive=false;
 		            	this.xPos.clear();
 		            	this.yPos.clear();
+		            	this.Activeelementlist.clear();
 		            	this.AmountOfXpos.clear();
 		            	this.AmountOfYpos.clear();
 		            	this.values.clear();
-		            	this.ActiveElement=null;
-		            }
+		            	this.beginElement=null;
+		            	
+			  }
 			
-
+           public void relpaceALLActive(UIElement[] elements) {
+        	   removeAllActiveELements();
+        	   loadList(elements);
+        	   setActiveElementBySameOffset();
+           }
 
 	
 
@@ -657,11 +672,12 @@ public class UIBoxState {
 		if(this.CurrentIndexPositionY!=0 && this.anyActive) {
 			int yI=this.CurrentIndexPositionY-1;
 			
-			
 			//first check if there is one that exist on the same line
 			
 			float x=this.xPos.get(this.CurrentIndexPositionX);
 			float y=this.yPos.get(yI);
+
+			
 			
 			Vector2f vector=new Vector2f(x,y);
 			if(this.values.containsKey(vector)) {
@@ -790,6 +806,25 @@ if(currentlyActive && this.anyActive) {//check if this state is currently active
         }
     	}
         }
+    public void setActiveElementBySameOffset() {
+    	
+    	if(this.ActiveElement!=null && this.anyActive==true){
+    	Vector2f vector=this.ActiveElement.getoffset();
+    
+    	this.CurrentIndexPositionX=this.xPos.indexOf(vector.x);
+    	this.CurrentIndexPositionY=this.yPos.indexOf(vector.y);
+    	
+    	if(beginElement==null) {
+    	this.beginElement=this.Activeelementlist.get(0);
+    	}
+    	this.ActiveElement=this.values.getOrDefault(vector,this.beginElement);
+    	
+    	
+    	
+    	}
+    }
+    
+    
 	
 	
 	public void setActive(boolean b) {

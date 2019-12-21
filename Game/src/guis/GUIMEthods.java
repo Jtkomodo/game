@@ -76,7 +76,7 @@ public abstract class GUIMEthods {
 	 public static void UseItem(BattleEntity p,Item item) {
 		 
 		 Start.DebugPrint("used "+item.getName());
-		 item.useItem(p);
+		 p.useItem(item);
 		 
 		 
 	 }

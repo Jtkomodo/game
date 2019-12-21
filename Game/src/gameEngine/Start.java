@@ -289,12 +289,14 @@ public class Start {
 		
 		s.loadVec4(Color, new Vector4f(1,1,1,1));
      
-		 p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getMoves());
+	
+		 playersInventory= new Inventory(new Item[] {Items.hpPotion.Item,Items.SuperHpPotion.Item},new int[] {1,3});
+		 
+		p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getMoves(),playersInventory);
 		 
 		 
 		 
-		 playersInventory= new Inventory(new Item[] {Items.hpPotion.Item,Items.hpPotion.Item,Items.SuperHpPotion.Item});
-		 
+	
 		 
 		 
 		
@@ -370,28 +372,27 @@ public class Start {
 			
 		playersHpBar=new HpBar(p.getMaxHP(),p.getHp(),new Vector2f(100,20),HealthBarBackground, COLTEX);
 
-		Item[] ITM= playersInventory.getItems();		
-	UIElement[] elementlist=new UIElement[ITM.length];	
 	
-	for(int i=0;i<ITM.length;i++) {
-		elementlist[i]=new UIStringElement(ITM[i].getName(),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Item.class});
-	}
-
-	
- 	
-		//----------------------GAME--LOOP------------------------------
-	
-	
-	battleBox.getUIState(2).addElements(elementlist);
-
-	
-  
 	while(!w.isExited()) {
 			oldpos=new Vector2f(x,y);
 		fps();    
 	    
 	if(canRender) {
+ 		Item[] ITM= playersInventory.getItems();		
+			UIElement[] elementlist=new UIElement[ITM.length];	
+			
+			for(int i=0;i<ITM.length;i++) {
+				elementlist[i]=new UIStringElement(ITM[i].getName(),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Item.class});
+			}
+
 		
+	 	
+			//----------------------GAME--LOOP------------------------------
+		
+		
+		StartBox.getUIState(1).relpaceALLActive(elementlist);
+		
+	 	 	 
 	  // TextureUpdate(MAP)
 Render.enable();//enables render
 
@@ -399,7 +400,8 @@ Render.enable();//enables render
 		
 	//if(test==false) {
 	
-	if(overworld==true) {		 
+	if(overworld==true) {	
+		
 		
 	    playerCol.setPosition(new Vector2f(x,y));
 	
@@ -556,8 +558,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		
 	    if(H==1) {
 	    	
-	    	Animate animation=new Animate(7,player, sloader, 0, 7);
-	         Proccesor.addComandtoItorator(new animate(animation,oldpos, 0,32,12,false));
+	    	p.addItemToInventory(Items.hpPotion.Item);
 	    }
 	    if(ESCAPE==1) {
 			if(StartBox.isActive()) {
@@ -642,9 +643,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		
 		
 	
-		if(Y==1) {
-			Proccesor.addComandtoQueue(new Wait(12d));
-			}
+	
 		
 		
 		if(F2==1) {
@@ -826,7 +825,22 @@ private static void EndBattle(BattleEntity Player) {
 	 	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
 	 	    SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
 	 
-	 	 	 battleBox.draw();
+	 		Item[] ITM= playersInventory.getItems();		
+			UIElement[] elementlist=new UIElement[ITM.length];	
+			
+			for(int i=0;i<ITM.length;i++) {
+				elementlist[i]=new UIStringElement(ITM[i].getName(),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Item.class});
+			}
+
+		
+	 	
+			//----------------------GAME--LOOP------------------------------
+		
+		
+		battleBox.getUIState(2).relpaceALLActive(elementlist);
+		battleBox.draw();
+	 	 	 
+	 	 
 	 	     //battleBox.getUIState().setOffsetPositionOnlist(arrowPosition);   	   
 	 	   
 	 	    

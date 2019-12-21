@@ -17,8 +17,9 @@
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="gameEngine.Render"/>
     <fullyQualifiedTypeName name="gameEngine.Model"/>
-    <fullyQualifiedTypeName name="Items.Item"/>
     <fullyQualifiedTypeName name="Items.Items"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="Items.Item"/>
+    <fullyQualifiedTypeName name="Items.Inventory"/>
 </qualifiedTypeNameHistroy>

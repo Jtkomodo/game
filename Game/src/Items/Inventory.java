@@ -12,11 +12,21 @@ public class Inventory {
 	private List<String> itemNames=new  LinkedList<String>();
 	private List<Item> itemsList=new LinkedList<Item>();
 	
-	public Inventory(Item[] items) {
-		for(int i=0;i<items.length;i++) {
-			addItem(items[i]);
+	public Inventory(Item[] ListOfUniqueItems,int[] itemAmount) {
+		if(ListOfUniqueItems.length==itemAmount.length) {
+		for(int i=0;i<ListOfUniqueItems.length;i++) {
+			
+			Item item=ListOfUniqueItems[i];
+			int amount=itemAmount[i];
+			
+			if(amount>0 && !items.containsKey(item.getName())) {
+			this.items.put(item.getName(),amount);
+			this.itemNames.add(item.getName());
+			this.itemsList.add(item);
+			}
+			
 		}
-		
+		}
 		
 	}
 	
@@ -45,7 +55,7 @@ public class Inventory {
 		
 		if(items.containsKey(item.getName())) {
 			int amount=items.get(item.getName());
-			items.put(item.getName(),amount++);
+			items.put(item.getName(),amount+1);
 		}else {
 			itemNames.add(item.getName());
 			itemsList.add(item);
@@ -64,7 +74,7 @@ public class Inventory {
 	    	   itemNames.remove(item.getName());
 	    	   itemsList.remove(item);
 	       }else {
-	    	   items.put(item.getName(),amount--);
+	    	   items.put(item.getName(),amount-1);
 	       }
 			
 		}

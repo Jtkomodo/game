@@ -7,6 +7,8 @@ import java.util.List;
 import org.joml.Vector2f;
 
 import Data.Moves;
+import Items.Inventory;
+import Items.Item;
 
 public class BattleEntity {
 
@@ -15,11 +17,11 @@ public class BattleEntity {
 	private List<Moves> movelist= new ArrayList<Moves>();
 	private List<Moves> spmovelist=new ArrayList<Moves>();;
 	private HashMap<String,Moves> moveStrings=new HashMap<String,Moves>();
+	private Inventory inventory;
 	
 	
-	
-	public BattleEntity(float atk,float def,float hp,Moves[] moves) {
-		
+	public BattleEntity(float atk,float def,float hp,Moves[] moves,Inventory inventory) {
+	this.inventory=inventory;	
     this.atk=atk;
     this.def=def;
     this.hp=hp;
@@ -175,6 +177,27 @@ public Moves getmoveFromString(String name) {
 	return moveStrings.get(name);
 	
 }
+
+public void useItem(Item item) {
 	
+	
+	item.useItem(this);
+	this.inventory.removeItem(item);
+	
+	
+	
+}
+
+public void addItemToInventory(Item item) {
+	
+	
+	
+	this.inventory.addItem(item);
+	
+	
+	
+}
+
+
 	
 }

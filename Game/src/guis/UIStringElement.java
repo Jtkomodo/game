@@ -20,6 +20,7 @@ public class UIStringElement extends UIElement{
 	
 	
 	public UIStringElement(String string,Vector2f offset,float scale) {//not active no color
+		super(offset);
 		this.string=string;
 		this.scale=scale;
 		this.text.setString(string);
@@ -28,6 +29,7 @@ public class UIStringElement extends UIElement{
 	
 	}
 	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color) {//not active color
+		super(offset);
 		this.string=string;
 		this.scale=scale;
 		this.text.setString(string);
@@ -42,6 +44,7 @@ public class UIStringElement extends UIElement{
 	
 	
 	public UIStringElement(String string,Vector2f offset,float scale,int state) {//active no color state
+		super(offset);
 		this.string=string;
 		this.scale=scale;
 		this.text.setString(string);
@@ -55,6 +58,7 @@ public class UIStringElement extends UIElement{
 	  
 	}
 	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,int state) {//active color
+		super(offset);
 		this.string=string;
 		this.scale=scale;
 		this.text.setString(string);
@@ -70,6 +74,7 @@ public class UIStringElement extends UIElement{
 	
 	
 	public UIStringElement(String string,Vector2f offset,float scale,String functionName,Object[] arguments) {//active function no color 
+		super(offset);
 		this.string=string;
 		this.scale=scale;
 		this.text.setString(string);
@@ -96,6 +101,7 @@ public class UIStringElement extends UIElement{
 	  
 	}
 	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,String functionName,Object[] arguments) {//active function color
+		super(offset);
 		this.string=string;
 		this.scale=scale;
 		this.text.setString(string);
@@ -123,6 +129,7 @@ public class UIStringElement extends UIElement{
 	}
 	
 	public UIStringElement(String string,Vector2f offset,float scale,String functionName,Object[] arguments,Class[] argumentTypes) {//active function no color base class 
+		super(offset);
 		this.string=string;
 		this.scale=scale;
 		this.baseCLass=baseCLass;
@@ -152,6 +159,7 @@ public class UIStringElement extends UIElement{
 	  
 	}
 	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,String functionName,Object[] arguments,Class[] argumentTypes) {//active function color base class
+		super(offset);
 		this.string=string;
 		this.scale=scale;
 	
@@ -180,6 +188,7 @@ public class UIStringElement extends UIElement{
 		
 	}
 	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,String functionName,Object[] arguments,Class[] argumentTypes,Class baseclass) {//active function color base class
+		super(offset);
 		this.string=string;
 		this.scale=scale;
 	    this.baseCLass=baseclass;
@@ -209,6 +218,7 @@ public class UIStringElement extends UIElement{
 	}
 	
 	public UIStringElement(String string,Vector2f offset,float scale,String functionName,Object[] arguments,Class[] argumentTypes,Object objtocallfrom) {//active function no color base class 
+		super(offset);
 		this.string=string;
 		this.scale=scale;
 		this.text.setString(string);
@@ -227,6 +237,7 @@ public class UIStringElement extends UIElement{
 	  
 	}
 	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,String functionName,Object[] values,Class[] argumentTypes,Object objtocallfrom) {//active function color base class
+		super(offset);
 		this.string=string;
 		this.scale=scale;
 		this.baseCLass=objtocallfrom.getClass();
@@ -253,7 +264,7 @@ public class UIStringElement extends UIElement{
 	
 
 	@Override
-	public void drawElement(Vector2f Position) {
+	protected void drawElement(Vector2f Position) {
 	
 	Vector2f noffset=new Vector2f();offset.add(Position,noffset);
 		

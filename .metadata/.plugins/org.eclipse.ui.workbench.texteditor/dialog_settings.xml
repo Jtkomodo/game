@@ -2,29 +2,31 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="TILES" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="get"/>
+			<item value="tiles"/>
+			<item value="-(this.leagthOfModel/2)"/>
+			<item value="-(leagthOfModel/2)"/>
+			<item value="x-"/>
+			<item value="/2"/>
+			<item value="playerCol"/>
+			<item value="yes"/>
+			<item value=" opended"/>
 			<item value="if"/>
 			<item value="debugprint"/>
 			<item value="reset"/>
 			<item value="v"/>
 			<item value="this.Activeelement="/>
 			<item value="this.Active"/>
-			<item value="this.cur"/>
-			<item value="this.currentl"/>
-			<item value="x"/>
-			<item value="isan"/>
-			<item value="addElement"/>
-			<item value="&#x09;Start.DebugPrint(&quot;&quot;+this.amountOfElements"/>
-			<item value="addElements"/>
-			<item value="set"/>
-			<item value="this.positionindex"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
+			<item value="x+"/>
 			<item value="setActiveElement()"/>
 			<item value="y"/>
 			<item value="Vector2f scale"/>
@@ -38,7 +40,7 @@
 		<item value="336" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="454" key="DIALOG_HEIGHT"/>
-		<item value="874" key="DIALOG_X_ORIGIN"/>
-		<item value="189" key="DIALOG_Y_ORIGIN"/>
+		<item value="1265" key="DIALOG_X_ORIGIN"/>
+		<item value="292" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

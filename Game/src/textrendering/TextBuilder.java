@@ -13,8 +13,6 @@ public class TextBuilder{
 	private String text;
 	private BatchedModel textModel;
 	private Fontloader loader;
-
-	
 	
 	
 	public TextBuilder(String Font, float AtlusSize) {
@@ -47,7 +45,7 @@ public class TextBuilder{
 		float[] l;//uv coords (don't know why I called it l) 
 		float[]  v;//vertex
 	    Vector2f cursor=new Vector2f(0,0);// the curent cursor position 
-		
+	
 	//actually make the model from values in font file	
 	    
 		for(int i=0;i<text.length();i++) {//simple for loop
@@ -99,14 +97,13 @@ public class TextBuilder{
 			}
 					
 			
-			
-			
-			
+	
+					 
 			 cursor.add(xadv,yoff);//moves the cursor for the next char		 
-			 
+			
 			
 		}
-		
+	
 		}
 		
 		

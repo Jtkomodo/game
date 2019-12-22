@@ -23,6 +23,7 @@ import battleClasses.BattleEntity;
 import battleClasses.TimedButton;
 import battleClasses.TimedButtonCombo;
 import entitys.DynamicEntity;
+import guis.BarElement;
 import guis.GUIMEthods;
 import guis.TextureElement;
 import guis.UIBox;
@@ -224,7 +225,6 @@ public class Start {
 		
 		
 		aakar=new Fontloader("aakar",512);    
-		TextBuilder textforTILES=new TextBuilder(aakar);
 	    textB= new TextBuilder(aakar); 
 		textA= new TextBuilder(aakar);
 		textC= new TextBuilder(aakar);
@@ -296,16 +296,17 @@ public class Start {
 		 
 		 
 		 
-	
+		playersHpBar=new HpBar(p.getMaxHP(),p.getHp(),new Vector2f(100,20),HealthBarBackground, COLTEX);
 		 
 		 
 		
-		 
+	
+
 		
 		try {
 		 
-	UIStringElement StartElements[] ={
-		
+	UIElement StartElements[] ={
+			new BarElement("HP:",playersHpBar,new Vector2f(-17,65)),
 		new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,"DebugPrint",new Object[] {"stats"},new Class[] {String.class},Start.class),
 		new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,1),
 		new UIStringElement("Save",new Vector2f(-17,-5),.2f,Constants.BLACK,GUIMEthods.saveGAME,null),
@@ -323,7 +324,7 @@ public class Start {
 	};
 		 
 		 
-		 
+		
    StartBox=new UIBox(new Vector2f(screencoordx,screencoordy),StartBoxs); 
 	
 
@@ -362,6 +363,7 @@ public class Start {
 		
 		
 		battleBox=new UIBox(new Vector2f(100,0),boxs);//this is the UIbox for the battle UI
+        StartBox.getUIState(1).addElement(new BarElement("HP:",playersHpBar,new Vector2f(-17,65)));
 
 		}
 		catch(Exception e) {
@@ -370,28 +372,29 @@ public class Start {
 		}
 		p.setHp(50);
 			
-		playersHpBar=new HpBar(p.getMaxHP(),p.getHp(),new Vector2f(100,20),HealthBarBackground, COLTEX);
-
+		
 	
 	while(!w.isExited()) {
 			oldpos=new Vector2f(x,y);
 		fps();    
 	    
 	if(canRender) {
+		
+		//----------------------GAME--LOOP------------------------------
  		Item[] ITM= playersInventory.getItems();		
 			UIElement[] elementlist=new UIElement[ITM.length];	
 			
 			for(int i=0;i<ITM.length;i++) {
-				elementlist[i]=new UIStringElement(ITM[i].getName(),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Item.class});
+				elementlist[i]=new UIStringElement(ITM[i].getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Item.class});
 			}
 
 		
 	 	
-			//----------------------GAME--LOOP------------------------------
-		
+			
+			  playersHpBar.setValue(p.getHp());
 		
 		StartBox.getUIState(1).relpaceALLActive(elementlist);
-		
+	    		
 	 	 	 
 	  // TextureUpdate(MAP)
 Render.enable();//enables render
@@ -403,8 +406,8 @@ Render.enable();//enables render
 	if(overworld==true) {	
 		
 		
-	    playerCol.setPosition(new Vector2f(x,y));
 	
+	    playerCol.setPosition(new Vector2f(x,y));
 			Vector2f vector=updateColisions();
 			
 			x=vector.x; 
@@ -453,10 +456,10 @@ Render.enable();//enables render
 		if(HideSprite==false) 
 		a1.drawAnimatedModel(new Vector2f(x,y),0,Playerscale,!facingLeft);	
 		//SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
-		textforTILES.setString("Tiles: "+loader.getTilesrenderd());
+	
 		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.2f);
 		textC.UIDebugdrawString(screencoordx+100,screencoordy-220,.2f);
-         textforTILES.UIDebugdrawString(screencoordx,(480/2)+ screencoordy-20, .2f);
+      
        
 
 }else {
@@ -796,9 +799,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 	
 	private static void StartBattle(BattleEntity Player) {
 		
-		amountOfMoves=Player.getAmountofMoves();
-		amountOfSPMoves=Player.getAmountofSPMoves();
-	    PHP=Player.getHp();
+	
 	 
 		
 	}
@@ -806,7 +807,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 private static void EndBattle(BattleEntity Player) {
 		
 		
-	    Player.setHp(PHP);;
+	
 	    
 		
 	}
@@ -829,7 +830,7 @@ private static void EndBattle(BattleEntity Player) {
 			UIElement[] elementlist=new UIElement[ITM.length];	
 			
 			for(int i=0;i<ITM.length;i++) {
-				elementlist[i]=new UIStringElement(ITM[i].getName(),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Item.class});
+				elementlist[i]=new UIStringElement(ITM[i].getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Item.class});
 			}
 
 		
@@ -848,13 +849,13 @@ private static void EndBattle(BattleEntity Player) {
 	 	
 	 	    
 	 	  battleBox.setPosition(position1);
-	 	  playersHpBar.setValue(p.getHp());
-	 	  playersHpBar.draw(new Vector2f(position1.x-100,position1.y+50));
+	 	
+	 	
 	 	  text1.setString("HP: "+Math.round(playersHpBar.getValue())+"/"+Math.round(playersHpBar.getMax()));
-	 	 
-	 	   text1.drawString(position1.x-130,position1.y+69,.12f);
-	 	  text1.setString("current state "+battleBox.getCurrentState());
-	 	 text1.drawString(position1.x,position1.y+69,.12f);
+	 	  playersHpBar.draw(new Vector2f(position1.x-100,position1.y+50),text1); 
+	 	  
+	 	   text1.setString("current state "+battleBox.getCurrentState());
+	 	   text1.drawString(position1.x,position1.y+69,.12f);
 	 	 
 	 
 	 	

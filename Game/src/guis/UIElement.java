@@ -17,9 +17,15 @@ public abstract class UIElement {
     protected Method Function;//function to call
     
     
+      public UIElement(Vector2f offset) {
+    	  this.offset=offset;
+      }
+    
+    
+    
     
 	
-	public abstract void drawElement(Vector2f Position);
+	protected abstract void drawElement(Vector2f Position);
 	
 
 	public boolean isHasFunction() {

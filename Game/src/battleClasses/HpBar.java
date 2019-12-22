@@ -3,6 +3,7 @@ package battleClasses;
 import org.joml.Vector2f;
 
 import gameEngine.Texture;
+import textrendering.TextBuilder;
 
 public class HpBar extends Bars {
 
@@ -27,9 +28,9 @@ public class HpBar extends Bars {
 
 
 	@Override
-	public void draw(Vector2f position) {		
+	public void draw(Vector2f position,TextBuilder text) {		
 		
 		
-	draw(position,hpbar);
+	draw(position,hpbar,text);
 		
 	}}

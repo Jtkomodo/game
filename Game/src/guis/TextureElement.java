@@ -20,7 +20,7 @@ public class TextureElement extends UIElement {
 	
 	
 	public TextureElement(Texture texture,float width,float height,Vector2f offset,Vector2f uv,float scale){
-		
+		super(offset);
 		this.texture=texture;
 		this.offset=offset;
 		this.scale=scale;

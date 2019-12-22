@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import input.GetInput;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL;
 public class InputHandler {
 
 	
@@ -12,7 +15,7 @@ public class InputHandler {
 	
 	
 	public static byte getStateofButton(int Button) {
-		if(Buttons.contains(Button)) {
+		if(Buttons.contains(Button) ||(Button==GLFW_KEY_F || Button==GLFW_KEY_RIGHT_CONTROL || Button==GLFW_KEY_LEFT_CONTROL)) {
 			return GetInput.getStateofButton(Button);
 		
 		}else {

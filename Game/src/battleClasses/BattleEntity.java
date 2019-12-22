@@ -11,7 +11,7 @@ import Items.Inventory;
 import Items.Item;
 
 public class BattleEntity {
-
+   
 	private float atk,def,hp;
 	private float maxATK,maxDEF,maxHP;
 	private List<Moves> movelist= new ArrayList<Moves>();

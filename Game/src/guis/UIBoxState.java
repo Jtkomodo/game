@@ -31,7 +31,6 @@ public class UIBoxState {
 	private List<UIElement> elementlist=new LinkedList<UIElement>();//all of the string elements
 	private List<UIElement> Activeelementlist=new LinkedList<UIElement>();//only the string elements that have a action associated with it
 	
-	
 	private HashMap<Float,Integer> AmountOfXpos=new HashMap<Float,Integer>();//holds the amount of each xpositions there are
 	private HashMap<Float,Integer> AmountOfYpos=new HashMap<Float,Integer>();//same but for y
 	
@@ -257,8 +256,7 @@ public class UIBoxState {
 					
 					
 			
-					if(this.ActiveElement==null && this.anyActive) {
-						  Start.DebugPrint("yes");     	
+					if(this.ActiveElement==null && this.anyActive) {    	
 						setActiveElement(this.beginElement);}
 					this.amountOfElements=this.elementlist.size();
 			      
@@ -748,7 +746,7 @@ for(int i=0;i<this.amountOfElements;i++) {
 }
 
 //now draw the arrow before the currently active element
-if(currentlyActive && this.anyActive) {//check if this state is currently active first and that there even is a active element
+if(currentlyActive && this.anyActive && hasArrow) {//check if this state is currently active first and that there even is a active element
 	 
     Vector2f pos=this.ActiveElement.getoffset();//get the position
     
@@ -806,7 +804,7 @@ if(currentlyActive && this.anyActive) {//check if this state is currently active
         }
     	}
         }
-    public void setActiveElementBySameOffset() {
+    private void setActiveElementBySameOffset() {
     	
     	if(this.ActiveElement!=null && this.anyActive==true){
     	Vector2f vector=this.ActiveElement.getoffset();
@@ -830,7 +828,7 @@ if(currentlyActive && this.anyActive) {//check if this state is currently active
 	public void setActive(boolean b) {
 		this.hasArrow=b;
 		this.currentlyActive=b;
-		reset();
+		
 	}
 	
 	public void reset() {
@@ -852,6 +850,10 @@ if(currentlyActive && this.anyActive) {//check if this state is currently active
 		
 		return this.ActiveElement;
 	}
+	
+	
+	
+	
     public boolean isAlwaysShown() {
 		
 		return this.alwaysShown;

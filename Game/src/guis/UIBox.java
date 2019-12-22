@@ -264,16 +264,18 @@ public void Update() {
     	
     }
     public UIBoxState getUIState(int index) {
+    	if(index<this.statelist.size()) {
     	return this.statelist.get(index);
-    	
+    	}else {
+    		return this.statelist.get(this.statelist.size()-1);
+    	}
     }
-
 
 
 	public static  boolean isOpened() {
 		return isAnyOpened;
 	}
-
+    
 
 
 	

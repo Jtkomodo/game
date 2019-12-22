@@ -7,6 +7,7 @@ import Data.Constants;
 import gameEngine.Model;
 import gameEngine.Render;
 import gameEngine.Texture;
+import textrendering.TextBuilder;
 
 public abstract class Bars {
 
@@ -64,9 +65,9 @@ public abstract class Bars {
 	
 	
 	
-	abstract public void draw(Vector2f position);//must make draw otherwise we can't draw the bars
+	abstract public void draw(Vector2f position,TextBuilder text);//must make draw otherwise we can't draw the bars
 
-	protected void draw(Vector2f position,Texture texture) {
+	protected void draw(Vector2f position,Texture texture,TextBuilder text) {
 		
 		
 		Vector4f color=new Vector4f(0);
@@ -90,6 +91,7 @@ public abstract class Bars {
 		
 		Render.draw(model, position,0,new Vector2f(backgroundScale.x+2,backgroundScale.y+2),background);
 		Render.draw(model, new Vector2f(position.x-((this.backgroundScale.x-(scaleX))/2),position.y), 0 ,new Vector2f(scaleX,backgroundScale.y), texture,color);
+		text.drawString(position.x-(this.backgroundScale.x/2),position.y+(this.backgroundScale.y/2)+6,0f,.12f);
 		
 	}
 	

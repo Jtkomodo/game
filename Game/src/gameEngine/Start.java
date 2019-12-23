@@ -30,6 +30,8 @@ import guis.UIBox;
 import guis.UIBoxState;
 import guis.UIElement;import guis.UIStringElement;
 import input.BIndingNameParser;
+import input.CharCallback;
+import input.GetInput;
 import input.InputHandler;
 import input.InputHandler;
 import Data.Pcs;
@@ -78,7 +80,7 @@ public class Start {
     public static UIBox battleBox,StartBox;
     public static DynamicEntity Ply;
     public static int amountOfMoves,amountOfSPMoves,function;
-    public static HpBar playersHpBar,EnemysHPBar;
+    public static HpBar playersHpBar,EnemysHPBar,playersSPBAr;
     public static double startTime;
     public static Inventory playersInventory;
     
@@ -292,13 +294,12 @@ public class Start {
 	
 		 playersInventory= new Inventory(new Item[] {Items.hpPotion.Item,Items.SuperHpPotion.Item},new int[] {1,3});
 		 
-		p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getMoves(),playersInventory);
+		p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getMoves(),playersInventory);
 		 
+		
 		 
-		 
-		playersHpBar=new HpBar(p.getMaxHP(),p.getHp(),new Vector2f(100,20),HealthBarBackground, COLTEX);
-		 
-		 
+		playersHpBar=new HpBar(p.getMaxHP(),p.getHp(),new Vector2f(100,10),HealthBarBackground, COLTEX); 
+		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
 		
 	
 
@@ -346,8 +347,7 @@ public class Start {
 		
 		
 		UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
-				new UIStringElement(p.getspmoves()[0].getName()+" "+(p.getspmoves()[0]).getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useSpMove,new Object[] {p,p.getspmoves()[0].name()}),new UIStringElement("test",new Vector2f(15,5), .15f,Constants.BLACK),
-				new UIStringElement("test",new Vector2f(-54,-8), .15f,Constants.BLACK),new UIStringElement("test ",new Vector2f(15,-8), .15f,Constants.BLACK)
+				new UIStringElement(p.getspmoves()[0].getName()+" "+(p.getspmoves()[0]).getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useSpMove,new Object[] {p,p.getspmoves()[0].name()})
 			
 		};
 		
@@ -370,7 +370,7 @@ public class Start {
 			e.printStackTrace();
 			System.exit(300);
 		}
-		p.setHp(50);
+		p.setHp(10);
 			
 		
 	
@@ -392,6 +392,7 @@ public class Start {
 	 	
 			
 			  playersHpBar.setValue(p.getHp());
+			  playersSPBAr.setValue(p.getSp());
 		
 		StartBox.getUIState(1).relpaceALLActive(elementlist);
 	    		
@@ -489,6 +490,8 @@ textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
 if(showFps)
 textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.2f);
 textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.2f);
+text1.setString(CharCallback.string);
+text1.DebugdrawString(0, 0, .15f);
 
 
 
@@ -503,7 +506,7 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		DebugPrint("Closing.....");
 		DebugPrint("Highest fps="+HighFPs+" Lowest fps="+lowFPS);
 		w.destroy();
-		
+		System.exit(0);
 		
 	}
 
@@ -541,7 +544,20 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		battleBox.Update();
 		
 		
-		
+if(CharCallback.takeInput) {
+	    	
+	    InputHandler.DisableAllBut(new int[] {GLFW_KEY_H});	
+	    	String string=CharCallback.string;
+	    	if(GetInput.getStateofButton(GLFW_KEY_BACKSPACE)==1 && string.length()!=0) {//back space
+				   
+				   CharCallback.string=(string.substring(0,string.length()-1).toString());
+					
+					
+				}		
+	    }else {
+	    	InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
+	    	
+	    }
 		
 	   
 	    int UP=InputHandler.getStateofButton(GLFW_KEY_UP),DOWN=InputHandler.getStateofButton(GLFW_KEY_DOWN),
@@ -556,12 +572,25 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 		
 		
 		
-		
-		
-		
-	    if(H==1) {
+	    
+	    
+	    
+	    
 	    	
-	    	p.addItemToInventory(Items.hpPotion.Item);
+		
+		
+	    if(H==1 && CONTROLLEFT>0) {
+	    boolean i=CharCallback.takeInput;
+       if(!i) {
+	    	CharCallback.clearString();
+	    	CharCallback.takeInput=true;
+	    	
+	    }else {
+	    	CharCallback.takeInput=false;
+	     
+	    }
+	    
+	    
 	    }
 	    if(ESCAPE==1) {
 			if(StartBox.isActive()) {
@@ -852,11 +881,12 @@ private static void EndBattle(BattleEntity Player) {
 	 	
 	 	
 	 	  text1.setString("HP: "+Math.round(playersHpBar.getValue())+"/"+Math.round(playersHpBar.getMax()));
-	 	  playersHpBar.draw(new Vector2f(position1.x-100,position1.y+50),text1); 
+	 	  playersHpBar.draw(new Vector2f(position1.x-100,position1.y+50),text1);
+
+	 	  text1.setString("SP: "+Math.round(playersSPBAr.getValue())+"/"+Math.round(playersSPBAr.getMax()));
+	 	  playersSPBAr.draw(new Vector2f(position1.x-110,position1.y+70), text1);
 	 	  
-	 	   text1.setString("current state "+battleBox.getCurrentState());
-	 	   text1.drawString(position1.x,position1.y+69,.12f);
-	 	 
+	 	
 	 
 	 	
 	 	  

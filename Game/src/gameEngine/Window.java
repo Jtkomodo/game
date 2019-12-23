@@ -14,7 +14,8 @@ import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
-import input.Callback;
+import input.CharCallback;
+import input.KeyCallback;
 
 public class Window {
 
@@ -71,7 +72,8 @@ public Window(int width, int height,Camera camera,String name) {
 		
 		glfwSetWindowSizeLimits(window,width,height,GLFW_DONT_CARE,GLFW_DONT_CARE);
 		glfwSetWindowAspectRatio(window, width, height);
-		glfwSetKeyCallback(window,new Callback());
+		glfwSetKeyCallback(window,new KeyCallback());
+		glfwSetCharCallback(window,new CharCallback());
 		}
 
 	public boolean isExited() {

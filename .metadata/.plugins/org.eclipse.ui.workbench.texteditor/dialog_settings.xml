@@ -2,12 +2,15 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="TILES" key="selection"/>
+		<item value="s" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="h"/>
+			<item value="float newhp=this.hp+hp;"/>
+			<item value="enemy"/>
 			<item value="get"/>
 			<item value="tiles"/>
 			<item value="-(this.leagthOfModel/2)"/>
@@ -20,11 +23,9 @@
 			<item value="if"/>
 			<item value="debugprint"/>
 			<item value="reset"/>
-			<item value="v"/>
-			<item value="this.Activeelement="/>
-			<item value="this.Active"/>
 		</list>
 		<list key="replacehistory">
+			<item value="s"/>
 			<item value=""/>
 			<item value="x+"/>
 			<item value="setActiveElement()"/>

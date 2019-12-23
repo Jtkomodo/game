@@ -26,8 +26,8 @@ public abstract class GUIMEthods {
 	 public static void UseSPmove(BattleEntity p,String move) {
 		
 		 Moves m=p.getmoveFromString(move);
-		 
-		 
+		if(m.getCost()<=p.getSp()){ 
+		 p.decreseSp(m.getCost());
 		 if(m!=null && m.isSpecailMove() ) {
 			 
 			
@@ -47,7 +47,7 @@ public abstract class GUIMEthods {
 				 Start.DebugPrint("move "+move+" does not exist in this player's("+ p+") moveset");
 				 
 			 }
-		
+		}
 	 }
 	 
    

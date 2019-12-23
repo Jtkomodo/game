@@ -5,7 +5,7 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 
 //this class is needed to use glfwKeyCallback in Window class 
 
-public class Callback extends  GLFWKeyCallback {
+public class KeyCallback extends  GLFWKeyCallback {
 
 	
 	public static boolean[] keys= new boolean[65537];

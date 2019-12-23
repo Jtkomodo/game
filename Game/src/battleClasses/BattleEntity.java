@@ -12,23 +12,24 @@ import Items.Item;
 
 public class BattleEntity {
    
-	private float atk,def,hp;
-	private float maxATK,maxDEF,maxHP;
+	private float atk,def,hp,sp;
+	private float maxATK,maxDEF,maxHP,maxsp;
 	private List<Moves> movelist= new ArrayList<Moves>();
 	private List<Moves> spmovelist=new ArrayList<Moves>();;
 	private HashMap<String,Moves> moveStrings=new HashMap<String,Moves>();
 	private Inventory inventory;
 	
 	
-	public BattleEntity(float atk,float def,float hp,Moves[] moves,Inventory inventory) {
+	public BattleEntity(float atk,float def,float hp,float sp,Moves[] moves,Inventory inventory) {
 	this.inventory=inventory;	
     this.atk=atk;
     this.def=def;
     this.hp=hp;
+    this.maxsp=sp;
     this.maxATK=atk;
     this.maxDEF=def;
     this.maxHP=hp;
-    
+    this.sp=sp;
     
 	for(int i=0;i<moves.length;i++) {
 	    Moves move=moves[i];
@@ -48,6 +49,23 @@ public class BattleEntity {
 		
 	}
 	
+	public float getSp() {
+		return sp;
+	}
+
+	public void setSp(float sp) {
+		if(sp<=maxsp)
+		this.sp = sp;
+	}
+
+	public float getMaxsp() {
+		return maxsp;
+	}
+
+	public void setMaxsp(float maxsp) {
+		this.maxsp = maxsp;
+	}
+
 	public float getMaxATK() {
 		return maxATK;
 	}
@@ -93,6 +111,7 @@ public class BattleEntity {
 	}
 
 	public void setHp(float hp) {
+		if(hp<=maxHP)
 		this.hp = hp;
 	}
 	public void IncreseHp(float hp) {
@@ -114,6 +133,27 @@ public class BattleEntity {
 		
 	}
 
+	public void IncreseSp(float sp) {
+		float newsp=this.sp+sp;
+		if(newsp>this.maxsp) {
+			newsp=this.maxsp;
+		}
+		
+		this.sp=newsp;
+		
+	}
+	public void decreseSp(float sp) {
+		float newsp=this.sp-sp;
+		if(newsp<0) {
+			newsp=0;
+		}
+		
+		this.sp=newsp;
+		
+	}
+
+
+	
 	
 	
 	public void  addMove(Moves move) {

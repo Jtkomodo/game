@@ -14,6 +14,7 @@ public abstract class Bars {
 	
 	protected float max;
 	protected float value;
+	protected Vector4f Barcolor=Constants.BAR_COLOR_GREEN,lowValuecolor=Constants.BAR_COLOR_RED;
 	private Model model;
 	private Texture background;
 	private Vector2f backgroundScale; 
@@ -73,9 +74,9 @@ public abstract class Bars {
 		Vector4f color=new Vector4f(0);
 		float percentage=(this.value/this.max);
 		if(percentage<.10f) {
-			Constants.RED.add( new Vector4f(-50,0,0,0),color);
+	       color=this.lowValuecolor;
 		}else {
-			color=Constants.BAR_COLOR_GREEN;
+			color=this.Barcolor;
 		}
 		
 		

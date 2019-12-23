@@ -33,7 +33,8 @@ public class SpriteSheetLoader {
 
 	private void  ReadFile(String name) {
 		
-		InputStream ist=getClass().getResourceAsStream("/res/SpriteSheets/"+name+".data");//loads the spriter sheet data file
+		
+		InputStream ist=this.getClass().getResourceAsStream("/res/SpriteSheets/"+name+".data");//loads the spriter sheet data file
 		
 		
 		

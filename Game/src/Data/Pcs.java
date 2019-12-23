@@ -12,7 +12,8 @@ public enum Pcs {
 	C1(new float[]{
 			20,//attack
 			30,//Defense
-			200   //hp
+			200,   //hp
+			100 //sp
 			
 	},new Moves[]{
 		Moves.punch,
@@ -23,6 +24,7 @@ public enum Pcs {
 	private float atk;	
 	private float def;
 	private float hp;
+	private float sp;
 	private int amountOfMoves;
 	private Moves[] moves;
 	
@@ -31,6 +33,7 @@ public enum Pcs {
 		this.atk=stats[0];
 		this.def=stats[1];
 		this.hp=stats[2];
+		this.sp=stats[3];
 		this.moves=moves;
 		this.amountOfMoves=moves.length;
 		
@@ -48,7 +51,9 @@ public enum Pcs {
 	public float getHp() {
 		return hp;
 	}
-	
+	public float getSp() {
+		return sp;
+	}
 	
 	public Moves getmove(int move) {
 		

@@ -6,7 +6,6 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButtonCombo"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="input.GetInput"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="battleClasses.HpBar"/>
@@ -19,9 +18,11 @@
     <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="Items.Item"/>
     <fullyQualifiedTypeName name="Items.Inventory"/>
-    <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
     <fullyQualifiedTypeName name="guis.BarElement"/>
     <fullyQualifiedTypeName name="Data.Constants"/>
+    <fullyQualifiedTypeName name="input.CharCallback"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
 </qualifiedTypeNameHistroy>

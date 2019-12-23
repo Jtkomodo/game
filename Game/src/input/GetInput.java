@@ -11,7 +11,7 @@ public class GetInput {
 		
 	private static boolean Find(int key) {
 		try {
-			Boolean newKey=Callback.keys[key];
+			Boolean newKey=KeyCallback.keys[key];
 
 			return newKey;	
 		}catch(IndexOutOfBoundsException e) {

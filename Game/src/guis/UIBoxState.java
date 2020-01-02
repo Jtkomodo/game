@@ -851,6 +851,18 @@ if(currentlyActive && this.anyActive && hasArrow) {//check if this state is curr
 		return this.ActiveElement;
 	}
 	
+public UIStringElement getActiveStringEllement() {
+		if(this.ActiveElement instanceof UIStringElement) {
+			
+			
+		
+		return (UIStringElement) this.ActiveElement;
+		}else {
+			return null;
+		}
+		
+		
+		}
 	
 	
 	

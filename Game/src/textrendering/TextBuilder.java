@@ -216,7 +216,7 @@ public class TextBuilder{
 	
 	public void drawString(float x,float y,float angle,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
 	
-		 Render.Debugdraw(textModel,new Vector2f(x,y),angle,scale,loader.tex);
+		 Render.draw(textModel,new Vector2f(x,y),angle,scale,loader.tex);
 		
 	}
 

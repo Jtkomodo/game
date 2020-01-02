@@ -338,12 +338,6 @@ if(mirror) {
 	
 	
 	
-	
-	
-	
-	
-	
-	
 	public static void changeShader(ShaderProgram shader) {
 		
 		Render.s=shader;

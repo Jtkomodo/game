@@ -4,16 +4,10 @@
     <fullyQualifiedTypeName name="input.InputHandler"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButtonHold"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="battleClasses.TimedButtonCombo"/>
-    <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
     <fullyQualifiedTypeName name="input.GetInput"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="battleClasses.HpBar"/>
     <fullyQualifiedTypeName name="org.joml.Vector4f"/>
-    <fullyQualifiedTypeName name="gameEngine.Texture"/>
-    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
-    <fullyQualifiedTypeName name="gameEngine.Render"/>
-    <fullyQualifiedTypeName name="gameEngine.Model"/>
     <fullyQualifiedTypeName name="Items.Items"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="Items.Item"/>
@@ -22,7 +16,15 @@
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
     <fullyQualifiedTypeName name="guis.BarElement"/>
     <fullyQualifiedTypeName name="Data.Constants"/>
-    <fullyQualifiedTypeName name="input.CharCallback"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
+    <fullyQualifiedTypeName name="Debug.Debuger"/>
+    <fullyQualifiedTypeName name="gameEngine.Texture"/>
+    <fullyQualifiedTypeName name="gameEngine.Model"/>
+    <fullyQualifiedTypeName name="gameEngine.Render"/>
+    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="input.CharCallback"/>
+    <fullyQualifiedTypeName name="battleClasses.TimedButtonCombo"/>
+    <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
+    <fullyQualifiedTypeName name="battleClasses.Enemy"/>
 </qualifiedTypeNameHistroy>

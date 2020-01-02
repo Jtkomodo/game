@@ -14,10 +14,11 @@ public class CharCallback extends GLFWCharCallback {
 	@Override
 	public void invoke(long  window, int codepoint) {
 		if(takeInput) {
-				
+			if( !(string.contains("/[") && string.contains("]/")))	
 			string =(string+String.valueOf(Character.toChars(codepoint)));
-			
-			
+			else {
+				string=String.valueOf(Character.toChars(codepoint));
+			}
 			
 		}
 			

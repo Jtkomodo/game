@@ -43,7 +43,7 @@ public abstract class Item {
 	}
 
 
-	public abstract void useItem(BattleEntity entity);
+	public abstract boolean useItem(BattleEntity entity);
 	
 	
 	

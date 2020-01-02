@@ -244,8 +244,8 @@ public void Update() {
 	  
   }
 
-	public int getCurrentState() {
-		return currentState;
+	public UIBoxState getCurrentState() {
+		return this.statelist.get(currentState);
 	}
 
     public void setCurrentState(int newState) {

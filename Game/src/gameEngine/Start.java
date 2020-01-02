@@ -20,9 +20,9 @@ import Data.Constants;
 import Data.Moves;
 import battleClasses.HpBar;
 import battleClasses.BattleEntity;
+import battleClasses.Enemy;
 import battleClasses.TimedButton;
 import battleClasses.TimedButtonCombo;
-import entitys.DynamicEntity;
 import guis.BarElement;
 import guis.GUIMEthods;
 import guis.TextureElement;
@@ -43,6 +43,10 @@ import ScripterCommands.animate;
 import animation.Animate;
 import animation.AnimationHandler;
 import animation.SpriteSheetLoader;
+
+import static org.lwjgl.opengl.GL11.GL_LINES;
+import static org.lwjgl.opengl.GL11.GL_POINTS;
+import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
 public class Start {
     
 	
@@ -65,7 +69,7 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static InputHandler I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=true,showFps=true,Debug=false,StateOfStartBOx=false;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=true,showFps=true,StateOfStartBOx=false;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds,TARGETFPS=60;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite,HealthBarBackground;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
@@ -78,7 +82,7 @@ public class Start {
     public static float PHP;
     public static float[] uvtextbox,uvArrow,vert; 
     public static UIBox battleBox,StartBox;
-    public static DynamicEntity Ply;
+ 
     public static int amountOfMoves,amountOfSPMoves,function;
     public static HpBar playersHpBar,EnemysHPBar,playersSPBAr;
     public static double startTime;
@@ -90,7 +94,7 @@ public class Start {
     
     public static Fontloader aakar;
     
-    public static boolean facingLeft,running;
+    public static boolean facingLeft,running,PlayersTurn=true;
     
     
     
@@ -292,7 +296,7 @@ public class Start {
 		s.loadVec4(Color, new Vector4f(1,1,1,1));
      
 	
-		 playersInventory= new Inventory(new Item[] {Items.hpPotion.Item,Items.SuperHpPotion.Item},new int[] {1,3});
+		 playersInventory= new Inventory(new Item[] {Items.hpPotion.Item,Items.SuperHpPotion.Item,Items.spRestore.Item},new int[] {1,3,2});
 		 
 		p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getMoves(),playersInventory);
 		 
@@ -339,9 +343,7 @@ public class Start {
 				new UIStringElement("specials",new Vector2f(1,-5), .15f,Constants.BLACK,3)
 		};
 		UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
-				new UIStringElement(p.getmoves()[0].getName(),new Vector2f(-54,5),.15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,p.getmoves()[0].name()}),new UIStringElement("test ",new Vector2f(15,5), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,"test"}),
-				new TextureElement(playerTex,32,46,new Vector2f(-54,-8),new Vector2f(0,0),.15f),new UIStringElement("test ",new Vector2f(15,-8), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,"test"})
-			
+				new UIStringElement(p.getmoves()[0].getName(),new Vector2f(-54,5),.15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,p.getmoves()[0].name()})
 		};
 		
 		
@@ -370,7 +372,7 @@ public class Start {
 			e.printStackTrace();
 			System.exit(300);
 		}
-		p.setHp(10);
+		p.setHp(100);
 			
 		
 	
@@ -455,10 +457,14 @@ Render.enable();//enables render
 	    
 	      
 		if(HideSprite==false) 
-		a1.drawAnimatedModel(new Vector2f(x,y),0,Playerscale,!facingLeft);	
+		a1.drawAnimatedModel(new Vector2f(x,y),0,Playerscale,!facingLeft);
+		
+		
+		
 		//SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
 	
 		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.2f);
+		
 		textC.UIDebugdrawString(screencoordx+100,screencoordy-220,.2f);
       
        
@@ -489,10 +495,16 @@ textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")\nAnim
 textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
 if(showFps)
 textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.2f);
-textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.2f);
-text1.setString(CharCallback.string);
-text1.DebugdrawString(0, 0, .15f);
+textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.25f);
 
+if(CharCallback.takeInput) {
+	
+    Render.draw(textboxM,new Vector2f(screencoordx,screencoordy),0,3, COLTEX,Constants.BLACK);
+    text1.setString("TAKING INPUT");
+	text1.drawString(screencoordx-75, screencoordy+70, .2f,Constants.RED);
+}
+text1.setString(CharCallback.string);
+text1.drawString(screencoordx-200, screencoordy, .15f);
 
 
 
@@ -537,28 +549,107 @@ text1.DebugdrawString(0, 0, .15f);
 
 	private static void Inputupdate() {
 	
+				
 		w.update();//this is needed to actually poll events from keyboard 
 		
-		
+if(CharCallback.takeInput) {
+	    
+		    InputHandler.DisableAllBut(new int[] {GLFW_KEY_H});
+		    	String string=CharCallback.string;
+		    	
+		    	
+		    	if(GetInput.getStateofButton(GLFW_KEY_BACKSPACE)==1 && string.length()!=0) {//back space
+					   
+					   CharCallback.string=(string.substring(0,string.length()-1).toString());
+						
+					   string=CharCallback.string;
+					}	
+		    	if(GetInput.getStateofButton(GLFW_KEY_ENTER)==1) {
+		    		CharCallback.string=string+"\n";
+		    	}
+		    	
+		    	
+		    	if(string.contains("/v")) {
+		    		int index=string.indexOf("/v");
+		    		String s=string.subSequence(index+1,string.length()).toString();
+		    	
+		    		if(s.contentEquals("vscreenx")) {
+		    			s=string.replace("/vscreenx",""+Start.screencoordx);
+		    			CharCallback.string=s;
+		    		}
+		    		
+		    		
+		    		
+		    		
+		    	}
+		    if(CharCallback.string.endsWith("\n")) {
+		    
+		    if(CharCallback.string.contains("#(")&& CharCallback.string.contains(")")){	
+		    	string=CharCallback.string.substring(CharCallback.string.indexOf("#"),CharCallback.string.indexOf(")"));
+		    	
+		    	string=string.replace("#(","");
+		    	string=string.replace(")","");
+		    	
+		    	if(string.contentEquals("EXIT")) {
+		    		w.CloseWIndow();
+		    	   
+		    	
+		    	
+		    	}else if(string.indexOf("DEBUGPRINT=")==0) {
+		    		
+		    		int index=string.indexOf("DEBUGPRINT=")+11;
+		    		
+		    		string=string.substring(index);
+		    		if(string.contentEquals("true") || string.contentEquals("false")) {
+		    	    Start.DebugPrint=Boolean.parseBoolean(string);
+		    	    CharCallback.string=CharCallback.string.replace("#(DEBUGPRINT="+string+")","/[OK]/Set "+string);
+		    		}else{
+		    			CharCallback.string=CharCallback.string.replace("#(DEBUGPRINT="+string+")","/[ERROR]/Sorry that is not a valid value");
+		    			
+		    		}
+		  
+		    	}else if(string.indexOf("DEBUGDRAW=")==0) {
+		    		
+		    		int index=string.indexOf("DEBUGDRAW")+10;
+		    		
+		    		string=string.substring(index);
+		    		if(string.contentEquals("true") || string.contentEquals("false")) {
+		    	    Start.Debugdraw=Boolean.parseBoolean(string);
+		    	    CharCallback.string=CharCallback.string.replace("#(DEBUGDRAW="+string+")","/[OK]/Set "+string);
+		    		}else{
+		    			CharCallback.string=CharCallback.string.replace("#(DEBUGDRAW="+string+")","/[ERROR]/Sorry that is not a valid value");
+		    			
+		    		}
+		    	}else if(string.indexOf("DEBUGFPS=")==0) {
+		    		
+		    		int index=string.indexOf("DEBUGFPS=")+9;
+		    		
+		    		string=string.substring(index);
+		    		if(string.contentEquals("true") || string.contentEquals("false")) {
+		    	    Start.showFps=Boolean.parseBoolean(string);
+		    	    CharCallback.string=CharCallback.string.replace("#(DEBUGFPS="+string+")","/[OK]/Set "+string);
+		    		}else{
+		    			CharCallback.string=CharCallback.string.replace("#(DEBUGFPS="+string+")","/[ERROR]/Sorry that is not a valid value");
+		    			
+		    		}}
+		  else{
+		    		CharCallback.string=CharCallback.string.replace("#("+string+")","/[ERROR]/Sorry that is not a valid Command");
+	    		}
+		    }
+	    		
+}
+	    		
+		    	
+		    }else if(!MoveInprogress) {
+		    	InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_ENTER,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
+		    	
+		    }
+
 		StartBox.Update();
 		battleBox.Update();
 		
 		
-if(CharCallback.takeInput) {
-	    	
-	    InputHandler.DisableAllBut(new int[] {GLFW_KEY_H});	
-	    	String string=CharCallback.string;
-	    	if(GetInput.getStateofButton(GLFW_KEY_BACKSPACE)==1 && string.length()!=0) {//back space
-				   
-				   CharCallback.string=(string.substring(0,string.length()-1).toString());
-					
-					
-				}		
-	    }else {
-	    	InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
-	    	
-	    }
-		
+
 	   
 	    int UP=InputHandler.getStateofButton(GLFW_KEY_UP),DOWN=InputHandler.getStateofButton(GLFW_KEY_DOWN),
 	    LEFT=InputHandler.getStateofButton(GLFW_KEY_LEFT),RIGHT=InputHandler.getStateofButton(GLFW_KEY_RIGHT),
@@ -582,15 +673,30 @@ if(CharCallback.takeInput) {
 	    if(H==1 && CONTROLLEFT>0) {
 	    boolean i=CharCallback.takeInput;
        if(!i) {
-	    	CharCallback.clearString();
-	    	CharCallback.takeInput=true;
 	    	
-	    }else {
+	    	CharCallback.takeInput=true;
+	        
+	    
+       }else {
+    	   try {
+    		
+    	    
+    	   }catch(NullPointerException e) {
+    		   
+    	   }
+    	   
+    	   
+    	    CharCallback.clearString();
 	    	CharCallback.takeInput=false;
+	    	
 	     
 	    }
 	    
 	    
+	    }else if(H==1) {
+	    	p.addItemToInventory(Items.spRestore.Item);
+	    	
+	    	
 	    }
 	    if(ESCAPE==1) {
 			if(StartBox.isActive()) {
@@ -652,18 +758,9 @@ if(CharCallback.takeInput) {
 	  
 		
 		
-		if( F1==1) {
-	if(Start.Debug==false) {
-			DEBUGCOLISIONS=true;Debugdraw=true;showFps=true;
-	Start.Debug=true;
-	}
+	
 
-	else{
-		DEBUGCOLISIONS=false;Debugdraw=false;showFps=false;
-	Start.Debug=false;
-	}
-
-	}
+	
 		
 		
 		
@@ -826,6 +923,14 @@ if(CharCallback.takeInput) {
 	
 	
 	
+	private static void StartBattleTurn(BattleEntity p,Enemy e) {
+		
+		
+	}
+	
+	
+	
+	
 	private static void StartBattle(BattleEntity Player) {
 		
 	
@@ -887,8 +992,11 @@ private static void EndBattle(BattleEntity Player) {
 	 	  playersSPBAr.draw(new Vector2f(position1.x-110,position1.y+70), text1);
 	 	  
 	 	
-	 
-	 	
+	 	if(!Start.PlayersTurn) {
+	 		battleBox.hide();
+	 	}else {
+	 		battleBox.show();
+	 	}
 	 	  
 	 	   if(Start.MoveInprogress) {
 	 		   

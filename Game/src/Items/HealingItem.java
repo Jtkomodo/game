@@ -14,9 +14,14 @@ public class HealingItem extends Item {
 	}
 
 	@Override
-	public void useItem(BattleEntity entity) {
-		 entity.IncreseHp(this.howMuchItHeals);
-
+	public boolean useItem(BattleEntity entity) {
+		
+		if(entity.getHp()!=entity.getMaxHP()) {
+		entity.IncreseHp(this.howMuchItHeals);
+		return true;
+		}else {
+			return false;
+		}
 	}
      
 }

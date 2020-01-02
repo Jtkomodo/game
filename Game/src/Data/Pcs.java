@@ -13,7 +13,7 @@ public enum Pcs {
 			20,//attack
 			30,//Defense
 			200,   //hp
-			100 //sp
+			100 //sp			
 			
 	},new Moves[]{
 		Moves.punch,

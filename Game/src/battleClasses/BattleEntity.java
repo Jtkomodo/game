@@ -221,9 +221,10 @@ public Moves getmoveFromString(String name) {
 public void useItem(Item item) {
 	
 	
-	item.useItem(this);
+	boolean used=item.useItem(this);
+	if(used) {
 	this.inventory.removeItem(item);
-	
+	}
 	
 	
 }

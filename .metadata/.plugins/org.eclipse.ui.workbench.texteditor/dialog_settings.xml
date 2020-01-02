@@ -2,12 +2,16 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="s" key="selection"/>
-		<item value="false" key="casesensitive"/>
+		<item value="EXIT" key="selection"/>
+		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="EXIT"/>
+			<item value="DEBUGSTRING="/>
+			<item value="lse if(string.indexOf(&quot;DEBUGSTRING=&quot;)==0) {"/>
+			<item value="getString state"/>
 			<item value="h"/>
 			<item value="float newhp=this.hp+hp;"/>
 			<item value="enemy"/>
@@ -19,12 +23,9 @@
 			<item value="/2"/>
 			<item value="playerCol"/>
 			<item value="yes"/>
-			<item value=" opended"/>
-			<item value="if"/>
-			<item value="debugprint"/>
-			<item value="reset"/>
 		</list>
 		<list key="replacehistory">
+			<item value="DEBUGFPS="/>
 			<item value="s"/>
 			<item value=""/>
 			<item value="x+"/>

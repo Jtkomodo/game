@@ -19,10 +19,7 @@ public abstract class GUIMEthods {
 	public static Window window=Start.w;
 	public static BattleEntity player=Start.p;
 	public static String useSpMove="UseSPmove",useMOVE="Usemove",exitWINDOW="ExitWindow",saveGAME="SaveGame",UseItem="UseItem";
-	private static TimedButtonPress button=new TimedButtonPress(2,4,GLFW_KEY_RIGHT);
-	private static TimedButtonHold buttonHold=new TimedButtonHold(2,4,2,GLFW_KEY_RIGHT);
-	private static TimedButtonCombo buttonCombo=new TimedButtonCombo(new TimedButton[]{button,buttonHold,button,buttonHold},4,2);
-	
+
 	 public static void UseSPmove(BattleEntity p,String move) {
 		
 		 Moves m=p.getmoveFromString(move);
@@ -32,10 +29,12 @@ public abstract class GUIMEthods {
 			 
 			
 			 Start.DebugPrint("used move "+m.getName()+"--");
-		
-			 buttonCombo.start();
+	   if(m.isTimedButton()) {
+			m.getCombo().start();
+			 Start.Button=m.getCombo();
+	   
 			 Start.MoveInprogress=true;
-			 Start.Button=buttonCombo;
+	   }	
 			 
 			 
 			 
@@ -60,10 +59,12 @@ public abstract class GUIMEthods {
 		
 		 Start.DebugPrint("used move "+m.getName()+"--");
 		 
-		 button.start();
+		 if(m.isTimedButton()) {
+				m.getCombo().start();
+		   
 		 Start.MoveInprogress=true;
-		 Start.Button=button;
-		 
+		 Start.Button=m.getCombo();
+		 }
 		 
 		 }else {
 			 

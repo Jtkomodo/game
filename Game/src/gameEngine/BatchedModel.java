@@ -22,9 +22,9 @@ public class BatchedModel extends ModelFramwork{
 	 private int drawCount,drawCount2;
 		private int v_id,tex_id,ind_id;//made these public so that we can get to them from another method to change values
 	private int indBase,pionter,sections;
-	private long Texsize=1000000;//size of the amount of space to allocate for the buffers 
-	private long Indsize=1000000;
-	private long Vertsize=1000000;
+	private long Texsize=100000;//size of the amount of space to allocate for the buffers 
+	private long Indsize=100000;
+	private long Vertsize=100000;
 	public BatchedModel() {
 		
 		//setting everything to 0 

@@ -18,6 +18,7 @@ public class BattleEntity {
 	private List<Moves> spmovelist=new ArrayList<Moves>();;
 	private HashMap<String,Moves> moveStrings=new HashMap<String,Moves>();
 	private Inventory inventory;
+	private Moves lastUsedMove;
 	
 	
 	public BattleEntity(float atk,float def,float hp,float sp,Moves[] moves,Inventory inventory) {
@@ -47,6 +48,14 @@ public class BattleEntity {
     
     
 		
+	}
+	
+	public void setLastUsedMove(Moves lastUsedMove) {
+		this.lastUsedMove = lastUsedMove;
+	}
+	
+	public Moves getLastUsedMove() {
+		return this.lastUsedMove;
 	}
 	
 	public float getSp() {

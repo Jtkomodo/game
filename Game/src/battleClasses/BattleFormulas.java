@@ -6,21 +6,25 @@ public class BattleFormulas {
 	
 	
 	
-	public static float CalculateDamage(BattleEntity player,Enemy enemy,int gradeOfMove) {
+	public static float CalculateDamage(BattleEntity player,Enemy enemy,int gradeOfMove,float baseDamage) {
 		
 	/*this is where we will put the code for the damage formula for player vs enemy 
 	 * if the move used was one with a Timed button then pass in the grade that was achieved  
 	 */	
+		float multiplier = ((player.getAtk()-enemy.getDef())/100)+1;
 		
+		if(gradeOfMove == 1)
+			multiplier*=0.5;
+		else if(gradeOfMove == 3)
+			multiplier*=2;
 		
-		
-		return 0;
+		return multiplier*baseDamage;
 		
 	}
 	
 	
 	
-	public static float CalculateDamage(Enemy enemy,BattleEntity player) {
+	public static float CalculateDamage(Enemy enemy,BattleEntity player,float baseDamage) {
 		
 		//this is where we will put the code for the damage formula for enemy vs player
 			

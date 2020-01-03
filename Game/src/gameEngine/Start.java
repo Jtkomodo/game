@@ -17,9 +17,11 @@ import Collisions.ColisionHandeler;
 import textrendering.Fontloader;
 import textrendering.TextBuilder;
 import Data.Constants;
+import Data.Enemies;
 import Data.Moves;
 import battleClasses.HpBar;
 import battleClasses.BattleEntity;
+import battleClasses.BattleFormulas;
 import battleClasses.Enemy;
 import battleClasses.TimedButton;
 import battleClasses.TimedButtonCombo;
@@ -78,6 +80,7 @@ public class Start {
     public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls;
     public static Vector2f currentmovement,c2,oldpos,direction,BattleBoxPosition;
     public static BattleEntity p;
+    public static Enemy e;
     public static CircleColision circle1, circle2;
     public static float PHP;
     public static float[] uvtextbox,uvArrow,vert; 
@@ -86,7 +89,7 @@ public class Start {
     public static int amountOfMoves,amountOfSPMoves,function;
     public static HpBar playersHpBar,EnemysHPBar,playersSPBAr;
     public static double startTime;
-    public static Inventory playersInventory;
+    public static Inventory playersInventory, enemyTestInventory;
     
     public static AABB playerCol,Col,COl2;
     public static Animate a1;
@@ -297,15 +300,16 @@ public class Start {
      
 	
 		 playersInventory= new Inventory(new Item[] {Items.hpPotion.Item,Items.SuperHpPotion.Item,Items.spRestore.Item},new int[] {1,3,2});
+		 enemyTestInventory = new Inventory(new Item[] {Items.hpPotion.Item,Items.spRestore.Item},new int[] {1,1});
 		 
 		p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getMoves(),playersInventory);
-		 
+		e=new Enemy(Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getMoves(),enemyTestInventory);
 		
 		 
 		playersHpBar=new HpBar(p.getMaxHP(),p.getHp(),new Vector2f(100,10),HealthBarBackground, COLTEX); 
 		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
 		
-	
+		EnemysHPBar=new HpBar(e.getMaxHP(),e.getHp(),new Vector2f(100,10),HealthBarBackground, COLTEX);
 
 		
 		try {
@@ -395,6 +399,7 @@ public class Start {
 			
 			  playersHpBar.setValue(p.getHp());
 			  playersSPBAr.setValue(p.getSp());
+			  EnemysHPBar.setValue(e.getHp());
 		
 		StartBox.getUIState(1).relpaceALLActive(elementlist);
 	    		
@@ -952,7 +957,7 @@ private static void EndBattle(BattleEntity Player) {
 		 
 	   
 	   Vector2f position1=new Vector2f(-90,40);
-	  
+	   Vector2f position2=new Vector2f(202,-88);
 	   
 	 		Render.draw(background,new Vector2f(0),0,64*40,bg); 
 	 	   
@@ -990,7 +995,9 @@ private static void EndBattle(BattleEntity Player) {
 
 	 	  text1.setString("SP: "+Math.round(playersSPBAr.getValue())+"/"+Math.round(playersSPBAr.getMax()));
 	 	  playersSPBAr.draw(new Vector2f(position1.x-110,position1.y+70), text1);
-	 	  
+	 	 
+	 	  text1.setString("HP: "+Math.round(EnemysHPBar.getValue())+"/"+Math.round(EnemysHPBar.getMax()));
+	 	  EnemysHPBar.draw(new Vector2f(position2.x,position2.y+100),text1);
 	 	
 	 	if(!Start.PlayersTurn) {
 	 		battleBox.hide();
@@ -1008,7 +1015,7 @@ private static void EndBattle(BattleEntity Player) {
 	 			   Start.MoveInprogress=false;
 	 			   battleBox.reset();
 	 			   battleBox.show();
-	 			
+	 			   e.decreseHp(BattleFormulas.CalculateDamage(p, e, State, p.getLastUsedMove().getDamage()));
 	 			   
 	 			   
 	 		   }

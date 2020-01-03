@@ -59,6 +59,8 @@ public abstract class GUIMEthods {
 		
 		 Start.DebugPrint("used move "+m.getName()+"--");
 		 
+		 p.setLastUsedMove(m);
+		 
 		 if(m.isTimedButton()) {
 				m.getCombo().start();
 		   

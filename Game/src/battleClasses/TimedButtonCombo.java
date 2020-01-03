@@ -3,6 +3,10 @@ package battleClasses;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.joml.Vector2f;
+
+import Scripter.Proccesor;
+import ScripterCommands.DrawModel;
 import gameEngine.Start;
 import gameEngine.Timer;
 import input.InputHandler;
@@ -58,12 +62,15 @@ public class TimedButtonCombo extends TimedButton{
     		 
     		 if(this.amountRight>=this.amountForExcellent) {
     			 result=Excellent;
+    			 this.model.setString("Excellent");
     			 Start.DebugPrint("Excellent");
     			 }else if (this.amountRight>=this.amountForGood) {
     				 result=good;
+    				 this.model.setString("Good");
     				 Start.DebugPrint("Good");
     			 }else {
     				 result=bad;
+    				 this.model.setString("Bad");
     				 Start.DebugPrint("Bad");
     			 }
     		 
@@ -80,7 +87,8 @@ public class TimedButtonCombo extends TimedButton{
     	  this.amountRight=0;
     	  this.ButtonCurrentlyOn=0;
     	  this.Going=false;
-    	  
+    	  Proccesor.addComandtoQueue(new DrawModel(this.model.getTextModel(),this.model.getLoader().getTex(),this.vector.add(100,0,new Vector2f()),.5f,1));
+			
     	  
       }
       

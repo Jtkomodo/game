@@ -10,7 +10,7 @@ import battleClasses.TimedButtonHold;
 
 public enum Moves {
 
-	punch("punch",5,false,0,false,new TimedButtonPress(2,2.5,GLFW_KEY_SPACE)),//damage,special,cost,healing move
+	punch("punch",33,false,0,false,new TimedButtonPress(2,2.5,GLFW_KEY_SPACE)),//damage,special,cost,healing move
 	heal("heal",20,true,25,true,new TimedButtonCombo(new TimedButton[]{new TimedButtonPress(2,2.5,GLFW_KEY_SPACE),new TimedButtonHold(1,1.4,2,GLFW_KEY_RIGHT)},2,1));
 	
 	

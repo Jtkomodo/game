@@ -1,5 +1,9 @@
 package battleClasses;
 
+import org.joml.Vector2f;
+
+import Scripter.Proccesor;
+import ScripterCommands.DrawModel;
 import gameEngine.Start;
 import gameEngine.Timer;
 import input.InputHandler;
@@ -113,7 +117,6 @@ public class TimedButtonHold extends TimedButton {
 			}
 		
 		
-				
 		
 		
 		}
@@ -129,7 +132,7 @@ public class TimedButtonHold extends TimedButton {
 			 Start.DebugPrint("miss");
 		}else if(result==HIT) {
 			
-			
+			this.model.setString("hit");
 			Start.DebugPrint("hit");
 			
 		}
@@ -140,6 +143,8 @@ public class TimedButtonHold extends TimedButton {
 			this.hasBeenPushed=false;
 		this.timePressed=0;
 			this.Going=false;
+			Proccesor.addComandtoQueue(new DrawModel(this.model.getTextModel(),this.model.getLoader().getTex(),this.vector.add(100,0,new Vector2f()),.5f,1));
+			
 		}else {
 			 InputHandler.DisableAll();
 

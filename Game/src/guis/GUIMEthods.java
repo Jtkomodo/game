@@ -27,9 +27,10 @@ public abstract class GUIMEthods {
 		 p.decreseSp(m.getCost());
 		 if(m!=null && m.isSpecailMove() ) {
 			 
-			
+			  p.setLastUsedMove(m);	
 			 Start.DebugPrint("used move "+m.getName()+"--");
 	   if(m.isTimedButton()) {
+		 
 			m.getCombo().start();
 			 Start.Button=m.getCombo();
 	   

@@ -53,7 +53,31 @@ protected HashMap<Integer,Float[]> Values=new HashMap<Integer,Float[]>();
  
  
  
- private void loadFile() {
+ public Texture getTex() {
+	return tex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private void loadFile() {
 	
 		//StringBuilder string=new StringBuilder();
 		BufferedReader br;

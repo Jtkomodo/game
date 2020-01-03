@@ -495,7 +495,7 @@ Render.enable();//enables render
      	 StartBox.setPosition(new Vector2f(screencoordx+300,screencoordy));
      	StartBox.draw(); 
       }
-	Proccesor.proccesCommands(time);
+	
 textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")\nAnimations: "+AnimationHandler.amountInList());
 textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
 if(showFps)
@@ -512,7 +512,7 @@ text1.setString(CharCallback.string);
 text1.drawString(screencoordx-200, screencoordy, .15f);
 
 
-
+Proccesor.proccesCommands(time);
 		    w.render();
 		    w.clear();
 		    loader.flushModel();
@@ -1015,7 +1015,16 @@ private static void EndBattle(BattleEntity Player) {
 	 			   Start.MoveInprogress=false;
 	 			   battleBox.reset();
 	 			   battleBox.show();
+	 			   if(!p.getLastUsedMove().isHeal()) {
 	 			   e.decreseHp(BattleFormulas.CalculateDamage(p, e, State, p.getLastUsedMove().getDamage()));
+	 			   
+	 			   }else {
+	 				   
+	 				p.IncreseHp(p.getLastUsedMove().getDamage());   
+	 				   
+	 			   }
+	 			   
+	 			   
 	 			   
 	 			   
 	 		   }

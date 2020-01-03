@@ -22,6 +22,11 @@ public class TextBuilder{
 	}
 	
 	
+	public Fontloader getLoader() {
+		return loader;
+	}
+
+
 	public TextBuilder(Fontloader loader) {
 		this.loader=loader;//actually loads the the font file to be used
 	    
@@ -110,6 +115,11 @@ public class TextBuilder{
 		
 		
 	}
+
+	public BatchedModel getTextModel() {
+		return textModel;
+	}
+
 
 	public void UIdrawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
 		

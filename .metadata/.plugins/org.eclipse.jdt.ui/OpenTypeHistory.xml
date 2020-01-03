@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-    <typeInfo handle="=Game/src&lt;battleClasses{TimedButton.java[TimedButton" modifiers="1025" timestamp="1576785364657"/>
-    <typeInfo handle="=Game/libwin\/lwjgl-glfw.jar&lt;org.lwjgl.glfw(GLFWCharCallback.class[GLFWCharCallback" modifiers="1057" timestamp="1563153861719"/>
-    <typeInfo handle="=Game/src&lt;Items{Item.java[Item" modifiers="1025" timestamp="1577825153657"/>
+    <typeInfo handle="=Game/src&lt;ScripterCommands{Commands.java[Commands" modifiers="1025" timestamp="1578015899254"/>
 </typeInfoHistroy>

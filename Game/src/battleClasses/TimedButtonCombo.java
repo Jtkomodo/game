@@ -87,7 +87,7 @@ public class TimedButtonCombo extends TimedButton{
     	  this.amountRight=0;
     	  this.ButtonCurrentlyOn=0;
     	  this.Going=false;
-    	  Proccesor.addComandtoQueue(new DrawModel(this.model.getTextModel(),this.model.getLoader().getTex(),this.vector.add(100,0,new Vector2f()),.5f,1));
+    	  Proccesor.addComandtoQueue(new DrawModel(this.model.getTextModel(),this.model.getLoader().getTex(),this.vector.add(100,0,new Vector2f()),.5f,.5,true));
 			
     	  
       }

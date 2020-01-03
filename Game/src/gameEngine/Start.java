@@ -40,6 +40,7 @@ import Data.Pcs;
 import Items.Item;
 import Items.Items;
 import  Scripter.Proccesor;
+import ScripterCommands.DrawModel;
 import ScripterCommands.Wait;
 import ScripterCommands.animate;
 import animation.Animate;
@@ -77,7 +78,7 @@ public class Start {
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
     public static Model background,player,textboxM,Arrow;
     public static BatchedModel testM;
-    public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls;
+    public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls,textR;
     public static Vector2f currentmovement,c2,oldpos,direction,BattleBoxPosition;
     public static BattleEntity p;
     public static Enemy e;
@@ -239,6 +240,7 @@ public class Start {
 		textC= new TextBuilder(aakar);
 		textD= new TextBuilder(aakar);
 		text1= new TextBuilder(aakar);
+		textR=new TextBuilder(aakar);
 		textDrawCalls= new TextBuilder("aakar",512);
 	//	TextBuilder textCircle= new TextBuilder("aakar",512);
 		testM= new BatchedModel();
@@ -1001,6 +1003,7 @@ private static void EndBattle(BattleEntity Player) {
 	 	
 	 	if(!Start.PlayersTurn) {
 	 		battleBox.hide();
+	 		battleBox.reset();
 	 	}else {
 	 		battleBox.show();
 	 	}
@@ -1016,11 +1019,24 @@ private static void EndBattle(BattleEntity Player) {
 	 			   battleBox.reset();
 	 			   battleBox.show();
 	 			   if(!p.getLastUsedMove().isHeal()) {
-	 			   e.decreseHp(BattleFormulas.CalculateDamage(p, e, State, p.getLastUsedMove().getDamage()));
+	 				   
+	 				   float Damage=BattleFormulas.CalculateDamage(p, e, State, p.getLastUsedMove().getDamage());
+	 				   DebugPrint("hi");
+	 				   
+	 				   
+	 				   Start.textR.setString(Math.round(Damage)+"!");
+	 				   Proccesor.addComandtoQueue(new DrawModel(textR.getTextModel(),textR.getLoader().getTex(),new Vector2f(100,40),.5f,1,true));			
+	 				
+	 			        e.decreseHp(Damage);
 	 			   
 	 			   }else {
+	 				
 	 				   
-	 				p.IncreseHp(p.getLastUsedMove().getDamage());   
+	 				   float health=BattleFormulas.CalculateHeath(p, State, p.getLastUsedMove().getDamage());
+	 				  textR.setString(Math.round(health)+"!");
+	 				  Proccesor.addComandtoQueue(new DrawModel(textR.getTextModel(),textR.getLoader().getTex(),new Vector2f(100,40),.5f,1,true));			
+	 				   
+	 				p.IncreseHp(health);   
 	 				   
 	 			   }
 	 			   
@@ -1038,7 +1054,7 @@ private static void EndBattle(BattleEntity Player) {
 	 		   
 	 	   }
 	 		     
-	 
+	 PlayersTurn=true;
 	 	  
 	   
 	   

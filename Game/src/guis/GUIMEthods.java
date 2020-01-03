@@ -80,8 +80,10 @@ public abstract class GUIMEthods {
 	 public static void UseItem(BattleEntity p,Item item) {
 		 
 		 Start.DebugPrint("used "+item.getName());
-		 p.useItem(item);
-		 
+		boolean used= p.useItem(item);
+		 if(used) {
+			 Start.PlayersTurn=false;
+		 }
 		 
 	 }
 	 

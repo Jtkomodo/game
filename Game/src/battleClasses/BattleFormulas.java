@@ -23,6 +23,25 @@ public class BattleFormulas {
 	}
 	
 	
+	public static float CalculateHeath(BattleEntity player,int gradeOfMove,float baseHealth) {
+		/*this is the calculation for a healing timed combo move*/
+		
+	 float multiplier;
+		
+	 if(gradeOfMove == 1)
+			multiplier=0.5f;
+		else if(gradeOfMove == 3)
+			multiplier=2;
+		
+		
+		
+		return baseHealth*gradeOfMove;
+		
+		
+	}
+	
+	
+	
 	
 	public static float CalculateDamage(Enemy enemy,BattleEntity player,float baseDamage) {
 		

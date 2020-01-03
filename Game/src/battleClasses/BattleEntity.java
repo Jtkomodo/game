@@ -227,14 +227,14 @@ public Moves getmoveFromString(String name) {
 	
 }
 
-public void useItem(Item item) {
+public boolean useItem(Item item) {
 	
 	
 	boolean used=item.useItem(this);
 	if(used) {
 	this.inventory.removeItem(item);
 	}
-	
+	return used;
 	
 }
 

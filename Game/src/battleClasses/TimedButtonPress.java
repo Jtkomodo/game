@@ -78,16 +78,17 @@ public class TimedButtonPress extends TimedButton {
 		if(result!=NOTPUSHED) {
 			if(result==MISS) {
 				this.model.setString("miss");
-				Proccesor.addComandtoQueue(new DrawModel(this.model.getTextModel(),this.model.getLoader().getTex(),this.vector.add(100,0,new Vector2f()),.5f,1));
+				
 				Start.DebugPrint("miss");
 			}else if(result==HIT) {
 				this.model.setString("HIT");
 				Start.DebugPrint("hit");
-				Proccesor.addComandtoQueue(new DrawModel(this.model.getTextModel(),this.model.getLoader().getTex(),this.vector.add(100,0,new Vector2f()),.5f,1));			
+				
 			}
-		
+			Proccesor.addComandtoQueue(new DrawModel(this.model.getTextModel(),this.model.getLoader().getTex(),this.vector.add(100,0,new Vector2f()),.5f,.5,false));
 			enableButtons();
 			this.Going=false;
+			
 		}else {
 			 InputHandler.DisableAll();
 		}

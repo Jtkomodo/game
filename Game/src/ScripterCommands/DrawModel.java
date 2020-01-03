@@ -20,23 +20,25 @@ public class DrawModel extends Commands {
 	private Texture texture;
 	
 	
-	public DrawModel(ModelFramwork model,Texture texture,Vector2f position,float size,double time){
+	public DrawModel(ModelFramwork model,Texture texture,Vector2f position,float size,double time,boolean stopsInput){
 		this.position=position;
 		this.model=model;
 		this.size=size;
 		this.texture=texture;
 		this.time=time;
+		this.StopsInput=stopsInput;
 		
 	}
 	
 	
- public DrawModel(ModelFramwork model,Texture texture,Vector2f position,float size,Vector4f color,double time){
+ public DrawModel(ModelFramwork model,Texture texture,Vector2f position,float size,Vector4f color,double time,boolean stopsInput){
 		this.model=model;
 		this.position=position;
 		this.color=color;
 		this.size=size;
 		this.texture=texture;
 		this.time=time;
+		this.StopsInput=stopsInput;
 	}
 	
 	
@@ -52,7 +54,6 @@ public class DrawModel extends Commands {
 		this.StartTime=Timer.getTIme();
 		this.completed=false;
 		this.hasBeenStarted=true;
-		
 	}
 
 	@Override

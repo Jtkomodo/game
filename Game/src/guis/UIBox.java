@@ -239,6 +239,7 @@ public void Update() {
        
        getUIState().reset();
        setCurrentState(0);
+       getUIState().reset();
 	  this.backStack.clear();
 	  
 	  

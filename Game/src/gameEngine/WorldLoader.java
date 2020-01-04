@@ -19,7 +19,7 @@ import org.newdawn.slick.opengl.PNGDecoder;
 
 public class WorldLoader {
 
-	private static File file=new File(System.getProperty("user.dir"));
+	
 	private final byte[] Tile1rgba={(byte) 0x00,(byte) 0x00,(byte) 0x00,(byte) 0xff};
 	private HashMap<Integer,Byte> Data= new HashMap<Integer,Byte>();  	
 	private HashMap<Integer,TilesData> tilesData=new HashMap<Integer,TilesData>();
@@ -38,7 +38,8 @@ public class WorldLoader {
 				
 				
 		try {
-			PNGDecoder decoder = new PNGDecoder(getClass().getResourceAsStream(location));
+			InputStream stream=getClass().getResourceAsStream(location);
+			PNGDecoder decoder = new PNGDecoder(stream);
 			 
 
 		    //create a byte buffer big enough to store RGBA values
@@ -46,7 +47,7 @@ public class WorldLoader {
 
 		    //decode
 		    decoder.decode(data, decoder.getWidth() * 4, PNGDecoder.RGBA);
-
+      
 	 
 		 data.flip();
 		  byte c;
@@ -66,6 +67,7 @@ public class WorldLoader {
 				k++;
 			}
 			data.clear();
+			stream.close();
 		
 		} catch (Exception e) {
 			e.printStackTrace();

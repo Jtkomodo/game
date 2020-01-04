@@ -61,7 +61,7 @@ public class Start {
 	public static int location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;
     public static byte dKeys,testKey;
     
-    private static int battleState,sprite,arrowPosition;
+   
     public static BIndingNameParser buttonNamses;
     public static boolean JustStarted=true,MoveInprogress=false;
     public static TimedButton Button;
@@ -736,9 +736,6 @@ if(CharCallback.takeInput) {
 					a1.removeAnimation();
 					StartBox.reset();
 					StateOfStartBOx=false;
-					battleState=0;
-					arrowPosition=0;
-					sprite=0;
 					battleBox.show();
 				
 				}

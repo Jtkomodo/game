@@ -65,7 +65,16 @@ public class BIndingNameParser {
 			
 			e.printStackTrace();
 		}
+	     
 		}
+		try {
+			ist.close();
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		
 		}	

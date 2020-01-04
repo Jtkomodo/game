@@ -20,6 +20,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.HashMap;
@@ -75,8 +76,9 @@ public Texture(String path) {
 			String location=new String("/res/"+path+".png");
 			
 		//data=stbi_load(location,width,height,comp,4);
-			 PNGDecoder decoder = new PNGDecoder(getClass().getResourceAsStream(location));
-			 
+			InputStream stream=getClass().getResourceAsStream(location);
+			 PNGDecoder decoder = new PNGDecoder(stream);
+			
 
 			    //create a byte buffer big enough to store RGBA values
 			    data = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
@@ -86,11 +88,13 @@ public Texture(String path) {
 			    
 			    decoder.decode(data, decoder.getWidth() * 4, PNGDecoder.RGBA);
 
+			    
+			    
 		if(data==null) {
 			throw new IOException();
 		}
 	 
-	    
+		 stream.close();
 	 //   loadMapWithBuffer(data);
 		
 		
@@ -154,6 +158,7 @@ private void loadTexture(ByteBuffer data) {
       glTexImage2D(GL_TEXTURE_2D,0,GL_RGBA,w,h,0,GL_RGBA,GL_UNSIGNED_BYTE,data);
    
    glBindTexture(GL_TEXTURE_2D,0);//unbinds
+ 
    
   
 }

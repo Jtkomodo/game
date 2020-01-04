@@ -85,7 +85,13 @@ public class SpriteSheetLoader {
 
 		}
 		
-		
+		try {
+			br.close();
+			isr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		

@@ -10,16 +10,20 @@
 		<list key="textEntries">
 			<item value="1"/>
 			<item value="1"/>
+			<item value="1"/>
 		</list>
 		<list key="orderedElements">
+			<item value="org.eclipse.ui.preferencePages.Workbench"/>
 			<item value="org.eclipse.recommenders.news.rcp.preferencePages.news"/>
 			<item value="org.eclipse.recommenders.news.rcp.command.pollNewsFeeds"/>
 		</list>
 		<list key="orderedProviders">
 			<item value="org.eclipse.ui.preferences"/>
+			<item value="org.eclipse.ui.preferences"/>
 			<item value="org.eclipse.ui.commands"/>
 		</list>
 		<list key="textArray">
+			<item value="heap"/>
 			<item value="poll"/>
 			<item value="news"/>
 		</list>

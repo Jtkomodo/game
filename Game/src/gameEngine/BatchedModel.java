@@ -103,7 +103,7 @@ int[] indeces= new int[] {
 	
 }
 	
-private static FloatBuffer makeBuffer(float[] array ) {
+private  FloatBuffer makeBuffer(float[] array ) {
 	FloatBuffer buffer= BufferUtils.createFloatBuffer(array.length); //this just is initializing our buffer with the correct capacity
 	buffer.put(array);//puts the data in the newly created buffer
 	buffer.flip();//this allows the buffer to be read from very very important
@@ -111,7 +111,7 @@ private static FloatBuffer makeBuffer(float[] array ) {
 }
 //same as float just integer this time
 
-private static IntBuffer makeBuffer(int[] array ) {
+private  IntBuffer makeBuffer(int[] array ) {
 	IntBuffer buffer= BufferUtils.createIntBuffer(array.length); 
 	buffer.put(array);  
 	buffer.flip();

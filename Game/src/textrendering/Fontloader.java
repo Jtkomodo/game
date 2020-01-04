@@ -18,7 +18,6 @@ private String Font="aakar";
 
 protected Texture tex;
 protected float Texwidth,Texheight;
-private static File file=new File(System.getProperty("user.dir"));
 protected HashMap<Integer,Float[]> Values=new HashMap<Integer,Float[]>();
 
 
@@ -172,6 +171,10 @@ private void loadFile() {
 			
 		i++;
 			}
+			
+		ist.close();
+		isr.close();
+		br.close();
 			
 		}catch(IOException e) {
 			e.printStackTrace();

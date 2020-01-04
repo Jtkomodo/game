@@ -1,5 +1,9 @@
 package battleClasses;
 
+import java.util.Random;
+
+import gameEngine.Start;
+
 public class BattleFormulas {
 
 	//TODO we will store every formula for the battle system here 
@@ -18,7 +22,9 @@ public class BattleFormulas {
 		else if(gradeOfMove == 3)
 			multiplier*=2;
 		
-		return multiplier*baseDamage;
+		
+		
+		return multiplier*baseDamage*getLuckyMultiplier();
 		
 	}
 	
@@ -52,6 +58,29 @@ public class BattleFormulas {
 			return 0;
 			
 		}
+	
+ private static float getLuckyMultiplier() {
+	 
+	 /*this is the formula for calculating whether we got a luck hit for now it's just a 30% chance*/
+	 Random r=new Random();
+	 
+	  float random =r.nextFloat();
+	 float result;
+	 Start.DebugPrint("random "+random);
+	 if(random<=.30) {
+		 result=1.5f;
+		 Start.DebugPrint("LUCKY HIT");
+		 
+	 }else {
+		 result=1;
+	 }
+	 
+	 
+	 return result;
+	 
+ }
+	
+	
 		
   public static BattleEntity calcuateWhoGoesFirst(BattleEntity entities[]) {
 	  

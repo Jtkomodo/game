@@ -29,4 +29,5 @@
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
     <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
 </qualifiedTypeNameHistroy>

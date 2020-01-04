@@ -16,10 +16,8 @@
     <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
     <fullyQualifiedTypeName name="Debug.Debuger"/>
     <fullyQualifiedTypeName name="gameEngine.Model"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="input.CharCallback"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButtonCombo"/>
-    <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
     <fullyQualifiedTypeName name="battleClasses.Enemy"/>
     <fullyQualifiedTypeName name="org.joml.Vector4f"/>
     <fullyQualifiedTypeName name="Data.Constants"/>
@@ -29,4 +27,6 @@
     <fullyQualifiedTypeName name="Scripter.Proccesor"/>
     <fullyQualifiedTypeName name="ScripterCommands.DrawModel"/>
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
+    <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
 </qualifiedTypeNameHistroy>

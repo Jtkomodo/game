@@ -34,11 +34,10 @@ public abstract class GUIMEthods {
 			m.getCombo().start();
 			 Start.Button=m.getCombo();
 	   
-			 Start.MoveInprogress=true;
-	   }	
+		
+	   } 
 			 
-			 
-			 
+	   Start.MoveInprogress=true;
 			  
 			 
 			 }else {
@@ -65,10 +64,10 @@ public abstract class GUIMEthods {
 		 if(m.isTimedButton()) {
 				m.getCombo().start();
 		   
-		 Start.MoveInprogress=true;
+		
 		 Start.Button=m.getCombo();
 		 }
-		 
+		 Start.MoveInprogress=true; 
 		 }else {
 			 
 			 

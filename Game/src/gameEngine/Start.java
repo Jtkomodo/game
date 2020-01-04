@@ -1004,6 +1004,7 @@ private static void EndBattle(BattleEntity Player) {
 	 	if(!Start.PlayersTurn) {
 	 		battleBox.hide();
 	 		battleBox.reset();
+	 		 PlayersTurn=true;
 	 	}else {
 	 		battleBox.show();
 	 	}
@@ -1013,15 +1014,23 @@ private static void EndBattle(BattleEntity Player) {
 	 		   battleBox.hide();
 	 		
 	 	 
-	 		  int State= Start.Button.update();
-	 		   if(State!=TimedButton.NOTPUSHED) {
+	 		
+	 		   
+	 		  
+	 		  Moves move=p.getLastUsedMove();
+	 		  
+	 		  if(move.isTimedButton()) {
+	 			  int State= Start.Button.update();
+	 		  if(State!=TimedButton.NOTPUSHED) {
 	 			   Start.MoveInprogress=false;
 	 			   battleBox.reset();
 	 			   battleBox.show();
+	 			   
+	 			   
 	 			   if(!p.getLastUsedMove().isHeal()) {
 	 				   
 	 				   float Damage=BattleFormulas.CalculateDamage(p, e, State, p.getLastUsedMove().getDamage());
-	 				   DebugPrint("hi");
+	 				  
 	 				   
 	 				   
 	 				   Start.textR.setString(Math.round(Damage)+"!");
@@ -1043,6 +1052,36 @@ private static void EndBattle(BattleEntity Player) {
 	 			   
 	 			   
 	 			   
+	 		   }}else {
+	 			  Start.MoveInprogress=false;
+	 			  Start.PlayersTurn=false;
+	 			   if(!move.isHeal()) {
+	 				   
+	 				  float Damage=BattleFormulas.CalculateDamage(p, e,2, p.getLastUsedMove().getDamage());
+	 				   
+	 				   
+	 				   Start.textR.setString(Math.round(Damage)+"!");
+	 				   Proccesor.addComandtoQueue(new DrawModel(textR.getTextModel(),textR.getLoader().getTex(),new Vector2f(100,40),.5f,1,true));			
+	 				
+	 			        e.decreseHp(Damage);
+	 			   
+	 				   
+	 				   
+	 			   }else {
+	 				
+	 				   
+	 				   float health=BattleFormulas.CalculateHeath(p, 2, p.getLastUsedMove().getDamage());
+	 				  textR.setString(Math.round(health)+"!");
+	 				  Proccesor.addComandtoQueue(new DrawModel(textR.getTextModel(),textR.getLoader().getTex(),new Vector2f(100,40),.5f,1,true));			
+	 				   
+	 				p.IncreseHp(health);   
+	 				   
+	 			   }
+	 			   
+	 			   
+	 			   
+	 			   
+	 			   
 	 		   }
 	 			   
 	 			   
@@ -1054,7 +1093,7 @@ private static void EndBattle(BattleEntity Player) {
 	 		   
 	 	   }
 	 		     
-	 PlayersTurn=true;
+	
 	 	  
 	   
 	   

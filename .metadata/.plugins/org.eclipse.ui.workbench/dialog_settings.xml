@@ -11,18 +11,26 @@
 			<item value="1"/>
 			<item value="1"/>
 			<item value="1"/>
+			<item value="1"/>
+			<item value="1"/>
 		</list>
 		<list key="orderedElements">
+			<item value="org.eclipse.ui.window.preferences(preferencePageId=org.eclipse.jdt.ui.preferences.ProblemSeveritiesPreferencePage)"/>
+			<item value="org.eclipse.ui.navigate.showIn(org.eclipse.ui.navigate.showIn.targetId=org.eclipse.debug.ui.MemoryView)"/>
 			<item value="org.eclipse.ui.preferencePages.Workbench"/>
 			<item value="org.eclipse.recommenders.news.rcp.preferencePages.news"/>
 			<item value="org.eclipse.recommenders.news.rcp.command.pollNewsFeeds"/>
 		</list>
 		<list key="orderedProviders">
+			<item value="org.eclipse.ui.commands"/>
+			<item value="org.eclipse.ui.commands"/>
 			<item value="org.eclipse.ui.preferences"/>
 			<item value="org.eclipse.ui.preferences"/>
 			<item value="org.eclipse.ui.commands"/>
 		</list>
 		<list key="textArray">
+			<item value="warnin"/>
+			<item value="memor"/>
 			<item value="heap"/>
 			<item value="poll"/>
 			<item value="news"/>

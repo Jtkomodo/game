@@ -17,6 +17,7 @@ public enum Pcs {
 			
 	},new Moves[]{
 		Moves.punch,
+		Moves.Doublekick,
 		Moves.heal
 	});
 		

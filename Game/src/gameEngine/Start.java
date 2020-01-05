@@ -348,15 +348,22 @@ public class Start {
 				new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK,1),
 				new UIStringElement("specials",new Vector2f(1,-5), .15f,Constants.BLACK,3)
 		};
+		
+		
+		Moves punch=p.getmoveFromString(Moves.punch.getName());
+		Moves DK=p.getmoveFromString(Moves.Doublekick.getName());
+		Moves heal=p.getmoveFromString(Moves.heal.getName());
+		
 		UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
-				new UIStringElement(p.getmoves()[0].getName(),new Vector2f(-54,5),.15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,p.getmoves()[0].name()})
+				new UIStringElement(punch.getName(),new Vector2f(-54,5),.15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,punch.getName()}),
+				
 		};
 		
 		
 		
 		UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
-				new UIStringElement(p.getspmoves()[0].getName()+" "+(p.getspmoves()[0]).getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useSpMove,new Object[] {p,p.getspmoves()[0].name()})
-			
+				new UIStringElement(heal.getName()+" "+(p.getspmoves()[0]).getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useSpMove,new Object[] {p,heal.name()})
+				,new UIStringElement(DK.getName(),new Vector2f(-54,-8),.15f,Constants.BLACK,GUIMEthods.useSpMove,new Object[] {p,DK.getName()})			
 		};
 		
 		
@@ -1006,7 +1013,7 @@ private static void EndBattle(BattleEntity Player) {
 	 		battleBox.show();
 	 	}
 	 	  
-	 	   if(Start.MoveInprogress) {
+	 	   if(Start.MoveInprogress && PlayersTurn) {
 	 		   
 	 		   battleBox.hide();
 	 		

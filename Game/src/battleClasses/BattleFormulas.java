@@ -32,7 +32,7 @@ public class BattleFormulas {
 	public static float CalculateHeath(BattleEntity player,int gradeOfMove,float baseHealth) {
 		/*this is the calculation for a healing timed combo move*/
 		
-	 float multiplier;
+	 float multiplier=1;
 		
 	 if(gradeOfMove == 1)
 			multiplier=0.5f;
@@ -41,7 +41,7 @@ public class BattleFormulas {
 		
 		
 		
-		return baseHealth*gradeOfMove;
+		return baseHealth*multiplier;
 		
 		
 	}

@@ -139,7 +139,10 @@ private void loadFile() {
 				
 			char c=line.charAt(i);
 			if(c=='*') {
-				
+				ist.close();
+				isr.close();
+				br.close();
+					
 				break;
 			}
 			if((c==' ' || c=='\\')) {	
@@ -172,10 +175,7 @@ private void loadFile() {
 		i++;
 			}
 			
-		ist.close();
-		isr.close();
-		br.close();
-			
+		
 		}catch(IOException e) {
 			e.printStackTrace();
 		}

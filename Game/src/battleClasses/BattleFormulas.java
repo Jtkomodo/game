@@ -2,6 +2,10 @@ package battleClasses;
 
 import java.util.Random;
 
+import org.joml.Vector2f;
+
+import Scripter.Proccesor;
+import ScripterCommands.DrawString;
 import gameEngine.Start;
 
 public class BattleFormulas {
@@ -67,9 +71,10 @@ public class BattleFormulas {
 	  float random =r.nextFloat();
 	 float result;
 	 Start.DebugPrint("random "+random);
-	 if(random<=.30) {
+	 if(random<=.3) {
 		 result=1.5f;
 		 Start.DebugPrint("LUCKY HIT");
+		 Proccesor.addComandtoItorator(new DrawString("Lucky!",new Vector2f(100,80),.5f,true,.5));
 		 
 	 }else {
 		 result=1;

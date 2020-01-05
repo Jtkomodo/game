@@ -41,6 +41,7 @@ import Items.Item;
 import Items.Items;
 import  Scripter.Proccesor;
 import ScripterCommands.DrawModel;
+import ScripterCommands.DrawString;
 import ScripterCommands.Wait;
 import ScripterCommands.animate;
 import animation.Animate;
@@ -362,8 +363,8 @@ public class Start {
 		
 		
 		UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
-				new UIStringElement(heal.getName()+" "+(p.getspmoves()[0]).getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useSpMove,new Object[] {p,heal.name()})
-				,new UIStringElement(DK.getName(),new Vector2f(-54,-8),.15f,Constants.BLACK,GUIMEthods.useSpMove,new Object[] {p,DK.getName()})			
+				new UIStringElement(heal.getName()+" "+heal.getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useSpMove,new Object[] {p,heal.name()})
+				,new UIStringElement(DK.getName()+"  "+DK.getCost()+"sp",new Vector2f(-54,-8),.15f,Constants.BLACK,GUIMEthods.useSpMove,new Object[] {p,DK.getName()})			
 		};
 		
 		
@@ -1037,8 +1038,8 @@ private static void EndBattle(BattleEntity Player) {
 	 				  
 	 				   
 	 				   
-	 				   Start.textR.setString(Math.round(Damage)+"!");
-	 				   Proccesor.addComandtoQueue(new DrawModel(textR.getTextModel(),textR.getLoader().getTex(),new Vector2f(100,40),.5f,1,true));			
+	 				   
+	 				   Proccesor.addComandtoItorator(new DrawString(Math.round(Damage)+"!",new Vector2f(100,40),.5f,true,.5f));			
 	 				
 	 			        e.decreseHp(Damage);
 	 			   
@@ -1046,8 +1047,8 @@ private static void EndBattle(BattleEntity Player) {
 	 				
 	 				   
 	 				   float health=BattleFormulas.CalculateHeath(p, State, p.getLastUsedMove().getDamage());
-	 				  textR.setString(Math.round(health)+"!");
-	 				  Proccesor.addComandtoQueue(new DrawModel(textR.getTextModel(),textR.getLoader().getTex(),new Vector2f(100,40),.5f,1,true));			
+	 				  
+	 				  Proccesor.addComandtoItorator(new DrawString(Math.round(health)+"!",new Vector2f(100,40),.5f,true,.5f));			
 	 				   
 	 				p.IncreseHp(health);   
 	 				   

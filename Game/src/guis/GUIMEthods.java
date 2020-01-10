@@ -19,7 +19,7 @@ public abstract class GUIMEthods {
 
 	public static Window window=Start.w;
 	public static BattleEntity player=Start.p;
-	public static String useMOVE="Usemove",exitWINDOW="ExitWindow",saveGAME="SaveGame",UseItem="UseItem";
+	public static String useMOVE="Usemove",exitWINDOW="ExitWindow",saveGAME="SaveGame",UseItem="UseItem",fullheal="FullHeal";
 
 	
    
@@ -77,7 +77,11 @@ public abstract class GUIMEthods {
 		
 		
 	}
-	
+	public static void  FullHeal(BattleEntity e) {
+		e.setHp(e.getMaxHP());
+		e.setSp(e.getMaxsp());
+		
+	}
 	
 	
 	

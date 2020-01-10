@@ -273,8 +273,10 @@ public class Enemy extends BattleEntity{
 	
 		 //if sp <Lowest Item cost------------------------------------------------------------------------------------------------
 if(SPRestoringItemFound) {
-	if(sp<(LowestRestoring.Item.getValue())) {
-		
+	Start.DebugPrint("sp="+sp+"spcost="+LowestRestoring.Item.getValue());
+		if(sp<(LowestRestoring.Item.getValue())) {
+			
+	
 	
 		
 		
@@ -291,6 +293,18 @@ if(SPRestoringItemFound) {
 		}
 		
 		
+		}else if(sp<HighestRestoring.Item.getValue()) {
+			Random r=new Random();
+			float random=r.nextFloat();
+			if(random<=.15) {
+				actionTaken=useItem(LowestRestoring);
+				 Proccesor.addComandtoQueue(new DrawString(name+" used "+HighestRestoring.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
+			        Proccesor.addComandtoQueue(new DrawString("restored "+Math.round(HighestRestoring.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
+				   
+			}
+			
+			
+			
 		}
 		
 	}

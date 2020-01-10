@@ -64,7 +64,7 @@ public class Start {
     
    
     public static BIndingNameParser buttonNamses;
-    public static boolean JustStarted=true,MoveInprogress=false,FinishedTurn=true,PlayersTurnFinished=true,EnemeiesTurnFinished=true;
+    public static boolean JustStarted=true,MoveInprogress=false,FinishedTurn=true,PlayersTurnFinished=true,EnemeiesTurnFinished=true,BattleEnded=false;
     public static TimedButton Button;
     public static ShaderProgram s;
     public static float scaleOfMapTiles=128,Rendercamx,Rendercamy;
@@ -321,8 +321,9 @@ public class Start {
 			new BarElement("HP:",playersHpBar,new Vector2f(-17,65)),
 		new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,"DebugPrint",new Object[] {"stats"},new Class[] {String.class},Start.class),
 		new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,1),
-		new UIStringElement("Save",new Vector2f(-17,-5),.2f,Constants.BLACK,GUIMEthods.saveGAME,null),
+		new UIStringElement("Heal",new Vector2f(-17,-5),.2f,Constants.BLACK,GUIMEthods.fullheal,new Object[] {p}),
 		new UIStringElement("Quit",new Vector2f(-17,-25),.2f,Constants.BLACK,GUIMEthods.exitWINDOW,null)
+		
 		};
 	
 	
@@ -744,7 +745,8 @@ if(CharCallback.takeInput) {
 					a1.removeAnimation();
 					StartBox.reset();
 					StateOfStartBOx=false;
-					battleBox.show();
+					StartBattle(e);
+					
 				
 				}
 				
@@ -958,23 +960,46 @@ if(CharCallback.takeInput) {
 	
 	
 	
-	private static void StartBattle(BattleEntity Player) {
+	private static void StartBattle(Enemy e) {
 		
-	
+		battleBox.show();
+		Start.PlayersTurnFinished=false;
+		Start.EnemeiesTurnFinished=false;
+		FinishedTurn=false;
+		e.setHp(e.getMaxHP());
+		
 	 
 		
 	}
 	
-private static void EndBattle(BattleEntity Player) {
+private static void EndBattleAsWin() {
 		
 		
-	
-	    
+	Start.BattleEnded=true;
+	text1.setString("YOU WON!");
+	 text1.drawString(100,40,.5f); 
 		
 	}
+private static void EndBattleAsLoss() {
 	
+	Start.BattleEnded=true;
+	
+	text1.setString("YOU LOST :(");
+	 text1.drawString(100,40,.5f); 
+	
+}	
 	
    private static void battleupdate() {
+	   
+	   
+	   
+	   
+	   
+	   
+	  
+	   
+	   
+	   
 	   
 	   if(PlayersTurnFinished && Start.EnemeiesTurnFinished) {
 		   FinishedTurn=true;
@@ -1012,6 +1037,8 @@ private static void EndBattle(BattleEntity Player) {
 			//----------------------GAME--LOOP------------------------------
 		
 		
+			
+			
 		battleBox.getUIState(2).relpaceALLActive(elementlist);
 		battleBox.draw();
 	 	 	 
@@ -1034,6 +1061,24 @@ private static void EndBattle(BattleEntity Player) {
 	 	  text1.setString("HP: "+Math.round(EnemysHPBar.getValue())+"/"+Math.round(EnemysHPBar.getMax()));
 	 	  EnemysHPBar.draw(new Vector2f(position2.x,position2.y+100),text1);
 	 	
+	 	  
+	 	  
+	 	 if(p.getHp()==0) {
+			   EndBattleAsLoss();
+			   
+			   
+		   }
+		   
+		   if(e.getHp()==0) {
+			   EndBattleAsWin();
+			   
+			   
+		   }
+		
+		
+	 	if(!Start.BattleEnded) {  
+	 	  
+	 	  
 	 	if(!Start.PlayersTurn && Proccesor.isUserInputallowed()) {
 	 		
 	 		e.takeTurn(p);
@@ -1132,7 +1177,7 @@ private static void EndBattle(BattleEntity Player) {
 	 		   
 	 		   
 	 	   }
-	 		     
+	 	}     
 	
 	 	  
 	   

@@ -13,13 +13,14 @@ public enum Enemies {
 			20,//attack
 			30,//Defense
 			180,   //hp
-			75 //sp			
+			120, //sp
+			48,//speed
 			
 	},new Moves[]{
 		Moves.punch,
-		
 		Moves.Doublekick,
 		Moves.heal,
+		Moves.superHeal
 	});
 		
 		
@@ -27,6 +28,7 @@ public enum Enemies {
 	private float def;
 	private float hp;
 	private float sp;
+	private float speed;
 	private String name;
 	private int amountOfMoves;
 	private Moves[] moves;
@@ -37,10 +39,15 @@ public enum Enemies {
 		this.def=stats[1];
 		this.hp=stats[2];
 		this.sp=stats[3];
+		this.speed=stats[4];
 		this.moves=moves;
 		this.amountOfMoves=moves.length;
 		this.name=name;
 		
+	}
+
+	public float getSpeed() {
+		return speed;
 	}
 
 	public String getName() {

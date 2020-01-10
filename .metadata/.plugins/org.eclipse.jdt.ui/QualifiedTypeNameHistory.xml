@@ -36,4 +36,5 @@
     <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="java.util.Comparator"/>
     <fullyQualifiedTypeName name="org.graalvm.compiler.lir.aarch64.AArch64Move.Move"/>
+    <fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
 </qualifiedTypeNameHistroy>

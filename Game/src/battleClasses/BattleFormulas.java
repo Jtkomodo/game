@@ -139,9 +139,48 @@ public class BattleFormulas {
 	  
 	  //this calculates which entity goes first based on it's stats
 	  
+	  Random r=new Random();
+	  int adder=0;	  
+	  BattleEntity entity=null;
+	  float highestSpeed=0;
+	  for(int i=0;i<entities.length;i++) {
+		  BattleEntity e= entities[i];
+		  if(entity!=null) {
+			  
+			  
+float random=r.nextFloat();
+			  
+			  if(random<.10) {
+				  adder=5;
+			  }
+			  float speed=entity.getSpeed()+adder;
+			  adder=0;
+			  
+			  if(speed>highestSpeed) {
+				  entity=e;
+				  highestSpeed=speed;
+			  }
+			  
+			  
+			  
+		  }else {
+			  entity=e;
+			  float random=r.nextFloat();
+			  
+			  if(random<.10) {
+				  adder=5;
+			  }
+			  highestSpeed=entity.getSpeed()+adder;
+			  adder=0;
+		  }
+		  
+		  
+	  }
 	  
 	  
-	  return null;
+	  
+	  
+	  return entity;
 	  
   }
 	

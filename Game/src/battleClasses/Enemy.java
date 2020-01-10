@@ -20,8 +20,8 @@ public class Enemy extends BattleEntity{
 
 	private String name;
 	
-	public Enemy(String name,float atk, float def, float hp,float sp, Moves[] moves,Inventory inventory) {
-		super(atk, def, hp,sp, moves,inventory);
+	public Enemy(String name,float atk, float def, float hp,float sp,float speed, Moves[] moves,Inventory inventory) {
+		super(atk, def, hp,sp,speed, moves,inventory);
 		this.name=name;
 	
 	}

@@ -17,7 +17,10 @@ import gameEngine.Start;
 
 public class BattleEntity {
    
-	protected float atk,def,hp,sp;
+	protected float atk,def,hp,sp,speed;
+	
+
+
 	protected float maxATK,maxDEF,maxHP,maxsp;
 	protected List<Moves> movelist= new ArrayList<Moves>();
 	protected List<Moves> NormalMoveList= new ArrayList<Moves>();
@@ -27,7 +30,7 @@ public class BattleEntity {
 	protected Moves lastUsedMove;
 	
 	
-	public BattleEntity(float atk,float def,float hp,float sp,Moves[] moves,Inventory inventory) {
+	public BattleEntity(float atk,float def,float hp,float sp,float speed,Moves[] moves,Inventory inventory) {
 	this.inventory=inventory;	
     this.atk=atk;
     this.def=def;
@@ -37,6 +40,7 @@ public class BattleEntity {
     this.maxDEF=def;
     this.maxHP=hp;
     this.sp=sp;
+    this.speed=speed;
     
 	for(int i=0;i<moves.length;i++) {
 	    Moves move=moves[i];
@@ -290,6 +294,9 @@ public void addItemToInventory(Items item) {
 	
 	
 	
+}
+public float getSpeed() {
+	return speed;
 }
 
 

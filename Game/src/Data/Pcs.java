@@ -13,11 +13,11 @@ public enum Pcs {
 			20,//attack
 			30,//Defense
 			200,   //hp
-			100 //sp			
+			100, //sp
+			50//speed
 			
 	},new Moves[]{
 		Moves.punch,
-		Moves.Doublekick,
 		Moves.heal
 	});
 		
@@ -26,6 +26,7 @@ public enum Pcs {
 	private float def;
 	private float hp;
 	private float sp;
+	private float speed;
 	private int amountOfMoves;
 	private Moves[] moves;
 	
@@ -35,10 +36,15 @@ public enum Pcs {
 		this.def=stats[1];
 		this.hp=stats[2];
 		this.sp=stats[3];
+		this.speed=stats[4];
 		this.moves=moves;
 		this.amountOfMoves=moves.length;
 		
 		
+	}
+
+	public float getSpeed() {
+		return speed;
 	}
 
 	public float getAtk() {

@@ -64,7 +64,7 @@ public class Start {
     
    
     public static BIndingNameParser buttonNamses;
-    public static boolean JustStarted=true,MoveInprogress=false;
+    public static boolean JustStarted=true,MoveInprogress=false,FinishedTurn=true,PlayersTurnFinished=true,EnemeiesTurnFinished=true;
     public static TimedButton Button;
     public static ShaderProgram s;
     public static float scaleOfMapTiles=128,Rendercamx,Rendercamy;
@@ -305,8 +305,8 @@ public class Start {
 		 playersInventory= new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore},new int[] {1,3,2});
 		 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.spRestore},new int[] {1,1});
 		 
-		p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getMoves(),playersInventory);
-		e=new Enemy(Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getMoves(),enemyTestInventory);
+		p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
+		e=new Enemy(Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
 		
 		 
 		playersHpBar=new HpBar(p.getMaxHP(),p.getHp(),new Vector2f(100,10),HealthBarBackground, COLTEX); 
@@ -364,7 +364,7 @@ public class Start {
 		
 		UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
 				new UIStringElement(heal.getName()+" "+heal.getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,heal.name()})
-				,new UIStringElement(DK.getName()+"  "+DK.getCost()+"sp",new Vector2f(-54,-8),.15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,DK.getName()})			
+				
 		};
 		
 		
@@ -936,7 +936,22 @@ if(CharCallback.takeInput) {
 	
 	
 	private static void StartBattleTurn(BattleEntity p,Enemy e) {
+		FinishedTurn=false;
+		BattleEntity First=BattleFormulas.calcuateWhoGoesFirst(new BattleEntity[] {p,e});
+		if(First==p) {
+			PlayersTurn=true;
+			
+			
+	 		battleBox.reset();
+	 		battleBox.show();
+		}else {
+			
+			PlayersTurn=false;
+			battleBox.hide();
+		}
 		
+		Start.PlayersTurnFinished=false;
+		Start.EnemeiesTurnFinished=false;
 		
 	}
 	
@@ -960,6 +975,19 @@ private static void EndBattle(BattleEntity Player) {
 	
 	
    private static void battleupdate() {
+	   
+	   if(PlayersTurnFinished && Start.EnemeiesTurnFinished) {
+		   FinishedTurn=true;
+	   }
+	   
+	   
+	   
+	   if(FinishedTurn) {
+		   
+			StartBattleTurn(p,e);
+	   }
+	   
+	   
 	   cam.setPosition(new Vector2f(0,0));
 		 
 	   
@@ -1007,12 +1035,13 @@ private static void EndBattle(BattleEntity Player) {
 	 	  EnemysHPBar.draw(new Vector2f(position2.x,position2.y+100),text1);
 	 	
 	 	if(!Start.PlayersTurn && Proccesor.isUserInputallowed()) {
-	 		battleBox.hide();
-	 		battleBox.reset();
+	 		
 	 		e.takeTurn(p);
+	 	    Start.EnemeiesTurnFinished=true;
+	 		Start.PlayersTurn=true;
+	 		battleBox.reset();
+	 		battleBox.show();
 	 		
-	 		
-	 		 PlayersTurn=true;
 	 	}else if(PlayersTurn && Proccesor.isUserInputallowed()){
 	 		battleBox.show();
 	 	}
@@ -1032,7 +1061,7 @@ private static void EndBattle(BattleEntity Player) {
 	 		  if(State!=TimedButton.NOTPUSHED) {
 	 			   Start.MoveInprogress=false;
 	 			   Start.PlayersTurn=false;
-	 			  
+	 			   Start.PlayersTurnFinished=true;
 	 			 
 	 			  
 	 			   if(!p.getLastUsedMove().isHeal()) {
@@ -1063,7 +1092,8 @@ private static void EndBattle(BattleEntity Player) {
 	 		   }}else {
 	 			  Start.MoveInprogress=false;
 	 			  Start.PlayersTurn=false;
-	 			 
+	 			   Start.PlayersTurnFinished=true;
+		 			 
 	 			   
 	 			   if(!move.isHeal()) {
 	 				   

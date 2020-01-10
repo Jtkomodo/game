@@ -32,8 +32,8 @@ public abstract class GUIMEthods {
 		
 		 Start.DebugPrint("used move "+m.getName()+"--");
 		 
-		 p.useMove(m);
-		 
+		 boolean used=p.useMove(m);
+		 if(used) {
 		 if(m.isTimedButton()) {
 				m.getCombo().start();
 		   
@@ -41,6 +41,7 @@ public abstract class GUIMEthods {
 		 Start.Button=m.getCombo();
 		 }
 		 Start.MoveInprogress=true; 
+		 }
 		 }else {
 			 
 			 
@@ -55,6 +56,7 @@ public abstract class GUIMEthods {
 		boolean used= p.useItem(item);
 		 if(used) {
 			 Start.PlayersTurn=false;
+			 Start.PlayersTurnFinished=true;
 		 }
 		 
 	 }

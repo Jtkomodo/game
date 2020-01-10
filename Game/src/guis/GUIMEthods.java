@@ -19,45 +19,15 @@ public abstract class GUIMEthods {
 
 	public static Window window=Start.w;
 	public static BattleEntity player=Start.p;
-	public static String useSpMove="UseSPmove",useMOVE="Usemove",exitWINDOW="ExitWindow",saveGAME="SaveGame",UseItem="UseItem";
+	public static String useMOVE="Usemove",exitWINDOW="ExitWindow",saveGAME="SaveGame",UseItem="UseItem";
 
-	 public static void UseSPmove(BattleEntity p,String move) {
-		
-		 Moves m=p.getmoveFromString(move);
 	
-		 
-		 if(m!=null && m.isSpecailMove()) {
-			 
-			  p.useMove(m);
-			 Start.DebugPrint("used move "+m.getName()+"--");
-	 
-			 
-	   if(m.isTimedButton()) {
-		 
-			m.getCombo().start();
-			 Start.Button=m.getCombo();
-	   
-		
-	   } 
-			 
-	   Start.MoveInprogress=true;
-			  
-			 
-			 }else {
-				 
-				 
-				 Start.DebugPrint("move "+move+" does not exist in this player's("+ p+") sp moveset");
-				 
-			 }
-		
-	 }
-	 
    
 	 public static void Usemove(BattleEntity p,String move) {
 		 
 		 Moves m=p.getmoveFromString(move);
 		 
-		 if(m!=null && !m.isSpecailMove()) {
+		 if(m!=null) {
 			 
 		
 		 Start.DebugPrint("used move "+m.getName()+"--");

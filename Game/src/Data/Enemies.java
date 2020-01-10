@@ -17,7 +17,9 @@ public enum Enemies {
 			
 	},new Moves[]{
 		Moves.punch,
-		Moves.heal
+		
+		Moves.Doublekick,
+		Moves.heal,
 	});
 		
 		

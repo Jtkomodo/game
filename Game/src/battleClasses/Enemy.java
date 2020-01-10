@@ -1,6 +1,8 @@
 package battleClasses;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 import org.joml.Vector2f;
@@ -40,9 +42,14 @@ public class Enemy extends BattleEntity{
 			}
 			
 		}
-		
-		
-		
+	
+			
+		  
+	if(!returnList.isEmpty()) {
+		  Comparator<Moves> byCost = Comparator.comparing(Moves::getCost);
+		 	Collections.sort(returnList, byCost);    
+			
+	}
 		
 		
 		return returnList;
@@ -66,7 +73,7 @@ public class Enemy extends BattleEntity{
 		
 	ArrayList<Moves> moves=makeListOfUseableMoves();		
 		
-	
+	if(!moves.isEmpty()) {
 	boolean actionTaken=false;
 	
 	
@@ -208,7 +215,7 @@ public class Enemy extends BattleEntity{
 	
 	
 	if(!actionTaken) {
-	//look for lowest and highest restoring sp items
+	//look for lowest and highest restoring sp items______________________________________________________________________
 		
 	  	boolean SPRestoringItemFound=false;
 		Items HighestRestoring=null;
@@ -262,9 +269,9 @@ public class Enemy extends BattleEntity{
 		SPRestoringItemFound=!spRestoreItems.isEmpty();
 		
 		
+	//_____________________________________________________________________________________________________________________
 	
-	
-		 //if sp <Lowest Item cost----------------------------------------------------------------------------------------------------------------
+		 //if sp <Lowest Item cost------------------------------------------------------------------------------------------------
 if(SPRestoringItemFound) {
 	if(sp<(LowestRestoring.Item.getValue())) {
 		
@@ -286,11 +293,94 @@ if(SPRestoringItemFound) {
 		
 		}
 		
-	}//-------------------------------------------------------------------------------------------------------------------------
-
 	}
 	}
 		
+		}//--------------------------------------------------------------------------------------------------------------------------
+	
+	if(!actionTaken) {
+	
+		Moves MostPowerfullAttack=null;
+		Moves LeastCostlyMoveThatcouldKill=null;
+		boolean isALeastCostly=false;
+		boolean isADamage=false;
+		float MostPowerfullDamge=0;
+		float leastCostly=moves.get(moves.size()-1).getCost();
+		float playersHP=player.getHp();
+		
+		//find the most powerful attack and the least costly that could kill the player
+		for(int i=moves.size()-1;i>=0;i--) {
+			Moves move=moves.get(i);
+			
+			//find most powerful attack--------------------
+			if(!move.isHeal()) {
+				isADamage=true;
+			if(MostPowerfullAttack!=null) {
+				
+				if(move.getDamage()>MostPowerfullDamge) {
+					MostPowerfullAttack=move;
+				    MostPowerfullDamge=move.getDamage();
+				}
+				
+			}else {
+				MostPowerfullAttack=move;
+			    MostPowerfullDamge=move.getDamage();
+			}
+			//--------------------------------------------
+			
+			//find the least costly that could kill the player
+			
+			
+				if(move.getDamage()>=playersHP && move.getCost()<=leastCostly) {
+					LeastCostlyMoveThatcouldKill=move;
+					leastCostly=move.getCost();
+					
+				}		
+					
+				}
+				
+				
+				
+			
+			}
+		isALeastCostly=!(LeastCostlyMoveThatcouldKill==null);
+		
+		//there is a least costly move that could kill use that one
+		if(isADamage) {
+			
+		if(isALeastCostly) {
+			
+			actionTaken=useMove(LeastCostlyMoveThatcouldKill,player);
+			
+			
+		}
+		//Otherwise use the most powerful move
+		else {
+			
+			actionTaken=useMove(MostPowerfullAttack,player);
+		}
+		
+			
+		}
+		
+		
+		
+	}
+	
+	//if somehow there was no action taken randomly pick the next move
+	if(!actionTaken) {
+		
+		Random r=new Random();
+		int random=r.nextInt(moves.size()-1);
+		
+		actionTaken=useMove(moves.get(random),player);
+		Start.DebugPrint("used random");
+	}
+	}else {
+		
+	    Proccesor.addComandtoQueue(new DrawString(name+" couldn't "+"act",new Vector2f(-100,40),.5f,true,.5f));
+		
+	}
 		
 		
 	}

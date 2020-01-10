@@ -1,8 +1,11 @@
 package battleClasses;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+
 
 import org.joml.Vector2f;
 
@@ -17,7 +20,8 @@ public class BattleEntity {
 	protected float atk,def,hp,sp;
 	protected float maxATK,maxDEF,maxHP,maxsp;
 	protected List<Moves> movelist= new ArrayList<Moves>();
-	protected List<Moves> spmovelist=new ArrayList<Moves>();;
+	protected List<Moves> NormalMoveList= new ArrayList<Moves>();
+	protected List<Moves> spmovelist=new ArrayList<Moves>();//this will be sorted by the spCost
 	protected HashMap<String,Moves> moveStrings=new HashMap<String,Moves>();
 	protected Inventory inventory;
 	protected Moves lastUsedMove;
@@ -37,17 +41,26 @@ public class BattleEntity {
 	for(int i=0;i<moves.length;i++) {
 	    Moves move=moves[i];
 		moveStrings.put(move.getName(),move);
-	if(move.isSpecailMove()) {
+        movelist.add(move);
+		if(move.isSpecailMove()) {
 		spmovelist.add(move);
+	}else {
+		NormalMoveList.add(move);
 	}
-	     movelist.add(move);}
-	     
+	   
+	 
+	 	}
 	
 	
 	
+	//sort splist by cost
+	if(!spmovelist.isEmpty()) {
+	  Comparator<Moves> byCost = Comparator.comparing(Moves::getCost);
+	 	Collections.sort(spmovelist, byCost);    
+	
+	}
   
-    
-    
+  
     
 		
 	}
@@ -174,7 +187,12 @@ public class BattleEntity {
 		}else {
 		     movelist.add(move);
 		     }
-		     
+		if(!spmovelist.isEmpty()) {
+			  Comparator<Moves> byCost = Comparator.comparing(Moves::getCost);
+			 	Collections.sort(spmovelist, byCost);    
+			
+			}
+		  
 		
 		
 	}
@@ -188,7 +206,12 @@ public class BattleEntity {
 			}else {
 			     movelist.add(moves[i]);}
 			     }
+		if(!spmovelist.isEmpty()) {
+			  Comparator<Moves> byCost = Comparator.comparing(Moves::getCost);
+			 	Collections.sort(spmovelist, byCost);    
 			
+			}
+		  
 		
 	}
 	

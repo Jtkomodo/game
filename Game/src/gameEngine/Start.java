@@ -307,7 +307,7 @@ public class Start {
 		 
 		p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getMoves(),playersInventory);
 		e=new Enemy(Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getMoves(),enemyTestInventory);
-		e.setHp(44);
+		
 		 
 		playersHpBar=new HpBar(p.getMaxHP(),p.getHp(),new Vector2f(100,10),HealthBarBackground, COLTEX); 
 		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
@@ -363,8 +363,8 @@ public class Start {
 		
 		
 		UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
-				new UIStringElement(heal.getName()+" "+heal.getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useSpMove,new Object[] {p,heal.name()})
-				,new UIStringElement(DK.getName()+"  "+DK.getCost()+"sp",new Vector2f(-54,-8),.15f,Constants.BLACK,GUIMEthods.useSpMove,new Object[] {p,DK.getName()})			
+				new UIStringElement(heal.getName()+" "+heal.getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,heal.name()})
+				,new UIStringElement(DK.getName()+"  "+DK.getCost()+"sp",new Vector2f(-54,-8),.15f,Constants.BLACK,GUIMEthods.useMOVE,new Object[] {p,DK.getName()})			
 		};
 		
 		
@@ -386,7 +386,7 @@ public class Start {
 			e.printStackTrace();
 			System.exit(300);
 		}
-		p.setHp(100);
+	
 			
 		
 	
@@ -1011,8 +1011,9 @@ private static void EndBattle(BattleEntity Player) {
 	 		battleBox.reset();
 	 		e.takeTurn(p);
 	 		
+	 		
 	 		 PlayersTurn=true;
-	 	}else {
+	 	}else if(PlayersTurn && Proccesor.isUserInputallowed()){
 	 		battleBox.show();
 	 	}
 	 	  
@@ -1031,8 +1032,8 @@ private static void EndBattle(BattleEntity Player) {
 	 		  if(State!=TimedButton.NOTPUSHED) {
 	 			   Start.MoveInprogress=false;
 	 			   Start.PlayersTurn=false;
-	 			   battleBox.reset();
-	 			   battleBox.show();
+	 			  
+	 			 
 	 			  
 	 			   if(!p.getLastUsedMove().isHeal()) {
 	 				   

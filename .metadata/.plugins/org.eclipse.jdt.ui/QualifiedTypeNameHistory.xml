@@ -6,7 +6,6 @@
     <fullyQualifiedTypeName name="input.GetInput"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="battleClasses.HpBar"/>
-    <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="Items.Inventory"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
@@ -34,4 +33,7 @@
     <fullyQualifiedTypeName name="Items.Items"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="java.util.Comparator"/>
+    <fullyQualifiedTypeName name="org.graalvm.compiler.lir.aarch64.AArch64Move.Move"/>
 </qualifiedTypeNameHistroy>

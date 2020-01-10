@@ -50,16 +50,64 @@ public class BattleFormulas {
 		
 	}
 	
+	public static float CalcaulateHealth(BattleEntity e,float baseHealth) {
+		
+//this is enemies calculate Health formula
+	    Random r=new Random();
+	    float random=r.nextFloat();
+	int grade=2;
+	    
+	    if(random<=.10) {
+	    	grade=3;
+	    }
+	    
+	    else {
+	    	random=r.nextFloat();
+	    	if(random<=.15) {
+	    	grade=1;
+	    	}
+	    }
+	    return CalculateHeath(e,grade,baseHealth);
+		
+		
+	}
+	
+	
 	
 	
 	
 	public static float CalculateDamage(Enemy enemy,BattleEntity player,float baseDamage) {
 		
-		//this is where we will put the code for the damage formula for enemy vs player
+		    Random r=new Random();
+		    float random=r.nextFloat();
+		int grade=2;
+		    
+		    if(random<=.10) {
+		    	grade=3;
+		    }
+		    
+		    else {
+		    	random=r.nextFloat();
+		    	if(random<=.15) {
+		    	grade=1;
+		    	}
+		    }
+		    
+		    
+		    
+			float multiplier = ((enemy.getAtk()-player.getDef())/100)+1;
+			
+			if(grade == 1)
+				multiplier*=0.5;
+			else if(grade == 3)
+				multiplier*=2;
 			
 			
 			
-			return 0;
+			return multiplier*baseDamage*getLuckyMultiplier();
+		
+			
+			
 			
 		}
 	

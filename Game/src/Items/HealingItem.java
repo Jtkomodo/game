@@ -11,6 +11,8 @@ public class HealingItem extends Item {
 	public HealingItem(String name, String textureName,float howMuchItHeals,float basePrice) {
 		super(name, textureName,basePrice);
 	    this.howMuchItHeals=howMuchItHeals;
+	    this.healing=true;
+	    this.value=this.howMuchItHeals;
 	}
 
 	@Override

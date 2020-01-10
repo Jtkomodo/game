@@ -2,6 +2,7 @@ package guis;
 
 import Data.Moves;
 import Items.Item;
+import Items.Items;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -23,12 +24,14 @@ public abstract class GUIMEthods {
 	 public static void UseSPmove(BattleEntity p,String move) {
 		
 		 Moves m=p.getmoveFromString(move);
-		if(m.getCost()<=p.getSp()){ 
-		 p.decreseSp(m.getCost());
-		 if(m!=null && m.isSpecailMove() ) {
+	
+		 
+		 if(m!=null && m.isSpecailMove()) {
 			 
-			  p.setLastUsedMove(m);	
+			  p.useMove(m);
 			 Start.DebugPrint("used move "+m.getName()+"--");
+	 
+			 
 	   if(m.isTimedButton()) {
 		 
 			m.getCombo().start();
@@ -43,10 +46,10 @@ public abstract class GUIMEthods {
 			 }else {
 				 
 				 
-				 Start.DebugPrint("move "+move+" does not exist in this player's("+ p+") moveset");
+				 Start.DebugPrint("move "+move+" does not exist in this player's("+ p+") sp moveset");
 				 
 			 }
-		}
+		
 	 }
 	 
    
@@ -59,7 +62,7 @@ public abstract class GUIMEthods {
 		
 		 Start.DebugPrint("used move "+m.getName()+"--");
 		 
-		 p.setLastUsedMove(m);
+		 p.useMove(m);
 		 
 		 if(m.isTimedButton()) {
 				m.getCombo().start();
@@ -76,9 +79,9 @@ public abstract class GUIMEthods {
 		 }
 	 }
 	 
-	 public static void UseItem(BattleEntity p,Item item) {
+	 public static void UseItem(BattleEntity p,Items item) {
 		 
-		 Start.DebugPrint("used "+item.getName());
+		 Start.DebugPrint("used "+item.Item.getName());
 		boolean used= p.useItem(item);
 		 if(used) {
 			 Start.PlayersTurn=false;
@@ -102,7 +105,6 @@ public abstract class GUIMEthods {
 		
 		
 	}
-	
 	
 	
 	

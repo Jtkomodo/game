@@ -13,7 +13,14 @@ public abstract class Item {
     private Texture texture;
 	private Model model;
 	private float basePrice;
+	protected float value;
 	
+
+	protected boolean healing=false;
+	
+	
+	
+
 	protected Item(String name,String textureName,float basePrice) {
 		
 		this.name=name;
@@ -58,10 +65,15 @@ public abstract class Item {
 		return this.basePrice;
 	}
 	
+	public boolean isHealing() {
+		return healing;
+	}
+
 	
 	
-	
-	
+	public float getValue() {
+		return value;
+	}
 	
 	
 	

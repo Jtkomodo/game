@@ -9,7 +9,7 @@ public class RestoreSPItem extends Item {
 	protected RestoreSPItem(String name, String textureName,float howMuchItRestores, float basePrice) {
 		super(name, textureName, basePrice);
 		this.howMuchItRestores=howMuchItRestores;
-		// TODO Auto-generated constructor stub
+		this.value=this.howMuchItRestores;
 	}
 
 	@Override
@@ -23,5 +23,7 @@ public class RestoreSPItem extends Item {
 			return false;
 		}
 	}
-
+   
+	
+	
 }

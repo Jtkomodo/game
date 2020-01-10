@@ -9,16 +9,18 @@ import org.joml.Vector2f;
 import Data.Moves;
 import Items.Inventory;
 import Items.Item;
+import Items.Items;
+import gameEngine.Start;
 
 public class BattleEntity {
    
-	private float atk,def,hp,sp;
-	private float maxATK,maxDEF,maxHP,maxsp;
-	private List<Moves> movelist= new ArrayList<Moves>();
-	private List<Moves> spmovelist=new ArrayList<Moves>();;
-	private HashMap<String,Moves> moveStrings=new HashMap<String,Moves>();
-	private Inventory inventory;
-	private Moves lastUsedMove;
+	protected float atk,def,hp,sp;
+	protected float maxATK,maxDEF,maxHP,maxsp;
+	protected List<Moves> movelist= new ArrayList<Moves>();
+	protected List<Moves> spmovelist=new ArrayList<Moves>();;
+	protected HashMap<String,Moves> moveStrings=new HashMap<String,Moves>();
+	protected Inventory inventory;
+	protected Moves lastUsedMove;
 	
 	
 	public BattleEntity(float atk,float def,float hp,float sp,Moves[] moves,Inventory inventory) {
@@ -227,18 +229,37 @@ public Moves getmoveFromString(String name) {
 	
 }
 
-public boolean useItem(Item item) {
+public boolean useItem(Items item) {
 	
 	
-	boolean used=item.useItem(this);
+	boolean used=item.Item.useItem(this);
 	if(used) {
 	this.inventory.removeItem(item);
+	Start.DebugPrint(this.toString()+"used item "+item.Item.getName());
 	}
+	
+	
 	return used;
 	
 }
 
-public void addItemToInventory(Item item) {
+public boolean useMove(Moves move) {
+	boolean used=this.movelist.contains(move);
+	
+if(move.getCost()<=this.sp) {
+	decreseSp(move.getCost());
+	this.lastUsedMove=move;
+	
+}else {
+	used=false;
+}
+	
+	return used;
+}
+
+
+
+public void addItemToInventory(Items item) {
 	
 	
 	

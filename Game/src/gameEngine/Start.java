@@ -302,8 +302,8 @@ public class Start {
 		s.loadVec4(Color, new Vector4f(1,1,1,1));
      
 	
-		 playersInventory= new Inventory(new Item[] {Items.hpPotion.Item,Items.SuperHpPotion.Item,Items.spRestore.Item},new int[] {1,3,2});
-		 enemyTestInventory = new Inventory(new Item[] {Items.hpPotion.Item,Items.spRestore.Item},new int[] {1,1});
+		 playersInventory= new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore},new int[] {1,3,2});
+		 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.spRestore},new int[] {1,1});
 		 
 		p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getMoves(),playersInventory);
 		e=new Enemy(Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getMoves(),enemyTestInventory);
@@ -397,11 +397,11 @@ public class Start {
 	if(canRender) {
 		
 		//----------------------GAME--LOOP------------------------------
- 		Item[] ITM= playersInventory.getItems();		
+ 		Items[] ITM= playersInventory.getItems();		
 			UIElement[] elementlist=new UIElement[ITM.length];	
 			
 			for(int i=0;i<ITM.length;i++) {
-				elementlist[i]=new UIStringElement(ITM[i].getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Item.class});
+				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Items.class});
 			}
 
 		
@@ -709,7 +709,7 @@ if(CharCallback.takeInput) {
 	    
 	    
 	    }else if(H==1) {
-	    	p.addItemToInventory(Items.spRestore.Item);
+	    	p.addItemToInventory(Items.spRestore);
 	    	
 	    	
 	    }
@@ -972,11 +972,11 @@ private static void EndBattle(BattleEntity Player) {
 	 	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
 	 	    SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
 	 
-	 		Item[] ITM= playersInventory.getItems();		
+	 		Items[] ITM= playersInventory.getItems();		
 			UIElement[] elementlist=new UIElement[ITM.length];	
 			
 			for(int i=0;i<ITM.length;i++) {
-				elementlist[i]=new UIStringElement(ITM[i].getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Item.class});
+				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Items.class});
 			}
 
 		
@@ -1009,6 +1009,8 @@ private static void EndBattle(BattleEntity Player) {
 	 	if(!Start.PlayersTurn) {
 	 		battleBox.hide();
 	 		battleBox.reset();
+	 		e.takeTurn(p);
+	 		
 	 		 PlayersTurn=true;
 	 	}else {
 	 		battleBox.show();
@@ -1028,6 +1030,7 @@ private static void EndBattle(BattleEntity Player) {
 	 			  int State= Start.Button.update();
 	 		  if(State!=TimedButton.NOTPUSHED) {
 	 			   Start.MoveInprogress=false;
+	 			   Start.PlayersTurn=false;
 	 			   battleBox.reset();
 	 			   battleBox.show();
 	 			   

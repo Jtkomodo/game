@@ -6,9 +6,7 @@
     <fullyQualifiedTypeName name="input.GetInput"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="battleClasses.HpBar"/>
-    <fullyQualifiedTypeName name="Items.Items"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
-    <fullyQualifiedTypeName name="Items.Item"/>
     <fullyQualifiedTypeName name="Items.Inventory"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
@@ -28,9 +26,12 @@
     <fullyQualifiedTypeName name="ScripterCommands.DrawModel"/>
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
-    <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="Data.Moves"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="ScripterCommands.DrawString"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="Items.Item"/>
+    <fullyQualifiedTypeName name="Items.Items"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
 </qualifiedTypeNameHistroy>

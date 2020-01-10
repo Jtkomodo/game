@@ -9,7 +9,7 @@ public enum Items {
 	
 	
 
-	public  Item Item; 
+	public Item Item; 
 	
 	   Items(Item item){
 	this.Item=item;

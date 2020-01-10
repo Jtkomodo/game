@@ -10,18 +10,18 @@ public class Inventory {
 	
 	private HashMap<String,Integer> items=new HashMap<String,Integer>();
 	private List<String> itemNames=new  LinkedList<String>();
-	private List<Item> itemsList=new LinkedList<Item>();
+	private List<Items> itemsList=new LinkedList<Items>();
 	
-	public Inventory(Item[] ListOfUniqueItems,int[] itemAmount) {
+	public Inventory(Items[] ListOfUniqueItems,int[] itemAmount) {
 		if(ListOfUniqueItems.length==itemAmount.length) {
 		for(int i=0;i<ListOfUniqueItems.length;i++) {
 			
-			Item item=ListOfUniqueItems[i];
+			Items item=ListOfUniqueItems[i];
 			int amount=itemAmount[i];
 			
-			if(amount>0 && !items.containsKey(item.getName())) {
-			this.items.put(item.getName(),amount);
-			this.itemNames.add(item.getName());
+			if(amount>0 && !items.containsKey(item.Item.getName())) {
+			this.items.put(item.Item.getName(),amount);
+			this.itemNames.add(item.Item.getName());
 			this.itemsList.add(item);
 			}
 			
@@ -30,9 +30,9 @@ public class Inventory {
 		
 	}
 	
-	public Item[] getItems() {
+	public Items[] getItems() {
 		
-		Item[] result=new Item[itemNames.size()];
+		Items[] result=new Items[itemNames.size()];
 		
 		for(int i=0;i<result.length;i++) {
 			result[i]=itemsList.get(i);
@@ -43,38 +43,38 @@ public class Inventory {
 		return result;
 	}
 	
-	public int getAmountOfItem(Item item) {
-		return items.getOrDefault(item.getName(),0);
+	public int getAmountOfItem(Items iTM) {
+		return items.getOrDefault(iTM.Item.getName(),0);
 		
 	}
 	
 	
-	public void addItem(Item item){
+	public void addItem(Items item){
 		
 		
 		
-		if(items.containsKey(item.getName())) {
-			int amount=items.get(item.getName());
-			items.put(item.getName(),amount+1);
+		if(items.containsKey(item.Item.getName())) {
+			int amount=items.get(item.Item.getName());
+			items.put(item.Item.getName(),amount+1);
 		}else {
-			itemNames.add(item.getName());
+			itemNames.add(item.Item.getName());
 			itemsList.add(item);
-			items.put(item.getName(),1);
+			items.put(item.Item.getName(),1);
 		}
 		
 		
 	}
 	
-	public void removeItem(Item item) {
+	public void removeItem(Items item) {
 		
-		if(items.containsKey(item.getName())) {
-	       int amount=items.get(item.getName());
+		if(items.containsKey(item.Item.getName())) {
+	       int amount=items.get(item.Item.getName());
 	       if(amount==1) {
-	    	   items.remove(item.getName());
-	    	   itemNames.remove(item.getName());
+	    	   items.remove(item.Item.getName());
+	    	   itemNames.remove(item.Item.getName());
 	    	   itemsList.remove(item);
 	       }else {
-	    	   items.put(item.getName(),amount-1);
+	    	   items.put(item.Item.getName(),amount-1);
 	       }
 			
 		}
@@ -83,7 +83,10 @@ public class Inventory {
 	}
 	
 	
-	
+	public boolean isEmpty() {
+		return itemsList.isEmpty();
+		
+	}
 	
 	
 	

@@ -39,13 +39,13 @@ public class BattleEntity {
 		moveStrings.put(move.getName(),move);
 	if(move.isSpecailMove()) {
 		spmovelist.add(move);
-	}else {
+	}
 	     movelist.add(move);}
-	     }
+	     
 	
 	
 	
-    
+  
     
     
     

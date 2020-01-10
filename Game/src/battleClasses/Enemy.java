@@ -31,7 +31,7 @@ public class Enemy extends BattleEntity{
 			
 			
 			Moves move=this.movelist.get(i);
-			if(move.getCost()>=this.sp) {
+			if(move.getCost()<=this.sp) {
 				returnList.add(move);
 				
 			}
@@ -203,7 +203,7 @@ public class Enemy extends BattleEntity{
 
 	public boolean useMove(Moves move,BattleEntity player) {
 		
-		boolean used=this.movelist.contains(move);
+		boolean used=useMove(move);
 		
 		if(used) {
 			

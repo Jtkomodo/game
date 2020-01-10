@@ -73,7 +73,7 @@ public abstract class Bars {
 		
 		Vector4f color=new Vector4f(0);
 		float percentage=(this.value/this.max);
-		if(percentage<.10f) {
+		if(percentage<.20f) {
 	       color=this.lowValuecolor;
 		}else {
 			color=this.Barcolor;

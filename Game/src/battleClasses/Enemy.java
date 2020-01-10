@@ -127,6 +127,8 @@ public class Enemy extends BattleEntity{
 		//now we check if there is a healing move
 	    boolean healingMoveFound=false;
 	    Moves HighestHealingMove=null;
+	    Moves KillerMove=null;
+	    
 	    ArrayList<Moves> healingMoves=new ArrayList<Moves>();
 	    
 		for(int i=0;i<moves.size();i++) {
@@ -150,17 +152,48 @@ public class Enemy extends BattleEntity{
 			
 			
 			
+			}else {
+				if(move.getDamage()>=player.getHp()) {
+					KillerMove=move;
+					
+				}
+				
+				
 			}
+			
+			
+			
+			
 			
 			
 			
 		}
 		healingMoveFound=!healingMoves.isEmpty();
-		
+
+		if(healingMoveFound || healingItemFound) {
+			Random r=new Random();
+			float random=r.nextFloat();
+			
+			if(KillerMove!=null) {
+				
+				if(random<.20) {
+					actionTaken=useMove(KillerMove,player);
+				}
+				
+				
+				
+			}
+			
+			
+			
+			
+		if(!actionTaken) {
+			
 		if(healingMoveFound && healingItemFound) {
 			float value1=itemWithHighestHeal.Item.getValue();
 			float value2=HighestHealingMove.getDamage();
 			
+
 			if(value1>value2) {
 				
 				actionTaken=useItem(itemWithHighestHeal);
@@ -173,8 +206,8 @@ public class Enemy extends BattleEntity{
 			     
 				actionTaken=useMove(HighestHealingMove,player);
 			}else {
-				Random r=new Random();
-				float random=r.nextFloat();
+				
+				 random=r.nextFloat();
 				
 				
 				if(random<=.5) {
@@ -204,6 +237,8 @@ public class Enemy extends BattleEntity{
 			   
 			
 			
+		}
+		}
 		}
 		
 		Start.DebugPrint("actiontaken= "+actionTaken+"("+healingMoveFound+","+healingItemFound+")");		
@@ -284,7 +319,7 @@ if(SPRestoringItemFound) {
 		
 		
 	
-		if(SPRestoringItemFound && HighestRestoring!=null) {
+		if(HighestRestoring!=null) {
 			actionTaken=useItem(HighestRestoring);
 			 Proccesor.addComandtoQueue(new DrawString(name+" used "+HighestRestoring.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
 		        Proccesor.addComandtoQueue(new DrawString("restored "+Math.round(HighestRestoring.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
@@ -298,8 +333,8 @@ if(SPRestoringItemFound) {
 			float random=r.nextFloat();
 			if(random<=.15) {
 				actionTaken=useItem(LowestRestoring);
-				 Proccesor.addComandtoQueue(new DrawString(name+" used "+HighestRestoring.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
-			        Proccesor.addComandtoQueue(new DrawString("restored "+Math.round(HighestRestoring.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
+				 Proccesor.addComandtoQueue(new DrawString(name+" used "+LowestRestoring.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
+			        Proccesor.addComandtoQueue(new DrawString("restored "+Math.round(LowestRestoring.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
 				   
 			}
 			

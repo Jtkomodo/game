@@ -17,6 +17,7 @@ import gameEngine.Start;
 
 public class BattleEntity {
    
+	
 	protected float atk,def,hp,sp,speed;
 	
 
@@ -299,6 +300,8 @@ public float getSpeed() {
 	return speed;
 }
 
-
+public void setInventory(Inventory inventory) {
+	this.inventory = inventory;
+}
 	
 }

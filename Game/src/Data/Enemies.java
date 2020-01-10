@@ -13,7 +13,7 @@ public enum Enemies {
 			20,//attack
 			30,//Defense
 			180,   //hp
-			120, //sp
+			70, //sp
 			48,//speed
 			
 	},new Moves[]{

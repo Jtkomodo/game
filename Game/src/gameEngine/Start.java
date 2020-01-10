@@ -303,7 +303,7 @@ public class Start {
      
 	
 		 playersInventory= new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore},new int[] {1,3,2});
-		 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.spRestore},new int[] {1,1});
+		 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.spRestore},new int[] {1,4});
 		 
 		p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
 		e=new Enemy(Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
@@ -965,9 +965,12 @@ if(CharCallback.takeInput) {
 		battleBox.show();
 		Start.PlayersTurnFinished=false;
 		Start.EnemeiesTurnFinished=false;
+		Start.BattleEnded=false;
 		FinishedTurn=false;
-		e.setHp(e.getMaxHP());
+		e.setInventory(Start.enemyTestInventory);
 		
+		e.setHp(e.getMaxHP());
+		e.setSp(e.getMaxsp());
 	 
 		
 	}

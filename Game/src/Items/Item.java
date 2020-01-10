@@ -16,10 +16,11 @@ public abstract class Item {
 	protected float value;
 	
 
-	protected boolean healing=false;
+	protected boolean healing=false,restorSP=false;
 	
 	
 	
+
 
 	protected Item(String name,String textureName,float basePrice) {
 		
@@ -61,7 +62,7 @@ public abstract class Item {
 	}
 	
 	
-	private float getBasePrice() {
+	public float getBasePrice() {
 		return this.basePrice;
 	}
 	
@@ -76,7 +77,11 @@ public abstract class Item {
 	}
 	
 	
-	
+
+	public boolean isRestorSP() {
+		return restorSP;
+	}
+
 	
 	
 }

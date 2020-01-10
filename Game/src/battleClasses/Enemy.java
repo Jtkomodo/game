@@ -11,13 +11,16 @@ import Items.Item;
 import Items.Items;
 import Scripter.Proccesor;
 import ScripterCommands.DrawModel;
+import ScripterCommands.DrawString;
 import gameEngine.Start;
 
 public class Enemy extends BattleEntity{
 
-	public Enemy(float atk, float def, float hp,float sp, Moves[] moves,Inventory inventory) {
+	private String name;
+	
+	public Enemy(String name,float atk, float def, float hp,float sp, Moves[] moves,Inventory inventory) {
 		super(atk, def, hp,sp, moves,inventory);
-		
+		this.name=name;
 	
 	}
 
@@ -154,6 +157,9 @@ public class Enemy extends BattleEntity{
 			if(value1>value2) {
 				
 				actionTaken=useItem(itemWithHighestHeal);
+				 Proccesor.addComandtoQueue(new DrawString(name+" used "+itemWithHighestHeal.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
+			        Proccesor.addComandtoQueue(new DrawString("healed "+Math.round(itemWithHighestHeal.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
+				   
 				
 			}else if(value1<value2) {
 				
@@ -167,6 +173,10 @@ public class Enemy extends BattleEntity{
 				if(random<=.5) {
 					
 					actionTaken=useItem(itemWithHighestHeal);
+					 Proccesor.addComandtoQueue(new DrawString(name+" used "+itemWithHighestHeal.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
+				        Proccesor.addComandtoQueue(new DrawString("healed "+Math.round(itemWithHighestHeal.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
+					   
+					
 				}else {
 					actionTaken=useMove(HighestHealingMove,player);
 				}
@@ -182,6 +192,9 @@ public class Enemy extends BattleEntity{
 			
 		}else if(healingItemFound){
 			actionTaken=useItem(itemWithHighestHeal);
+			 Proccesor.addComandtoQueue(new DrawString(name+" used "+itemWithHighestHeal.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
+		        Proccesor.addComandtoQueue(new DrawString("healed "+Math.round(itemWithHighestHeal.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
+			   
 			
 			
 		}
@@ -190,15 +203,99 @@ public class Enemy extends BattleEntity{
 	}
 	//-------------------------------------------------------------------------------------------------------------------------
 	
+	
+  	
+	
+	
+	if(!actionTaken) {
+	//look for lowest and highest restoring sp items
+		
+	  	boolean SPRestoringItemFound=false;
+		Items HighestRestoring=null;
+		Items LowestRestoring=null;
+		ArrayList<Items> spRestoreItems=new ArrayList<Items>();
+		if(!this.inventory.isEmpty()) {
+		for(int i=0;i<this.inventory.getItems().length;i++) {
+			
+			Items item=this.inventory.getItems()[i];
+		  	if(item.Item.isRestorSP()) {
+		  		
+		  		spRestoreItems.add(item);
+		  		
+		  		
+		  		//we find the highest restoring item
+		  		
+		  	
+		  		if(HighestRestoring!=null) {
+		  		
+		  			if(item.Item.getValue()>HighestRestoring.Item.getValue())
+		  			HighestRestoring=item;
+		  		
+		  		
+		  		
+		  		}else {
+		  			
+		  			HighestRestoring=item;
+		  		}
+		  		
+		  		
+		  		if(LowestRestoring!=null) {
+			  		
+		  			if(item.Item.getValue()<LowestRestoring.Item.getValue())
+		  			HighestRestoring=item;
+		  		
+		  		
+		  		
+		  		}else {
+		  			
+		  			LowestRestoring=item;
+		  		}
+		  		
+		  		
+		  		
+		  	}
+		
+		
+		
+		}
 
+		SPRestoringItemFound=!spRestoreItems.isEmpty();
+		
+		
 	
 	
+		 //if sp <Lowest Item cost----------------------------------------------------------------------------------------------------------------
+if(SPRestoringItemFound) {
+	if(sp<(LowestRestoring.Item.getValue())) {
+		
+	
+		
+		
+	
+		
+		
+	
+		if(SPRestoringItemFound && HighestRestoring!=null) {
+			actionTaken=useItem(HighestRestoring);
+			 Proccesor.addComandtoQueue(new DrawString(name+" used "+HighestRestoring.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
+		        Proccesor.addComandtoQueue(new DrawString("restored "+Math.round(HighestRestoring.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
+			   
+			
+		}
+		
+		
+		}
+		
+	}//-------------------------------------------------------------------------------------------------------------------------
+
+	}
+	}
 		
 		
 		
 	}
 	
-	
+    
 	
 
 	public boolean useMove(Moves move,BattleEntity player) {
@@ -215,7 +312,9 @@ public class Enemy extends BattleEntity{
 				
 			        player.decreseHp(Damage);
 			   
-				   
+			       
+			        Proccesor.addComandtoQueue(new DrawString(name+" used "+move.getName(),new Vector2f(-100,40),.5f,true,.5f));			
+			        Proccesor.addComandtoQueue(new DrawString(Math.round(Damage)+"!",new Vector2f(100,40),.5f,true,.5f));			
 				   
 			   }else {
 				
@@ -223,6 +322,8 @@ public class Enemy extends BattleEntity{
 				   float health=BattleFormulas.CalcaulateHealth(this, move.getDamage());
 				
 				IncreseHp(health);   
+				   Proccesor.addComandtoQueue(new DrawString(name+" used "+move.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
+			        Proccesor.addComandtoQueue(new DrawString("healed "+Math.round(health)+"!",new Vector2f(100,40),.5f,true,.5f));			
 				   
 			   }
 			

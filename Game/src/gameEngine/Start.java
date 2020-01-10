@@ -306,8 +306,8 @@ public class Start {
 		 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.spRestore},new int[] {1,1});
 		 
 		p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getMoves(),playersInventory);
-		e=new Enemy(Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getMoves(),enemyTestInventory);
-		
+		e=new Enemy(Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getMoves(),enemyTestInventory);
+		e.setHp(44);
 		 
 		playersHpBar=new HpBar(p.getMaxHP(),p.getHp(),new Vector2f(100,10),HealthBarBackground, COLTEX); 
 		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
@@ -1006,7 +1006,7 @@ private static void EndBattle(BattleEntity Player) {
 	 	  text1.setString("HP: "+Math.round(EnemysHPBar.getValue())+"/"+Math.round(EnemysHPBar.getMax()));
 	 	  EnemysHPBar.draw(new Vector2f(position2.x,position2.y+100),text1);
 	 	
-	 	if(!Start.PlayersTurn) {
+	 	if(!Start.PlayersTurn && Proccesor.isUserInputallowed()) {
 	 		battleBox.hide();
 	 		battleBox.reset();
 	 		e.takeTurn(p);
@@ -1033,8 +1033,7 @@ private static void EndBattle(BattleEntity Player) {
 	 			   Start.PlayersTurn=false;
 	 			   battleBox.reset();
 	 			   battleBox.show();
-	 			   
-	 			   
+	 			  
 	 			   if(!p.getLastUsedMove().isHeal()) {
 	 				   
 	 				   float Damage=BattleFormulas.CalculateDamage(p, e, State, p.getLastUsedMove().getDamage());
@@ -1063,6 +1062,8 @@ private static void EndBattle(BattleEntity Player) {
 	 		   }}else {
 	 			  Start.MoveInprogress=false;
 	 			  Start.PlayersTurn=false;
+	 			 
+	 			   
 	 			   if(!move.isHeal()) {
 	 				   
 	 				  float Damage=BattleFormulas.CalculateDamage(p, e,2, p.getLastUsedMove().getDamage());

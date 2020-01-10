@@ -9,7 +9,7 @@ public enum Enemies {
 	
 	
 	
-	E1(new float[]{
+	E1("enemy",new float[]{
 			20,//attack
 			30,//Defense
 			180,   //hp
@@ -25,19 +25,24 @@ public enum Enemies {
 	private float def;
 	private float hp;
 	private float sp;
+	private String name;
 	private int amountOfMoves;
 	private Moves[] moves;
 	
 	
-	Enemies(float[] stats ,Moves[] moves ){
+	Enemies(String name,float[] stats ,Moves[] moves ){
 		this.atk=stats[0];
 		this.def=stats[1];
 		this.hp=stats[2];
 		this.sp=stats[3];
 		this.moves=moves;
 		this.amountOfMoves=moves.length;
+		this.name=name;
 		
-		
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public float getAtk() {

@@ -10,6 +10,7 @@ public class RestoreSPItem extends Item {
 		super(name, textureName, basePrice);
 		this.howMuchItRestores=howMuchItRestores;
 		this.value=this.howMuchItRestores;
+		this.restorSP=true;
 	}
 
 	@Override

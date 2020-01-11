@@ -79,179 +79,279 @@ public class Enemy extends BattleEntity{
 	
 	//next we check enemy's hp
 	
-	//if HP is less than 25%----------------------------------------------------------------------------------------------------------
-	if(this.hp<(this.maxHP*.25f)) {
-		//heal up
+    actionTaken=HealthCheck(moves,player,.25f,.20f);
+	
+  	
+	
+	
+	if(!actionTaken) 
+	 actionTaken=checkSp(.15f);
+	
+	if(!actionTaken) 
+		actionTaken=UseMostPowerfulOrKillingMove(moves, player);
+	
 		
-		//we first check if we have a item that heals
-		boolean healingItemFound=false;
 		
-		Items itemWithHighestHeal=null;
-		ArrayList<Items> healingItems=new ArrayList<Items>();
-		if(!this.inventory.isEmpty()) {
-		for(int i=0;i<this.inventory.getItems().length;i++) {
+	
+	
+	//if somehow there was no action taken randomly pick the next move
+	if(!actionTaken) {
+		
+		Random r=new Random();
+		int random=r.nextInt(moves.size()-1);
+		
+		actionTaken=useMove(moves.get(random),player);
+		Start.DebugPrint("used random");
+	}
+	}else {
+		
+	    Proccesor.addComandtoQueue(new DrawString(name+" couldn't "+"act",new Vector2f(-100,40),.5f,true,.5f));
+		
+	}
+		
+		
+	}
+	
+    
+	
+
+	protected boolean useMove(Moves move,BattleEntity player) {
+		
+		boolean used=useMove(move);
+		
+		if(used) {
 			
-			Items item=this.inventory.getItems()[i];
-		  	if(item.Item.isHealing()) {
-		  		
-		  		healingItems.add(item);
-		  		
-		  		
-		  		//we find the highest healing item
-		  		
-		  		if(itemWithHighestHeal!=null) {
-		  			
-		  		  if(item.Item.getValue()>itemWithHighestHeal.Item.getValue()) {
-		  			  
-		  			  itemWithHighestHeal=item;
-		  		  }
-		  			
-		  			
-		  		}else {
-		  			itemWithHighestHeal=item;
-		  		}
-		  		
-		  		
-		  		
-		  		
-		  		
-		  	}
-		
-		
-		
-		}
-		healingItemFound=!healingItems.isEmpty();
-		}
-		
-		
-		//now we check if there is a healing move
-	    boolean healingMoveFound=false;
-	    Moves HighestHealingMove=null;
-	    Moves KillerMove=null;
-	    
-	    ArrayList<Moves> healingMoves=new ArrayList<Moves>();
-	    
-		for(int i=0;i<moves.size();i++) {
+			 if(!move.isHeal()) {
+				   
+				  float Damage=BattleFormulas.CalculateDamage(this, player,move.getDamage());
+				   
+						
+				
+			        player.decreseHp(Damage);
+			   
+			       
+			        Proccesor.addComandtoQueue(new DrawString(name+" used "+move.getName(),new Vector2f(-100,40),.5f,true,.5f));			
+			        Proccesor.addComandtoQueue(new DrawString(Math.round(Damage)+"!",new Vector2f(100,40),.5f,true,.5f));			
+				   
+			   }else {
+				
+				   
+				   float health=BattleFormulas.CalcaulateHealth(this, move.getDamage());
+				
+				IncreseHp(health);   
+				   Proccesor.addComandtoQueue(new DrawString(name+" used "+move.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
+			        Proccesor.addComandtoQueue(new DrawString("healed "+Math.round(health)+"!",new Vector2f(100,40),.5f,true,.5f));			
+				   
+			   }
 			
-			Moves move=moves.get(i);
-			if(move.isHeal()) {
+			
+			
+			
+			
+			
+			
+			
+			
+		Start.DebugPrint("enemy used move "+move.getName());	
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+		return used;
+	}
+	
+	
+	
+	
+	
+	protected boolean HealthCheck(ArrayList<Moves> moves,BattleEntity player,float percentage,float percentageChanceToUseKillerMove) {
+		
+		boolean actionTaken=false;
+		//if HP is less than value----------------------------------------------------------------------------------------------------------
+		if(this.hp<(this.maxHP*percentage)) {
+			//heal up
+			
+			//we first check if we have a item that heals
+			boolean healingItemFound=false;
+			
+			Items itemWithHighestHeal=null;
+			ArrayList<Items> healingItems=new ArrayList<Items>();
+			if(!this.inventory.isEmpty()) {
+			for(int i=0;i<this.inventory.getItems().length;i++) {
 				
-				healingMoves.add(move);
+				Items item=this.inventory.getItems()[i];
+			  	if(item.Item.isHealing()) {
+			  		
+			  		healingItems.add(item);
+			  		
+			  		
+			  		//we find the highest healing item
+			  		
+			  		if(itemWithHighestHeal!=null) {
+			  			
+			  		  if(item.Item.getValue()>itemWithHighestHeal.Item.getValue()) {
+			  			  
+			  			  itemWithHighestHeal=item;
+			  		  }
+			  			
+			  			
+			  		}else {
+			  			itemWithHighestHeal=item;
+			  		}
+			  		
+			  		
+			  		
+			  		
+			  		
+			  	}
+			
+			
+			
+			}
+			healingItemFound=!healingItems.isEmpty();
+			}
+			
+			
+			//now we check if there is a healing move
+		    boolean healingMoveFound=false;
+		    Moves HighestHealingMove=null;
+		    Moves KillerMove=null;
+		    
+		    ArrayList<Moves> healingMoves=new ArrayList<Moves>();
+		    
+			for(int i=0;i<moves.size();i++) {
 				
-			if(HighestHealingMove!=null) {
-				
-				if(move.getDamage()>HighestHealingMove.getDamage()) {
+				Moves move=moves.get(i);
+				if(move.isHeal()) {
+					
+					healingMoves.add(move);
+					
+				if(HighestHealingMove!=null) {
+					
+					if(move.getDamage()>HighestHealingMove.getDamage()) {
+						HighestHealingMove=move;
+						
+					}
+					
+				}else {
 					HighestHealingMove=move;
 					
 				}
 				
-			}else {
-				HighestHealingMove=move;
 				
-			}
-			
-			
-			
-			}else {
-				if(move.getDamage()>=player.getHp()) {
-					KillerMove=move;
+				
+				}else {
+					if(move.getDamage()>=player.getHp()) {
+						KillerMove=move;
+						
+					}
+					
 					
 				}
 				
 				
-			}
-			
-			
-			
-			
-			
-			
-			
-		}
-		healingMoveFound=!healingMoves.isEmpty();
-
-		if(healingMoveFound || healingItemFound) {
-			Random r=new Random();
-			float random=r.nextFloat();
-			
-			if(KillerMove!=null) {
 				
-				if(random<.20) {
-					actionTaken=useMove(KillerMove,player);
+				
+				
+				
+				
+			}
+			healingMoveFound=!healingMoves.isEmpty();
+
+			if(healingMoveFound || healingItemFound) {
+				Random r=new Random();
+				float random=r.nextFloat();
+				
+				if(KillerMove!=null) {
+					
+					if(random<percentageChanceToUseKillerMove) {
+						actionTaken=useMove(KillerMove,player);
+					}
+					
+					
+					
 				}
 				
 				
 				
-			}
-			
-			
-			
-			
-		if(!actionTaken) {
-			
-		if(healingMoveFound && healingItemFound) {
-			float value1=itemWithHighestHeal.Item.getValue();
-			float value2=HighestHealingMove.getDamage();
-			
+				
+			if(!actionTaken) {
+				
+			if(healingMoveFound && healingItemFound) {
+				float value1=itemWithHighestHeal.Item.getValue();
+				float value2=HighestHealingMove.getDamage();
+				
 
-			if(value1>value2) {
-				
-				actionTaken=useItem(itemWithHighestHeal);
-				 Proccesor.addComandtoQueue(new DrawString(name+" used "+itemWithHighestHeal.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
-			        Proccesor.addComandtoQueue(new DrawString("healed "+Math.round(itemWithHighestHeal.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
-				   
-				
-			}else if(value1<value2) {
-				
-			     
-				actionTaken=useMove(HighestHealingMove,player);
-			}else {
-				
-				 random=r.nextFloat();
-				
-				
-				if(random<=.5) {
+				if(value1>value2) {
 					
 					actionTaken=useItem(itemWithHighestHeal);
 					 Proccesor.addComandtoQueue(new DrawString(name+" used "+itemWithHighestHeal.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
 				        Proccesor.addComandtoQueue(new DrawString("healed "+Math.round(itemWithHighestHeal.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
 					   
 					
-				}else {
+				}else if(value1<value2) {
+					
+				     
 					actionTaken=useMove(HighestHealingMove,player);
+				}else {
+					
+					 random=r.nextFloat();
+					
+					
+					if(random<=.5) {
+						
+						actionTaken=useItem(itemWithHighestHeal);
+						 Proccesor.addComandtoQueue(new DrawString(name+" used "+itemWithHighestHeal.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
+					        Proccesor.addComandtoQueue(new DrawString("healed "+Math.round(itemWithHighestHeal.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
+						   
+						
+					}else {
+						actionTaken=useMove(HighestHealingMove,player);
+					}
+					
+					
 				}
 				
 				
+			}else if(healingMoveFound){
+				
+				actionTaken=useMove(HighestHealingMove,player);
+				
+				
+			}else if(healingItemFound){
+				actionTaken=useItem(itemWithHighestHeal);
+				 Proccesor.addComandtoQueue(new DrawString(name+" used "+itemWithHighestHeal.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
+			        Proccesor.addComandtoQueue(new DrawString("healed "+Math.round(itemWithHighestHeal.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
+				   
+				
+				
+			}
+			}
 			}
 			
-			
-		}else if(healingMoveFound){
-			
-			actionTaken=useMove(HighestHealingMove,player);
-			
-			
-		}else if(healingItemFound){
-			actionTaken=useItem(itemWithHighestHeal);
-			 Proccesor.addComandtoQueue(new DrawString(name+" used "+itemWithHighestHeal.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
-		        Proccesor.addComandtoQueue(new DrawString("healed "+Math.round(itemWithHighestHeal.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
-			   
-			
-			
+			Start.DebugPrint("actiontaken= "+actionTaken+"("+healingMoveFound+","+healingItemFound+")");		
 		}
-		}
-		}
+		//-------------------------------------------------------------------------------------------------------------------------
 		
-		Start.DebugPrint("actiontaken= "+actionTaken+"("+healingMoveFound+","+healingItemFound+")");		
+		
+		
+		return actionTaken;
+		
 	}
-	//-------------------------------------------------------------------------------------------------------------------------
 	
 	
-  	
 	
 	
-	if(!actionTaken) {
-	//look for lowest and highest restoring sp items______________________________________________________________________
+	protected boolean checkSp(float percantageChanceToUse) {
 		
+		
+//look for lowest and highest restoring sp items______________________________________________________________________
+		boolean actionTaken=false;
 	  	boolean SPRestoringItemFound=false;
 		Items HighestRestoring=null;
 		Items LowestRestoring=null;
@@ -331,7 +431,7 @@ if(SPRestoringItemFound) {
 		}else if(sp<HighestRestoring.Item.getValue()) {
 			Random r=new Random();
 			float random=r.nextFloat();
-			if(random<=.15) {
+			if(random<=percantageChanceToUse) {
 				actionTaken=useItem(LowestRestoring);
 				 Proccesor.addComandtoQueue(new DrawString(name+" used "+LowestRestoring.Item.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
 			        Proccesor.addComandtoQueue(new DrawString("restored "+Math.round(LowestRestoring.Item.getValue()),new Vector2f(100,40),.5f,true,.5f));			
@@ -345,10 +445,32 @@ if(SPRestoringItemFound) {
 	}
 	}
 		
-		}//--------------------------------------------------------------------------------------------------------------------------
+		
+		
+		
+		
+		
+		
+		
+		
+		return actionTaken;
+		
+		
+		
+		
+	}
 	
-	if(!actionTaken) {
 	
+	protected boolean UseMostPowerfulOrKillingMove(ArrayList<Moves> moves,BattleEntity player) {
+		boolean actionTaken=false;
+		
+		
+		
+		
+		
+		
+		
+		
 		Moves MostPowerfullAttack=null;
 		Moves LeastCostlyMoveThatcouldKill=null;
 		boolean isALeastCostly=false;
@@ -414,92 +536,21 @@ if(SPRestoringItemFound) {
 		
 		
 		
-	}
-	
-	//if somehow there was no action taken randomly pick the next move
-	if(!actionTaken) {
 		
-		Random r=new Random();
-		int random=r.nextInt(moves.size()-1);
 		
-		actionTaken=useMove(moves.get(random),player);
-		Start.DebugPrint("used random");
-	}
-	}else {
 		
-	    Proccesor.addComandtoQueue(new DrawString(name+" couldn't "+"act",new Vector2f(-100,40),.5f,true,.5f));
 		
-	}
 		
+		
+		
+		
+		
+		
+		
+		
+		return actionTaken;
 		
 	}
-	
-    
-	
-
-	public boolean useMove(Moves move,BattleEntity player) {
-		
-		boolean used=useMove(move);
-		
-		if(used) {
-			
-			 if(!move.isHeal()) {
-				   
-				  float Damage=BattleFormulas.CalculateDamage(this, player,move.getDamage());
-				   
-						
-				
-			        player.decreseHp(Damage);
-			   
-			       
-			        Proccesor.addComandtoQueue(new DrawString(name+" used "+move.getName(),new Vector2f(-100,40),.5f,true,.5f));			
-			        Proccesor.addComandtoQueue(new DrawString(Math.round(Damage)+"!",new Vector2f(100,40),.5f,true,.5f));			
-				   
-			   }else {
-				
-				   
-				   float health=BattleFormulas.CalcaulateHealth(this, move.getDamage());
-				
-				IncreseHp(health);   
-				   Proccesor.addComandtoQueue(new DrawString(name+" used "+move.getName(),new Vector2f(-100,40),.5f,true,1.5f));			
-			        Proccesor.addComandtoQueue(new DrawString("healed "+Math.round(health)+"!",new Vector2f(100,40),.5f,true,.5f));			
-				   
-			   }
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		Start.DebugPrint("enemy used move "+move.getName());	
-			
-			
-		}
-		
-		
-		
-		
-		
-		
-		return used;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

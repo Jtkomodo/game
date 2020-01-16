@@ -1,6 +1,6 @@
 package Collisions;
 
-import java.util.HashMap;
+
 
 import org.joml.Vector2f;
 
@@ -23,8 +23,9 @@ import gameEngine.VectorMath;
 
 
 
-public abstract class CollisionFunctions extends VectorMath {
+public abstract class Collisions extends VectorMath {
  protected boolean DebugColisions=Start.DEBUGCOLISIONS;
+ 
 	
 	abstract protected void debug();
 	abstract protected Vector2f findVector(Vector2f position, Vector2f movement,Vector2f direction,CircleColision circle); 
@@ -32,7 +33,7 @@ public abstract class CollisionFunctions extends VectorMath {
 	abstract protected boolean vsAABB(AABB box);
 	abstract protected boolean vsCircle(CircleColision circle);
 	
-	 public static float clamp(float value,float min,float max) {
+	 protected  float clamp(float value,float min,float max) {
 		   
 		   if(value<min) {
 			   return min;

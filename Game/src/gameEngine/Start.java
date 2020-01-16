@@ -20,6 +20,7 @@ import Data.Constants;
 import Data.Enemies;
 import Data.Moves;
 import battleClasses.HpBar;
+import battleClasses.BattleEnemyField;
 import battleClasses.BattleEntity;
 import battleClasses.BattleFormulas;
 import battleClasses.Enemy;
@@ -82,7 +83,7 @@ public class Start {
     public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls,textR;
     public static Vector2f currentmovement,c2,oldpos,direction,BattleBoxPosition;
     public static BattleEntity p;
-    public static Enemy e;
+ 
     public static CircleColision circle1, circle2;
     public static float PHP;
     public static float[] uvtextbox,uvArrow,vert; 
@@ -96,7 +97,7 @@ public class Start {
     public static AABB playerCol,Col,COl2;
     public static Animate a1;
     public static SpriteSheetLoader sloader;
-    
+    public static BattleEnemyField enemyField;
     public static Fontloader aakar;
     
     public static boolean facingLeft,running,PlayersTurn=true;
@@ -303,16 +304,16 @@ public class Start {
      
 	
 		 playersInventory= new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore},new int[] {1,3,2});
-		 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.spRestore},new int[] {1,4});
+		 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore,Items.spSuperRestore},new int[] {3,1,4,2});
 		 
 		p=new BattleEntity(Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
-		e=new Enemy(Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
-		
-		 
+		Enemy enemy=new Enemy(player,playerTex,96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
+	
+		enemyField=new BattleEnemyField(new Enemy[] {enemy,enemy,enemy});
 		playersHpBar=new HpBar(p.getMaxHP(),p.getHp(),new Vector2f(100,10),HealthBarBackground, COLTEX); 
 		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
 		
-		EnemysHPBar=new HpBar(e.getMaxHP(),e.getHp(),new Vector2f(100,10),HealthBarBackground, COLTEX);
+		EnemysHPBar=new HpBar(enemy.getMaxHP(),enemy.getHp(),new Vector2f(100,10),HealthBarBackground, COLTEX);
 
 		
 		try {
@@ -410,7 +411,7 @@ public class Start {
 			
 			  playersHpBar.setValue(p.getHp());
 			  playersSPBAr.setValue(p.getSp());
-			  EnemysHPBar.setValue(e.getHp());
+			  EnemysHPBar.setValue(enemyField.getEnemy(0).getHp());
 		
 		StartBox.getUIState(1).relpaceALLActive(elementlist);
 	    		
@@ -745,7 +746,7 @@ if(CharCallback.takeInput) {
 					a1.removeAnimation();
 					StartBox.reset();
 					StateOfStartBOx=false;
-					StartBattle(e);
+					StartBattle(enemyField.getEnemy(0));
 					
 				
 				}
@@ -1002,7 +1003,7 @@ private static void EndBattleAsLoss() {
 	  
 	   
 	   
-	   
+	   Enemy e=enemyField.getEnemy(0);
 	   
 	   if(PlayersTurnFinished && Start.EnemeiesTurnFinished) {
 		   FinishedTurn=true;
@@ -1012,7 +1013,7 @@ private static void EndBattleAsLoss() {
 	   
 	   if(FinishedTurn) {
 		   
-			StartBattleTurn(p,e);
+			StartBattleTurn(p,enemyField.getEnemy(0));
 	   }
 	   
 	   
@@ -1026,8 +1027,7 @@ private static void EndBattleAsLoss() {
 	 	   
 	 	 	 
 	 	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
-	 	    SpriteUpdate(player,playerTex,222-20,-128+40,64*1.5f,false);
-	 
+	 	    enemyField.draw();
 	 		Items[] ITM= playersInventory.getItems();		
 			UIElement[] elementlist=new UIElement[ITM.length];	
 			

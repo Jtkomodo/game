@@ -13,7 +13,7 @@ public enum Moves {
 	punch("punch",33,0,false,new TimedButtonPress(2,2.5,GLFW_KEY_SPACE)),//damage,special,cost,healing move
 	heal("heal",25,25,true,new TimedButtonCombo(new TimedButton[]{new TimedButtonPress(2,2.5,GLFW_KEY_SPACE),new TimedButtonHold(1,1.4,2,GLFW_KEY_RIGHT)},2,1))
 	,Doublekick("double kick",50,33,false,new TimedButtonCombo(new TimedButton[] {new TimedButtonPress(3,3.39,GLFW_KEY_SPACE),new TimedButtonPress(3,3.39,GLFW_KEY_SPACE)},2,1)),
-	superHeal("SuperHeal",50,100,true)
+	superHeal("SuperHeal",100,40,true)
 	
 	;
 

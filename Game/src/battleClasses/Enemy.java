@@ -14,19 +14,31 @@ import Items.Items;
 import Scripter.Proccesor;
 import ScripterCommands.DrawModel;
 import ScripterCommands.DrawString;
+import gameEngine.Model;
 import gameEngine.Start;
+import gameEngine.Texture;
 
 public class Enemy extends BattleEntity{
 
 	private String name;
-	
-	public Enemy(String name,float atk, float def, float hp,float sp,float speed, Moves[] moves,Inventory inventory) {
+	private Model model;
+    private Texture texture;  
+    private float scale;
+
+
+
+	public Enemy(Model model,Texture texture,float scale,String name,float atk, float def, float hp,float sp,float speed, Moves[] moves,Inventory inventory) {
 		super(atk, def, hp,sp,speed, moves,inventory);
 		this.name=name;
-	
+	    this.model=model;
+	    this.texture=texture;
+	    this.scale=scale;
 	}
 
 	
+
+
+
 
 	private ArrayList<Moves> makeListOfUseableMoves() {
 		
@@ -170,6 +182,16 @@ public class Enemy extends BattleEntity{
 	
 	
 	protected boolean HealthCheck(ArrayList<Moves> moves,BattleEntity player,float percentage,float percentageChanceToUseKillerMove) {
+		
+		
+		
+		
+		Items[] items=this.inventory.getItems();
+		for(int i=0;i<items.length;i++) {
+		Start.DebugPrint(items[i].name());
+	}
+		
+		
 		
 		boolean actionTaken=false;
 		//if HP is less than value----------------------------------------------------------------------------------------------------------
@@ -553,5 +575,29 @@ if(SPRestoringItemFound) {
 	}
 	
 	
+	public Model getModel() {
+		return model;
+	}
+
+	public float getScale() {
+		return scale;
+	}
+
+
+
+
+
+	public void setScale(float scale) {
+		this.scale = scale;
+	}
+
+
+
+
+	public Texture getTexture() {
+		return texture;
+	}
+
+
 	
 }

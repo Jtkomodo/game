@@ -1,21 +1,15 @@
 package Collisions;
 
 
-import static org.lwjgl.opengl.GL11.*;
 import org.joml.Math;
-import org.joml.Matrix4f;
 import org.joml.Vector2f;
-import org.joml.Vector4f;
 
-
-import gameEngine.MatrixMath;
-import gameEngine.Model;
 import Data.Constants;
+import gameEngine.Model;
 import gameEngine.Render;
 import gameEngine.Start;
-import gameEngine.VectorMath;
 //06d7ea
-public class AABB extends CollisionFunctions{
+public class AABB extends Collisions{
 	private float widthR,heightR,resistance,amount;//resistance is the amount of push away the box will have on the player
 	private Vector2f position=new Vector2f(0),lc=new Vector2f(0,0),rc=new Vector2f(0,0),r,Pposition=new Vector2f(0,0),beforeCol=new Vector2f(0,0),edgep=new Vector2f(0,0),edgen=new Vector2f(0,0),ActualPosition=new Vector2f(0);
 	private Model aabb,piont;

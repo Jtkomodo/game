@@ -44,7 +44,7 @@ public class TimedButtonPress extends TimedButton {
 		double TimeSince=Math.max(0,TimeNow-StartTime);
 		
 		byte StateOfButton=InputHandler.getStateofButton(Button);
-		Start.DebugPrint("TimeForButtonPress="+TimeSince+"("+time1+"/"+time2+")");
+		
 		int result=NOTPUSHED;
 		
 	

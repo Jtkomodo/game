@@ -1,16 +1,14 @@
 package Collisions;
-import org.joml.*;
-import org.joml.Math;
+import org.joml.Vector2f;
 
 import Data.Constants;
-import gameEngine.MatrixMath;
 import gameEngine.Model;
 import gameEngine.Render;
 import gameEngine.Start;
 import gameEngine.VectorMath;
 
 
-public class CircleColision extends CollisionFunctions {
+public class CircleColision extends Collisions {
 private float r;
 private Vector2f position,closest=new Vector2f(0,0),d=new Vector2f(0,0),closest2=new Vector2f(0,0),closest3=new Vector2f(0);
 private boolean isCheccked=false,debug=Start.DEBUGCOLISIONS,lastResult=false;

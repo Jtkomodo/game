@@ -10,25 +10,19 @@
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
     <fullyQualifiedTypeName name="guis.BarElement"/>
-    <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
     <fullyQualifiedTypeName name="Debug.Debuger"/>
-    <fullyQualifiedTypeName name="gameEngine.Model"/>
     <fullyQualifiedTypeName name="input.CharCallback"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButtonCombo"/>
     <fullyQualifiedTypeName name="battleClasses.Enemy"/>
     <fullyQualifiedTypeName name="org.joml.Vector4f"/>
     <fullyQualifiedTypeName name="Data.Constants"/>
     <fullyQualifiedTypeName name="gameEngine.Timer"/>
-    <fullyQualifiedTypeName name="gameEngine.Render"/>
-    <fullyQualifiedTypeName name="gameEngine.Texture"/>
     <fullyQualifiedTypeName name="Scripter.Proccesor"/>
     <fullyQualifiedTypeName name="ScripterCommands.DrawModel"/>
-    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="Data.Moves"/>
     <fullyQualifiedTypeName name="ScripterCommands.DrawString"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="Items.Item"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
@@ -38,4 +32,11 @@
     <fullyQualifiedTypeName name="Data.Enemies"/>
     <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="Items.Items"/>
+    <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
+    <fullyQualifiedTypeName name="gameEngine.Render"/>
+    <fullyQualifiedTypeName name="gameEngine.Model"/>
+    <fullyQualifiedTypeName name="gameEngine.Texture"/>
+    <fullyQualifiedTypeName name="battleClasses.BattleEnemyField"/>
 </qualifiedTypeNameHistroy>

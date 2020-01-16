@@ -2,12 +2,14 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="res" key="selection"/>
+		<item value="item" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="item"/>
+			<item value="heal"/>
 			<item value="rest"/>
 			<item value="res"/>
 			<item value="re"/>
@@ -21,8 +23,6 @@
 			<item value="PlayersTurn"/>
 			<item value="battleBox.show"/>
 			<item value="Remove"/>
-			<item value="Item.class"/>
-			<item value="textA"/>
 		</list>
 		<list key="replacehistory">
 			<item value="returnList"/>

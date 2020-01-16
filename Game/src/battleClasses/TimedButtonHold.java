@@ -87,7 +87,7 @@ public class TimedButtonHold extends TimedButton {
 		
 		
 		} else {
-			Start.DebugPrint("TimeForButtonPress="+TimeSince+"("+time1+"/"+time2+")");
+			
 		///same code as before to check if it is first pressed in the right range
 			
 		if(TimeSince>=time2) {

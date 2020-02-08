@@ -18,6 +18,10 @@ import gameEngine.Start;
 public class BattleEntity {
    
 	
+	public boolean isEnemy() {
+		return isEnemy;
+	}
+
 	protected float atk,def,hp,sp,speed;
 	
 
@@ -29,9 +33,10 @@ public class BattleEntity {
 	protected HashMap<String,Moves> moveStrings=new HashMap<String,Moves>();
 	protected Inventory inventory;
 	protected Moves lastUsedMove;
+	protected HpBar hpbar;
+	protected boolean isEnemy=false;
 	
-	
-	public BattleEntity(float atk,float def,float hp,float sp,float speed,Moves[] moves,Inventory inventory) {
+	public BattleEntity(Vector2f sizeForHealthBar,float atk,float def,float hp,float sp,float speed,Moves[] moves,Inventory inventory) {
 	this.inventory=inventory;	
     this.atk=atk;
     this.def=def;
@@ -42,6 +47,9 @@ public class BattleEntity {
     this.maxHP=hp;
     this.sp=sp;
     this.speed=speed;
+    this.hpbar=new HpBar(maxHP,hp, sizeForHealthBar, Start.HealthBarBackground, Start.COLTEX);
+    
+    
     
 	for(int i=0;i<moves.length;i++) {
 	    Moves move=moves[i];
@@ -69,6 +77,7 @@ public class BattleEntity {
     
 		
 	}
+	
 	
 	public void setLastUsedMove(Moves lastUsedMove) {
 		this.lastUsedMove = lastUsedMove;
@@ -142,7 +151,13 @@ public class BattleEntity {
 	public void setHp(float hp) {
 		if(hp<=maxHP)
 		this.hp = hp;
+		
+		this.hpbar.setValue(this.hp);
 	}
+	public HpBar getHpbar() {
+		return hpbar;
+	}
+
 	public void IncreseHp(float hp) {
 		float newhp=this.hp+hp;
 		if(newhp>this.maxHP) {
@@ -150,6 +165,8 @@ public class BattleEntity {
 		}
 		
 		this.hp=newhp;
+		this.hpbar.setValue(this.hp);
+		
 		
 	}
 	public void decreseHp(float hp) {
@@ -159,7 +176,8 @@ public class BattleEntity {
 		}
 		
 		this.hp=newhp;
-		
+		this.hpbar.setValue(this.hp);
+	
 	}
 
 	public void IncreseSp(float sp) {
@@ -281,9 +299,28 @@ if(move.getCost()<=this.sp) {
 }else {
 	used=false;
 }
+
 	
 	return used;
 }
+public boolean testIfMoveCanBeUsed(Moves move) {
+	
+	boolean used=this.movelist.contains(move);
+	
+if(move.getCost()<=this.sp) {
+	
+	return true;
+	
+}else {
+	used=false;
+}
+
+	
+	return used;
+}
+	
+
+
 
 
 

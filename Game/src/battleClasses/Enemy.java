@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Random;
 
 import org.joml.Vector2f;
+import org.joml.Vector4f;
 
 import Data.Moves;
 import Items.Inventory;
@@ -15,8 +16,10 @@ import Scripter.Proccesor;
 import ScripterCommands.DrawModel;
 import ScripterCommands.DrawString;
 import gameEngine.Model;
+import gameEngine.Render;
 import gameEngine.Start;
 import gameEngine.Texture;
+import textrendering.TextBuilder;
 
 public class Enemy extends BattleEntity{
 
@@ -24,20 +27,39 @@ public class Enemy extends BattleEntity{
 	private Model model;
     private Texture texture;  
     private float scale;
+   
 
 
-
-	public Enemy(Model model,Texture texture,float scale,String name,float atk, float def, float hp,float sp,float speed, Moves[] moves,Inventory inventory) {
-		super(atk, def, hp,sp,speed, moves,inventory);
+	public Enemy(Vector2f sizeForBar,Model model,Texture texture,float scale,String name,float atk, float def, float hp,float sp,float speed, Moves[] moves,Inventory inventory) {
+		super(sizeForBar,atk, def, hp,sp,speed, moves,inventory);
 		this.name=name;
 	    this.model=model;
 	    this.texture=texture;
 	    this.scale=scale;
+	    super.isEnemy=true;
 	}
 
-	
+	public String getName() {
+		return name;
+	}
 
+	public void draw(Vector2f position,TextBuilder text) {
+		
+		Render.draw(model, position, 0, scale, texture);
+		this.hpbar.draw(position.add(0,80,new Vector2f()),text);
+		
+		
+		
+	}
 
+   public void draw(Vector2f position,TextBuilder text,Vector4f color) {
+		
+		Render.draw(model, position, 0, scale, texture,color);
+		this.hpbar.draw(position.add(0,80,new Vector2f()),text);
+		
+		
+		
+	}
 
 
 	private ArrayList<Moves> makeListOfUseableMoves() {
@@ -74,7 +96,7 @@ public class Enemy extends BattleEntity{
 	
 	//this is the generic ai for enemies later we will make different kinds of enemies that will extend this class and we will override the take turn method
 	
-	public void takeTurn(BattleEntity player) {
+	public void takeTurn(BattleEnemyField enemyField,BattleEntity player) {
 		//this is going to be the method that is called when it is this enemy's turn it will do all the calculations to find out whether to attack or use a item
 		
 	
@@ -83,21 +105,24 @@ public class Enemy extends BattleEntity{
 	
 		
 		
-	ArrayList<Moves> moves=makeListOfUseableMoves();		
-		
+	ArrayList<Moves> moves=makeListOfUseableMoves();
+
+	
+	
+	
 	if(!moves.isEmpty()) {
 	boolean actionTaken=false;
 	
 	
 	//next we check enemy's hp
 	
-    actionTaken=HealthCheck(moves,player,.25f,.20f);
+    actionTaken=SelfHealthCheck(moves,player,.25f,.20f);
 	
   	
 	
 	
 	if(!actionTaken) 
-	 actionTaken=checkSp(.15f);
+	 actionTaken=SelfCheckSp(.15f);
 	
 	if(!actionTaken) 
 		actionTaken=UseMostPowerfulOrKillingMove(moves, player);
@@ -181,7 +206,7 @@ public class Enemy extends BattleEntity{
 	
 	
 	
-	protected boolean HealthCheck(ArrayList<Moves> moves,BattleEntity player,float percentage,float percentageChanceToUseKillerMove) {
+	protected boolean SelfHealthCheck(ArrayList<Moves> moves,BattleEntity player,float percentage,float percentageChanceToUseKillerMove) {
 		
 		
 		
@@ -369,7 +394,7 @@ public class Enemy extends BattleEntity{
 	
 	
 	
-	protected boolean checkSp(float percantageChanceToUse) {
+	protected boolean SelfCheckSp(float percantageChanceToUse) {
 		
 		
 //look for lowest and highest restoring sp items______________________________________________________________________

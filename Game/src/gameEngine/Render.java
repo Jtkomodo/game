@@ -136,7 +136,7 @@ if(draw) {
 			
 		    
 		
-		  Start.s.loadVec4(Color,Data.Constants.DEFAULT_COLOR);;	 
+		  Start.s.loadVec4(Color,Data.Constants.DEFAULT_COLOR);	 
 		drawcalls++;
 		
 		mirror=false;

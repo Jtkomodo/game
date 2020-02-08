@@ -8,13 +8,11 @@ import gameEngine.Start;
 
 public abstract class UIElement {
 
-	protected Class baseCLass=GUIMEthods.class;
-	protected Object[] arguments;
+	
 	protected boolean HasFunction=false,hasColor=false,active=false,ChangesState=false;
 	protected int state=-1;//this is the number to specify which state to switch to when this element is selected
 	protected Vector2f offset;
-    protected Object objToCallfrom;
-    protected Method Function;//function to call
+    protected FunctionCaller Function;
     
     
       public UIElement(Vector2f offset) {
@@ -50,10 +48,10 @@ public abstract class UIElement {
 	
 	
 	
-public void invokeMethod() throws Exception {
+public void invokeMethod(){
 		
 	
-	this.Function.invoke(this.objToCallfrom,this.arguments);
+	this.Function.invoke();
 	
 		
 	}
@@ -61,21 +59,12 @@ public void invokeMethod() throws Exception {
 
 	
 	
-protected void loadFunction(String functionName,Class[] argumentTypes) {
+protected void loadFunction(FunctionCaller Function) {
 	
-	try {
+	
 		this.HasFunction=true;
-		this.Function=this.baseCLass.getMethod(functionName,argumentTypes);
+		this.Function=Function;
 		
-	} catch (NoSuchMethodException e) {
-		
-		e.printStackTrace();
-		System.exit(3007);	
-	} catch (SecurityException e) {
-		
-		e.printStackTrace();
-		System.exit(3002);
-	}
 	
 }
 
@@ -89,23 +78,10 @@ public void setChangesState(boolean changesState) {
 	ChangesState = changesState;
 }
 
-public void changeMethod(String functionName,Object[] arguments) {
-	Class[] cArg; 
-	if(arguments!=null) {
-		 cArg= new Class[arguments.length];
-		
-		 for(int i=0;i<arguments.length;i++) {
-			 cArg[i]=arguments[i].getClass();
-		 }
-	}else {
-		cArg=null;
-	}
-    
-    loadFunction(functionName, cArg);
+public void changeMethod(FunctionCaller Function) {
+
+    loadFunction(Function);
     
 
-}
-public void changeParameters(Object[] arguments) {
-     this.arguments=arguments;
 }
 }

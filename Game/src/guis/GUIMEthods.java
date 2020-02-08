@@ -3,8 +3,12 @@ package guis;
 import Data.Moves;
 import Items.Item;
 import Items.Items;
+import Scripter.Proccesor;
+import ScripterCommands.DrawString;
 
 import static org.lwjgl.glfw.GLFW.*;
+
+import org.joml.Vector2f;
 
 import battleClasses.Enemy;
 import battleClasses.BattleEntity;
@@ -19,28 +23,73 @@ public abstract class GUIMEthods {
 
 	public static Window window=Start.w;
 	public static BattleEntity player=Start.p;
-	public static String useMOVE="Usemove",exitWINDOW="ExitWindow",saveGAME="SaveGame",UseItem="UseItem",fullheal="FullHeal";
+	public static String PickMove="Pickmove",useMOVE="Usemove",exitWINDOW="ExitWindow",saveGAME="SaveGame",UseItem="UseItem",fullheal="FullHeal";
+	
+	
+	
+	public static void UseAttack(Moves move,BattleEntity p,Enemy e) {
+		if(move!=null) {
+			boolean test= p.useMove(move);
 
+			if(test) { 
+			Start.DebugPrint("Used move "+move.getName()+"on"+e.getName()+"--");
+			if(move.isTimedButton()) {
+				Start.Button.start();
+			}
+			 Start.MoveInprogress=true;
+			 Start.MoveCalled=false;
+			}
+		}
+		  
+		
+	}
+	public static void UseNonAttack(Moves move,BattleEntity p) {
+		if(move!=null) {
+			boolean test= p.useMove(move);
+
+			if(test) { 
+			Start.DebugPrint("Used move "+move.getName());
+			if(move.isTimedButton()) {
+				Start.Button.start();
+			}
+		}
+		
+			 Start.MoveInprogress=true;
+			 Start.MoveCalled=false;
+			}
+		}
+		  
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
    
-	 public static void Usemove(BattleEntity p,String move) {
+	 public static void Pickmove(BattleEntity p,String move) {
 		 
 		 Moves m=p.getmoveFromString(move);
 		 
 		 if(m!=null) {
 			 
 		
-		 Start.DebugPrint("used move "+m.getName()+"--");
+		 Start.DebugPrint("Picked move "+m.getName()+"--");
 		 
-		 boolean used=p.useMove(m);
+		 Start.currentlyUsedMove=m;
+		 
+		 boolean used=p.testIfMoveCanBeUsed(m);
 		 if(used) {
 		 if(m.isTimedButton()) {
-				m.getCombo().start();
-		   
-		
-		 Start.Button=m.getCombo();
+			Start.Button=m.getCombo();
 		 }
-		 Start.MoveInprogress=true; 
+		 Start.MoveCalled=true; 
+		 Start.MoveInprogress=false;
+		
 		 }
 		 }else {
 			 
@@ -52,11 +101,22 @@ public abstract class GUIMEthods {
 	 
 	 public static void UseItem(BattleEntity p,Items item) {
 		 
-		 Start.DebugPrint("used "+item.Item.getName());
+		 
 		boolean used= p.useItem(item);
 		 if(used) {
-			 Start.PlayersTurn=false;
-			 Start.PlayersTurnFinished=true;
+			 Start.DebugPrint("used "+item.Item.getName());
+			
+			 Proccesor.addComandtoQueue(new DrawString("used "+item.Item.getName(),new Vector2f(-100,40),.5f,true,.5f));
+			if( item.Item.isHealing())
+			 Proccesor.addComandtoQueue(new DrawString("healed "+item.Item.getValue()+"!",new Vector2f(100,40),.5f,true,.5f));
+			if( item.Item.isRestorSP())
+				 Proccesor.addComandtoQueue(new DrawString("restored "+item.Item.getValue()+"!",new Vector2f(100,40),.5f,true,.5f));
+				  
+			 
+			 Start.MoveInprogress=false;
+			  Start.PlayersTurn=false;
+			   Start.TurnFinished=true;
+	 			 
 		 }
 		 
 	 }

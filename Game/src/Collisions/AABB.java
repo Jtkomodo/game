@@ -8,67 +8,89 @@ import Data.Constants;
 import gameEngine.Model;
 import gameEngine.Render;
 import gameEngine.Start;
+import guis.FunctionCaller;
 //06d7ea
 public class AABB extends Collisions{
 	private float widthR,heightR,resistance,amount;//resistance is the amount of push away the box will have on the player
 	private Vector2f position=new Vector2f(0),lc=new Vector2f(0,0),rc=new Vector2f(0,0),r,Pposition=new Vector2f(0,0),beforeCol=new Vector2f(0,0),edgep=new Vector2f(0,0),edgen=new Vector2f(0,0),ActualPosition=new Vector2f(0);
 	private Model aabb,piont;
 	private boolean colide=false,COLIDECHECK=false;
+	private boolean hasFunction=false;
+	private FunctionCaller function;
+	
+	
+	public AABB(Vector2f position ,float widthR,float heightR,float resistance,FunctionCaller function) {
+		this.function=function;
+		this.hasFunction=true;
+		construct(position,widthR,heightR,resistance);
+
+		}
+	
+	
+	
 	
 	
 	public AABB(Vector2f position ,float widthR,float heightR,float resistance) {
-	 this.widthR=widthR;
-	 this.heightR=heightR;
-	 
-     ActualPosition=position;
+	
+	construct(position,widthR,heightR,resistance);
 
-     position.add(widthR,-heightR,this.position);
+	}
 	
-	 this.resistance=resistance;	
-	 this.r=new Vector2f(this.widthR,this.heightR);
 	
-	 this.position.sub(this.r,this.lc);
-	// System.out.println("lc= "+lc);
-	 this.position.add(this.r,this.rc); 
-	// System.out.println("lc= "+rc);
-	 
-	 if(DebugColisions) {
-		 float[] Vert= {
-				 -widthR,+heightR,
-					widthR,heightR,
-					widthR,-heightR,
-					-widthR,-heightR
-				 };
-			float[] uvBg={
-					0,0,
-					1,0,
-					1,1,
-					0,1
-					
-					};
-			int[] ind= {
-					0,1,2,
-					2,3,0	
-						
-				};float[] vert={
-						-0.5f,+0.5f,
-						0.5f,0.5f,
-						0.5f,-0.5f,
-						-0.5f,-0.5f
-					};
-				
-				
-				
-				
-			aabb= new Model(Vert,uvBg,ind);
-			
-			
-			piont= new Model(vert,uvBg,ind);
-			//piont.setDrawMethod(GL_POINTS);
-		
+	private void construct(Vector2f position,float widthR,float heightR,float resistance) {
+		 this.widthR=widthR;
+		 this.heightR=heightR;
 		 
-	 }
-	
+	     ActualPosition=position;
+
+	     position.add(widthR,-heightR,this.position);
+		
+		 this.resistance=resistance;	
+		 this.r=new Vector2f(this.widthR,this.heightR);
+		
+		 this.position.sub(this.r,this.lc);
+		// System.out.println("lc= "+lc);
+		 this.position.add(this.r,this.rc); 
+		// System.out.println("lc= "+rc);
+		 
+		 if(DebugColisions) {
+			 float[] Vert= {
+					 -widthR,+heightR,
+						widthR,heightR,
+						widthR,-heightR,
+						-widthR,-heightR
+					 };
+				float[] uvBg={
+						0,0,
+						1,0,
+						1,1,
+						0,1
+						
+						};
+				int[] ind= {
+						0,1,2,
+						2,3,0	
+							
+					};float[] vert={
+							-0.5f,+0.5f,
+							0.5f,0.5f,
+							0.5f,-0.5f,
+							-0.5f,-0.5f
+						};
+					
+					
+					
+					
+				aabb= new Model(Vert,uvBg,ind);
+				
+				
+				piont= new Model(vert,uvBg,ind);
+				//piont.setDrawMethod(GL_POINTS);
+			
+			 
+		 }
+		
+		
 		
 		
 	}
@@ -98,7 +120,6 @@ public class AABB extends Collisions{
 	
 		
 	
-		
 		/*
 		     lc_____________
 		       |           |        
@@ -126,6 +147,10 @@ public class AABB extends Collisions{
 		
 		else {//if both all sides have been checked and not resulted in no collision then there must be a collision
 			this.colide=true;
+			
+			if(box.hasFunction) {
+		
+				box.getFunction().invoke();}
 			return true;
 		}
 	  
@@ -136,6 +161,22 @@ public class AABB extends Collisions{
 		
 	
 	}
+	public FunctionCaller getFunction() {
+		return function;
+	}
+
+
+
+
+
+	public void setFunction(FunctionCaller function) {
+		this.function = function;
+	}
+
+
+
+
+
 	@Override
 	public Vector2f findVector(Vector2f position, Vector2f movement, Vector2f direction, CircleColision circle) {
 		// TODO Auto-generated method stub
@@ -273,6 +314,8 @@ public class AABB extends Collisions{
 		   
 	   }
 	   
+	   }else if(amount==1) {
+		   return currentmovement;
 	   }
 	   
 	    return newMOvement;

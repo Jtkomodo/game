@@ -10,7 +10,7 @@ public enum Enemies {
 	
 	
 	E1("enemy",new float[]{
-			20,//attack
+			0,//attack
 			30,//Defense
 			180,   //hp
 			70, //sp

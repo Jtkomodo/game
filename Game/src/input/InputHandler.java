@@ -11,10 +11,10 @@ public class InputHandler {
 
 	
 	
-	private static List<Integer> Buttons=new LinkedList<Integer>();
+	private static  List<Integer> Buttons=new LinkedList<Integer>();
+
 	
-	
-	public static byte getStateofButton(int Button) {
+	public static  byte getStateofButton(int Button) {
 		if(Buttons.contains(Button) ||(Button==GLFW_KEY_F || Button==GLFW_KEY_RIGHT_CONTROL || Button==GLFW_KEY_LEFT_CONTROL)) {
 			return GetInput.getStateofButton(Button);
 		
@@ -24,6 +24,8 @@ public class InputHandler {
 		
 		
 	}
+
+	
 	
 	public static void EnableButton(int Button) {
 		

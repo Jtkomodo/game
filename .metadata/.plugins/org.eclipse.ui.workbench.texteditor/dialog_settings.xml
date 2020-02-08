@@ -2,50 +2,51 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="item" key="selection"/>
-		<item value="true" key="casesensitive"/>
+		<item value="FINISHED" key="selection"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="item"/>
-			<item value="heal"/>
-			<item value="rest"/>
-			<item value="res"/>
-			<item value="re"/>
-			<item value="sp"/>
-			<item value="restore"/>
-			<item value="Scripter"/>
-			<item value="SP"/>
-			<item value="scrip"/>
-			<item value="spmovelist"/>
-			<item value="byAge"/>
-			<item value="PlayersTurn"/>
-			<item value="battleBox.show"/>
-			<item value="Remove"/>
+			<item value="finished"/>
+			<item value="movecalled"/>
+			<item value="true"/>
+			<item value="InputHandler.getStateofButtonPressed"/>
+			<item value="LastKeyState"/>
+			<item value="1"/>
+			<item value="getStateOfButton"/>
+			<item value="debug"/>
+			<item value="drawString"/>
+			<item value="draw"/>
+			<item value="GetInput"/>
+			<item value="u"/>
+			<item value="cArg"/>
+			<item value="InputHandler"/>
+			<item value="moveCalled"/>
 		</list>
 		<list key="replacehistory">
+			<item value="1"/>
+			<item value="input.getStateOFButton"/>
+			<item value="LastKeyStateInstanc"/>
+			<item value="true"/>
+			<item value="getStateOfButtonPressed"/>
+			<item value="InputHandler"/>
+			<item value="argumentTypes"/>
+			<item value="GetInput"/>
+			<item value="BattleEntity"/>
+			<item value="Enemies"/>
+			<item value="players"/>
+			<item value="0x64"/>
 			<item value="returnList"/>
 			<item value="byCost"/>
 			<item value="textR"/>
-			<item value="DEBUGFPS="/>
-			<item value="s"/>
-			<item value=""/>
-			<item value="x+"/>
-			<item value="setActiveElement()"/>
-			<item value="y"/>
-			<item value="Vector2f scale"/>
-			<item value="InputHandler."/>
-			<item value="InputHandler"/>
-			<item value="GetInput."/>
-			<item value="GetInput"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="336" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="454" key="DIALOG_HEIGHT"/>
-		<item value="725" key="DIALOG_X_ORIGIN"/>
-		<item value="232" key="DIALOG_Y_ORIGIN"/>
+		<item value="670" key="DIALOG_X_ORIGIN"/>
+		<item value="312" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

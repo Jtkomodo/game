@@ -1,9 +1,18 @@
 package battleClasses;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import org.joml.Vector2f;
 
+import Data.Moves;
 import Scripter.Proccesor;
 import ScripterCommands.DrawString;
 import gameEngine.Start;
@@ -135,7 +144,7 @@ public class BattleFormulas {
 	
 	
 		
-  public static BattleEntity calcuateWhoGoesFirst(BattleEntity entities[]) {
+  public static ArrayList<BattleEntity> calcuateTurnOrder(BattleEntity players[],Enemy[] enemies) {
 	  
 	  //this calculates which entity goes first based on it's stats
 	  
@@ -143,46 +152,56 @@ public class BattleFormulas {
 	  int adder=0;	  
 	  BattleEntity entity=null;
 	  float highestSpeed=0;
-	  for(int i=0;i<entities.length;i++) {
-		  BattleEntity e= entities[i];
-		  if(entity!=null) {
-			  
-			  
-float random=r.nextFloat();
-			  
-			  if(random<.10) {
-				  adder=5;
-			  }
-			  float speed=entity.getSpeed()+adder;
-			  adder=0;
-			  
-			  if(speed>highestSpeed) {
-				  entity=e;
-				  highestSpeed=speed;
-			  }
-			  
-			  
-			  
-		  }else {
-			  entity=e;
-			  float random=r.nextFloat();
-			  
-			  if(random<.10) {
-				  adder=5;
-			  }
-			  highestSpeed=entity.getSpeed()+adder;
-			  adder=0;
-		  }
+	  
+	  HashMap<BattleEntity,Float> map=new HashMap<BattleEntity,Float>();
+	  //load map with entities and speeds
+	  for(int i=0;i<players.length;i++) {
+		  float random=r.nextFloat();
+		  map.put(players[i],players[i].getSpeed()+random);
+		  
 		  
 		  
 	  }
 	  
+      for(int i=0;i<enemies.length;i++) {
+    	  float random=r.nextFloat();
+		  map.put(enemies[i],enemies[i].getSpeed()+random);
+	  
+	  }
+	  
+	  
+	  //sort map by speed
+	  
+      
+    	  
+      Comparator<Entry<BattleEntity,Float>> valueComparator = new Comparator<Entry<BattleEntity,Float>>() {
+          
+          @Override
+          public int compare(Entry<BattleEntity, Float> e1, Entry<BattleEntity, Float> e2) {
+              Float v1 = e1.getValue();
+              Float v2 = e2.getValue();
+              return v1.compareTo(v2);
+          }
+      };
+      	  
+      List<Entry<BattleEntity, Float>> listOfEntries = new ArrayList<Entry<BattleEntity,Float>>(map.entrySet());
+      Collections.sort(listOfEntries, valueComparator);
+      ArrayList<BattleEntity> sortedByValue = new ArrayList<BattleEntity>(listOfEntries.size());
+      for(Entry<BattleEntity,Float> entry : listOfEntries){
+          sortedByValue.add(entry.getKey());
+      }
+      return sortedByValue;
+}
+
+  
 	  
 	  
 	  
-	  return entity;
 	  
-  }
+	  
+	 
+	  
+  
 	
 	
 	

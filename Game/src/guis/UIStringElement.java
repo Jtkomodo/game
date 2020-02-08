@@ -73,189 +73,44 @@ public class UIStringElement extends UIElement{
 	}
 	
 	
-	public UIStringElement(String string,Vector2f offset,float scale,String functionName,Object[] arguments) {//active function no color 
+
+
+	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,FunctionCaller Function) {//active function color base class
 		super(offset);
 		this.string=string;
 		this.scale=scale;
-		this.text.setString(string);
-		this.arguments=arguments;
-		this.offset=offset;
-		this.active=true;
-		this.HasFunction=true;
-		
-		Class[] cArg; 
-		if(arguments!=null) {
-			 cArg= new Class[arguments.length];
-			
-			 for(int i=0;i<arguments.length;i++) {
-				 cArg[i]=arguments[i].getClass();
-			 }
-		}else {
-			cArg=null;
-		}
-	    
-	    loadFunction(functionName, cArg);
-	    
-		
-		
-	  
-	}
-	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,String functionName,Object[] arguments) {//active function color
-		super(offset);
-		this.string=string;
-		this.scale=scale;
+	
 		this.text.setString(string);
 		this.offset=offset;
 		this.active=true;
-		this.arguments=arguments;
+	
 		this.color=color;
 		this.hasColor=true;
 		this.HasFunction=true;
 	    
-		Class[] cArg; 
-		if(arguments!=null) {
-			 cArg= new Class[arguments.length];
-			
-			 for(int i=0;i<arguments.length;i++) {
-				 cArg[i]=arguments[i].getClass();
-			 }
-		}else {
-			cArg=null;
-		}
+	
 	    
-	    loadFunction(functionName, cArg);
+	    loadFunction(Function);
+	    
 	    
 		
 	}
 	
-	public UIStringElement(String string,Vector2f offset,float scale,String functionName,Object[] arguments,Class[] argumentTypes) {//active function no color base class 
+	public UIStringElement(String string,Vector2f offset,float scale,FunctionCaller Function) {//active function no color base class 
 		super(offset);
 		this.string=string;
 		this.scale=scale;
-		this.baseCLass=baseCLass;
 		this.text.setString(string);
-		this.arguments=arguments;
-		this.offset=offset;
 		this.active=true;
 		this.HasFunction=true;
 		
-		
-		Class[] cArg; 
-		if(arguments!=null) {
-			 cArg= new Class[arguments.length];
-			
-			 for(int i=0;i<arguments.length;i++) {
-				 cArg[i]=arguments[i].getClass();
-			 }
-		}else {
-			cArg=null;
-		}
-	    
-	    loadFunction(functionName, cArg);
+		loadFunction(Function);
 	    
 
 		
 		
 	  
 	}
-	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,String functionName,Object[] arguments,Class[] argumentTypes) {//active function color base class
-		super(offset);
-		this.string=string;
-		this.scale=scale;
-	
-		this.text.setString(string);
-		this.offset=offset;
-		this.active=true;
-		this.arguments=arguments;
-		this.color=color;
-		this.hasColor=true;
-		this.HasFunction=true;
-	    
-		Class[] cArg; 
-		if(arguments!=null) {
-			 cArg= new Class[argumentTypes.length];
-			
-			 for(int i=0;i<argumentTypes.length;i++) {
-				 cArg[i]=argumentTypes[i];
-			 }
-		}else {
-			cArg=null;
-		}
-	    
-	    loadFunction(functionName, cArg);
-	    
-	    
-		
-	}
-	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,String functionName,Object[] arguments,Class[] argumentTypes,Class baseclass) {//active function color base class
-		super(offset);
-		this.string=string;
-		this.scale=scale;
-	    this.baseCLass=baseclass;
-		this.text.setString(string);
-		this.offset=offset;
-		this.active=true;
-		this.arguments=arguments;
-		this.color=color;
-		this.hasColor=true;
-		this.HasFunction=true;
-	    
-		Class[] cArg; 
-		if(arguments!=null) {
-			 cArg= new Class[arguments.length];
-			
-			 for(int i=0;i<arguments.length;i++) {
-				 cArg[i]=arguments[i].getClass();
-			 }
-		}else {
-			cArg=null;
-		}
-	    
-	    loadFunction(functionName, cArg);
-	    
-	    
-		
-	}
-	
-	public UIStringElement(String string,Vector2f offset,float scale,String functionName,Object[] arguments,Class[] argumentTypes,Object objtocallfrom) {//active function no color base class 
-		super(offset);
-		this.string=string;
-		this.scale=scale;
-		this.text.setString(string);
-		this.baseCLass=objtocallfrom.getClass();
-		this.objToCallfrom=objtocallfrom;
-		this.arguments=arguments;
-		this.offset=offset;
-		this.active=true;
-		this.HasFunction=true;
-		
-		loadFunction(functionName,argumentTypes);
-	    
-
-		
-		
-	  
-	}
-	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,String functionName,Object[] values,Class[] argumentTypes,Object objtocallfrom) {//active function color base class
-		super(offset);
-		this.string=string;
-		this.scale=scale;
-		this.baseCLass=objtocallfrom.getClass();
-		this.objToCallfrom=objtocallfrom;
-		this.text.setString(string);
-		this.offset=offset;
-		this.active=true;
-		this.arguments=values;
-		this.color=color;
-		this.hasColor=true;
-		this.HasFunction=true;
-		
-	    
-	    loadFunction(functionName,argumentTypes);
-	    
-		
-	}
-	
 	
 	
 	

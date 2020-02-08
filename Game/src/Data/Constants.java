@@ -24,5 +24,7 @@ public final class Constants {
 	public static Vector4f BAR_COLOR_YELLOW=new Vector4f(0xfe,0xe8,0x46,0xff);
 	
 	public static Vector4f DEFAULT_COLOR = new Vector4f(1,1,1,1);
+	public static Vector4f SPRITE_NOT_SELECTED_COLOR=new Vector4f(0x64,0x64,0x64,0xff);
+	
 	
 }

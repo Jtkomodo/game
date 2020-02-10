@@ -25,8 +25,14 @@ import gameEngine.VectorMath;
 
 public abstract class Collisions extends VectorMath {
  protected boolean DebugColisions=Start.DEBUGCOLISIONS;
- 
+ protected boolean isBox=false,isTrigger=false;
 	
+	public boolean isTrigger() {
+	return isTrigger;
+}
+	public boolean isBox() {
+	return isBox;
+}
 	abstract protected void debug();
 	abstract protected Vector2f findVector(Vector2f position, Vector2f movement,Vector2f direction,CircleColision circle); 
 	abstract protected Vector2f findVector(Vector2f position, Vector2f movement,Vector2f direction,AABB box); 

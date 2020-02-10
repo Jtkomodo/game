@@ -3,7 +3,6 @@
 uniform sampler2D sampler;
 varying vec2 tex;
 uniform vec4 color;
-uniform int mul;
 
 
 void main(){    

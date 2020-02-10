@@ -45,7 +45,19 @@ public class UIBox {
 		
 	}
 	
+   
+	
+	public int/*returns the id for the state to use later*/ addUIState(UIBoxState state) {
 
+		statelist.add(state);
+		if(state.isAlwaysShown()) {
+			alwaysShownStateList.add(state);
+		}
+		
+		return this.statelist.size()-1;
+	}
+	
+	
 	
 	public void setPosition(Vector2f position) {
 		this.position=position;
@@ -245,6 +257,7 @@ public void Update() {
 	  
   }
 
+  
 	public UIBoxState getCurrentState() {
 		return this.statelist.get(currentState);
 	}

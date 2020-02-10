@@ -15,7 +15,7 @@ private boolean isCheccked=false,debug=Start.DEBUGCOLISIONS,lastResult=false;
 private Model Circle,piont;
 	
 	
-	public CircleColision(Vector2f position,float r) {
+	public CircleColision(Vector2f position,float r,boolean isTrigger) {
 		
 		this.r=r;
 		this.position=position;
@@ -44,7 +44,7 @@ private Model Circle,piont;
 			
 			 this.Circle=new Model(Vert,uv,ind);
 			 this.piont=new Model(vert,uv,ind); 
-			
+			this.isTrigger=isTrigger;
 			
 	}
 	@Override

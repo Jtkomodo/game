@@ -38,6 +38,7 @@ public class AABB extends Collisions{
 	
 	
 	private void construct(Vector2f position,float widthR,float heightR,float resistance) {
+		this.isBox=true;
 		 this.widthR=widthR;
 		 this.heightR=heightR;
 		 
@@ -45,6 +46,10 @@ public class AABB extends Collisions{
 
 	     position.add(widthR,-heightR,this.position);
 		
+	     if(resistance==1) {
+	    	 this.isTrigger=true;
+	     }
+	     
 		 this.resistance=resistance;	
 		 this.r=new Vector2f(this.widthR,this.heightR);
 		

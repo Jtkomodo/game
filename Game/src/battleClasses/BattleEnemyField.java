@@ -394,7 +394,12 @@ public class BattleEnemyField {
 		
 	}
 	
-	
+   public Enemy[] getOtherEnemies(Enemy e) {
+	   ArrayList<Enemy>  temp=new ArrayList<Enemy>(this.ListOfEnemies.keySet());
+	   temp.remove(e);
+	   return temp.toArray(new Enemy[temp.size()-1]);
+	   
+   }
 	
 	
 	public int getAmountOfEnemies() {
@@ -411,7 +416,7 @@ public class BattleEnemyField {
           public int compare(Entry<Enemy,Vector2f> e1, Entry<Enemy,Vector2f> e2) {
               Float v1 = e1.getValue().y;
               Float v2 = e2.getValue().y;
-              return v1.compareTo(-v2);
+              return -v1.compareTo(v2);
           }
       };
       	  

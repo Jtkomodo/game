@@ -21,7 +21,6 @@
     <fullyQualifiedTypeName name="Data.Enemies"/>
     <fullyQualifiedTypeName name="Items.Items"/>
     <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
-    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="gameEngine.Model"/>
     <fullyQualifiedTypeName name="gameEngine.Texture"/>
     <fullyQualifiedTypeName name="battleClasses.BattleEnemyField"/>
@@ -30,13 +29,11 @@
     <fullyQualifiedTypeName name="Scripter.Proccesor"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
-    <fullyQualifiedTypeName name="gameEngine.Render"/>
     <fullyQualifiedTypeName name="org.joml.Vector4f"/>
     <fullyQualifiedTypeName name="java.util.Comparator"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.util.LinkedHashMap"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="input.GetInput"/>
@@ -47,4 +44,9 @@
     <fullyQualifiedTypeName name="java.util.Map.Entry"/>
     <fullyQualifiedTypeName name="guis.GUIMEthods"/>
     <fullyQualifiedTypeName name="gameEngine.Timer"/>
+    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
+    <fullyQualifiedTypeName name="gameEngine.Render"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="Collisions.Collisions"/>
+    <fullyQualifiedTypeName name="Collisions.ColisionHandeler"/>
 </qualifiedTypeNameHistroy>

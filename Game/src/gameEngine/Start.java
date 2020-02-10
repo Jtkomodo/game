@@ -2,59 +2,68 @@ package gameEngine;
 
 
 
-import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_BACKSPACE;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_C;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F1;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F12;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F2;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F3;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F4;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_H;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_T;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_Y;
 
-import Items.Inventory;
-import Items.Item;
+import java.util.ArrayList;
 
 import  org.joml.Vector2f;
 import org.joml.Vector4f;
 
-
 import Collisions.AABB;
 import Collisions.CircleColision;
 import Collisions.ColisionHandeler;
-import textrendering.Fontloader;
-import textrendering.TextBuilder;
+import Collisions.Collisions;
 import Data.Constants;
 import Data.Enemies;
 import Data.Moves;
-import battleClasses.HpBar;
-import battleClasses.BattleEnemyField;
-import battleClasses.BattleEntity;
-import battleClasses.BattleFormulas;
-import battleClasses.Enemy;
-import battleClasses.TimedButton;
-import battleClasses.TimedButtonCombo;
-import guis.BarElement;
-import guis.FunctionCaller;
-import guis.GUIMEthods;
-import guis.TextureElement;
-import guis.UIBox;
-import guis.UIBoxState;
-import guis.UIElement;import guis.UIStringElement;
-import input.BIndingNameParser;
-import input.CharCallback;
-import input.GetInput;
-import input.InputHandler;
-import input.InputHandler;
 import Data.Pcs;
-import Items.Item;
+import Items.Inventory;
 import Items.Items;
 import  Scripter.Proccesor;
 import ScripterCommands.DrawModel;
 import ScripterCommands.DrawString;
-import ScripterCommands.Wait;
-import ScripterCommands.animate;
 import animation.Animate;
 import animation.AnimationHandler;
 import animation.SpriteSheetLoader;
-
-import static org.lwjgl.opengl.GL11.GL_LINES;
-import static org.lwjgl.opengl.GL11.GL_POINTS;
-import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
-
-import java.util.ArrayList;
+import battleClasses.BattleEnemyField;
+import battleClasses.BattleEntity;
+import battleClasses.BattleFormulas;
+import battleClasses.Enemy;
+import battleClasses.HpBar;
+import battleClasses.TimedButton;
+import guis.BarElement;
+import guis.FunctionCaller;
+import guis.GUIMEthods;
+import guis.UIBox;
+import guis.UIBoxState;
+import guis.UIElement;
+import guis.UIStringElement;
+import input.BIndingNameParser;
+import input.CharCallback;
+import input.GetInput;
+import input.InputHandler;
+import textrendering.Fontloader;
+import textrendering.TextBuilder;
 public class Start {
     
 	
@@ -176,11 +185,7 @@ public class Start {
 		
 		
 			
-		int[] ind= {
-			0,1,2,
-			2,3,0	
-				
-		};
+	
 	   Texwidth=138;
 	   Texheight=138;		
 	   wi=32;
@@ -292,7 +297,8 @@ public class Start {
 		Col=new AABB(new Vector2f(4968-64,1280-64),64,128,1,new FunctionCaller("ShowBox",new Object[] {new Vector2f(0,100) },Start.class));
         COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
 	    buttonNamses = new BIndingNameParser("GLFW");
-		
+		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2});
+	
 		
 		initializeFPS();
 		x=100;
@@ -355,7 +361,7 @@ public class Start {
 	
    ShowBox=new UIBox(new Vector2f(0,50),showBoxStates);	
    StartBox=new UIBox(new Vector2f(screencoordx,screencoordy),StartBoxs); 
-	
+ 
 
 		 
 		 
@@ -369,7 +375,6 @@ public class Start {
 		
 		
 		Moves punch=p.getmoveFromString(Moves.punch.getName());
-		Moves DK=p.getmoveFromString(Moves.Doublekick.getName());
 		Moves heal=p.getmoveFromString(Moves.heal.getName());
 		
 		UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
@@ -436,7 +441,8 @@ Render.enable();//enables render
 		ShowBox.hide();
 	
 	    playerCol.setPosition(new Vector2f(x,y));
-			Vector2f vector=updateColisions();
+	    
+			Vector2f vector=updateColisions(playerCol,new Vector2f(x,y),oldpos, c2, direction);
 			
 			x=vector.x; 
 			y=vector.y;	
@@ -470,11 +476,7 @@ Render.enable();//enables render
 	      Vector2f newvec=postest.findPositionOnMap(Rendercamx,Rendercamy);
 	      gridx= Math.round(newvec.x);gridy=Math.round(newvec.y);
 	    drawmap(loader,gridx,gridy);		     
-	    Col.debug();
-	    playerCol.debug();
-	    
-
-	    COl2.debug();
+	   ColisionHandeler.Debug();
 	      textD.setString("circCol:"+circCol);
 	      textC.setString("xmap="+gridx+" ymap="+gridy);
 	    
@@ -1019,8 +1021,7 @@ private static void EndBattleAsLoss() {
 }	
 	
    private static void battleupdate() {
-	
-	p.setHp(p.getMaxHP());
+
 	   if(Start.TurnFinished) {
 		   DebugPrint("FINISHED");
 			currentEntity=StartBattleTurn(p,enemyField);
@@ -1045,12 +1046,12 @@ private static void EndBattleAsLoss() {
 		 
 	   
 	   Vector2f position1=new Vector2f(-90,40);
-	   Vector2f position2=new Vector2f(202,-88);
+	
 	   
 	 		Render.draw(background,new Vector2f(0),0,64*40,bg); 
 	 	   
-	 	 	 
-	 	 	SpriteUpdate(player,playerTex,-192,-20,64*1.5f,true); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
+	 	 	 Render.Mirror();
+	 	 	Render.draw(player,new Vector2f(-192,-20),0,64*1.5f,playerTex); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
 	 	    enemyField.draw(selectingEnemy);//draws all the enemies to the screen
 	 	    
 	 	    
@@ -1313,39 +1314,8 @@ private static void EndBattleAsLoss() {
 			
 			
 	}
-private static void SpriteUpdate(Model sprite,Texture tex,float x,float y,float spritescale,boolean mirror){
-if(mirror)
-Render.Mirror();
-	
-Render.draw(sprite,new Vector2f(x,y), 0, spritescale, tex);
-    
-    
-    
-    
-    
-}
-private static void SpriteUpdate(Model sprite,Texture tex,float x,float y,float angle,float spritescale,boolean mirror){
-if(mirror)
-Render.Mirror();
-	
-Render.draw(sprite,new Vector2f(x,y), angle, spritescale, tex);
-    
-    
-    
-    
-    
-}
-private static void SpriteUpdate(Model sprite,Texture tex,float x,float y,float angle,float spritescale,Vector4f color,boolean mirror){
-if(mirror)
-Render.Mirror();
-	
-Render.draw(sprite,new Vector2f(x,y), angle, spritescale, tex,color);
-    
-    
-    
-    
-    
-}
+
+
 private static void drawmap(MapLoader loader,int gridx,int gridy) {
 	 // loader.loadTile(0,0);
 
@@ -1364,19 +1334,19 @@ private static void drawmap(MapLoader loader,int gridx,int gridy) {
 
 
 
-private static Vector2f updateColisions() {
+private static Vector2f updateColisions(AABB colision,Vector2f position,Vector2f oldposition,Vector2f movement,Vector2f direction) {
 	
-	  Vector2f cs=new Vector2f(x,y);
+	
     
    
-	   cs =ColisionHandeler.CheckAndGetResponse(playerCol,COl2,cs,oldpos, c2, direction);
+	  
 	    
-	   ColisionHandeler.checkTriger(playerCol, Col);
-	   cs =ColisionHandeler.CheckAndGetResponse(playerCol,COl2,cs,oldpos, c2, direction);
+	   ColisionHandeler.updateTriggers(colision);
+	
 
 	   
 	   
-	   return cs;
+	   return  ColisionHandeler.updateVector(colision,position,oldposition,movement, direction);
 }
 
 

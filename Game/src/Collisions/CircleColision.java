@@ -10,7 +10,7 @@ import gameEngine.VectorMath;
 
 public class CircleColision extends Collisions {
 private float r;
-private Vector2f position,closest=new Vector2f(0,0),d=new Vector2f(0,0),closest2=new Vector2f(0,0),closest3=new Vector2f(0);
+private Vector2f closest=new Vector2f(0,0),d=new Vector2f(0,0),closest2=new Vector2f(0,0),closest3=new Vector2f(0);
 private boolean isCheccked=false,debug=Start.DEBUGCOLISIONS,lastResult=false;
 private Model Circle,piont;
 	
@@ -193,13 +193,7 @@ private Model Circle,piont;
 		this.r = r;
 	}
 
-	public Vector2f getPosition() {
-		return position;
-	}
-
-	public void setPosition(Vector2f position) {
-		this.position = position;
-	}
+	
 
 	
 

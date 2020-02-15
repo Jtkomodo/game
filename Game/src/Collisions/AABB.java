@@ -12,7 +12,7 @@ import guis.FunctionCaller;
 //06d7ea
 public class AABB extends Collisions{
 	private float widthR,heightR,resistance,amount;//resistance is the amount of push away the box will have on the player
-	private Vector2f position=new Vector2f(0),lc=new Vector2f(0,0),rc=new Vector2f(0,0),r,Pposition=new Vector2f(0,0),beforeCol=new Vector2f(0,0),edgep=new Vector2f(0,0),edgen=new Vector2f(0,0),ActualPosition=new Vector2f(0);
+	private Vector2f lc=new Vector2f(0,0),rc=new Vector2f(0,0),r,Pposition=new Vector2f(0,0),beforeCol=new Vector2f(0,0),edgep=new Vector2f(0,0),edgen=new Vector2f(0,0),ActualPosition=new Vector2f(0);
 	private Model aabb,piont;
 	private boolean colide=false,COLIDECHECK=false;
 	private boolean hasFunction=false;
@@ -375,10 +375,7 @@ public class AABB extends Collisions{
 
 
 
-	public Vector2f getPosition() {
-		return position;
-	}
-
+	
 	public void setPosition(Vector2f position) {
 		this.position = position;
 		 

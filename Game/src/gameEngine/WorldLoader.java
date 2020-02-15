@@ -1,38 +1,27 @@
 package gameEngine;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
-import java.io.EOFException;
-import Data.TilesData;
-import org.joml.Math;
+
 import org.newdawn.slick.opengl.PNGDecoder;
+
+import Data.TilesData;
 
 public class WorldLoader {
 
 	
-	private final byte[] Tile1rgba={(byte) 0x00,(byte) 0x00,(byte) 0x00,(byte) 0xff};
+
 	private HashMap<Integer,Byte> Data= new HashMap<Integer,Byte>();  	
-	private HashMap<Integer,TilesData> tilesData=new HashMap<Integer,TilesData>();
-	private int i=0,width,height;
+    private int width,height;
 	private int[][] map;
-	private Camera cam;
 	
 	
 	
-	public WorldLoader(String name, int width, int height,Camera cam) {
-				this.width=width;
-				this.height=height;
-				this.cam=cam;
+	
+	public WorldLoader(String name) {
+				
 		
 				String location=new String("/res/Maps/"+name+".png");
 				
@@ -50,7 +39,9 @@ public class WorldLoader {
       
 	 
 		 data.flip();
-		  byte c;
+		width=decoder.getWidth();
+		height=decoder.getHeight();
+		 byte c;
 			int k=0;
 			while(data.position()<data.capacity()) {
 				try{
@@ -72,6 +63,7 @@ public class WorldLoader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	map=GetMapData();
 	
 	}
@@ -88,7 +80,7 @@ public class WorldLoader {
 				   	  byte b=Data.get((i*width*4)+(j+2));
 				   	  byte a=Data.get((i*width*4)+(j+3)); 
 				   
-				
+				if(a!=0) {
 				   	  if(r==TilesData.Dirt.getColorR() &&  g==TilesData.Dirt.getColorG() && b==TilesData.Dirt.getColorB()) {
 							
 						map[j/4][i]=1;
@@ -110,7 +102,11 @@ public class WorldLoader {
 						 }
 				   	  
 				   	 
-				   	  
+				}else {
+					
+					
+					map[j/4][i]=0;
+				}
 				   	  
 		}
 	}

@@ -13,6 +13,7 @@ import static org.lwjgl.opengl.GL11.glViewport;
 import static org.lwjgl.glfw.GLFW.*;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GLCapabilities;
 
 import input.CharCallback;
 import input.KeyCallback;
@@ -24,7 +25,6 @@ private  Long fullscreen;
 private GLFWVidMode vidmode;
 private int width,height;
 private int dH,dW;
-private float aspectRatio;
 private Camera camera;
 
 public Window(int width, int height,Camera camera,String name) {
@@ -34,17 +34,17 @@ public Window(int width, int height,Camera camera,String name) {
 		this.height=height;
 		dH=height;
 		dW=width;
-		aspectRatio=width/height;
-		
+		glfwSetErrorCallback(new ErrorCallback());
 		
 		if(!glfwInit()) {
-			throw new IllegalStateException("failed to initialize window");
+		throw new IllegalStateException("failed to initialize window");
 			
 		}
 		glfwWindowHint(GLFW_VISIBLE,GLFW_TRUE);//this makes it so that we don't show the window till it is ready
 		glfwWindowHint(GLFW_DECORATED,GLFW_TRUE);//this makes it so the top bar is there if this is set to false  it will not show it
 		glfwWindowHint(GLFW_RESIZABLE,GLFW_TRUE);//this allows the window to be resized by the user
-	//	glfwWindowHint(GLFW_FOCUSED,GLFW_TRUE);
+	
+		//	glfwWindowHint(GLFW_FOCUSED,GLFW_TRUE);
 		
 		window=glfwCreateWindow(width,height,name,0,0);//creats the glfw window to be draw to
 		if(window==0) {
@@ -60,8 +60,8 @@ public Window(int width, int height,Camera camera,String name) {
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval( 0 );Start.DebugPrint("vsnc off"); //this is for the vsync uncomment this when testing frame rates 
 		
+GL.createCapabilities();
 
-		GL.createCapabilities();
 		glEnable(GL_TEXTURE_2D);
 		//glClearColor(.0f, 0.0f, 0.0f, 0.0f);
 		glEnable(GL_BLEND);
@@ -69,9 +69,10 @@ public Window(int width, int height,Camera camera,String name) {
 		//allow gfwKeycallbacks for Callback
 		
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-		
+	
 		glfwSetWindowSizeLimits(window,width,height,GLFW_DONT_CARE,GLFW_DONT_CARE);
 		glfwSetWindowAspectRatio(window, width, height);
+	  
 		glfwSetKeyCallback(window,new KeyCallback());
 		glfwSetCharCallback(window,new CharCallback());
 		}
@@ -117,7 +118,7 @@ width=w;height=h;
 	public void clear() {
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
-
+    
 
    
 

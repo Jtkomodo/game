@@ -51,7 +51,7 @@ public Texture(String path) {
 		
 		Path=path;
 	
-		Start.DebugPrint("TEXTURE");
+		
 		//create buffers for stbi to use
 		 width=BufferUtils.createIntBuffer(1);
          height=BufferUtils.createIntBuffer(1);

@@ -60,7 +60,11 @@ public abstract class GUIMEthods {
 		}
 		  
 		
-	
+	public static void ADD(int a,int b) {
+		int c=a+b;
+		Start.DebugPrint("c="+c);
+		
+	}
 	
 	
 	

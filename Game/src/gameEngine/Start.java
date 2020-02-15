@@ -45,6 +45,10 @@ import ScripterCommands.DrawString;
 import animation.Animate;
 import animation.AnimationHandler;
 import animation.SpriteSheetLoader;
+import audio.AudioInit;
+import audio.Listener;
+import audio.Sound;
+import audio.Source;
 import battleClasses.BattleEnemyField;
 import battleClasses.BattleEntity;
 import battleClasses.BattleFormulas;
@@ -86,14 +90,14 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static InputHandler I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=true,showFps=true,StateOfStartBOx=false;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,GLDEBUG=false,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=true,showFps=true,StateOfStartBOx=false;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds,TARGETFPS=60;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite,HealthBarBackground;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
     public static Model background,player,textboxM,Arrow;
     public static BatchedModel testM;
     public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls,textR;
-    public static Vector2f currentmovement,c2,oldpos,direction,BattleBoxPosition;
+    public static Vector2f currentmovement,c2,oldpos,direction,BattleBoxPosition,velocity;
     public static BattleEntity p;
  
     public static CircleColision circle1, circle2;
@@ -111,6 +115,8 @@ public class Start {
     public static SpriteSheetLoader sloader;
     public static BattleEnemyField enemyField,CurrentEnemyFeild;
     public static BattleEntity currentEntity;
+    public static Sound lazer,Heal;
+    public static Source source1;
     public static Fontloader aakar;
     public static ArrayList<BattleEntity> turnOrder= new ArrayList<BattleEntity>();
     public static boolean facingLeft,running,PlayersTurn=true;
@@ -119,8 +125,8 @@ public class Start {
     
 	public static void main(String[] args) {
 	
-	
-		
+	AudioInit.InitAudio();
+	Listener.InitListener();	
 		
 		
 		DebugPrint("Starting.....");
@@ -244,6 +250,11 @@ public class Start {
 		bg= new Texture("testBackground");
 		HealthBarBackground=new Texture("HealthBarBackground");
 		
+		lazer=new Sound("Lazer");
+		Heal=new Sound("healing sound");
+		
+		
+		
 		
 		aakar=new Fontloader("aakar",512);    
 	    textB= new TextBuilder(aakar); 
@@ -286,7 +297,7 @@ public class Start {
 			e.printStackTrace();
 		}
 		DebugPrint("Loading world....");
-		WorldLoader worldLoader=new WorldLoader("map3", 64,64, cam);
+		WorldLoader worldLoader=new WorldLoader("map3");
 		MapLoader loader=new MapLoader(worldLoader.Getmap(),scaleOfMapTiles);
         PositionTest postest=new PositionTest(worldLoader.Getmap(),scaleOfMapTiles);	
 		
@@ -402,8 +413,8 @@ public class Start {
 		
 		battleBox=new UIBox(new Vector2f(100,0),boxs);//this is the UIbox for the battle UI
         StartBox.getUIState(1).addElement(new BarElement("HP:",p.getHpbar(),new Vector2f(-17,65)));
-
-		
+        source1=new Source(new Vector2f(0),1,1, 1,200, 0);
+     
 			
 		
 	
@@ -468,7 +479,8 @@ Render.enable();//enables render
 	    
 
 	  
-	
+	     Listener.ChangePosition(oldpos);
+
 	      textB.setString("x="+x+" y="+y);
 	      Vector2f camPos=cam.getPosition();
 	     Rendercamx=-(camPos.x);
@@ -514,10 +526,10 @@ Render.enable();//enables render
 
 
 }
-	  if(StartBox.isActive()) {
+	 
      	 StartBox.setPosition(new Vector2f(screencoordx+300,screencoordy));
      	StartBox.draw(); 
-      }
+      
 	  ShowBox.draw();
 textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")\nAnimations: "+AnimationHandler.amountInList());
 textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
@@ -538,6 +550,7 @@ text1.drawString(screencoordx-200, screencoordy, .15f);
 Proccesor.proccesCommands(time);
 		    w.render();
 		    w.clear();
+		  
 		    loader.flushModel();
 			
 		}
@@ -546,7 +559,9 @@ Proccesor.proccesCommands(time);
 		DebugPrint("Closing.....");
 		DebugPrint("Highest fps="+HighFPs+" Lowest fps="+lowFPS);
 		w.destroy();
+		AudioInit.destroy();
 		System.exit(0);
+		
 		
 	}
 
@@ -562,7 +577,7 @@ Proccesor.proccesCommands(time);
 			//set camera
 			cam= new Camera(width,height);
 		w=new Window(width,height,cam,"Game");
-		
+	
 		
 	
        //load our shaders 
@@ -577,7 +592,7 @@ Proccesor.proccesCommands(time);
 
 	private static void Inputupdate() {
 	
-				
+		
 		w.update();//this is needed to actually poll events from keyboard 
 		
 if(CharCallback.takeInput) {
@@ -605,7 +620,10 @@ if(CharCallback.takeInput) {
 		    			s=string.replace("/vscreenx",""+Start.screencoordx);
 		    			CharCallback.string=s;
 		    		}
-		    		
+		    		if(s.contentEquals("vscreeny")) {
+		    			s=string.replace("/vscreeny",""+Start.screencoordy);
+		    			CharCallback.string=s;
+		    		}
 		    		
 		    		
 		    		
@@ -623,7 +641,7 @@ if(CharCallback.takeInput) {
 		    	   
 		    	
 		    	
-		    	}else if(string.indexOf("DEBUGPRINT=")==0) {
+		    	}else if(string.startsWith("DEBUGPRINT=")) {
 		    		
 		    		int index=string.indexOf("DEBUGPRINT=")+11;
 		    		
@@ -636,7 +654,7 @@ if(CharCallback.takeInput) {
 		    			
 		    		}
 		  
-		    	}else if(string.indexOf("DEBUGDRAW=")==0) {
+		    	}else if(string.startsWith("DEBUGDRAW=")) {
 		    		
 		    		int index=string.indexOf("DEBUGDRAW")+10;
 		    		
@@ -648,7 +666,7 @@ if(CharCallback.takeInput) {
 		    			CharCallback.string=CharCallback.string.replace("#(DEBUGDRAW="+string+")","/[ERROR]/Sorry that is not a valid value");
 		    			
 		    		}
-		    	}else if(string.indexOf("DEBUGFPS=")==0) {
+		    	}else if(string.startsWith("DEBUGFPS=")) {
 		    		
 		    		int index=string.indexOf("DEBUGFPS=")+9;
 		    		
@@ -659,7 +677,120 @@ if(CharCallback.takeInput) {
 		    		}else{
 		    			CharCallback.string=CharCallback.string.replace("#(DEBUGFPS="+string+")","/[ERROR]/Sorry that is not a valid value");
 		    			
-		    		}}
+		    		}}else if(string.startsWith("ADD_AABB")) {
+		    			
+		    			int index=string.indexOf("ADD_AABB")+8;
+		    			string=string.substring(index);
+		    			String[] arguments=string.split(",");
+		    			if(arguments.length==5) {
+		    				try {
+		    			float x=Float.parseFloat(arguments[0]);	
+		    			float y=Float.parseFloat(arguments[1]);
+		    			float widthr=Float.parseFloat(arguments[2]);
+		    			float heightR=Float.parseFloat(arguments[3]);
+		    			float r=Float.parseFloat(arguments[4]);
+		    			ColisionHandeler.addCollision(new AABB(new Vector2f(x,y),widthr,heightR,r));
+		    		    CharCallback.string=CharCallback.string.replace("#(ADD_AABB"+string+")","/[OK]/COL_ADDED");
+		    			
+		    				}catch(NumberFormatException e) {
+		    				
+		    					CharCallback.string=CharCallback.string.replace("#(ADD_AABB"+string+")","/[ERROR]/Sorry there are incorrect argument types");
+		    				}
+		    				
+		    				
+		    			}else {
+		    				CharCallback.string=CharCallback.string.replace("#(ADD_AABB"+string+")","/[ERROR]/Sorry add aabb takes 5 arguments");
+		    			}
+		    			
+		    		}else if(string.startsWith("REMOVE_AABB")) {
+		    			
+		    			string=string.substring(string.indexOf(" ")+1);
+		    			int index=Integer.parseInt(string);
+		    			ColisionHandeler.remove(index);
+		    			 CharCallback.string=CharCallback.string.replace("#(REMOVE_AABB "+string+")","/[OK]/COL_REMOVED");
+		    			
+		    		}
+		    	
+		    		else if(string.startsWith("CALL")) {
+		    			FunctionCaller function;
+		    			string=string.substring(string.indexOf("CALL")+5);
+		    			if(string.contains(",")) {
+		    			String[] arguments=string.split(",");
+		    			if(arguments.length==2) {
+		    				String a=arguments[0];
+		    				String b=arguments[1];
+		    				if(b.startsWith("{") && b.endsWith("}")) {
+		    					String[] bargs;
+		    					if(b.contains(" ")) {
+		    						bargs=b.split(" ");}
+		    					else {
+		    					    bargs=new String[]{b};
+		    					}
+		    					Object[] args=new Object[bargs.length];
+		    				    Class[]  argTypes=new Class[args.length];
+		    					for(int i=0;i<bargs.length;i++) {
+		    						
+		    						String bi=bargs[i];
+		    					
+		    					
+		    						if(bi.contains("{")) {
+		    							bi=bi.substring(bi.indexOf("{")+1);
+		    						}
+		    						if(bi.contains("}")) {
+		    						  bi= bi.substring(0,bi.indexOf("}"));
+		    						}
+		    						
+		    						if(bi.startsWith("/i")) {
+		    							
+		    							bi=bi.substring(bi.indexOf("/i")+2);
+		    							args[i]=Integer.parseInt(bi);
+		    							argTypes[i]=Integer.TYPE;
+		    						}else if(bi.startsWith("/f")) {
+		    							bi=bi.substring(bi.indexOf("/f")+2);
+		    							args[i]=Float.parseFloat(bi);
+		    							argTypes[i]=Float.TYPE;
+		    							
+		    						}else if(bi.startsWith("/s")) {
+		    							bi=bi.substring(bi.indexOf("/s")+2);
+		    							args[i]=bi;
+		    							argTypes[i]=String.class;
+		    							
+		    							
+		    						}else if(bi.startsWith("/d")) {
+		    							bi=bi.substring(bi.indexOf("/d")+2);
+		    							args[i]=Double.parseDouble(bi);
+		    							argTypes[i]=Double.TYPE;
+		    						}else {
+		    							CharCallback.string=CharCallback.string.replace("#(CALL "+string+")","[ERROR] that is not a valid type only /s /i /f /d ");
+		    						}
+		    						
+		    						
+		    						
+		    					}
+		    					
+		    					function=new FunctionCaller(a,args,argTypes);
+		    					function.invoke();
+		    					CharCallback.string=CharCallback.string.replace("#(CALL "+string+")","");
+		    					
+		    				}else {
+		    					CharCallback.string=CharCallback.string.replace("#(CALL "+string+")","[ERROR] second arg needs to be a array of types");
+		    				}
+		    				
+		    				
+		    			}
+		    			
+		    			
+		    			
+		    			}else {
+		    			function=new FunctionCaller(string);
+		    			CharCallback.string=CharCallback.string.replace("#(CALL "+string+")"," ");
+		    			function.invoke();
+		    			
+		    			}
+		    		
+		    		}
+		    	
+		    	
 		  else{
 		    		CharCallback.string=CharCallback.string.replace("#("+string+")","/[ERROR]/Sorry that is not a valid Command");
 	    		}
@@ -692,8 +823,10 @@ if(CharCallback.takeInput) {
 		
 		
 	    
-	    
-	    
+	    if(GetInput.getStateofButton(GLFW_KEY_S)==1) {
+	    	
+	    	source1.play(Heal);
+	    }
 	    
 	    	
 		
@@ -919,7 +1052,7 @@ if(CharCallback.takeInput) {
 						direction=(VectorMath.normalize(new Vector2f(speedx,speedy)));
 						
 						
-						Vector2f velocity=new Vector2f(direction.x*speed,direction.y*speed);
+					    velocity=new Vector2f(direction.x*speed,direction.y*speed);
 						direction.add(velocity,newvec);
 						direction=new Vector2f(speedx,speedy);
 											
@@ -1270,6 +1403,7 @@ private static void EndBattleAsLoss() {
 				if(Proccesor.isUserInputallowed()) {
 				 Inputupdate();}else {
 						w.update();//this is needed to still allow exiting
+				       
 				 }
 				 
 			     canRender=true;//now we render	

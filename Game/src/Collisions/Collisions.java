@@ -24,9 +24,11 @@ import gameEngine.VectorMath;
 
 
 public abstract class Collisions extends VectorMath {
- protected boolean DebugColisions=Start.DEBUGCOLISIONS;
+ public boolean DebugColisions=Start.DEBUGCOLISIONS;
  protected boolean isBox=false,isTrigger=false;
-	
+ protected Vector2f position=new Vector2f();
+ 
+
 	public boolean isTrigger() {
 	return isTrigger;
 }
@@ -55,7 +57,12 @@ public abstract class Collisions extends VectorMath {
 		   }
 	
 	
-	
+		public Vector2f getPosition() {
+			return position;
+		}
+		public void setPosition(Vector2f position) {
+			this.position = position;
+		}	
 	
 	
 	

@@ -12,8 +12,8 @@ public class FunctionCaller {
    private Object[] args;
    private Method Function;
    private Class baseClass=GUIMEthods.class;
-   private Class[]  argumentTypes;
-   private Object objToCallfrom;
+   private Class[]  argumentTypes=null;
+   private Object objToCallfrom=null;
 
    public FunctionCaller(String functionName) {
 	   this.functionName=functionName;
@@ -142,7 +142,7 @@ public class FunctionCaller {
    
    public void invoke() {
 	  try {
-		this.Function.invoke(this.objToCallfrom, args);
+		this.Function.invoke(objToCallfrom, args);
 	} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 		
 		e.printStackTrace();

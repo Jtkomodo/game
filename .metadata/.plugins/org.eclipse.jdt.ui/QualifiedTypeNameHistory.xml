@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="input.InputHandler"/>
-    <fullyQualifiedTypeName name="battleClasses.TimedButtonHold"/>
-    <fullyQualifiedTypeName name="battleClasses.HpBar"/>
-    <fullyQualifiedTypeName name="Items.Inventory"/>
-    <fullyQualifiedTypeName name="guis.BarElement"/>
-    <fullyQualifiedTypeName name="Debug.Debuger"/>
-    <fullyQualifiedTypeName name="input.CharCallback"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButtonCombo"/>
     <fullyQualifiedTypeName name="battleClasses.Enemy"/>
     <fullyQualifiedTypeName name="ScripterCommands.DrawModel"/>
@@ -20,7 +13,6 @@
     <fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
     <fullyQualifiedTypeName name="Data.Enemies"/>
     <fullyQualifiedTypeName name="Items.Items"/>
-    <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
     <fullyQualifiedTypeName name="gameEngine.Model"/>
     <fullyQualifiedTypeName name="gameEngine.Texture"/>
     <fullyQualifiedTypeName name="battleClasses.BattleEnemyField"/>
@@ -28,7 +20,6 @@
     <fullyQualifiedTypeName name="Data.Constants"/>
     <fullyQualifiedTypeName name="Scripter.Proccesor"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
-    <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
     <fullyQualifiedTypeName name="org.joml.Vector4f"/>
     <fullyQualifiedTypeName name="java.util.Comparator"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
@@ -40,13 +31,33 @@
     <fullyQualifiedTypeName name="com.sun.java.util.jar.pack.Package.Class.Method"/>
     <fullyQualifiedTypeName name="java.lang.reflect.Method"/>
     <fullyQualifiedTypeName name="guis.FunctionCaller"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="java.util.Map.Entry"/>
     <fullyQualifiedTypeName name="guis.GUIMEthods"/>
     <fullyQualifiedTypeName name="gameEngine.Timer"/>
-    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="gameEngine.Render"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="Collisions.Collisions"/>
     <fullyQualifiedTypeName name="Collisions.ColisionHandeler"/>
+    <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.nio.IntBuffer"/>
+    <fullyQualifiedTypeName name="org.lwjgl.openal.ALC"/>
+    <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
+    <fullyQualifiedTypeName name="org.lwjgl.system.Callback"/>
+    <fullyQualifiedTypeName name="org.lwjgl.opengl.GLUtil"/>
+    <fullyQualifiedTypeName name="org.lwjgl.openal.ALCapabilities"/>
+    <fullyQualifiedTypeName name="org.lwjgl.openal.ALC10"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="Sound.Sound"/>
+    <fullyQualifiedTypeName name="java.io.FileInputStream"/>
+    <fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
+    <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
+    <fullyQualifiedTypeName name="audio.Listener"/>
+    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
+    <fullyQualifiedTypeName name="audio.Source"/>
+    <fullyQualifiedTypeName name="org.lwjgl.openal.EXTExponentDistance"/>
+    <fullyQualifiedTypeName name="org.lwjgl.openal.ALUtil"/>
+    <fullyQualifiedTypeName name="org.lwjgl.openal.AL"/>
+    <fullyQualifiedTypeName name="org.lwjgl.openal.AL10"/>
+    <fullyQualifiedTypeName name="org.lwjgl.openal.AL11"/>
 </qualifiedTypeNameHistroy>

@@ -37,21 +37,27 @@ public class MapLoader {
 	public void loadInData() {
 		float[] vert;
 		float[] uv;
-		keychart=new int[map.length][map[0].length];
+		keychart=new int[map[0].length][map.length];
 		int key=0;
+		
+		Start.DebugPrint(map.length+" "+map[0].length);
 		for(int i=0;i<map[0].length;i++) {
 			for(int j=0;j<map.length;j++) {
-				String a;    
-				TilesData tile;
-				int tileIndex=map[j][63-i];
+				String a="";
+			
+				TilesData tile=TilesData.Dirt;
+				int tileIndex=map[j][(map[0].length-1)-i];
 			    
 				keychart[i][j]=key;
 				
 				
 				
 				switch(tileIndex) {
-				
-				
+				case 0:
+					
+					
+				    break;
+					
 				case 1:
 					tile=TilesData.Dirt;
 					a="dirt";
@@ -91,13 +97,13 @@ public class MapLoader {
 					 
 
 						
-
+if(tileIndex !=0) {
 			   uv=tile.getUVcoords();
 			   
 			   
 				tilePosData.put(key, vert); 
 				test.put(key, a);
-				tileUVData.put(key, uv); 	 
+				tileUVData.put(key, uv); 	} 
 			key++;
 			}
 			
@@ -119,9 +125,10 @@ public class MapLoader {
 		float[] uv=tileUVData.get(key);		
 		float[] vert=tilePosData.get(key);	
 		
-		
+		if(tileUVData.containsKey(key)) {
 		model.addvaluestoVBO(vert, uv);
-	this.a++;	  
+		}
+		this.a++;	  
 		
 		
 	}

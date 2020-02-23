@@ -130,7 +130,7 @@ private static boolean checkTriger(Collisions a,CircleColision b) {
 	
    private static Vector2f CheckAndGetResponse(AABB a,AABB b,Vector2f position,Vector2f oldposition, Vector2f movement, Vector2f direction) {
 	   Vector2f vec=new Vector2f(0,0);
-	   a.setPosition(position);
+	
 		  boolean check=a.vsAABB(b);
 		  if(check){
 		  Vector2f new2= a.findVector(oldposition,movement,direction,b);
@@ -139,11 +139,11 @@ private static boolean checkTriger(Collisions a,CircleColision b) {
 			Vector2f vector=new Vector2f(0);
 			vec.add(position,vector);
 			
-			a.setPosition(vector);			
+			a.setCenterPosition(vector);			
 		
 			return vector;
 		  }else {
-				a.setPosition(position);	
+				a.setCenterPosition(position);	
 			return position;
 		  }
 		

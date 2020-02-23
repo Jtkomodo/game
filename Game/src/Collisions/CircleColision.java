@@ -192,7 +192,6 @@ private Model Circle,piont;
 	public void setR(float r) {
 		this.r = r;
 	}
-
 	
 
 	

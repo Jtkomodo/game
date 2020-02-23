@@ -174,6 +174,10 @@ private  void createShaders(String path1,String path2) {
 	     	glUniform1i(location,value);
 
 }
+	
+	public void loadIntegers(int location,int values[]) {
+	 glUniform1iv(location, values);
+	}
 
 	public void loadFloat(int location,float value) {
 	   	     	glUniform1f(location,value);
@@ -212,7 +216,7 @@ private  void createShaders(String path1,String path2) {
 	    	
 	 return location;  
 	 }
-	public void makeNewLocation(String location) {
+	public void makeAttribLocation(String location) {
 		
 		 glBindAttribLocation(program,locationSlot,location);
 		 linkandValidate();

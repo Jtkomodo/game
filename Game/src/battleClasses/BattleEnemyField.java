@@ -130,15 +130,16 @@ public class BattleEnemyField {
 			if(Select==1) {
 				Start.DebugPrint("Select");
 				
-			
+				Start.source.play(Start.Select);
 				GUIMEthods.UseAttack(Start.currentlyUsedMove, Start.p, this.currentEnemy);
 				
 			
 				
 				}
-		      
+		      Vector2f oldPosition=this.currentPosition;
 		 
 					if(Back==1) {
+						Start.source.play(Start.Back);
 						 Start.MoveCalled=false; 
 						 Start.MoveInprogress=false;
 						
@@ -151,6 +152,12 @@ public class BattleEnemyField {
 						  GoLeft();
 					if(right==1)
 						  GoRight();
+					
+				if(this.currentPosition!=oldPosition) {
+					Start.source.play(Start.Move);
+				}
+					
+					
 		}
 		
 		}else {

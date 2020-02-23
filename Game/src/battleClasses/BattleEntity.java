@@ -282,6 +282,9 @@ public boolean useItem(Items item) {
 	if(used) {
 	this.inventory.removeItem(item);
 	Start.DebugPrint(this.toString()+"used item "+item.Item.getName());
+	if(item.Item.isHealing()) {
+		Start.source.play(Start.Heal);
+	}
 	}
 	
 	
@@ -295,6 +298,7 @@ public boolean useMove(Moves move) {
 if(move.getCost()<=this.sp) {
 	decreseSp(move.getCost());
 	this.lastUsedMove=move;
+	
 	
 }else {
 	used=false;

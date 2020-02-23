@@ -21,7 +21,7 @@ public class Listener {
 	
 	  public static void ChangePosition(Vector2f position) {
 			 Listener.position=position;
-			 alListener3f(AL_POSITION,-position.x, -position.y, 1);
+			 alListener3f(AL_POSITION,position.x, -position.y, 1);
 		  
 	  }
 	

@@ -1,13 +1,17 @@
 package gameEngine;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 
 import org.newdawn.slick.opengl.PNGDecoder;
 
 import Data.TilesData;
+import customExceptions.MapSizeNotCorrectlyDefined;
 
 public class WorldLoader {
 
@@ -20,58 +24,137 @@ public class WorldLoader {
 	
 	
 	
-	public WorldLoader(String name) {
-				
+	public WorldLoader(String name,boolean png) {
+     if(png) {	
 		
-				String location=new String("/res/Maps/"+name+".png");
-				
-				
-		try {
-			InputStream stream=getClass().getResourceAsStream(location);
-			PNGDecoder decoder = new PNGDecoder(stream);
-			 
-
-		    //create a byte buffer big enough to store RGBA values
-		   ByteBuffer data = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
-
-		    //decode
-		    decoder.decode(data, decoder.getWidth() * 4, PNGDecoder.RGBA);
-      
-	 
-		 data.flip();
-		width=decoder.getWidth();
-		height=decoder.getHeight();
-		 byte c;
-			int k=0;
-			while(data.position()<data.capacity()) {
-				try{
-				c=data.get();	
-				}catch(Exception e){
-                   
-					System.out.println(e);
-					break;
-
-				}
-				Data.put(k,  c);
-				
-				
-				k++;
-			}
-			data.clear();
-			stream.close();
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	map=GetMapData();
-	
+		loadFromPng(name);
+     }else {
+    	 loadFromFile(name);
+    	 
+     }
 	}
 	
 	
-	private int[][] GetMapData() {
+	private void loadFromFile(String name) {
+
+		String location=new String("/res/Maps/"+name+".mp");
+	    
+	
+	
+		InputStream stream=getClass().getResourceAsStream(location);
+		
+		
+	
+		InputStreamReader isr = new InputStreamReader(stream);//creates a input stream so that we can read the file
+		BufferedReader br=new BufferedReader(isr);//makes the bufferd reader that takes in the input stream from the file
+		String line="";//just intializing the line
+		try {
+			line=br.readLine();
+			String[] size=line.split(",");
+			if(size.length==2) {
+				width=Integer.parseInt(size[0]);
+				height=Integer.parseInt(size[1]);
+			}else {
+				br.close();
+				throw new MapSizeNotCorrectlyDefined(name);
+				
+			}
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (MapSizeNotCorrectlyDefined e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		while(true) {
+			try {
+				line=br.readLine();
+				String[] indexs=line.split(",");
+				//TODO finish the file loading by file
+				
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+		}
+	
+	
+	
+	}
+
+
+	private void loadFromPng(String name) {
+		
+		
+		
+		String location=new String("/res/Maps/"+name+".png");
+		
+		
+try {
+	InputStream stream=getClass().getResourceAsStream(location);
+	PNGDecoder decoder = new PNGDecoder(stream);
+	 
+
+    //create a byte buffer big enough to store RGBA values
+   ByteBuffer data = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
+
+    //decode
+    decoder.decode(data, decoder.getWidth() * 4, PNGDecoder.RGBA);
+
+
+ data.flip();
+width=decoder.getWidth();
+height=decoder.getHeight();
+ byte c;
+	int k=0;
+	while(data.position()<data.capacity()) {
+		try{
+		c=data.get();	
+		}catch(Exception e){
+           
+			System.out.println(e);
+			break;
+
+		}
+		Data.put(k,  c);
+		
+		
+		k++;
+	}
+	data.clear();
+	stream.close();
+
+} catch (Exception e) {
+	e.printStackTrace();
+}
+
+map=GetMapFromColors();
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private int[][] GetMapFromColors() {
 		int[][] map= new int[width][height];
-		int y=0;
+		
 			for(int i=0;i<height;i++) {
 				for(int j=0;j<width*4;j+=4) {  
 				

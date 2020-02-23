@@ -339,7 +339,7 @@ public class AABB extends Collisions{
 
 		   Render.draw(aabb, position, 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE);
 		  // Start.s.bind();
-		   Render.draw(piont, ActualPosition, 0, 6,Start.COLTEX,Constants.RED);
+		  // Render.draw(piont, ActualPosition, 0, 6,Start.COLTEX,Constants.RED);
 		 
 			  
 			  Render.draw(piont, Pposition, 0, 1,Start.COLTEX,Constants.YELLOW);
@@ -375,8 +375,17 @@ public class AABB extends Collisions{
 
 
 
-	
+	@Override
 	public void setPosition(Vector2f position) {
+		
+		 position.add(widthR,-heightR,this.position);
+		this.position.sub(this.r,this.lc);
+		this.position.add(this.r,this.rc); 
+		 
+		
+	}
+
+	public void setCenterPosition(Vector2f position) {
 		this.position = position;
 		 
 		position.sub(this.r,this.lc);
@@ -385,21 +394,11 @@ public class AABB extends Collisions{
 		
 	}
 
-	public void setWidthR(float widthR) {
-		this.widthR = widthR;
-	}
-
-
 
 	public float getHeighR() {
 		return heightR;
 	}
 
-
-
-	public void setHeightR(float height) {
-		this.heightR = height;
-	}
 
 
 
@@ -418,19 +417,11 @@ public class AABB extends Collisions{
 		return lc;
 	}
 
-	public void setLc(Vector2f lc) {
-		this.lc = lc;
-	}
-
 	public Vector2f getRc() {
 		return rc;
 	}
 
-	public void setRc(Vector2f rc) {
-		this.rc = rc;
-	}
-
-
+	
 
 
 

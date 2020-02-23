@@ -2,51 +2,51 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="lazer" key="selection"/>
+		<item value="drawString" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="lazer"/>
-			<item value=".debug()"/>
-			<item value=".debug"/>
-			<item value="CircleColisio"/>
-			<item value="remove"/>
-			<item value="finished"/>
-			<item value="movecalled"/>
-			<item value="true"/>
-			<item value="InputHandler.getStateofButtonPressed"/>
-			<item value="LastKeyState"/>
-			<item value="1"/>
-			<item value="getStateOfButton"/>
-			<item value="debug"/>
 			<item value="drawString"/>
-			<item value="draw"/>
+			<item value="a1"/>
+			<item value="player"/>
+			<item value="vert"/>
+			<item value="vert*"/>
+			<item value="verts"/>
+			<item value="i+"/>
+			<item value="i"/>
+			<item value="color["/>
+			<item value=","/>
+			<item value="new"/>
+			<item value="uv"/>
+			<item value="cuv"/>
+			<item value="&quot;h&quot;"/>
+			<item value="flush"/>
 		</list>
 		<list key="replacehistory">
-			<item value="1"/>
-			<item value="input.getStateOFButton"/>
-			<item value="LastKeyStateInstanc"/>
-			<item value="true"/>
-			<item value="getStateOfButtonPressed"/>
-			<item value="InputHandler"/>
-			<item value="argumentTypes"/>
-			<item value="GetInput"/>
-			<item value="BattleEntity"/>
-			<item value="Enemies"/>
-			<item value="players"/>
-			<item value="0x64"/>
-			<item value="returnList"/>
-			<item value="byCost"/>
-			<item value="textR"/>
+			<item value="position"/>
+			<item value="translations"/>
+			<item value="i2+"/>
+			<item value="i4+"/>
+			<item value="i3+"/>
+			<item value="i2"/>
+			<item value="colors["/>
+			<item value=";"/>
+			<item value="color[i+0]=new"/>
+			<item value="uvs"/>
+			<item value="uv[i+0]=cuv"/>
+			<item value="verts[i]=verts"/>
+			<item value="MainBatchedRender"/>
+			<item value="Render.Debug"/>
+			<item value="Render.UIDraw"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="336" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="454" key="DIALOG_HEIGHT"/>
-		<item value="670" key="DIALOG_X_ORIGIN"/>
-		<item value="312" key="DIALOG_Y_ORIGIN"/>
+		<item value="1014" key="DIALOG_X_ORIGIN"/>
+		<item value="245" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

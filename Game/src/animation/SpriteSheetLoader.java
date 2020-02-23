@@ -45,7 +45,7 @@ public class SpriteSheetLoader {
 		InputStreamReader isr = new InputStreamReader(ist);//creates a input stream so that we can read the file
 		BufferedReader br=new BufferedReader(isr);//makes the bufferd reader that takes in the input stream from the file
 		String line="";//just intializing the line
-		int lineNumber=0;//makes sure the line number is zero to start
+	
 		while(true) {
 			
 		
@@ -76,7 +76,7 @@ public class SpriteSheetLoader {
 			
 		
 			
-		lineNumber++;	
+		
 			
 		} catch (IOException e) {
 			

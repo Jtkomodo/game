@@ -18,14 +18,14 @@ import org.lwjgl.opengl.GL;
    either v_id,tex_id,or ind_id and lastly the data in float array and integer array for v_id,tex_id and ind_id.  
 */
 
-public class BatchedModel extends ModelFramwork{
+public class OneTextureBatchedModel extends ModelFramwork{
 	 private int drawCount,drawCount2;
 		private int v_id,tex_id,ind_id;//made these public so that we can get to them from another method to change values
 	private int indBase,pionter,sections;
 	private long Texsize=100000;//size of the amount of space to allocate for the buffers 
 	private long Indsize=100000;
 	private long Vertsize=100000;
-	public BatchedModel() {
+	public OneTextureBatchedModel() {
 		
 		//setting everything to 0 
 		
@@ -88,7 +88,7 @@ int[] indeces= new int[] {
 	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
 	 glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,drawCount2, makeBuffer(indeces));//remember all offsets are in bytes so a int is 4 bytes and a float is as well so we need to multiply be 4 to get the correct offset 
-  
+
 	drawCount=drawCount+6;//used for telling the amount of triangles to draw when the drawcall is made
 	drawCount2=drawCount*4;//this is for the correct pionter to the next value in the indeces buffer
 	
@@ -193,6 +193,23 @@ unbindBuffers();
 
 }
 
+@Override
+public float[] getUv_coords() {
+	float[] data = new float[sections*8];
+	glBindBuffer(GL_ARRAY_BUFFER,tex_id);
+	glGetBufferSubData(GL_ARRAY_BUFFER, 0, data);;
+return data;
+}
+@Override
+public float[] getVertices() {
+
+	float[] data = new float[sections*8];
+	glBindBuffer(GL_ARRAY_BUFFER,v_id);
+	glGetBufferSubData(GL_ARRAY_BUFFER, 0, data);;
+	
+	
+	return data;
+}
 
 
 

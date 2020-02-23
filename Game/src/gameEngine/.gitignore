@@ -26,3 +26,9 @@
 /InputHandler.class
 /Render.class
 /ErrorCallback.class
+/MainBatchRender.class
+/OneTextureBatchedModel.class
+/MultipleTextureBatchedModel.class
+/Entity.class
+/MainRenderHandler$1.class
+/MainRenderHandler.class

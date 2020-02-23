@@ -1,6 +1,7 @@
 package ScripterCommands;
 
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 
 import animation.Animate;
 import animation.AnimationHandler;
@@ -13,7 +14,7 @@ public class animate extends Commands {
 	private Animate animation;
 	private double StartTime;
 	private double time;
-	private Vector2f position;
+	private Vector3f position;
 	private boolean walk=false,Draw=false;
 	private float angle,scale;
 	
@@ -23,7 +24,7 @@ public class animate extends Commands {
 		this.StopsInput=StopsInput;
 		
 	}
-	public animate(Animate animation,Vector2f position,float angle,float scale,double time,boolean StopsInput) {
+	public animate(Animate animation,Vector3f position,float angle,float scale,double time,boolean StopsInput) {
 		this.animation=animation;
 		this.Draw=true;
 		this.angle=angle;

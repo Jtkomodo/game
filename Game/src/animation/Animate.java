@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 
+import gameEngine.Entity;
+import gameEngine.MainRenderHandler;
 import gameEngine.Model;
 import gameEngine.Render;
 import gameEngine.Start;
@@ -253,48 +256,56 @@ public class Animate {
 		this.animation=animation;
 	}
 	
-	public void drawAnimatedModel(Vector2f position,float angle,float scale) {
+	public void drawAnimatedModel(Vector3f position,float angle,float scale) {
 		
 		if(AnimationHandler.exsits(this)){
-		Render.draw(model, position, angle, scale,texture);
-	
+			Entity e=new Entity(model, position, angle, scale,texture);
+		     
+		       MainRenderHandler.addEntity(e);
 		}
 		
 		
 	}
 	
-	public void drawAnimatedModel(Vector2f position,float angle,float scale,boolean mirror) {
+	public void drawAnimatedModel(Vector3f position,float angle,float scale,boolean mirror) {
 		
 		
 		if(AnimationHandler.exsits(this)){
-		if(mirror)	
-		Render.Mirror();
-
-		Render.draw(model, position, angle, scale,texture);
+			
+		Entity e=new Entity(model, position, angle, scale,texture);
+       if(mirror) {
+		e.setMirror(true);
+       }
+       MainRenderHandler.addEntity(e);
+       
+		}
+		
+	}
+	
+	
+public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale) {
+		
+		if(AnimationHandler.exsits(this)){
+			Entity e=new Entity(model, position, angle, scale,texture);
+		     
+		       MainRenderHandler.addEntity(e);
+		       
 		}
 		
 		
 	}
 	
-	
-public void drawAnimatedModel(Vector2f position,float angle,Vector2f scale) {
-		
-		if(AnimationHandler.exsits(this)){
-		Render.draw(model, position, angle, scale,texture);
-	
-		}
-		
-		
-	}
-	
-	public void drawAnimatedModel(Vector2f position,float angle,Vector2f scale,boolean mirror) {
+	public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale,boolean mirror) {
 		
 		
 		if(AnimationHandler.exsits(this)){
-		if(mirror)	
-		Render.Mirror();
-
-		Render.draw(model, position, angle, scale,texture);
+			Entity e=new Entity(model, position, angle, scale,texture);
+			 if(mirror) {
+					e.setMirror(true);
+			       }
+		       MainRenderHandler.addEntity(e);
+		       
+		
 		}
 		
 		

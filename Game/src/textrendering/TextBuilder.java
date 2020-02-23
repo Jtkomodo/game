@@ -3,7 +3,7 @@ package textrendering;
 import org.joml.*;
 
 import Data.Constants;
-import gameEngine.BatchedModel;
+import gameEngine.OneTextureBatchedModel;
 import gameEngine.MatrixMath;
 import gameEngine.Render;
 import gameEngine.Start;
@@ -11,13 +11,13 @@ import gameEngine.Start;
 public class TextBuilder{
 
 	private String text;
-	private BatchedModel textModel;
+	private OneTextureBatchedModel 	textModel=new OneTextureBatchedModel();;
 	private Fontloader loader;
 	
 	
 	public TextBuilder(String Font, float AtlusSize) {
 		loader=new Fontloader(Font, AtlusSize);//actually loads the the font file to be used
-	    textModel=new BatchedModel();
+	    textModel=new OneTextureBatchedModel();
 	    
 	}
 	
@@ -31,7 +31,7 @@ public class TextBuilder{
 		this.loader=loader;//actually loads the the font file to be used
 	    
 		
-		textModel=new BatchedModel();
+	
 	    
 	}	
 	
@@ -116,8 +116,8 @@ public class TextBuilder{
 		
 	}
 
-	public BatchedModel getTextModel() {
-		return textModel;
+	public OneTextureBatchedModel getTextModel() {
+		return this.textModel;
 	}
 
 

@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 
 import Data.TilesData;
 
@@ -11,7 +12,7 @@ public class MapLoader {
 
 	
 	private float sizeOfEachTile;
-	private BatchedModel model=new BatchedModel(); 
+	private OneTextureBatchedModel model=new OneTextureBatchedModel(); 
 	
 
 
@@ -28,13 +29,16 @@ public class MapLoader {
 	public MapLoader(int[][] map ,float sizeOfEachTile){
 		
 		this.sizeOfEachTile=sizeOfEachTile;
-		this.map=map;
-		loadInData();
+	
+		loadInData(map);
 		
 	}
 	
 	
-	public void loadInData() {
+	
+	
+	public void loadInData(int[][] map) {
+		this.map=map;
 		float[] vert;
 		float[] uv;
 		keychart=new int[map[0].length][map.length];
@@ -118,7 +122,7 @@ if(tileIndex !=0) {
 	
 	//test method
 	public void loadTile(int tilex,int tiley) {
-		//model.flushBuffers();
+		
 	if((tilex<map.length && tilex>=0)&&(tiley<map[0].length && tiley>=0))	{
 		int key=keychart[tiley][tilex];
 		
@@ -136,7 +140,7 @@ if(tileIndex !=0) {
 	}
 	public void drawtiles(Texture tex) {
 
-		Render.draw(model,new Vector2f(0),0, sizeOfEachTile,tex);
+		MainRenderHandler.addEntity(new Entity(model,new Vector3f(0,0,-1000),0, sizeOfEachTile,tex));
 tilesRenderd=a;
 		a=0;
 
@@ -152,7 +156,7 @@ tilesRenderd=a;
 	}
 	
 	
-	public BatchedModel getModel() {
+	public OneTextureBatchedModel getModel() {
 		return model;
 	}
 	
@@ -160,6 +164,17 @@ tilesRenderd=a;
 		
 		return this.tilesRenderd;
 	}
+	public Vector2f findPositionOnMap(float x,float y) {
+		  Vector2f mapPosition=new Vector2f(x/sizeOfEachTile,y/sizeOfEachTile);
+		
+			
+			return mapPosition;
+			
+			
+			
+			
+			
+		}
 	
 	
 }

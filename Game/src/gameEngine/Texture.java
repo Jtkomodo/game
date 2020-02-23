@@ -119,7 +119,6 @@ public Texture(String path) {
 		  
 		if(sampler>=0 && sampler<=31) {
 		glActiveTexture(GL_TEXTURE0+sampler);
-		
 		glBindTexture(GL_TEXTURE_2D,TEXid);
 		   
 		} 

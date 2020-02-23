@@ -24,8 +24,7 @@ public abstract class GUIMEthods {
 	public static Window window=Start.w;
 	public static BattleEntity player=Start.p;
 	public static String PickMove="Pickmove",useMOVE="Usemove",exitWINDOW="ExitWindow",saveGAME="SaveGame",UseItem="UseItem",fullheal="FullHeal";
-	
-	
+	public static boolean soundPlay=true;
 	
 	public static void UseAttack(Moves move,BattleEntity p,Enemy e) {
 		if(move!=null) {
@@ -78,7 +77,7 @@ public abstract class GUIMEthods {
 	 public static void Pickmove(BattleEntity p,String move) {
 		 
 		 Moves m=p.getmoveFromString(move);
-		 
+		 soundPlay=true;
 		 if(m!=null) {
 			 
 		
@@ -94,6 +93,9 @@ public abstract class GUIMEthods {
 		 Start.MoveCalled=true; 
 		 Start.MoveInprogress=false;
 		
+		 }else {
+			 soundPlay=false;
+			 Start.source.play(Start.NO);
 		 }
 		 }else {
 			 
@@ -104,7 +106,7 @@ public abstract class GUIMEthods {
 	 }
 	 
 	 public static void UseItem(BattleEntity p,Items item) {
-		 
+		 soundPlay=true;
 		 
 		boolean used= p.useItem(item);
 		 if(used) {
@@ -121,6 +123,9 @@ public abstract class GUIMEthods {
 			  Start.PlayersTurn=false;
 			   Start.TurnFinished=true;
 	 			 
+		 }else {
+			 soundPlay=false;
+			 Start.source.play(Start.NO);
 		 }
 		 
 	 }

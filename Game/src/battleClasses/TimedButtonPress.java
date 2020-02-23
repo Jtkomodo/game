@@ -83,7 +83,7 @@ public class TimedButtonPress extends TimedButton {
 			}else if(result==HIT) {
 				this.model.setString("HIT");
 				Start.DebugPrint("hit");
-				
+				Start.source.play(Start.Select);
 			}
 			Proccesor.addComandtoQueue(new DrawModel(this.model.getTextModel(),this.model.getLoader().getTex(),this.vector.add(100,0,new Vector2f()),.5f,.5,false));
 			enableButtons();

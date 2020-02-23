@@ -27,6 +27,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_Y;
 import java.util.ArrayList;
 
 import  org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import Collisions.AABB;
@@ -76,14 +77,14 @@ public class Start {
     public static int lowFPS=60,HighFPs=0;
 	
 	
-	public static int location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;
+	public static int  location2,Projection2,RTS2,location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;
     public static byte dKeys,testKey;
     
    
     public static BIndingNameParser buttonNamses;
     public static boolean JustStarted=true,MoveInprogress=false,MoveCalled=false,TurnFinished=false,BattleEnded=false;
     public static TimedButton Button;
-    public static ShaderProgram s;
+    public static ShaderProgram s,Batcheds;
     public static float scaleOfMapTiles=128,Rendercamx,Rendercamy;
     public static int amountWidth=Math.round((width/scaleOfMapTiles)),amountHeight=Math.round((height/scaleOfMapTiles));
     public static Camera cam,DebugCam;
@@ -95,7 +96,7 @@ public class Start {
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite,HealthBarBackground;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
     public static Model background,player,textboxM,Arrow;
-    public static BatchedModel testM;
+    public static OneTextureBatchedModel testM;
     public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls,textR;
     public static Vector2f currentmovement,c2,oldpos,direction,BattleBoxPosition,velocity;
     public static BattleEntity p;
@@ -115,11 +116,14 @@ public class Start {
     public static SpriteSheetLoader sloader;
     public static BattleEnemyField enemyField,CurrentEnemyFeild;
     public static BattleEntity currentEntity;
-    public static Sound lazer,Heal;
+    public static Sound lazer,Heal,Select,Move,Back,NO,TimedBad;
     public static Source source1;
+	public static  Source source;
     public static Fontloader aakar;
     public static ArrayList<BattleEntity> turnOrder= new ArrayList<BattleEntity>();
     public static boolean facingLeft,running,PlayersTurn=true;
+	private static WorldLoader map1;
+	private static MapLoader currentMap;
 
     
     
@@ -165,6 +169,7 @@ public class Start {
 				
 				};
 		
+	
 	    float  Texwidth=192;
 		float Texheight=192;		
 		float  wi=71;
@@ -241,6 +246,20 @@ public class Start {
         DebugPrint("Creating window....");
 		//make our window and attach shaders
 		createWindow("shader");
+		Batcheds=new ShaderProgram("BatchShader");
+		
+			Batcheds.makeAttribLocation("colors");
+			Batcheds.makeAttribLocation("translation");
+		DebugPrint("loading Sounds");
+		lazer=new Sound("Lazer");
+		Heal=new Sound("healing sound");
+		Select=new Sound("select_GUI");
+		Move=new Sound("move_GUI");
+		Back=new Sound("Back_GUI");
+		NO=new Sound("NO_GUI");
+		TimedBad=new Sound("Timed_Button_BAD");
+		
+		
 		DebugPrint("Making Textures....");
 		//Define texturesbr.close();
 		//font=new Fontloader("aakar",512);    
@@ -249,9 +268,7 @@ public class Start {
 		textbox=new Texture("textbox");
 		bg= new Texture("testBackground");
 		HealthBarBackground=new Texture("HealthBarBackground");
-		
-		lazer=new Sound("Lazer");
-		Heal=new Sound("healing sound");
+	
 		
 		
 		
@@ -265,7 +282,7 @@ public class Start {
 		textR=new TextBuilder(aakar);
 		textDrawCalls= new TextBuilder("aakar",512);
 	//	TextBuilder textCircle= new TextBuilder("aakar",512);
-		testM= new BatchedModel();
+		testM= new OneTextureBatchedModel();
 		piont= new Texture("Point");
 
 		piont2= new Texture("Point2");
@@ -292,20 +309,26 @@ public class Start {
 			Projection=s.makeLocation("projection");
 			RTS=s.makeLocation("rts");
 			Color=s.makeLocation("color");
+			
+			
+			location2=Start.Batcheds.makeLocation("sampler");
+			Projection2=Batcheds.makeLocation("projection");
+			RTS2=Batcheds.makeLocation("rts");
+			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
 		DebugPrint("Loading world....");
-		WorldLoader worldLoader=new WorldLoader("map3");
-		MapLoader loader=new MapLoader(worldLoader.Getmap(),scaleOfMapTiles);
-        PositionTest postest=new PositionTest(worldLoader.Getmap(),scaleOfMapTiles);	
+		map1=new WorldLoader("map3",true);
 		
+	    currentMap=new MapLoader(map1.Getmap(),scaleOfMapTiles);
+      
 	
 		DebugPrint("Settign Colisions....");
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		playerCol=new AABB(new Vector2f(0,0),15,44,0);
-		Col=new AABB(new Vector2f(4968-64,1280-64),64,128,1,new FunctionCaller("ShowBox",new Object[] {new Vector2f(0,100) },Start.class));
+		Col=new AABB(new Vector2f(5000,1240),64,128,1,new FunctionCaller("ShowBox",new Object[] {new Vector2f(0,100) },Start.class));
         COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
 	    buttonNamses = new BIndingNameParser("GLFW");
 		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2});
@@ -336,7 +359,7 @@ public class Start {
 		
 		
 		
-		enemyField=new BattleEnemyField(new Enemy[] {enemy,enemy2,enemy3,enemy4});
+		enemyField=new BattleEnemyField(new Enemy[] {enemy,enemy2,enemy3});
 	
 		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
 		
@@ -414,15 +437,16 @@ public class Start {
 		battleBox=new UIBox(new Vector2f(100,0),boxs);//this is the UIbox for the battle UI
         StartBox.getUIState(1).addElement(new BarElement("HP:",p.getHpbar(),new Vector2f(-17,65)));
         source1=new Source(new Vector2f(0),1,1, 1,200, 0);
-     
-			
+        source=new Source(new Vector2f(0), 1, 1, 0, 0,0);
+		source.setSourceRelitive(true);	
 		
-	
+		
 	while(!w.isExited()) {
 			oldpos=new Vector2f(x,y);
 		fps();    
 	    
 	if(canRender) {
+		GUIMEthods.soundPlay=true;
 		
 		//----------------------GAME--LOOP------------------------------
  		Items[] ITM= playersInventory.getItems();		
@@ -434,12 +458,12 @@ public class Start {
 
 		
 	 	
-			
-			
+				//MainBatchRender.addTexture(textbox);
 			  playersSPBAr.setValue(p.getSp());
 		StartBox.getUIState(1).relpaceALLActive(elementlist);
-	    		
-	 	 	 
+	Entity test=new Entity(player,new Vector3f(0,64,10),0,64,playerTex);
+	Entity test2=new Entity(Start.background,new Vector3f(0,0,0),0,64,Start.COLTEX,Constants.COL_COLOR_BLUE);
+ 	  	 	 
 	  // TextureUpdate(MAP)
 Render.enable();//enables render
 
@@ -451,7 +475,7 @@ Render.enable();//enables render
 		
 		ShowBox.hide();
 	
-	    playerCol.setPosition(new Vector2f(x,y));
+	    playerCol.setCenterPosition(new Vector2f(x,y));
 	    
 			Vector2f vector=updateColisions(playerCol,new Vector2f(x,y),oldpos, c2, direction);
 			
@@ -468,16 +492,16 @@ Render.enable();//enables render
 				
 		screencoordx=-camx;
 	    screencoordy=-camy;
-	    
+	   MainRenderHandler.addEntity(test);
+	    MainRenderHandler.addEntity(test2);
 	    		
 	     cam.setPosition((new Vector2f(camx,camy)));s.bind();
 	     //cam.setPosition((new Vector2f(camx,camy)));s.bind();
 		
 		       
 		    //   testcol=playerCol.AABBwAABB(Col); 
-	       
-	    
-
+	   
+	  
 	  
 	     Listener.ChangePosition(oldpos);
 
@@ -485,10 +509,10 @@ Render.enable();//enables render
 	      Vector2f camPos=cam.getPosition();
 	     Rendercamx=-(camPos.x);
 	     Rendercamy=-(camPos.y);
-	      Vector2f newvec=postest.findPositionOnMap(Rendercamx,Rendercamy);
+	      Vector2f newvec=currentMap.findPositionOnMap(Rendercamx,Rendercamy);
 	      gridx= Math.round(newvec.x);gridy=Math.round(newvec.y);
-	    drawmap(loader,gridx,gridy);		     
-	   ColisionHandeler.Debug();
+	    drawmap(currentMap,gridx,gridy);		     
+	  
 	      textD.setString("circCol:"+circCol);
 	      textC.setString("xmap="+gridx+" ymap="+gridy);
 	    
@@ -496,12 +520,14 @@ Render.enable();//enables render
 	    
 	      
 		if(HideSprite==false) 
-		a1.drawAnimatedModel(new Vector2f(x,y),0,Playerscale,!facingLeft);
-		
-		
+		a1.drawAnimatedModel(new Vector3f(x,y,100),0,Playerscale,!facingLeft);
 		
 		//SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
-	
+		MainRenderHandler.SortEntities(); 
+
+		MainRenderHandler.addToBatchedRender();
+		MainBatchRender.draw();
+
 		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.2f);
 		
 		textC.UIDebugdrawString(screencoordx+100,screencoordy-220,.2f);
@@ -526,7 +552,7 @@ Render.enable();//enables render
 
 
 }
-	 
+	 ColisionHandeler.Debug();
      	 StartBox.setPosition(new Vector2f(screencoordx+300,screencoordy));
      	StartBox.draw(); 
       
@@ -543,15 +569,20 @@ if(CharCallback.takeInput) {
     text1.setString("TAKING INPUT");
 	text1.drawString(screencoordx-75, screencoordy+70, .2f,Constants.RED);
 }
-text1.setString(CharCallback.string);
-text1.drawString(screencoordx-200, screencoordy, .15f);
+text1.setString("tell");
+
+
+
 
 
 Proccesor.proccesCommands(time);
+
+MainBatchRender.flushModel();
+MainRenderHandler.clear();
 		    w.render();
 		    w.clear();
 		  
-		    loader.flushModel();
+		    currentMap.flushModel();
 			
 		}
 		}
@@ -583,6 +614,7 @@ Proccesor.proccesCommands(time);
        //load our shaders 
 	 DebugPrint("Making Shader Program....");
 		s= new ShaderProgram(Shader);
+		
 		
 		//bind shader
 		s.bind();	
@@ -1286,7 +1318,7 @@ private static void EndBattleAsLoss() {
 	 			        e.decreseHp(Damage);
 	 			   
 	 			   }else {
-	 				
+	 				  Start.source.play(Start.Heal);
 	 				   
 	 				   float health=BattleFormulas.CalculateHeath(p, State, p.getLastUsedMove().getDamage());
 	 				  
@@ -1318,11 +1350,13 @@ private static void EndBattleAsLoss() {
 	 				   
 	 			   }else {
 	 				
-	 				   
+	 				
+	 						Start.source.play(Start.Heal);
+	 					
 	 				   float health=BattleFormulas.CalculateHeath(p, 2, p.getLastUsedMove().getDamage());
 	 				  textR.setString(Math.round(health)+"!");
 	 				  Proccesor.addComandtoQueue(new DrawModel(textR.getTextModel(),textR.getLoader().getTex(),new Vector2f(100,40),.5f,1,true));			
-	 				   
+	 				
 	 				p.IncreseHp(health);   
 	 				 
 	 			   }

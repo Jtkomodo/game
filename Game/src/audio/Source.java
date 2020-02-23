@@ -23,15 +23,24 @@ public class Source {
 		   this.MaxDistance=MaxDistance;
 		   
 		  sourceID=alGenSources();
+		   
 		   alSourcef(sourceID, AL_GAIN, gain);
 		   alSourcef(sourceID, AL_PITCH, pitch);
-		   alSource3f(sourceID,AL_POSITION,-position.x,-position.y,1);
+		   alSource3f(sourceID,AL_POSITION,position.x,-position.y,1);
 		   alSourcef(sourceID,AL_ROLLOFF_FACTOR,rollOff);
 		   alSourcef(sourceID,AL_REFERENCE_DISTANCE,referenceDistance);
 		   alSourcef(sourceID,AL_MAX_DISTANCE,MaxDistance);
 			  
 		   
-	   }
+	}
+	
+	public void setSourceRelitive(boolean rel) {
+		if(rel=true)
+		alSourcei(sourceID,AL_SOURCE_RELATIVE,AL_TRUE);
+		else alSourcei(sourceID,AL_SOURCE_RELATIVE,AL_FALSE);
+	
+	}
+	
 	
 	
 	  public float getRollOff() {
@@ -68,19 +77,24 @@ public class Source {
 
 
 	public void play(Sound sound){
-		if(alGetSourcef(sourceID,AL_SOURCE_STATE)!=AL_PLAYING) {
+		
 		  alSourcei(sourceID, AL_BUFFER, sound.getSoundId());
 		  alSourcePlay(sourceID);
-		}
+		
 	  }
 	
 	  public void SetPosition(Vector2f position) {
 		  this.position=position;
-		   alSource3f(sourceID,AL_POSITION,-position.x,-position.y,1);
+		   alSource3f(sourceID,AL_POSITION,position.x,-position.y,1);
 			 
 		  
 		  
 	  }
+	  
+	  public boolean isPlaying() {
+		  return alGetSourcei(sourceID,AL_SOURCE_STATE)==AL_PLAYING;
+	  }
+	  
 	
 	  public void setGain(float gain) {
 		  this.gain=gain;
@@ -110,7 +124,7 @@ public class Source {
 		public float getPitch() {
 			return pitch;
 		}
-
+      
 
 	
 }

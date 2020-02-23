@@ -22,7 +22,7 @@ public class MatrixMath {
 	
 	public static Matrix4f getMatrix(Vector2f translation,float angle,Vector2f scale ) {
 		
-matrix.identity();
+       matrix.identity();
 		
 		
 		matrix.scale(scale.x,scale.y,1);

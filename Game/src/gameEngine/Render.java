@@ -4,6 +4,8 @@ import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
+import Data.Constants;
+
 public class Render {
 
 	private static int drawcalls=0,Location=Start.location,Rts=Start.RTS,Color=Start.Color,Projection=Start.Projection;
@@ -171,9 +173,42 @@ if(mirror) {
 			mirror=false;}
 			
 	}
- 
+    
 	
 	
+	public static void draw(MultipleTextureBatchedModel model,Vector2f position,float angle,float scale,Texture[] textures) {
+		
+		changeShader(Start.Batcheds);
+		int[] samplers=new int[textures.length];
+		for(int i=0;i<textures.length;i++) {
+			textures[i].bind(i);
+			samplers[i]=i;
+		}
+		 
+		   
+		   Matrix4f rts=MatrixMath.getMatrix(new Vector2f(position.x/scale,position.y/scale),angle,scale);
+if(mirror) {
+			   
+			   MatrixMath.mirror(rts);
+		   }
+          
+		   
+		   s.loadIntegers(Start.location2, samplers); 
+		  	   s.loadMat(Start.Projection2,cam.getProjection());
+		       s.loadMat(Start.RTS2, rts);
+		     
+		  model.draw();	 
+			
+		    
+		
+		
+		
+		
+			changeShader(Start.s);
+		
+			drawcalls++;
+			mirror=false;}
+			
 	
 	
 	public static void Debugdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture,Vector4f color) {
@@ -338,9 +373,10 @@ if(mirror) {
 	
 	
 	
-	public static void changeShader(ShaderProgram shader) {
+	private static void changeShader(ShaderProgram shader) {
 		
-		Render.s=shader;
+		s=shader;
+		shader.bind();
 		
 	}
 	

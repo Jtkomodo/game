@@ -415,10 +415,10 @@ public class UIBoxState {
 
 
 //______________STATE__MOVEMENT________________
-	public void DecreasePositionIndeX() {
+	public boolean DecreasePositionIndeX() {
 		//go left
 		
-	
+		boolean found=false;//this is to tell if we found a value
 		if(this.CurrentIndexPositionX!=0 && this.anyActive) {
 			int xI=this.CurrentIndexPositionX-1;
 			
@@ -432,8 +432,9 @@ public class UIBoxState {
 			if(this.values.containsKey(vector)) {
 				
 				setActiveElement(this.values.get(vector));
+				found=true;
 				}else {
-					boolean found=false;//this is to tell if we found a value
+				
 					
 			
 				      ///check below line 
@@ -498,10 +499,12 @@ public class UIBoxState {
 				
 				
 				}
+			return found;
+			}else {
+		
+		
+		return false;
 			}
-		
-		
-		
 		
 	}
 
@@ -509,7 +512,7 @@ public class UIBoxState {
 
 
 
-	public void IncreasePositionIndexX() {
+	public boolean IncreasePositionIndexX() {
 	//go right
 		
 		//if this is the last x position
@@ -517,7 +520,7 @@ public class UIBoxState {
 		if(this.CurrentIndexPositionX!=this.xPos.size()-1 && this.anyActive) {
 			int xI=this.CurrentIndexPositionX+1;
 			
-			
+			boolean found=false;//this is to tell if we found a value
 			//first check if there is one that exist on the same line
 			
 			float x=this.xPos.get(xI);
@@ -526,8 +529,9 @@ public class UIBoxState {
 			Vector2f vector=new Vector2f(x,y);
 			if(this.values.containsKey(vector)) {
 				setActiveElement(this.values.get(vector));
+				found=true;
 				}else {
-					boolean found=false;//this is to tell if we found a value
+					
 					
 			
 				   
@@ -597,8 +601,12 @@ public class UIBoxState {
 				
 				
 				
-				
-				}
+			return found;
+		}else {
+	
+	
+	return false;
+		}
 		
 		
 	}
@@ -607,7 +615,7 @@ public class UIBoxState {
 
 
 
-	public void IncreasePositionIndexY() {
+	public boolean IncreasePositionIndexY() {
 	//this stands for bringing the cursor up
 		
 		
@@ -624,8 +632,10 @@ public class UIBoxState {
 			float y=this.yPos.get(yI);
 			
 			Vector2f vector=new Vector2f(x,y);
+			boolean found=false;
 			if(this.values.containsKey(vector)) {
 				setActiveElement(this.values.get(vector));
+				found=true;
 				}else {
 				
 					//check above line
@@ -641,7 +651,9 @@ public class UIBoxState {
 					        	if(this.values.containsKey(vector)) {
 					        		
 					        		setActiveElement(this.values.get(vector));
-					        	     break;
+					        	    found=true; 
+					        		break;
+					        	     
 					        	}
 					        	
 					        	
@@ -653,6 +665,11 @@ public class UIBoxState {
 					       	
 			        	
 			   }
+			return found;
+		}else {
+	
+	
+	return false;
 		}
 		
 	}
@@ -661,7 +678,7 @@ public class UIBoxState {
 
 
 
-	public void DecreasePositionIndexY() {
+	public boolean DecreasePositionIndexY() {
 		//this stands for bringing the cursor down
 		
 		
@@ -675,11 +692,12 @@ public class UIBoxState {
 			float x=this.xPos.get(this.CurrentIndexPositionX);
 			float y=this.yPos.get(yI);
 
-			
+			boolean found=false;
 			
 			Vector2f vector=new Vector2f(x,y);
 			if(this.values.containsKey(vector)) {
 				setActiveElement(this.values.get(vector));
+				found=true;
 				}else {
 					
 					
@@ -699,6 +717,7 @@ public class UIBoxState {
 					        	if(this.values.containsKey(vector)) {
 					        		
 					        		setActiveElement(this.values.get(vector));
+					        		found=true;
 					        	     break;
 					        	}
 					        	
@@ -711,8 +730,12 @@ public class UIBoxState {
 					       	
 			        	
 			   }
-		}
+			return found;
+			}else {
 		
+		
+		return false;
+			}
 	}
 
 

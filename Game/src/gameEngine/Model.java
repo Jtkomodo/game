@@ -14,7 +14,6 @@ public class Model extends ModelFramwork{
     private int drawCount;
 	private int vao_id,v_id,tex_id,ind_id;
 	private static  boolean draw=true;
-	private float[] vertices,uv_coords;
 	private int[] indeces= {
 			0,1,2,
 			2,3,0	
@@ -34,20 +33,20 @@ public Model(float width,float height,float u,float v,float texWidth,float texHe
 			float  Texx=u;
 			float Texy=v;		
 			
-			float[]  uv=new float[]{
+			  UV_coords=new float[]{
 					Texx/Texwidth,Texy/Texheight,
 					(Texx+wi)/Texwidth,Texy/Texheight,
 					(Texx+wi)/Texwidth,(Texy+h)/Texheight,
 					Texx/Texwidth,(Texy+h)/Texheight
 					};
 			
-			float[] vert={
+			 Vertices=new float[]{
 					   -wi,+h,
 						wi,h,
 						wi,-h,
 						-wi,-h};
 			
-			MakeModel(vert,uv,indeces);
+			MakeModel(Vertices,UV_coords,indeces);
 			
 			
 		
@@ -78,8 +77,8 @@ public Model(float width,float height,float u,float v,float texWidth,float texHe
 		
 		
 	private void MakeModel(float[] vertices,float[] uv_coords,int[] indices) {
-		this.vertices=vertices;
-		this.uv_coords=uv_coords;
+		this.Vertices=vertices;
+		this.UV_coords=uv_coords;
 		this.indeces=indices;
 		
 		      drawCount=indices.length;
@@ -125,19 +124,19 @@ public Model(float width,float height,float u,float v,float texWidth,float texHe
 	}
 	
 	public float[] getVertices() {
-		return vertices;
+		return Vertices;
 	}
 
 	public void setVertices(float[] vertices) {
-		this.vertices = vertices;
+		this.Vertices = vertices;
 	}
 
 	public float[] getUv_coords() {
-		return uv_coords;
+		return UV_coords;
 	}
 
 	public void setUv_coords(float[] uv_coords) {
-		this.uv_coords = uv_coords;
+		this.UV_coords = uv_coords;
 	}
 
 	public int[] getIndeces() {
@@ -184,11 +183,13 @@ public Model(float width,float height,float u,float v,float texWidth,float texHe
 		 glBindBuffer(GL_ARRAY_BUFFER,tex_id);
 		  glBufferSubData(GL_ARRAY_BUFFER, 0, makeBuffer(data));
 		  glBindBuffer(GL_ARRAY_BUFFER,0);
+		  this.UV_coords=data;
 			}
 	public void  changeVert(float[] data) {
 		  glBindBuffer(GL_ARRAY_BUFFER,v_id);
 		  glBufferSubData(GL_ARRAY_BUFFER, 0, makeBuffer(data));
 		  glBindBuffer(GL_ARRAY_BUFFER,0);
+		  this.Vertices=data;
 			}
 	
 

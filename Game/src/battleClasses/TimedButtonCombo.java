@@ -70,6 +70,7 @@ public class TimedButtonCombo extends TimedButton{
     				 Start.DebugPrint("Good");
     			 }else {
     				 result=bad;
+    			
     				 this.model.setString("Bad");
     				 Start.DebugPrint("Bad");
     			 }
@@ -88,7 +89,9 @@ public class TimedButtonCombo extends TimedButton{
     	  this.ButtonCurrentlyOn=0;
     	  this.Going=false;
     	  Proccesor.addComandtoQueue(new DrawModel(this.model.getTextModel(),this.model.getLoader().getTex(),this.vector.add(100,0,new Vector2f()),.5f,.5,true));
-			
+			if(result==bad) {
+				 Start.source.play(Start.TimedBad);
+			}
     	  
       }
       

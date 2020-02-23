@@ -134,7 +134,7 @@ public class TimedButtonHold extends TimedButton {
 			
 			this.model.setString("hit");
 			Start.DebugPrint("hit");
-			
+			Start.source.play(Start.Select);
 		}
 			
 			

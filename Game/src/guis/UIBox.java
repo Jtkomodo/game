@@ -8,6 +8,8 @@ import java.util.Stack;
 import static org.lwjgl.glfw.GLFW.*;
 import org.joml.Vector2f;
 
+import audio.Sound;
+import audio.Source;
 import battleClasses.BattleEntity;
 import gameEngine.Start;
 import input.GetInput;
@@ -23,13 +25,15 @@ public class UIBox {
 
 	private Vector2f position;
 	private static boolean isAnyOpened;
+	private Sound selectSound=Start.Select,MovementSound=Start.Move,BackSound=Start.Back;
+	private Source source=new Source(new Vector2f(0), 1, 1, 0, 0,0);
 	private static List<UIBox> opended=new ArrayList<UIBox>();
 	private List<UIBoxState> statelist=new ArrayList<UIBoxState>();	
 	private List<UIBoxState> alwaysShownStateList=new ArrayList<UIBoxState>();	
 	private Stack<Integer> backStack=new Stack<Integer>();//this is a stack that just sores the previous states
 	
 	public UIBox(Vector2f position,UIBoxState[] states) {
-		
+		source.setSourceRelitive(true);
 		this.position=position;
 		
 		for(int i=0;i<states.length;i++) {
@@ -106,22 +110,34 @@ public void Update() {
 	int up=InputHandler.getStateofButton(GLFW_KEY_UP),down=InputHandler.getStateofButton(GLFW_KEY_DOWN)
 	,left=InputHandler.getStateofButton(GLFW_KEY_LEFT),right=InputHandler.getStateofButton(GLFW_KEY_RIGHT),
     Enter=InputHandler.getStateofButton(GLFW_KEY_ENTER),backspace=InputHandler.getStateofButton(GLFW_KEY_BACKSPACE);
-	
+	boolean movement=false;
 	
 	if(up==1) 
-	    GoUp();
+	  movement=GoUp();
 	if(down==1)	
-	     GoDown();
+	   movement=GoDown();
 	if(left==1)
-		  GoLeft();
+		movement=GoLeft();
 	if(right==1)
-		  GoRight();
-	if(Enter==1)
-		    Select();
-	if(backspace==1)
-		     GoBack();
+		movement= GoRight();
+	if(Enter==1) {
+	Select();
+	
+	if(GUIMEthods.soundPlay)source.play(selectSound);}
+	if(backspace==1) {
+     if(GoBack()) {
+	   source.play(BackSound);	    	 
+		     }
+		     
+	}
+    if(movement) {
+	  source.play(MovementSound);	
+	}
+	
 	
 	}
+	
+	
 	
 }
     
@@ -150,26 +166,26 @@ public void Update() {
     	UIstate.drawBox(this.position);
 	}
 	
-	public void GoLeft() {
-		statelist.get(currentState).DecreasePositionIndeX();		
+	public boolean GoLeft() {
+		return statelist.get(currentState).DecreasePositionIndeX();		
 		
 	}
 	
 	
-	public void GoRight() {
-		statelist.get(currentState).IncreasePositionIndexX();		
+	public boolean GoRight() {
+		return statelist.get(currentState).IncreasePositionIndexX();		
 		
 	}
 	
 	
 	
-	public void GoUp() {
-		statelist.get(currentState).IncreasePositionIndexY();		
+	public boolean GoUp() {
+		return statelist.get(currentState).IncreasePositionIndexY();		
 	}
 	
 	
-	public void GoDown() {
-		statelist.get(currentState).DecreasePositionIndexY();		
+	public boolean GoDown() {
+		return statelist.get(currentState).DecreasePositionIndexY();		
 		
 	}
 	
@@ -209,13 +225,15 @@ public void Update() {
 
 	
 	
-	public void GoBack() {
+	public boolean GoBack() {
+	
 		try{
 		    int lastState=backStack.pop();
-			
-		    setCurrentState(lastState);}
+		
+		    setCurrentState(lastState);
+			return true;}
 	catch(EmptyStackException e) {
-	
+	return false;
 	
  
 	}

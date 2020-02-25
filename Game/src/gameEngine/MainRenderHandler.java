@@ -32,10 +32,24 @@ public class MainRenderHandler {
 				MainBatchRender.Mirror();
 			}
 			if(e.isHasColor()) {
-			MainBatchRender.addModel(e.getModel(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getSize(),e.getTexture(),e.getColor());
+				
+			if(!e.isHasNonSqaureSize()) {	
+			MainBatchRender.addModel(e.getModel(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getSize(),e.getTexture(),e.getColor(),e.getUIPojeection());
 			}else {
-				MainBatchRender.addModel(e.getModel(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getSize(),e.getTexture());
+				MainBatchRender.addModel(e.getModel(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getNonSquareSize(),e.getTexture(),e.getColor(),e.getUIPojeection());
 			}
+			
+			}else {
+				if(!e.isHasNonSqaureSize()) {	
+					
+				
+				MainBatchRender.addModel(e.getModel(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getSize(),e.getTexture(),e.getUIPojeection());
+				}else {
+					MainBatchRender.addModel(e.getModel(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getNonSquareSize(),e.getTexture(),e.getUIPojeection());
+					
+				}
+				
+				}
 			
 			}
 		

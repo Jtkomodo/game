@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.graalvm.compiler.lir.aarch64.AArch64Move.Move"/>
     <fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
     <fullyQualifiedTypeName name="Data.Enemies"/>
     <fullyQualifiedTypeName name="Items.Items"/>
@@ -53,11 +52,12 @@
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="org.joml.Vector4f"/>
     <fullyQualifiedTypeName name="Data.Constants"/>
-    <fullyQualifiedTypeName name="gameEngine.Render"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.util.Iterator"/>
     <fullyQualifiedTypeName name="gameEngine.MainBatchRender"/>
-    <fullyQualifiedTypeName name="gameEngine.Entity"/>
-    <fullyQualifiedTypeName name="gameEngine.MainRenderHandler"/>
+    <fullyQualifiedTypeName name="gameEngine.Render"/>
     <fullyQualifiedTypeName name="org.joml.Vector3f"/>
+    <fullyQualifiedTypeName name="gameEngine.MainRenderHandler"/>
+    <fullyQualifiedTypeName name="gameEngine.Entity"/>
+    <fullyQualifiedTypeName name="gameEngine.MultipleTextureBatchedModel"/>
 </qualifiedTypeNameHistroy>

@@ -97,7 +97,11 @@ int[] indeces= new int[] {
 	sections++; //this is for the method change values
 	
 	
+	}else {
+		Start.DebugPrint("whoops");
 	}
+	
+
 	
 	
 	

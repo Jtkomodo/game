@@ -192,10 +192,10 @@ if(mirror) {
 			   MatrixMath.mirror(rts);
 		   }
           
-		   
+		   s.loadMat(Start.UIProjection, cam.getUIProjection());
 		   s.loadIntegers(Start.location2, samplers); 
-		  	   s.loadMat(Start.Projection2,cam.getProjection());
-		       s.loadMat(Start.RTS2, rts);
+		   s.loadMat(Start.Projection2,cam.getProjection());
+		   s.loadMat(Start.RTS2, rts);
 		     
 		  model.draw();	 
 			

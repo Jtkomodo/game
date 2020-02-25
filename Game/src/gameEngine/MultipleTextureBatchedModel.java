@@ -35,11 +35,13 @@ public class MultipleTextureBatchedModel {
 			
 			//setting everything to 0 
 			
-			drawCount=0;
-			drawCount2=0;
-			indBase=0;
-			pionter=0;
-		    sections=0;
+			  drawCount=0;
+				drawCount2=0;
+				indBase=0;
+				pionter=0;
+				pionter2=0;
+				pionter3=0;
+				sections=0;
 			//making space for buffers
 			 v_id=glGenBuffers();//for vertices		
 			   tex_id=glGenBuffers();//for uv Coords
@@ -63,13 +65,13 @@ public class MultipleTextureBatchedModel {
 			  glVertexAttribPointer(1,3,GL_FLOAT,false,0,0);
 		   glBindBuffer(GL_ARRAY_BUFFER,color_id);
 			  glVertexAttribPointer(2,4,GL_FLOAT,false,0,0);
-			  glBindBuffer(GL_ARRAY_BUFFER,Trans_id);
-			  glVertexAttribPointer(3,2,GL_FLOAT,false,0,0);
+		   glBindBuffer(GL_ARRAY_BUFFER,Trans_id);
+			  glVertexAttribPointer(3,3,GL_FLOAT,false,0,0);
 					  
 			  
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
 		      glDrawElements(GL_TRIANGLES,drawCount,GL_UNSIGNED_INT,0);/* this is a drawcall it takes all the data in the binded buffers and actually draws them to the screen with indices */
-		  	
+		  	unbindBuffers();
 		      
 		      
 			}
@@ -79,14 +81,14 @@ public class MultipleTextureBatchedModel {
 		
 		
 	public boolean addvaluestoVBO(float[] v,float[] uv,float[] colors,float[] translation) {//used to add a new model to the buffers
-		if((uv.length%12==0) && (v.length%8==0) && (colors.length%16==0 )&& (translation.length%8==0)) {//just makes sure they have the correct size of data
+		if((uv.length%12==0) && (v.length%8==0) && (colors.length%16==0 )&& (translation.length%12==0)) {//just makes sure they have the correct size of data
 			
         int quads=v.length/8;		
 		glBindBuffer(GL_ARRAY_BUFFER, v_id);
 		 glBufferSubData(GL_ARRAY_BUFFER,pionter, makeBuffer(v));//adds the vertex values to the vertex buffer
 	//glBindBuffer(GL_ARRAY_BUFFER,0);
 		 glBindBuffer(GL_ARRAY_BUFFER, Trans_id);
-		 glBufferSubData(GL_ARRAY_BUFFER,pionter, makeBuffer(translation));//adds the vertex values to the vertex buffer
+		 glBufferSubData(GL_ARRAY_BUFFER,pionter2, makeBuffer(translation));//adds the vertex values to the vertex buffer
 		 glBindBuffer(GL_ARRAY_BUFFER, tex_id);
 		 glBufferSubData(GL_ARRAY_BUFFER, pionter2, makeBuffer(uv));//adds the uv values to the uv buffer
 		 
@@ -114,10 +116,11 @@ public class MultipleTextureBatchedModel {
 		 pionter2=pionter2+(uv.length*4);//pionter to the next value in the uv buffer
 		 pionter3=pionter3+(colors.length*4);//pionter to the next value in the color buffer
 		 sections+=quads; //this is for the method change values
-		return (sections>=maxSections);
+		 	unbindBuffers();
+		 return (sections>=maxSections);
 		 
 		}else{
-			Start.DebugPrint("sorry but that is not the correct format for the data. sizes of each is"+ v.length+","+uv.length+","+colors.length+"/nShould be devisable by 8,12,16");
+			Start.DebugPrint("sorry but that is not the correct format for the data. sizes of each is"+ v.length+","+uv.length+","+colors.length+","+translation.length+"/nShould be devisable by 8,12,16,12");
 		return false;
 		}
 		
@@ -191,7 +194,7 @@ public class MultipleTextureBatchedModel {
     glBindBuffer(GL_ARRAY_BUFFER,color_id);
 		  glBufferData(GL_ARRAY_BUFFER,this.maxSections*(16*4),GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER,Trans_id);
-			  glBufferData(GL_ARRAY_BUFFER,this.maxSections*(8*4),GL_DYNAMIC_DRAW);
+			  glBufferData(GL_ARRAY_BUFFER,this.maxSections*(12*4),GL_DYNAMIC_DRAW);
 											
 		  
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);

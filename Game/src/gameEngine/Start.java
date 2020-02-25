@@ -77,7 +77,7 @@ public class Start {
     public static int lowFPS=60,HighFPs=0;
 	
 	
-	public static int  location2,Projection2,RTS2,location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;
+	public static int  location2,Projection2,UIProjection,RTS2,location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;
     public static byte dKeys,testKey;
     
    
@@ -314,6 +314,7 @@ public class Start {
 			location2=Start.Batcheds.makeLocation("sampler");
 			Projection2=Batcheds.makeLocation("projection");
 			RTS2=Batcheds.makeLocation("rts");
+			UIProjection=Batcheds.makeLocation("UIProjection");
 			
 		} catch (Exception e) {
 			
@@ -359,7 +360,7 @@ public class Start {
 		
 		
 		
-		enemyField=new BattleEnemyField(new Enemy[] {enemy,enemy2,enemy3});
+		enemyField=new BattleEnemyField(new Enemy[] {enemy,enemy2,enemy3,enemy4});
 	
 		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
 		
@@ -523,16 +524,13 @@ Render.enable();//enables render
 		a1.drawAnimatedModel(new Vector3f(x,y,100),0,Playerscale,!facingLeft);
 		
 		//SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
-		MainRenderHandler.SortEntities(); 
-
-		MainRenderHandler.addToBatchedRender();
-		MainBatchRender.draw();
+	
 
 		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.2f);
 		
 		textC.UIDebugdrawString(screencoordx+100,screencoordy-220,.2f);
       
-       
+		 ColisionHandeler.Debug();
 
 }else {
 	//---------------------battle loop---------------------
@@ -552,13 +550,14 @@ Render.enable();//enables render
 
 
 }
-	 ColisionHandeler.Debug();
+	
      	 StartBox.setPosition(new Vector2f(screencoordx+300,screencoordy));
      	StartBox.draw(); 
       
 	  ShowBox.draw();
 textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")\nAnimations: "+AnimationHandler.amountInList());
 textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
+
 if(showFps)
 textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.2f);
 textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.25f);
@@ -569,14 +568,17 @@ if(CharCallback.takeInput) {
     text1.setString("TAKING INPUT");
 	text1.drawString(screencoordx-75, screencoordy+70, .2f,Constants.RED);
 }
-text1.setString("tell");
+
 
 
 
 
 
 Proccesor.proccesCommands(time);
+MainRenderHandler.SortEntities(); 
 
+MainRenderHandler.addToBatchedRender();
+MainBatchRender.draw();
 MainBatchRender.flushModel();
 MainRenderHandler.clear();
 		    w.render();
@@ -1213,10 +1215,13 @@ private static void EndBattleAsLoss() {
 	   Vector2f position1=new Vector2f(-90,40);
 	
 	   
-	 		Render.draw(background,new Vector2f(0),0,64*40,bg); 
+	 		Entity backg=new Entity(background,new Vector3f(0,0,-10),0,64*40,bg); 
 	 	   
-	 	 	 Render.Mirror();
-	 	 	Render.draw(player,new Vector2f(-192,-20),0,64*1.5f,playerTex); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
+	      MainRenderHandler.addEntity(backg);
+	 		
+	 		
+	 	    
+	 	    MainRenderHandler.addEntity(new Entity(player,new Vector3f(-192,-20,10),0,64*1.5f,playerTex,true)); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
 	 	    enemyField.draw(selectingEnemy);//draws all the enemies to the screen
 	 	    
 	 	    
@@ -1250,7 +1255,7 @@ private static void EndBattleAsLoss() {
 	 	  battleBox.setPosition(position1);
 	 	
 	 	
-	 	  text1.setString("HP: "+Math.round(p.getHp())+"/"+Math.round(p.getMaxDEF()));
+	 	 text1.setString("HP: "+Math.round(p.getHp())+"/"+Math.round(p.getMaxDEF()));
 	 	  p.getHpbar().draw(new Vector2f(position1.x-100,position1.y+50),text1);
 
 	 	  text1.setString("SP: "+Math.round(playersSPBAr.getValue())+"/"+Math.round(playersSPBAr.getMax()));
@@ -1495,7 +1500,7 @@ private static void drawmap(MapLoader loader,int gridx,int gridy) {
 	}
 	
  //   loader.getModel().setDrawMethod(GL_LINES);
-	loader.drawtiles(tex);
+	  loader.drawtiles(tex);
 
 }
 

@@ -1,7 +1,10 @@
 package guis;
 
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 
+import gameEngine.Entity;
+import gameEngine.MainRenderHandler;
 import gameEngine.Model;
 import gameEngine.Render;
 import gameEngine.Texture;
@@ -10,7 +13,7 @@ public class TextureElement extends UIElement {
 
 	private Model model;
 	private Texture texture;
-
+    private float z=10002;
 	private float scale;
 	private float width,height;
 	
@@ -38,9 +41,9 @@ public class TextureElement extends UIElement {
 
 	@Override
 	public void drawElement(Vector2f Position) {
-		Vector2f noffset=new Vector2f();offset.add(Position,noffset);
+		Vector3f noffset=new Vector3f();new Vector3f(offset,0).add(new Vector3f(Position,z),noffset);
 		
-	Render.draw(model,noffset,0, scale, texture);
+	   MainRenderHandler.addEntity(new Entity(model,noffset,0, scale, texture));
 		
 	}
 	

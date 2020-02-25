@@ -8,9 +8,11 @@ import java.util.List;
 
 import org.joml.Vector2f;
 import org.joml.Vector2fc;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 
-
+import gameEngine.Entity;
+import gameEngine.MainRenderHandler;
 import gameEngine.Model;
 import gameEngine.ModelFramwork;
 import gameEngine.Render;
@@ -26,7 +28,7 @@ public class UIBoxState {
 	
 	private UIElement beginElement,ActiveElement;
 	private int amountOfElements=0,offsetPositionOnlist=0;
-	
+	private float z=10000;
 	
 	private List<UIElement> elementlist=new LinkedList<UIElement>();//all of the string elements
 	private List<UIElement> Activeelementlist=new LinkedList<UIElement>();//only the string elements that have a action associated with it
@@ -752,9 +754,10 @@ public class UIBoxState {
 		
 	//draw the actual box first	
 	if(color==null) {	
-	Render.draw(m, noffsetPosition, 0, 1,tex);}
+		  MainRenderHandler.addEntity(new Entity(m, new Vector3f(noffsetPosition,z), 0, 1,tex));
+		  }
 	else {
-		Render.draw(m, noffsetPosition, 0, 1,tex,color);
+		MainRenderHandler.addEntity(new Entity(m, new Vector3f(noffsetPosition,z), 0, 1,tex,color));
 	}
 	
 	
@@ -775,7 +778,7 @@ if(currentlyActive && this.anyActive && hasArrow) {//check if this state is curr
     
    Vector2f pos2=new Vector2f(0);//placeholder
    pos.add(noffsetPosition,pos2);
-    Render.draw(arrow, pos2.sub(5,0,new Vector2f(0)),0,10,ArrowTex);//draw the arrow
+   MainRenderHandler.addEntity(new Entity(arrow, new Vector3f(pos2,z+1).sub(5,0,0,new Vector3f(0)),0,10,ArrowTex));//draw the arrow
  }
 		
 		
@@ -892,6 +895,24 @@ public UIStringElement getActiveStringEllement() {
     public boolean isAlwaysShown() {
 		
 		return this.alwaysShown;
+	}
+
+
+
+
+
+
+	public float getZ() {
+		return z;
+	}
+
+
+
+
+
+
+	public void setZ(float z) {
+		this.z = z;
 	}
 
 }

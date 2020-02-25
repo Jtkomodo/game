@@ -36,7 +36,6 @@ public class BattleEnemyField {
 	private final Vector2f Position1=new Vector2f(140,-20),Position2=new Vector2f(202,-88),Position3=new Vector2f(202,10),Position4=new Vector2f(260,-20);
 	private HashMap<Enemy,Vector2f> ListOfEnemies=new HashMap<Enemy,Vector2f>();
 	private HashMap<Vector2f,Enemy> ListOfEnemiesI=new HashMap<Vector2f,Enemy>();
-	private ArrayList<Entry<Enemy,Vector2f>> drawOrder;// sorted by y
 	private TextBuilder text=new TextBuilder(Start.aakar);
     private Vector2f currentPosition;
     private Enemy currentEnemy;
@@ -72,7 +71,7 @@ public class BattleEnemyField {
 		  ListOfEnemiesI.put(position,enemies[i]);
 			
 		}
-		drawOrder=sortHashMap();
+	
 	
 		currentEnemy=enemies[0];
 		this.currentPosition=this.ListOfEnemies.get(this.currentEnemy);
@@ -91,7 +90,7 @@ public class BattleEnemyField {
 		
 		
 		 Iterator<Map.Entry<Enemy,Vector2f>> itr = ListOfEnemies.entrySet().iterator(); 
-		boolean anyRemoved=false;
+	
 		 while(itr.hasNext()) {
 			 Map.Entry<Enemy, Vector2f> entry = itr.next();
              Enemy e=entry.getKey();
@@ -102,18 +101,14 @@ public class BattleEnemyField {
              
              
              if(e.getHp()<=0) {
-               anyRemoved=true;	 
+            
 				itr.remove();
 			    this.ListOfEnemiesI.remove(v);
 			}
 			
 			
 		}
-		if(anyRemoved) {
-			drawOrder=sortHashMap();
-		}
-		 
-		 
+	
 		if(selecting) {
 			double TimeTaken=0;
 			if(this.Selected) {
@@ -201,7 +196,7 @@ public class BattleEnemyField {
 		  ListOfEnemiesI.put(position,enemies[i]);
 			
 		}
-		drawOrder=sortHashMap();
+		
 		currentEnemy=enemies[0];
 		this.currentPosition=this.ListOfEnemies.get(this.currentEnemy);
 		
@@ -342,13 +337,15 @@ public class BattleEnemyField {
 	public void draw(boolean selecting) {
 	
 		
-		for(Entry<Enemy,Vector2f> entry :this.drawOrder) {
+		for(Entry<Enemy,Vector2f> entry :this.ListOfEnemies.entrySet()) {
 	           
 	             Enemy e=entry.getKey();
 	             Vector2f position=entry.getValue();
 	             text.setString("HP:"+Math.round(e.getHp())+"/"+Math.round(e.getMaxHP()));
 	            if(this.currentEnemy==e || !selecting) {
-	             e.draw(position, text);}else  {
+	            text.setZ(900);
+	            e.setZ(800);
+	            	e.draw(position, text);}else  {
 	            	 e.draw(position, text,Constants.SPRITE_NOT_SELECTED_COLOR);
 	             }
 	              
@@ -414,24 +411,5 @@ public class BattleEnemyField {
 		return this.ListOfEnemies.size();
 	}
 	
- private ArrayList<Entry<Enemy,Vector2f>> sortHashMap() {
-	 
-	 
-  Comparator<Entry<Enemy,Vector2f>> valueComparator = new Comparator<Entry<Enemy,Vector2f>>() {
-          
-          @Override
-          public int compare(Entry<Enemy,Vector2f> e1, Entry<Enemy,Vector2f> e2) {
-              Float v1 = e1.getValue().y;
-              Float v2 = e2.getValue().y;
-              return -v1.compareTo(v2);
-          }
-      };
-      	  
-      ArrayList<Entry<Enemy,Vector2f>> listOfEntries = new ArrayList<Entry<Enemy,Vector2f>>(this.ListOfEnemies.entrySet());
-      Collections.sort(listOfEntries, valueComparator);
-    
-      
- 
-	return listOfEntries;
- }
+
 }

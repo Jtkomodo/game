@@ -3,8 +3,11 @@ package Collisions;
 
 import org.joml.Math;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 
 import Data.Constants;
+import gameEngine.Entity;
+import gameEngine.MainRenderHandler;
 import gameEngine.Model;
 import gameEngine.Render;
 import gameEngine.Start;
@@ -14,6 +17,7 @@ public class AABB extends Collisions{
 	private float widthR,heightR,resistance,amount;//resistance is the amount of push away the box will have on the player
 	private Vector2f lc=new Vector2f(0,0),rc=new Vector2f(0,0),r,Pposition=new Vector2f(0,0),beforeCol=new Vector2f(0,0),edgep=new Vector2f(0,0),edgen=new Vector2f(0,0),ActualPosition=new Vector2f(0);
 	private Model aabb,piont;
+	private float z=50;
 	private boolean colide=false,COLIDECHECK=false;
 	private boolean hasFunction=false;
 	private FunctionCaller function;
@@ -337,14 +341,11 @@ public class AABB extends Collisions{
 	   if(Start.DEBUGCOLISIONS) {
 		
 
-		   Render.draw(aabb, position, 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE);
-		  // Start.s.bind();
-		  // Render.draw(piont, ActualPosition, 0, 6,Start.COLTEX,Constants.RED);
-		 
-			  
-			  Render.draw(piont, Pposition, 0, 1,Start.COLTEX,Constants.YELLOW);
+		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(position,z), 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE));
+		    
+		   MainRenderHandler.addEntity( new Entity(piont,new Vector3f( Pposition,z), 0, 1,Start.COLTEX,Constants.YELLOW));
 			
-			  Render.draw(piont, edgen, 0, 3,Start.COLTEX,Constants.YELLOW);
+		   MainRenderHandler.addEntity( new Entity(piont, new Vector3f(edgen,0), 0, 3,Start.COLTEX,Constants.YELLOW));
 			  
 
 		  // }
@@ -419,6 +420,22 @@ public class AABB extends Collisions{
 
 	public Vector2f getRc() {
 		return rc;
+	}
+
+
+
+
+
+	public float getZ() {
+		return z;
+	}
+
+
+
+
+
+	public void setZ(float z) {
+		this.z = z;
 	}
 
 	

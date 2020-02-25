@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Random;
 
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import Data.Moves;
@@ -15,6 +16,8 @@ import Items.Items;
 import Scripter.Proccesor;
 import ScripterCommands.DrawModel;
 import ScripterCommands.DrawString;
+import gameEngine.Entity;
+import gameEngine.MainRenderHandler;
 import gameEngine.Model;
 import gameEngine.Render;
 import gameEngine.Start;
@@ -27,7 +30,7 @@ public class Enemy extends BattleEntity{
 	private Model model;
     private Texture texture;  
     private float scale;
-   
+    private float z=1000;
 
 
 	public Enemy(Vector2f sizeForBar,Model model,Texture texture,float scale,String name,float atk, float def, float hp,float sp,float speed, Moves[] moves,Inventory inventory) {
@@ -45,7 +48,7 @@ public class Enemy extends BattleEntity{
 
 	public void draw(Vector2f position,TextBuilder text) {
 		
-		Render.draw(model, position, 0, scale, texture);
+		MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture));
 		this.hpbar.draw(position.add(0,80,new Vector2f()),text);
 		
 		
@@ -54,7 +57,7 @@ public class Enemy extends BattleEntity{
 
    public void draw(Vector2f position,TextBuilder text,Vector4f color) {
 		
-		Render.draw(model, position, 0, scale, texture,color);
+	    MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture,color));
 		this.hpbar.draw(position.add(0,80,new Vector2f()),text);
 		
 		
@@ -621,6 +624,14 @@ if(SPRestoringItemFound) {
 
 	public Texture getTexture() {
 		return texture;
+	}
+
+	public float getZ() {
+		return z;
+	}
+
+	public void setZ(float z) {
+		this.z = z;
 	}
 
 

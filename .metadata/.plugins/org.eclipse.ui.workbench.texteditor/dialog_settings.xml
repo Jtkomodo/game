@@ -2,35 +2,37 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="drawString" key="selection"/>
+		<item value="ui" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="drawString"/>
-			<item value="a1"/>
-			<item value="player"/>
-			<item value="vert"/>
-			<item value="vert*"/>
-			<item value="verts"/>
-			<item value="i+"/>
-			<item value="i"/>
-			<item value="color["/>
-			<item value=","/>
-			<item value="new"/>
-			<item value="uv"/>
-			<item value="cuv"/>
-			<item value="&quot;h&quot;"/>
-			<item value="flush"/>
+			<item value="ui"/>
+			<item value="gui"/>
+			<item value="i2"/>
+			<item value="vertices"/>
+			<item value="unbind"/>
+			<item value="2"/>
+			<item value="8"/>
+			<item value="f:"/>
+			<item value="f/"/>
+			<item value="f"/>
+			<item value="drawcount"/>
+			<item value="i3"/>
+			<item value="ui;"/>
+			<item value="glvertex"/>
+			<item value="verts[i2"/>
 		</list>
 		<list key="replacehistory">
+			<item value="i3"/>
+			<item value="i2"/>
+			<item value="0;"/>
 			<item value="position"/>
 			<item value="translations"/>
 			<item value="i2+"/>
 			<item value="i4+"/>
 			<item value="i3+"/>
-			<item value="i2"/>
 			<item value="colors["/>
 			<item value=";"/>
 			<item value="color[i+0]=new"/>
@@ -38,15 +40,13 @@
 			<item value="uv[i+0]=cuv"/>
 			<item value="verts[i]=verts"/>
 			<item value="MainBatchedRender"/>
-			<item value="Render.Debug"/>
-			<item value="Render.UIDraw"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="336" key="DIALOG_WIDTH"/>
+		<item value="575" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="454" key="DIALOG_HEIGHT"/>
-		<item value="1014" key="DIALOG_X_ORIGIN"/>
-		<item value="245" key="DIALOG_Y_ORIGIN"/>
+		<item value="438" key="DIALOG_HEIGHT"/>
+		<item value="1125" key="DIALOG_X_ORIGIN"/>
+		<item value="36" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

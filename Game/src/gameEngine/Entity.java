@@ -15,7 +15,7 @@ public class Entity {
     private float angle=0;
 	private Vector2f NonSquareSize;
 	private Vector4f color=Constants.DEFAULT_COLOR;
-    private boolean hasColor=false,hasNonSqaureSize=false,Mirror=false;
+    private boolean hasColor=false,hasNonSqaureSize=false,Mirror=false,UIPojeection=false;
 	
     
     
@@ -52,75 +52,43 @@ public class Entity {
 		this.hasNonSqaureSize =true;
 	}
 	
+	  public Entity(ModelFramwork model,Vector3f position,float angle, float size,Texture texture,boolean Mirror) {
+			this.angle=angle;
+	    	this.texture=texture;
+			this.model = model;
+			this.position = position;
+			this.Mirror=Mirror;
+			this.size = size;
+		}
+		public Entity(ModelFramwork model, Vector3f position,float angle, Vector2f nonSquareSize,Texture texture,boolean Mirror) {
+			this.angle=angle;
+			this.texture=texture;
+			this.model = model;
+			this.position = position;
+			this.Mirror=Mirror;
+			NonSquareSize = nonSquareSize;
+			this.hasNonSqaureSize =true;
+		}
+		public Entity(ModelFramwork model,Vector3f position,float angle, float size,Texture texture,Vector4f color,boolean Mirror) {
+			setColor(color);
+			this.angle=angle;
+	    	this.texture=texture;
+			this.model = model;
+			this.position = position;
+			this.Mirror=Mirror;
+			this.size = size;
+		}
+		public Entity(ModelFramwork model, Vector3f position,float angle, Vector2f nonSquareSize,Texture texture,Vector4f color,boolean Mirror) {
+			setColor(color);
+			this.angle=angle;
+			this.texture=texture;
+			this.model = model;
+			this.position = position;
+			this.Mirror=Mirror;
+			NonSquareSize = nonSquareSize;
+			this.hasNonSqaureSize =true;
+		}
 
-	public void  draw() {
-		
-	    Vector2f position=new Vector2f(this.position.x,this.position.y);
-		if(hasColor && this.hasNonSqaureSize) {
-			
-			Render.draw(model, position, angle,NonSquareSize, texture,color);
-			
-		}else if(hasColor) {
-			Render.draw(model, position, angle, size, texture,color);
-		}else if(this.hasNonSqaureSize) {
-			Render.draw(model, position, angle,NonSquareSize, texture);
-		}else {
-			Render.draw(model, position, angle, size, texture);
-		}
-		
-		
-	}
-	
-public void  Debugdraw() {
-    Vector2f position=new Vector2f(this.position.x,this.position.y);
-		if(hasColor && this.hasNonSqaureSize) {
-			
-			Render.Debugdraw(model, position, angle,NonSquareSize, texture,color);
-			
-		}else if(hasColor) {
-			Render.Debugdraw(model, position, angle, size, texture,color);
-		}else if(this.hasNonSqaureSize) {
-			Render.Debugdraw(model, position, angle,NonSquareSize, texture);
-		}else {
-			Render.Debugdraw(model, position, angle, size, texture);
-		}
-		
-		
-	}
-	
-public void  UIdraw() {
-    Vector2f position=new Vector2f(this.position.x,this.position.y);
-	if(hasColor && this.hasNonSqaureSize) {
-		
-		Render.UIdraw(model, position, angle,NonSquareSize, texture,color);
-		
-	}else if(hasColor) {
-		Render.UIdraw(model, position, angle, size, texture,color);
-	}else if(this.hasNonSqaureSize) {
-		Render.UIdraw(model, position, angle,NonSquareSize, texture);
-	}else {
-		Render.UIdraw(model, position, angle, size, texture);
-	}
-	
-	
-}
-public void  DebugUIdraw() {
-    Vector2f position=new Vector2f(this.position.x,this.position.y);
-	if(hasColor && this.hasNonSqaureSize) {
-		
-		Render.DebugUIdraw(model, position, angle,NonSquareSize, texture,color);
-		
-	}else if(hasColor) {
-		Render.DebugUIdraw(model, position, angle, size, texture,color);
-	}else if(this.hasNonSqaureSize) {
-		Render.DebugUIdraw(model, position, angle,NonSquareSize, texture);
-	}else {
-		Render.DebugUIdraw(model, position, angle, size, texture);
-	}
-	
-	
-}
-	
 	
 	
 	public ModelFramwork getModel() {
@@ -182,6 +150,9 @@ this.hasNonSqaureSize=false;
 	}
     
 
+	public void setAngle(float angle) {
+		this.angle = angle;
+	}
 	public Texture getTexture() {
 		return texture;
 	}
@@ -195,6 +166,12 @@ this.hasNonSqaureSize=false;
 	
 	public boolean isMirror() {
 		return this.Mirror;
+	}
+	public boolean getUIPojeection() {
+		return UIPojeection;
+	}
+	public void setUIPojeection(boolean uIPojeection) {
+		UIPojeection = uIPojeection;
 	}
 	
 	

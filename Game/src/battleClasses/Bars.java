@@ -1,9 +1,12 @@
 package battleClasses;
 
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import Data.Constants;
+import gameEngine.Entity;
+import gameEngine.MainRenderHandler;
 import gameEngine.Model;
 import gameEngine.Render;
 import gameEngine.Texture;
@@ -15,6 +18,7 @@ public abstract class Bars {
 	protected float max;
 	protected float value;
 	protected Vector4f Barcolor=Constants.BAR_COLOR_GREEN,lowValuecolor=Constants.BAR_COLOR_RED;
+	private float z=1000;
 	private Model model;
 	private Texture background;
 	private Vector2f backgroundScale; 
@@ -90,8 +94,8 @@ public abstract class Bars {
 		
 		
 		
-		Render.draw(model, position,0,new Vector2f(backgroundScale.x+2,backgroundScale.y+2),background);
-		Render.draw(model, new Vector2f(position.x-((this.backgroundScale.x-(scaleX))/2),position.y), 0 ,new Vector2f(scaleX,backgroundScale.y), texture,color);
+		MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z),0,new Vector2f(backgroundScale.x+2,backgroundScale.y+2),background));
+		MainRenderHandler.addEntity(new Entity(model, new Vector3f(position.x-((this.backgroundScale.x-(scaleX))/2),position.y,z+1), 0 ,new Vector2f(scaleX,backgroundScale.y), texture,color));
 		text.drawString(position.x-(this.backgroundScale.x/2),position.y+(this.backgroundScale.y/2)+6,0f,.12f);
 		
 	}
@@ -115,6 +119,16 @@ public abstract class Bars {
 
 	public void setValue(float value) {
 		this.value = value;
+	}
+
+
+	public float getZ() {
+		return z;
+	}
+
+
+	public void setZ(float z) {
+		this.z = z;
 	}
 
 	

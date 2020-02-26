@@ -5,8 +5,8 @@ import org.joml.Vector3f;
 
 import animation.Animate;
 import animation.AnimationHandler;
-import gameEngine.Render;
 import gameEngine.Timer;
+import rendering.Render;
 
 
 public class animate extends Commands {

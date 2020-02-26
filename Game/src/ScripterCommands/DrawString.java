@@ -2,8 +2,8 @@ package ScripterCommands;
 
 import org.joml.Vector2f;
 
-import gameEngine.Render;
 import gameEngine.Timer;
+import rendering.Render;
 import textrendering.TextBuilder;
 
 public class DrawString extends Commands {

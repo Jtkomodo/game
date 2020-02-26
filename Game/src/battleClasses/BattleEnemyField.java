@@ -23,12 +23,12 @@ import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import Data.Constants;
-import gameEngine.Render;
 import gameEngine.Start;
 import gameEngine.Timer;
 import guis.GUIMEthods;
 import input.GetInput;
 import input.InputHandler;
+import rendering.Render;
 import textrendering.TextBuilder;
 
 public class BattleEnemyField {

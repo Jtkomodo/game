@@ -1,4 +1,4 @@
-package gameEngine;
+package rendering;
 
 
 import static org.lwjgl.opengl.GL11.*;
@@ -10,6 +10,8 @@ import java.nio.*;
 
 import  org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL;
+
+import gameEngine.Start;
 
 public class MultipleTextureBatchedModel {
 	
@@ -28,8 +30,8 @@ public class MultipleTextureBatchedModel {
 
 		 private int drawCount,drawCount2;
 			private int v_id,tex_id,ind_id,color_id,Trans_id;//made these public so that we can get to them from another method to change values
-		private int indBase,pionter,sections;
-	   private final int maxSections=1000000;
+		private int indBase,pionter,sections=0;
+	   private final int maxSections=10000;
 		private int pionter2=0,pionter3=0;
 		public MultipleTextureBatchedModel() {
 			
@@ -55,7 +57,7 @@ public class MultipleTextureBatchedModel {
 			}
 		
 		
-		public void draw() {
+		protected void draw() {
 			
 			glBindBuffer(GL_ARRAY_BUFFER,v_id);
 			  glVertexAttribPointer(0,2,GL_FLOAT,false,0,0);
@@ -83,7 +85,14 @@ public class MultipleTextureBatchedModel {
 	public boolean addvaluestoVBO(float[] v,float[] uv,float[] colors,float[] translation) {//used to add a new model to the buffers
 		if((uv.length%12==0) && (v.length%8==0) && (colors.length%16==0 )&& (translation.length%12==0)) {//just makes sure they have the correct size of data
 			
-        int quads=v.length/8;		
+        int quads=v.length/8;	
+        sections+=quads; //this is for the method change values
+        if((sections>=maxSections)) {
+        	sections-=quads;
+        	return true;
+        }
+        
+        
 		glBindBuffer(GL_ARRAY_BUFFER, v_id);
 		 glBufferSubData(GL_ARRAY_BUFFER,pionter, makeBuffer(v));//adds the vertex values to the vertex buffer
 	//glBindBuffer(GL_ARRAY_BUFFER,0);
@@ -115,9 +124,9 @@ public class MultipleTextureBatchedModel {
 		 pionter=pionter+(v.length*4);//pionter to the next value in the vertex buffer so that it won't write over the old one
 		 pionter2=pionter2+(uv.length*4);//pionter to the next value in the uv buffer
 		 pionter3=pionter3+(colors.length*4);//pionter to the next value in the color buffer
-		 sections+=quads; //this is for the method change values
+		
 		 	unbindBuffers();
-		 return (sections>=maxSections);
+		 return false;
 		 
 		}else{
 			Start.DebugPrint("sorry but that is not the correct format for the data. sizes of each is"+ v.length+","+uv.length+","+colors.length+","+translation.length+"/nShould be devisable by 8,12,16,12");
@@ -128,6 +137,11 @@ public class MultipleTextureBatchedModel {
 		
 	}
 		
+	public int getSections() {
+		return this.sections;
+	}
+
+
 	private  FloatBuffer makeBuffer(float[] array ) {
 		FloatBuffer buffer= BufferUtils.createFloatBuffer(array.length); //this just is initializing our buffer with the correct capacity
 		buffer.put(array);//puts the data in the newly created buffer

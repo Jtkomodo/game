@@ -1,13 +1,16 @@
 package ScripterCommands;
 
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import Data.Constants;
-import gameEngine.ModelFramwork;
-import gameEngine.Render;
+import gameEngine.Entity;
 import gameEngine.Texture;
 import gameEngine.Timer;
+import rendering.MainRenderHandler;
+import rendering.ModelFramwork;
+import rendering.Render;
 
 public class DrawModel extends Commands {
 
@@ -64,8 +67,8 @@ public class DrawModel extends Commands {
 		
 			
 		}
-		
-		Render.draw(model,position,0f,size,texture,color);
+		float z=10000;
+		MainRenderHandler.addEntity(new Entity(model,new Vector3f(position,z),0f,size,texture,color));
 		
 		
 	}

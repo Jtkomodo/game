@@ -12,12 +12,12 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import gameEngine.Entity;
-import gameEngine.MainRenderHandler;
-import gameEngine.Model;
-import gameEngine.ModelFramwork;
-import gameEngine.Render;
 import gameEngine.Start;
 import gameEngine.Texture;
+import rendering.MainRenderHandler;
+import rendering.Model;
+import rendering.ModelFramwork;
+import rendering.Render;
 
 
 public class UIBoxState {

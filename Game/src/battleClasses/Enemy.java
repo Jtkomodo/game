@@ -17,11 +17,11 @@ import Scripter.Proccesor;
 import ScripterCommands.DrawModel;
 import ScripterCommands.DrawString;
 import gameEngine.Entity;
-import gameEngine.MainRenderHandler;
-import gameEngine.Model;
-import gameEngine.Render;
 import gameEngine.Start;
 import gameEngine.Texture;
+import rendering.MainRenderHandler;
+import rendering.Model;
+import rendering.Render;
 import textrendering.TextBuilder;
 
 public class Enemy extends BattleEntity{

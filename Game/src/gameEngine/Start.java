@@ -67,6 +67,11 @@ import input.BIndingNameParser;
 import input.CharCallback;
 import input.GetInput;
 import input.InputHandler;
+import rendering.MainBatchRender;
+import rendering.MainRenderHandler;
+import rendering.Model;
+import rendering.OneTextureBatchedModel;
+import rendering.Render;
 import textrendering.Fontloader;
 import textrendering.TextBuilder;
 public class Start {
@@ -555,16 +560,14 @@ Render.enable();//enables render
      	StartBox.draw(); 
       
 	  ShowBox.draw();
-textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")\nAnimations: "+AnimationHandler.amountInList());
-textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
+	  if(showFps)
+		  textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.2f);
+		  textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.25f);
 
-if(showFps)
-textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.2f);
-textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.25f);
 
 if(CharCallback.takeInput) {
 	
-    Render.draw(textboxM,new Vector2f(screencoordx,screencoordy),0,3, COLTEX,Constants.BLACK);
+     MainRenderHandler.addEntity(new Entity(textboxM,new Vector3f(screencoordx,screencoordy,text1.getZ()-1),0,3, COLTEX,Constants.BLACK));
     text1.setString("TAKING INPUT");
 	text1.drawString(screencoordx-75, screencoordy+70, .2f,Constants.RED);
 }
@@ -578,9 +581,15 @@ Proccesor.proccesCommands(time);
 MainRenderHandler.SortEntities(); 
 
 MainRenderHandler.addToBatchedRender();
+textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")\nAnimations: "+AnimationHandler.amountInList()+"\nQuads"+MainBatchRender.getQuads());
+textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
+
+MainRenderHandler.clear();
+
+MainRenderHandler.addToBatchedRender();
 MainBatchRender.draw();
 MainBatchRender.flushModel();
-MainRenderHandler.clear();
+
 		    w.render();
 		    w.clear();
 		  

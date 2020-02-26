@@ -1,11 +1,14 @@
 package Items;
 
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 
 import battleClasses.BattleEntity;
-import gameEngine.Model;
-import gameEngine.Render;
+import gameEngine.Entity;
 import gameEngine.Texture;
+import rendering.MainRenderHandler;
+import rendering.Model;
+import rendering.Render;
 
 public abstract class Item {
 
@@ -56,7 +59,7 @@ public abstract class Item {
 	
 	
 	public void draw(Vector2f position,float scale) {
-		Render.draw(model, position,0, scale, texture);
+	   MainRenderHandler.addEntity( new Entity(model, new Vector3f(position,10000),0, scale, texture));
 		
 		
 	}

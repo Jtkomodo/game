@@ -7,6 +7,8 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import Data.TilesData;
+import rendering.MainRenderHandler;
+import rendering.OneTextureBatchedModel;
 
 public class MapLoader {
 

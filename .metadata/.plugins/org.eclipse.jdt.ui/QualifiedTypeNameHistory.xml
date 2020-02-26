@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
     <fullyQualifiedTypeName name="Data.Enemies"/>
     <fullyQualifiedTypeName name="Items.Items"/>
     <fullyQualifiedTypeName name="gameEngine.Model"/>
@@ -48,7 +47,6 @@
     <fullyQualifiedTypeName name="org.joml.Matrix4f"/>
     <fullyQualifiedTypeName name="gameEngine.MatrixMath"/>
     <fullyQualifiedTypeName name="java.lang.Float"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="org.joml.Vector4f"/>
     <fullyQualifiedTypeName name="Data.Constants"/>
@@ -56,8 +54,10 @@
     <fullyQualifiedTypeName name="java.util.Iterator"/>
     <fullyQualifiedTypeName name="gameEngine.MainBatchRender"/>
     <fullyQualifiedTypeName name="gameEngine.Render"/>
-    <fullyQualifiedTypeName name="org.joml.Vector3f"/>
     <fullyQualifiedTypeName name="gameEngine.MainRenderHandler"/>
-    <fullyQualifiedTypeName name="gameEngine.Entity"/>
     <fullyQualifiedTypeName name="gameEngine.MultipleTextureBatchedModel"/>
+    <fullyQualifiedTypeName name="org.joml.Vector3f"/>
+    <fullyQualifiedTypeName name="gameEngine.Entity"/>
+    <fullyQualifiedTypeName name="rendering.MainRenderHandler"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
 </qualifiedTypeNameHistroy>

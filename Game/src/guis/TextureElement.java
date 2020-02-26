@@ -4,10 +4,10 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import gameEngine.Entity;
-import gameEngine.MainRenderHandler;
-import gameEngine.Model;
-import gameEngine.Render;
 import gameEngine.Texture;
+import rendering.MainRenderHandler;
+import rendering.Model;
+import rendering.Render;
 
 public class TextureElement extends UIElement {
 

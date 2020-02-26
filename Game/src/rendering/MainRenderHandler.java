@@ -1,4 +1,4 @@
-package gameEngine;
+package rendering;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +11,7 @@ import org.joml.Vector3f;
 
 import Data.Moves;
 import battleClasses.Enemy;
+import gameEngine.Entity;
 
 public class MainRenderHandler {
 

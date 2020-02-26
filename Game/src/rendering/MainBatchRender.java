@@ -1,4 +1,4 @@
-package gameEngine;
+package rendering;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,9 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import Data.Constants;
+import gameEngine.MatrixMath;
+import gameEngine.Start;
+import gameEngine.Texture;
 
 public class MainBatchRender {
 
@@ -250,13 +253,13 @@ addDataToBatch(verts,uvs,colors,translations);
 		for(int i=0;i<models.size();i++) {
 		models.get(i).flushBuffers();
 		}
-		
+		currentbatch=0;
 	}
 	private static void addDataToBatch(float[] verts,float[] uvs,float[] colors,float[] translations) {
 		if(models.isEmpty()) {
 			models.add(new MultipleTextureBatchedModel());
 			currentbatch=0;
-			
+			Start.DebugPrint("hi");
 		}
 
 
@@ -264,9 +267,15 @@ addDataToBatch(verts,uvs,colors,translations);
 		 boolean batchedHasReachedMax=MainBatchRender.models.get(currentbatch).addvaluestoVBO(verts,uvs,colors,translations);
 
 		 if(batchedHasReachedMax) {
-		   models.add(new MultipleTextureBatchedModel());
+			   currentbatch++;
+			 if(models.size()<=currentbatch) { 
+		 
+				models.add(new MultipleTextureBatchedModel());
+			
 		
-		   currentbatch++;	
+			}
+			 
+		   models.get(currentbatch).addvaluestoVBO(verts, uvs, colors, translations);
 		 }
 		
 	}
@@ -497,7 +506,17 @@ addDataToBatch(verts,uvs,colors,translations);
 
 	}
 	
-	
+	public static int getQuads() {
+		int quads=0;
+		//Start.DebugPrint(""+models.size());
+		for(int i=0;i<models.size();i++) {
+			
+			quads+=models.get(i).getSections();
+		//	Start.DebugPrint(i+","+quads);
+		}
+		return quads;
+		
+	}
 	
 	
 	

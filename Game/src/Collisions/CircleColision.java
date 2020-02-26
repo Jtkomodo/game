@@ -1,15 +1,19 @@
 package Collisions;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 
 import Data.Constants;
-import gameEngine.Model;
-import gameEngine.Render;
+import gameEngine.Entity;
 import gameEngine.Start;
 import gameEngine.VectorMath;
+import rendering.MainRenderHandler;
+import rendering.Model;
+import rendering.Render;
 
 
 public class CircleColision extends Collisions {
 private float r;
+private float z=100000;
 private Vector2f closest=new Vector2f(0,0),d=new Vector2f(0,0),closest2=new Vector2f(0,0),closest3=new Vector2f(0);
 private boolean isCheccked=false,debug=Start.DEBUGCOLISIONS,lastResult=false;
 private Model Circle,piont;
@@ -169,17 +173,17 @@ private Model Circle,piont;
 		if(debug) {
 		
 		
-		   Render.draw(Circle, position, 0, 1,Start.circleCol1);
+			MainRenderHandler.addEntity( new Entity(Circle, new Vector3f(position,z), 0, 1,Start.circleCol1));
 		   
 		 
 		  if(this.isCheccked)
-		  Render.draw(piont, closest,0, 3, Start.COLTEX,Constants.YELLOW);
+		MainRenderHandler.addEntity( new Entity(piont, new Vector3f(closest,z),0, 3, Start.COLTEX,Constants.YELLOW));
 		  
 			  
 		  
 		 
-		   Render.draw(piont, closest2,0, 2, Start.COLTEX,Constants.BLACK);
-		   Render.draw(piont, closest3,0, 2, Start.COLTEX,Constants.BLACK);
+			MainRenderHandler.addEntity( new Entity(piont,new Vector3f(closest2,z),0, 2, Start.COLTEX,Constants.BLACK));
+			MainRenderHandler.addEntity( new Entity(piont, new Vector3f(closest3,z),0, 2, Start.COLTEX,Constants.BLACK));
 	   
 		}
 	

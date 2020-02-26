@@ -3,12 +3,12 @@ package textrendering;
 import org.joml.*;
 
 import Data.Constants;
-import gameEngine.OneTextureBatchedModel;
 import gameEngine.Entity;
-import gameEngine.MainRenderHandler;
 import gameEngine.MatrixMath;
-import gameEngine.Render;
 import gameEngine.Start;
+import rendering.MainRenderHandler;
+import rendering.OneTextureBatchedModel;
+import rendering.Render;
 
 public class TextBuilder{
 

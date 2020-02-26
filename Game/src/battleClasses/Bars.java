@@ -6,10 +6,10 @@ import org.joml.Vector4f;
 
 import Data.Constants;
 import gameEngine.Entity;
-import gameEngine.MainRenderHandler;
-import gameEngine.Model;
-import gameEngine.Render;
 import gameEngine.Texture;
+import rendering.MainRenderHandler;
+import rendering.Model;
+import rendering.Render;
 import textrendering.TextBuilder;
 
 public abstract class Bars {

@@ -1,10 +1,15 @@
-package gameEngine;
+package rendering;
 
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import Data.Constants;
+import gameEngine.Camera;
+import gameEngine.MatrixMath;
+import gameEngine.ShaderProgram;
+import gameEngine.Start;
+import gameEngine.Texture;
 
 public class Render {
 
@@ -20,7 +25,7 @@ public class Render {
 	
 	
 	
-	public static void Debugdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
+	protected static void Debugdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
 		
 		if(Start.Debugdraw)
 			draw(model,position,angle,scale,texture,color);
@@ -28,14 +33,14 @@ public class Render {
 	
 	
 	
-   public static void Debugdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture) {
+   protected static void Debugdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture) {
 		
 		if(Start.Debugdraw)
 			draw(model,position,angle,scale,texture);
 	}
 	
 
-	public static void DebugUIdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
+	protected static void DebugUIdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
 		
 		if(Start.Debugdraw)
 			UIdraw(model,position,angle,scale,texture,color);
@@ -43,7 +48,7 @@ public class Render {
 	
 	
 	
-  public static void DebugUIdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture) {
+  protected static void DebugUIdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture) {
 		
 		if(Start.Debugdraw)
 			UIdraw(model,position,angle,scale,texture);
@@ -54,7 +59,7 @@ public class Render {
 	
 	
 	
-	public static void draw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
+	protected static void draw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
 if(draw) {
 	Vector4f newcolor=new Vector4f(0);
 		
@@ -96,7 +101,7 @@ if(draw) {
 	
 	
 	
-   public static void draw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture) {
+   protected static void draw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture) {
 	   if(draw) {	
 	   drawcalls++;
 		
@@ -117,7 +122,7 @@ if(draw) {
 	   }
 		
 	}
-   public static void UIdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
+   protected static void UIdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color) {
 	   if(draw) {
 		Vector4f newcolor=new Vector4f(0);
 		
@@ -145,7 +150,7 @@ if(draw) {
 	   }
 		
 	}
-	public static void UIdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture) {
+	protected static void UIdraw(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture) {
 		if(draw) {
 		
 		
@@ -176,7 +181,7 @@ if(mirror) {
     
 	
 	
-	public static void draw(MultipleTextureBatchedModel model,Vector2f position,float angle,float scale,Texture[] textures) {
+	protected static void draw(MultipleTextureBatchedModel model,Vector2f position,float angle,float scale,Texture[] textures) {
 		
 		changeShader(Start.Batcheds);
 		int[] samplers=new int[textures.length];
@@ -211,7 +216,7 @@ if(mirror) {
 			
 	
 	
-	public static void Debugdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture,Vector4f color) {
+	protected static void Debugdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture,Vector4f color) {
 		
 		if(Start.Debugdraw)
 			draw(model,position,angle,scale,texture,color);
@@ -219,14 +224,14 @@ if(mirror) {
 	
 	
 	
-   public static void Debugdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture) {
+   protected static void Debugdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture) {
 		
 		if(Start.Debugdraw)
 			draw(model,position,angle,scale,texture);
 	}
 	
 
-	public static void DebugUIdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture,Vector4f color) {
+	protected static void DebugUIdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture,Vector4f color) {
 		
 		if(Start.Debugdraw)
 			UIdraw(model,position,angle,scale,texture,color);
@@ -234,7 +239,7 @@ if(mirror) {
 	
 	
 	
-  public static void DebugUIdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture) {
+  protected static void DebugUIdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture) {
 		
 		if(Start.Debugdraw)
 			UIdraw(model,position,angle,scale,texture);
@@ -245,7 +250,7 @@ if(mirror) {
 	
 	
 	
-	public static void draw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture,Vector4f color) {
+	protected static void draw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture,Vector4f color) {
 if(draw) {
 	Vector4f newcolor=new Vector4f(0);
 		
@@ -287,7 +292,7 @@ if(draw) {
 	
 	
 	
-   public static void draw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture) {
+   protected static void draw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture) {
 	   if(draw) {	
 	   drawcalls++;
 		
@@ -308,7 +313,7 @@ if(draw) {
 	   }
 		
 	}
-   public static void UIdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture,Vector4f color) {
+   protected static void UIdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture,Vector4f color) {
 	   if(draw) {
 		Vector4f newcolor=new Vector4f(0);
 		
@@ -336,7 +341,7 @@ if(draw) {
 	   }
 		
 	}
-	public static void UIdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture) {
+	protected static void UIdraw(ModelFramwork model,Vector2f position,float angle,Vector2f scale,Texture texture) {
 		if(draw) {
 		
 		
@@ -392,12 +397,12 @@ if(mirror) {
 	}
 
 
-	public static void setDrawcalls(int drawcalls) {
+	protected static void setDrawcalls(int drawcalls) {
 		Render.drawcalls = drawcalls;
 	}
 
 
-	public static void Mirror() {
+	protected static void Mirror() {
 		
 		Render.mirror = true;
 	}
@@ -405,14 +410,14 @@ if(mirror) {
 	
 	
 	
-	public static Camera getCam() {
+	protected static Camera getCam() {
 		return cam;
 	}
 
 
 
 
-	public static void setCam(Camera cam) {
+	protected static void setCam(Camera cam) {
 		Render.cam = cam;
 	}
 

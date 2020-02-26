@@ -2,12 +2,17 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="ui" key="selection"/>
+		<item value="sections" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="sections"/>
+			<item value="sectiona"/>
+			<item value="flush"/>
+			<item value="public static"/>
+			<item value="draw"/>
 			<item value="ui"/>
 			<item value="gui"/>
 			<item value="i2"/>
@@ -18,13 +23,9 @@
 			<item value="f:"/>
 			<item value="f/"/>
 			<item value="f"/>
-			<item value="drawcount"/>
-			<item value="i3"/>
-			<item value="ui;"/>
-			<item value="glvertex"/>
-			<item value="verts[i2"/>
 		</list>
 		<list key="replacehistory">
+			<item value="protected static"/>
 			<item value="i3"/>
 			<item value="i2"/>
 			<item value="0;"/>
@@ -39,7 +40,6 @@
 			<item value="uvs"/>
 			<item value="uv[i+0]=cuv"/>
 			<item value="verts[i]=verts"/>
-			<item value="MainBatchedRender"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

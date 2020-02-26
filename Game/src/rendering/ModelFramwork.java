@@ -1,4 +1,4 @@
-package gameEngine;
+package rendering;
 
 import static org.lwjgl.opengl.GL11.GL_LINES;
 import static org.lwjgl.opengl.GL11.GL_POINTS;
@@ -10,7 +10,7 @@ public abstract class ModelFramwork {
 	protected float[] Vertices,UV_coords; 
 	
 	
-	public abstract void draw();
+	protected abstract void draw();
 	
 	
 	

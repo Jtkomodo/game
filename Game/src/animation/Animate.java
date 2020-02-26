@@ -7,12 +7,12 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import gameEngine.Entity;
-import gameEngine.MainRenderHandler;
-import gameEngine.Model;
-import gameEngine.Render;
 import gameEngine.Start;
 import gameEngine.Texture;
 import gameEngine.Timer;
+import rendering.MainRenderHandler;
+import rendering.Model;
+import rendering.Render;
 
 
 public class Animate {

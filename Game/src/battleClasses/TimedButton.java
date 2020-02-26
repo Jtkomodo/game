@@ -14,10 +14,10 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 
 import org.joml.Vector2f;
 
-import gameEngine.Model;
 import gameEngine.Start;
 import gameEngine.Texture;
 import input.InputHandler;
+import rendering.Model;
 import textrendering.TextBuilder;
 
 public abstract class TimedButton {

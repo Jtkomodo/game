@@ -7,11 +7,11 @@ import org.joml.Vector3f;
 
 import Data.Constants;
 import gameEngine.Entity;
-import gameEngine.MainRenderHandler;
-import gameEngine.Model;
-import gameEngine.Render;
 import gameEngine.Start;
 import guis.FunctionCaller;
+import rendering.MainRenderHandler;
+import rendering.Model;
+import rendering.Render;
 //06d7ea
 public class AABB extends Collisions{
 	private float widthR,heightR,resistance,amount;//resistance is the amount of push away the box will have on the player

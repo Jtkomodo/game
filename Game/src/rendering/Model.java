@@ -1,4 +1,4 @@
-package gameEngine;
+package rendering;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
@@ -147,7 +147,7 @@ public Model(float width,float height,float u,float v,float texWidth,float texHe
 		this.indeces = indeces;
 	}
 
-	public void draw() {
+	protected void draw() {
 	if(draw) {	
 		
 		

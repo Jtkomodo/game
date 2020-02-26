@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -26,7 +27,7 @@ import org.newdawn.slick.opengl.PNGDecoder;
 public class Texture {
 private  int TEXid;
 
-
+private static ArrayList<Texture> textures=new ArrayList<Texture>();
 private int h,w;
 private IntBuffer width,height,comp;
 
@@ -102,7 +103,7 @@ public Texture(String path) {
 		 h= decoder.getHeight();
 	
 	    this.TEXid = glGenTextures();
-	    
+	    textures.add(this);
 	  loadTexture(data);
 	  } catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -151,7 +152,11 @@ private void loadTexture(ByteBuffer data) {
    
   
 }
-
+public static void deleteAllTextures() {
+	for(int i=0;i<textures.size();i++) {
+	textures.get(i).delete();
+	}
+	}
 
 
 

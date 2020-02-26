@@ -605,7 +605,6 @@ MainBatchRender.flushModel();
 		w.destroy();
 		AudioInit.destroy();
 		MainBatchRender.deleteResources();
-		ModelFramwork.deleteALL();
 		System.exit(0);
 		
 		

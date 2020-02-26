@@ -26,7 +26,8 @@ public class Model extends ModelFramwork{
 		
 		
 public Model(float width,float height,float u,float v,float texWidth,float texHeight) {
-		  float  Texwidth=texWidth;
+		 
+	        float  Texwidth=texWidth;
 			float Texheight=texHeight;		
 			float  wi=width;
 			float  h=height;
@@ -117,7 +118,7 @@ public Model(float width,float height,float u,float v,float texWidth,float texHe
 		glBindVertexArray(0);
 
   //  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);		
-			
+			listOfModels.add(this);
 	
 		
 
@@ -201,6 +202,17 @@ private void enableAtributes() {
 private void disableAtributes() {
 	glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
+}
+
+
+
+
+
+@Override
+protected void delete() {
+	glDeleteVertexArrays(vao_id);
+	glDeleteBuffers(new int[] {this.v_id,this.tex_id,this.ind_id});
+	
 }
 
 

@@ -3,12 +3,15 @@ package rendering;
 import static org.lwjgl.opengl.GL11.GL_LINES;
 import static org.lwjgl.opengl.GL11.GL_POINTS;
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
+import org.lwjgl.opengl.GL15;
+
+import java.util.ArrayList;
 
 public abstract class ModelFramwork {
 
 	protected static int DrawMethod=GL_TRIANGLES;
 	protected float[] Vertices,UV_coords; 
-	
+	protected static ArrayList<ModelFramwork> listOfModels=new ArrayList<ModelFramwork>();
 	
 	protected abstract void draw();
 	
@@ -27,6 +30,20 @@ public abstract class ModelFramwork {
 	
 		return this.Vertices;
 	}
+
+   public static void deleteALL() {
+	   for(int i=0;i<listOfModels.size();i++) {
+		   listOfModels.get(i).delete();
+		   
+	   }
+	   
+   }
+
+
+	protected abstract void delete();
+	
+	
+
 
 
 

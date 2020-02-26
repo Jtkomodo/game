@@ -24,13 +24,11 @@ public class OneTextureBatchedModel extends ModelFramwork{
 	 private int drawCount,drawCount2;
 		private int v_id,tex_id,ind_id;//made these public so that we can get to them from another method to change values
 	private int indBase,pionter,sections;
-	private long Texsize=100000;//size of the amount of space to allocate for the buffers 
-	private long Indsize=100000;
-	private long Vertsize=100000;
+    private final int MaxSections=500;
 	public OneTextureBatchedModel() {
 		
 		//setting everything to 0 
-		
+		listOfModels.add(this);
 		drawCount=0;
 		drawCount2=0;
 		indBase=0;
@@ -70,7 +68,11 @@ public class OneTextureBatchedModel extends ModelFramwork{
 public void addvaluestoVBO(float[] v,float[] uv) {//used to add a new model to the buffers
 	if((v.length == uv.length) && v.length==8) {//just makes sure they have the correct size of data
 		
-
+		sections++; //this is for the method change values
+		if(sections>this.MaxSections) {
+			sections--;
+			return;
+		}
 	
 	glBindBuffer(GL_ARRAY_BUFFER, v_id);
 	 glBufferSubData(GL_ARRAY_BUFFER,pionter, makeBuffer(v));//adds the vertex values to the vertex buffer
@@ -96,11 +98,11 @@ int[] indeces= new int[] {
 	
 	indBase=indBase+4;//this makes sure that the indeces are loaded in right other wise it will  draw the same model multiple times
 	 pionter=pionter+(8*4);//pionter to the next value in the vertex and uv buffers so that it won't write over the old ones
-	sections++; //this is for the method change values
+	
 	
 	
 	}else {
-		Start.DebugPrint("whoops");
+		Start.DebugPrint("[ERROR]sorry but both verts and uv must have a size of 8",this.getClass());
 	}
 	
 
@@ -185,15 +187,15 @@ private void init() {
 	enable();
 	
 	glBindBuffer(GL_ARRAY_BUFFER,v_id);
-	  glBufferData(GL_ARRAY_BUFFER,Vertsize,GL_DYNAMIC_DRAW);
+	  glBufferData(GL_ARRAY_BUFFER,this.MaxSections*(8*4),GL_DYNAMIC_DRAW);
 	
 	 
 glBindBuffer(GL_ARRAY_BUFFER,tex_id);
-	  glBufferData(GL_ARRAY_BUFFER,Texsize,GL_DYNAMIC_DRAW);
+	  glBufferData(GL_ARRAY_BUFFER,this.MaxSections*(8*4),GL_DYNAMIC_DRAW);
 		
 	  
 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
-glBufferData(GL_ELEMENT_ARRAY_BUFFER,Indsize,GL_DYNAMIC_DRAW);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER,this.MaxSections*(6*4),GL_DYNAMIC_DRAW);
 
 unbindBuffers();
 
@@ -215,6 +217,12 @@ public float[] getVertices() {
 	
 	
 	return data;
+}
+
+@Override
+protected void delete() {
+	glDeleteBuffers(new int[] {this.v_id,this.ind_id,this.tex_id});
+	
 }
 
 

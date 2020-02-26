@@ -144,7 +144,7 @@
 			<item value="" key="javaElement"/>
 			<item value="0" key="scope"/>
 			<item value="11" key="includeMask"/>
-			<item value="Render.draw" key="pattern"/>
+			<item value="setString" key="pattern"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="matchLocations"/>
 			<item value="1" key="searchFor"/>
@@ -168,7 +168,7 @@
 			<item value="" key="javaElement"/>
 			<item value="0" key="scope"/>
 			<item value="11" key="includeMask"/>
-			<item value="text.set" key="pattern"/>
+			<item value="text1" key="pattern"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="matchLocations"/>
 			<item value="1" key="searchFor"/>
@@ -192,7 +192,7 @@
 			<item value="" key="javaElement"/>
 			<item value="0" key="scope"/>
 			<item value="11" key="includeMask"/>
-			<item value="setString" key="pattern"/>
+			<item value="text.set" key="pattern"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="matchLocations"/>
 			<item value="1" key="searchFor"/>
@@ -240,7 +240,7 @@
 			<item value="" key="javaElement"/>
 			<item value="0" key="scope"/>
 			<item value="11" key="includeMask"/>
-			<item value="/8" key="pattern"/>
+			<item value="flush" key="pattern"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="matchLocations"/>
 			<item value="1" key="searchFor"/>
@@ -252,7 +252,7 @@
 			<item value="" key="javaElement"/>
 			<item value="0" key="scope"/>
 			<item value="11" key="includeMask"/>
-			<item value="text1" key="pattern"/>
+			<item value="/8" key="pattern"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="matchLocations"/>
 			<item value="1" key="searchFor"/>
@@ -264,7 +264,7 @@
 			<item value="" key="javaElement"/>
 			<item value="0" key="scope"/>
 			<item value="11" key="includeMask"/>
-			<item value="flush*" key="pattern"/>
+			<item value="Render.draw" key="pattern"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="matchLocations"/>
 			<item value="1" key="searchFor"/>
@@ -276,7 +276,7 @@
 			<item value="" key="javaElement"/>
 			<item value="0" key="scope"/>
 			<item value="11" key="includeMask"/>
-			<item value="flush" key="pattern"/>
+			<item value="flush*" key="pattern"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="matchLocations"/>
 			<item value="1" key="searchFor"/>

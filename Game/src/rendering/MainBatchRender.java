@@ -517,7 +517,19 @@ addDataToBatch(verts,uvs,colors,translations);
 		return quads;
 		
 	}
-	
+	public static void deleteResources() {
+		for(int i=0;i<textures.size();i++) {
+			
+			textures.get(i).delete();
+		}
+		
+		for(int i=0;i<models.size();i++) {
+			models.get(i).delete();
+		}
+		
+		
+		
+	}
 	
 	
 	

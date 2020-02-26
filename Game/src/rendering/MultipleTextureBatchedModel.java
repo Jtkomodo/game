@@ -28,10 +28,10 @@ public class MultipleTextureBatchedModel {
 	*/
 
 
-		 private int drawCount,drawCount2;
-			private int v_id,tex_id,ind_id,color_id,Trans_id;//made these public so that we can get to them from another method to change values
+		private int drawCount,drawCount2;
+		private int v_id,tex_id,ind_id,color_id,Trans_id;//made these public so that we can get to them from another method to change values
 		private int indBase,pionter,sections=0;
-	   private final int maxSections=10000;
+	    private final int maxSections=10000;
 		private int pionter2=0,pionter3=0;
 		public MultipleTextureBatchedModel() {
 			
@@ -216,6 +216,12 @@ public class MultipleTextureBatchedModel {
 
 	unbindBuffers();
 
+	}
+
+
+	public void delete() {
+		glDeleteBuffers(new int[] {this.tex_id,this.v_id,this.color_id,this.Trans_id,this.ind_id});
+		
 	}
 
 

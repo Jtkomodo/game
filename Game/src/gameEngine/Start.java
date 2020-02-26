@@ -70,6 +70,7 @@ import input.InputHandler;
 import rendering.MainBatchRender;
 import rendering.MainRenderHandler;
 import rendering.Model;
+import rendering.ModelFramwork;
 import rendering.OneTextureBatchedModel;
 import rendering.Render;
 import textrendering.Fontloader;
@@ -162,8 +163,7 @@ public class Start {
 		
 		
 		
-		
-        
+
 		
 		
 		float[] uvBg={
@@ -498,8 +498,8 @@ Render.enable();//enables render
 				
 		screencoordx=-camx;
 	    screencoordy=-camy;
-	   MainRenderHandler.addEntity(test);
-	    MainRenderHandler.addEntity(test2);
+	//   MainRenderHandler.addEntity(test);
+	 //   MainRenderHandler.addEntity(test2);
 	    		
 	     cam.setPosition((new Vector2f(camx,camy)));s.bind();
 	     //cam.setPosition((new Vector2f(camx,camy)));s.bind();
@@ -567,9 +567,11 @@ Render.enable();//enables render
 
 if(CharCallback.takeInput) {
 	
-     MainRenderHandler.addEntity(new Entity(textboxM,new Vector3f(screencoordx,screencoordy,text1.getZ()-1),0,3, COLTEX,Constants.BLACK));
+   MainRenderHandler.addEntity(new Entity(textboxM,new Vector3f(screencoordx,screencoordy,text1.getZ()-1),0,3, COLTEX,Constants.BLACK));
     text1.setString("TAKING INPUT");
 	text1.drawString(screencoordx-75, screencoordy+70, .2f,Constants.RED);
+    text1.setString(CharCallback.string);
+    text1.drawString(screencoordx-100, screencoordy, .15f);
 }
 
 
@@ -602,6 +604,8 @@ MainBatchRender.flushModel();
 		DebugPrint("Highest fps="+HighFPs+" Lowest fps="+lowFPS);
 		w.destroy();
 		AudioInit.destroy();
+		MainBatchRender.deleteResources();
+		ModelFramwork.deleteALL();
 		System.exit(0);
 		
 		

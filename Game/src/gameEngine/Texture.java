@@ -131,7 +131,9 @@ public Texture(String path) {
 		glBindTexture(GL_TEXTURE_2D,0);
 	}
 
-
+  public void delete() {
+      GL11.glDeleteTextures(this.TEXid);
+  }
 
 
 

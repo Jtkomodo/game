@@ -1,7 +1,5 @@
 package gameEngine;
 
-
-
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_BACKSPACE;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_C;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
@@ -97,7 +95,7 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static InputHandler I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,GLDEBUG=false,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=true,showFps=true,StateOfStartBOx=false;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,GLDEBUG=false,LOG=true,DEBUGCOLISIONS=false,HideSprite=false,DebugPrint=true,Debugdraw=false,showFps=true,StateOfStartBOx=false,showDrawLines=true;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds,TARGETFPS=60;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite,HealthBarBackground;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
@@ -480,7 +478,8 @@ Render.enable();//enables render
 	if(overworld==true) {	
 		
 		ShowBox.hide();
-	
+		  MainRenderHandler.addEntity(new Entity(background,new Vector3f(100,100,100),0,64, COLTEX,Constants.BLACK,10,true));
+		
 	    playerCol.setCenterPosition(new Vector2f(x,y));
 	    
 			Vector2f vector=updateColisions(playerCol,new Vector2f(x,y),oldpos, c2, direction);
@@ -496,8 +495,8 @@ Render.enable();//enables render
 	   
 	     cam.setPosition((new Vector2f(camx,camy)));
 				
-		screencoordx=-camx;
-	    screencoordy=-camy;
+		//screencoordx=-camx;
+	   // screencoordy=-camy;
 	//   MainRenderHandler.addEntity(test);
 	 //   MainRenderHandler.addEntity(test2);
 	    		
@@ -527,6 +526,8 @@ Render.enable();//enables render
 	      
 		if(HideSprite==false) 
 		a1.drawAnimatedModel(new Vector3f(x,y,100),0,Playerscale,!facingLeft);
+		
+		
 		
 		//SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
 	
@@ -560,9 +561,11 @@ Render.enable();//enables render
      	StartBox.draw(); 
       
 	  ShowBox.draw();
+	  textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
+		
 	  if(showFps)
 		  textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.2f);
-		  textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.25f);
+		
 
 
 if(CharCallback.takeInput) {
@@ -583,15 +586,16 @@ Proccesor.proccesCommands(time);
 MainRenderHandler.SortEntities(); 
 
 MainRenderHandler.addToBatchedRender();
-textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")\nAnimations: "+AnimationHandler.amountInList()+"\nQuads"+MainBatchRender.getQuads());
-textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
-
 MainRenderHandler.clear();
+textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")\nAnimations: "+AnimationHandler.amountInList()+"\nQuads"+MainBatchRender.getQuads());
+
+textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.25f);
+
 
 MainRenderHandler.addToBatchedRender();
 MainBatchRender.draw();
 MainBatchRender.flushModel();
-
+MainRenderHandler.clear();
 		    w.render();
 		    w.clear();
 		  

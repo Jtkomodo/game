@@ -14,83 +14,140 @@ public class Entity {
 	private Vector3f position;
 	private float size=-1;
     private float angle=0;
+    private float DrawLineOffset=0;
 	private Vector2f NonSquareSize;
 	private Vector4f color=Constants.DEFAULT_COLOR;
-    private boolean hasColor=false,hasNonSqaureSize=false,Mirror=false,UIPojeection=false;
+    private boolean hasColor=false,hasNonSqaureSize=false,Mirror=false,UIPojeection=false,drawDrawLine=false;
 	
     
     
     public Entity(ModelFramwork model,Vector3f position,float angle, float size,Texture texture) {
-		this.angle=angle;
-    	this.texture=texture;
-		this.model = model;
-		this.position = position;
+	    construct(model,position,angle,texture);
 		this.size = size;
 	}
 	public Entity(ModelFramwork model, Vector3f position,float angle, Vector2f nonSquareSize,Texture texture) {
-		this.angle=angle;
-		this.texture=texture;
-		this.model = model;
-		this.position = position;
-		NonSquareSize = nonSquareSize;
-		this.hasNonSqaureSize =true;
+	    construct(model,position,angle,texture);
+	    setSize(nonSquareSize);
 	}
 	public Entity(ModelFramwork model,Vector3f position,float angle, float size,Texture texture,Vector4f color) {
-		setColor(color);
-		this.angle=angle;
-    	this.texture=texture;
-		this.model = model;
-		this.position = position;
+		construct(model,position,angle,texture,color);
 		this.size = size;
 	}
 	public Entity(ModelFramwork model, Vector3f position,float angle, Vector2f nonSquareSize,Texture texture,Vector4f color) {
-		setColor(color);
-		this.angle=angle;
-		this.texture=texture;
-		this.model = model;
-		this.position = position;
-		NonSquareSize = nonSquareSize;
-		this.hasNonSqaureSize =true;
+		construct(model,position,angle,texture,color);
+	     setSize(nonSquareSize);
 	}
 	
 	  public Entity(ModelFramwork model,Vector3f position,float angle, float size,Texture texture,boolean Mirror) {
-			this.angle=angle;
-	    	this.texture=texture;
-			this.model = model;
-			this.position = position;
+		    construct(model,position,angle,texture);
 			this.Mirror=Mirror;
 			this.size = size;
 		}
 		public Entity(ModelFramwork model, Vector3f position,float angle, Vector2f nonSquareSize,Texture texture,boolean Mirror) {
-			this.angle=angle;
-			this.texture=texture;
-			this.model = model;
-			this.position = position;
+		    construct(model,position,angle,texture);
 			this.Mirror=Mirror;
-			NonSquareSize = nonSquareSize;
-			this.hasNonSqaureSize =true;
+			  setSize(nonSquareSize);
 		}
 		public Entity(ModelFramwork model,Vector3f position,float angle, float size,Texture texture,Vector4f color,boolean Mirror) {
-			setColor(color);
-			this.angle=angle;
-	    	this.texture=texture;
-			this.model = model;
-			this.position = position;
+		
+		    construct(model,position,angle,texture,color);
 			this.Mirror=Mirror;
 			this.size = size;
 		}
 		public Entity(ModelFramwork model, Vector3f position,float angle, Vector2f nonSquareSize,Texture texture,Vector4f color,boolean Mirror) {
-			setColor(color);
-			this.angle=angle;
-			this.texture=texture;
-			this.model = model;
-			this.position = position;
+			construct(model,position,angle,texture,color);
 			this.Mirror=Mirror;
-			NonSquareSize = nonSquareSize;
-			this.hasNonSqaureSize =true;
+			  setSize(nonSquareSize);
 		}
 
-	
+		
+		
+		
+		
+		//ones with drawLineOffset value in constructor
+		
+		
+		
+		   public Entity(ModelFramwork model,Vector3f position,float angle, float size,Texture texture,float DrawLineOffset,boolean drawLine) {
+			    construct(model,position,angle,texture);
+				this.size = size;
+				this.DrawLineOffset=DrawLineOffset;
+				this.drawDrawLine=drawLine;
+			}
+			public Entity(ModelFramwork model, Vector3f position,float angle, Vector2f nonSquareSize,Texture texture,float DrawLineOffset,boolean drawLine) {
+			    construct(model,position,angle,texture);
+			    setSize(nonSquareSize);
+			    this.DrawLineOffset=DrawLineOffset;
+			    this.drawDrawLine=drawLine;
+			}
+			public Entity(ModelFramwork model,Vector3f position,float angle, float size,Texture texture,Vector4f color,float DrawLineOffset,boolean drawLine) {
+				construct(model,position,angle,texture,color);
+				this.size = size;
+				this.DrawLineOffset=DrawLineOffset;
+				this.drawDrawLine=drawLine;
+			}
+			public Entity(ModelFramwork model, Vector3f position,float angle, Vector2f nonSquareSize,Texture texture,Vector4f color,float DrawLineOffset,boolean drawLine) {
+				construct(model,position,angle,texture,color);
+			     setSize(nonSquareSize);
+			     this.DrawLineOffset=DrawLineOffset;
+			     this.drawDrawLine=drawLine;
+			}
+			
+			  public Entity(ModelFramwork model,Vector3f position,float angle, float size,Texture texture,boolean Mirror,float DrawLineOffset,boolean drawLine) {
+				    construct(model,position,angle,texture);
+					this.Mirror=Mirror;
+					this.size = size;
+					this.DrawLineOffset=DrawLineOffset;
+					this.drawDrawLine=drawLine;
+				}
+				public Entity(ModelFramwork model, Vector3f position,float angle, Vector2f nonSquareSize,Texture texture,boolean Mirror,float DrawLineOffset,boolean drawLine) {
+				    construct(model,position,angle,texture);
+					this.Mirror=Mirror;
+					  setSize(nonSquareSize);
+					  this.DrawLineOffset=DrawLineOffset;
+					  this.drawDrawLine=drawLine;
+				}
+				public Entity(ModelFramwork model,Vector3f position,float angle, float size,Texture texture,Vector4f color,boolean Mirror,float DrawLineOffset,boolean drawLine) {
+				
+				    construct(model,position,angle,texture,color);
+					this.Mirror=Mirror;
+					this.size = size;
+					this.DrawLineOffset=DrawLineOffset;
+					this.drawDrawLine=drawLine;
+				}
+				public Entity(ModelFramwork model, Vector3f position,float angle, Vector2f nonSquareSize,Texture texture,Vector4f color,boolean Mirror,float DrawLineOffset,boolean drawLine) {
+					construct(model,position,angle,texture,color);
+					this.Mirror=Mirror;
+					  setSize(nonSquareSize);
+					  this.DrawLineOffset=DrawLineOffset;
+					  this.drawDrawLine=drawLine;
+				}
+		
+		
+		
+		
+	private void construct(ModelFramwork model,Vector3f position,float angle,Texture texture,Vector4f color) {
+		
+		setColor(color);
+		construct(model,position,angle,texture);
+		
+		
+	}
+		
+		
+	private void construct(ModelFramwork model,Vector3f position,float angle,Texture texture) {
+		this.angle=angle;
+    	this.texture=texture;
+		this.model = model;
+		this.position = position;
+		
+		
+	}
+		
+		
+		
+		
+		
 	
 	public ModelFramwork getModel() {
 		return model;
@@ -173,6 +230,18 @@ this.hasNonSqaureSize=false;
 	}
 	public void setUIPojeection(boolean uIPojeection) {
 		UIPojeection = uIPojeection;
+	}
+	public float getDrawLineOffset() {
+		return DrawLineOffset;
+	}
+	public void setDrawLineOffset(float drawLineOffset) {
+		DrawLineOffset = drawLineOffset;
+	}
+	public boolean isDrawDrawLine() {
+		return drawDrawLine;
+	}
+	public void setDrawDrawLine(boolean drawDrawLine) {
+		this.drawDrawLine = drawDrawLine;
 	}
 	
 	

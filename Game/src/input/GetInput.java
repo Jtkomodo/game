@@ -1,8 +1,19 @@
 package input;
 
 
+
 import java.util.HashMap;
 
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+import org.joml.Vector4f;
+
+import gameEngine.Camera;
+import gameEngine.MatrixMath;
+import gameEngine.Start;
+import gameEngine.Window;
+
+import static org.lwjgl.glfw.GLFW.*;
 
 public class GetInput {
    
@@ -12,10 +23,12 @@ public class GetInput {
 	private HashMap<Integer,Boolean> lastKeyStateInstance=new HashMap<Integer,Boolean>();
 	
 	
+	
 	private static boolean Find(int key) {
 		try {
-			Boolean newKey=KeyCallback.keys[key];
-
+			Boolean newKey;
+			
+				newKey=KeyCallback.keys[key];
 			return newKey;	
 		}catch(IndexOutOfBoundsException e) {
 			throw new IndexOutOfBoundsException("sorry there is no"+key+"key");
@@ -92,6 +105,8 @@ public byte getStateofButtonInstanced(int button) {
 			}
 		lastKeyStateInstance.put(button,now);
 		return state;
-	}
-	
+}
+
+
+
 }

@@ -8,7 +8,8 @@ import java.util.Map.Entry;
 
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-
+import gameEngine.Start;
+import Data.Constants;
 import Data.Moves;
 import battleClasses.Enemy;
 import gameEngine.Entity;
@@ -58,6 +59,9 @@ public class MainRenderHandler {
 	
 	public static void addEntity(Entity e) {
 		entities.add(e);
+		if(e.isDrawDrawLine() && Start.showDrawLines) {
+			entities.add( new Entity(Start.background,new Vector3f(e.getPosition().x,e.getPosition().y+e.getDrawLineOffset(),100),0,new Vector2f(64,1),Start.COLTEX,Constants.RED));
+		}
 		
 	}
 	public static void clear() {
@@ -75,7 +79,16 @@ public class MainRenderHandler {
 		          public int compare(Entity e1,Entity e2) {
 		              Float v1 = e1.getPosition().z;
 		              Float v2 = e2.getPosition().z;
-		              return v1.compareTo(v2);
+		              int result=v1.compareTo(v2);
+		              if(result==0) {
+		            	 v1=e1.getPosition().y; 
+		            	 v2=e2.getPosition().y+e2.getDrawLineOffset();
+		            	 
+		            	 result=v2.compareTo(v1);
+		              }
+		              
+		              
+		              return result;
 		          }
 		      };
 			 	Collections.sort(entities, byZvalue);    

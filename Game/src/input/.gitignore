@@ -7,3 +7,5 @@
 /KeyCallback.class
 /CharCallbak.class
 /CharCallback.class
+/MouseButtonCallback.class
+/MousePositionCallback.class

@@ -95,14 +95,14 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static InputHandler I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,GLDEBUG=false,LOG=true,DEBUGCOLISIONS=false,HideSprite=false,DebugPrint=true,Debugdraw=false,showFps=true,StateOfStartBOx=false,showDrawLines=true;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,GLDEBUG=false,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=false,showFps=true,StateOfStartBOx=false,showDrawLines=true;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds,TARGETFPS=60;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite,HealthBarBackground;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
     public static Model background,player,textboxM,Arrow;
     public static OneTextureBatchedModel testM;
     public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls,textR;
-    public static Vector2f currentmovement,c2,oldpos,direction,BattleBoxPosition,velocity;
+    public static Vector2f currentmovement,quarterStepVelocity=new Vector2f(),oldpos,direction,BattleBoxPosition,velocity;
     public static BattleEntity p;
  
     public static CircleColision circle1, circle2;
@@ -446,7 +446,7 @@ public class Start {
 		
 		
 	while(!w.isExited()) {
-			oldpos=new Vector2f(x,y);
+		
 		fps();    
 	    
 	if(canRender) {
@@ -480,19 +480,58 @@ Render.enable();//enables render
 		ShowBox.hide();
 		  MainRenderHandler.addEntity(new Entity(background,new Vector3f(100,100,100),0,64, COLTEX,Constants.BLACK,10,true));
 		
-	    playerCol.setCenterPosition(new Vector2f(x,y));
-	    
-			Vector2f vector=updateColisions(playerCol,new Vector2f(x,y),oldpos, c2, direction);
+		  
+		 
+		  //  MainRenderHandler.addEntity(new Entity(background,new Vector3f(new Vector2f(x,y).add(quarterStepVelocity.mul(3,new Vector2f())),200),0,5, COLTEX,Constants.YELLOW));
+	       
+		   Vector2f step=new Vector2f();
+		
+		  //step 1
+		
+            new Vector2f(x,y).add(quarterStepVelocity,step);
+		    playerCol.setCenterPosition(step);//take step
+		 
+		    Vector2f vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);//check colisions
+		    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.GREEN));//put marker to indicate where this step ended at
+		  
+		    
+		    //step 2
+		    vector.add(quarterStepVelocity,step);
+		    playerCol.setCenterPosition(step);
+			vector=updateColisions(playerCol,step,vector, quarterStepVelocity, direction);
+		    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.BLUE));
+		    
 			
-			x=vector.x; 
-			y=vector.y;	
+		   //step3
+		    vector.add(quarterStepVelocity,step);
+		    playerCol.setCenterPosition(step);
+			vector=updateColisions(playerCol,step,vector, quarterStepVelocity, direction);
+		    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.RED));
+			
+		    //step4
+		    vector.add(quarterStepVelocity,step);
+		    playerCol.setCenterPosition(step);
+			vector=updateColisions(playerCol,step,vector, quarterStepVelocity, direction);
+		    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.YELLOW));
+		
+		   
+		    
+			x=vector.x; y=vector.y;	
+		    playerCol.setCenterPosition(vector);	
+			
+			
+			
+		
 			     
 				    camx=-x;
 					camy=-y;
 							
 		screencoordx=-camx;
 	    screencoordy=-camy;
-	   
+		
+		
+		  textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-80,.2f);
+		
 	     cam.setPosition((new Vector2f(camx,camy)));
 				
 		//screencoordx=-camx;
@@ -525,6 +564,7 @@ Render.enable();//enables render
 	    
 	      
 		if(HideSprite==false) 
+       
 		a1.drawAnimatedModel(new Vector3f(x,y,100),0,Playerscale,!facingLeft);
 		
 		
@@ -565,7 +605,7 @@ Render.enable();//enables render
 		
 	  if(showFps)
 		  textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.2f);
-		
+	
 
 
 if(CharCallback.takeInput) {
@@ -1061,7 +1101,7 @@ if(CharCallback.takeInput) {
 		        }
 		     float speedx=0,speedy=0;
 		
-		     speed=5*speed;
+		    // speed=5*speed;
 				{ 
 						
 						
@@ -1098,24 +1138,26 @@ if(CharCallback.takeInput) {
 						//speedx*=(float)DeltaTime;
 						//speedy*=(float)DeltaTime;
 					
-						Vector2f newvec=new Vector2f(0,0);
+					
 						direction=(VectorMath.normalize(new Vector2f(speedx,speedy)));
 						
-						
-					    velocity=new Vector2f(direction.x*speed,direction.y*speed);
-						direction.add(velocity,newvec);
-						direction=new Vector2f(speedx,speedy);
+						velocity=new Vector2f();
+					    direction.mul(speed,velocity);
+					
 											
 						 
-						newvec.mul(50);
+						velocity.mul(50*5);
 						
-						newvec=new Vector2f((newvec.x*(float)DeltaTime),(newvec.y*(float)DeltaTime));
+						velocity.mul((float) DeltaTime);						
 						
-						c2=newvec;//this is the movement that needs to be added to the position vector
-
-					    x=x+newvec.x;
-						y=y+newvec.y;
 						
+						
+						
+						velocity.mul(.25f,quarterStepVelocity);//this is the movement that needs to be added to the position vector
+                   
+                    	oldpos=new Vector2f(x,y);
+					 
+						//one quarter step is taken
 						
 						
 					camx=-x;

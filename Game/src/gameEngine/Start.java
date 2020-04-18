@@ -95,7 +95,7 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static InputHandler I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,GLDEBUG=false,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=false,showFps=true,StateOfStartBOx=false,showDrawLines=true;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,GLDEBUG=false,LOG=true,DEBUGCOLISIONS=true,HideSprite=true,DebugPrint=true,Debugdraw=false,showFps=true,StateOfStartBOx=false,showDrawLines=true;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds,TARGETFPS=60;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite,HealthBarBackground;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
@@ -332,7 +332,7 @@ public class Start {
 		DebugPrint("Settign Colisions....");
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		playerCol=new AABB(new Vector2f(0,0),15,44,0);
-		Col=new AABB(new Vector2f(5000,1240),64,128,1,new FunctionCaller("ShowBox",new Object[] {new Vector2f(0,100) },Start.class));
+		Col=new AABB(new Vector2f(5000,1240),64,128,0);
         COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
 	    buttonNamses = new BIndingNameParser("GLFW");
 		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2});
@@ -487,34 +487,43 @@ Render.enable();//enables render
 		   Vector2f step=new Vector2f();
 		
 		  //step 1
-		
+		   ColisionHandeler.setColided(false);
             new Vector2f(x,y).add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);//take step
 		 
 		    Vector2f vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);//check colisions
-		    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.GREEN));//put marker to indicate where this step ended at
-		  
+		  //  MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.GREEN));//put marker to indicate where this step ended at
+		    Start.text1.setString("bc: "+Math.round(playerCol.getPosBeforeCol().x)+", "+Math.round(playerCol.getPosBeforeCol().y));
+			   Start.text1.UIdrawString((640/2)+Start.screencoordx-100,(480/2)+Start.screencoordy-80,.2f);			  
 		    
 		    //step 2
 		    vector.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
 			vector=updateColisions(playerCol,step,vector, quarterStepVelocity, direction);
-		    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.BLUE));
+		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.BLUE));
 		    
 			
 		   //step3
 		    vector.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
 			vector=updateColisions(playerCol,step,vector, quarterStepVelocity, direction);
-		    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.RED));
+		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.RED));
 			
 		    //step4
 		    vector.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
 			vector=updateColisions(playerCol,step,vector, quarterStepVelocity, direction);
-		    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.YELLOW));
+		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.YELLOW));
 		
-		   
+			if(!ColisionHandeler.getColided()) {
+				
+				playerCol.setPosBeforeCol(vector);
+				
+				
+			
+				
+			}
+			  
 		    
 			x=vector.x; y=vector.y;	
 		    playerCol.setCenterPosition(vector);	
@@ -530,7 +539,7 @@ Render.enable();//enables render
 	    screencoordy=-camy;
 		
 		
-		  textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-80,.2f);
+		//  textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-80,.2f);
 		
 	     cam.setPosition((new Vector2f(camx,camy)));
 				

@@ -15,10 +15,11 @@ public class ColisionHandeler {
 	private static ArrayList<Collisions> Triggers=new ArrayList<Collisions>(); 
 	private static ArrayList<Collisions> allCollisions=new ArrayList<Collisions>();
 	private static TextBuilder text=new TextBuilder(Start.aakar);
-	
+	private static boolean colided;
 	
 	public static Vector2f updateVector(Collisions ToTestWith,Vector2f position,Vector2f oldPosition,Vector2f movement,Vector2f direction) {
 		Vector2f returnVector=position;
+		
 		for(int i=0;i<Cols.size();i++) {
 		 Collisions col=Cols.get(i);
 		 if(col!=ToTestWith) {
@@ -32,6 +33,8 @@ public class ColisionHandeler {
 			}
 		 }
 		}
+		
+		
 		return returnVector;
 		
 	}
@@ -130,18 +133,20 @@ private static boolean checkTriger(Collisions a,CircleColision b) {
 	
    private static Vector2f CheckAndGetResponse(AABB a,AABB b,Vector2f position,Vector2f oldposition, Vector2f movement, Vector2f direction) {
 	   Vector2f vec=new Vector2f(0,0);
-	
+	  
 		  boolean check=a.vsAABB(b);
+		
 		  if(check){
+			  colided=true;
 		  Vector2f new2= a.findVector(oldposition,movement,direction,b);
 		  
-			new2.sub(position,vec);
-			Vector2f vector=new Vector2f(0);
-			vec.add(position,vector);
-			
-			a.setCenterPosition(vector);			
+//			new2.sub(position,vec);
+//			Vector2f vector=new Vector2f(0);
+//			vec.add(position,vector);
+//			
+			a.setCenterPosition(new2);			
 		
-			return vector;
+			return new2;
 		  }else {
 				a.setCenterPosition(position);	
 			return position;
@@ -154,17 +159,15 @@ private static boolean checkTriger(Collisions a,CircleColision b) {
 	  Vector2f vec=new Vector2f(0,0);
 	  a.setPosition(position);
 	  boolean check=a.vsAABB(b);
+	  
 	  if(check){
+			
 	  Vector2f new2= a.findVector(oldposition,movement,direction,b);
 	  
-		new2.sub(position,vec);
-
-		Vector2f vector=new Vector2f(0);
-		vec.add(position,vector);
+	
+		a.setPosition(new2);			
 		
-		a.setPosition(vector);			
-		
-		return vector;
+		return new2;
 	  }else {
 			a.setPosition(position);	
 			return position;
@@ -221,7 +224,13 @@ public static void remove(int index) {
 	  }
 		
 	}
-	
+
+public static void setColided(boolean colided) {
+	ColisionHandeler.colided = colided;
+}
+public static boolean getColided() {
+	return colided;
+}	
 	
 	
 

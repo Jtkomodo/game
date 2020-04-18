@@ -1,9 +1,10 @@
 package Collisions;
 
 
-import org.joml.Math;
+
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import Data.Constants;
 import gameEngine.Entity;
@@ -15,7 +16,8 @@ import rendering.Render;
 //06d7ea
 public class AABB extends Collisions{
 	private float widthR,heightR,resistance,amount;//resistance is the amount of push away the box will have on the player
-	private Vector2f lc=new Vector2f(0,0),rc=new Vector2f(0,0),r,Pposition=new Vector2f(0,0),beforeCol=new Vector2f(0,0),edgep=new Vector2f(0,0),edgen=new Vector2f(0,0),ActualPosition=new Vector2f(0);
+	private Vector2f lc=new Vector2f(0,0),rc=new Vector2f(0,0),r,ClosestPosition=new Vector2f(0,0),edgep=new Vector2f(0,0),edgen=new Vector2f(0,0),ActualPosition=new Vector2f(0);
+	private Vector2f PosBeforeCol=new Vector2f();
 	private Model aabb,piont;
 	private float z=50;
 	private boolean colide=false,COLIDECHECK=false;
@@ -124,33 +126,50 @@ public class AABB extends Collisions{
 		rcB=box.getRc();
 		
 		
-		
-		
+		Vector2f d= new Vector2f(0,0);
+		//Vector2f d2= new Vector2f(0,0);
+		this.getPosBeforeCol().sub(box.position,d);
+	
+	
+	    
+	 
+		box.ClosestPosition=new Vector2f(clamp(box.position.x+d.x,box.lc.x,box.rc.x),clamp(box.position.y+d.y,box.lc.y,box.rc.y));
+	  
+	
+//		
+//		 MainRenderHandler.addEntity(new Entity(piont, new Vector3f(lc,200), 0, 3,Start.COLTEX,Constants.RED));
+//		   MainRenderHandler.addEntity(new Entity(piont, new Vector3f(rc,200), 0, 3,Start.COLTEX,Constants.RED));
+//			 MainRenderHandler.addEntity(new Entity(piont, new Vector3f(lcB,200), 0, 3,Start.COLTEX,Constants.RED));
+//			   MainRenderHandler.addEntity(new Entity(piont, new Vector3f(rcB,200), 0, 3,Start.COLTEX,Constants.RED));
+//		
+//		
 	
 		
 	
 		/*
-		     lc_____________
+		       _____________rc
 		       |           |        
 		       |     A     |     
 		       |___________|
-                            rc		       
-		     lc_____________
+              lc            		       
+		       _____________rc
 		       |           | 
 		       |     B     |     
 		       |___________|
-                            rc		
+              lc             		
 		
 		
 		*/
 		if((rcA.x<lcB.x) || (rcB.x<lcA.x)) {// if the right side of A comes before the left side of B or vice versa return false(they can not be colliding)
-			
-			
+		
 			
 			return false;
 		}
 		else if((rcA.y<lcB.y) || (rcB.y<lcA.y)) {//if the Bottom side of A comes before the top side of B or vice versa return false
 		
+			
+			
+			
 			return false;
 		}
 		
@@ -196,21 +215,34 @@ public class AABB extends Collisions{
 	
 	
    public Vector2f findVector(Vector2f position, Vector2f movement,Vector2f direction,AABB box) {
-	 
-	   Vector2f lc=new Vector2f(0,0);
-	   Vector2f rc=new Vector2f(0,0);
-	   Vector2f newMOvement=new Vector2f(0,0); //this is the rerturn value
+	   //position is the current position before movement
+	   //movement is the current step we are taking
+	   //direction is a normalized version of the current velocity
+	   //box is the box we are checking collision with
+	   
 	  
-	   Vector2f currentmovement=new Vector2f(0,0);movement.add(new Vector2f(position.x,position.y),currentmovement);//this is the current position after addition of the movement
+	  
+
+	   Vector2f newMOvement=new Vector2f(0,0); //this is the return value
+	  
+	   Vector2f currentmovement=new Vector2f(0,0);
+	   movement.add(new Vector2f(position.x,position.y),currentmovement);//this is the current position after addition of the movement
 	 
-	   currentmovement.sub(this.r,lc);//this is the bottom left corner of the cuurent box
-	   currentmovement.add(this.r,rc); //this is the top right corner
-	   if(this.colide) {
-		
-		  this.beforeCol=currentmovement;//this is just a position value so i can know exactly where the box is before change if a colision has happend
-	 }
+	   
+	   
+	   
+	   
 	
-	   Vector2f penetration=new Vector2f(0,0);
+	
+	   Vector2f penetration=new Vector2f(0,0);//this is the vector representing how much into the box we are in
+	   
+	   Vector2f closesta=box.ClosestPosition;
+	   Vector2f closestb;
+	   Vector2f d2=new Vector2f();
+		closesta.sub(this.PosBeforeCol,d2);
+		closestb=new Vector2f(clamp(currentmovement.x+d2.x,lc.x,rc.x),clamp(currentmovement.y+d2.y,lc.y,rc.y));
+	   
+	//MainRenderHandler.addEntity( new Entity(piont,new Vector3f(closestb,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
 	   
 	   
 	   this.amount=box.resistance;
@@ -225,97 +257,25 @@ public class AABB extends Collisions{
 		   newMOvement=lerp(position,currentmovement, amount);
 	
 	   }else if(amount==0) {
-		Vector2f d= new Vector2f(0,0);position.sub(box.position,d);
-	
-	    Vector2f closest;
-		closest=new Vector2f(clamp(box.position.x+d.x,box.lc.x,box.rc.x),clamp(box.position.y+d.y,box.lc.y,box.rc.y));
-	//	System.out.println(d"before "+d+"after "+closest);
-		//currentmovement.sub(pen,newMOvement);
-		
-		this.Pposition=closest;
 				   
 		
 	if(this.colide) {
-			Vector2f pen=new Vector2f(0,0);closest.sub(position,pen);
-			
-		   Vector2f norm=new Vector2f(0,0);pen.normalize(norm);
-		   float dot=dotProduct(norm, new Vector2f(0,1));
-		  
-		if(Math.abs(direction.x)!=Math.abs(direction.y)){
-		   
-			
-			
-			
-			
-			
-			
-			
-			
-			
 		
-		 if(closest.x==box.lc.x) {
-			
-			 closest.sub(r.x,0,edgep);
-			 
-		   }else if(closest.x==box.rc.x) {
-		
-				 closest.add(r.x,0,edgep);
-				 
-			   } if(closest.y==box.lc.y) {
-					
-					 closest.sub(0,r.y,edgep);
-					 
-				   }else if(closest.y==box.rc.y) {
-						
-						 closest.add(0,r.y,edgep);
-						 
-					   }
-		}else {
-			
-			   if(closest.x==box.lc.x) {
-				
+	     closestb.sub(closesta, penetration);
+		 
+		 currentmovement.sub(penetration.add(direction.mul(.0001f,new Vector2f())), newMOvement);
 
-					 closest.sub(r.x,0,edgep);
-					 
-				   }else if(closest.x==box.rc.x) {
-						
-						 closest.add(r.x,-0,edgep);
-						 
-					   } if(closest.y==box.lc.y) {
-							 
-							 closest.sub(0,r.y,edgep);
-							 
-						   }else if(closest.y==box.rc.y) {
-								
-								 closest.add(0,r.y,edgep);
-			
-			
-
-						   
-						   
-						   
-	   }
-
-			
-					   
-					   
-					   
-					   
-					   
-					   
-					   
-					   
-					   
-					   
-					   
-					   
-					   
-		}
-		   
-		   
-		   edgep.sub(movement.mul(0.0001f,new Vector2f(0,0)));
-		   
-				newMOvement=edgep;
+//		  MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(newMOvement,199), 0, 1,Start.COLTEX,Constants.COL_COLOR_RED));
+//		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(this.PosBeforeCol,198), 0, 1,Start.COLTEX,new Vector4f(0,255,0,Constants.COL_COLOR_RED.w)));
+//			Vector2f lc=new Vector2f();
+//			Vector2f rc=new Vector2f();
+//		   this.PosBeforeCol.add(this.r,lc);
+//			this.PosBeforeCol.sub(this.r,rc); 
+//		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(this.PosBeforeCol,198), 0, 1,Start.COLTEX,new Vector4f(0,255,0,Constants.COL_COLOR_RED.w)));
+//		   MainRenderHandler.addEntity(new Entity(piont, new Vector3f(lc,200), 0, 3,Start.COLTEX,Constants.RED));
+//		   MainRenderHandler.addEntity(new Entity(piont, new Vector3f(rc,200), 0, 3,Start.COLTEX,Constants.RED));
+//		 newMOvement=currentmovement;
+		 
 	   }else {
 		   newMOvement=currentmovement;
 		   
@@ -343,10 +303,13 @@ public class AABB extends Collisions{
 
 		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(position,z), 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE));
 		    
-		   MainRenderHandler.addEntity( new Entity(piont,new Vector3f( Pposition,z), 0, 1,Start.COLTEX,Constants.YELLOW));
+		  // MainRenderHandler.addEntity( new Entity(piont,new Vector3f( ClosestPosition,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
 			
-		   MainRenderHandler.addEntity( new Entity(piont, new Vector3f(edgen,0), 0, 3,Start.COLTEX,Constants.YELLOW));
-			  
+		 //  MainRenderHandler.addEntity( new Entity(aabb, new Vector3f(edgen,0), 0, 1,Start.COLTEX,Constants.YELLOW));
+		   
+		   
+		   
+		
 
 		  // }
 			
@@ -436,6 +399,22 @@ public class AABB extends Collisions{
 
 	public void setZ(float z) {
 		this.z = z;
+	}
+
+
+
+
+
+	public Vector2f getPosBeforeCol() {
+		return PosBeforeCol;
+	}
+
+
+
+
+
+	public void setPosBeforeCol(Vector2f posBeforeCol) {
+		PosBeforeCol = posBeforeCol;
 	}
 
 	

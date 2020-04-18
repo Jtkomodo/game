@@ -28,12 +28,17 @@ public class Animate {
     private SpriteSheetLoader animation;
 	private boolean going=true,eachTimed=false;
 	private Texture texture;
+	private Entity e;
 	
 	
+
+
+
+
 	public Animate(double fps,Model model,SpriteSheetLoader animation,int start,int end) {
 		addAnimation();
 		this.fps=fps;
-		
+	
 		this.frameTiming=1.0/fps;
 		this.time=Timer.getTIme();
 		this.model=new Model(model.getVertices(),model.getUv_coords());
@@ -42,7 +47,7 @@ public class Animate {
 		
 		SetStartAndEnd(start,end);
 		texture=animation.getTexture();
-	
+		e=new Entity(model, new Vector3f(0),0,0,texture);
 		this.animation=animation;
 	}
 	
@@ -55,7 +60,7 @@ public class Animate {
 	public Animate(double fps,Model model,SpriteSheetLoader animation,int[] HowlongEachFramelasts/*in frames one integer value for each frame*/,int start) {
 		
 		addAnimation();
-		
+	
 		this.fps=fps;
 		this.frameTiming=1.0/fps;
 		this.time=Timer.getTIme();
@@ -69,7 +74,7 @@ public class Animate {
 		
 		SetStartAndEnd(start,(start+HowlongEachFramelasts.length)-1);
 		texture=animation.getTexture();
-	
+		e=new Entity(model, new Vector3f(0),0,0,texture);
 		this.animation=animation;
 	}
 	
@@ -137,6 +142,7 @@ public class Animate {
 		
 		
 		model.changeUV(uv);//change the uv of the model 
+		e.setModel(model);
 	     }	
 		
 	if(currentframe!=end) {
@@ -259,7 +265,12 @@ public class Animate {
 	public void drawAnimatedModel(Vector3f position,float angle,float scale) {
 		
 		if(AnimationHandler.exsits(this)){
-			Entity e=new Entity(model, position, angle, scale,texture);
+			//e=(model, position, angle, scale,texture);
+		     e.setPosition(position);
+		     e.setAngle(angle);
+		     e.setSize(scale);
+		     e.RemoveColor();
+		     e.setMirror(false);
 		     
 		       MainRenderHandler.addEntity(e);
 		}
@@ -271,11 +282,13 @@ public class Animate {
 		
 		
 		if(AnimationHandler.exsits(this)){
-			
-		Entity e=new Entity(model, position, angle, scale,texture);
-       if(mirror) {
-		e.setMirror(true);
-       }
+			 e.setPosition(position);
+		     e.setAngle(angle);
+		     e.setSize(scale);
+		     e.RemoveColor();
+		     e.setMirror(mirror);		
+	
+    
        MainRenderHandler.addEntity(e);
        
 		}
@@ -286,8 +299,12 @@ public class Animate {
 public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale) {
 		
 		if(AnimationHandler.exsits(this)){
-			Entity e=new Entity(model, position, angle, scale,texture);
-		     
+			 e.setPosition(position);
+		     e.setAngle(angle);
+		     e.setSize(scale);
+		     e.RemoveColor();
+		     e.setMirror(false);
+		      
 		       MainRenderHandler.addEntity(e);
 		       
 		}
@@ -299,10 +316,11 @@ public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale) {
 		
 		
 		if(AnimationHandler.exsits(this)){
-			Entity e=new Entity(model, position, angle, scale,texture);
-			 if(mirror) {
-					e.setMirror(true);
-			       }
+			 e.setPosition(position);
+		     e.setAngle(angle);
+		     e.setSize(scale);
+		     e.RemoveColor();
+		     e.setMirror(mirror);
 		       MainRenderHandler.addEntity(e);
 		       
 		
@@ -338,7 +356,12 @@ public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale) {
 		return AnimationHandler.getIndex(this);
 	}
 
-    
+	public Entity getE() {
+		return e;
+	}
+
+
+   
 
 
 

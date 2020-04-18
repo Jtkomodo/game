@@ -96,7 +96,7 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static InputHandler I;
     public static Fontloader font;
-    public static boolean canRender,overworld=true,test=false,testcol,circCol,GLDEBUG=false,LOG=true,DEBUGCOLISIONS=true,HideSprite=true,DebugPrint=true,Debugdraw=false,showFps=true,StateOfStartBOx=false,showDrawLines=true;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,GLDEBUG=false,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=false,showFps=true,StateOfStartBOx=false,showDrawLines=true;
     public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds,TARGETFPS=60;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite,HealthBarBackground;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
@@ -580,8 +580,7 @@ Render.enable();//enables render
        
 		a1.drawAnimatedModel(new Vector3f(x,y,100),0,Playerscale,!facingLeft);
 		
-	      MainRenderHandler.addEntity(teste);
-	   
+	
 		//SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
 	
 
@@ -928,7 +927,7 @@ if(CharCallback.takeInput) {
 	    
 	    if(GetInput.getStateofButton(GLFW_KEY_S)==1) {
 	    	
-	    	Proccesor.addComandtoItorator(new walkTo(teste,new Vector2f(0,0),new Vector2f(0,100),5.0));
+	    	Proccesor.addComandtoItorator(new walkTo(a1.getE(),new Vector2f(0,0),new Vector2f(0,100),5.0));
 	    }
 	    
 	    	

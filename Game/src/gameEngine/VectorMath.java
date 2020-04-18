@@ -151,13 +151,12 @@ public class VectorMath {
 	}
 		
 	
-	public static Vector2f ProjectionV(Vector2f a,Vector2f b) {//projecting b onto a
-        float dot=dotProduct(a,b); 
-		float ls=dotProduct(a,a);
-		float n=dot/ls;
-		
-		
-		Vector2f d=b.mul(n);
+	public static Vector2f ProjectionV(Vector2f u,Vector2f v) {//projecting u onto v
+       Vector2f d=new Vector2f();
+		float dot=dotProduct(u,v); 
+		float mag= getMagnitude(v);
+		mag=(float) Math.pow(mag, 2);
+		v.mul(dot/mag,d);
          
         return d;
 		

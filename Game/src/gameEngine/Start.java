@@ -497,22 +497,25 @@ Render.enable();//enables render
 			   Start.text1.UIdrawString((640/2)+Start.screencoordx-100,(480/2)+Start.screencoordy-80,.2f);			  
 		    
 		    //step 2
+			   oldpos.set(vector);
 		    vector.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
-			vector=updateColisions(playerCol,step,vector, quarterStepVelocity, direction);
+			vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
 		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.BLUE));
 		    
 			
 		   //step3
+			oldpos.set(vector);
 		    vector.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
-			vector=updateColisions(playerCol,step,vector, quarterStepVelocity, direction);
+			vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
 		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.RED));
 			
 		    //step4
+			oldpos.set(vector);
 		    vector.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
-			vector=updateColisions(playerCol,step,vector, quarterStepVelocity, direction);
+			vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
 		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.YELLOW));
 		
 			if(!ColisionHandeler.getColided()) {
@@ -1162,7 +1165,7 @@ if(CharCallback.takeInput) {
 						
 						
 						
-						velocity.mul(.25f,quarterStepVelocity);//this is the movement that needs to be added to the position vector
+						velocity.mul(1/4f,quarterStepVelocity);//this is the movement that needs to be added to the position vector
                    
                     	oldpos=new Vector2f(x,y);
 					 

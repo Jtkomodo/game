@@ -228,20 +228,14 @@ public class AABB extends Collisions{
 	   Vector2f currentmovement=new Vector2f(0,0);
 	   movement.add(new Vector2f(position.x,position.y),currentmovement);//this is the current position after addition of the movement
 	 
-	   
+	 //  MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(currentmovement,z), 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE));
 	   
 	   
 	   
 	
 	
 	   Vector2f penetration=new Vector2f(0,0);//this is the vector representing how much into the box we are in
-	   
-	   Vector2f closesta=box.ClosestPosition;
-	   Vector2f closestb;
-	   Vector2f d2=new Vector2f();
-		closesta.sub(this.PosBeforeCol,d2);
-		closestb=new Vector2f(clamp(currentmovement.x+d2.x,lc.x,rc.x),clamp(currentmovement.y+d2.y,lc.y,rc.y));
-	   
+	  
 	//MainRenderHandler.addEntity( new Entity(piont,new Vector3f(closestb,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
 	   
 	   
@@ -260,10 +254,16 @@ public class AABB extends Collisions{
 				   
 		
 	if(this.colide) {
-		
+		 
+		   Vector2f closesta=box.ClosestPosition;
+		   Vector2f closestb;
+		   Vector2f d2=new Vector2f();
+			closesta.sub(this.PosBeforeCol,d2);
+			closestb=new Vector2f(clamp(currentmovement.x+d2.x,lc.x,rc.x),clamp(currentmovement.y+d2.y,lc.y,rc.y));
+		   
 	     closestb.sub(closesta, penetration);
 		 
-		 currentmovement.sub(penetration.add(direction.mul(.0001f,new Vector2f())), newMOvement);
+		 currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement);
 
 //		  MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(newMOvement,199), 0, 1,Start.COLTEX,Constants.COL_COLOR_RED));
 //		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(this.PosBeforeCol,198), 0, 1,Start.COLTEX,new Vector4f(0,255,0,Constants.COL_COLOR_RED.w)));
@@ -350,7 +350,7 @@ public class AABB extends Collisions{
 	}
 
 	public void setCenterPosition(Vector2f position) {
-		this.position = position;
+		this.position.set(position);
 		 
 		position.sub(this.r,this.lc);
 		position.add(this.r,this.rc); 

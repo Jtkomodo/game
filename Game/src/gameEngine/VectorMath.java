@@ -136,20 +136,6 @@ public class VectorMath {
 		
 	}
 	
-	public static Vector2f lerp(Vector2f a,Vector2f b,float amount) {
-		Vector2f lerpa=a.mul((1-amount));
-		Vector2f  lerpb=b.mul(amount);
-		
-		Vector2f lerp=lerpa.add(lerpb);
-		
-		
-		return lerp;
-		
-		
-		
-		
-	}
-		
 	
 	public static Vector2f ProjectionV(Vector2f u,Vector2f v) {//projecting u onto v
        Vector2f d=new Vector2f();

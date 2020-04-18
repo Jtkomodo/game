@@ -248,7 +248,7 @@ public class AABB extends Collisions{
 	   if(amount!=0 && amount!=1) {     
 		 
 			
-		   newMOvement=lerp(position,currentmovement, amount);
+		   newMOvement=position.lerp(currentmovement, amount);
 	
 	   }else if(amount==0) {
 				   

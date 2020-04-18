@@ -41,6 +41,7 @@ import Items.Items;
 import  Scripter.Proccesor;
 import ScripterCommands.DrawModel;
 import ScripterCommands.DrawString;
+import ScripterCommands.walkTo;
 import animation.Animate;
 import animation.AnimationHandler;
 import animation.SpriteSheetLoader;
@@ -128,7 +129,7 @@ public class Start {
     public static boolean facingLeft,running,PlayersTurn=true;
 	private static WorldLoader map1;
 	private static MapLoader currentMap;
-
+    public static Entity teste;
     
     
 	public static void main(String[] args) {
@@ -332,7 +333,7 @@ public class Start {
 		DebugPrint("Settign Colisions....");
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		playerCol=new AABB(new Vector2f(0,0),15,44,0);
-		Col=new AABB(new Vector2f(5000,1240),64,128,0);
+		Col=new AABB(new Vector2f(5000,1240),64,128,0.5f);
         COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
 	    buttonNamses = new BIndingNameParser("GLFW");
 		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2});
@@ -444,7 +445,7 @@ public class Start {
         source=new Source(new Vector2f(0), 1, 1, 0, 0,0);
 		source.setSourceRelitive(true);	
 		
-		
+		teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
 	while(!w.isExited()) {
 		
 		fps();    
@@ -471,7 +472,7 @@ public class Start {
 	  // TextureUpdate(MAP)
 Render.enable();//enables render
 
-	
+
 		
 	//if(test==false) {
 	
@@ -579,8 +580,8 @@ Render.enable();//enables render
        
 		a1.drawAnimatedModel(new Vector3f(x,y,100),0,Playerscale,!facingLeft);
 		
-		
-		
+	      MainRenderHandler.addEntity(teste);
+	   
 		//SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
 	
 
@@ -927,7 +928,7 @@ if(CharCallback.takeInput) {
 	    
 	    if(GetInput.getStateofButton(GLFW_KEY_S)==1) {
 	    	
-	    	source1.play(Heal);
+	    	Proccesor.addComandtoItorator(new walkTo(teste,new Vector2f(0,0),new Vector2f(0,100),5.0));
 	    }
 	    
 	    	

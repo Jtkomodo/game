@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="this.colide" key="selection"/>
+		<item value="teste" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="teste"/>
 			<item value="this.colide"/>
 			<item value="this."/>
 			<item value="this"/>
@@ -22,7 +23,6 @@
 			<item value="no"/>
 			<item value="51"/>
 			<item value="c2"/>
-			<item value="3f"/>
 		</list>
 		<list key="replacehistory">
 			<item value="ClosestPosition"/>

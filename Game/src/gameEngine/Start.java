@@ -332,9 +332,9 @@ public class Start {
 	
 		DebugPrint("Settign Colisions....");
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
-		playerCol=new AABB(new Vector2f(0,0),15,44,0);
-		Col=new AABB(new Vector2f(5000,1240),64,128,0.5f);
-        COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
+		playerCol=new AABB(new Vector2f(0,0),15,44,0,false);
+		Col=new AABB(new Vector2f(0,0),32,32,0,true);
+        COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0,false);
 	    buttonNamses = new BIndingNameParser("GLFW");
 		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2});
 	
@@ -791,7 +791,7 @@ if(CharCallback.takeInput) {
 		    			float widthr=Float.parseFloat(arguments[2]);
 		    			float heightR=Float.parseFloat(arguments[3]);
 		    			float r=Float.parseFloat(arguments[4]);
-		    			ColisionHandeler.addCollision(new AABB(new Vector2f(x,y),widthr,heightR,r));
+		    			ColisionHandeler.addCollision(new AABB(new Vector2f(x,y),widthr,heightR,r,false));
 		    		    CharCallback.string=CharCallback.string.replace("#(ADD_AABB"+string+")","/[OK]/COL_ADDED");
 		    			
 		    				}catch(NumberFormatException e) {

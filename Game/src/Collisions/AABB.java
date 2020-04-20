@@ -21,25 +21,26 @@ public class AABB extends Collisions{
 	private Model aabb,piont;
 	private float z=50;
 	private boolean colide=false,COLIDECHECK=false;
+	private boolean pushable;
 	private boolean hasFunction=false;
 	private FunctionCaller function;
 	
 	
-	public AABB(Vector2f position ,float widthR,float heightR,float resistance,FunctionCaller function) {
+	public AABB(Vector2f position ,float widthR,float heightR,float resistance,FunctionCaller function,boolean Pushable) {
 		this.function=function;
 		this.hasFunction=true;
 		construct(position,widthR,heightR,resistance);
-
+       this.pushable=Pushable;
 		}
 	
 	
 	
 	
 	
-	public AABB(Vector2f position ,float widthR,float heightR,float resistance) {
+	public AABB(Vector2f position ,float widthR,float heightR,float resistance,boolean Pushable) {
 	
 	construct(position,widthR,heightR,resistance);
-
+	   this.pushable=Pushable;
 	}
 	
 	
@@ -236,7 +237,7 @@ public class AABB extends Collisions{
 	
 	   Vector2f penetration=new Vector2f(0,0);//this is the vector representing how much into the box we are in
 	  
-	//MainRenderHandler.addEntity( new Entity(piont,new Vector3f(closestb,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
+	
 	   
 	   
 	   this.amount=box.resistance;
@@ -260,21 +261,50 @@ public class AABB extends Collisions{
 		   Vector2f d2=new Vector2f();
 			closesta.sub(this.PosBeforeCol,d2);
 			closestb=new Vector2f(clamp(currentmovement.x+d2.x,lc.x,rc.x),clamp(currentmovement.y+d2.y,lc.y,rc.y));
-		   
+			MainRenderHandler.addEntity( new Entity(piont,new Vector3f(closestb,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
 	     closestb.sub(closesta, penetration);
-		 
-		 currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement);
+	     
+		 if(!box.isPushable()) {
+			 
 
+			 currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement); 
+		 }else {
+
+		Vector2f lc=new Vector2f();
+		Vector2f rc=new Vector2f();
+	   currentmovement.add(this.r,lc);
+	   currentmovement.sub(this.r,rc);  
+	
+		if((closestb.x==lc.x || closestb.x== rc.x )) {//if on the left or right side
+        	  box.getPosition().add(penetration.sub(direction.mul(.001f,new Vector2f()),new Vector2f()).x,0, newMOvement);
+         }
+		  
+		else if((closestb.y==lc.y || closestb.y==rc.y)) {//if on top or bottom
+       	  box.getPosition().add(0,penetration.sub(direction.mul(.001f,new Vector2f()),new Vector2f()).y, newMOvement);
+        }
+         box.setCenterPosition(newMOvement);
+		
+		
+//	}
+		  
+	 //    currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement);
+	 newMOvement=currentmovement; 
+		 }
+		 
+		 
+		 
 //		  MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(newMOvement,199), 0, 1,Start.COLTEX,Constants.COL_COLOR_RED));
 //		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(this.PosBeforeCol,198), 0, 1,Start.COLTEX,new Vector4f(0,255,0,Constants.COL_COLOR_RED.w)));
-//			Vector2f lc=new Vector2f();
-//			Vector2f rc=new Vector2f();
-//		   this.PosBeforeCol.add(this.r,lc);
-//			this.PosBeforeCol.sub(this.r,rc); 
+ 
 //		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(this.PosBeforeCol,198), 0, 1,Start.COLTEX,new Vector4f(0,255,0,Constants.COL_COLOR_RED.w)));
 //		   MainRenderHandler.addEntity(new Entity(piont, new Vector3f(lc,200), 0, 3,Start.COLTEX,Constants.RED));
 //		   MainRenderHandler.addEntity(new Entity(piont, new Vector3f(rc,200), 0, 3,Start.COLTEX,Constants.RED));
-//		 newMOvement=currentmovement;
+//		
+//		 
+		 
+		 
+		 
+		 
 		 
 	   }else {
 		   newMOvement=currentmovement;
@@ -297,13 +327,21 @@ public class AABB extends Collisions{
   
 	   
 	  
-   public void debug() {
+   public boolean isPushable() {
+	return pushable;
+}
+
+
+
+
+
+public void debug() {
 	   if(Start.DEBUGCOLISIONS) {
 		
 
 		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(position,z), 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE));
 		    
-		  // MainRenderHandler.addEntity( new Entity(piont,new Vector3f( ClosestPosition,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
+		  MainRenderHandler.addEntity( new Entity(piont,new Vector3f( ClosestPosition,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
 			
 		 //  MainRenderHandler.addEntity( new Entity(aabb, new Vector3f(edgen,0), 0, 1,Start.COLTEX,Constants.YELLOW));
 		   

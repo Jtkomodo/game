@@ -17,12 +17,37 @@ public class ColisionHandeler {
 	private static TextBuilder text=new TextBuilder(Start.aakar);
 	private static boolean colided;
 	
+	
 	public static Vector2f updateVector(Collisions ToTestWith,Vector2f position,Vector2f oldPosition,Vector2f movement,Vector2f direction) {
 		Vector2f returnVector=position;
 		
 		for(int i=0;i<Cols.size();i++) {
 		 Collisions col=Cols.get(i);
 		 if(col!=ToTestWith) {
+			if(ToTestWith.isBox && col.isBox) {
+			  returnVector =CheckAndGetResponse((AABB)ToTestWith,(AABB)col,returnVector,oldPosition,movement, direction);
+		 }else if(!ToTestWith.isBox && !col.isBox) {
+			 returnVector =CheckAndGetResponse((CircleColision)ToTestWith,(CircleColision)col,returnVector,oldPosition,movement, direction);
+			}
+		 else if(!ToTestWith.isBox && col.isBox) {
+			 returnVector =CheckAndGetResponse((CircleColision)ToTestWith,(AABB)col,returnVector,oldPosition,movement, direction);
+			}
+		 }
+		}
+		
+		
+		return returnVector;
+		
+	}
+	
+
+	public static Vector2f updateVector(Collisions ToTestWith,Vector2f position,Vector2f oldPosition,Vector2f movement,Vector2f direction,Collisions collsionTOSKIP) {
+		Vector2f returnVector=position;
+		
+		for(int i=0;i<Cols.size();i++) {
+		 Collisions col=Cols.get(i);
+		 if(col!=ToTestWith && col!=collsionTOSKIP) {
+	
 			if(ToTestWith.isBox && col.isBox) {
 			  returnVector =CheckAndGetResponse((AABB)ToTestWith,(AABB)col,returnVector,oldPosition,movement, direction);
 		 }else if(!ToTestWith.isBox && !col.isBox) {

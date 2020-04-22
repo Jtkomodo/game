@@ -127,15 +127,7 @@ public class AABB extends Collisions{
 		rcB=box.getRc();
 		
 		
-		Vector2f d= new Vector2f(0,0);
-		//Vector2f d2= new Vector2f(0,0);
-		this.getPosBeforeCol().sub(box.position,d);
 	
-	
-	    
-	 
-		box.ClosestPosition=new Vector2f(clamp(box.position.x+d.x,box.lc.x,box.rc.x),clamp(box.position.y+d.y,box.lc.y,box.rc.y));
-	  
 	
 //		
 //		 MainRenderHandler.addEntity(new Entity(piont, new Vector3f(lc,200), 0, 3,Start.COLTEX,Constants.RED));
@@ -255,7 +247,15 @@ public class AABB extends Collisions{
 				   
 		
 	if(this.colide) {
-		 
+		Vector2f d3= new Vector2f(0,0);
+		//Vector2f d32= new Vector2f(0,0);
+		this.getPosBeforeCol().sub(box.position,d3);
+	
+	
+	    
+	 
+		box.ClosestPosition=new Vector2f(clamp(box.position.x+d3.x,box.lc.x,box.rc.x),clamp(box.position.y+d3.y,box.lc.y,box.rc.y));
+	  
 		   Vector2f closesta=box.ClosestPosition;
 		   Vector2f closestb;
 		   Vector2f d2=new Vector2f();
@@ -269,26 +269,34 @@ public class AABB extends Collisions{
 
 			 currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement); 
 		 }else {
+             
+			 boolean save=ColisionHandeler.getColided();//saving the old  value
+			 ColisionHandeler.setColided(false);//setting to false so that we can use it to check for collision
 
-		Vector2f lc=new Vector2f();
-		Vector2f rc=new Vector2f();
-	   currentmovement.add(this.r,lc);
-	   currentmovement.sub(this.r,rc);  
-	
-		if((closestb.x==lc.x || closestb.x== rc.x )) {//if on the left or right side
-        	  box.getPosition().add(penetration.sub(direction.mul(.001f,new Vector2f()),new Vector2f()).x,0, newMOvement);
-         }
+			 Vector2f saveVector=new Vector2f(box.getPosition());
+		     box.setPosBeforeCol(saveVector);//posbeforecol set to current position
+		     Vector2f boxPosition=push(currentmovement, closestb, penetration, direction, box);//this is the movement after push
 		  
-		else if((closestb.y==lc.y || closestb.y==rc.y)) {//if on top or bottom
-       	  box.getPosition().add(0,penetration.sub(direction.mul(.001f,new Vector2f()),new Vector2f()).y, newMOvement);
-        }
-         box.setCenterPosition(newMOvement);
-		
-		
-//	}
-		  
-	 //    currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement);
-	 newMOvement=currentmovement; 
+		     box.setCenterPosition(boxPosition);//setting position to the bocx position after push so we can check collisons
+		     Vector2f d=new Vector2f();boxPosition.sub(saveVector,d);//this is the movement vector
+		     Start.DebugPrint("P"+Math.round(boxPosition.x)+","+Math.round(boxPosition.y)); 
+		     Start.DebugPrint(""+Math.round(saveVector.x)+","+Math.round(saveVector.y)); 
+
+		     
+		     Vector2f newBoxPosition=ColisionHandeler.updateVector(box, boxPosition, saveVector, d, d.normalize(new Vector2f()),this);//this is doing the collssion check
+            
+		     boolean colision=ColisionHandeler.getColided();//checking to see if any collision happened
+		   
+		     if(!colision) {
+		     box.setCenterPosition(boxPosition);
+		     newMOvement=currentmovement; 
+		     }else {
+		    	  box.setCenterPosition(newBoxPosition);
+		    	 currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement); 
+		    
+		     }
+		     ColisionHandeler.setColided(save);//restoring the old value
+		 
 		 }
 		 
 		 
@@ -449,7 +457,24 @@ public void debug() {
 
 
 
-
+   public Vector2f push(Vector2f currentmovement, Vector2f closestb,Vector2f penetration,Vector2f direction,AABB box) {
+	   
+	   Vector2f lc=new Vector2f();
+		Vector2f rc=new Vector2f();
+	   currentmovement.add(this.r,lc);
+	   currentmovement.sub(this.r,rc);  
+	
+		Vector2f newMOvement=new Vector2f();
+		if((closestb.x==lc.x || closestb.x== rc.x )) {//if on the left or right side
+       	  box.getPosition().add(penetration.sub(direction.mul(.001f,new Vector2f()),new Vector2f()).x,0, newMOvement);
+        }
+		  
+		else if((closestb.y==lc.y || closestb.y==rc.y)) {//if on top or bottom
+      	  box.getPosition().add(0,penetration.sub(direction.mul(.001f,new Vector2f()),new Vector2f()).y, newMOvement);
+       }
+    
+	   return newMOvement;
+   }
 
 	public void setPosBeforeCol(Vector2f posBeforeCol) {
 		PosBeforeCol = posBeforeCol;

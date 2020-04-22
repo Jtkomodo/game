@@ -126,7 +126,7 @@ public class Start {
 	public static  Source source;
     public static Fontloader aakar;
     public static ArrayList<BattleEntity> turnOrder= new ArrayList<BattleEntity>();
-    public static boolean facingLeft,running,PlayersTurn=true;
+    public static boolean facingLeft,running,PlayersTurn=true,ESCAPEBOXUP;
 	private static WorldLoader map1;
 	private static MapLoader currentMap;
     public static Entity teste;
@@ -468,7 +468,7 @@ public class Start {
 		StartBox.getUIState(1).relpaceALLActive(elementlist);
 	Entity test=new Entity(player,new Vector3f(0,64,10),0,64,playerTex);
 	Entity test2=new Entity(Start.background,new Vector3f(0,0,0),0,64,Start.COLTEX,Constants.COL_COLOR_BLUE);
- 	  	 	 
+ 	  	 	
 	  // TextureUpdate(MAP)
 Render.enable();//enables render
 
@@ -484,7 +484,7 @@ Render.enable();//enables render
 		  
 		 
 		  //  MainRenderHandler.addEntity(new Entity(background,new Vector3f(new Vector2f(x,y).add(quarterStepVelocity.mul(3,new Vector2f())),200),0,5, COLTEX,Constants.YELLOW));
-	       
+		  if(!ESCAPEBOXUP) {    
 		   Vector2f step=new Vector2f();
 		
 		  //step 1
@@ -542,7 +542,7 @@ Render.enable();//enables render
 		screencoordx=-camx;
 	    screencoordy=-camy;
 		
-		
+		  }	
 		//  textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-80,.2f);
 		
 	     cam.setPosition((new Vector2f(camx,camy)));
@@ -961,16 +961,19 @@ if(CharCallback.takeInput) {
 	    	
 	    	
 	    }
-	    if(ESCAPE==1) {
+	    ESCAPEBOXUP=StartBox.isActive();
+	       if(ESCAPE==1) {
 			if(StartBox.isActive()) {
 				StartBox.hide();
 				InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
 	
 			}else {
+				
 				StartBox.show();
 				a1.Pause();
 			    InputHandler.DisableAllBut(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_BACKSPACE,GLFW_KEY_ENTER});
 			    StartBox.reset();
+			 
 			}
 			
 		}
@@ -1155,8 +1158,7 @@ if(CharCallback.takeInput) {
 						
 						velocity=new Vector2f();
 					    direction.mul(speed,velocity);
-					
-											
+									
 						 
 						velocity.mul(50*5);
 						
@@ -1170,7 +1172,8 @@ if(CharCallback.takeInput) {
                     	oldpos=new Vector2f(x,y);
 					 
 						//one quarter step is taken
-						
+                    
+    								
 						
 					camx=-x;
 					camy=-y;

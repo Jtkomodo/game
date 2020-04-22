@@ -2,12 +2,17 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="animate" key="selection"/>
+		<item value="box.set" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="box.set"/>
+			<item value="boxPosition"/>
+			<item value="d2"/>
+			<item value="d"/>
+			<item value="=100"/>
 			<item value="animate"/>
 			<item value="teste"/>
 			<item value="this.colide"/>
@@ -16,18 +21,14 @@
 			<item value="PosBeforeCol"/>
 			<item value="Pposition"/>
 			<item value="d."/>
-			<item value="d"/>
 			<item value="trigger"/>
 			<item value="is"/>
-			<item value="FPS"/>
-			<item value="speed"/>
-			<item value="no"/>
-			<item value="51"/>
 		</list>
 		<list key="replacehistory">
+			<item value="d3"/>
+			<item value="d2"/>
 			<item value="ClosestPosition"/>
 			<item value="d2."/>
-			<item value="d2"/>
 			<item value="protected static"/>
 			<item value="i3"/>
 			<item value="i2"/>
@@ -39,7 +40,6 @@
 			<item value="i3+"/>
 			<item value="colors["/>
 			<item value=";"/>
-			<item value="color[i+0]=new"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

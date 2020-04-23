@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="box.set" key="selection"/>
+		<item value="camx" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="camx"/>
 			<item value="box.set"/>
 			<item value="boxPosition"/>
 			<item value="d2"/>
@@ -22,7 +23,6 @@
 			<item value="Pposition"/>
 			<item value="d."/>
 			<item value="trigger"/>
-			<item value="is"/>
 		</list>
 		<list key="replacehistory">
 			<item value="d3"/>

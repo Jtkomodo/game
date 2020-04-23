@@ -334,9 +334,10 @@ public class Start {
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		playerCol=new AABB(new Vector2f(0,0),15,44,0,false);
 		Col=new AABB(new Vector2f(0,0),32,32,0,true);
+	AABB	Col3=new AABB(new Vector2f(100,0),32,32,0,true);
         COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0,false);
 	    buttonNamses = new BIndingNameParser("GLFW");
-		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2});
+		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2,Col3});
 	
 		
 		initializeFPS();
@@ -544,9 +545,10 @@ Render.enable();//enables render
 		
 		  }	
 		//  textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-80,.2f);
+		DebugPrint("x="+x+","+y);
 		
 	     cam.setPosition((new Vector2f(camx,camy)));
-				
+	     DebugPrint(""+cam.getPosition());		
 		//screencoordx=-camx;
 	   // screencoordy=-camy;
 	//   MainRenderHandler.addEntity(test);

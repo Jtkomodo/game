@@ -279,9 +279,13 @@ public class AABB extends Collisions{
 		  
 		     box.setCenterPosition(boxPosition);//setting position to the bocx position after push so we can check collisons
 		     Vector2f d=new Vector2f();boxPosition.sub(saveVector,d);//this is the movement vector
+		     if(d.equals(new Vector2f(0))) {
+		    	 d.set(new Vector2f(0.001f,0.001f));
+		    	 
+		     }
 		     Start.DebugPrint("P"+Math.round(boxPosition.x)+","+Math.round(boxPosition.y)); 
 		     Start.DebugPrint(""+Math.round(saveVector.x)+","+Math.round(saveVector.y)); 
-
+         
 		     
 		     Vector2f newBoxPosition=ColisionHandeler.updateVector(box, boxPosition, saveVector, d, d.normalize(new Vector2f()),this);//this is doing the collssion check
             

@@ -545,10 +545,10 @@ Render.enable();//enables render
 		
 		  }	
 		//  textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-80,.2f);
-		DebugPrint("x="+x+","+y);
+		//DebugPrint("x="+x+","+y);
 		
 	     cam.setPosition((new Vector2f(camx,camy)));
-	     DebugPrint(""+cam.getPosition());		
+	   //  DebugPrint(""+cam.getPosition());		
 		//screencoordx=-camx;
 	   // screencoordy=-camy;
 	//   MainRenderHandler.addEntity(test);

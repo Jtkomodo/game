@@ -9,6 +9,7 @@ import org.joml.Vector4f;
 import Data.Constants;
 import gameEngine.Entity;
 import gameEngine.Start;
+import gameEngine.VectorMath;
 import guis.FunctionCaller;
 import rendering.MainRenderHandler;
 import rendering.Model;
@@ -247,15 +248,15 @@ public class AABB extends Collisions{
 				   
 		
 	if(this.colide) {
+	
+	    
 		Vector2f d3= new Vector2f(0,0);
 		//Vector2f d32= new Vector2f(0,0);
 		this.getPosBeforeCol().sub(box.position,d3);
 	
-	
-	    
-	 
 		box.ClosestPosition=new Vector2f(clamp(box.position.x+d3.x,box.lc.x,box.rc.x),clamp(box.position.y+d3.y,box.lc.y,box.rc.y));
-	  
+		  
+
 		   Vector2f closesta=box.ClosestPosition;
 		   Vector2f closestb;
 		   Vector2f d2=new Vector2f();
@@ -266,10 +267,16 @@ public class AABB extends Collisions{
 	     
 		 if(!box.isPushable()) {
 			 
-
+          
 			 currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement); 
 		 }else {
-             
+			 boolean checkColision=ColisionHandeler.updateCollsionCheck(this,currentmovement, position, movement, direction,box);
+				if(!checkColision) { 
+				 PosBeforeCol.set(position);
+				}
+				 
+			
+			 
 			 boolean save=ColisionHandeler.getColided();//saving the old  value
 			 ColisionHandeler.setColided(false);//setting to false so that we can use it to check for collision
 
@@ -279,39 +286,38 @@ public class AABB extends Collisions{
 		  
 		     box.setCenterPosition(boxPosition);//setting position to the bocx position after push so we can check collisons
 		     Vector2f d=new Vector2f();boxPosition.sub(saveVector,d);//this is the movement vector
-		     if(d.equals(new Vector2f(0))) {
-		    	 d.set(new Vector2f(0.001f,0.001f));
-		    	 
-		     }
-		     Start.DebugPrint("P"+Math.round(boxPosition.x)+","+Math.round(boxPosition.y)); 
-		     Start.DebugPrint(""+Math.round(saveVector.x)+","+Math.round(saveVector.y)); 
-         
-		     
-		     Vector2f newBoxPosition=ColisionHandeler.updateVector(box, boxPosition, saveVector, d, d.normalize(new Vector2f()),this);//this is doing the collssion check
+		   
+		   
+		   
+		    Start.DebugPrint("d="+Math.round(d.x)+","+Math.round(d.y));
+		 
+		     Vector2f dir=VectorMath.normalize(d);
+		     Start.DebugPrint("dir="+dir);
+		     Vector2f newBoxPosition=ColisionHandeler.updateVector(box, boxPosition, saveVector, d,dir,this);//this is doing the collssion check
             
 		     boolean colision=ColisionHandeler.getColided();//checking to see if any collision happened
 		   
 		     if(!colision) {
 		     box.setCenterPosition(boxPosition);
-		     newMOvement=currentmovement; 
+		     currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement); 
 		     }else {
 		    	  box.setCenterPosition(newBoxPosition);
 		    	 currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement); 
-		    
+		    	
 		     }
 		     ColisionHandeler.setColided(save);//restoring the old value
-		 
+			 
 		 }
 		 
 		 
 		 
 //		  MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(newMOvement,199), 0, 1,Start.COLTEX,Constants.COL_COLOR_RED));
 //		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(this.PosBeforeCol,198), 0, 1,Start.COLTEX,new Vector4f(0,255,0,Constants.COL_COLOR_RED.w)));
- 
+// 
 //		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(this.PosBeforeCol,198), 0, 1,Start.COLTEX,new Vector4f(0,255,0,Constants.COL_COLOR_RED.w)));
 //		   MainRenderHandler.addEntity(new Entity(piont, new Vector3f(lc,200), 0, 3,Start.COLTEX,Constants.RED));
 //		   MainRenderHandler.addEntity(new Entity(piont, new Vector3f(rc,200), 0, 3,Start.COLTEX,Constants.RED));
-//		
+////		
 //		 
 		 
 		 
@@ -353,7 +359,7 @@ public void debug() {
 
 		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(position,z), 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE));
 		    
-		  MainRenderHandler.addEntity( new Entity(piont,new Vector3f( ClosestPosition,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
+	//	  MainRenderHandler.addEntity( new Entity(piont,new Vector3f( ClosestPosition,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
 			
 		 //  MainRenderHandler.addEntity( new Entity(aabb, new Vector3f(edgen,0), 0, 1,Start.COLTEX,Constants.YELLOW));
 		   

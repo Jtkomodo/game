@@ -46,7 +46,7 @@ public class ColisionHandeler {
 		
 		for(int i=0;i<Cols.size();i++) {
 		 Collisions col=Cols.get(i);
-		 if(col!=ToTestWith && col!=collsionTOSKIP) {
+		 if(!col.equals(ToTestWith) && !col.equals(collsionTOSKIP)) {
 	
 			if(ToTestWith.isBox && col.isBox) {
 			  returnVector =CheckAndGetResponse((AABB)ToTestWith,(AABB)col,returnVector,oldPosition,movement, direction);
@@ -61,6 +61,33 @@ public class ColisionHandeler {
 		
 		
 		return returnVector;
+		
+	}
+	
+	public static boolean updateCollsionCheck(Collisions ToTestWith,Vector2f position,Vector2f oldPosition,Vector2f movement,Vector2f direction,Collisions collsionTOSKIP) {
+	
+		boolean check=false;
+		for(int i=0;i<Cols.size();i++) {
+		 Collisions trigger=Cols.get(i);
+		 if(!trigger.equals(ToTestWith) && !trigger.equals(collsionTOSKIP)) {
+	
+			 if(trigger!=ToTestWith) {
+					if(trigger.isBox) {if(
+						checkTriger(ToTestWith,(AABB)trigger)) {
+					check=true;	
+					}
+					}
+					}else {
+						if(checkTriger(ToTestWith,(CircleColision)trigger)) {
+							check=true;
+					}
+					
+					 }
+		 }
+		}
+	
+		
+		return check;
 		
 	}
 	

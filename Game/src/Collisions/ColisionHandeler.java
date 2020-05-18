@@ -16,11 +16,11 @@ public class ColisionHandeler {
 	private static ArrayList<Collisions> allCollisions=new ArrayList<Collisions>();
 	private static TextBuilder text=new TextBuilder(Start.aakar);
 	private static boolean colided;
-	
+	public  static int amountThrough=0;
 	
 	public static Vector2f updateVector(Collisions ToTestWith,Vector2f position,Vector2f oldPosition,Vector2f movement,Vector2f direction) {
 		Vector2f returnVector=position;
-		
+		amountThrough++;
 		for(int i=0;i<Cols.size();i++) {
 		 Collisions col=Cols.get(i);
 		 if(col!=ToTestWith) {
@@ -43,7 +43,7 @@ public class ColisionHandeler {
 
 	public static Vector2f updateVector(Collisions ToTestWith,Vector2f position,Vector2f oldPosition,Vector2f movement,Vector2f direction,Collisions collsionTOSKIP) {
 		Vector2f returnVector=position;
-		
+		amountThrough++;
 		for(int i=0;i<Cols.size();i++) {
 		 Collisions col=Cols.get(i);
 		 if(!col.equals(ToTestWith) && !col.equals(collsionTOSKIP)) {

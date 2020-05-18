@@ -325,9 +325,12 @@ public class Start {
 			e.printStackTrace();
 		}
 		DebugPrint("Loading world....");
-		map1=new WorldLoader("map3",true);
+		//map1=new WorldLoader("map3",true);
 		
-	    currentMap=new MapLoader(map1.Getmap(),scaleOfMapTiles);
+	    //currentMap=new MapLoader(map1.Getmap(),scaleOfMapTiles);
+		MapFIle map=new MapFIle("map1TEST");
+		map.readMap();
+	    currentMap=new MapLoader(tex,map,scaleOfMapTiles);
       
 	
 		DebugPrint("Settign Colisions....");
@@ -335,9 +338,11 @@ public class Start {
 		playerCol=new AABB(new Vector2f(0,0),15,44,0,false);
 		Col=new AABB(new Vector2f(0,0),32,32,0,true);
 	AABB	Col3=new AABB(new Vector2f(100,0),32,32,0,true);
+	AABB	Col4=new AABB(new Vector2f(200,0),32,32,0,true);
+	AABB	Col5=new AABB(new Vector2f(400,0),32,32,0,true);
         COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0,false);
 	    buttonNamses = new BIndingNameParser("GLFW");
-		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2,Col3});
+		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2,Col3,Col4,Col5});
 	
 		
 		initializeFPS();
@@ -487,7 +492,7 @@ Render.enable();//enables render
 		  //  MainRenderHandler.addEntity(new Entity(background,new Vector3f(new Vector2f(x,y).add(quarterStepVelocity.mul(3,new Vector2f())),200),0,5, COLTEX,Constants.YELLOW));
 		  if(!ESCAPEBOXUP) {    
 		   Vector2f step=new Vector2f();
-		
+		 ColisionHandeler.amountThrough=0;
 		  //step 1
 		   ColisionHandeler.setColided(false);
             new Vector2f(x,y).add(quarterStepVelocity,step);

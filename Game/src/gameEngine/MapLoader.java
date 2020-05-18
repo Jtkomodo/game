@@ -27,7 +27,7 @@ public class MapLoader {
 	protected HashMap<Integer,float[]> tilePosData=new HashMap<Integer,float[]>();
 	protected HashMap<Integer,float[]> tileUVData=new HashMap<Integer,float[]>();
 	protected HashMap<Integer,int[]> test2=new HashMap<Integer,int[]>();
-	protected HashMap<Integer,String> test=new HashMap<Integer,String>();
+
 	public MapLoader(int[][] map ,float sizeOfEachTile){
 		
 		this.sizeOfEachTile=sizeOfEachTile;
@@ -35,8 +35,75 @@ public class MapLoader {
 		loadInData(map);
 		
 	}
+public MapLoader(Texture texture,MapFIle file,float sizeOfEachTile){
+		
+		this.sizeOfEachTile=sizeOfEachTile;
+	
+		loadInData(texture,file);
+		
+	}
+	
+	public void loadInData(Texture texture, MapFIle file) {
+	this.map=file.getMap();
+	float[] vert;	
+	float[] uv;
+	float texWidth=texture.getW();
+	float texHeight=texture.getH();
+	Vector2f[] uvData=file.getTextures();
+	keychart=new int[map[0].length][map.length];	
+	int key=0;	
+	Start.DebugPrint(map.length+" "+map[0].length);
 	
 	
+	for(int i=0;i<map[0].length;i++) {
+		for(int j=0;j<map.length;j++) {
+			
+			int index=map[j][i];
+			float addi=(0.5f*i)*2;	
+	        float addj=(0.5f*j)*2;	
+	    	keychart[i][j]=key;
+				 vert=new float[]{
+							addj-0.5f,addi+0.5f,
+							addj+0.5f,addi+0.5f,
+							addj+0.5f,addi-0.5f,
+							addj-0.5f,addi-0.5f
+		
+				 };
+				 
+
+					
+if(index>0) {
+	      Vector2f uvCoords=uvData[index-1];
+		   
+		   
+			tilePosData.put(key, vert); 
+			
+			
+			uv=new float[]{
+				uvCoords.x/texWidth,uvCoords.y/texHeight,
+				(uvCoords.x+64)/texWidth,uvCoords.y/texHeight,
+				(uvCoords.x+64)/texWidth,(uvCoords.y+64)/texHeight,
+				uvCoords.x/texWidth,(uvCoords.y+64)/texHeight,
+			};
+			
+			
+			
+			
+		
+			tileUVData.put(key, uv); 	} 
+		key++;
+		}
+		
+			
+		}
+		
+		
+		
+	}
+	
+	
+		
+		
 	
 	
 	public void loadInData(int[][] map) {
@@ -108,7 +175,7 @@ if(tileIndex !=0) {
 			   
 			   
 				tilePosData.put(key, vert); 
-				test.put(key, a);
+			
 				tileUVData.put(key, uv); 	} 
 			key++;
 			}

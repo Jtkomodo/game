@@ -45,6 +45,15 @@ public class AABB extends Collisions{
 	}
 	
 	
+	public AABB(Vector2f position, float widthR, float heightR, float resistance) {
+		construct(position,widthR,heightR,resistance);
+		this.pushable=false;
+	}
+
+
+
+
+
 	private void construct(Vector2f position,float widthR,float heightR,float resistance) {
 		this.isBox=true;
 		 this.widthR=widthR;
@@ -297,6 +306,9 @@ public class AABB extends Collisions{
             
 		     boolean colision=ColisionHandeler.getColided();//checking to see if any collision happened
 		   
+		        Start.DebugPrint("("+ColisionHandeler.amountThrough+")NBP="+Math.round(newBoxPosition.x)+","+Math.round(newBoxPosition.y));
+		     
+		     
 		     if(!colision) {
 		     box.setCenterPosition(boxPosition);
 		     currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement); 

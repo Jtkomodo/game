@@ -8,12 +8,20 @@ import java.util.List;
 
 
 import org.joml.Vector2f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import Data.Moves;
 import Items.Inventory;
 import Items.Item;
 import Items.Items;
+import animation.Animate;
+import gameEngine.Entity;
 import gameEngine.Start;
+import gameEngine.Texture;
+import rendering.MainRenderHandler;
+import rendering.Model;
+import textrendering.TextBuilder;
 
 public class BattleEntity {
    
@@ -35,18 +43,29 @@ public class BattleEntity {
 	protected Moves lastUsedMove;
 	protected HpBar hpbar;
 	protected boolean isEnemy=false;
+	protected boolean isDead=false;
+	protected Model model;
+	protected float scale;
+	protected Texture texture;
+	 protected  float z=1000;
+
 	
-	public BattleEntity(Vector2f sizeForHealthBar,float atk,float def,float hp,float sp,float speed,Moves[] moves,Inventory inventory) {
+	public BattleEntity( Model model,Texture texture,float scale, Vector2f sizeForHealthBar, float atk,float def,float hp,float sp,float speed,Moves[] moves,Inventory inventory) {
 	this.inventory=inventory;	
     this.atk=atk;
     this.def=def;
     this.hp=hp;
     this.maxsp=sp;
     this.maxATK=atk;
+    this.scale=scale;
     this.maxDEF=def;
     this.maxHP=hp;
+    this.texture=texture;
     this.sp=sp;
     this.speed=speed;
+    this.model=model;
+    this.texture=texture;
+
     this.hpbar=new HpBar(maxHP,hp, sizeForHealthBar, Start.HealthBarBackground, Start.COLTEX);
     
     
@@ -77,6 +96,7 @@ public class BattleEntity {
     
 		
 	}
+	
 	
 	
 	public void setLastUsedMove(Moves lastUsedMove) {
@@ -173,12 +193,26 @@ public class BattleEntity {
 		float newhp=this.hp-hp;
 		if(newhp<0) {
 			newhp=0;
+			
+		}
+		
+		
+		if(newhp==0) {
+			isDead=true;
+			
+		}else {
+			isDead=false;
 		}
 		
 		this.hp=newhp;
 		this.hpbar.setValue(this.hp);
 	
 	}
+
+	public boolean isDead() {
+		return isDead;
+	}
+
 
 	public void IncreseSp(float sp) {
 		float newsp=this.sp+sp;
@@ -324,9 +358,26 @@ if(move.getCost()<=this.sp) {
 }
 	
 
+public void draw(Vector2f position,TextBuilder text) {
+	
+	MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture));
+	this.hpbar.draw(position.add(0,80,new Vector2f()),text);
+	
+	
+	
+}
 
-
-
+public void draw(Vector2f position,TextBuilder text,Vector4f color) {
+	
+    MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture,color));
+	this.hpbar.draw(position.add(0,80,new Vector2f()),text);
+	
+	
+	
+}
+public Model getModel() {
+	return model;
+}
 
 public void addItemToInventory(Items item) {
 	
@@ -344,5 +395,12 @@ public float getSpeed() {
 public void setInventory(Inventory inventory) {
 	this.inventory = inventory;
 }
-	
+public float getZ() {
+	return z;
+}
+
+public void setZ(float z) {
+	this.z = z;
+}
+
 }

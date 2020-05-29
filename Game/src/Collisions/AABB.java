@@ -224,16 +224,16 @@ public class AABB extends Collisions{
 	   //box is the box we are checking collision with
 	   
 	  
-	  
+	   Start.DebugPrint("("+ColisionHandeler.amountThrough+")");
 
-	   Vector2f newMOvement=new Vector2f(0,0); //this is the return value
+	int amountThrough=ColisionHandeler.amountThrough;
 	  
 	   Vector2f currentmovement=new Vector2f(0,0);
 	   movement.add(new Vector2f(position.x,position.y),currentmovement);//this is the current position after addition of the movement
 	 
 	 //  MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(currentmovement,z), 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE));
 	   
-	   
+	   Vector2f newMOvement=currentmovement; //this is the return value   
 	   
 	
 	
@@ -279,10 +279,10 @@ public class AABB extends Collisions{
           
 			 currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement); 
 		 }else {
-			 boolean checkColision=ColisionHandeler.updateCollsionCheck(this,currentmovement, position, movement, direction,box);
-				if(!checkColision) { 
+			// boolean checkColision=ColisionHandeler.updateCollsionCheck(this,currentmovement, position, movement, direction,box);
+			//	if(!checkColision) { 
 				 PosBeforeCol.set(position);
-				}
+		//		}
 				 
 			
 			 
@@ -293,46 +293,29 @@ public class AABB extends Collisions{
 		     box.setPosBeforeCol(saveVector);//posbeforecol set to current position
 		     Vector2f boxPosition=push(currentmovement, closestb, penetration, direction, box);//this is the movement after push
 		  
-		     box.setCenterPosition(boxPosition);//setting position to the bocx position after push so we can check collisons
+		    box.setCenterPosition(boxPosition);//setting position to the bocx position after push so we can check collisons
 		     Vector2f d=new Vector2f();boxPosition.sub(saveVector,d);//this is the movement vector
 		   
 		   
 		   
-		    Start.DebugPrint("d="+Math.round(d.x)+","+Math.round(d.y));
+		  
 		 
 		     Vector2f dir=VectorMath.normalize(d);
-		     Start.DebugPrint("dir="+dir);
-		     Vector2f newBoxPosition=ColisionHandeler.updateVector(box, boxPosition, saveVector, d,dir,this);//this is doing the collssion check
+		     
             
-		     boolean colision=ColisionHandeler.getColided();//checking to see if any collision happened
-		   
-		        Start.DebugPrint("("+ColisionHandeler.amountThrough+")NBP="+Math.round(newBoxPosition.x)+","+Math.round(newBoxPosition.y));
-		     
-		     
-		     if(!colision) {
-		     box.setCenterPosition(boxPosition);
-		     currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement); 
-		     }else {
-		    	  box.setCenterPosition(newBoxPosition);
-		    	 currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement); 
-		    	
-		     }
-		     ColisionHandeler.setColided(save);//restoring the old value
-			 
+		  
+		   currentmovement.sub(penetration.add(direction.mul(.0000001f,new Vector2f()),new Vector2f()), newMOvement); 
+		
+		   Vector2f newBoxPosition= ColisionHandeler.updateVector(box, boxPosition, saveVector, d,dir,this);//this is doing the next collision
+		  
+	
+		   box.setCenterPosition(newBoxPosition);
+	
+		   ColisionHandeler.setColided(save);//restoring the old value 
 		 }
 		 
 		 
-		 
-//		  MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(newMOvement,199), 0, 1,Start.COLTEX,Constants.COL_COLOR_RED));
-//		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(this.PosBeforeCol,198), 0, 1,Start.COLTEX,new Vector4f(0,255,0,Constants.COL_COLOR_RED.w)));
-// 
-//		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(this.PosBeforeCol,198), 0, 1,Start.COLTEX,new Vector4f(0,255,0,Constants.COL_COLOR_RED.w)));
-//		   MainRenderHandler.addEntity(new Entity(piont, new Vector3f(lc,200), 0, 3,Start.COLTEX,Constants.RED));
-//		   MainRenderHandler.addEntity(new Entity(piont, new Vector3f(rc,200), 0, 3,Start.COLTEX,Constants.RED));
-////		
-//		 
-		 
-		 
+
 		 
 		 
 		 
@@ -347,7 +330,10 @@ public class AABB extends Collisions{
 		   return currentmovement;
 	   }
 	   
-	    return newMOvement;
+	   
+	   Start.DebugPrint("("+amountThrough+")"+"nm="+newMOvement);
+	   
+	   return newMOvement;
 	   
 	   
 	   
@@ -488,11 +474,11 @@ public void debug() {
 	
 		Vector2f newMOvement=new Vector2f();
 		if((closestb.x==lc.x || closestb.x== rc.x )) {//if on the left or right side
-       	  box.getPosition().add(penetration.sub(direction.mul(.001f,new Vector2f()),new Vector2f()).x,0, newMOvement);
+       	  box.getPosition().add(penetration.x,0, newMOvement);
         }
 		  
 		else if((closestb.y==lc.y || closestb.y==rc.y)) {//if on top or bottom
-      	  box.getPosition().add(0,penetration.sub(direction.mul(.001f,new Vector2f()),new Vector2f()).y, newMOvement);
+      	  box.getPosition().add(0,penetration.y, newMOvement);
        }
     
 	   return newMOvement;

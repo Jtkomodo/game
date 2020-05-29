@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import gameEngine.Entity;
 import gameEngine.Start;
@@ -329,6 +330,75 @@ public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale) {
 		
 	}
 	
+	
+	
+	//color
+public void drawAnimatedModel(Vector3f position,float angle,float scale,Vector4f color) {
+		
+		if(AnimationHandler.exsits(this)){
+			//e=(model, position, angle, scale,texture);
+		     e.setPosition(position);
+		     e.setAngle(angle);
+		     e.setSize(scale);
+		     e.setColor(color);
+		     e.setMirror(false);
+		     
+		       MainRenderHandler.addEntity(e);
+		}
+		
+		
+	}
+	
+	public void drawAnimatedModel(Vector3f position,float angle,float scale,Vector4f color,boolean mirror) {
+		
+		
+		if(AnimationHandler.exsits(this)){
+			 e.setPosition(position);
+		     e.setAngle(angle);
+		     e.setSize(scale);
+		     e.setColor(color);
+		     e.setMirror(mirror);		
+	
+    
+       MainRenderHandler.addEntity(e);
+       
+		}
+		
+	}
+	
+	
+public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale,Vector4f color) {
+		
+		if(AnimationHandler.exsits(this)){
+			 e.setPosition(position);
+		     e.setAngle(angle);
+		     e.setSize(scale);
+		     e.setColor(color);
+		     e.setMirror(false);
+		      
+		       MainRenderHandler.addEntity(e);
+		       
+		}
+		
+		
+	}
+	
+	public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale,Vector4f color,boolean mirror) {
+		
+		
+		if(AnimationHandler.exsits(this)){
+			 e.setPosition(position);
+		     e.setAngle(angle);
+		     e.setSize(scale);
+		     e.setColor(color);
+		     e.setMirror(mirror);
+		       MainRenderHandler.addEntity(e);
+		       
+		
+		}
+		
+		
+	}
 	
 	public int getCurrentframe() {
 		return this.currentframe;

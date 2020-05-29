@@ -10,7 +10,7 @@ import gameEngine.Start;
 import textrendering.TextBuilder;
 
 public class ColisionHandeler {
-
+	private static ArrayList<Collisions> ColsPushed=new ArrayList<Collisions>();
 	private static ArrayList<Collisions> Cols=new ArrayList<Collisions>();
 	private static ArrayList<Collisions> Triggers=new ArrayList<Collisions>(); 
 	private static ArrayList<Collisions> allCollisions=new ArrayList<Collisions>();
@@ -44,9 +44,10 @@ public class ColisionHandeler {
 	public static Vector2f updateVector(Collisions ToTestWith,Vector2f position,Vector2f oldPosition,Vector2f movement,Vector2f direction,Collisions collsionTOSKIP) {
 		Vector2f returnVector=position;
 		amountThrough++;
+		ColsPushed.add(collsionTOSKIP);
 		for(int i=0;i<Cols.size();i++) {
 		 Collisions col=Cols.get(i);
-		 if(!col.equals(ToTestWith) && !col.equals(collsionTOSKIP)) {
+		 if(!col.equals(ToTestWith) && !ColsPushed.contains(col)) {
 	
 			if(ToTestWith.isBox && col.isBox) {
 			  returnVector =CheckAndGetResponse((AABB)ToTestWith,(AABB)col,returnVector,oldPosition,movement, direction);
@@ -63,33 +64,35 @@ public class ColisionHandeler {
 		return returnVector;
 		
 	}
-	
-	public static boolean updateCollsionCheck(Collisions ToTestWith,Vector2f position,Vector2f oldPosition,Vector2f movement,Vector2f direction,Collisions collsionTOSKIP) {
-	
-		boolean check=false;
-		for(int i=0;i<Cols.size();i++) {
-		 Collisions trigger=Cols.get(i);
-		 if(!trigger.equals(ToTestWith) && !trigger.equals(collsionTOSKIP)) {
-	
-			 if(trigger!=ToTestWith) {
-					if(trigger.isBox) {if(
-						checkTriger(ToTestWith,(AABB)trigger)) {
-					check=true;	
-					}
-					}
-					}else {
-						if(checkTriger(ToTestWith,(CircleColision)trigger)) {
-							check=true;
-					}
-					
-					 }
-		 }
-		}
-	
-		
-		return check;
-		
-	}
+//	
+//	public static boolean updateCollsionCheck(Collisions ToTestWith,Vector2f position,Vector2f oldPosition,Vector2f movement,Vector2f direction,Collisions collsionTOSKIP) {
+//	
+//		boolean check=false;
+//		for(int i=0;i<Cols.size();i++) {
+//		 Collisions trigger=Cols.get(i);
+//		 if(!trigger.equals(ToTestWith) && !trigger.equals(collsionTOSKIP)) {
+//	
+//			 if(trigger!=ToTestWith) {
+//					if(trigger.isBox) {
+//						if(checkTriger(ToTestWith,(AABB)trigger)) {
+//					check=true;	
+//					break;
+//					}
+//					}
+//					}else {
+//						if(checkTriger(ToTestWith,(CircleColision)trigger)) {
+//							check=true;
+//							break;
+//					}
+//					
+//					 }
+//		 }
+//		}
+//	
+//		
+//		return check;
+//		
+//	}
 	
 	public static void updateTriggers(Collisions ToTestWith) {
 		
@@ -192,15 +195,11 @@ private static boolean checkTriger(Collisions a,CircleColision b) {
 			  colided=true;
 		  Vector2f new2= a.findVector(oldposition,movement,direction,b);
 		  
-//			new2.sub(position,vec);
-//			Vector2f vector=new Vector2f(0);
-//			vec.add(position,vector);
-//			
-			a.setCenterPosition(new2);			
-		
+	
+	
 			return new2;
 		  }else {
-				a.setCenterPosition(position);	
+				//a.setCenterPosition(position);	
 			return position;
 		  }
 		
@@ -217,11 +216,11 @@ private static boolean checkTriger(Collisions a,CircleColision b) {
 	  Vector2f new2= a.findVector(oldposition,movement,direction,b);
 	  
 	
-		a.setPosition(new2);			
+		//a.setPosition(new2);			
 		
 		return new2;
 	  }else {
-			a.setPosition(position);	
+			//a.setPosition(position);	
 			return position;
 	  }
 		
@@ -270,7 +269,7 @@ public static void remove(int index) {
 		
 		return vector;
 	  }else {
-			a.setPosition(position);	
+			//a.setPosition(position);	
 			return position;
 		
 	  }
@@ -284,7 +283,9 @@ public static boolean getColided() {
 	return colided;
 }	
 	
-	
+public static void FlushPushList() {
+   ColsPushed.clear();
+}
 
 
 }	

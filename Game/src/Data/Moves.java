@@ -10,10 +10,12 @@ import battleClasses.TimedButtonHold;
 
 public enum Moves {
 
-	punch("punch",33,0,false,false,new TimedButtonPress(2,2.5,GLFW_KEY_SPACE)),//damage,special,cost,healing move
-	heal("heal",25,25,true,false,new TimedButtonCombo(new TimedButton[]{new TimedButtonPress(2,2.5,GLFW_KEY_SPACE),new TimedButtonHold(1,1.4,2,GLFW_KEY_RIGHT)},2,1))
-	,Doublekick("double kick",50,33,false,false,new TimedButtonCombo(new TimedButton[] {new TimedButtonPress(3,3.39,GLFW_KEY_SPACE),new TimedButtonPress(3,3.39,GLFW_KEY_SPACE)},2,1)),
-	superHeal("SuperHeal",100,40,true,false)
+	punch("punch",33,0,false,false,new TimedButtonPress(.5,1,GLFW_KEY_A)),//damage,special,cost,healing move
+	heal("heal",25,25,true,false,new TimedButtonCombo(new TimedButton[]{new TimedButtonPress(.5,1,GLFW_KEY_A),new TimedButtonHold(.5,1,2,GLFW_KEY_D),new TimedButtonPress(.5
+			,.9,GLFW_KEY_A)},2,1))
+	,Doublekick("double kick",50,33,false,false,new TimedButtonCombo(new TimedButton[] {new TimedButtonPress(.5,.9,GLFW_KEY_S),new TimedButtonPress(.5,.9,GLFW_KEY_A)
+			,new TimedButtonPress(.5,.9,GLFW_KEY_D)},3,2)),
+	superHeal("SuperHeal",100,40,true,false);
 	
 	;
 

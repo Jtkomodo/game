@@ -335,9 +335,9 @@ public class Start {
 	
 		DebugPrint("Settign Colisions....");
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
-		playerCol=new AABB(new Vector2f(0,0),15,44,0,false);
+		playerCol=new AABB(new Vector2f(0,0),64,64,0,false);
 		Col=new AABB(new Vector2f(0,0),32,32,0,true);
-	AABB	Col3=new AABB(new Vector2f(100,0),32,32,0,true);
+	AABB	Col3=new AABB(new Vector2f(100,0),16,32,0,true);
 	AABB	Col4=new AABB(new Vector2f(200,0),32,32,0,true);
 	AABB	Col5=new AABB(new Vector2f(400,0),32,32,0,true);
         COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0,false);
@@ -357,15 +357,16 @@ public class Start {
 		
 		s.loadVec4(Color, new Vector4f(1,1,1,1));
      
-	
+		a1=new Animate(7,player,sloader,0,7);
+		 
 		 playersInventory= new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore},new int[] {1,3,2});
 		 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore,Items.spSuperRestore},new int[] {3,1,4,2});
 		 
-		p=new BattleEntity(new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
-		Enemy enemy=new Enemy(new Vector2f(50,10),player,playerTex,96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),15,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
-		Enemy enemy2=new Enemy(new Vector2f(50,10),player,playerTex,96,"E2",Enemies.E1.getAtk(),Enemies.E1.getDef(),20,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
-		Enemy enemy3=new Enemy(new Vector2f(50,10),player,playerTex,96,"E3",Enemies.E1.getAtk(),Enemies.E1.getDef(),20,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
-		Enemy enemy4=new Enemy(new Vector2f(50,10),player,playerTex,96,"E4",Enemies.E1.getAtk(),Enemies.E1.getDef(),20,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
+		p=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
+		Enemy enemy=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),15,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
+		Enemy enemy2=new Enemy(new Vector2f(50,10),player, playerTex,96,"E2",Enemies.E1.getAtk(),Enemies.E1.getDef(),20,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
+		Enemy enemy3=new Enemy(new Vector2f(50,10),player, playerTex,96,"E3",Enemies.E1.getAtk(),Enemies.E1.getDef(),20,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
+		Enemy enemy4=new Enemy(new Vector2f(50,10),player, playerTex,96,"E4",Enemies.E1.getAtk(),Enemies.E1.getDef(),20,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
 		
 		
 		
@@ -492,7 +493,7 @@ Render.enable();//enables render
 		  //  MainRenderHandler.addEntity(new Entity(background,new Vector3f(new Vector2f(x,y).add(quarterStepVelocity.mul(3,new Vector2f())),200),0,5, COLTEX,Constants.YELLOW));
 		  if(!ESCAPEBOXUP) {    
 		   Vector2f step=new Vector2f();
-		 ColisionHandeler.amountThrough=0;
+	
 		  //step 1
 		   ColisionHandeler.setColided(false);
             new Vector2f(x,y).add(quarterStepVelocity,step);
@@ -704,211 +705,10 @@ MainRenderHandler.clear();
 		
 		w.update();//this is needed to actually poll events from keyboard 
 		
-if(CharCallback.takeInput) {
-	    
-		    InputHandler.DisableAllBut(new int[] {GLFW_KEY_H});
-		    	String string=CharCallback.string;
-		    	
-		    	
-		    	if(GetInput.getStateofButton(GLFW_KEY_BACKSPACE)==1 && string.length()!=0) {//back space
-					   
-					   CharCallback.string=(string.substring(0,string.length()-1).toString());
-						
-					   string=CharCallback.string;
-					}	
-		    	if(GetInput.getStateofButton(GLFW_KEY_ENTER)==1) {
-		    		CharCallback.string=string+"\n";
-		    	}
-		    	
-		    	
-		    	if(string.contains("/v")) {
-		    		int index=string.indexOf("/v");
-		    		String s=string.subSequence(index+1,string.length()).toString();
-		    	
-		    		if(s.contentEquals("vscreenx")) {
-		    			s=string.replace("/vscreenx",""+Start.screencoordx);
-		    			CharCallback.string=s;
-		    		}
-		    		if(s.contentEquals("vscreeny")) {
-		    			s=string.replace("/vscreeny",""+Start.screencoordy);
-		    			CharCallback.string=s;
-		    		}
-		    		
-		    		
-		    		
-		    	}
-		    if(CharCallback.string.endsWith("\n")) {
-		    
-		    if(CharCallback.string.contains("#(")&& CharCallback.string.contains(")")){	
-		    	string=CharCallback.string.substring(CharCallback.string.indexOf("#"),CharCallback.string.indexOf(")"));
-		    	
-		    	string=string.replace("#(","");
-		    	string=string.replace(")","");
-		    	
-		    	if(string.contentEquals("EXIT")) {
-		    		w.CloseWIndow();
-		    	   
-		    	
-		    	
-		    	}else if(string.startsWith("DEBUGPRINT=")) {
-		    		
-		    		int index=string.indexOf("DEBUGPRINT=")+11;
-		    		
-		    		string=string.substring(index);
-		    		if(string.contentEquals("true") || string.contentEquals("false")) {
-		    	    Start.DebugPrint=Boolean.parseBoolean(string);
-		    	    CharCallback.string=CharCallback.string.replace("#(DEBUGPRINT="+string+")","/[OK]/Set "+string);
-		    		}else{
-		    			CharCallback.string=CharCallback.string.replace("#(DEBUGPRINT="+string+")","/[ERROR]/Sorry that is not a valid value");
-		    			
-		    		}
-		  
-		    	}else if(string.startsWith("DEBUGDRAW=")) {
-		    		
-		    		int index=string.indexOf("DEBUGDRAW")+10;
-		    		
-		    		string=string.substring(index);
-		    		if(string.contentEquals("true") || string.contentEquals("false")) {
-		    	    Start.Debugdraw=Boolean.parseBoolean(string);
-		    	    CharCallback.string=CharCallback.string.replace("#(DEBUGDRAW="+string+")","/[OK]/Set "+string);
-		    		}else{
-		    			CharCallback.string=CharCallback.string.replace("#(DEBUGDRAW="+string+")","/[ERROR]/Sorry that is not a valid value");
-		    			
-		    		}
-		    	}else if(string.startsWith("DEBUGFPS=")) {
-		    		
-		    		int index=string.indexOf("DEBUGFPS=")+9;
-		    		
-		    		string=string.substring(index);
-		    		if(string.contentEquals("true") || string.contentEquals("false")) {
-		    	    Start.showFps=Boolean.parseBoolean(string);
-		    	    CharCallback.string=CharCallback.string.replace("#(DEBUGFPS="+string+")","/[OK]/Set "+string);
-		    		}else{
-		    			CharCallback.string=CharCallback.string.replace("#(DEBUGFPS="+string+")","/[ERROR]/Sorry that is not a valid value");
-		    			
-		    		}}else if(string.startsWith("ADD_AABB")) {
-		    			
-		    			int index=string.indexOf("ADD_AABB")+8;
-		    			string=string.substring(index);
-		    			String[] arguments=string.split(",");
-		    			if(arguments.length==5) {
-		    				try {
-		    			float x=Float.parseFloat(arguments[0]);	
-		    			float y=Float.parseFloat(arguments[1]);
-		    			float widthr=Float.parseFloat(arguments[2]);
-		    			float heightR=Float.parseFloat(arguments[3]);
-		    			float r=Float.parseFloat(arguments[4]);
-		    			ColisionHandeler.addCollision(new AABB(new Vector2f(x,y),widthr,heightR,r,false));
-		    		    CharCallback.string=CharCallback.string.replace("#(ADD_AABB"+string+")","/[OK]/COL_ADDED");
-		    			
-		    				}catch(NumberFormatException e) {
-		    				
-		    					CharCallback.string=CharCallback.string.replace("#(ADD_AABB"+string+")","/[ERROR]/Sorry there are incorrect argument types");
-		    				}
-		    				
-		    				
-		    			}else {
-		    				CharCallback.string=CharCallback.string.replace("#(ADD_AABB"+string+")","/[ERROR]/Sorry add aabb takes 5 arguments");
-		    			}
-		    			
-		    		}else if(string.startsWith("REMOVE_AABB")) {
-		    			
-		    			string=string.substring(string.indexOf(" ")+1);
-		    			int index=Integer.parseInt(string);
-		    			ColisionHandeler.remove(index);
-		    			 CharCallback.string=CharCallback.string.replace("#(REMOVE_AABB "+string+")","/[OK]/COL_REMOVED");
-		    			
-		    		}
-		    	
-		    		else if(string.startsWith("CALL")) {
-		    			FunctionCaller function;
-		    			string=string.substring(string.indexOf("CALL")+5);
-		    			if(string.contains(",")) {
-		    			String[] arguments=string.split(",");
-		    			if(arguments.length==2) {
-		    				String a=arguments[0];
-		    				String b=arguments[1];
-		    				if(b.startsWith("{") && b.endsWith("}")) {
-		    					String[] bargs;
-		    					if(b.contains(" ")) {
-		    						bargs=b.split(" ");}
-		    					else {
-		    					    bargs=new String[]{b};
-		    					}
-		    					Object[] args=new Object[bargs.length];
-		    				    Class[]  argTypes=new Class[args.length];
-		    					for(int i=0;i<bargs.length;i++) {
-		    						
-		    						String bi=bargs[i];
-		    					
-		    					
-		    						if(bi.contains("{")) {
-		    							bi=bi.substring(bi.indexOf("{")+1);
-		    						}
-		    						if(bi.contains("}")) {
-		    						  bi= bi.substring(0,bi.indexOf("}"));
-		    						}
-		    						
-		    						if(bi.startsWith("/i")) {
-		    							
-		    							bi=bi.substring(bi.indexOf("/i")+2);
-		    							args[i]=Integer.parseInt(bi);
-		    							argTypes[i]=Integer.TYPE;
-		    						}else if(bi.startsWith("/f")) {
-		    							bi=bi.substring(bi.indexOf("/f")+2);
-		    							args[i]=Float.parseFloat(bi);
-		    							argTypes[i]=Float.TYPE;
-		    							
-		    						}else if(bi.startsWith("/s")) {
-		    							bi=bi.substring(bi.indexOf("/s")+2);
-		    							args[i]=bi;
-		    							argTypes[i]=String.class;
-		    							
-		    							
-		    						}else if(bi.startsWith("/d")) {
-		    							bi=bi.substring(bi.indexOf("/d")+2);
-		    							args[i]=Double.parseDouble(bi);
-		    							argTypes[i]=Double.TYPE;
-		    						}else {
-		    							CharCallback.string=CharCallback.string.replace("#(CALL "+string+")","[ERROR] that is not a valid type only /s /i /f /d ");
-		    						}
-		    						
-		    						
-		    						
-		    					}
-		    					
-		    					function=new FunctionCaller(a,args,argTypes);
-		    					function.invoke();
-		    					CharCallback.string=CharCallback.string.replace("#(CALL "+string+")","");
-		    					
-		    				}else {
-		    					CharCallback.string=CharCallback.string.replace("#(CALL "+string+")","[ERROR] second arg needs to be a array of types");
-		    				}
-		    				
-		    				
-		    			}
-		    			
-		    			
-		    			
-		    			}else {
-		    			function=new FunctionCaller(string);
-		    			CharCallback.string=CharCallback.string.replace("#(CALL "+string+")"," ");
-		    			function.invoke();
-		    			
-		    			}
-		    		
-		    		}
-		    	
-		    	
-		  else{
-		    		CharCallback.string=CharCallback.string.replace("#("+string+")","/[ERROR]/Sorry that is not a valid Command");
-	    		}
-		    }
-	    		
-}
+
 	    		
 		    	
-		    }else if(!MoveInprogress) {
+		   if(!MoveInprogress) {
 		    	InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_ENTER,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
 		    	
 		    }
@@ -932,10 +732,7 @@ if(CharCallback.takeInput) {
 		
 		
 	    
-	    if(GetInput.getStateofButton(GLFW_KEY_S)==1) {
-	    	
-	    	Proccesor.addComandtoItorator(new walkTo(a1.getE(),new Vector2f(0,0),new Vector2f(0,100),5.0));
-	    }
+	   
 	    
 	    	
 		
@@ -1268,6 +1065,14 @@ private static void EndBattleAsLoss() {
 }	
 	
    private static void battleupdate() {
+	   
+	   
+	   
+	   
+	   
+	   cam.setPosition(new Vector2f(0,0));
+	   
+	   
 
 	   if(Start.TurnFinished) {
 		   DebugPrint("FINISHED");
@@ -1279,7 +1084,13 @@ private static void EndBattleAsLoss() {
 		   selectingEnemy=true;}
 		
 	   
-	   boolean allEnemiesDead=Start.CurrentEnemyFeild.updateField(selectingEnemy);
+	   boolean allEnemiesDead=Start.CurrentEnemyFeild.updateField();
+	   if(selectingEnemy) {
+		   CurrentEnemyFeild.selectEnemy();
+		   
+	   }else {
+		   CurrentEnemyFeild.setSelected(false);
+	   }
 	  
 	   
 	   Enemy e=enemyField.getCurrentEnemy();
@@ -1592,8 +1403,8 @@ private static Vector2f updateColisions(AABB colision,Vector2f position,Vector2f
 	
     
    
-	  
-	    
+	 ColisionHandeler.amountThrough=0;
+	 ColisionHandeler.FlushPushList();
 	   ColisionHandeler.updateTriggers(colision);
 	
 
@@ -1651,8 +1462,7 @@ private static void initializeFPS() {
 	
 	
 
-	a1=new Animate(7,player,sloader,0,7);
- 
+	
 
 }	
 

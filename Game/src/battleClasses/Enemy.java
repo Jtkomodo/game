@@ -27,18 +27,18 @@ import textrendering.TextBuilder;
 public class Enemy extends BattleEntity{
 
 	private String name;
-	private Model model;
-    private Texture texture;  
-    private float scale;
-    private float z=1000;
+	
+   
+   
+  
 
 
 	public Enemy(Vector2f sizeForBar,Model model,Texture texture,float scale,String name,float atk, float def, float hp,float sp,float speed, Moves[] moves,Inventory inventory) {
-		super(sizeForBar,atk, def, hp,sp,speed, moves,inventory);
+		super(model,texture,scale, sizeForBar,atk, def, hp,sp,speed, moves,inventory);
 		this.name=name;
-	    this.model=model;
+	   
 	    this.texture=texture;
-	    this.scale=scale;
+	 
 	    super.isEnemy=true;
 	}
 
@@ -46,23 +46,7 @@ public class Enemy extends BattleEntity{
 		return name;
 	}
 
-	public void draw(Vector2f position,TextBuilder text) {
-		
-		MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture));
-		this.hpbar.draw(position.add(0,80,new Vector2f()),text);
-		
-		
-		
-	}
-
-   public void draw(Vector2f position,TextBuilder text,Vector4f color) {
-		
-	    MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture,color));
-		this.hpbar.draw(position.add(0,80,new Vector2f()),text);
-		
-		
-		
-	}
+	
 
 
 	private ArrayList<Moves> makeListOfUseableMoves() {
@@ -167,7 +151,7 @@ public class Enemy extends BattleEntity{
 				   
 						
 				
-			        player.decreseHp(Damage);
+			       // player.decreseHp(Damage);
 			   
 			       
 			        Proccesor.addComandtoQueue(new DrawString(name+" used "+move.getName(),new Vector2f(-100,40),.5f,true,.5f));			
@@ -603,10 +587,7 @@ if(SPRestoringItemFound) {
 	}
 	
 	
-	public Model getModel() {
-		return model;
-	}
-
+	
 	public float getScale() {
 		return scale;
 	}
@@ -626,14 +607,7 @@ if(SPRestoringItemFound) {
 		return texture;
 	}
 
-	public float getZ() {
-		return z;
-	}
-
-	public void setZ(float z) {
-		this.z = z;
-	}
-
+	
 
 	
 }

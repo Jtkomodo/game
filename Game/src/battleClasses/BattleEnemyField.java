@@ -78,7 +78,7 @@ public class BattleEnemyField {
 		
 	}
 	
-	public boolean updateField(boolean selecting) {
+	public boolean updateField() {
 		
 		
 	        //this will be what will check the enemy hp and remove enemies from list if 0
@@ -99,8 +99,9 @@ public class BattleEnemyField {
              
              
              
+			 
              
-             if(e.getHp()<=0) {
+             if(e.isDead) {
             
 				itr.remove();
 			    this.ListOfEnemiesI.remove(v);
@@ -108,8 +109,13 @@ public class BattleEnemyField {
 			
 			
 		}
+
+	        return this.ListOfEnemies.isEmpty();
+	   
+	}
 	
-		if(selecting) {
+	public void selectEnemy() {
+		//this is where we will select which enemy we are doing a attack on
 			double TimeTaken=0;
 			if(this.Selected) {
 				TimeTaken=Timer.getTIme()-time;	
@@ -123,7 +129,7 @@ public class BattleEnemyField {
 				    
 			if(TimeTaken>=.1) {			
 			if(Select==1) {
-				Start.DebugPrint("Select");
+			
 				
 				Start.source.play(Start.Select);
 				GUIMEthods.UseAttack(Start.currentlyUsedMove, Start.p, this.currentEnemy);
@@ -155,18 +161,17 @@ public class BattleEnemyField {
 					
 		}
 		
-		}else {
-			
-			Selected=false;
-		}
 		
 		
-	        return this.ListOfEnemies.isEmpty();
-	        
+		     
 		
 	}
 	
 	
+	public void setSelected(boolean selected) {
+		Selected = selected;
+	}
+
 	public void reload(Enemy[] enemies) {
 		this.ListOfEnemies.clear();
 		this.ListOfEnemiesI.clear();
@@ -220,8 +225,8 @@ public class BattleEnemyField {
 	
 	
 	private void GoRight() {
-		// TODO Auto-generated method stub
-		Start.DebugPrint("RIGHT");
+		
+	
 		
 		float x=this.currentPosition.x;
 	
@@ -257,8 +262,7 @@ public class BattleEnemyField {
 	}
 
 	private void GoLeft() {
-		// TODO Auto-generated method stub
-		Start.DebugPrint("left");
+	
 		float x=this.currentPosition.x;
 		if(this.ListOfEnemiesI.containsKey(Position1)) {
 		this.currentEnemy=this.ListOfEnemiesI.get(Position1);
@@ -277,7 +281,7 @@ public class BattleEnemyField {
 	}
 
 	private void GoDown() {
-		Start.DebugPrint("DOWN");
+		
 		float y=this.currentPosition.y;
 		int size= this.ListOfEnemies.size();
    if(this.ListOfEnemiesI.containsKey(Position2)) {
@@ -299,7 +303,7 @@ public class BattleEnemyField {
 	}
 
 	private void GoUp() {
-		Start.DebugPrint("UP");
+		
 		float y=this.currentPosition.y;
 		
    if(this.ListOfEnemiesI.containsKey(Position3)) {

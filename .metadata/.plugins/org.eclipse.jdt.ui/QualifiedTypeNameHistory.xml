@@ -1,20 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.Map"/>
-    <fullyQualifiedTypeName name="java.util.Comparator"/>
-    <fullyQualifiedTypeName name="java.util.Collections"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
-    <fullyQualifiedTypeName name="java.util.LinkedHashMap"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="java.util.LinkedList"/>
-    <fullyQualifiedTypeName name="input.GetInput"/>
-    <fullyQualifiedTypeName name="com.sun.java.util.jar.pack.Package.Class.Method"/>
-    <fullyQualifiedTypeName name="java.lang.reflect.Method"/>
-    <fullyQualifiedTypeName name="guis.FunctionCaller"/>
     <fullyQualifiedTypeName name="java.util.Map.Entry"/>
     <fullyQualifiedTypeName name="Collisions.Collisions"/>
     <fullyQualifiedTypeName name="Collisions.ColisionHandeler"/>
-    <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="java.nio.IntBuffer"/>
     <fullyQualifiedTypeName name="org.lwjgl.openal.ALC"/>
@@ -48,16 +36,28 @@
     <fullyQualifiedTypeName name="gameEngine.MultipleTextureBatchedModel"/>
     <fullyQualifiedTypeName name="rendering.MainRenderHandler"/>
     <fullyQualifiedTypeName name="input.CharCallback"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
     <fullyQualifiedTypeName name="org.lwjgl.opengl.GL15"/>
     <fullyQualifiedTypeName name="org.joml.Math"/>
-    <fullyQualifiedTypeName name="org.joml.Vector4f"/>
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="gameEngine.Timer"/>
     <fullyQualifiedTypeName name="gameEngine.Entity"/>
     <fullyQualifiedTypeName name="gameEngine.VectorMath"/>
     <fullyQualifiedTypeName name="org.joml.Vector3f"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
+    <fullyQualifiedTypeName name="battleClasses.BattleEnemyField"/>
+    <fullyQualifiedTypeName name="battleClasses.BattlePlayerField"/>
+    <fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
+    <fullyQualifiedTypeName name="guis.UIBox"/>
+    <fullyQualifiedTypeName name="gameEngine.Texture"/>
+    <fullyQualifiedTypeName name="org.joml.Vector4f"/>
+    <fullyQualifiedTypeName name="animation.Animate"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="customExceptions.EnemyHasToManyMoves"/>
+    <fullyQualifiedTypeName name="rendering.Model"/>
+    <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="org.lwjgl.openal.LOKIWAVEFormat"/>
+    <fullyQualifiedTypeName name="org.lwjgl.BufferUtils"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

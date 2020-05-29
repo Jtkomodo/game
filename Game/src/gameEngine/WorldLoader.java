@@ -11,7 +11,7 @@ import java.util.HashMap;
 import org.newdawn.slick.opengl.PNGDecoder;
 
 import Data.TilesData;
-import customExceptions.MapSizeNotCorrectlyDefined;
+
 
 public class WorldLoader {
 
@@ -24,70 +24,13 @@ public class WorldLoader {
 	
 	
 	
-	public WorldLoader(String name,boolean png) {
-     if(png) {	
-		
+	public WorldLoader(String name) {
+     
 		loadFromPng(name);
-     }else {
-    	 loadFromFile(name);
-    	 
-     }
+   
 	}
 	
 	
-	private void loadFromFile(String name) {
-
-		String location=new String("/res/Maps/"+name+".mp");
-	    
-	
-	
-		InputStream stream=getClass().getResourceAsStream(location);
-		
-		
-	
-		InputStreamReader isr = new InputStreamReader(stream);//creates a input stream so that we can read the file
-		BufferedReader br=new BufferedReader(isr);//makes the bufferd reader that takes in the input stream from the file
-		String line="";//just intializing the line
-		try {
-			line=br.readLine();
-			String[] size=line.split(",");
-			if(size.length==2) {
-				width=Integer.parseInt(size[0]);
-				height=Integer.parseInt(size[1]);
-			}else {
-				br.close();
-				throw new MapSizeNotCorrectlyDefined(name);
-				
-			}
-			
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (MapSizeNotCorrectlyDefined e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		while(true) {
-			try {
-				line=br.readLine();
-				String[] indexs=line.split(",");
-				//TODO finish the file loading by file
-				
-				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			
-			
-		}
-	
-	
-	
-	}
 
 
 	private void loadFromPng(String name) {

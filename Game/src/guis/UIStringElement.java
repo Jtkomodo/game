@@ -75,7 +75,7 @@ public class UIStringElement extends UIElement{
 	
 
 
-	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,FunctionCaller Function) {//active function color base class
+	public UIStringElement(String string,Vector2f offset,float scale,Vector4f color,GUIfunction Function) {//active function color base class
 		super(offset);
 		this.string=string;
 		this.scale=scale;
@@ -96,7 +96,7 @@ public class UIStringElement extends UIElement{
 		
 	}
 	
-	public UIStringElement(String string,Vector2f offset,float scale,FunctionCaller Function) {//active function no color base class 
+	public UIStringElement(String string,Vector2f offset,float scale,GUIfunction Function) {//active function no color base class 
 		super(offset);
 		this.string=string;
 		this.scale=scale;

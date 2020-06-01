@@ -12,7 +12,7 @@ public abstract class UIElement {
 	protected boolean HasFunction=false,hasColor=false,active=false,ChangesState=false;
 	protected int state=-1;//this is the number to specify which state to switch to when this element is selected
 	protected Vector2f offset;
-    protected FunctionCaller Function;
+    protected GUIfunction Function;
     
     
       public UIElement(Vector2f offset) {
@@ -59,7 +59,7 @@ public void invokeMethod(){
 
 	
 	
-protected void loadFunction(FunctionCaller Function) {
+protected void loadFunction(GUIfunction Function) {
 	
 	
 		this.HasFunction=true;
@@ -78,7 +78,7 @@ public void setChangesState(boolean changesState) {
 	ChangesState = changesState;
 }
 
-public void changeMethod(FunctionCaller Function) {
+public void changeMethod(GUIfunction Function) {
 
     loadFunction(Function);
     

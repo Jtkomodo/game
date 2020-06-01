@@ -56,12 +56,14 @@ import battleClasses.Enemy;
 import battleClasses.HpBar;
 import battleClasses.TimedButton;
 import guis.BarElement;
-import guis.FunctionCaller;
-import guis.GUIMEthods;
+import guis.CloseWindow;
+import guis.FullHeal;
+import guis.PickMove;
 import guis.UIBox;
 import guis.UIBoxState;
 import guis.UIElement;
 import guis.UIStringElement;
+import guis.UseItem;
 import input.BIndingNameParser;
 import input.CharCallback;
 import input.GetInput;
@@ -130,6 +132,7 @@ public class Start {
 	private static WorldLoader map1;
 	private static MapLoader currentMap;
     public static Entity teste;
+	public static boolean soundPlay=true;
     
     
 	public static void main(String[] args) {
@@ -334,8 +337,8 @@ public class Start {
       
 	
 		DebugPrint("Settign Colisions....");
-		//playerCol=new AABB(new Vector2f(0,0),15,44,0);
 		playerCol=new AABB(new Vector2f(0,0),64,64,0,false);
+		//playerCol=new AABB(new Vector2f(0,0),15,44,0,false);
 		Col=new AABB(new Vector2f(0,0),32,32,0,true);
 	AABB	Col3=new AABB(new Vector2f(100,0),16,32,0,true);
 	AABB	Col4=new AABB(new Vector2f(200,0),32,32,0,true);
@@ -379,69 +382,69 @@ public class Start {
 		
 		
 		 
-	UIElement StartElements[] ={
-			new BarElement("HP:",p.getHpbar(),new Vector2f(-17,65)),
-		new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,new FunctionCaller("DebugPrint",new Object[] {"stats"},new Class[] {String.class},Start.class)),
-		new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,1),
-		new UIStringElement("Heal",new Vector2f(-17,-5),.2f,Constants.BLACK,new FunctionCaller(GUIMEthods.fullheal,new Object[] {p})),
-		new UIStringElement("Quit",new Vector2f(-17,-25),.2f,Constants.BLACK,new FunctionCaller(GUIMEthods.exitWINDOW))
+		UIElement StartElements[] ={
+				new BarElement("HP:",p.getHpbar(),new Vector2f(-17,65)),
+			new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,new guis.DebugPrint("stats")),
+			new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,1),
+			new UIStringElement("Heal",new Vector2f(-17,-5),.2f,Constants.BLACK,new FullHeal(p)),
+			new UIStringElement("Quit",new Vector2f(-17,-25),.2f,Constants.BLACK,new CloseWindow(w))
+			
+			};
 		
+		
+		
+		UIStringElement BagElements[]= {new UIStringElement("-------bag------",new Vector2f(-38,40), .15f,Constants.BLACK)
 		};
-	
-	
-	
-	UIStringElement BagElements[]= {new UIStringElement("-------bag------",new Vector2f(-38,40), .15f,Constants.BLACK)
-	};
-		 
-	UIBoxState StartBoxs[]= {
-			new UIBoxState(new Vector2f(0,0),30,50,StartElements,Start.COLTEX,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,-50),new Vector4f(0))),
-			new UIBoxState(new Vector2f(-200,0),w.getWidth()-200,w.getHeight()-200,BagElements,Start.textbox,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,80),new Vector4f(0)))
-	};
-		 
-	UIStringElement Elements[]= {new UIStringElement("event walked\n into colision\n Box",new Vector2f(-38,30), .15f,Constants.BLACK)
-	};
-	UIBoxState showBoxStates[]= {
+			 
+		UIBoxState StartBoxs[]= {
+				new UIBoxState(new Vector2f(0,0),30,50,StartElements,Start.COLTEX,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,-50),new Vector4f(0))),
+				new UIBoxState(new Vector2f(-200,0),w.getWidth()-200,w.getHeight()-200,BagElements,Start.textbox,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,80),new Vector4f(0)))
+		};
+			 
+		UIStringElement Elements[]= {new UIStringElement("event walked\n into colision\n Box",new Vector2f(-38,30), .15f,Constants.BLACK)
+		};
+		UIBoxState showBoxStates[]= {
+			
+				new UIBoxState(new Vector2f(-200,0),100,41,Elements,Start.textbox,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,80),new Vector4f(0)))
+		};
 		
-			new UIBoxState(new Vector2f(-200,0),100,41,Elements,Start.textbox,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,80),new Vector4f(0)))
-	};
-	
-   ShowBox=new UIBox(new Vector2f(0,50),showBoxStates);	
-   StartBox=new UIBox(new Vector2f(screencoordx,screencoordy),StartBoxs); 
- 
+	   ShowBox=new UIBox(new Vector2f(0,50),showBoxStates);	
+	   StartBox=new UIBox(new Vector2f(screencoordx,screencoordy),StartBoxs); 
+	 
 
-		 
-		 
-		 
-		 
-		UIStringElement MenuElements[]= {
-				new UIStringElement("bag",new Vector2f(-35,-5), .15f,Constants.BLACK,2),
-				new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK,1),
-				new UIStringElement("specials",new Vector2f(1,-5), .15f,Constants.BLACK,3)
-		};
+			 
+			 
+			 
+			 
+			UIStringElement MenuElements[]= {
+					new UIStringElement("bag",new Vector2f(-35,-5), .15f,Constants.BLACK,2),
+					new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK,1),
+					new UIStringElement("specials",new Vector2f(1,-5), .15f,Constants.BLACK,3)
+			};
+			
+			
+			Moves punch=p.getmoveFromString(Moves.punch.getName());
+			Moves heal=p.getmoveFromString(Moves.heal.getName());
+			
+			UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
+					new UIStringElement(punch.getName(),new Vector2f(-54,5),.15f,Constants.BLACK,new PickMove(p,punch.getName())),
+					
+			};
+			
+			
+			
+			UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
+					new UIStringElement(heal.getName()+" "+heal.getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,new PickMove(p,heal.name()))
+					
+			};
+			
+			
+			UIBoxState boxs[]= {new UIBoxState(new Vector2f(),71,28,MenuElements,textbox,true),new UIBoxState(new Vector2f(150,10f),71,28,MoveElements,textbox),
+					new UIBoxState(new Vector2f(150,10),71,50,BagElements,Start.COLTEX,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,29,50),new Vector4f(0))),new UIBoxState(new Vector2f(150,10f),71,28,SPElements,textbox)
+			};
 		
 		
-		Moves punch=p.getmoveFromString(Moves.punch.getName());
-		Moves heal=p.getmoveFromString(Moves.heal.getName());
-		
-		UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
-				new UIStringElement(punch.getName(),new Vector2f(-54,5),.15f,Constants.BLACK,new FunctionCaller(GUIMEthods.PickMove,new Object[] {p,punch.getName()})),
-				
-		};
-		
-		
-		
-		UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
-				new UIStringElement(heal.getName()+" "+heal.getCost()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,new FunctionCaller(GUIMEthods.PickMove,new Object[] {p,heal.name()}))
-				
-		};
-		
-		
-		UIBoxState boxs[]= {new UIBoxState(new Vector2f(),71,28,MenuElements,textbox,true),new UIBoxState(new Vector2f(150,10f),71,28,MoveElements,textbox),
-				new UIBoxState(new Vector2f(150,10),71,50,BagElements,Start.COLTEX,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,29,50),new Vector4f(0))),new UIBoxState(new Vector2f(150,10f),71,28,SPElements,textbox)
-		};
-		
-		
-		
+	
 		
 		
 		
@@ -458,14 +461,14 @@ public class Start {
 		fps();    
 	    
 	if(canRender) {
-		GUIMEthods.soundPlay=true;
+		BattleSystem.soundPlay=true;
 		
 		//----------------------GAME--LOOP------------------------------
  		Items[] ITM= playersInventory.getItems();		
 			UIElement[] elementlist=new UIElement[ITM.length];	
 			
 			for(int i=0;i<ITM.length;i++) {
-				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new FunctionCaller(GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Items.class}));
+				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(p,ITM[i]));
 			}
 
 		
@@ -505,7 +508,7 @@ Render.enable();//enables render
 			   Start.text1.UIdrawString((640/2)+Start.screencoordx-100,(480/2)+Start.screencoordy-80,.2f);			  
 		    
 		    //step 2
-			   oldpos.set(vector);
+			oldpos.set(vector);
 		    vector.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
 			vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
@@ -975,7 +978,7 @@ MainRenderHandler.clear();
                    
                     	oldpos=new Vector2f(x,y);
 					 
-						//one quarter step is taken
+					
                     
     								
 						
@@ -1120,8 +1123,9 @@ private static void EndBattleAsLoss() {
 			UIElement[] elementlist=new UIElement[ITM.length];	
 			
 			for(int i=0;i<ITM.length;i++) {
-				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new FunctionCaller(GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Items.class}));
+				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(p,ITM[i]));
 			}
+
 
 		
 	 	
@@ -1273,7 +1277,7 @@ private static void EndBattleAsLoss() {
 	 	   }else if(Start.MoveCalled==true && Start.PlayersTurn) {
 				 
 					  if( Start.currentlyUsedMove.isHeal()){
-						  GUIMEthods.UseNonAttack(Start.currentlyUsedMove, p);
+						 BattleSystem.UseNonAttack(Start.currentlyUsedMove, p);
 					  }
 					  battleBox.hide();
 				   }

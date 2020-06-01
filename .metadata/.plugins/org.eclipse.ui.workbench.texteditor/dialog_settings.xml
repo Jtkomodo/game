@@ -2,31 +2,34 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="updateColisions" key="selection"/>
+		<item value="BattleSystem." key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="battlesystem."/>
+			<item value="function"/>
+			<item value="invoke"/>
+			<item value="Start."/>
+			<item value="GREEN"/>
+			<item value="draw"/>
+			<item value="BLACK"/>
+			<item value="(0"/>
+			<item value="0"/>
+			<item value="return"/>
 			<item value="updateColisions"/>
 			<item value="updateCollisons"/>
-			<item value="(0"/>
 			<item value="0."/>
-			<item value="0"/>
 			<item value="box.set"/>
 			<item value="box"/>
-			<item value="somthing"/>
-			<item value="amountThrough"/>
-			<item value="loading sounds"/>
-			<item value="making shader program"/>
-			<item value="PC1"/>
-			<item value="remove"/>
-			<item value="playerTex"/>
-			<item value="key"/>
 		</list>
 		<list key="replacehistory">
-			<item value="PC2"/>
 			<item value=""/>
+			<item value="BAR_COLOR_GREEN"/>
+			<item value="BLUE"/>
+			<item value="GREEN"/>
+			<item value="PC2"/>
 			<item value="d3"/>
 			<item value="d2"/>
 			<item value="ClosestPosition"/>
@@ -37,9 +40,6 @@
 			<item value="0;"/>
 			<item value="position"/>
 			<item value="translations"/>
-			<item value="i2+"/>
-			<item value="i4+"/>
-			<item value="i3+"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

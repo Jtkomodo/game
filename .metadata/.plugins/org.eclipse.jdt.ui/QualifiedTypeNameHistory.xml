@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.Map.Entry"/>
-    <fullyQualifiedTypeName name="Collisions.Collisions"/>
-    <fullyQualifiedTypeName name="Collisions.ColisionHandeler"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="java.nio.IntBuffer"/>
     <fullyQualifiedTypeName name="org.lwjgl.openal.ALC"/>
     <fullyQualifiedTypeName name="org.lwjgl.glfw.GLFW"/>
     <fullyQualifiedTypeName name="org.lwjgl.system.Callback"/>
@@ -28,7 +23,6 @@
     <fullyQualifiedTypeName name="org.joml.Matrix4f"/>
     <fullyQualifiedTypeName name="gameEngine.MatrixMath"/>
     <fullyQualifiedTypeName name="java.lang.Float"/>
-    <fullyQualifiedTypeName name="Data.Constants"/>
     <fullyQualifiedTypeName name="java.util.Iterator"/>
     <fullyQualifiedTypeName name="gameEngine.MainBatchRender"/>
     <fullyQualifiedTypeName name="gameEngine.Render"/>
@@ -60,4 +54,10 @@
     <fullyQualifiedTypeName name="org.lwjgl.openal.LOKIWAVEFormat"/>
     <fullyQualifiedTypeName name="org.lwjgl.BufferUtils"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="Data.Constants"/>
+    <fullyQualifiedTypeName name="gameEngine.BattleSystem"/>
+    <fullyQualifiedTypeName name="guis.PickMove"/>
+    <fullyQualifiedTypeName name="guis.FullHeal"/>
+    <fullyQualifiedTypeName name="guis.CloseWindow"/>
+    <fullyQualifiedTypeName name="guis.UseItem"/>
 </qualifiedTypeNameHistroy>

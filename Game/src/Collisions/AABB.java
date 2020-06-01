@@ -10,7 +10,6 @@ import Data.Constants;
 import gameEngine.Entity;
 import gameEngine.Start;
 import gameEngine.VectorMath;
-import guis.FunctionCaller;
 import rendering.MainRenderHandler;
 import rendering.Model;
 import rendering.Render;
@@ -24,10 +23,10 @@ public class AABB extends Collisions{
 	private boolean colide=false,COLIDECHECK=false;
 	private boolean pushable;
 	private boolean hasFunction=false;
-	private FunctionCaller function;
+	private Event function;
 	
 	
-	public AABB(Vector2f position ,float widthR,float heightR,float resistance,FunctionCaller function,boolean Pushable) {
+	public AABB(Vector2f position ,float widthR,float heightR,float resistance,Event function,boolean Pushable) {
 		this.function=function;
 		this.hasFunction=true;
 		construct(position,widthR,heightR,resistance);
@@ -181,7 +180,7 @@ public class AABB extends Collisions{
 			
 			if(box.hasFunction) {
 		
-				box.getFunction().invoke();}
+				box.getFunction().Invoke();}
 			return true;
 		}
 	  
@@ -192,7 +191,7 @@ public class AABB extends Collisions{
 		
 	
 	}
-	public FunctionCaller getFunction() {
+	public Event getFunction() {
 		return function;
 	}
 
@@ -200,7 +199,7 @@ public class AABB extends Collisions{
 
 
 
-	public void setFunction(FunctionCaller function) {
+	public void setFunction(Event function) {
 		this.function = function;
 	}
 

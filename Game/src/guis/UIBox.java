@@ -123,7 +123,7 @@ public void Update() {
 	if(Enter==1) {
 	Select();
 	
-	if(GUIMEthods.soundPlay)source.play(selectSound);}
+	if(Start.soundPlay)source.play(selectSound);}
 	if(backspace==1) {
      if(GoBack()) {
 	   source.play(BackSound);	    	 

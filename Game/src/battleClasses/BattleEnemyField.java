@@ -23,6 +23,7 @@ import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import Data.Constants;
+import gameEngine.BattleSystem;
 import gameEngine.Start;
 import gameEngine.Timer;
 import guis.GUIMEthods;
@@ -132,7 +133,7 @@ public class BattleEnemyField {
 			
 				
 				Start.source.play(Start.Select);
-				GUIMEthods.UseAttack(Start.currentlyUsedMove, Start.p, this.currentEnemy);
+				BattleSystem.UseAttack(Start.currentlyUsedMove, Start.p, this.currentEnemy);
 				
 			
 				

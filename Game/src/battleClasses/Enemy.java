@@ -151,7 +151,7 @@ public class Enemy extends BattleEntity{
 				   
 						
 				
-			       // player.decreseHp(Damage);
+			        player.decreseHp(Damage);
 			   
 			       
 			        Proccesor.addComandtoQueue(new DrawString(name+" used "+move.getName(),new Vector2f(-100,40),.5f,true,.5f));			

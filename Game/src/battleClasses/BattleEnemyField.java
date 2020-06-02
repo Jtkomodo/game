@@ -26,7 +26,7 @@ import Data.Constants;
 import gameEngine.BattleSystem;
 import gameEngine.Start;
 import gameEngine.Timer;
-import guis.GUIMEthods;
+
 import input.GetInput;
 import input.InputHandler;
 import rendering.Render;
@@ -142,8 +142,8 @@ public class BattleEnemyField {
 		 
 					if(Back==1) {
 						Start.source.play(Start.Back);
-						 Start.MoveCalled=false; 
-						 Start.MoveInprogress=false;
+						 BattleSystem.setMoveCalled(false); 
+						BattleSystem.setMoveInprogress(false);
 						
 					}
 					if(up==1) 

@@ -89,8 +89,8 @@ public class Start {
     
    
     public static BIndingNameParser buttonNamses;
-    public static boolean JustStarted=true,MoveInprogress=false,MoveCalled=false,TurnFinished=false,BattleEnded=false;
-    public static TimedButton Button;
+    public static boolean JustStarted=true;//,MoveInprogress=false,MoveCalled=false,TurnFinished=false,BattleEnded=false;
+  //  public static TimedButton Button;
     public static ShaderProgram s,Batcheds;
     public static float scaleOfMapTiles=128,Rendercamx,Rendercamy;
     public static int amountWidth=Math.round((width/scaleOfMapTiles)),amountHeight=Math.round((height/scaleOfMapTiles));
@@ -122,16 +122,16 @@ public class Start {
     public static Animate a1;
     public static SpriteSheetLoader sloader;
     public static BattleEnemyField enemyField,CurrentEnemyFeild;
-    public static BattleEntity currentEntity;
+  //  public static BattleEntity currentEntity;
     public static Sound lazer,Heal,Select,Move,Back,NO,TimedBad;
     public static Source source1;
 	public static  Source source;
     public static Fontloader aakar;
     public static ArrayList<BattleEntity> turnOrder= new ArrayList<BattleEntity>();
-    public static boolean facingLeft,running,PlayersTurn=true,ESCAPEBOXUP;
+    public static boolean facingLeft,running,ESCAPEBOXUP;
 	private static WorldLoader map1;
 	private static MapLoader currentMap;
-    public static Entity teste;
+   // public static Entity teste;
 	public static boolean soundPlay=true;
     
     
@@ -455,7 +455,7 @@ public class Start {
         source=new Source(new Vector2f(0), 1, 1, 0, 0,0);
 		source.setSourceRelitive(true);	
 		
-		teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
+		//teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
 	while(!w.isExited()) {
 		
 		fps();    
@@ -605,7 +605,7 @@ Render.enable();//enables render
 	//---------------------battle loop---------------------
 	
 
-	battleupdate();
+	BattleSystem.battleUpdate(p);
 	
     screencoordx=0;
 	screencoordy=0;
@@ -711,7 +711,7 @@ MainRenderHandler.clear();
 
 	    		
 		    	
-		   if(!MoveInprogress) {
+		   if(!BattleSystem.isMoveInprogress()) {
 		    	InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_ENTER,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
 		    	
 		    }
@@ -802,7 +802,7 @@ MainRenderHandler.clear();
 					a1.removeAnimation();
 					StartBox.reset();
 					StateOfStartBOx=false;
-					StartBattle(enemyField);
+					BattleSystem.StartBattle(enemyField,p);
 					
 				
 				}
@@ -996,300 +996,7 @@ MainRenderHandler.clear();
 	
 	
 	
-	private static void StartBattleRound(BattleEntity p,BattleEnemyField e) {
-		
-		turnOrder=BattleFormulas.calcuateTurnOrder(new BattleEntity[] {p},e.getEnemies());
 	
-	}
-	
-	private static BattleEntity StartBattleTurn(BattleEntity p,BattleEnemyField e) {
-		if(turnOrder.isEmpty())  {
-			StartBattleRound(p,e);
-			
-		}
-		BattleEntity returnEntity=turnOrder.remove(0);
-		if(!returnEntity.isEnemy()) {
-		    Start.PlayersTurn=true;
-		    battleBox.reset();
-	 		battleBox.show();
-	 		
-		}else {
-			Start.PlayersTurn=false;
-			e.setCurrentEnemy((Enemy)returnEntity);
-		}
-		Start.TurnFinished=false;
-		Start.MoveCalled=false;
-		Start.MoveInprogress=false;
-     
-		   		
-		return returnEntity;
-	}
-	
-	
-	private static void StartBattle(BattleEnemyField enemies) {
-		
-		
-		for(int i=0;i<enemies.getAmountOfEnemies();i++) {
-		Enemy e=enemies.getEnemy(i);
-		
-		e.setInventory(Start.enemyTestInventory);
-		
-		e.setHp(e.getMaxHP());
-		e.setSp(e.getMaxsp());
-		}
-		
-		Start.CurrentEnemyFeild=enemies;
-		battleBox.show();
-		Start.TurnFinished=false;
-		Start.BattleEnded=false;
-		
-		
-		TurnFinished=false;
-	    
-	
-		  
-	}
-	
-private static void EndBattleAsWin() {
-		
-		
-	Start.BattleEnded=true;
-	text1.setString("YOU WON!");
-	 text1.drawString(100,40,.5f); 
-		
-	}
-private static void EndBattleAsLoss() {
-	
-	Start.BattleEnded=true;
-	
-	text1.setString("YOU LOST :(");
-	 text1.drawString(100,40,.5f); 
-	
-}	
-	
-   private static void battleupdate() {
-	   
-	   
-	   
-	   
-	   
-	   cam.setPosition(new Vector2f(0,0));
-	   
-	   
-
-	   if(Start.TurnFinished) {
-		   DebugPrint("FINISHED");
-			currentEntity=StartBattleTurn(p,enemyField);
-			
-	   }
-	   boolean selectingEnemy=false;
-	   if( Start.MoveCalled && !Start.StartBox.isActive() && !Start.currentlyUsedMove.isHeal()) {
-		   selectingEnemy=true;}
-		
-	   
-	   boolean allEnemiesDead=Start.CurrentEnemyFeild.updateField();
-	   if(selectingEnemy) {
-		   CurrentEnemyFeild.selectEnemy();
-		   
-	   }else {
-		   CurrentEnemyFeild.setSelected(false);
-	   }
-	  
-	   
-	   Enemy e=enemyField.getCurrentEnemy();
-	   
-	   
-	 
-	   
-	   
-	 
-	   cam.setPosition(new Vector2f(0,0));
-		 
-	   
-	   Vector2f position1=new Vector2f(-90,40);
-	
-	   
-	 		Entity backg=new Entity(background,new Vector3f(0,0,-10),0,64*40,bg); 
-	 	   
-	      MainRenderHandler.addEntity(backg);
-	 		
-	 		
-	 	    
-	 	    MainRenderHandler.addEntity(new Entity(player,new Vector3f(-192,-20,10),0,64*1.5f,playerTex,true)); //doing the same model and texture just for testing  will change that when we actually get the battle system down  
-	 	    enemyField.draw(selectingEnemy);//draws all the enemies to the screen
-	 	    
-	 	    
-	 		Items[] ITM= playersInventory.getItems();		
-			UIElement[] elementlist=new UIElement[ITM.length];	
-			
-			for(int i=0;i<ITM.length;i++) {
-				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(p,ITM[i]));
-			}
-
-
-		
-	 	
-			//----------------------GAME--LOOP------------------------------
-		
-		
-			
-			
-		battleBox.getUIState(2).relpaceALLActive(elementlist);
-		battleBox.draw();
-	 	if(selectingEnemy) { 
-	 		  text1.setString("Selecting enemy");
-	 		  text1.drawString(position1.x-100,position1.y+150, .64f);
-	 	}
-	 	 
-	 	     //battleBox.getUIState().setOffsetPositionOnlist(arrowPosition);   	   
-	 	   
-	 	    
-	 	    
-	 	
-	 	    
-	 	  battleBox.setPosition(position1);
-	 	
-	 	
-	 	 text1.setString("HP: "+Math.round(p.getHp())+"/"+Math.round(p.getMaxDEF()));
-	 	  p.getHpbar().draw(new Vector2f(position1.x-100,position1.y+50),text1);
-
-	 	  text1.setString("SP: "+Math.round(playersSPBAr.getValue())+"/"+Math.round(playersSPBAr.getMax()));
-	 	  playersSPBAr.draw(new Vector2f(position1.x-110,position1.y+70), text1);
-	 	 
-	 	
-	 	
-	 	  
-	 	  
-	 	 if(p.getHp()==0) {
-			   EndBattleAsLoss();
-			   
-			   
-		   }
-		   
-
-	 	 if(allEnemiesDead) {
-			   EndBattleAsWin();
-			   
-			   
-	 	 }
-	 	 
-		if(Start.BattleEnded) {   
-		Start.battleBox.hide();
-		}
-		else {  
-	 	  
-	 	  
-	 	if(!Start.PlayersTurn && Proccesor.isUserInputallowed()) {
-	 		Start.DebugPrint("hi'");
-	 		if(Start.currentEntity.getHp()!=0) {
-	 		((Enemy) Start.currentEntity).takeTurn(Start.CurrentEnemyFeild,p);
-	 		}
-	 		Start.TurnFinished=true;
-	 		
-	 	}else if(PlayersTurn && Proccesor.isUserInputallowed()){
-	 		battleBox.show();
-	 	}
-	 	  
-	 	   if(Start.MoveInprogress && PlayersTurn) {	
-	 		   
-	 		   battleBox.hide();
-	 		
-	 	 
-	 		
-	 		   
-	 		  
-	 		  Moves move=p.getLastUsedMove();
-	 		  
-	 		  if(move.isTimedButton()) {
-	 			  int State= Start.Button.update();
-	 		  if(State!=TimedButton.NOTPUSHED) {
-	 			
-	 			   Start.TurnFinished=true;
-	 				  
-	 			   if(!p.getLastUsedMove().isHeal()) {
-	 				   
-	 				   float Damage=BattleFormulas.CalculateDamage(p, e, State, p.getLastUsedMove().getDamage());
-	 				  
-	 				   
-	 				   
-	 				   
-	 				   Proccesor.addComandtoItorator(new DrawString(Math.round(Damage)+"!",new Vector2f(100,40),.5f,true,.5f));			
-	 				
-	 			        e.decreseHp(Damage);
-	 			   
-	 			   }else {
-	 				  Start.source.play(Start.Heal);
-	 				   
-	 				   float health=BattleFormulas.CalculateHeath(p, State, p.getLastUsedMove().getDamage());
-	 				  
-	 				  Proccesor.addComandtoItorator(new DrawString(Math.round(health)+"!",new Vector2f(100,40),.5f,true,.5f));			
-	 				   
-	 				p.IncreseHp(health);   
-	 				   
-	 			   }
-	 			   
-	 			   
-	 			   
-	 			   
-	 		   }}else {
-	 			
-	 			
-	 			   Start.TurnFinished=true;
-	 				
-	 			   if(!move.isHeal()) {
-	 				   
-	 				  float Damage=BattleFormulas.CalculateDamage(p, e,2, p.getLastUsedMove().getDamage());
-	 				   
-	 				   
-	 				   Start.textR.setString(Math.round(Damage)+"!");
-	 				   Proccesor.addComandtoQueue(new DrawModel(textR.getTextModel(),textR.getLoader().getTex(),new Vector2f(100,40),.5f,1,true));			
-	 				
-	 			        e.decreseHp(Damage);
-	 			   
-	 				   
-	 				   
-	 			   }else {
-	 				
-	 				
-	 						Start.source.play(Start.Heal);
-	 					
-	 				   float health=BattleFormulas.CalculateHeath(p, 2, p.getLastUsedMove().getDamage());
-	 				  textR.setString(Math.round(health)+"!");
-	 				  Proccesor.addComandtoQueue(new DrawModel(textR.getTextModel(),textR.getLoader().getTex(),new Vector2f(100,40),.5f,1,true));			
-	 				
-	 				p.IncreseHp(health);   
-	 				 
-	 			   }
-	 			   
-	 			   
-	 			   
-	 			   
-	 			   
-	 		   }
-	 			   
-	 			   
-	 		   
-	 		   
-	 		   
-	 		   
-	 		   
-	 		   
-	 	   }else if(Start.MoveCalled==true && Start.PlayersTurn) {
-				 
-					  if( Start.currentlyUsedMove.isHeal()){
-						 BattleSystem.UseNonAttack(Start.currentlyUsedMove, p);
-					  }
-					  battleBox.hide();
-				   }
-	 	   
-	 	   
-	 	   
-	 	}     
-	
-	 	  
-	   
-	   
-   }
 	
 	 	   
 	 	   

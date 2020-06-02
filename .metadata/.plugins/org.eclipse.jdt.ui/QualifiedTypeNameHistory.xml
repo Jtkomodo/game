@@ -16,7 +16,6 @@
     <fullyQualifiedTypeName name="org.lwjgl.openal.AL"/>
     <fullyQualifiedTypeName name="org.lwjgl.openal.AL10"/>
     <fullyQualifiedTypeName name="org.lwjgl.openal.AL11"/>
-    <fullyQualifiedTypeName name="audio.Source"/>
     <fullyQualifiedTypeName name="audio.Sound"/>
     <fullyQualifiedTypeName name="guis.GUIMEthods"/>
     <fullyQualifiedTypeName name="customExceptions.MapSizeNotCorrectlyDefined"/>
@@ -50,7 +49,6 @@
     <fullyQualifiedTypeName name="customExceptions.EnemyHasToManyMoves"/>
     <fullyQualifiedTypeName name="rendering.Model"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="org.lwjgl.openal.LOKIWAVEFormat"/>
     <fullyQualifiedTypeName name="org.lwjgl.BufferUtils"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="guis.FullHeal"/>
     <fullyQualifiedTypeName name="guis.CloseWindow"/>
     <fullyQualifiedTypeName name="guis.UseItem"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="audio.Source"/>
 </qualifiedTypeNameHistroy>

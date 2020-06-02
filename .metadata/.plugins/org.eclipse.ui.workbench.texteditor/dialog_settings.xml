@@ -2,27 +2,27 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="BattleSystem." key="selection"/>
+		<item value="p." key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="p."/>
+			<item value="currentlyusedmove"/>
+			<item value="cam.set"/>
+			<item value="Cam."/>
+			<item value="cam."/>
+			<item value="MoveInProgress"/>
+			<item value="Start."/>
+			<item value="currentEntity"/>
+			<item value="Battle"/>
 			<item value="battlesystem."/>
 			<item value="function"/>
 			<item value="invoke"/>
-			<item value="Start."/>
 			<item value="GREEN"/>
 			<item value="draw"/>
 			<item value="BLACK"/>
-			<item value="(0"/>
-			<item value="0"/>
-			<item value="return"/>
-			<item value="updateColisions"/>
-			<item value="updateCollisons"/>
-			<item value="0."/>
-			<item value="box.set"/>
-			<item value="box"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

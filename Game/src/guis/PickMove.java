@@ -2,6 +2,7 @@ package guis;
 
 import Data.Moves;
 import battleClasses.BattleEntity;
+import gameEngine.BattleSystem;
 import gameEngine.Start;
 
 public class PickMove extends GUIfunction {
@@ -32,10 +33,10 @@ public class PickMove extends GUIfunction {
 		 boolean used=p.testIfMoveCanBeUsed(m);
 		 if(used) {
 		 if(m.isTimedButton()) {
-			Start.Button=m.getCombo();
+			BattleSystem.setButton(m.getCombo());
 		 }
-		 Start.MoveCalled=true; 
-		 Start.MoveInprogress=false;
+		 BattleSystem.setMoveCalled(true); 
+		 BattleSystem.setMoveInprogress(false);
 		
 		 }else {
 			 Start.soundPlay=false;

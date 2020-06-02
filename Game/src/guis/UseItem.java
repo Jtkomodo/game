@@ -6,6 +6,7 @@ import Items.Items;
 import Scripter.Proccesor;
 import ScripterCommands.DrawString;
 import battleClasses.BattleEntity;
+import gameEngine.BattleSystem;
 import gameEngine.Start;
 
 public class UseItem extends GUIfunction {
@@ -44,9 +45,9 @@ public class UseItem extends GUIfunction {
 					 Proccesor.addComandtoQueue(new DrawString("restored "+item.Item.getValue()+"!",new Vector2f(100,40),.5f,true,.5f));
 					  
 				 
-				 Start.MoveInprogress=false;
-				  Start.PlayersTurn=false;
-				   Start.TurnFinished=true;
+				 BattleSystem.setMoveInprogress(false);
+				 BattleSystem.setPlayersTurn(false);
+				 BattleSystem.setTurnFinished(true);
 		 			 
 			 }else {
 				 Start.soundPlay=false;

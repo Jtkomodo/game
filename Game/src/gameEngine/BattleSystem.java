@@ -12,6 +12,7 @@ import Items.Items;
 import Scripter.Proccesor;
 import ScripterCommands.DrawModel;
 import ScripterCommands.DrawString;
+import audio.Source;
 import battleClasses.BattleEnemyField;
 import battleClasses.BattleEntity;
 import battleClasses.BattleFormulas;
@@ -19,11 +20,10 @@ import battleClasses.BattlePlayerField;
 import battleClasses.Enemy;
 import battleClasses.HpBar;
 import battleClasses.TimedButton;
-import guis.FunctionCaller;
-import guis.GUIMEthods;
 import guis.UIBox;
 import guis.UIElement;
 import guis.UIStringElement;
+import guis.UseItem;
 import rendering.MainRenderHandler;
 import rendering.Model;
 import textrendering.TextBuilder;
@@ -37,9 +37,9 @@ public class BattleSystem {
 	public static boolean soundPlay=true;
 	
 
-	private static BattleEnemyField enemyField=Start.CurrentEnemyFeild;
-	private static BattlePlayerField playerField;
-	private static BattleEntity currentEntity=Start.currentEntity; 
+	private static BattleEnemyField enemyField;
+	//private static BattlePlayerField playerField;
+	private static BattleEntity currentEntity;
 	private static ArrayList<BattleEntity> turnOrder=new ArrayList<BattleEntity>();
 	private static UIBox battleBox=Start.battleBox;
 	private static Model backgroundModel=Start.background;
@@ -47,24 +47,37 @@ public class BattleSystem {
 	private static Inventory playersInventory=Start.playersInventory, enemyTestInventory=Start.enemyTestInventory;
 	private static TextBuilder text1=Start.text1;
 	private static HpBar playersSPBAr=Start.playersSPBAr;
-	private static boolean PlayersTurn;
-	private static boolean TurnFinished;
-	private static boolean MoveCalled;
+	private static boolean PlayersTurn=true;
+	private static boolean TurnFinished=false;
+	private static boolean MoveCalled=false;
 	private static Moves currentlyUsedMove;
+	private static boolean MoveInprogress=false;
+	private static TimedButton Button;
+	
+	private static boolean BattleEnded=false;
+	private static Source source=Start.source;
 	
 	
-	public static void Update(BattleEntity p) {
-		 if(TurnFinished) {
+	
+	
+
+	
+	
+	
+	
+	public static void battleUpdate(BattleEntity p) {
+		 if(isTurnFinished()) {
 		
-				currentEntity = StartBattleTurn(playerField,enemyField);
+				currentEntity = StartBattleTurn(p,enemyField);
 				
 		   }
 		   boolean selectingEnemy=false;
-		   if( MoveCalled && !Start.StartBox.isActive() && !currentlyUsedMove.isHeal()) {
+		   if( isMoveCalled() && !Start.StartBox.isActive() 
+				   && !currentlyUsedMove.isHeal()) {
 			   selectingEnemy=true;}
 			
 		   
-		   boolean allEnemiesDead=CurrentEnemyFeild.updateField();
+		   boolean allEnemiesDead=enemyField.updateField();
 		   if(selectingEnemy) {
 			   enemyField.selectEnemy();
 			   
@@ -92,7 +105,7 @@ public class BattleSystem {
 		 		
 		 		
 		 	    
-		 	    //MainRenderHandler.addEntity(new Entity(player,new Vector3f(-192,-20,10),0,64*1.5f,playerTex,true));
+		 	    MainRenderHandler.addEntity(new Entity(Start.player,new Vector3f(-192,-20,10),0,64*1.5f,Start.playerTex,true));
 		 	    enemyField.draw(selectingEnemy);//draws all the enemies to the screen
 		 	    
 		 	    
@@ -100,8 +113,7 @@ public class BattleSystem {
 				UIElement[] elementlist=new UIElement[ITM.length];	
 				
 				for(int i=0;i<ITM.length;i++) {
-				
-					elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new FunctionCaller(GUIMEthods.UseItem,new Object[] {p,ITM[i]},new Class[] {p.getClass(),Items.class}));
+					elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(p,ITM[i]));
 				}
 
 			
@@ -156,18 +168,18 @@ public class BattleSystem {
 			else {  
 		 	  
 		 	  
-		 	if(!PlayersTurn && Proccesor.isUserInputallowed()) {
-		 		DebugPrint("hi'");
+		 	if(!isPlayersTurn() && Proccesor.isUserInputallowed()) {
+		 	//	DebugPrint("hi'");
 		 		if(currentEntity.getHp()!=0) {
-		 		((Enemy) currentEntity).takeTurn(CurrentEnemyFeild,p);
+		 		((Enemy) currentEntity).takeTurn(enemyField,p);
 		 		}
-		 		TurnFinished=true;
+		 		setTurnFinished(true);
 		 		
-		 	}else if(PlayersTurn && Proccesor.isUserInputallowed()){
+		 	}else if(isPlayersTurn() && Proccesor.isUserInputallowed()){
 		 		battleBox.show();
 		 	}
 		 	  
-		 	   if(MoveInprogress && PlayersTurn) {	
+		 	   if(isMoveInprogress() && isPlayersTurn()) {	
 		 		   
 		 		   battleBox.hide();
 		 		
@@ -178,10 +190,10 @@ public class BattleSystem {
 		 		  Moves move=p.getLastUsedMove();
 		 		  
 		 		  if(move.isTimedButton()) {
-		 			  int State= Button.update();
+		 			  int State= getButton().update();
 		 		  if(State!=TimedButton.NOTPUSHED) {
 		 			
-		 			   TurnFinished=true;
+		 			   setTurnFinished(true);
 		 				  
 		 			   if(!p.getLastUsedMove().isHeal()) {
 		 				   
@@ -195,7 +207,7 @@ public class BattleSystem {
 		 			        e.decreseHp(Damage);
 		 			   
 		 			   }else {
-		 				  source.play(Heal);
+		 				  source.play(Start.Heal);
 		 				   
 		 				   float health=BattleFormulas.CalculateHeath(p, State, p.getLastUsedMove().getDamage());
 		 				  
@@ -211,7 +223,7 @@ public class BattleSystem {
 		 		   }}else {
 		 			
 		 			
-		 			   TurnFinished=true;
+		 			   setTurnFinished(true);
 		 				
 		 			   if(!move.isHeal()) {
 		 				   
@@ -228,7 +240,7 @@ public class BattleSystem {
 		 			   }else {
 		 				
 		 				
-		 						source.play(Heal);
+		 						source.play(Start.Heal);
 		 					
 		 				   float health=BattleFormulas.CalculateHeath(p, 2, p.getLastUsedMove().getDamage());
 		 				  text1.setString(Math.round(health)+"!");
@@ -251,10 +263,10 @@ public class BattleSystem {
 		 		   
 		 		   
 		 		   
-		 	   }else if(MoveCalled==true && PlayersTurn) {
+		 	   }else if(isMoveCalled()==true && isPlayersTurn()) {
 					 
 						  if( currentlyUsedMove.isHeal()){
-							  GUIMEthods.UseNonAttack(currentlyUsedMove, p);
+							  UseNonAttack(currentlyUsedMove, p);
 						  }
 						  battleBox.hide();
 					   }
@@ -273,32 +285,32 @@ public class BattleSystem {
 	}
 	
 	
-	private static BattleEntity StartBattleTurn(BattlePlayerField p,BattleEnemyField e) {
+	private static BattleEntity StartBattleTurn(BattleEntity p,BattleEnemyField e) {
 		if(turnOrder.isEmpty())  {
 			StartBattleRound(p,e);
 			
 		}
 		BattleEntity returnEntity=turnOrder.remove(0);
 		if(!returnEntity.isEnemy()) {
-		    PlayersTurn=true;
+		    setPlayersTurn(true);
 		    battleBox.reset();
 	 		battleBox.show();
 	 		
 		}else {
-			PlayersTurn=false;
+			setPlayersTurn(false);
 			e.setCurrentEnemy((Enemy)returnEntity);
 		}
-		TurnFinished=false;
-		MoveCalled=false;
-		MoveInprogress=false;
+		setTurnFinished(false);
+		setMoveCalled(false);
+		setMoveInprogress(false);
      
 		   		
 		return returnEntity;
 	}
 	
-private static void StartBattleRound(BattlePlayerField p,BattleEnemyField e) {
+private static void StartBattleRound(BattleEntity  p,BattleEnemyField e) {
 		
-		turnOrder=BattleFormulas.calcuateTurnOrder(new BattleEntity[] {p.getCurrentPC1(),p.getCurrentPC2()},e.getEnemies());
+		turnOrder=BattleFormulas.calcuateTurnOrder(new BattleEntity[] {p},e.getEnemies());
 	
 	}
 	
@@ -327,10 +339,10 @@ public static void UseAttack(Moves move,BattleEntity p,Enemy e) {
 		if(test) { 
 		Start.DebugPrint("Used move "+move.getName()+"on"+e.getName()+"--");
 		if(move.isTimedButton()) {
-			Start.Button.start();
+			getButton().start();
 		}
-		 Start.MoveInprogress=true;
-		 Start.MoveCalled=false;
+		 setMoveInprogress(true);
+		 setMoveCalled(false);
 		}
 	}
 	  
@@ -343,95 +355,90 @@ public static void UseNonAttack(Moves move,BattleEntity p) {
 		if(test) { 
 		Start.DebugPrint("Used move "+move.getName());
 		if(move.isTimedButton()) {
-			Start.Button.start();
+			getButton().start();
 		}
 	}
 	
-		 Start.MoveInprogress=true;
-		 Start.MoveCalled=false;
+		 setMoveInprogress(true);
+		 setMoveCalled(false);
 		}
 	}
+
+
+
+public static void StartBattle(BattleEnemyField enemies,BattleEntity p) {
+	Start.cam.setPosition(new Vector2f());
+	
+	for(int i=0;i<enemies.getAmountOfEnemies();i++) {
+	Enemy e=enemies.getEnemy(i);
+	
+	e.setInventory(enemyTestInventory);
+	
+	e.setHp(e.getMaxHP());
+	e.setSp(e.getMaxsp());
+	}
+	
+	enemyField=enemies;
+	battleBox.show();
+	setTurnFinished(false);
+	BattleEnded=false;
+	enemyField=enemies;
+	currentEntity=p; 
+	currentlyUsedMove=p.getmoves()[0];
+	setTurnFinished(false);
+
 	  
-	
-public static void ADD(int a,int b) {
-	int c=a+b;
-	Start.DebugPrint("c="+c);
-	
 }
 
 
+public static boolean isMoveInprogress() {
+	return MoveInprogress;
+}
 
 
+public static void setMoveInprogress(boolean moveInprogress) {
+	MoveInprogress = moveInprogress;
+}
 
 
+public static boolean isMoveCalled() {
+	return MoveCalled;
+}
 
 
+public static void setMoveCalled(boolean moveCalled) {
+	MoveCalled = moveCalled;
+}
 
 
- public static void Pickmove(BattleEntity p,String move) {
-	 
-	 Moves m=p.getmoveFromString(move);
-	 soundPlay=true;
-	 if(m!=null) {
-		 
-	
-	 Start.DebugPrint("Picked move "+m.getName()+"--");
-	 
-	 Start.currentlyUsedMove=m;
-	 
-	 boolean used=p.testIfMoveCanBeUsed(m);
-	 if(used) {
-	 if(m.isTimedButton()) {
-		Start.Button=m.getCombo();
-	 }
-	 Start.MoveCalled=true; 
-	 Start.MoveInprogress=false;
-	
-	 }else {
-		 soundPlay=false;
-		 Start.source.play(Start.NO);
-	 }
-	 }else {
-		 
-		 
-		 Start.DebugPrint("move "+move+" does not exist in this player's("+ p+") moveset");
-		 
-	 }
- }
- 
- public static void UseItem(BattleEntity p,Items item) {
-	 soundPlay=true;
-	 
-	boolean used= p.useItem(item);
-	 if(used) {
-		 Start.DebugPrint("used "+item.Item.getName());
-		
-		 Proccesor.addComandtoQueue(new DrawString("used "+item.Item.getName(),new Vector2f(-100,40),.5f,true,.5f));
-		if( item.Item.isHealing())
-		 Proccesor.addComandtoQueue(new DrawString("healed "+item.Item.getValue()+"!",new Vector2f(100,40),.5f,true,.5f));
-		if( item.Item.isRestorSP())
-			 Proccesor.addComandtoQueue(new DrawString("restored "+item.Item.getValue()+"!",new Vector2f(100,40),.5f,true,.5f));
-			  
-		 
-		 Start.MoveInprogress=false;
-		  Start.PlayersTurn=false;
-		   Start.TurnFinished=true;
- 			 
-	 }else {
-		 soundPlay=false;
-		 Start.source.play(Start.NO);
-	 }
-	 
- }
- 
-	public static void  FullHeal(BattleEntity e) {
-		e.setHp(e.getMaxHP());
-		e.setSp(e.getMaxsp());
-		
-	}
-		
- 
+public static boolean isTurnFinished() {
+	return TurnFinished;
+}
 
+
+public static void setTurnFinished(boolean turnFinished) {
+	TurnFinished = turnFinished;
+}
+
+
+public static boolean isPlayersTurn() {
+	return PlayersTurn;
+}
+
+
+public static void setPlayersTurn(boolean playersTurn) {
+	PlayersTurn = playersTurn;
+}
+
+
+public static TimedButton getButton() {
+	return Button;
+}
+
+
+public static void setButton(TimedButton button) {
+	Button = button;
+}
 
 
 

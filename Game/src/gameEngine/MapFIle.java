@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.joml.Vector2f;
 
@@ -66,8 +66,8 @@ public class MapFIle {
   private final String mapDataIndicator=".MAP";
   private final String tileUVIndicator=".UV";
   private final String tileDataIndicator=".TILES";
-  private ArrayList<AABB> aabbs=new ArrayList<AABB>();
-  private ArrayList<Vector2f> uvData=new ArrayList<Vector2f>();
+  private LinkedList<AABB> aabbs=new LinkedList<AABB>();
+  private LinkedList<Vector2f> uvData=new LinkedList<Vector2f>();
   private int[][] map;
   private int width,height;
   private int amountOfTiles;
@@ -82,7 +82,7 @@ public class MapFIle {
 		
 	}
 
-	public void makeFile(int[][] map,ArrayList<Vector2f> UVDATA) {
+	public void makeFile(int[][] map,LinkedList<Vector2f> UVDATA) {
 		
 		
 		

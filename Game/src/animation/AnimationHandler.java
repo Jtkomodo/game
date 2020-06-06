@@ -45,7 +45,7 @@ public class AnimationHandler {
 		for (int i=0;i<animations.size();i++) {
 		    animations.get(i).updateTime();
 		}
-
+   
 	}
 	
 	

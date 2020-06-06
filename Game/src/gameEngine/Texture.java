@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -27,7 +27,7 @@ import org.newdawn.slick.opengl.PNGDecoder;
 public class Texture {
 private  int TEXid;
 
-private static ArrayList<Texture> textures=new ArrayList<Texture>();
+private static LinkedList<Texture> textures=new LinkedList<Texture>();
 private int h,w;
 private IntBuffer width,height,comp;
 

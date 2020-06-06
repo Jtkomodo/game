@@ -1,7 +1,7 @@
 package guis;
 
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
@@ -27,9 +27,9 @@ public class UIBox {
 	private static boolean isAnyOpened;
 	private Sound selectSound=Start.Select,MovementSound=Start.Move,BackSound=Start.Back;
 	private Source source=new Source(new Vector2f(0), 1, 1, 0, 0,0);
-	private static List<UIBox> opended=new ArrayList<UIBox>();
-	private List<UIBoxState> statelist=new ArrayList<UIBoxState>();	
-	private List<UIBoxState> alwaysShownStateList=new ArrayList<UIBoxState>();	
+	private static List<UIBox> opended=new LinkedList<UIBox>();
+	private List<UIBoxState> statelist=new LinkedList<UIBoxState>();	
+	private List<UIBoxState> alwaysShownStateList=new LinkedList<UIBoxState>();	
 	private Stack<Integer> backStack=new Stack<Integer>();//this is a stack that just sores the previous states
 	
 	public UIBox(Vector2f position,UIBoxState[] states) {

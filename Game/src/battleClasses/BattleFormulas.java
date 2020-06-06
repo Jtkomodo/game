@@ -144,7 +144,7 @@ public class BattleFormulas {
 	
 	
 		
-  public static ArrayList<BattleEntity> calcuateTurnOrder(BattleEntity players[],Enemy[] enemies) {
+  public static LinkedList<BattleEntity> calcuateTurnOrder(BattleEntity players[],Enemy[] enemies) {
 	  
 	  //this calculates which entity goes first based on it's stats
 	  
@@ -184,9 +184,9 @@ public class BattleFormulas {
           }
       };
       	  
-      List<Entry<BattleEntity, Float>> listOfEntries = new ArrayList<Entry<BattleEntity,Float>>(map.entrySet());
+      List<Entry<BattleEntity, Float>> listOfEntries = new LinkedList<Entry<BattleEntity,Float>>(map.entrySet());
       Collections.sort(listOfEntries, valueComparator);
-      ArrayList<BattleEntity> sortedByValue = new ArrayList<BattleEntity>(listOfEntries.size());
+      LinkedList<BattleEntity> sortedByValue = new LinkedList<BattleEntity>();
       for(Entry<BattleEntity,Float> entry : listOfEntries){
           sortedByValue.add(entry.getKey());
       }

@@ -2,30 +2,33 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="p." key="selection"/>
+		<item value="glBufferData" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="p."/>
-			<item value="currentlyusedmove"/>
-			<item value="cam.set"/>
-			<item value="Cam."/>
-			<item value="cam."/>
-			<item value="MoveInProgress"/>
-			<item value="Start."/>
-			<item value="currentEntity"/>
-			<item value="Battle"/>
-			<item value="battlesystem."/>
-			<item value="function"/>
-			<item value="invoke"/>
-			<item value="GREEN"/>
-			<item value="draw"/>
-			<item value="BLACK"/>
+			<item value="glBufferData"/>
+			<item value="flbufferdata"/>
+			<item value="models.delete"/>
+			<item value="float"/>
+			<item value="width"/>
+			<item value="Entity "/>
+			<item value="Entity  "/>
+			<item value="ArrayList"/>
+			<item value="LinkedList"/>
+			<item value="hi&quot;"/>
+			<item value="hi"/>
+			<item value="&quot;hi&quot;"/>
+			<item value="models."/>
+			<item value="models.clear"/>
+			<item value="models.remove"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Float"/>
+			<item value="height"/>
 			<item value=""/>
+			<item value="LinkedList"/>
 			<item value="BAR_COLOR_GREEN"/>
 			<item value="BLUE"/>
 			<item value="GREEN"/>
@@ -37,9 +40,6 @@
 			<item value="protected static"/>
 			<item value="i3"/>
 			<item value="i2"/>
-			<item value="0;"/>
-			<item value="position"/>
-			<item value="translations"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

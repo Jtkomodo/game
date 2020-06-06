@@ -1,6 +1,6 @@
 package battleClasses;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -35,9 +35,9 @@ public class BattleEntity {
 
 
 	protected float maxATK,maxDEF,maxHP,maxsp;
-	protected List<Moves> movelist= new ArrayList<Moves>();
-	protected List<Moves> NormalMoveList= new ArrayList<Moves>();
-	protected List<Moves> spmovelist=new ArrayList<Moves>();//this will be sorted by the spCost
+	protected List<Moves> movelist= new LinkedList<Moves>();
+	protected List<Moves> NormalMoveList= new LinkedList<Moves>();
+	protected List<Moves> spmovelist=new LinkedList<Moves>();//this will be sorted by the spCost
 	protected HashMap<String,Moves> moveStrings=new HashMap<String,Moves>();
 	protected Inventory inventory;
 	protected Moves lastUsedMove;

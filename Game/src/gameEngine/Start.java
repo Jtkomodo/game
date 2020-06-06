@@ -99,8 +99,8 @@ public class Start {
     public static InputHandler I;
     public static Fontloader font;
     public static boolean canRender,overworld=true,test=false,testcol,circCol,GLDEBUG=false,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=false,showFps=true,StateOfStartBOx=false,showDrawLines=true;
-    public static double framCap,time,time2,passed,unproccesed,frameTime=0,lastFrame=0,DeltaTime,animateTime,Ti,TT,seconds,amountInSeconds,TARGETFPS=60;
-    public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite,HealthBarBackground;
+    public static double time,frameTime=0,lastFrame=0,DeltaTime;
+    public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite,HealthBarBackground,VectorTex;
     public static float x2,y2,camx,camy,x,y,Playerscale=64;
     public static Model background,player,textboxM,Arrow;
     public static OneTextureBatchedModel testM;
@@ -127,7 +127,7 @@ public class Start {
     public static Source source1;
 	public static  Source source;
     public static Fontloader aakar;
-    public static ArrayList<BattleEntity> turnOrder= new ArrayList<BattleEntity>();
+   // public static ArrayList<BattleEntity> turnOrder= new ArrayList<BattleEntity>();
     public static boolean facingLeft,running,ESCAPEBOXUP;
 	private static WorldLoader map1;
 	private static MapLoader currentMap;
@@ -275,7 +275,7 @@ public class Start {
 		textbox=new Texture("textbox");
 		bg= new Texture("testBackground");
 		HealthBarBackground=new Texture("HealthBarBackground");
-	
+	    VectorTex=new Texture("vector");
 		
 		
 		
@@ -456,11 +456,17 @@ public class Start {
 		source.setSourceRelitive(true);	
 		
 		//teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
+		
+		
+		
+		BattleSystem.INIT(battleBox);
+		
+		
 	while(!w.isExited()) {
 		
 		fps();    
 	    
-	if(canRender) {
+	//if(canRender) {
 		BattleSystem.soundPlay=true;
 		
 		//----------------------GAME--LOOP------------------------------
@@ -480,11 +486,13 @@ public class Start {
 	Entity test2=new Entity(Start.background,new Vector3f(0,0,0),0,64,Start.COLTEX,Constants.COL_COLOR_BLUE);
  	  	 	
 	  // TextureUpdate(MAP)
-Render.enable();//enables render
+//Render.enable();//enables render
 
 
 		
 	//if(test==false) {
+
+
 	
 	if(overworld==true) {	
 		
@@ -649,7 +657,7 @@ Proccesor.proccesCommands(time);
 MainRenderHandler.SortEntities(); 
 
 MainRenderHandler.addToBatchedRender();
-MainRenderHandler.clear();
+
 textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")\nAnimations: "+AnimationHandler.amountInList()+"\nQuads"+MainBatchRender.getQuads());
 
 textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.25f);
@@ -658,14 +666,14 @@ textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20
 MainRenderHandler.addToBatchedRender();
 MainBatchRender.draw();
 MainBatchRender.flushModel();
-MainRenderHandler.clear();
+//MainRenderHandler.clear();
 		    w.render();
 		    w.clear();
 		  
 		    currentMap.flushModel();
 			
 		}
-		}
+	//	}
 //--------------------------------------------------------------	
 		DebugPrint("Closing.....");
 		DebugPrint("Highest fps="+HighFPs+" Lowest fps="+lowFPS);
@@ -797,12 +805,8 @@ MainRenderHandler.clear();
 			         battleBox.hide();
 					
 				}else {
-					overworld=false;
-					battleBox.reset();
-					a1.removeAnimation();
-					StartBox.reset();
-					StateOfStartBOx=false;
-					BattleSystem.StartBattle(enemyField,p);
+					
+					BattleSystem.StartBattle(enemyField,p, bg, background);
 					
 				
 				}
@@ -1016,15 +1020,14 @@ MainRenderHandler.clear();
 	 	   
 	private static void fps() {
 	
-		    Render.disable();
+		   // Render.disable();
 		    canRender=false;//don't allow rendering until time
-			time2=Timer.getTIme();//gets current time
-		    passed=time2-time;//this is the time since the last time through the loop
+			double time2=Timer.getTIme();//gets current time
+		    double passed=time2-time;//this is the time since the last time through the loop
 		    AnimationHandler.update();
 			
-		    unproccesed+=passed;//this is the time that we have not rendered anything
-			Ti+=passed;
-			TT+=passed;
+		  
+		
 			frameTime+=passed;//this is the time since the last second
 			time=time2;
 		
@@ -1032,11 +1035,11 @@ MainRenderHandler.clear();
 			
 			
 		
-			if(unproccesed>=framCap) {//when the time we have not rendered is greater than or equal to our frame target we allow rendering
+		//	if(unproccesed>=framCap) {//when the time we have not rendered is greater than or equal to our frame target we allow rendering
 				
 				DeltaTime=Timer.getTIme()-lastFrame;
 				//System.out.println(DeltaTime);
-				unproccesed-=framCap;//this is like reseting 
+			//	unproccesed-=framCap;//this is like reseting 
 				//take input
 				
 				
@@ -1074,7 +1077,7 @@ MainRenderHandler.clear();
 			    	  drawcalls=Render.getDrawcalls();
 			    
 			    	  drawcallsFrame=drawcalls/frames;
-			    	 
+			    	 Start.DebugPrint("FPS="+fps);
 			    	  
 			    	  Render.resetDrawCalls();
 			    	  frameTime=0;
@@ -1082,7 +1085,7 @@ MainRenderHandler.clear();
 			    	  
 			    	  
 			    	  
-			      }
+			   //   }
 			      
 			     
 					}
@@ -1159,10 +1162,10 @@ public static void UseMove(Moves move) {
 	
 private static void initializeFPS() {
 	time=Timer.getTIme();
-	unproccesed=0;
+
     frameTime=0;
     frames=0;
-	framCap=1.0/TARGETFPS;
+	
 	
 	
 	

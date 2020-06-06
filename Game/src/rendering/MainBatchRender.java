@@ -1,6 +1,6 @@
 package rendering;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
@@ -14,8 +14,8 @@ import gameEngine.Texture;
 
 public class MainBatchRender {
 
-	private static ArrayList<Texture> textures=new ArrayList<Texture>();
-	private static ArrayList<MultipleTextureBatchedModel> models=new ArrayList<MultipleTextureBatchedModel>();
+	private static LinkedList<Texture> textures=new LinkedList<Texture>();
+	private static LinkedList<MultipleTextureBatchedModel> models=new LinkedList<MultipleTextureBatchedModel>();
 	private static int currentbatch=0;
 	private static boolean Mirror=false; 
 	
@@ -24,9 +24,10 @@ public class MainBatchRender {
 	
 	
 	public static void draw() {
-		Texture array[]=new Texture[textures.size()];
+	    
+	//	Start.DebugPrint(" Number of BatchedModels="+ models.size());
 		for(int i=0;i<models.size();i++) {
-		Render.draw(models.get(i),new Vector2f(0),0,1, textures.toArray(array));
+		Render.draw(models.get(i),new Vector2f(0),0,1, textures.toArray( new Texture[textures.size()]));
 		}
 		
 		
@@ -252,14 +253,17 @@ addDataToBatch(verts,uvs,colors,translations);
 	public static  void flushModel() {
 		for(int i=0;i<models.size();i++) {
 		models.get(i).flushBuffers();
+		
 		}
+	
+		
 		currentbatch=0;
 	}
 	private static void addDataToBatch(float[] verts,float[] uvs,float[] colors,float[] translations) {
 		if(models.isEmpty()) {
 			models.add(new MultipleTextureBatchedModel());
 			currentbatch=0;
-			Start.DebugPrint("hi");
+		
 		}
 
 
@@ -272,7 +276,7 @@ addDataToBatch(verts,uvs,colors,translations);
 		 
 				models.add(new MultipleTextureBatchedModel());
 			
-		
+				Start.DebugPrint("BatchedRender added new BatchedModel because the amount of sections added exceded max");
 			}
 			 
 		   models.get(currentbatch).addvaluestoVBO(verts, uvs, colors, translations);

@@ -422,16 +422,7 @@ if(mirror) {
 	}
 
 
-	 public static void enable() {
-		   
-		   draw=true;
-	   }
-	   public static void disable() {
-		   
-	       draw=false;
-	   }
 	
-
 
 	
 	

@@ -1,6 +1,6 @@
 package Scripter;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -14,7 +14,7 @@ public class Proccesor {
 	//this is for in the future this is going to allow anything that keeps players input from happening till the commands are done
 	
 	private static Queue<Commands> Commands=new LinkedList<Commands>();//this is the command queue that will go through each command one by one starting from the first to be added
-	private static List<Commands> CommandsItor=new ArrayList<Commands>();//this allows multiple commands to run one by one
+	private static List<Commands> CommandsItor=new LinkedList<Commands>();//this allows multiple commands to run one by one
 	private static  boolean UserInputallowed=true;
 	
 	public static void addComandtoQueue(Commands command) {

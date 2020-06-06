@@ -184,7 +184,7 @@ public class MultipleTextureBatchedModel {
 		
 	public void flushBuffers() {//clears all the buffers and moves the pionter back to one
 		
-		init();
+		//init();
 	    drawCount=0;
 		drawCount2=0;
 		indBase=0;

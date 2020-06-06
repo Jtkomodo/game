@@ -1,7 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy>
-    <typeInfo handle="=Game/src&lt;ScripterCommands{Commands.java[Commands" modifiers="1025" timestamp="1578015899254"/>
-    <typeInfo handle="=Game/C:\/Program Files\/Java\/jdk-13.0.2\/lib\/jrt-fs.jar`jdk.jdi&lt;com.sun.tools.jdi(JDWP$Event$Composite$Events$Exception.class[Exception" modifiers="8" timestamp="1579906373238"/>
-    <typeInfo handle="=Game/C:\/Program Files\/Java\/jdk-13.0.2\/lib\/jrt-fs.jar`java.base&lt;java.lang(Exception.class[Exception" modifiers="33" timestamp="1579906373238"/>
-    <typeInfo handle="=Game/src&lt;guis{GUIfunction.java[GUIfunction" modifiers="1025" timestamp="1590990465596"/>
-</typeInfoHistroy>
+<typeInfoHistroy/>

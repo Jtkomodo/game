@@ -1,7 +1,8 @@
 package battleClasses;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import org.joml.Vector2f;
 
@@ -12,8 +13,8 @@ import textrendering.TextBuilder;
 public class BattlePlayerField {
     
 	private final Vector2f Position1=new Vector2f(-90,40),Position2=new Vector2f(-90,-20);
-	private ArrayList<BattleEntity> listOfALLPcs=new ArrayList<BattleEntity>(); 
-	private ArrayList<BattleEntity> listOfAlivePcs=new ArrayList<BattleEntity>(); 
+	private LinkedList<BattleEntity> listOfALLPcs=new LinkedList<BattleEntity>(); 
+	private LinkedList<BattleEntity> listOfAlivePcs=new LinkedList<BattleEntity>(); 
 	private BattleEntity CurrentPC1,CurrentPC2,CurrentlyUsingPC;
 	private boolean hasPC1=false,hasPC2=false;
 	private TextBuilder text=new TextBuilder(Start.aakar);
@@ -157,14 +158,14 @@ public class BattlePlayerField {
 	
 	
 	
-	public ArrayList<BattleEntity> getListOfAlivePcs() {
+	public LinkedList<BattleEntity> getListOfAlivePcs() {
 		return listOfAlivePcs;
 	}
 
 
 
 
-	public void setListOfAlivePcs(ArrayList<BattleEntity> listOfAlivePcs) {
+	public void setListOfAlivePcs(LinkedList<BattleEntity> listOfAlivePcs) {
 		this.listOfAlivePcs = listOfAlivePcs;
 	}
 

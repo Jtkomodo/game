@@ -8,6 +8,18 @@ public class VectorMath {
 
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static Vector2f normalize(Vector2f vector) {
 		Vector2f normal;
 	if((vector.x !=0) || (vector.y!=0)){//this is so we don't have a divided by zero problem
@@ -29,7 +41,6 @@ public class VectorMath {
 	public static float getMagnitude(Vector2f vector) {
 		float magnitude;
 		magnitude=(float) sqrt(pow(vector.x, 2)+pow(vector.y,2));
-		
 		return magnitude;
 		
 	}
@@ -142,6 +153,9 @@ public class VectorMath {
 		float dot=dotProduct(u,v); 
 		float mag= getMagnitude(v);
 		mag=(float) Math.pow(mag, 2);
+		if(mag==0) {
+			mag=.0000001f;
+		}
 		v.mul(dot/mag,d);
          
         return d;

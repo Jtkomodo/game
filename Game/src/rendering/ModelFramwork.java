@@ -5,13 +5,13 @@ import static org.lwjgl.opengl.GL11.GL_POINTS;
 import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
 import org.lwjgl.opengl.GL15;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public abstract class ModelFramwork {
 
 	protected static int DrawMethod=GL_TRIANGLES;
 	protected float[] Vertices,UV_coords; 
-	protected static ArrayList<ModelFramwork> listOfModels=new ArrayList<ModelFramwork>();
+	protected static LinkedList<ModelFramwork> listOfModels=new LinkedList<ModelFramwork>();
 	
 	protected abstract void draw();
 	

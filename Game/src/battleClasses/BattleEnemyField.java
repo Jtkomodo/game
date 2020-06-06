@@ -8,7 +8,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -362,7 +362,7 @@ public class BattleEnemyField {
 	
 	public Enemy getEnemy(int index) {
 		
-		ArrayList<Enemy> listTemp=new ArrayList<Enemy>(ListOfEnemies.keySet());
+		LinkedList<Enemy> listTemp=new LinkedList<Enemy>(ListOfEnemies.keySet());
         if(index<listTemp.size() && index>=0) {
         	
         	
@@ -384,7 +384,7 @@ public class BattleEnemyField {
 		
 	}
 	public void setCurrentEnemy(int index) {
-		ArrayList<Enemy> listTemp=new ArrayList<Enemy>(ListOfEnemies.keySet());
+		LinkedList<Enemy> listTemp=new LinkedList<Enemy>(ListOfEnemies.keySet());
         if(index<listTemp.size() && index>=0) {
            	this.currentEnemy=listTemp.get(index);
         }
@@ -398,13 +398,13 @@ public class BattleEnemyField {
 	
 	public Enemy[] getEnemies() {
 		
-		ArrayList<Enemy> listTemp=new ArrayList<Enemy>(ListOfEnemies.keySet());
+		LinkedList<Enemy> listTemp=new LinkedList<Enemy>(ListOfEnemies.keySet());
 		return  listTemp.toArray(new Enemy[listTemp.size()]);
 		
 	}
 	
    public Enemy[] getOtherEnemies(Enemy e) {
-	   ArrayList<Enemy>  temp=new ArrayList<Enemy>(this.ListOfEnemies.keySet());
+	   LinkedList<Enemy>  temp=new LinkedList<Enemy>(this.ListOfEnemies.keySet());
 	   temp.remove(e);
 	   return temp.toArray(new Enemy[temp.size()-1]);
 	   

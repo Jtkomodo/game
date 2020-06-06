@@ -2,7 +2,7 @@ package Collisions;
 
 
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.joml.Vector2f;
 
@@ -10,10 +10,10 @@ import gameEngine.Start;
 import textrendering.TextBuilder;
 
 public class ColisionHandeler {
-	private static ArrayList<Collisions> ColsPushed=new ArrayList<Collisions>();
-	private static ArrayList<Collisions> Cols=new ArrayList<Collisions>();
-	private static ArrayList<Collisions> Triggers=new ArrayList<Collisions>(); 
-	private static ArrayList<Collisions> allCollisions=new ArrayList<Collisions>();
+	private static LinkedList<Collisions> ColsPushed=new LinkedList<Collisions>();
+	private static LinkedList<Collisions> Cols=new LinkedList<Collisions>();
+	private static LinkedList<Collisions> Triggers=new LinkedList<Collisions>(); 
+	private static LinkedList<Collisions> allCollisions=new LinkedList<Collisions>();
 	private static TextBuilder text=new TextBuilder(Start.aakar);
 	private static boolean colided;
 	public  static int amountThrough=0;

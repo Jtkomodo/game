@@ -223,14 +223,21 @@ public class AABB extends Collisions{
 	   //box is the box we are checking collision with
 	   
 	  
-	   Start.DebugPrint("("+ColisionHandeler.amountThrough+")");
+	 //  Start.DebugPrint("("+ColisionHandeler.amountThrough+")");
 
 	int amountThrough=ColisionHandeler.amountThrough;
 	  
 	   Vector2f currentmovement=new Vector2f(0,0);
 	   movement.add(new Vector2f(position.x,position.y),currentmovement);//this is the current position after addition of the movement
-	 
-	 //  MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(currentmovement,z), 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE));
+//	 Vector2f magangle=VectorMath.getMagAndAngleComponet(movement);
+//	
+//	 
+//	//   MainRenderHandler.addEntity(new Entity(piont, new Vector3f(position,z+10),-magangle.y,magangle.x*10,Start.VectorTex,Constants.RED));
+//	   
+//	 Start.DebugPrint(""+magangle.y);
+//	   
+	   
+	   
 	   
 	   Vector2f newMOvement=currentmovement; //this is the return value   
 	   
@@ -319,6 +326,7 @@ public class AABB extends Collisions{
 		 
 		 
 	   }else {
+		   
 		   newMOvement=currentmovement;
 		   
 		  
@@ -330,7 +338,7 @@ public class AABB extends Collisions{
 	   }
 	   
 	   
-	   Start.DebugPrint("("+amountThrough+")"+"nm="+newMOvement);
+	//   Start.DebugPrint("("+amountThrough+")"+"nm="+newMOvement);
 	   
 	   return newMOvement;
 	   

@@ -1,6 +1,6 @@
 package rendering;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -18,14 +18,15 @@ public class MainRenderHandler {
 
 	
 	
-	private static ArrayList<Entity> entities=new ArrayList<Entity>();
+	private static LinkedList<Entity> entities=new LinkedList<Entity>();
     
 	
 	public static void addToBatchedRender() {
 		
 	    Iterator<Entity> i=entities.iterator();	
 		
-	
+if(!entities.isEmpty()) {
+	//Start.DebugPrint(" Number of entities="+ entities.size());
 		while(i.hasNext()) {
 			
 			Entity e=i.next();
@@ -52,9 +53,10 @@ public class MainRenderHandler {
 				}
 				
 				}
-			
-			}
 		
+			}
+		entities.clear();
+}
 	}
 	
 	public static void addEntity(Entity e) {
@@ -64,10 +66,7 @@ public class MainRenderHandler {
 		}
 		
 	}
-	public static void clear() {
-		entities.clear();
-		
-	}
+
 	
 	
 	public static void SortEntities() {

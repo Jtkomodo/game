@@ -264,91 +264,91 @@ public class UIBoxState {
 			      
 				}
 				
-				public void unloadList(int[] indexs) {
-					
-					int amount=0;
-					for(int i=0;i<indexs.length;i++) {
-						
-						if((indexs[i]-amount)<this.elementlist.size() && (indexs[i]-amount)>0) {
-						UIElement e=this.elementlist.get(indexs[i]-amount);//get the element by the index making sure to account for ones already deleted in this loop
-							this.elementlist.remove(e);//remove from element list
-							amount++;
-							if(e.isActive()) {
-								this.Activeelementlist.remove(e);//remove from active element list if active
-							    
-								if(this.beginElement==e) {
-							this.beginElement=null;
-                                    for(int yi=0;yi<this.yPos.size();yi++) {
-                                     for(int xi=0;xi<this.xPos.size();xi++) {
-                                          	float x=xPos.get(xi);
-                                          	float y=yPos.get(yi);
-                                          	
-                                          	Vector2f vector=new Vector2f(x,y);
-                                          	if(this.values.containsKey(vector)) {
-                                          		this.beginElement=values.get(vector);
-                                          		
-                                          	}
-                                          	
-                                          	
-                                          }	
-                                    	
-                                    	
-                                    	
-                                    }
-							}
-								
-								
-								Vector2f vector=e.getoffset();
-								//unload the Vector and Element to the Values map
-								
-								this.values.remove(vector);
-								float x=vector.x;
-								float y=vector.y;
-								
-								int amountx=this.AmountOfXpos.get(x);
-								int amounty=this.AmountOfYpos.get(y);
-								
-								
-								if(amountx==1) {//remove this x position if there is only 1
-									xPos.remove(vector.x);
-								   this.AmountOfXpos.remove(vector.x);
-								}else {
-									this.AmountOfXpos.put(vector.x, amountx-1);
-								}
-								
-								
-								if(amounty==1) {
-									yPos.remove(vector.y);
-									 this.AmountOfYpos.remove(vector.y);
-								}else {
-									
-									this.AmountOfYpos.put(vector.y, amounty-1);
-								}
-								
-								
-									
-								
-							
-								
-								
-							}
-						}
-						}
-					
-					Collections.sort(this.xPos);
-					Collections.sort(this.yPos);
-					
-					
-			
-					if(!this.Activeelementlist.contains(this.ActiveElement)) {  	
-					      this.setActiveElement(this.beginElement);	
-					}
-					
-					this.anyActive=!Activeelementlist.isEmpty();
-						this.amountOfElements=this.elementlist.size();
-					
-				}
-				
+//				public void unloadList(int[] indexs) {
+//					
+//					int amount=0;
+//					for(int i=0;i<indexs.length;i++) {
+//						
+//						if((indexs[i]-amount)<this.elementlist.size() && (indexs[i]-amount)>0) {
+//						UIElement e=this.elementlist.get(indexs[i]-amount);//get the element by the index making sure to account for ones already deleted in this loop
+//							this.elementlist.remove(e);//remove from element list
+//							amount++;
+//							if(e.isActive()) {
+//								this.Activeelementlist.remove(e);//remove from active element list if active
+//							    
+//								if(this.beginElement==e) {
+//							this.beginElement=null;
+//                                    for(int yi=0;yi<this.yPos.size();yi++) {
+//                                     for(int xi=0;xi<this.xPos.size();xi++) {
+//                                          	float x=xPos.get(xi);
+//                                          	float y=yPos.get(yi);
+//                                          	
+//                                          	Vector2f vector=new Vector2f(x,y);
+//                                          	if(this.values.containsKey(vector)) {
+//                                          		this.beginElement=values.get(vector);
+//                                          		
+//                                          	}
+//                                          	
+//                                          	
+//                                          }	
+//                                    	
+//                                    	
+//                                    	
+//                                    }
+//							}
+//								
+//								
+//								Vector2f vector=e.getoffset();
+//								//unload the Vector and Element to the Values map
+//								
+//								this.values.remove(vector);
+//								float x=vector.x;
+//								float y=vector.y;
+//								
+//								int amountx=this.AmountOfXpos.get(x);
+//								int amounty=this.AmountOfYpos.get(y);
+//								
+//								
+//								if(amountx==1) {//remove this x position if there is only 1
+//									xPos.remove(vector.x);
+//								   this.AmountOfXpos.remove(vector.x);
+//								}else {
+//									this.AmountOfXpos.put(vector.x, amountx-1);
+//								}
+//								
+//								
+//								if(amounty==1) {
+//									yPos.remove(vector.y);
+//									 this.AmountOfYpos.remove(vector.y);
+//								}else {
+//									
+//									this.AmountOfYpos.put(vector.y, amounty-1);
+//								}
+//								
+//								
+//									
+//								
+//							
+//								
+//								
+//							}
+//						}
+//						}
+//					
+//					Collections.sort(this.xPos);
+//					Collections.sort(this.yPos);
+//					
+//					
+//			
+//					if(!this.Activeelementlist.contains(this.ActiveElement)) {  	
+//					      this.setActiveElement(this.beginElement);	
+//					}
+//					
+//					this.anyActive=!Activeelementlist.isEmpty();
+//						this.amountOfElements=this.elementlist.size();
+//					
+//				}
+//				
 				
 				
 		//____________________Adding____and___Removing_______________	
@@ -365,15 +365,15 @@ public class UIBoxState {
 					loadList(new UIElement[] {element});
 				}
 				
-			 public void removeElements(int[] indexs) {
-				 
-				 unloadList(indexs);
-				 
-			 }
-			public void removeElement(int index) {
-				unloadList(new int[] {index});
-			}
-				
+//			 public void removeElements(int[] indexs) {
+//				 
+//				 unloadList(indexs);
+//				 
+//			 }
+//			public void removeElement(int index) {
+//				unloadList(new int[] {index});
+//			}
+//				
 			  private void removeAllActiveELements() {
 		       
 				  int amount=0;

@@ -1,6 +1,6 @@
 package battleClasses;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
@@ -27,7 +27,7 @@ import textrendering.TextBuilder;
 public class Enemy extends BattleEntity{
 
 	private String name;
-	
+	private LinkedList<Moves> returnList=new LinkedList<Moves>();
    
    
   
@@ -49,9 +49,9 @@ public class Enemy extends BattleEntity{
 	
 
 
-	private ArrayList<Moves> makeListOfUseableMoves() {
+	private LinkedList<Moves> makeListOfUseableMoves() {
+		returnList.clear();
 		
-		ArrayList<Moves> returnList=new ArrayList<Moves>();
 		
 		for(int i=0;i<this.movelist.size();i++) {
 			
@@ -92,7 +92,7 @@ public class Enemy extends BattleEntity{
 	
 		
 		
-	ArrayList<Moves> moves=makeListOfUseableMoves();
+	LinkedList<Moves> moves=makeListOfUseableMoves();
 
 	
 	
@@ -193,7 +193,7 @@ public class Enemy extends BattleEntity{
 	
 	
 	
-	protected boolean SelfHealthCheck(ArrayList<Moves> moves,BattleEntity player,float percentage,float percentageChanceToUseKillerMove) {
+	protected boolean SelfHealthCheck(LinkedList<Moves> moves,BattleEntity player,float percentage,float percentageChanceToUseKillerMove) {
 		
 		
 		
@@ -214,7 +214,7 @@ public class Enemy extends BattleEntity{
 			boolean healingItemFound=false;
 			
 			Items itemWithHighestHeal=null;
-			ArrayList<Items> healingItems=new ArrayList<Items>();
+			LinkedList<Items> healingItems=new LinkedList<Items>();
 			if(!this.inventory.isEmpty()) {
 			for(int i=0;i<this.inventory.getItems().length;i++) {
 				
@@ -256,7 +256,7 @@ public class Enemy extends BattleEntity{
 		    Moves HighestHealingMove=null;
 		    Moves KillerMove=null;
 		    
-		    ArrayList<Moves> healingMoves=new ArrayList<Moves>();
+		    LinkedList<Moves> healingMoves=new LinkedList<Moves>();
 		    
 			for(int i=0;i<moves.size();i++) {
 				
@@ -389,7 +389,7 @@ public class Enemy extends BattleEntity{
 	  	boolean SPRestoringItemFound=false;
 		Items HighestRestoring=null;
 		Items LowestRestoring=null;
-		ArrayList<Items> spRestoreItems=new ArrayList<Items>();
+		LinkedList<Items> spRestoreItems=new LinkedList<Items>();
 		if(!this.inventory.isEmpty()) {
 		for(int i=0;i<this.inventory.getItems().length;i++) {
 			
@@ -495,7 +495,7 @@ if(SPRestoringItemFound) {
 	}
 	
 	
-	protected boolean UseMostPowerfulOrKillingMove(ArrayList<Moves> moves,BattleEntity player) {
+	protected boolean UseMostPowerfulOrKillingMove(LinkedList<Moves> moves,BattleEntity player) {
 		boolean actionTaken=false;
 		
 		

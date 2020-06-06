@@ -23,8 +23,10 @@ import gameEngine.Start;
 public class OneTextureBatchedModel extends ModelFramwork{
 	 private int drawCount,drawCount2;
 		private int v_id,tex_id,ind_id;//made these public so that we can get to them from another method to change values
-	private int indBase,pionter,sections;
-    private final int MaxSections=500;
+	private int indBase=0,pionter,sections;
+    private final int MaxSections=100;
+    private FloatBuffer  buffer;
+    private IntBuffer  bufferi;
 	public OneTextureBatchedModel() {
 		
 		//setting everything to 0 
@@ -66,40 +68,41 @@ public class OneTextureBatchedModel extends ModelFramwork{
 	
 	
 public void addvaluestoVBO(float[] v,float[] uv) {//used to add a new model to the buffers
-	if((v.length == uv.length) && v.length==8) {//just makes sure they have the correct size of data
-		
-		sections++; //this is for the method change values
+	if((v.length == uv.length) && (v.length%8==0)) {//just makes sure they have the correct size of data
+	    int quads=v.length/8;	
+        sections+=quads; //this is for the method change values
+		//sections++; //this is for the method change values
 		if(sections>this.MaxSections) {
-			sections--;
+			sections-=quads;
 			return;
 		}
 	
 	glBindBuffer(GL_ARRAY_BUFFER, v_id);
-	 glBufferSubData(GL_ARRAY_BUFFER,pionter, makeBuffer(v));//adds the vertex values to the vertex buffer
-//glBindBuffer(GL_ARRAY_BUFFER,0);
-	 
-	glBindBuffer(GL_ARRAY_BUFFER, tex_id);
-	 glBufferSubData(GL_ARRAY_BUFFER, pionter, makeBuffer(uv));//adds the uv values to the uv buffer
-		
-int[] indeces= new int[] {
-			indBase,indBase+1,indBase+2,
-			indBase+2,indBase+3,indBase	
-			
-			
-			
-			
-	};
-	
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
-	 glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,drawCount2, makeBuffer(indeces));//remember all offsets are in bytes so a int is 4 bytes and a float is as well so we need to multiply be 4 to get the correct offset 
+	buffer=makeBuffer(v);
+	glBufferSubData(GL_ARRAY_BUFFER,pionter, buffer);//adds the vertex values to the vertex buffer
 
-	drawCount=drawCount+6;//used for telling the amount of triangles to draw when the drawcall is made
+	buffer=makeBuffer(uv);
+	glBindBuffer(GL_ARRAY_BUFFER, tex_id);
+	 glBufferSubData(GL_ARRAY_BUFFER, pionter,buffer);//adds the uv values to the uv buffer
+		
+	 int[] indeces=new int[6*quads];
+		for(int i=0;i<quads;i++) {
+			int i2=i*6;
+			indeces[i2]=indBase;indeces[i2+1]=indBase+1;indeces[i2+2]=indBase+2;
+			indeces[i2+3]=indBase+2;indeces[i2+4]=indBase+3;indeces[i2+5]=indBase;	
+			indBase+=4;
+		}
+   bufferi=makeBuffer(indeces);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
+	glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,drawCount2,bufferi);//remember all offsets are in bytes so a int is 4 bytes and a float is as well so we need to multiply be 4 to get the correct offset 
+
+	drawCount=drawCount+(6*quads);//used for telling the amount of triangles to draw when the drawcall is made
 	drawCount2=drawCount*4;//this is for the correct pionter to the next value in the indeces buffer
 	
-	indBase=indBase+4;//this makes sure that the indeces are loaded in right other wise it will  draw the same model multiple times
-	 pionter=pionter+(8*4);//pionter to the next value in the vertex and uv buffers so that it won't write over the old ones
+//	indBase=indBase+4;//this makes sure that the indeces are loaded in right other wise it will  draw the same model multiple times
+	 pionter=pionter+(v.length*4);
 	
-	
+	 glBindBuffer(GL_ARRAY_BUFFER,0);
 	
 	}else {
 		Start.DebugPrint("[ERROR]sorry but both verts and uv must have a size of 8",this.getClass());
@@ -110,6 +113,21 @@ int[] indeces= new int[] {
 	
 	
 }
+
+
+
+private  FloatBuffer makeBuffer(Float[] array ) {
+	FloatBuffer buffer= BufferUtils.createFloatBuffer(array.length); //this just is initializing our buffer with the correct capacity
+	for(int i=0;i<array.length;i++) {
+		
+		buffer.put((float)array[i]);
+	}
+	buffer.flip();//this allows the buffer to be read from very very important
+	return buffer;
+}
+//same as float just integer this time
+
+
 	
 private  FloatBuffer makeBuffer(float[] array ) {
 	FloatBuffer buffer= BufferUtils.createFloatBuffer(array.length); //this just is initializing our buffer with the correct capacity
@@ -173,7 +191,7 @@ public void changevalues(int section,int target,int[] newValue) {
 }	
 public void flushBuffers() {//clears all the buffers and moves the pionter back to one
 	
-	init();
+//	init();
     drawCount=0;
 	drawCount2=0;
 	indBase=0;
@@ -184,7 +202,8 @@ public void flushBuffers() {//clears all the buffers and moves the pionter back 
 	
 }	
 private void init() {
-	enable();
+	//enable();
+	
 	
 	glBindBuffer(GL_ARRAY_BUFFER,v_id);
 	  glBufferData(GL_ARRAY_BUFFER,this.MaxSections*(8*4),GL_DYNAMIC_DRAW);
@@ -224,9 +243,6 @@ protected void delete() {
 	glDeleteBuffers(new int[] {this.v_id,this.ind_id,this.tex_id});
 	
 }
-
-
-
 
 
 

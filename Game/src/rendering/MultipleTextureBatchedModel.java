@@ -39,7 +39,7 @@ public class MultipleTextureBatchedModel {
 		public MultipleTextureBatchedModel() {
 			
 			//setting everything to 0 
-			
+			Start.DebugPrint("made new multiple texture batched model");
 			  drawCount=0;
 				drawCount2=0;
 				indBase=0;

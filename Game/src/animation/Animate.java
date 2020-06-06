@@ -234,7 +234,7 @@ public class Animate {
 		this.fps=fps;
 		this.frameTiming=1.0/fps;
 		this.time=Timer.getTIme();
-		this.model=new Model(model.getVertices(),model.getUv_coords());
+		this.model.changeValues(model.getVertices(),model.getUv_coords());
 		this.eachTimed=false;
 		this.finalFrame=animation.getLastFrame();
 		
@@ -253,7 +253,7 @@ public class Animate {
 		this.eachTimed=true;
 		
 		
-		this.model=new Model(model.getVertices(),model.getUv_coords());
+		this.model.changeValues(model.getVertices(),model.getUv_coords());
 		
 		this.finalFrame=animation.getLastFrame();
 		

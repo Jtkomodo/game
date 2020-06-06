@@ -9,6 +9,8 @@ import java.nio.*;
 import  org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL30;
 
+import gameEngine.Start;
+
 
 public class Model extends ModelFramwork{
     private int drawCount;
@@ -71,7 +73,14 @@ public Model(float width,float height,float u,float v,float texWidth,float texHe
 		}
 				
 		
-		
+
+	
+	
+public void changeValues(float[] vertices,float[] uv_coords) {
+	
+	changeVert(vertices);
+	changeUV(uv_coords);
+}
 		
 		
 		
@@ -121,7 +130,7 @@ public Model(float width,float height,float u,float v,float texWidth,float texHe
 			listOfModels.add(this);
 	
 		
-
+Start.DebugPrint("made new model");
 	}
 	
 	public float[] getVertices() {

@@ -13,7 +13,7 @@ import textrendering.TextBuilder;
 public class UIStringElement extends UIElement{
 	
     
-	private TextBuilder text=new TextBuilder(Start.aakar); 
+
 	private String string;
 	private float scale;
 	private Vector4f color;
@@ -23,7 +23,7 @@ public class UIStringElement extends UIElement{
 		super(offset);
 		this.string=string;
 		this.scale=scale;
-		this.text.setString(string);
+	
 		this.offset=offset;
 		
 	
@@ -32,7 +32,7 @@ public class UIStringElement extends UIElement{
 		super(offset);
 		this.string=string;
 		this.scale=scale;
-		this.text.setString(string);
+	
 		this.offset=offset;
 		this.color=color;
 		this.hasColor=true;
@@ -47,7 +47,7 @@ public class UIStringElement extends UIElement{
 		super(offset);
 		this.string=string;
 		this.scale=scale;
-		this.text.setString(string);
+		
 		this.offset=offset;
 		this.active=true;
 		
@@ -61,7 +61,7 @@ public class UIStringElement extends UIElement{
 		super(offset);
 		this.string=string;
 		this.scale=scale;
-		this.text.setString(string);
+	
 		this.offset=offset;
 		this.active=true;
 		this.color=color;
@@ -80,7 +80,7 @@ public class UIStringElement extends UIElement{
 		this.string=string;
 		this.scale=scale;
 	
-		this.text.setString(string);
+	
 		this.offset=offset;
 		this.active=true;
 	
@@ -100,8 +100,7 @@ public class UIStringElement extends UIElement{
 		super(offset);
 		this.string=string;
 		this.scale=scale;
-		this.text.setString(string);
-		this.active=true;
+			this.active=true;
 		this.HasFunction=true;
 		
 		loadFunction(Function);
@@ -123,11 +122,11 @@ public class UIStringElement extends UIElement{
 	
 	Vector2f noffset=new Vector2f();offset.add(Position,noffset);
 		
-		
+		Start.text1.setString(string);
 		if(!hasColor) {
-	     text.drawString(noffset.x, noffset.y,0, scale);	
+	     Start.text1.drawString(noffset.x, noffset.y,0, scale);	
 		}else {
-			text.drawString(noffset.x, noffset.y, scale,color);
+			Start.text1.drawString(noffset.x, noffset.y, scale,color);
 		}
 		
 	}
@@ -140,7 +139,7 @@ public class UIStringElement extends UIElement{
 
 	public void setString(String string) {
 		this.string = string;
-		this.text.setString(string);	
+		
 	}
 
 	public float getScale() {

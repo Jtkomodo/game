@@ -28,7 +28,7 @@ public class OneTextureBatchedModel extends ModelFramwork{
     private FloatBuffer  buffer;
     private IntBuffer  bufferi;
 	public OneTextureBatchedModel() {
-		
+		Start.DebugPrint("made new one texture batched model");
 		//setting everything to 0 
 		listOfModels.add(this);
 		drawCount=0;

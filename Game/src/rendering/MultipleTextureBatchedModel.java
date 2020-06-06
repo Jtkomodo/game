@@ -33,6 +33,9 @@ public class MultipleTextureBatchedModel {
 		private int indBase,pionter,sections=0;
 	    private final int maxSections=10000;
 		private int pionter2=0,pionter3=0;
+		private FloatBuffer buffer;
+		private IntBuffer bufferi;
+		
 		public MultipleTextureBatchedModel() {
 			
 			//setting everything to 0 
@@ -94,16 +97,20 @@ public class MultipleTextureBatchedModel {
         
         
 		glBindBuffer(GL_ARRAY_BUFFER, v_id);
-		 glBufferSubData(GL_ARRAY_BUFFER,pionter, makeBuffer(v));//adds the vertex values to the vertex buffer
+		buffer= makeBuffer(v);
+		 glBufferSubData(GL_ARRAY_BUFFER,pionter,buffer);//adds the vertex values to the vertex buffer
 	//glBindBuffer(GL_ARRAY_BUFFER,0);
 		 glBindBuffer(GL_ARRAY_BUFFER, Trans_id);
-		 glBufferSubData(GL_ARRAY_BUFFER,pionter2, makeBuffer(translation));//adds the vertex values to the vertex buffer
+			buffer= makeBuffer(translation);
+		 glBufferSubData(GL_ARRAY_BUFFER,pionter2,buffer);//adds the vertex values to the vertex buffer
 		 glBindBuffer(GL_ARRAY_BUFFER, tex_id);
-		 glBufferSubData(GL_ARRAY_BUFFER, pionter2, makeBuffer(uv));//adds the uv values to the uv buffer
+			buffer= makeBuffer(uv);
+		 glBufferSubData(GL_ARRAY_BUFFER, pionter2, buffer);//adds the uv values to the uv buffer
 		 
 		 
 		 glBindBuffer(GL_ARRAY_BUFFER, color_id);
-		 glBufferSubData(GL_ARRAY_BUFFER, pionter3, makeBuffer(colors));//adds the uv values to the uv buffer	
+		 buffer= makeBuffer(colors);
+		 glBufferSubData(GL_ARRAY_BUFFER, pionter3, buffer);//adds the uv values to the uv buffer	
 	int[] indeces=new int[6*quads];
 		for(int i=0;i<quads;i++) {
 			int i2=i*6;
@@ -115,7 +122,8 @@ public class MultipleTextureBatchedModel {
 		
 		
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
-		 glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,drawCount2, makeBuffer(indeces));//remember all offsets are in bytes so a int is 4 bytes and a float is as well so we need to multiply be 4 to get the correct offset 
+		bufferi=makeBuffer(indeces);
+		 glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,drawCount2, bufferi);//remember all offsets are in bytes so a int is 4 bytes and a float is as well so we need to multiply be 4 to get the correct offset 
 	  
 		drawCount=drawCount+(6*quads);//used for telling the amount of triangles to draw when the drawcall is made
 		drawCount2=drawCount*4;//this is for the correct pionter to the next value in the indeces buffer

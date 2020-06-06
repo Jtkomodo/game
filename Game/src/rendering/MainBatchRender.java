@@ -38,10 +38,10 @@ public class MainBatchRender {
 	
 	
 	
-	public static void addModel(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture,Vector4f color,boolean UIprojection) {
+	public static void addModel(float[] cuvs,float[] LocalVerts,Vector2f position,float angle,float scale,Texture texture,Vector4f color,boolean UIprojection) {
 		
 		
-		float LocalVerts[]=model.getVertices();
+		
 		
 		if(LocalVerts.length!=0 && LocalVerts.length%8==0) { 
 				
@@ -57,7 +57,7 @@ public class MainBatchRender {
 	   float[] uvs=new float[sections*12];
 	   float[] colors=new float[sections*16]; 
 	   float[] translations=new float[sections*12];
-		float cuvs[]= model.getUv_coords();
+		
 	   Matrix4f trs=new Matrix4f();
 	   trs.identity();
 	    trs.scale(scale);
@@ -144,9 +144,9 @@ public class MainBatchRender {
 	}
 	
 	
-public static void addModel(ModelFramwork model,Vector2f position,float angle,float scale,Texture texture, boolean UIprojection) {
+public static void addModel(float[] cuvs,float[] LocalVerts,Vector2f position,float angle,float scale,Texture texture, boolean UIprojection) {
 		
-	float LocalVerts[]=model.getVertices();
+	
 	
 	if(LocalVerts.length!=0 && LocalVerts.length%8==0) { 
 			
@@ -162,7 +162,7 @@ public static void addModel(ModelFramwork model,Vector2f position,float angle,fl
    float[] uvs=new float[sections*12];
    float[] colors=new float[sections*16]; 
    float[] translations=new float[sections*12];
-	float cuvs[]= model.getUv_coords();
+	
    Matrix4f trs=new Matrix4f();
    trs.identity();
     trs.scale(scale);
@@ -299,9 +299,9 @@ addDataToBatch(verts,uvs,colors,translations);
 
 
 
-	public static void addModel(ModelFramwork model, Vector2f position, float angle, Vector2f size,Texture texture, Vector4f color, boolean UIprojection) {
+	public static void addModel(float[] cuvs,float LocalVerts[], Vector2f position, float angle, Vector2f size,Texture texture, Vector4f color, boolean UIprojection) {
 		
-	float LocalVerts[]=model.getVertices();
+
 	
 	if(LocalVerts.length!=0 && LocalVerts.length%8==0) { 
 			
@@ -317,7 +317,7 @@ addDataToBatch(verts,uvs,colors,translations);
    float[] uvs=new float[sections*12];
    float[] colors=new float[sections*16]; 
    float[] translations=new float[sections*12];
-	float cuvs[]= model.getUv_coords();
+	
    Matrix4f trs=new Matrix4f();
    trs.identity();
     trs.scale(new Vector3f(size,0));
@@ -407,10 +407,10 @@ addDataToBatch(verts,uvs,colors,translations);
 
 
 
-	public static void addModel(ModelFramwork model, Vector2f position, float angle, Vector2f scale,
+	public static void addModel(float[] cuvs,float[] LocalVerts, Vector2f position, float angle, Vector2f scale,
 			Texture texture, boolean UIprojection) {
 		// TODO Auto-generated method stub
-		float LocalVerts[]=model.getVertices();
+		
 		
 		if(LocalVerts.length!=0 && LocalVerts.length%8==0) { 
 				
@@ -426,7 +426,7 @@ addDataToBatch(verts,uvs,colors,translations);
 	   float[] uvs=new float[sections*12];
 	   float[] colors=new float[sections*16]; 
 	   float[] translations=new float[sections*12];
-		float cuvs[]= model.getUv_coords();
+		
 	   Matrix4f trs=new Matrix4f();
 	   trs.identity();
 	    trs.scale(new Vector3f(scale,0));

@@ -37,23 +37,23 @@ if(!entities.isEmpty()) {
 			if(e.isHasColor()) {
 				
 			if(!e.isHasNonSqaureSize()) {	
-			MainBatchRender.addModel(e.getModel(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getSize(),e.getTexture(),e.getColor(),e.getUIPojeection());
+			MainBatchRender.addModel(e.getUvs(),e.getVerts(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getSize(),e.getTexture(),e.getColor(),e.getUIPojeection());
 			}else {
-				MainBatchRender.addModel(e.getModel(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getNonSquareSize(),e.getTexture(),e.getColor(),e.getUIPojeection());
+				MainBatchRender.addModel(e.getUvs(),e.getVerts(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getNonSquareSize(),e.getTexture(),e.getColor(),e.getUIPojeection());
 			}
 			
 			}else {
 				if(!e.isHasNonSqaureSize()) {	
 					
 				
-				MainBatchRender.addModel(e.getModel(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getSize(),e.getTexture(),e.getUIPojeection());
+				MainBatchRender.addModel(e.getUvs(),e.getVerts(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getSize(),e.getTexture(),e.getUIPojeection());
 				}else {
-					MainBatchRender.addModel(e.getModel(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getNonSquareSize(),e.getTexture(),e.getUIPojeection());
+					MainBatchRender.addModel(e.getUvs(),e.getVerts(),new Vector2f(p.x,p.y) ,e.getAngle(), e.getNonSquareSize(),e.getTexture(),e.getUIPojeection());
 					
 				}
 				
 				}
-		
+		  
 			}
 		entities.clear();
 }
@@ -64,7 +64,7 @@ if(!entities.isEmpty()) {
 		if(e.isDrawDrawLine() && Start.showDrawLines) {
 			entities.add( new Entity(Start.background,new Vector3f(e.getPosition().x,e.getPosition().y+e.getDrawLineOffset(),100),0,new Vector2f(64,1),Start.COLTEX,Constants.RED));
 		}
-		
+		 
 	}
 
 	

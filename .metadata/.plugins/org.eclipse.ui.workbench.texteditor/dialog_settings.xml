@@ -2,32 +2,35 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="glBufferData" key="selection"/>
+		<item value="e.getUvs(),e.getVerts()," key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="e.getModel(),"/>
+			<item value="float cuvs[]= model.getUv_coords();"/>
+			<item value="float LocalVerts[]=model.getVertices();"/>
+			<item value="ModelFramwork model,"/>
+			<item value="ModelFramework model,"/>
+			<item value="this.model = model;"/>
+			<item value="this.model =model"/>
+			<item value="this.model=model"/>
+			<item value="model"/>
+			<item value="deltaTime"/>
 			<item value="glBufferData"/>
 			<item value="flbufferdata"/>
 			<item value="models.delete"/>
 			<item value="float"/>
 			<item value="width"/>
-			<item value="Entity "/>
-			<item value="Entity  "/>
-			<item value="ArrayList"/>
-			<item value="LinkedList"/>
-			<item value="hi&quot;"/>
-			<item value="hi"/>
-			<item value="&quot;hi&quot;"/>
-			<item value="models."/>
-			<item value="models.clear"/>
-			<item value="models.remove"/>
 		</list>
 		<list key="replacehistory">
+			<item value="e.getUvs(),e.getVerts(),"/>
+			<item value=""/>
+			<item value="float[] cuvs,float[] LocalVerts,"/>
+			<item value="setModel(model)"/>
 			<item value="Float"/>
 			<item value="height"/>
-			<item value=""/>
 			<item value="LinkedList"/>
 			<item value="BAR_COLOR_GREEN"/>
 			<item value="BLUE"/>
@@ -37,9 +40,6 @@
 			<item value="d2"/>
 			<item value="ClosestPosition"/>
 			<item value="d2."/>
-			<item value="protected static"/>
-			<item value="i3"/>
-			<item value="i2"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

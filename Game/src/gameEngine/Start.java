@@ -1052,7 +1052,7 @@ MainBatchRender.flushModel();
 				 
 			     canRender=true;//now we render	
 			 	frames++;
-			 	lastFrame=Timer.getTIme();
+			 	lastFrame=time2;
 			 
 			      if(frameTime>=1.0) {//if a second has passed print fps
 			    	 

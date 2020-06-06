@@ -43,7 +43,6 @@
     <fullyQualifiedTypeName name="animation.Animate"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="customExceptions.EnemyHasToManyMoves"/>
-    <fullyQualifiedTypeName name="rendering.Model"/>
     <fullyQualifiedTypeName name="org.lwjgl.openal.LOKIWAVEFormat"/>
     <fullyQualifiedTypeName name="org.lwjgl.BufferUtils"/>
     <fullyQualifiedTypeName name="Data.Constants"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="com.sun.tools.javac.util.ArrayUtils"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="rendering.Model"/>
 </qualifiedTypeNameHistroy>

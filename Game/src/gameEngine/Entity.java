@@ -9,7 +9,6 @@ import rendering.ModelFramwork;
 
 public class Entity {
 
-	private ModelFramwork model;
 	private Texture texture;
 	private Vector3f position;
 	private float size=-1;
@@ -18,7 +17,7 @@ public class Entity {
 	private Vector2f NonSquareSize;
 	private Vector4f color=Constants.DEFAULT_COLOR;
     private boolean hasColor=false,hasNonSqaureSize=false,Mirror=false,UIPojeection=false,drawDrawLine=false;
-	
+	private float[] uvs,verts;
     
     
     public Entity(ModelFramwork model,Vector3f position,float angle, float size,Texture texture) {
@@ -138,10 +137,8 @@ public class Entity {
 	private void construct(ModelFramwork model,Vector3f position,float angle,Texture texture) {
 		this.angle=angle;
     	this.texture=texture;
-		this.model = model;
+		setModel(model);
 		this.position = position;
-		
-		
 	}
 		
 		
@@ -149,11 +146,10 @@ public class Entity {
 		
 		
 	
-	public ModelFramwork getModel() {
-		return model;
-	}
+	
 	public void setModel(ModelFramwork model) {
-		this.model = model;
+		this.uvs=model.getUv_coords();
+		this.verts=model.getVertices();
 	}
 	public Vector3f getPosition() {
 		return position;
@@ -244,7 +240,13 @@ this.hasNonSqaureSize=false;
 		this.drawDrawLine = drawDrawLine;
 	}
 	
-	
+	public float[] getVerts() {
+		return verts;
+	}
+	public float[] getUvs() {
+		return uvs;
+	}
+
 	
 	
 	

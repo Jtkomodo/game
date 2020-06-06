@@ -18,7 +18,6 @@ public class UIStringElement extends UIElement{
 	private float scale;
 	private Vector4f color;
 	
-	
 	public UIStringElement(String string,Vector2f offset,float scale) {//not active no color
 		super(offset);
 		this.string=string;
@@ -121,11 +120,13 @@ public class UIStringElement extends UIElement{
 	protected void drawElement(Vector2f Position) {
 	
 	Vector2f noffset=new Vector2f();offset.add(Position,noffset);
+		Start.DebugPrint(string);
 		
-		Start.text1.setString(string);
 		if(!hasColor) {
+			Start.text1.setString(string);
 	     Start.text1.drawString(noffset.x, noffset.y,0, scale);	
 		}else {
+			Start.text1.setString(string);
 			Start.text1.drawString(noffset.x, noffset.y, scale,color);
 		}
 		

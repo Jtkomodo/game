@@ -11,6 +11,7 @@ public abstract class ModelFramwork {
 
 	protected static int DrawMethod=GL_TRIANGLES;
 	protected float[] Vertices,UV_coords; 
+	protected boolean BatchedModel=false;
 	protected static LinkedList<ModelFramwork> listOfModels=new LinkedList<ModelFramwork>();
 	
 	protected abstract void draw();
@@ -52,6 +53,18 @@ public abstract class ModelFramwork {
 		
 		return UV_coords;
 	}
+
+
+
+
+	public boolean isBatchedModel() {
+		return BatchedModel;
+	}
+
+
+
+
+	
 	
 	
 }

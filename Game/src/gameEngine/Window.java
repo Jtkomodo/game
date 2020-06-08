@@ -59,7 +59,7 @@ public Window(int width, int height,Camera camera,String name) {
 		glfwShowWindow(window);
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(1);
-		//glfwSwapInterval( 0 );Start.DebugPrint("vsnc off"); //this is for the vsync uncomment this when testing frame rates 
+		glfwSwapInterval( 0 );Start.DebugPrint("vsnc off"); //this is for the vsync uncomment this when testing frame rates 
 		
 GL.createCapabilities();
 
@@ -135,7 +135,7 @@ width=w;height=h;
 				//System.out.println(fullscreen);
 			width=vidmode.width();height=vidmode.height();
 			camera.setSize(width/2.5f, height/2.5f);
-		  
+			glfwSwapInterval(1);
     	}
     	else {
     		
@@ -144,7 +144,7 @@ width=w;height=h;
     		width=dW;height=dH;
     		camera.setSize(width, height);
     	
-   			
+    		glfwSwapInterval(1);
 		}
     		
     	

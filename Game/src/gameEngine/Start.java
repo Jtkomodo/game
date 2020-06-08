@@ -81,7 +81,7 @@ public class Start {
 	
 	public static Window w;
 	public static final int width=640,height=480;
-    public static int lowFPS=60,HighFPs=0;
+    public static int lowFPS=60000,HighFPs=0;
 	
 	
 	public static int  location2,Projection2,UIProjection,RTS2,location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;
@@ -460,6 +460,7 @@ public class Start {
 		
 		
 		BattleSystem.INIT(battleBox);
+
 		
 		
 	while(!w.isExited()) {
@@ -482,9 +483,7 @@ public class Start {
 				//MainBatchRender.addTexture(textbox);
 			  playersSPBAr.setValue(p.getSp());
 		StartBox.getUIState(1).relpaceALLActive(elementlist);
-	Entity test=new Entity(player,new Vector3f(0,64,10),0,64,playerTex);
-	Entity test2=new Entity(Start.background,new Vector3f(0,0,0),0,64,Start.COLTEX,Constants.COL_COLOR_BLUE);
- 	  	 	
+	
 	  // TextureUpdate(MAP)
 //Render.enable();//enables render
 
@@ -497,7 +496,7 @@ public class Start {
 	if(overworld==true) {	
 		
 		ShowBox.hide();
-		  MainRenderHandler.addEntity(new Entity(background,new Vector3f(100,100,100),0,64, COLTEX,Constants.BLACK,10,true));
+		 // MainRenderHandler.addEntity(new Entity(background,new Vector3f(100,100,100),0,64, COLTEX,Constants.BLACK,10,true));
 		
 		  
 		 
@@ -507,7 +506,7 @@ public class Start {
 	
 		  //step 1
 		   ColisionHandeler.setColided(false);
-            new Vector2f(x,y).add(quarterStepVelocity,step);
+           new Vector2f(x,y).add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);//take step
 		 
 		    Vector2f vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);//check colisions
@@ -571,7 +570,7 @@ public class Start {
 	//   MainRenderHandler.addEntity(test);
 	 //   MainRenderHandler.addEntity(test2);
 	    		
-	     cam.setPosition((new Vector2f(camx,camy)));s.bind();
+	     //cam.setPosition((new Vector2f(camx,camy)));s.bind();
 	     //cam.setPosition((new Vector2f(camx,camy)));s.bind();
 		
 		       
@@ -655,7 +654,8 @@ if(CharCallback.takeInput) {
 
 Proccesor.proccesCommands(time);
 MainRenderHandler.SortEntities(); 
-
+textDrawCalls.setString("\n"+"Entities "+MainRenderHandler.getAmountOfEntities());
+textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-90,.25f);
 MainRenderHandler.addToBatchedRender();
 
 textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")\nAnimations: "+AnimationHandler.amountInList()+"\nQuads"+MainBatchRender.getQuads());
@@ -670,7 +670,7 @@ MainBatchRender.flushModel();
 		    w.render();
 		    w.clear();
 		  
-		    currentMap.flushModel();
+		 
 			
 		}
 	//	}
@@ -979,15 +979,14 @@ MainBatchRender.flushModel();
 						
 						
 						velocity.mul(1/4f,quarterStepVelocity);//this is the movement that needs to be added to the position vector
-                   
+                       
                     	oldpos=new Vector2f(x,y);
 					 
 					
                     
     								
 						
-					camx=-x;
-					camy=-y;
+				
 					}
 		}
 					
@@ -1021,14 +1020,14 @@ MainBatchRender.flushModel();
 	private static void fps() {
 	
 		   // Render.disable();
-		    canRender=false;//don't allow rendering until time
+		   // canRender=false;//don't allow rendering until time
 			double time2=Timer.getTIme();//gets current time
-		    double passed=time2-time;//this is the time since the last time through the loop
+		    DeltaTime=time2-time;//this is the time since the last time through the loop
 		    AnimationHandler.update();
 			
 		  
 		
-			frameTime+=passed;//this is the time since the last second
+			frameTime+=DeltaTime;//this is the time since the last second
 			time=time2;
 		
 			
@@ -1037,7 +1036,7 @@ MainBatchRender.flushModel();
 		
 		//	if(unproccesed>=framCap) {//when the time we have not rendered is greater than or equal to our frame target we allow rendering
 				
-				DeltaTime=Timer.getTIme()-lastFrame;
+				
 				//System.out.println(DeltaTime);
 			//	unproccesed-=framCap;//this is like reseting 
 				//take input
@@ -1056,8 +1055,7 @@ MainBatchRender.flushModel();
 			 
 			      if(frameTime>=1.0) {//if a second has passed print fps
 			    	 
-			    	  
-			    	  
+  
 			    	  
 			    	if(!JustStarted) {
 			    	 
@@ -1106,7 +1104,7 @@ private static void drawmap(MapLoader loader,int gridx,int gridy) {
 	
  //   loader.getModel().setDrawMethod(GL_LINES);
 	  loader.drawtiles(tex);
-
+	   currentMap.flushModel();
 }
 
 

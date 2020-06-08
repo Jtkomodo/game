@@ -20,9 +20,7 @@ public class TextBuilder{
 
 	private OneTextureBatchedModel 	textModel;
 	private Fontloader loader;
-	private LinkedList<Float> verts=new LinkedList<Float>();
-	private LinkedList<Float> uvs=new LinkedList<Float>();
-	
+
 	private Entity e;
 	
 	public TextBuilder(String Font, float AtlusSize) {

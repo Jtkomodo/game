@@ -120,7 +120,7 @@ public class UIStringElement extends UIElement{
 	protected void drawElement(Vector2f Position) {
 	
 	Vector2f noffset=new Vector2f();offset.add(Position,noffset);
-		Start.DebugPrint(string);
+		
 		
 		if(!hasColor) {
 			Start.text1.setString(string);

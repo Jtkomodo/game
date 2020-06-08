@@ -21,6 +21,7 @@ import java.util.LinkedList;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.system.MemoryUtil;
 import org.newdawn.slick.opengl.PNGDecoder;
 
 
@@ -29,7 +30,7 @@ private  int TEXid;
 
 private static LinkedList<Texture> textures=new LinkedList<Texture>();
 private int h,w;
-private IntBuffer width,height,comp;
+
 
 private String Path;
 
@@ -54,9 +55,8 @@ public Texture(String path) {
 	
 		
 		//create buffers for stbi to use
-		 width=BufferUtils.createIntBuffer(1);
-         height=BufferUtils.createIntBuffer(1);
-	     comp=BufferUtils.createIntBuffer(1);
+		
+       
 		ByteBuffer data;
 			    
 	                                   //load our texture 
@@ -70,7 +70,7 @@ public Texture(String path) {
 			
 
 			    //create a byte buffer big enough to store RGBA values
-			    data = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
+			    data = MemoryUtil.memAlloc(4 * decoder.getWidth() * decoder.getHeight());
 
 			    //decode
 			    
@@ -105,6 +105,7 @@ public Texture(String path) {
 	    this.TEXid = glGenTextures();
 	    textures.add(this);
 	  loadTexture(data);
+	  MemoryUtil.memFree(data);
 	  } catch (IOException e) {
 			System.out.println(e.getMessage());
 			System.out.println("didn't work");

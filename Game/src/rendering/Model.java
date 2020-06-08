@@ -8,6 +8,7 @@ import java.nio.*;
 
 import  org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL30;
+import org.lwjgl.system.MemoryUtil;
 
 import gameEngine.Start;
 
@@ -16,6 +17,7 @@ public class Model extends ModelFramwork{
     private int drawCount;
 	private int vao_id,v_id,tex_id,ind_id;
 	private static  boolean draw=true;
+	
 	private int[] indeces= {
 			0,1,2,
 			2,3,0	
@@ -99,21 +101,35 @@ public void changeValues(float[] vertices,float[] uv_coords) {
 		   tex_id=glGenBuffers();//for uv Coords
 			ind_id=glGenBuffers();//for indices  
 			
+			FloatBuffer Vertsbuffer=MemoryUtil.memAllocFloat(vertices.length);	
+			FloatBuffer Uvsbuffer=MemoryUtil.memAllocFloat(uv_coords.length);	
+			IntBuffer Indbuffer=MemoryUtil.memAllocInt(indeces.length);
+			Vertsbuffer.put(vertices);
+			Uvsbuffer.put(uv_coords);
+		    Indbuffer.put(indeces);
+		    Vertsbuffer.flip();
+		    Uvsbuffer.flip();
+		    Indbuffer.flip();
+				
+			
+			
 		
 		            //bind buffers and store the data in them
 
-		glBindBuffer(GL_ARRAY_BUFFER,v_id);
-		  glBufferData(GL_ARRAY_BUFFER,makeBuffer(vertices),GL_DYNAMIC_DRAW);
-		
-		 
-	    glBindBuffer(GL_ARRAY_BUFFER,tex_id);
-		  glBufferData(GL_ARRAY_BUFFER,makeBuffer(uv_coords),GL_DYNAMIC_DRAW);
 			
-		  
+	
+		glBindBuffer(GL_ARRAY_BUFFER,v_id);
+		  glBufferData(GL_ARRAY_BUFFER,Vertsbuffer,GL_DYNAMIC_DRAW);
+		
+		
+	    glBindBuffer(GL_ARRAY_BUFFER,tex_id);
+		  glBufferData(GL_ARRAY_BUFFER,Uvsbuffer,GL_DYNAMIC_DRAW);
+			
+	
 	    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
-	      glBufferData(GL_ELEMENT_ARRAY_BUFFER,makeBuffer(indices),GL_STATIC_DRAW);
+	      glBufferData(GL_ELEMENT_ARRAY_BUFFER,Indbuffer,GL_STATIC_DRAW);
 
-	 
+	
 	      enableAtributes();
 	      
 	      glBindBuffer(GL_ARRAY_BUFFER,v_id);//bind so we can use     
@@ -123,12 +139,16 @@ public void changeValues(float[] vertices,float[] uv_coords) {
 				
 	     	    
 		   //unbind buffers
-	//		glBindBuffer(GL_ARRAY_BUFFER,0);	     
+//		glBindBuffer(GL_ARRAY_BUFFER,0);	     
 		glBindVertexArray(0);
 
-  //  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);		
-			listOfModels.add(this);
+ //  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
+		
 	
+			listOfModels.add(this);
+			 MemoryUtil.memFree(Vertsbuffer);
+			 MemoryUtil.memFree(Uvsbuffer);
+			 MemoryUtil.memFree(Indbuffer);
 		
 Start.DebugPrint("made new model");
 	}
@@ -174,31 +194,26 @@ Start.DebugPrint("made new model");
 	
 	
 	//make buffers and put data in them
-	private  FloatBuffer makeBuffer(float[] array ) {
-		FloatBuffer buffer= BufferUtils.createFloatBuffer(array.length); //this just is initializing our buffer with the correct capacity
-		buffer.put(array);//puts the data in the newly created buffer
-		buffer.flip();//this allows the buffer to be read from very very important 
-		return buffer;
-	}
-	//same as float just integer this time
-	private  IntBuffer makeBuffer(int[] array ) {
-		IntBuffer buffer= BufferUtils.createIntBuffer(array.length); 
-		buffer.put(array);  
-		buffer.flip();
-		return buffer;
 		
-	}
-	
 		public void  changeUV(float[] data) {
 		 glBindBuffer(GL_ARRAY_BUFFER,tex_id);
-		  glBufferSubData(GL_ARRAY_BUFFER, 0, makeBuffer(data));
+		FloatBuffer buffer= MemoryUtil.memAllocFloat(data.length);
+		buffer.put(data);
+		buffer.flip();
+		
+		  glBufferSubData(GL_ARRAY_BUFFER, 0,buffer);
 		  glBindBuffer(GL_ARRAY_BUFFER,0);
+		 MemoryUtil.memFree(buffer);
 		  this.UV_coords=data;
 			}
 	public void  changeVert(float[] data) {
 		  glBindBuffer(GL_ARRAY_BUFFER,v_id);
-		  glBufferSubData(GL_ARRAY_BUFFER, 0, makeBuffer(data));
+		  FloatBuffer buffer= MemoryUtil.memAllocFloat(data.length);
+			buffer.put(data);
+			buffer.flip();
+		  glBufferSubData(GL_ARRAY_BUFFER, 0,buffer);
 		  glBindBuffer(GL_ARRAY_BUFFER,0);
+		  MemoryUtil.memFree(buffer);
 		  this.Vertices=data;
 			}
 	

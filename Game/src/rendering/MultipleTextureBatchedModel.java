@@ -10,6 +10,7 @@ import java.nio.*;
 
 import  org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.system.MemoryUtil;
 
 import gameEngine.Start;
 
@@ -33,8 +34,7 @@ public class MultipleTextureBatchedModel {
 		private int indBase,pionter,sections=0;
 	    private final int maxSections=10000;
 		private int pionter2=0,pionter3=0;
-		private FloatBuffer buffer;
-		private IntBuffer bufferi;
+	
 		
 		public MultipleTextureBatchedModel() {
 			
@@ -94,24 +94,7 @@ public class MultipleTextureBatchedModel {
         	sections-=quads;
         	return true;
         }
-        
-        
-		glBindBuffer(GL_ARRAY_BUFFER, v_id);
-		buffer= makeBuffer(v);
-		 glBufferSubData(GL_ARRAY_BUFFER,pionter,buffer);//adds the vertex values to the vertex buffer
-	//glBindBuffer(GL_ARRAY_BUFFER,0);
-		 glBindBuffer(GL_ARRAY_BUFFER, Trans_id);
-			buffer= makeBuffer(translation);
-		 glBufferSubData(GL_ARRAY_BUFFER,pionter2,buffer);//adds the vertex values to the vertex buffer
-		 glBindBuffer(GL_ARRAY_BUFFER, tex_id);
-			buffer= makeBuffer(uv);
-		 glBufferSubData(GL_ARRAY_BUFFER, pionter2, buffer);//adds the uv values to the uv buffer
-		 
-		 
-		 glBindBuffer(GL_ARRAY_BUFFER, color_id);
-		 buffer= makeBuffer(colors);
-		 glBufferSubData(GL_ARRAY_BUFFER, pionter3, buffer);//adds the uv values to the uv buffer	
-	int[] indeces=new int[6*quads];
+    	int[] indeces=new int[6*quads];
 		for(int i=0;i<quads;i++) {
 			int i2=i*6;
 			indeces[i2]=indBase;indeces[i2+1]=indBase+1;indeces[i2+2]=indBase+2;
@@ -119,13 +102,49 @@ public class MultipleTextureBatchedModel {
 			indBase+=4;
 		}
 		 
+		FloatBuffer Vertsbuffer=MemoryUtil.memAllocFloat(v.length);	
+		FloatBuffer Uvsbuffer=MemoryUtil.memAllocFloat(uv.length);	
+		FloatBuffer Transbuffer=MemoryUtil.memAllocFloat(translation.length);
+		FloatBuffer Colorsbuffer=MemoryUtil.memAllocFloat(colors.length);
+		IntBuffer Indbuffer=MemoryUtil.memAllocInt(indeces.length);
 		
+		Vertsbuffer.put(v);
+		Uvsbuffer.put(uv);
+		Transbuffer.put(translation);
+		Colorsbuffer.put(colors);
+	    Indbuffer.put(indeces);
+	    
+	    Vertsbuffer.flip();
+	    Uvsbuffer.flip();
+	    Transbuffer.flip();
+	    Colorsbuffer.flip();
+	    Indbuffer.flip();
 		
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
-		bufferi=makeBuffer(indeces);
-		 glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,drawCount2, bufferi);//remember all offsets are in bytes so a int is 4 bytes and a float is as well so we need to multiply be 4 to get the correct offset 
-	  
-		drawCount=drawCount+(6*quads);//used for telling the amount of triangles to draw when the drawcall is made
+        
+		 glBindBuffer(GL_ARRAY_BUFFER, v_id);
+		
+		 glBufferSubData(GL_ARRAY_BUFFER,pionter,Vertsbuffer);//adds the vertex values to the vertex buffer
+	//glBindBuffer(GL_ARRAY_BUFFER,0);
+		 glBindBuffer(GL_ARRAY_BUFFER, tex_id);
+			
+		 glBufferSubData(GL_ARRAY_BUFFER, pionter2, Uvsbuffer);//adds the uv values to the uv buffer
+		 
+		 glBindBuffer(GL_ARRAY_BUFFER, Trans_id);
+			
+		 glBufferSubData(GL_ARRAY_BUFFER,pionter2,Transbuffer);//adds the Translation values to the Tanslation buffer
+		 
+		 glBindBuffer(GL_ARRAY_BUFFER, color_id);
+		 
+		 glBufferSubData(GL_ARRAY_BUFFER, pionter3, Colorsbuffer);//adds the color values to the color buffer	
+	
+	     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,ind_id);
+	
+		 glBufferSubData(GL_ELEMENT_ARRAY_BUFFER,drawCount2, Indbuffer);//remember all offsets are in bytes so a int is 4 bytes and a float is as well so we need to multiply be 4 to get the correct offset 
+		
+	
+		 
+		 
+		 drawCount=drawCount+(6*quads);//used for telling the amount of triangles to draw when the drawcall is made
 		drawCount2=drawCount*4;//this is for the correct pionter to the next value in the indeces buffer
 		
 		
@@ -134,9 +153,18 @@ public class MultipleTextureBatchedModel {
 		 pionter3=pionter3+(colors.length*4);//pionter to the next value in the color buffer
 		
 		 	unbindBuffers();
+		 	//clear buffers
+		 	
+		 	
+		 	MemoryUtil.memFree(Vertsbuffer);
+		 	MemoryUtil.memFree(Uvsbuffer);
+		 	MemoryUtil.memFree(Transbuffer);
+		 	MemoryUtil.memFree(Colorsbuffer);
+		 	MemoryUtil.memFree(Indbuffer);
+		 	
+		 	
 		 return false;
-		 
-		}else{
+		 }else{
 			Start.DebugPrint("sorry but that is not the correct format for the data. sizes of each is"+ v.length+","+uv.length+","+colors.length+","+translation.length+"/nShould be devisable by 8,12,16,12");
 		return false;
 		}
@@ -150,21 +178,7 @@ public class MultipleTextureBatchedModel {
 	}
 
 
-	private  FloatBuffer makeBuffer(float[] array ) {
-		FloatBuffer buffer= BufferUtils.createFloatBuffer(array.length); //this just is initializing our buffer with the correct capacity
-		buffer.put(array);//puts the data in the newly created buffer
-		buffer.flip();//this allows the buffer to be read from very very important
-		return buffer;
-	}
-	//same as float just integer this time
 
-	private  IntBuffer makeBuffer(int[] array ) {
-		IntBuffer buffer= BufferUtils.createIntBuffer(array.length); 
-		buffer.put(array);  
-		buffer.flip();
-		return buffer;
-		
-	}	
 		
 		
 	public void enable() {

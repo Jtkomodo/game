@@ -137,8 +137,8 @@ public class VectorMath {
 		Vector3f cross;
 		
 		float crossx=newA.y*newB.z-newA.z*newB.y;
-		float crossy=newA.z*newB.x-newA.x-newB.z;
-		float crossz=newA.x*newB.y-newA.y-newB.x;
+		float crossy=newA.z*newB.x-newA.x*newB.z;
+		float crossz=newA.x*newB.y-newA.y*newB.x;
 		
 		
 		cross=new Vector3f(crossx,crossy,crossz);
@@ -159,6 +159,21 @@ public class VectorMath {
 		v.mul(dot/mag,d);
          
         return d;
+		
+	}
+
+	public static Vector3f crossProduct(Vector3f u, Vector3f v) {
+		Vector3f newA=u;
+		Vector3f newB=v;
+		Vector3f cross;
+		float crossx=newA.y*newB.z-newA.z*newB.y;
+		float crossy=newA.z*newB.x-newA.x*newB.z;
+		float crossz=newA.x*newB.y-newA.y*newB.x;
+		
+		
+		cross=new Vector3f(crossx,crossy,crossz);
+		
+		return cross;
 		
 	}
 	

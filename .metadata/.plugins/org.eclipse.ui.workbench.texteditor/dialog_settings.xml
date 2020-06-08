@@ -2,12 +2,18 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="e.getUvs(),e.getVerts()," key="selection"/>
+		<item value="p=" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="p="/>
+			<item value=" p="/>
+			<item value="background"/>
+			<item value="bg"/>
+			<item value="backgroundModel"/>
+			<item value="drawmap"/>
 			<item value="e.getModel(),"/>
 			<item value="float cuvs[]= model.getUv_coords();"/>
 			<item value="float LocalVerts[]=model.getVertices();"/>
@@ -17,12 +23,6 @@
 			<item value="this.model =model"/>
 			<item value="this.model=model"/>
 			<item value="model"/>
-			<item value="deltaTime"/>
-			<item value="glBufferData"/>
-			<item value="flbufferdata"/>
-			<item value="models.delete"/>
-			<item value="float"/>
-			<item value="width"/>
 		</list>
 		<list key="replacehistory">
 			<item value="e.getUvs(),e.getVerts(),"/>

@@ -102,7 +102,9 @@ if(!entities.isEmpty()) {
 	
 	
 	
-	
+	public static int getAmountOfEntities() {
+		return entities.size();
+	}
 	
 	
 	

@@ -282,11 +282,11 @@ public void setBySameOffset() {
 		float x=this.xPos.get(this.CurrentIndexPositionX);
 
 	
-		boolean foundOnSameLine=false;		 
+	
 		    Vector2f closest=new Vector2f(0);
-		    Vector2f closestLine=new Vector2f(0);
+		
 		    float closestx=0;
-		    float closestxOnSameLine=0;
+		  
 		    for(int i=0;i<this.positions.size();i++) {
 		    	Vector2f vector=positions.get(i);
 		    	if(!vector.equals(this.currentPosition) && x>vector.x) {
@@ -294,20 +294,17 @@ public void setBySameOffset() {
 		    	
 		    	 if(vector.y!=this.currentPosition.y) {
 		    	if(value<=closestx || closestx==0) {
+		    		
+		    		if(closestx!=value || closest.y<vector.y ) {
 		    		closestx=value;
 		    		closest=vector;
 		    		found=true;
+		    		}
+		    			
+		    			
+		    		}
 		    	}
-		    	 }else {
-		    		 if(value<=closestxOnSameLine || closestxOnSameLine==0) {
-				    		closestxOnSameLine=value;
-				    		closestLine=vector;
-				    		found=true;
-				    		foundOnSameLine=true;;
-				    	}	 
-		    		 
-		    		 
-		    	 }
+		    	
 		    	}
 		
 		
@@ -316,12 +313,9 @@ public void setBySameOffset() {
 		    }
 		    
 		    if(found) {
-		    	if(!foundOnSameLine) {
+		    
 		    	 setActivePosition(closest);
-		    	}else {
-		    		setActivePosition(closestLine);
-		    	}
-		    }
+	    }
 		        	
 		
 		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionX+" indexs="+this.xPos.size()+","+this.yPos.size());
@@ -336,7 +330,7 @@ public void setBySameOffset() {
 		float x=this.xPos.get(this.CurrentIndexPositionX);
 
 	
-		boolean foundOnSameLine=false;		 
+	
 		    Vector2f closest=new Vector2f(0);
 		    Vector2f closestLine=new Vector2f(0);
 		    float closestx=0;
@@ -349,18 +343,12 @@ public void setBySameOffset() {
 		    	   
 		    	   if(vector.y!=this.currentPosition.y) {
 				    	if(value<=closestx || closestx==0) {
+				    		if(value!=0 || closest.y>vector.y) {
 				    		closestx=value;
 				    		closest=vector;
 				    		found=true;
+				    		}
 				    	}
-				    	 }else {
-				    		 if(value<=closestxOnSameLine || closestxOnSameLine==0) {
-						    		closestxOnSameLine=value;
-						    		closestLine=vector;
-						    		found=true;
-						    		foundOnSameLine=true;;
-						    	}	 
-				    		 
 				    	 }
 		    	}
 		
@@ -370,12 +358,9 @@ public void setBySameOffset() {
 		    
 		    
 		    	  if(found) {
-				    	if(!foundOnSameLine) {
+				
 				    	 setActivePosition(closest);
-				    	}else {
-				    		setActivePosition(closestLine);
-				    	}
-				    }
+		    }
 				         	
 		   
 		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indexs="+this.xPos.size()+","+this.yPos.size());

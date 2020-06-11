@@ -380,7 +380,7 @@ public class Start {
 		
 		
 		
-		enemyField=new BattleEnemyField(new BattleSlot[] {new BattleSlot(new Vector2f(0,-20),enemy6),new BattleSlot(new Vector2f(0,-88),enemy5),new BattleSlot(new Vector2f(140,-20),enemy),new BattleSlot(new Vector2f(202,-88),enemy2),new BattleSlot(new Vector2f(202,10),enemy3),new BattleSlot(new Vector2f(260,-20),enemy4)});
+		enemyField=new BattleEnemyField(new BattleSlot[] {new BattleSlot(new Vector2f(0,10),enemy6),new BattleSlot(new Vector2f(0,-88),enemy5),new BattleSlot(new Vector2f(140,-20),enemy),new BattleSlot(new Vector2f(202,-88),enemy2),new BattleSlot(new Vector2f(202,10),enemy3),new BattleSlot(new Vector2f(260,-20),enemy4)});
 	
 		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
 		

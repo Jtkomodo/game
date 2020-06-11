@@ -113,7 +113,7 @@ public class BattleSystem {
 		}
 		enemyField.updateField();
 		drawBattle(selecting,p);
-		if(selecting) {
+		if(selecting && !Start.StartBox.isActive()) {
 		if(enemyField.selectEnemy()) {
 			enemyField.getCurrentEnemy().setHp(0);
 			

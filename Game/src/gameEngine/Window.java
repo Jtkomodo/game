@@ -58,7 +58,7 @@ public Window(int width, int height,Camera camera,String name) {
 		glfwSetWindowTitle(window,name);
 		glfwShowWindow(window);
 		glfwMakeContextCurrent(window);
-		glfwSwapInterval(1);
+		//glfwSwapInterval(1);
 		glfwSwapInterval( 0 );Start.DebugPrint("vsnc off"); //this is for the vsync uncomment this when testing frame rates 
 		
 GL.createCapabilities();

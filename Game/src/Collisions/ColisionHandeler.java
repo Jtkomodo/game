@@ -286,7 +286,10 @@ public static boolean getColided() {
 public static void FlushPushList() {
    ColsPushed.clear();
 }
-
+public static boolean PushedListEmpty() {
+	
+	return ColsPushed.isEmpty();
+}
 
 }	
 	

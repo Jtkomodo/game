@@ -52,6 +52,8 @@ import audio.Source;
 import battleClasses.BattleEnemyField;
 import battleClasses.BattleEntity;
 import battleClasses.BattleFormulas;
+import battleClasses.BattleSlot;
+import battleClasses.BattleSlotList;
 import battleClasses.Enemy;
 import battleClasses.HpBar;
 import battleClasses.TimedButton;
@@ -98,6 +100,7 @@ public class Start {
     public static float screencoordx=0,screencoordy=0;
     public static InputHandler I;
     public static Fontloader font;
+    public static int step=0;
     public static boolean canRender,overworld=true,test=false,testcol,circCol,GLDEBUG=false,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=false,showFps=true,StateOfStartBOx=false,showDrawLines=true;
     public static double time,frameTime=0,lastFrame=0,DeltaTime;
     public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite,HealthBarBackground,VectorTex;
@@ -370,11 +373,14 @@ public class Start {
 		Enemy enemy2=new Enemy(new Vector2f(50,10),player, playerTex,96,"E2",Enemies.E1.getAtk(),Enemies.E1.getDef(),20,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
 		Enemy enemy3=new Enemy(new Vector2f(50,10),player, playerTex,96,"E3",Enemies.E1.getAtk(),Enemies.E1.getDef(),20,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
 		Enemy enemy4=new Enemy(new Vector2f(50,10),player, playerTex,96,"E4",Enemies.E1.getAtk(),Enemies.E1.getDef(),20,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
+		Enemy enemy5=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),15,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
+		Enemy enemy6=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),15,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
 		
 		
 		
 		
-		enemyField=new BattleEnemyField(new Enemy[] {enemy,enemy2,enemy3,enemy4});
+		
+		enemyField=new BattleEnemyField(new BattleSlot[] {new BattleSlot(new Vector2f(0,-20),enemy6),new BattleSlot(new Vector2f(0,-88),enemy5),new BattleSlot(new Vector2f(140,-20),enemy),new BattleSlot(new Vector2f(202,-88),enemy2),new BattleSlot(new Vector2f(202,10),enemy3),new BattleSlot(new Vector2f(260,-20),enemy4)});
 	
 		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
 		
@@ -427,7 +433,7 @@ public class Start {
 			Moves heal=p.getmoveFromString(Moves.heal.getName());
 			
 			UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
-					new UIStringElement(punch.getName(),new Vector2f(-54,5),.15f,Constants.BLACK,new PickMove(p,punch.getName())),
+					new UIStringElement(punch.getName(),new Vector2f(-54,5),.15f,Constants.BLACK,new PickMove(p,punch.getName()))
 					
 			};
 			
@@ -461,8 +467,10 @@ public class Start {
 		
 		BattleSystem.INIT(battleBox);
 
+		p.setHp(10);
+		p.setSp(0);
 		
-		
+	
 	while(!w.isExited()) {
 		
 		fps();    
@@ -479,9 +487,11 @@ public class Start {
 			}
 
 		
+
+			
 	 	
 				//MainBatchRender.addTexture(textbox);
-			  playersSPBAr.setValue(p.getSp());
+	
 		StartBox.getUIState(1).relpaceALLActive(elementlist);
 	
 	  // TextureUpdate(MAP)
@@ -1018,7 +1028,7 @@ MainBatchRender.flushModel();
 	 	   
 	 	   
 	private static void fps() {
-	
+	       step=0;
 		   // Render.disable();
 		   // canRender=false;//don't allow rendering until time
 			double time2=Timer.getTIme();//gets current time
@@ -1112,7 +1122,7 @@ private static void drawmap(MapLoader loader,int gridx,int gridy) {
 
 private static Vector2f updateColisions(AABB colision,Vector2f position,Vector2f oldposition,Vector2f movement,Vector2f direction) {
 	
-	
+	step++;
     
    
 	 ColisionHandeler.amountThrough=0;

@@ -37,9 +37,9 @@ public class BattleSlot {
 
 
 	public Vector2f getPosition() {
-		return position;
+		return new Vector2f(position);
 	}
-
+   
 
 	public BattleEntity getEntity() {
 		return entity;
@@ -51,13 +51,6 @@ public class BattleSlot {
 		this.entity = entity;
 	}
 
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

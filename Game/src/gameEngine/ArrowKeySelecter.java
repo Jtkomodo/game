@@ -20,24 +20,27 @@ public class ArrowKeySelecter {
 	
 	
 	
-	private Vector2f currentPosition;
-	private Vector2f BeginPosition;
+	private Vector2f currentPosition=null;
+	private Vector2f BeginPosition=null;
 	private int CurrentIndexPositionX=0;
 	private int CurrentIndexPositionY=0;
 	
 	
+	
+
 	public ArrowKeySelecter(Vector2f[] positions) {
+	
 		addPositions(positions);
-		
+	}
+	public ArrowKeySelecter() {
 		
 	}
-
 
 	public void addPositions(Vector2f[] positions) {
 		
 		for(int i=0;i<positions.length;i++) {
 			
-			Vector2f p=positions[i];
+			Vector2f vector=positions[i];
 				
 				
 				//if__Active_______________________________________________________________
@@ -47,21 +50,21 @@ public class ArrowKeySelecter {
 					
 					
 					if(this.BeginPosition==null) {
-						this.BeginPosition=p;
+						this.BeginPosition=vector;
 						
 					}
-					Vector2f vector=p;//get the offset of the vector								
+									
 					Vector2f vector2=this.BeginPosition;
 					
 					//if this element is before the begin element from left to right up to down then it becomes the new begin element
 					if(vector.y>vector2.y) {
 						
 						
-						this.BeginPosition=p;
+						this.BeginPosition=vector;
 						
 					}else if(vector.y==vector2.y) {
 						if(vector.x<vector2.x) {
-							this.BeginPosition=p;
+							this.BeginPosition=vector;
 						}
 						
 					}
@@ -71,12 +74,12 @@ public class ArrowKeySelecter {
 					float x=vector.x;
 					float y=vector.y;
 					
-					if(!this.xPos.contains(vector.x))//add this x position if unique to the xPosition list
-						xPos.add(vector.x);
-				
-					if(!this.yPos.contains(vector.y))
-						yPos.add(vector.y);
-					
+					if(!this.xPos.contains(x)) {//add this x position if unique to the xPosition list
+						xPos.add(x);
+					}
+					if(!this.yPos.contains(y)) {
+						yPos.add(y);
+					}
 					
 					
 						
@@ -147,16 +150,33 @@ public class ArrowKeySelecter {
 	
 	private void resetBeginPosition() {
 	
-		if(positions.isEmpty()) {
-            this.BeginPosition=new Vector2f(0,0);
-		}else {
-			
-			this.BeginPosition=positions.get(0);
-		}
+		if(this.currentPosition!=null && this.positions.contains(this.currentPosition)){
+	    	Vector2f vector=this.currentPosition;
+	    
+	    	this.CurrentIndexPositionX=this.xPos.indexOf(vector.x);
+	    	this.CurrentIndexPositionY=this.yPos.indexOf(vector.y);
+	    	
+	    	
+	    	 this.BeginPosition=vector;
+	    	
+	    	}else if(!positions.isEmpty()) {
+	    		//Vector2f vector=this.currentPosition;
+	    			setActivePosition(this.positions.get(0));
+	    			
+	    	    	 this.BeginPosition=this.currentPosition;
+	    		    	
+	    	    	
+	    	    	
+	    		}
+	    		
+	    	else {	
+	    	this.BeginPosition=null;
+	    	}
+	    		
 }
 
 
-	private void resetCurrentPosition() {
+	public void resetCurrentPosition() {
 	if(positions.isEmpty()) {
 		this.currentPosition=null;
 		this.CurrentIndexPositionX=0;
@@ -172,7 +192,20 @@ public class ArrowKeySelecter {
 	}
 	
 }
+public void setBySameOffset() {
 
+    	Vector2f vector=this.currentPosition;
+  if(vector!=null) {  
+    	this.CurrentIndexPositionX=this.xPos.indexOf(vector.x);
+    	this.CurrentIndexPositionY=this.yPos.indexOf(vector.y);
+    	
+    	if(BeginPosition==null) {
+    	this.BeginPosition=positions.get(0);
+    	}
+  }
+    	
+	
+}
 
 	public void removePositions(Vector2f[] positions) {
 		
@@ -197,25 +230,19 @@ public class ArrowKeySelecter {
 
 	private void setActivePosition(Vector2f vector) {
 	
-    
-		 if(vector!=null) {	
+    if(this.positions.contains(vector)) {
+	
     	this.CurrentIndexPositionX=this.xPos.indexOf(vector.x);
     	this.CurrentIndexPositionY=this.yPos.indexOf(vector.y);
     	this.currentPosition=vector;
-  
-    	
-    }else {
-       this.currentPosition=null;
-      
-    		   
     }
-		
+    	
 	}
 	
 	
-	  private void removeAllPositions() {
+	  public void removeAllPositions() {
 	       
-		  int amount=0;
+		  
         
          
             	
@@ -227,15 +254,16 @@ public class ArrowKeySelecter {
             	this.positions.clear();
             	this.AmountOfXpos.clear();
             	this.AmountOfYpos.clear();
-            
+               
             	resetBeginPosition();
             	
 	  }
 	
-   public void relpaceALLActive(Vector2f[] positions) {
+   public void relpaceAllPositions(Vector2f[] positions) {
 	   removeAllPositions();
 	   addPositions(positions);
-	  
+	   resetBeginPosition();
+	   resetCurrentPosition();
    }
 
 	
@@ -248,25 +276,225 @@ public class ArrowKeySelecter {
 	
 	
 
-	public void moveLeft() {
+	public boolean moveLeft() {
+		boolean found=false;
+		if(this.currentPosition!=null) {
+		float x=this.xPos.get(this.CurrentIndexPositionX);
+
+	
+		boolean foundOnSameLine=false;		 
+		    Vector2f closest=new Vector2f(0);
+		    Vector2f closestLine=new Vector2f(0);
+		    float closestx=0;
+		    float closestxOnSameLine=0;
+		    for(int i=0;i<this.positions.size();i++) {
+		    	Vector2f vector=positions.get(i);
+		    	if(!vector.equals(this.currentPosition) && x>vector.x) {
+		    	   float value=x-vector.x;
+		    	
+		    	 if(vector.y!=this.currentPosition.y) {
+		    	if(value<=closestx || closestx==0) {
+		    		closestx=value;
+		    		closest=vector;
+		    		found=true;
+		    	}
+		    	 }else {
+		    		 if(value<=closestxOnSameLine || closestxOnSameLine==0) {
+				    		closestxOnSameLine=value;
+				    		closestLine=vector;
+				    		found=true;
+				    		foundOnSameLine=true;;
+				    	}	 
+		    		 
+		    		 
+		    	 }
+		    	}
+		
+		
+		
+		
+		    }
+		    
+		    if(found) {
+		    	if(!foundOnSameLine) {
+		    	 setActivePosition(closest);
+		    	}else {
+		    		setActivePosition(closestLine);
+		    	}
+		    }
+		        	
+		
+		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionX+" indexs="+this.xPos.size()+","+this.yPos.size());
+		}
+		return found;
+	}
+	
+	public boolean moveRight() {
+		boolean found=false;
+		if(this.currentPosition!=null) {
+
+		float x=this.xPos.get(this.CurrentIndexPositionX);
+
+	
+		boolean foundOnSameLine=false;		 
+		    Vector2f closest=new Vector2f(0);
+		    Vector2f closestLine=new Vector2f(0);
+		    float closestx=0;
+		    float closestxOnSameLine=0;
+		    for(int i=0;i<this.positions.size();i++) {
+		    	Vector2f vector=positions.get(i);
+		    	if(!vector.equals(this.currentPosition) && x<vector.x) {
+		    	   float value=vector.x-x;
+		    	
+		    	   
+		    	   if(vector.y!=this.currentPosition.y) {
+				    	if(value<=closestx || closestx==0) {
+				    		closestx=value;
+				    		closest=vector;
+				    		found=true;
+				    	}
+				    	 }else {
+				    		 if(value<=closestxOnSameLine || closestxOnSameLine==0) {
+						    		closestxOnSameLine=value;
+						    		closestLine=vector;
+						    		found=true;
+						    		foundOnSameLine=true;;
+						    	}	 
+				    		 
+				    	 }
+		    	}
+		
+		
+		
+		    }
+		    
+		    
+		    	  if(found) {
+				    	if(!foundOnSameLine) {
+				    	 setActivePosition(closest);
+				    	}else {
+				    		setActivePosition(closestLine);
+				    	}
+				    }
+				         	
+		   
+		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indexs="+this.xPos.size()+","+this.yPos.size());
+		}
+		return found;
+		
+	
+	}
+	
+	
+	public boolean moveUP() {
+		boolean found=false;
+		if(this.currentPosition!=null) {
+		float y=this.yPos.get(this.CurrentIndexPositionY);
+
+		
+		boolean foundOnSameLine=false;		 
+		    Vector2f closest=new Vector2f(0);
+		    Vector2f closestLine=new Vector2f(0);
+		    float closesty=0;
+		    float closestyOnSameLine=0;
+		    for(int i=0;i<this.positions.size();i++) {
+		    	Vector2f vector=positions.get(i);
+		    	if(!vector.equals(this.currentPosition) && y<vector.y) {
+		    	   float value=vector.y-y;
+		    	
+		    	   
+		    	   if(vector.x!=this.currentPosition.x) {
+				    	if(value<=closesty || closesty==0) {
+				    		closesty=value;
+				    		closest=vector;
+				    		found=true;
+				    	}
+				    	 }else {
+				    		 if(value<=closestyOnSameLine || closestyOnSameLine==0) {
+						    		closestyOnSameLine=value;
+						    		closestLine=vector;
+						    		found=true;
+						    		foundOnSameLine=true;;
+						    	}	 
+				    		 
+				    	 }
+		    	}
+		
+		
+		
+		    }
+		    
+		    
+		    	  if(found) {
+				    	if(!foundOnSameLine) {
+				    	 setActivePosition(closest);
+				    	}else {
+				    		setActivePosition(closestLine);
+				    	}
+				    }
+				         	
+		   
+		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indeys="+this.xPos.size()+","+this.yPos.size());
+		}
+		return found;
 		
 		
 	}
 	
-	public void moveRight() {
+	public boolean moveDown() {
+		
+		boolean found=false;
+		if(this.currentPosition!=null) {
+		
+		float y=this.yPos.get(this.CurrentIndexPositionY);
+
+		
+		boolean foundOnSameLine=false;		 
+		    Vector2f closest=new Vector2f(0);
+		    Vector2f closestLine=new Vector2f(0);
+		    float closesty=0;
+		    float closestyOnSameLine=0;
+		    for(int i=0;i<this.positions.size();i++) {
+		    	Vector2f vector=positions.get(i);
+		    	if(!vector.equals(this.currentPosition) && y>vector.y) {
+		    	   float value=y-vector.y;
+		    	
+		    	   
+		    	   if(vector.x!=this.currentPosition.x) {
+				    	if(value<=closesty || closesty==0) {
+				    		closesty=value;
+				    		closest=vector;
+				    		found=true;
+				    	}
+				    	 }else {
+				    		 if(value<=closestyOnSameLine || closestyOnSameLine==0) {
+						    		closestyOnSameLine=value;
+						    		closestLine=vector;
+						    		found=true;
+						    		foundOnSameLine=true;;
+						    	}	 
+				    		 
+				    	 }
+		    	}
 		
 		
-	}
-	
-	
-	public void moveUP() {
 		
-		
-	}
-	
-	public void moveDown() {
-		
-		
+		    }
+		    
+		    
+		    	  if(found) {
+				    	if(!foundOnSameLine) {
+				    	 setActivePosition(closest);
+				    	}else {
+				    		setActivePosition(closestLine);
+				    	}
+				    }
+				         	
+		   
+		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indeys="+this.xPos.size()+","+this.yPos.size());
+		}
+		return found;
+				
 	}
 
 
@@ -274,11 +502,24 @@ public class ArrowKeySelecter {
 		return currentPosition;
 	}
 
+    
+	public Vector2f getBeginPosition() {
+		return this.BeginPosition;
+	}
+
+	
+	
+	public Vector2f getIndex(Vector2f v) {
+	  return new Vector2f(this.xPos.indexOf(v.x),this.yPos.indexOf(v.y));
+		
+	}
 
 
-	
-	
-	
+	public void setCurrentPosition(Vector2f position) {
+		if(positions.contains(position)) {
+		this.currentPosition=position;
+		}
+		}
 	
 
 }

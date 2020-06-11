@@ -111,7 +111,7 @@ public void Update() {
 	,left=InputHandler.getStateofButton(GLFW_KEY_LEFT),right=InputHandler.getStateofButton(GLFW_KEY_RIGHT),
     Enter=InputHandler.getStateofButton(GLFW_KEY_ENTER),backspace=InputHandler.getStateofButton(GLFW_KEY_BACKSPACE);
 	boolean movement=false;
-	
+	boolean entered=false;
 	if(up==1) 
 	  movement=GoUp();
 	if(down==1)	
@@ -121,9 +121,15 @@ public void Update() {
 	if(right==1)
 		movement= GoRight();
 	if(Enter==1) {
-	Select();
+	   entered= Select();
 	
-	if(Start.soundPlay)source.play(selectSound);}
+	if(Start.soundPlay && entered) {source.play(selectSound);
+	}else if(entered==false && Start.soundPlay==true) {
+		source.play(Start.NO);
+	}
+	
+	
+	}
 	if(backspace==1) {
      if(GoBack()) {
 	   source.play(BackSound);	    	 
@@ -192,32 +198,30 @@ public void Update() {
 	
 	
 	
-	public void Select() {//will return -1 if this changes state otherwise returns a value for us to tell what function is used
+	public boolean Select() {//will return -1 if this changes state otherwise returns a value for us to tell what function is used
 	
+		boolean returnB=false;
 		UIBoxState state=this.statelist.get(currentState);
 	
 	    UIElement e=state.getActiveEllement();
-			
+	  
 	if(e!=null && state.isAnyActive()) {	
 		int stateToChangeTo=e.getState();//this is just telling us what happens if this string element is clicked on
 		if(stateToChangeTo!=-1) {//-1 means this is not a element that goes to another state
 			backStack.push(this.currentState);
 			setCurrentState(stateToChangeTo);
-			
+			returnB=true;
 		}else if(e.isHasFunction()) {
-			try {
+		
 				e.invokeMethod();
-			} catch (Exception e1) {
+		returnB=true;
 			
-				e1.printStackTrace();
-			}
-		
-		
 		}
+		
 		}
 		
 		
-		
+		return returnB;
 		
 	
 	}

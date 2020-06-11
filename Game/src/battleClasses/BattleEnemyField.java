@@ -23,6 +23,7 @@ import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import Data.Constants;
+import gameEngine.ArrowKeySelecter;
 import gameEngine.BattleSystem;
 import gameEngine.Start;
 import gameEngine.Timer;
@@ -34,49 +35,40 @@ import textrendering.TextBuilder;
 
 public class BattleEnemyField {
 
-	private final Vector2f Position1=new Vector2f(140,-20),Position2=new Vector2f(202,-88),Position3=new Vector2f(202,10),Position4=new Vector2f(260,-20);
+	
 	private HashMap<Enemy,Vector2f> ListOfEnemies=new HashMap<Enemy,Vector2f>();
 	private HashMap<Vector2f,Enemy> ListOfEnemiesI=new HashMap<Vector2f,Enemy>();
 	private TextBuilder text=new TextBuilder(Start.aakar);
-    private Vector2f currentPosition;
-    private Enemy currentEnemy;
     private GetInput input=new GetInput();
 	private boolean Selected=false;
 	private double time;
+	private ArrowKeySelecter selector;
 	
-	public BattleEnemyField(Enemy[] enemies) {
+	
+	
+	
+	
+	public BattleEnemyField(BattleSlot[] enemies) {
 		
-		for(int i=0;(enemies.length<=4)? i<enemies.length:i<4;i++) {
-			Vector2f position=new Vector2f();
-			switch(i) {
+		for(int i=0;i<enemies.length;i++) {
 			
-			case 0:
-			     position=Position1;
-			break;
-			case 1:
-			     position=Position2;
-			break;
-			case 2:
-			     position=Position3;
-			break;
-			
-			case 3:
-			     position=Position4;
-			break;
-			
-			
-			
+			  BattleSlot s=enemies[i];
+				
+				if(s.isEnemy()) {
+					Enemy e=(Enemy)s.getEntity();
+					Vector2f vector=s.getPosition();
+					
+					if(!this.ListOfEnemies.containsKey(e) && !this.ListOfEnemiesI.containsKey(vector)) {
+			  ListOfEnemies.put(e,vector);
+			  ListOfEnemiesI.put(vector,e);
+					}
+				
+				
+				}
 			}
-			
-		  ListOfEnemies.put(enemies[i],position);
-		  ListOfEnemiesI.put(position,enemies[i]);
-			
-		}
-	
-	
-		currentEnemy=enemies[0];
-		this.currentPosition=this.ListOfEnemies.get(this.currentEnemy);
-		
+		  
+		   this.selector=new ArrowKeySelecter(ListOfEnemiesI.keySet().toArray(new Vector2f[ListOfEnemiesI.size()]));
+		   
 	}
 	
 	public boolean updateField() {
@@ -102,20 +94,24 @@ public class BattleEnemyField {
              
 			 
              
-             if(e.isDead) {
+             if(e.isDead()) {
             
 				itr.remove();
 			    this.ListOfEnemiesI.remove(v);
+			    this.selector.removePosition(v);
+			    
 			}
 			
 			
 		}
+		 
+		 
 
 	        return this.ListOfEnemies.isEmpty();
 	   
 	}
 	
-	public void selectEnemy() {
+	public boolean selectEnemy() {
 		//this is where we will select which enemy we are doing a attack on
 			double TimeTaken=0;
 			if(this.Selected) {
@@ -133,12 +129,12 @@ public class BattleEnemyField {
 			
 				
 				Start.source.play(Start.Select);
-				BattleSystem.UseAttack(Start.currentlyUsedMove, Start.p, this.currentEnemy);
-				
+				////BattleSystem.UseAttack(Start.currentlyUsedMove, Start.p, this.ListOfEnemiesI.get(selector.getCurrentPosition()));
+				return true;
 			
 				
 				}
-		      Vector2f oldPosition=this.currentPosition;
+		   Vector2f oldPosition=selector.getCurrentPosition();
 		 
 					if(Back==1) {
 						Start.source.play(Start.Back);
@@ -147,21 +143,21 @@ public class BattleEnemyField {
 						
 					}
 					if(up==1) 
-					    GoUp();
+					   selector.moveUP();
 					if(down==1)	
-					     GoDown();
+					     selector.moveDown();
 					if(left==1)
-						  GoLeft();
+						  selector.moveLeft();
 					if(right==1)
-						  GoRight();
+						  selector.moveRight();
 					
-				if(this.currentPosition!=oldPosition) {
+				if(this.selector.getCurrentPosition()!=oldPosition) {
 					Start.source.play(Start.Move);
 				}
 					
 					
 		}
-		
+		return false;
 		
 		
 		     
@@ -173,39 +169,28 @@ public class BattleEnemyField {
 		Selected = selected;
 	}
 
-	public void reload(Enemy[] enemies) {
+	public void reload(BattleSlot[] enemies) {
 		this.ListOfEnemies.clear();
 		this.ListOfEnemiesI.clear();
-		for(int i=0;(enemies.length<=4)? i<enemies.length:i<4;i++) {
-			Vector2f position=new Vector2f();
-			switch(i) {
+	
+		for(int i=0;i<enemies.length;i++) {
 			
-			case 0:
-			     position=Position1;
-			break;
-			case 1:
-			     position=Position2;
-			break;
-			case 2:
-			     position=Position3;
-			break;
-			
-			case 3:
-			     position=Position4;
-			break;
-			
-			
-			
+			  BattleSlot s=enemies[i];
+				
+				if(s.isEnemy()) {
+					Enemy e=(Enemy)s.getEntity();
+					Vector2f vector=s.getPosition();
+					
+					if(!this.ListOfEnemies.containsKey(e)&& !this.ListOfEnemiesI.containsKey(vector)) {
+			  ListOfEnemies.put(e,vector);
+			  ListOfEnemiesI.put(vector,e);
+					}
+				
+				
+				}
 			}
-			
-		  ListOfEnemies.put(enemies[i],position);
-		  ListOfEnemiesI.put(position,enemies[i]);
-			
-		}
-		
-		currentEnemy=enemies[0];
-		this.currentPosition=this.ListOfEnemies.get(this.currentEnemy);
-		
+		   
+		   this.selector.relpaceAllPositions(ListOfEnemiesI.keySet().toArray(new Vector2f[ListOfEnemiesI.size()]));
 	
 		
 		
@@ -218,120 +203,6 @@ public class BattleEnemyField {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	private void GoRight() {
-		
-	
-		
-		float x=this.currentPosition.x;
-	
-		
-		if(x==this.Position1.x) {
-			
-		
-	
-		if(this.ListOfEnemiesI.containsKey(Position4)) {
-				this.currentEnemy=this.ListOfEnemiesI.get(Position4);	
-		}	
-		
-		else if(this.ListOfEnemiesI.containsKey(Position2)) {
-				this.currentEnemy=this.ListOfEnemiesI.get(Position2);
-			
-		}
-			
-		
-		}else if(x==Position2.x || x==Position3.x) {
-			
-			if(this.ListOfEnemiesI.containsKey(Position4)) {
-				this.currentEnemy=this.ListOfEnemiesI.get(Position4);
-			}
-           
-			
-		}
-		
-	   this.currentPosition=this.ListOfEnemies.get(this.currentEnemy);	
-		
-		
-		
-		
-	}
-
-	private void GoLeft() {
-	
-		float x=this.currentPosition.x;
-		if(this.ListOfEnemiesI.containsKey(Position1)) {
-		this.currentEnemy=this.ListOfEnemiesI.get(Position1);
-		}else if(x==Position4.x) { 
-			
-			if(this.ListOfEnemiesI.containsKey(Position2)) {
-				this.currentEnemy=this.ListOfEnemiesI.get(Position2);
-			}else if(this.ListOfEnemiesI.containsKey(Position3)) {
-				this.currentEnemy=this.ListOfEnemiesI.get(Position3);
-			}
-		}
-		
-		this.currentPosition=this.ListOfEnemies.get(this.currentEnemy);	
-		
-		
-	}
-
-	private void GoDown() {
-		
-		float y=this.currentPosition.y;
-		int size= this.ListOfEnemies.size();
-   if(this.ListOfEnemiesI.containsKey(Position2)) {
-	   this.currentEnemy=this.ListOfEnemiesI.get(Position2);
-		
-		
-	   
-   }else if (y==Position3.y){
-	   if(this.ListOfEnemiesI.containsKey(Position4)) {
-			this.currentEnemy=this.ListOfEnemiesI.get(Position4);
-	   }else if(this.ListOfEnemiesI.containsKey(Position1)) {
-			this.currentEnemy=this.ListOfEnemiesI.get(Position1);
-	   }
-	   
-   }
-   this.currentPosition=this.ListOfEnemies.get(this.currentEnemy);	
-		
-		
-	}
-
-	private void GoUp() {
-		
-		float y=this.currentPosition.y;
-		
-   if(this.ListOfEnemiesI.containsKey(Position3)) {
-	   this.currentEnemy=this.ListOfEnemiesI.get(Position3);
-		
-
-   }else if(y==Position2.y) {
-    if(this.ListOfEnemiesI.containsKey(Position1)) {
-	   this.currentEnemy=this.ListOfEnemiesI.get(Position1);
-   }else if(this.ListOfEnemies.containsKey(Position4)) {
-	   this.currentEnemy=this.ListOfEnemiesI.get(Position4);
-   }
-   }
-   
-   
-   
-   
-   
-   this.currentPosition=this.ListOfEnemies.get(this.currentEnemy);	
-		
-	}
-
-
-
-
-
-
 
 	
 	
@@ -346,10 +217,11 @@ public class BattleEnemyField {
 	           
 	             Enemy e=entry.getKey();
 	             Vector2f position=entry.getValue();
+	             text.setZ(900);
+		            e.setZ(800);
 	             text.setString("HP:"+Math.round(e.getHp())+"/"+Math.round(e.getMaxHP()));
-	            if(this.currentEnemy==e || !selecting) {
-	            text.setZ(900);
-	            e.setZ(800);
+	            if(this.ListOfEnemiesI.get(selector.getCurrentPosition())==e || !selecting) {
+	           
 	            	e.draw(position, text);}else  {
 	            	 e.draw(position, text,Constants.SPRITE_NOT_SELECTED_COLOR);
 	             }
@@ -378,22 +250,16 @@ public class BattleEnemyField {
 	
 	public void setCurrentEnemy(Enemy enemy) {
 		if(this.ListOfEnemies.containsKey(enemy)) {
-			this.currentEnemy=enemy;
-			this.currentPosition=this.ListOfEnemies.get(enemy);
+			
+			selector.setCurrentPosition(this.ListOfEnemies.get(enemy));
 		}
 		
 	}
-	public void setCurrentEnemy(int index) {
-		LinkedList<Enemy> listTemp=new LinkedList<Enemy>(ListOfEnemies.keySet());
-        if(index<listTemp.size() && index>=0) {
-           	this.currentEnemy=listTemp.get(index);
-        }
-        this.currentPosition=this.ListOfEnemies.get(this.currentEnemy);
-	}
+
 	
 	
 	public Enemy getCurrentEnemy() {
-		return this.currentEnemy;
+		return this.ListOfEnemiesI.get(selector.getCurrentPosition());
 	}
 	
 	public Enemy[] getEnemies() {

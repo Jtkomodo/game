@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.lwjgl.openal.ALCapabilities"/>
-    <fullyQualifiedTypeName name="org.lwjgl.openal.ALC10"/>
-    <fullyQualifiedTypeName name="Sound.Sound"/>
-    <fullyQualifiedTypeName name="java.io.FileInputStream"/>
     <fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
     <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
     <fullyQualifiedTypeName name="audio.Listener"/>
@@ -31,7 +27,6 @@
     <fullyQualifiedTypeName name="gameEngine.Entity"/>
     <fullyQualifiedTypeName name="gameEngine.VectorMath"/>
     <fullyQualifiedTypeName name="org.joml.Vector3f"/>
-    <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="battleClasses.BattlePlayerField"/>
     <fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
     <fullyQualifiedTypeName name="guis.UIBox"/>
@@ -51,13 +46,18 @@
     <fullyQualifiedTypeName name="audio.Source"/>
     <fullyQualifiedTypeName name="battleClasses.BattleEnemyField"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
-    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="com.sun.tools.javac.util.ArrayUtils"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="rendering.Model"/>
     <fullyQualifiedTypeName name="rendering.MainRenderHandler"/>
     <fullyQualifiedTypeName name="java.nio.FloatBuffer"/>
     <fullyQualifiedTypeName name="org.lwjgl.system.MemoryUtil"/>
+    <fullyQualifiedTypeName name="gameEngine.ArrowKeySelecter"/>
+    <fullyQualifiedTypeName name="java.lang.Math"/>
+    <fullyQualifiedTypeName name="Collisions.ColisionHandeler"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
+    <fullyQualifiedTypeName name="battleClasses.BattleSlotList"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
 </qualifiedTypeNameHistroy>

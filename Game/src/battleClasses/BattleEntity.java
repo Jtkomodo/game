@@ -210,7 +210,7 @@ public class BattleEntity {
 	}
 
 	public boolean isDead() {
-		return isDead;
+		return hp<=0;
 	}
 
 

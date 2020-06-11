@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="652" key="DIALOG_X_ORIGIN"/>
+		<item value="387" key="DIALOG_Y_ORIGIN"/>
+	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="p=" key="selection"/>
+		<item value="y" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="x"/>
+			<item value="y"/>
+			<item value="4"/>
+			<item value="static"/>
+			<item value="ColsPushed"/>
+			<item value="this.currently"/>
+			<item value="reset"/>
+			<item value="removeall"/>
+			<item value="remove"/>
+			<item value="sort"/>
 			<item value="p="/>
 			<item value=" p="/>
 			<item value="background"/>
 			<item value="bg"/>
 			<item value="backgroundModel"/>
-			<item value="drawmap"/>
-			<item value="e.getModel(),"/>
-			<item value="float cuvs[]= model.getUv_coords();"/>
-			<item value="float LocalVerts[]=model.getVertices();"/>
-			<item value="ModelFramwork model,"/>
-			<item value="ModelFramework model,"/>
-			<item value="this.model = model;"/>
-			<item value="this.model =model"/>
-			<item value="this.model=model"/>
-			<item value="model"/>
 		</list>
 		<list key="replacehistory">
-			<item value="e.getUvs(),e.getVerts(),"/>
+			<item value="y"/>
+			<item value="x"/>
 			<item value=""/>
+			<item value="e.getUvs(),e.getVerts(),"/>
 			<item value="float[] cuvs,float[] LocalVerts,"/>
 			<item value="setModel(model)"/>
 			<item value="Float"/>
@@ -38,15 +44,13 @@
 			<item value="PC2"/>
 			<item value="d3"/>
 			<item value="d2"/>
-			<item value="ClosestPosition"/>
-			<item value="d2."/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="575" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="438" key="DIALOG_HEIGHT"/>
+		<item value="1080" key="DIALOG_HEIGHT"/>
 		<item value="1277" key="DIALOG_X_ORIGIN"/>
-		<item value="524" key="DIALOG_Y_ORIGIN"/>
+		<item value="9" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

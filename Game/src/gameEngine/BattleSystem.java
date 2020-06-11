@@ -72,9 +72,23 @@ public class BattleSystem {
 	
 	
 	
-	private static void drawBattle(boolean selecting) {
+	private static void drawBattle(boolean selecting,BattleEntity p) {
 		MainRenderHandler.addEntity(new Entity(backgroundModel,new Vector3f(0,0,-10), 0, 64*40, backgroundTexture));
 		enemyField.draw(selecting);
+		Items[] ITM= playersInventory.getItems();		
+		UIElement[] elementlist=new UIElement[ITM.length];	
+		
+		for(int i=0;i<ITM.length;i++) {
+			elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(p,ITM[i]));
+		}
+
+	
+ 	
+			//MainBatchRender.addTexture(textbox);
+		 	    battleBox.getUIState(2).relpaceALLActive(elementlist);
+		
+		 	   
+		battleBox.draw();
 		
 	}
 	
@@ -91,9 +105,20 @@ public class BattleSystem {
 		
 		
 		//draw the background and sprites
-		boolean selecting=false;
-		drawBattle(selecting);
-		
+		boolean selecting=true;
+		if(!selecting) {
+		battleBox.show();
+		}else {
+			battleBox.hide();
+		}
+		enemyField.updateField();
+		drawBattle(selecting,p);
+		if(selecting) {
+		if(enemyField.selectEnemy()) {
+			enemyField.getCurrentEnemy().setHp(0);
+			
+		}
+		}
 		//if()
 		
 		

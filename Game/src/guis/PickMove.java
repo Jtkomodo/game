@@ -32,13 +32,19 @@ public class PickMove extends GUIfunction {
 		 
 		 boolean used=p.testIfMoveCanBeUsed(m);
 		 if(used) {
-		 if(m.isTimedButton()) {
-			BattleSystem.setButton(m.getCombo());
-		 }
+		if(!m.isHeal()) {
+		 BattleSystem.setSelectingEnemy(true);
 		 BattleSystem.setMoveCalled(true); 
-		 BattleSystem.setMoveInprogress(false);
 		
-		 }else {
+		}else {
+			
+			 BattleSystem.setSelectingPC(true);
+			 BattleSystem.setMoveCalled(true); 
+			
+			
+			
+		}
+		}else {
 			 Start.soundPlay=false;
 			 Start.source.play(Start.NO);
 		 }

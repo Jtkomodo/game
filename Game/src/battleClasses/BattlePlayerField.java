@@ -1,190 +1,277 @@
 package battleClasses;
 
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_BACKSPACE;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
+
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.joml.Vector2f;
 
 import Data.Constants;
+import gameEngine.ArrowKeySelecter;
+import gameEngine.BattleSystem;
 import gameEngine.Start;
+import gameEngine.Timer;
+import input.GetInput;
 import textrendering.TextBuilder;
 
 public class BattlePlayerField {
     
-	private final Vector2f Position1=new Vector2f(-90,40),Position2=new Vector2f(-90,-20);
-	private LinkedList<BattleEntity> listOfALLPcs=new LinkedList<BattleEntity>(); 
-	private LinkedList<BattleEntity> listOfAlivePcs=new LinkedList<BattleEntity>(); 
-	private BattleEntity CurrentPC1,CurrentPC2,CurrentlyUsingPC;
-	private boolean hasPC1=false,hasPC2=false;
-	private TextBuilder text=new TextBuilder(Start.aakar);
-	private BattleEntity CurrentPC;
 	
-	public BattlePlayerField(BattleEntity[] pcs,BattleEntity currentpc1,BattleEntity currentpc2) {
+	private HashMap<BattleEntity,Vector2f> ListOfpcs=new HashMap<BattleEntity,Vector2f>();
+	private HashMap<Vector2f,BattleEntity> ListOfpcsI=new HashMap<Vector2f,BattleEntity>();//the inverse of the list so that we can get the pc by the position
+	private TextBuilder text=new TextBuilder(Start.aakar);
+    private GetInput input=new GetInput();
+	private boolean Selected=false;
+	private double time;
+	private ArrowKeySelecter selector;
+	
+	
+	
+	
+	
+	
+
+	
+	
+	public BattlePlayerField(BattleSlot[] slots) {
 	   
-		for(int i=0;i<pcs.length;i++) {
-			BattleEntity pc=pcs[i];
-			listOfALLPcs.add(pc);
-			if(!pc.isDead) {
-				listOfAlivePcs.add(pc);				
-			}
-		}
-		if(currentpc2!=null) {
-			hasPC2=true;
-			CurrentPC2=currentpc2;
-			this.CurrentPC=currentpc2;
-		}
-		if(currentpc1!=null) {
-			hasPC1=true;
-			CurrentPC1=currentpc1;
-			this.CurrentPC=currentpc1;
+		for(int i=0;i<slots.length;i++) {
+			
+			  BattleSlot s=slots[i];
+				
+				if(!s.isEnemy()) {
+					BattleEntity e=s.getEntity();
+					Vector2f vector=s.getPosition();
 					
+					if(!this.ListOfpcs.containsKey(e) && !this.ListOfpcsI.containsKey(vector)) {
+			  ListOfpcs.put(e,vector);
+			  ListOfpcsI.put(vector,e);
+					}
+				
+				
+				}
+			}
+		  
+		   this.selector=new ArrowKeySelecter(ListOfpcsI.keySet().toArray(new Vector2f[ListOfpcsI.size()]));
+		   
+	    
+	}
+	
+	public void addPcs(BattleSlot[] slots) {
+		for(int i=0;i<slots.length;i++) {
+			
+			addPc(slots[i]);
 		}
 		
+	}
+	
+	
+	
+	public void addPc(BattleSlot slot) {
+		
+		BattleEntity p=slot.getEntity();
+		Vector2f position=slot.getPosition();
+		
+		if(!this.ListOfpcs.containsKey(p) && !this.ListOfpcsI.containsKey(position) && !slot.isEnemy()) {
+			
+			this.ListOfpcs.put(p,position);
+			this.ListOfpcsI.put(position, p);
+			this.selector.addPosition(position);
+		}else if(!slot.isEnemy() && !this.ListOfpcs.containsKey(p) && this.ListOfpcsI.containsKey(position)) {
+			
+			//if this is not a enemy and if the new pc does not already exist ,but the postion is taken then 
+			//replace the current pc in that position with the new one
+			
+			BattleEntity Oldpc=this.ListOfpcsI.get(position);//get the oldPC that was in that position
+		    this.ListOfpcs.remove(Oldpc);//remove the old pc and the position
+		    this.ListOfpcs.put(p, position);//now place the new pc in the position
+			this.ListOfpcsI.put(position,p);//repalces the old pc with the new one in the correct position 
+			this.selector.addPosition(position);
+		   //now both of these lists are exact inverses of the other still
+			
+			
+		}
+		if(this.ListOfpcs.size()!=this.ListOfpcsI.size()) {
+			Start.DebugPrint("the lists are not inverses somthing went wrong");
+			
+		}
+		
+	}
+     
+
+	public void removePcs(BattleSlot[] slots) {
+		for(int i=0;i<slots.length;i++) {
+			removePc(slots[i]);
+			
+		}
+		
+	}
+	
+	
+	public void removePc(BattleSlot slot) {
+		BattleEntity p=slot.getEntity();
+		Vector2f position=slot.getPosition();
+	if(this.ListOfpcs.containsKey(p) && this.ListOfpcsI.containsKey(position)) {
+			
+			this.ListOfpcs.remove(p);
+			this.ListOfpcsI.remove(position);
+			this.selector.removePosition(position);
+		}
+		
+	}
+	
+	private void removeAllPcs() {
+		this.ListOfpcs.clear();
+		this.ListOfpcsI.clear();
+	    this.selector.removeAllPositions();
+		
+	}
+	
+	
+	
+	
+	public void replaceAllPcs(BattleSlot[] slots) {
+		removeAllPcs();
+		addPcs(slots);
 	
 	}
 	
 	
 	
-
 	
+	
+	public boolean updateField() {
+	
+	 Iterator<Map.Entry<BattleEntity,Vector2f>> itr = ListOfpcs.entrySet().iterator(); 
+		
+	 while(itr.hasNext()) {
+		 Map.Entry<BattleEntity, Vector2f> entry = itr.next();
+         BattleEntity p=entry.getKey();
+		 Vector2f v=entry.getValue();
+		
+         
+         
+         
+		 
+         
+         if(p.isDead()) {
+        
+			itr.remove();
+		    this.ListOfpcsI.remove(v);
+		    this.selector.removePosition(v);
+		    
+		}
+		
+		
+	}
+	 
+	 
 
-
-
-
-	public BattlePlayerField(BattleEntity[] pcs,BattleEntity currentpc1) {
-	   
-		   
-				for(int i=0;i<pcs.length;i++) {
-					BattleEntity pc=pcs[i];
-					listOfALLPcs.add(pc);
-					if(!pc.isDead) {
-						listOfAlivePcs.add(pc);				
-					}
-				}
-				if(currentpc1!=null) {
-					hasPC1=true;
-					CurrentPC1=currentpc1;
-					this.CurrentPC=currentpc1;
+        return this.ListOfpcs.isEmpty();
+	}
+	
+  
+	
+	public boolean selectPC() {
+		//this is where we will select which enemy we are doing a attack on
+			double TimeTaken=0;
+			if(this.Selected) {
+				TimeTaken=Timer.getTIme()-time;	
+			}else {
+				Selected=true;
+				this.time=Timer.getTIme();
+			}
+		 int up=input.getStateofButtonInstanced(GLFW_KEY_UP),down=input.getStateofButtonInstanced(GLFW_KEY_DOWN)
+					,left=input.getStateofButtonInstanced(GLFW_KEY_LEFT),right=input.getStateofButtonInstanced(GLFW_KEY_RIGHT)
+							,Back=input.getStateofButtonInstanced(GLFW_KEY_BACKSPACE),Select=input.getStateofButtonInstanced(GLFW_KEY_ENTER);
+				    
+			if(TimeTaken>=.1) {			
+			if(Select==1) {
+			
+				if(!this.ListOfpcs.isEmpty()) {
+				Start.source.play(Start.Select);
+				////BattleSystem.UseAttack(Start.currentlyUsedMove, Start.p, this.ListOfEnemiesI.get(selector.getCurrentPosition()));
+				return true;
+				}else {
+					
+					Start.source.play(Start.NO);
 				}
 				
-		
-	}
-	
-	
-	public void switchPC1(BattleEntity newPC1) {
-		if(!this.listOfALLPcs.contains(newPC1)) {
-			this.listOfALLPcs.add(newPC1);
-			
+				}
+		   Vector2f oldPosition=selector.getCurrentPosition();
+		 
+					if(Back==1) {
+						Start.source.play(Start.Back);
+						BattleSystem.setSelectingPC(false);
+						BattleSystem.setMoveCalled(false); 
+						
+						this.Selected=false;
+					}
+					if(up==1) 
+					   selector.moveUP();
+					if(down==1)	
+					     selector.moveDown();
+					if(left==1)
+						  selector.moveLeft();
+					if(right==1)
+						  selector.moveRight();
+					
+				if(this.selector.getCurrentPosition()!=oldPosition) {
+					Start.source.play(Start.Move);
+				}
+					
+					
 		}
-		
-		if(!newPC1.isDead) {
-		   this.CurrentPC1=newPC1;
-		   
-		   if(!this.listOfAlivePcs.contains(newPC1)) {
-			   
-			   this.listOfAlivePcs.add(newPC1);
-		   }
-		   
-		}
-		
-		
-	}
-	
-    public void switchPC2(BattleEntity newPC2) {
-    	if(!this.listOfALLPcs.contains(newPC2)) {
-			this.listOfALLPcs.add(newPC2);
-			
-		}
-		
-		if(!newPC2.isDead) {
-		   this.CurrentPC2=newPC2;
-   if(!this.listOfAlivePcs.contains(newPC2)) {
-			   
-			   this.listOfAlivePcs.add(newPC2);
-		   }
-		}
-		
-		
-		
-	}
-	
-	public void SelectCurrentPC(BattleEntity p) {
-		//this is for selecting PC1 or PC2
-		if(p.equals(CurrentPC1) || p.equals(CurrentPC2)) {
-		CurrentlyUsingPC=p;
-		}
-	}
-	
-	
-	public void draw(boolean selecting) {
-		
-		//draw pc1
-		if(this.CurrentPC1!=null && !this.CurrentPC1.isDead()) {
-			 text.setString("HP:"+Math.round(this.CurrentPC1.getHp())+"/"+Math.round(this.CurrentPC1.getMaxHP()));
-		  
-			 if(this.CurrentPC==CurrentPC1 || !selecting) {
-			   text.setZ(900);
-	            this.CurrentPC1.setZ(800);
-	            this.CurrentPC1.draw(Position1, text);
-		   }else {
-			   this.CurrentPC1.draw(Position1, text,Constants.SPRITE_NOT_SELECTED_COLOR);
-		   }
-		}
-		//draw pc2
-		if(this.CurrentPC2!=null && !this.CurrentPC2.isDead()) {
-			 text.setString("HP:"+Math.round(this.CurrentPC2.getHp())+"/"+Math.round(this.CurrentPC2.getMaxHP()));
-		  
-			 if(this.CurrentPC==CurrentPC2 || !selecting) {
-			   text.setZ(900);
-	            this.CurrentPC2.setZ(800);
-	            this.CurrentPC2.draw(Position1, text);
-		   }else {
-			   this.CurrentPC2.draw(Position1, text,Constants.SPRITE_NOT_SELECTED_COLOR);
-		   }
-		}
-	}
-	
-	public boolean update() {//returns if all pcs are dead 
-		//returns
-		
-		
-		
-		
-		
 		return false;
-	}
-	
-	
-	
-	
-	public LinkedList<BattleEntity> getListOfAlivePcs() {
-		return listOfAlivePcs;
+		
+		
+		     
+		
 	}
 
 
 
-
-	public void setListOfAlivePcs(LinkedList<BattleEntity> listOfAlivePcs) {
-		this.listOfAlivePcs = listOfAlivePcs;
-	}
-
-
-
-
-	public BattleEntity getCurrentPC1() {
-		return CurrentPC1;
-	}
-
-
-
-
-	public BattleEntity getCurrentPC2() {
-		return CurrentPC2;
+public void draw(boolean selecting) {
+	
+		
+		for(Entry<BattleEntity,Vector2f> entry :this.ListOfpcs.entrySet()) {
+	           
+	             BattleEntity p=entry.getKey();
+	             Vector2f position=entry.getValue();
+	             text.setZ(900);
+		            p.setZ(800);
+	             text.setString("HP:"+Math.round(p.getHp())+"/"+Math.round(p.getMaxHP()));
+	            if(this.ListOfpcsI.get(selector.getCurrentPosition())==p || !selecting) {
+	           
+	            	p.draw(position, text,true);}else  {
+	            	 p.draw(position, text,Constants.SPRITE_NOT_SELECTED_COLOR,true);
+	             }
+	              
+	        } 
+		
 	}
 	
 	
+public BattleEntity[] getPCs() {
 	
+	return this.ListOfpcs.entrySet().toArray(new BattleEntity[this.ListOfpcs.size()]);
+}
+
+
+public BattleEntity getCurrentPC() {
+	return this.ListOfpcsI.get(selector.getCurrentPosition());
+}
 	
 	
 	

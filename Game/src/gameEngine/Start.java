@@ -52,8 +52,8 @@ import audio.Source;
 import battleClasses.BattleEnemyField;
 import battleClasses.BattleEntity;
 import battleClasses.BattleFormulas;
+import battleClasses.BattlePlayerField;
 import battleClasses.BattleSlot;
-import battleClasses.BattleSlotList;
 import battleClasses.Enemy;
 import battleClasses.HpBar;
 import battleClasses.TimedButton;
@@ -109,7 +109,7 @@ public class Start {
     public static OneTextureBatchedModel testM;
     public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls,textR;
     public static Vector2f currentmovement,quarterStepVelocity=new Vector2f(),oldpos,direction,BattleBoxPosition,velocity;
-    public static BattleEntity p;
+   // public static BattleEntity p;
  
     public static CircleColision circle1, circle2;
     public static float PHP;
@@ -124,7 +124,8 @@ public class Start {
     public static AABB playerCol,Col,COl2;
     public static Animate a1;
     public static SpriteSheetLoader sloader;
-    public static BattleEnemyField enemyField,CurrentEnemyFeild;
+    public static BattleEnemyField enemyField;
+    public static BattlePlayerField playerField;
   //  public static BattleEntity currentEntity;
     public static Sound lazer,Heal,Select,Move,Back,NO,TimedBad;
     public static Source source1;
@@ -367,8 +368,11 @@ public class Start {
 		 
 		 playersInventory= new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore},new int[] {1,3,2});
 		 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore,Items.spSuperRestore},new int[] {3,1,4,2});
-		 
-		p=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
+		
+	BattleEntity	p=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
+	BattleEntity    p2=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
+//	BattleEntity	p3=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
+		
 		Enemy enemy=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),15,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
 		Enemy enemy2=new Enemy(new Vector2f(50,10),player, playerTex,96,"E2",Enemies.E1.getAtk(),Enemies.E1.getDef(),20,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
 		Enemy enemy3=new Enemy(new Vector2f(50,10),player, playerTex,96,"E3",Enemies.E1.getAtk(),Enemies.E1.getDef(),20,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
@@ -380,8 +384,10 @@ public class Start {
 		
 		
 		
-		enemyField=new BattleEnemyField(new BattleSlot[] {new BattleSlot(new Vector2f(0,10),enemy6),new BattleSlot(new Vector2f(0,-88),enemy5),new BattleSlot(new Vector2f(140,-20),enemy),new BattleSlot(new Vector2f(202,-88),enemy2),new BattleSlot(new Vector2f(202,10),enemy3),new BattleSlot(new Vector2f(260,-20),enemy4)});
-	
+		enemyField=new BattleEnemyField(new BattleSlot[] {new BattleSlot(new Vector2f(140,-20),enemy),new BattleSlot(new Vector2f(202,-88),enemy2),new BattleSlot(new Vector2f(202,10),enemy3),new BattleSlot(new Vector2f(260,-20),enemy4)});
+	    playerField=new BattlePlayerField(new BattleSlot[] {new BattleSlot(new Vector2f(-90,40),p),new BattleSlot(new Vector2f(-100,-40),p2)});
+		
+		
 		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
 		
 	
@@ -389,7 +395,6 @@ public class Start {
 		
 		 
 		UIElement StartElements[] ={
-				new BarElement("HP:",p.getHpbar(),new Vector2f(-17,65)),
 			new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,new guis.DebugPrint("stats")),
 			new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,1),
 			new UIStringElement("Heal",new Vector2f(-17,-5),.2f,Constants.BLACK,new FullHeal(p)),
@@ -467,8 +472,7 @@ public class Start {
 		
 		BattleSystem.INIT(battleBox);
 
-		p.setHp(10);
-		p.setSp(0);
+		
 		
 	
 	while(!w.isExited()) {
@@ -622,7 +626,7 @@ public class Start {
 	//---------------------battle loop---------------------
 	
 
-	BattleSystem.battleUpdate(p);
+	BattleSystem.battleUpdate();
 	
     screencoordx=0;
 	screencoordy=0;
@@ -729,10 +733,10 @@ MainBatchRender.flushModel();
 
 	    		
 		    	
-		   if(!BattleSystem.isMoveInprogress()) {
+		 
 		    	InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_ENTER,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
 		    	
-		    }
+		    
 
 		StartBox.Update();
 		battleBox.Update();
@@ -781,10 +785,6 @@ MainBatchRender.flushModel();
 	    }
 	    
 	    
-	    }else if(H==1) {
-	    	p.addItemToInventory(Items.spRestore);
-	    	
-	    	
 	    }
 	    ESCAPEBOXUP=StartBox.isActive();
 	       if(ESCAPE==1) {
@@ -816,7 +816,7 @@ MainBatchRender.flushModel();
 					
 				}else {
 					
-					BattleSystem.StartBattle(enemyField,p, bg, background);
+					BattleSystem.StartBattle(enemyField,playerField, bg, background);
 					
 				
 				}

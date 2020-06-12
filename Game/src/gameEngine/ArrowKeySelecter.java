@@ -48,7 +48,7 @@ public class ArrowKeySelecter {
 				
 				   
 					
-					
+				if(!this.positions.contains(vector)) {	
 					if(this.BeginPosition==null) {
 						this.BeginPosition=vector;
 						
@@ -92,6 +92,7 @@ public class ArrowKeySelecter {
 					
 					
 				}
+		}
 			 //____________________________________________________________________________________
 			
 			
@@ -196,15 +197,15 @@ public void setBySameOffset() {
 
     	Vector2f vector=this.currentPosition;
   if(vector!=null) {  
-    	this.CurrentIndexPositionX=this.xPos.indexOf(vector.x);
-    	this.CurrentIndexPositionY=this.yPos.indexOf(vector.y);
+    	setActivePosition(vector);
     	
-    	if(BeginPosition==null) {
-    	this.BeginPosition=positions.get(0);
-    	}
+  }else {
+	  resetCurrentPosition();
   }
     	
-	
+  if(BeginPosition==null) {
+      resetBeginPosition();
+  	}
 }
 
 	public void removePositions(Vector2f[] positions) {
@@ -235,6 +236,8 @@ public void setBySameOffset() {
     	this.CurrentIndexPositionX=this.xPos.indexOf(vector.x);
     	this.CurrentIndexPositionY=this.yPos.indexOf(vector.y);
     	this.currentPosition=vector;
+    }else {
+    	this.currentPosition=null;
     }
     	
 	}
@@ -343,7 +346,7 @@ public void setBySameOffset() {
 		    	   
 		    	   if(vector.y!=this.currentPosition.y) {
 				    	if(value<=closestx || closestx==0) {
-				    		if(value!=0 || closest.y>vector.y) {
+				    		if(value!=closestx|| closest.y>vector.y) {
 				    		closestx=value;
 				    		closest=vector;
 				    		found=true;
@@ -502,7 +505,7 @@ public void setBySameOffset() {
 
 	public void setCurrentPosition(Vector2f position) {
 		if(positions.contains(position)) {
-		this.currentPosition=position;
+		    setActivePosition(position);
 		}
 		}
 	

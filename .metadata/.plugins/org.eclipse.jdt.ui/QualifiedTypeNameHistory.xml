@@ -27,8 +27,6 @@
     <fullyQualifiedTypeName name="gameEngine.Entity"/>
     <fullyQualifiedTypeName name="gameEngine.VectorMath"/>
     <fullyQualifiedTypeName name="org.joml.Vector3f"/>
-    <fullyQualifiedTypeName name="battleClasses.BattlePlayerField"/>
-    <fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
     <fullyQualifiedTypeName name="guis.UIBox"/>
     <fullyQualifiedTypeName name="gameEngine.Texture"/>
     <fullyQualifiedTypeName name="org.joml.Vector4f"/>
@@ -38,7 +36,6 @@
     <fullyQualifiedTypeName name="org.lwjgl.openal.LOKIWAVEFormat"/>
     <fullyQualifiedTypeName name="org.lwjgl.BufferUtils"/>
     <fullyQualifiedTypeName name="Data.Constants"/>
-    <fullyQualifiedTypeName name="gameEngine.BattleSystem"/>
     <fullyQualifiedTypeName name="guis.PickMove"/>
     <fullyQualifiedTypeName name="guis.FullHeal"/>
     <fullyQualifiedTypeName name="guis.CloseWindow"/>
@@ -60,4 +57,7 @@
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="battleClasses.BattleSlotList"/>
     <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
+    <fullyQualifiedTypeName name="gameEngine.BattleSystem"/>
+    <fullyQualifiedTypeName name="battleClasses.BattlePlayerField"/>
 </qualifiedTypeNameHistroy>

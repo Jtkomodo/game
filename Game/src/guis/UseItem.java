@@ -45,7 +45,7 @@ public class UseItem extends GUIfunction {
 					 Proccesor.addComandtoQueue(new DrawString("restored "+item.Item.getValue()+"!",new Vector2f(100,40),.5f,true,.5f));
 					  
 				 
-				 BattleSystem.setMoveInprogress(false);
+			
 				 BattleSystem.setPlayersTurn(false);
 				 BattleSystem.setTurnFinished(true);
 		 			 

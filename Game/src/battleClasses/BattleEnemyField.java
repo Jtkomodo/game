@@ -126,21 +126,23 @@ public class BattleEnemyField {
 				    
 			if(TimeTaken>=.1) {			
 			if(Select==1) {
-			
+			if(!this.ListOfEnemies.isEmpty()) {
 				
 				Start.source.play(Start.Select);
 				////BattleSystem.UseAttack(Start.currentlyUsedMove, Start.p, this.ListOfEnemiesI.get(selector.getCurrentPosition()));
 				return true;
-			
+			}else {
+				Start.source.play(Start.NO);
+			}
 				
 				}
 		   Vector2f oldPosition=selector.getCurrentPosition();
 		 
 					if(Back==1) {
 						Start.source.play(Start.Back);
+						BattleSystem.setSelectingEnemy(false);
 						 BattleSystem.setMoveCalled(false); 
-						BattleSystem.setMoveInprogress(false);
-						
+						 this.Selected=false;
 					}
 					if(up==1) 
 					   selector.moveUP();
@@ -165,10 +167,6 @@ public class BattleEnemyField {
 	}
 	
 	
-	public void setSelected(boolean selected) {
-		Selected = selected;
-	}
-
 	public void reload(BattleSlot[] enemies) {
 		this.ListOfEnemies.clear();
 		this.ListOfEnemiesI.clear();

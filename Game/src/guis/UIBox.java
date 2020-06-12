@@ -21,7 +21,6 @@ public class UIBox {
 	private int currentState=0;
 	
 	private boolean isActive=false;
-    private BattleEntity p=Start.p;
 
 	private Vector2f position;
 	private static boolean isAnyOpened;

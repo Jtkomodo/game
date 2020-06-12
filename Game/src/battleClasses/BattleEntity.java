@@ -47,7 +47,7 @@ public class BattleEntity {
 	protected Model model;
 	protected float scale;
 	protected Texture texture;
-	 protected  float z=1000;
+	protected  float z=1000;
 
 	
 	public BattleEntity( Model model,Texture texture,float scale, Vector2f sizeForHealthBar, float atk,float def,float hp,float sp,float speed,Moves[] moves,Inventory inventory) {
@@ -370,6 +370,24 @@ public void draw(Vector2f position,TextBuilder text) {
 public void draw(Vector2f position,TextBuilder text,Vector4f color) {
 	
     MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture,color));
+	this.hpbar.draw(position.add(0,80,new Vector2f()),text);
+	
+	
+	
+}
+
+public void draw(Vector2f position,TextBuilder text,boolean Mirror) {
+	
+	MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture,Mirror));
+	this.hpbar.draw(position.add(0,80,new Vector2f()),text);
+	
+	
+	
+}
+
+public void draw(Vector2f position,TextBuilder text,Vector4f color,boolean Mirror) {
+	
+    MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture,color,Mirror));
 	this.hpbar.draw(position.add(0,80,new Vector2f()),text);
 	
 	

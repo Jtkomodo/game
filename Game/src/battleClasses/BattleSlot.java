@@ -44,14 +44,5 @@ public class BattleSlot {
 	public BattleEntity getEntity() {
 		return entity;
 	}
-
-
-
-	public void setEntity(BattleEntity entity) {
-		this.entity = entity;
-	}
-
-	
-	
 	
 }

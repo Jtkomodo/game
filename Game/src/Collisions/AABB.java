@@ -309,14 +309,16 @@ public class AABB extends Collisions{
 		     Vector2f dir=VectorMath.normalize(d);
 		     
             
-		  
-		   currentmovement.sub(penetration.add(direction.mul(.0000001f,new Vector2f()),new Vector2f()), newMOvement); 
-		
+		 
+		   currentmovement.sub(penetration, newMOvement); 
+		//  this.setPosition(newMOvement);
+		   
+		   
 		   Vector2f newBoxPosition= ColisionHandeler.updateVector(box, boxPosition, saveVector, d,dir,this);//this is doing the next collision
-		  
+		
 	
 		   box.setCenterPosition(newBoxPosition);
-	
+	  
 		   ColisionHandeler.setColided(save);//restoring the old value 
 		 }
 		 

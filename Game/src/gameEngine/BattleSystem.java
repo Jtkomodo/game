@@ -93,7 +93,7 @@ public class BattleSystem {
 	
 	public static void battleUpdate() {
 		
-	
+	//hide gui box if selecting a enemy or 
 		if(EnemySelected || PCSelected) {
 			battleBox.hide();
 			
@@ -101,7 +101,7 @@ public class BattleSystem {
 			battleBox.show();
 		}
 		
-		
+	
 		boolean enemiesdead=enemyField.updateField();
 		boolean PCsdead=playerField.updateField();
 		if(PCsdead) {
@@ -115,17 +115,17 @@ public class BattleSystem {
 		
 		
 		drawBattle();
-		
+		currentEntity=playerField.getPCs()[0];	
 		if(PCSelected) {
 			if(playerField.selectPC()) {
-			    playerField.getCurrentPC().setHp(0);
+			    currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,playerField.getCurrentPC());
 			}
 			
 		}
 		
 		if(EnemySelected && !Start.StartBox.isActive()) {
 		if(enemyField.selectEnemy()) {
-			enemyField.getCurrentEnemy().setHp(0);
+			   currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,enemyField.getCurrentEnemy());
 			
 		}
 		}
@@ -138,6 +138,17 @@ public class BattleSystem {
 	}
 	
 	
+	
+	
+	
+	
+	public static void setCurrentlyUsedMove(Moves currentlyUsedMove) {
+		BattleSystem.currentlyUsedMove = currentlyUsedMove;
+	}
+
+
+
+
 	private static void StartBattleTurn(BattleEntity  currentPC) {
 	  if(currentPC.isEnemy()) {
 		  Enemy e=(Enemy)currentPC;

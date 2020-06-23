@@ -145,7 +145,7 @@ public class Enemy extends BattleEntity{
 		
 		if(used) {
 			
-			 if(!move.isHeal()) {
+			 if(!move.isSingleHeal()) {
 				   
 				  float Damage=BattleFormulas.CalculateDamage(this, player,move.getDamage());
 				   
@@ -261,7 +261,7 @@ public class Enemy extends BattleEntity{
 			for(int i=0;i<moves.size();i++) {
 				
 				Moves move=moves.get(i);
-				if(move.isHeal()) {
+				if(move.isSingleHeal()) {
 					
 					healingMoves.add(move);
 					
@@ -518,7 +518,7 @@ if(SPRestoringItemFound) {
 			Moves move=moves.get(i);
 			
 			//find most powerful attack--------------------
-			if(!move.isHeal()) {
+			if(!move.isSingleHeal()) {
 				isADamage=true;
 			if(MostPowerfullAttack!=null) {
 				

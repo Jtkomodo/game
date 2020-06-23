@@ -29,7 +29,7 @@ public class UIBoxState {
 	private float z=10000;
 	
 	private List<UIElement> elementlist=new LinkedList<UIElement>();//all of the string elements
-     private HashMap<Vector2f,UIElement> values=new HashMap<Vector2f,UIElement>();//holds every active element with it's position as the key 
+    private HashMap<Vector2f,UIElement> values=new HashMap<Vector2f,UIElement>();//holds every active element with it's position as the key 
     
     private ArrowKeySelecter selector=new ArrowKeySelecter();
 	

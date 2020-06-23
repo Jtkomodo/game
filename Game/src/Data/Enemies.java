@@ -24,7 +24,7 @@ public enum Enemies {
 		Moves.punch,
 		Moves.Doublekick,
 		Moves.heal,
-		Moves.superHeal
+		Moves.SupprHeal
 	
 	});
 		

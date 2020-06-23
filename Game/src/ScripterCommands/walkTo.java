@@ -51,7 +51,7 @@ public class walkTo extends Commands {
 			}else {
 				Vector2f v=new Vector2f();
 				
-				begin.lerp(end, (float) (timeTaken/this.time), v);
+			v=VectorMath.Lerp(begin,end, (float) (timeTaken/this.time));
 						
 			
 				e.setPosition(new Vector3f(v,e.getPosition().z));

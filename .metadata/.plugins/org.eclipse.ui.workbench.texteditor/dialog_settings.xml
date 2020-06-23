@@ -6,12 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="set" key="selection"/>
-		<item value="true" key="casesensitive"/>
+		<item value=",Enemies.E1.getHP()," key="selection"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value=",20,"/>
+			<item value="isHeal()"/>
+			<item value="int gradeofmove,"/>
+			<item value="gradeofmove,"/>
+			<item value="gradeofmove"/>
+			<item value="colided"/>
+			<item value="PosBeforeCol"/>
+			<item value="beforemovement"/>
 			<item value="set"/>
 			<item value="Enemy"/>
 			<item value="enemy"/>
@@ -19,20 +27,15 @@
 			<item value="y"/>
 			<item value="4"/>
 			<item value="static"/>
-			<item value="ColsPushed"/>
-			<item value="this.currently"/>
-			<item value="reset"/>
-			<item value="removeall"/>
-			<item value="remove"/>
-			<item value="sort"/>
-			<item value="p="/>
-			<item value=" p="/>
 		</list>
 		<list key="replacehistory">
+			<item value=",Enemies.E1.getHP(),"/>
+			<item value=",E1.getHP(),"/>
+			<item value="isSingleHeal()"/>
+			<item value=""/>
 			<item value="BattleEntity"/>
 			<item value="y"/>
 			<item value="x"/>
-			<item value=""/>
 			<item value="e.getUvs(),e.getVerts(),"/>
 			<item value="float[] cuvs,float[] LocalVerts,"/>
 			<item value="setModel(model)"/>
@@ -41,9 +44,6 @@
 			<item value="LinkedList"/>
 			<item value="BAR_COLOR_GREEN"/>
 			<item value="BLUE"/>
-			<item value="GREEN"/>
-			<item value="PC2"/>
-			<item value="d3"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

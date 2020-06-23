@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
-    <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
-    <fullyQualifiedTypeName name="audio.Listener"/>
-    <fullyQualifiedTypeName name="org.lwjgl.openal.EXTExponentDistance"/>
-    <fullyQualifiedTypeName name="org.lwjgl.openal.ALUtil"/>
-    <fullyQualifiedTypeName name="org.lwjgl.openal.AL"/>
-    <fullyQualifiedTypeName name="org.lwjgl.openal.AL10"/>
-    <fullyQualifiedTypeName name="org.lwjgl.openal.AL11"/>
-    <fullyQualifiedTypeName name="audio.Sound"/>
-    <fullyQualifiedTypeName name="guis.GUIMEthods"/>
     <fullyQualifiedTypeName name="customExceptions.MapSizeNotCorrectlyDefined"/>
     <fullyQualifiedTypeName name="org.joml.Matrix4f"/>
     <fullyQualifiedTypeName name="gameEngine.MatrixMath"/>
@@ -41,9 +31,7 @@
     <fullyQualifiedTypeName name="guis.CloseWindow"/>
     <fullyQualifiedTypeName name="guis.UseItem"/>
     <fullyQualifiedTypeName name="audio.Source"/>
-    <fullyQualifiedTypeName name="battleClasses.BattleEnemyField"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
-    <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="com.sun.tools.javac.util.ArrayUtils"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="rendering.Model"/>
@@ -53,11 +41,23 @@
     <fullyQualifiedTypeName name="gameEngine.ArrowKeySelecter"/>
     <fullyQualifiedTypeName name="java.lang.Math"/>
     <fullyQualifiedTypeName name="Collisions.ColisionHandeler"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="battleClasses.BattleSlotList"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
-    <fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
     <fullyQualifiedTypeName name="gameEngine.BattleSystem"/>
+    <fullyQualifiedTypeName name="Scripter.Proccesor"/>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="battleClasses.BattlePlayerField"/>
+    <fullyQualifiedTypeName name="battleClasses.BattleEnemyField"/>
+    <fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
+    <fullyQualifiedTypeName name="battleClasses.BattleFormulas"/>
+    <fullyQualifiedTypeName name="battleClasses.TimedButtonPress"/>
+    <fullyQualifiedTypeName name="battleClasses.TimedButtonCombo"/>
+    <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
+    <fullyQualifiedTypeName name="battleMoves.MoveComponent"/>
+    <fullyQualifiedTypeName name="battleMoves.Move"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.util.UUID"/>
+    <fullyQualifiedTypeName name="battleMoves.SingleDamageComponent"/>
+    <fullyQualifiedTypeName name="battleMoves.SpCostComponent"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
 </qualifiedTypeNameHistroy>

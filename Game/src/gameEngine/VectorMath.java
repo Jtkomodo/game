@@ -12,7 +12,11 @@ public class VectorMath {
 	
 	
 	
-	
+	public static Vector2f Lerp(Vector2f start,Vector2f end,float amount) {
+		float x=start.x+((end.x-start.x)*amount);
+		float y=start.y+((end.y-start.y)*amount);
+		return new Vector2f(x,y);
+	}
 	
 	
 	

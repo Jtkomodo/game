@@ -265,7 +265,7 @@ public void draw(boolean selecting) {
 	
 public BattleEntity[] getPCs() {
 	
-	return this.ListOfpcs.entrySet().toArray(new BattleEntity[this.ListOfpcs.size()]);
+	return this.ListOfpcsI.values().toArray(new BattleEntity[this.ListOfpcsI.size()]);
 }
 
 

@@ -32,7 +32,8 @@ public class PickMove extends GUIfunction {
 		 
 		 boolean used=p.testIfMoveCanBeUsed(m);
 		 if(used) {
-		if(!m.isHeal()) {
+			 BattleSystem.setCurrentlyUsedMove(m);
+		if(!m.isSingleHeal()) {
 		 BattleSystem.setSelectingEnemy(true);
 		 BattleSystem.setMoveCalled(true); 
 		

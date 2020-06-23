@@ -23,6 +23,9 @@ public class BattleFormulas {
 	
 	
 	
+	
+	
+	
 	public static float CalculateDamage(BattleEntity player,Enemy enemy,int gradeOfMove,float baseDamage) {
 		
 	/*this is where we will put the code for the damage formula for player vs enemy 
@@ -81,11 +84,28 @@ public class BattleFormulas {
 		
 	}
 	
+	public static float CalculateDamage(BattleEntity e,BattleEntity e2,int gradeOfMove,float baseDamage) {
+		
+		/*this is where we will put the code for the damage formula for player vs enemy 
+		 * if the move used was one with a Timed button then pass in the grade that was achieved  
+		 */	
+			float multiplier = ((e.getAtk()-e2.getDef())/100)+1;
+			
+			if(gradeOfMove == 1)
+				multiplier*=0.5;
+			else if(gradeOfMove == 3)
+				multiplier*=2;
+			
+			
+			
+			return multiplier*baseDamage*getLuckyMultiplier();
+			
+		}
+		
 	
 	
 	
-	
-	public static float CalculateDamage(Enemy enemy,BattleEntity player,float baseDamage) {
+	public static float CalculateDamage(BattleEntity e,BattleEntity e2,float baseDamage) {
 		
 		    Random r=new Random();
 		    float random=r.nextFloat();
@@ -104,7 +124,7 @@ public class BattleFormulas {
 		    
 		    
 		    
-			float multiplier = ((enemy.getAtk()-player.getDef())/100)+1;
+			float multiplier = ((e.getAtk()-e2.getDef())/100)+1;
 			
 			if(grade == 1)
 				multiplier*=0.5;

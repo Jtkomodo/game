@@ -41,6 +41,24 @@ public class ColisionHandeler {
 	}
 	
 
+	public static boolean checkCollision(Collisions ToTestWith,Vector2f position,Vector2f oldPosition,Vector2f movement,Vector2f direction,Collisions collsionTOSKIP) {
+	
+		
+		for(int i=0;i<Cols.size();i++) {
+			 Collisions col=Cols.get(i);
+			 if(!col.equals(ToTestWith) && !ColsPushed.contains(col)) {
+		
+				if(col.isBox) {
+				   checkTriger(ToTestWith,(AABB)col);
+			
+			 }else {
+				  checkTriger(ToTestWith,(CircleColision)col);
+			 }
+			}
+		}
+		return colided;
+	}
+	
 	public static Vector2f updateVector(Collisions ToTestWith,Vector2f position,Vector2f oldPosition,Vector2f movement,Vector2f direction,Collisions collsionTOSKIP) {
 		Vector2f returnVector=position;
 		amountThrough++;
@@ -124,7 +142,9 @@ public class ColisionHandeler {
 			Cols.add(colision);
 			Start.DebugPrint("Colision Added");
 		}
+	
 		allCollisions.add(colision);
+		
 		}
 		
 	}
@@ -169,18 +189,22 @@ public static void addCollisions(Collisions[] colisions) {
 	
 	private static boolean checkTriger(Collisions a,AABB b) {
 		
-		return a.vsAABB(b);
-		
-		
+		boolean c= a.vsAABB(b);
+		if(c) {
+			colided=true;
+		}
+		return colided;
 	}
 	
 	
 
 private static boolean checkTriger(Collisions a,CircleColision b) {
 		
-		return a.vsCircle(b);
-		
-		
+		boolean c=a.vsCircle(b);
+		if(c) {
+			colided=true;
+		}
+		return c;
 	}
 	
   
@@ -212,7 +236,7 @@ private static boolean checkTriger(Collisions a,CircleColision b) {
 	  boolean check=a.vsAABB(b);
 	  
 	  if(check){
-			
+		  colided=true;	
 	  Vector2f new2= a.findVector(oldposition,movement,direction,b);
 	  
 	
@@ -254,6 +278,7 @@ public static void remove(int index) {
 	  a.setPosition(position);
 	  boolean check=a.vsCircle(b);
 	  if(check){
+		  colided=true;
 	  Vector2f new2= a.findVector(oldposition,movement,direction,b);
 	  
 		new2.sub(position,vec);

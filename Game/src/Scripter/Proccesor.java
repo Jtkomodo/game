@@ -47,7 +47,7 @@ public class Proccesor {
 		
 		
 	}else {//if it has been completed remove it from the queue
-		
+		Commands.peek().Reset();
 		Start.DebugPrint("removed command "+Commands.peek().getClass().getName(),Proccesor.class);
 		Commands.poll();
 		
@@ -76,6 +76,7 @@ public class Proccesor {
 		}else {//if it has been completed remove it from the queue
 			
 			Start.DebugPrint("removed command "+command.getClass().getName()+" from Itor",Proccesor.class);
+			command.Reset();
 			CommandsItor.remove(i);
 			
 		}

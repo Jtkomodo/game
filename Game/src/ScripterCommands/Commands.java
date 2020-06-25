@@ -24,5 +24,9 @@ public abstract class Commands {
 	 public boolean isStopsInput() {
 			return StopsInput;
 		}
-	
+    public void Reset() {
+    	this.completed=false;
+    }
+
+
 }

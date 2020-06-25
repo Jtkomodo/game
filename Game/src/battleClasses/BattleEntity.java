@@ -69,7 +69,7 @@ public class BattleEntity {
     this.texture=texture;
 
     this.hpbar=new HpBar(maxHP,hp, sizeForHealthBar, Start.HealthBarBackground, Start.COLTEX);
-    this.SPBAr=new  HpBar(this.getMaxsp(),this.sp,new Vector2f(80,10),Start.HealthBarBackground, Start.COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
+    this.SPBAr=new  HpBar(maxsp,sp,new Vector2f(80,10),Start.HealthBarBackground, Start.COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
     
     
 	for(int i=0;i<moves.length;i++) {
@@ -114,8 +114,10 @@ public class BattleEntity {
 	}
 
 	public void setSp(float sp) {
-		if(sp<=maxsp)
-		this.sp = sp;
+		if(sp<=maxsp) {
+			this.sp = sp;
+			this.SPBAr.setValue(sp);
+		}
 	}
 
 	public float getMaxsp() {
@@ -222,7 +224,7 @@ public class BattleEntity {
 			newsp=this.maxsp;
 		}
 		
-		this.sp=newsp;
+		setSp(newsp);
 		
 	}
 	public void decreseSp(float sp) {
@@ -231,7 +233,7 @@ public class BattleEntity {
 			newsp=0;
 		}
 		
-		this.sp=newsp;
+		setSp(newsp);
 		
 	}
 

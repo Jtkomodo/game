@@ -25,6 +25,7 @@ public class PlaySoundEffect extends Commands {
 	
 	@Override
 	public void Start() {
+    this.completed=false;
 	this.hasBeenStarted=true;
 	this.StartTime=Timer.getTIme();
 

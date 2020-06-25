@@ -11,6 +11,7 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import Data.Constants;
 import Data.Moves;
 import Items.Inventory;
 import Items.Item;
@@ -39,6 +40,7 @@ public class BattleEntity {
 	protected List<Moves> NormalMoveList= new LinkedList<Moves>();
 	protected List<Moves> spmovelist=new LinkedList<Moves>();//this will be sorted by the spCost
 	protected HashMap<String,Moves> moveStrings=new HashMap<String,Moves>();
+    protected HpBar SPBAr;
 	protected Inventory inventory;
 	protected Moves lastUsedMove;
 	protected HpBar hpbar;
@@ -67,7 +69,7 @@ public class BattleEntity {
     this.texture=texture;
 
     this.hpbar=new HpBar(maxHP,hp, sizeForHealthBar, Start.HealthBarBackground, Start.COLTEX);
-    
+    this.SPBAr=new  HpBar(this.getMaxsp(),this.sp,new Vector2f(80,10),Start.HealthBarBackground, Start.COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
     
     
 	for(int i=0;i<moves.length;i++) {
@@ -393,6 +395,13 @@ public void draw(Vector2f position,TextBuilder text,Vector4f color,boolean Mirro
 	
 	
 }
+public void drawSPBAR(Vector2f position,TextBuilder text) {
+	this.SPBAr.draw(position,text);
+	
+}
+
+
+
 public Model getModel() {
 	return model;
 }

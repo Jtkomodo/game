@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="customExceptions.MapSizeNotCorrectlyDefined"/>
-    <fullyQualifiedTypeName name="org.joml.Matrix4f"/>
     <fullyQualifiedTypeName name="gameEngine.MatrixMath"/>
     <fullyQualifiedTypeName name="java.lang.Float"/>
     <fullyQualifiedTypeName name="java.util.Iterator"/>
@@ -13,7 +11,6 @@
     <fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
     <fullyQualifiedTypeName name="org.lwjgl.opengl.GL15"/>
     <fullyQualifiedTypeName name="org.joml.Math"/>
-    <fullyQualifiedTypeName name="gameEngine.Timer"/>
     <fullyQualifiedTypeName name="gameEngine.Entity"/>
     <fullyQualifiedTypeName name="gameEngine.VectorMath"/>
     <fullyQualifiedTypeName name="org.joml.Vector3f"/>
@@ -30,7 +27,6 @@
     <fullyQualifiedTypeName name="guis.FullHeal"/>
     <fullyQualifiedTypeName name="guis.CloseWindow"/>
     <fullyQualifiedTypeName name="guis.UseItem"/>
-    <fullyQualifiedTypeName name="audio.Source"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
     <fullyQualifiedTypeName name="com.sun.tools.javac.util.ArrayUtils"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -44,7 +40,6 @@
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="battleClasses.BattleSlotList"/>
     <fullyQualifiedTypeName name="gameEngine.BattleSystem"/>
-    <fullyQualifiedTypeName name="Scripter.Proccesor"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="battleClasses.BattlePlayerField"/>
     <fullyQualifiedTypeName name="battleClasses.BattleEnemyField"/>
@@ -60,4 +55,9 @@
     <fullyQualifiedTypeName name="battleMoves.SingleDamageComponent"/>
     <fullyQualifiedTypeName name="battleMoves.SpCostComponent"/>
     <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="audio.Sound"/>
+    <fullyQualifiedTypeName name="gameEngine.Timer"/>
+    <fullyQualifiedTypeName name="Scripter.Proccesor"/>
+    <fullyQualifiedTypeName name="ScripterCommands.PlaySoundEffect"/>
+    <fullyQualifiedTypeName name="audio.Source"/>
 </qualifiedTypeNameHistroy>

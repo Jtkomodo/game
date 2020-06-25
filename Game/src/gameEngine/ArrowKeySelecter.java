@@ -196,7 +196,7 @@ public class ArrowKeySelecter {
 public void setBySameOffset() {
 
     	Vector2f vector=this.currentPosition;
-  if(vector!=null) {  
+  if(vector!=null && this.positions.contains(vector)) {  
     	setActivePosition(vector);
     	
   }else {

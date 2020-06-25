@@ -9,6 +9,7 @@ import battleClasses.BattleEntity;
 import battleClasses.BattlePlayerField;
 import battleClasses.TimedButtonCombo;
 import battleClasses.TimedButtonPress;
+import gameEngine.Start;
 
 public class Move {
 
@@ -78,7 +79,11 @@ public boolean testIfMoveCanBeUsed(BattlePlayerField pcs,BattleEnemyField enemie
 		   
 	   }
 	   
-	   
+	   if(moveCanBeUsed) {
+		   Start.source.play(Start.Select);
+	   }else {
+		   Start.source.play(Start.NO);
+	   }
 	   
 	   
 	   return moveCanBeUsed;
@@ -97,10 +102,10 @@ public boolean testIfMoveCanBeUsed(BattlePlayerField pcs,BattleEnemyField enemie
 	   
         Iterator<MoveComponent> i=this.components.values().iterator();
 	   
-	   
+	if(testIfMoveCanBeUsed(pcs, enemies, entityUsingMove, SelectedEntity)) {   
 	   while(i.hasNext()) {
 		   MoveComponent c=i.next();
-		 
+	  
 		   if(entityUsingMove.isEnemy()) {
 				 
 		      if(!c.isTimedButtonDependent() || !this.timedPress) {
@@ -112,7 +117,7 @@ public boolean testIfMoveCanBeUsed(BattlePlayerField pcs,BattleEnemyField enemie
 		   }
 		   
 	   }
-	   
+	}
 	   
 	   
 	   
@@ -145,11 +150,11 @@ public boolean testIfMoveCanBeUsed(BattlePlayerField pcs,BattleEnemyField enemie
     public boolean HasSingleHealComponent() {
     	
     	
-    	return this.components.containsKey(SingleHealComponent.COMPID);
+    	return this.components.containsKey(SingleSelectedHealComponent.COMPID);
     }
 
-   public SingleHealComponent getSingleHealCompoent() {
-	   return (SingleHealComponent)this.components.get(SingleHealComponent.COMPID);
+   public SingleSelectedHealComponent getSingleHealCompoent() {
+	   return (SingleSelectedHealComponent)this.components.get(SingleSelectedHealComponent.COMPID);
    }
    
    

@@ -41,7 +41,7 @@ public class SpCostComponent extends MoveComponent {
 	boolean canMoveBeUsed(BattlePlayerField pcs,BattleEnemyField enemies,BattleEntity entityUsingMove,BattleEntity entitySelected) {
 		
 		float sp=entityUsingMove.getSp();
-		return (sp>this.cost);
+		return (sp>=this.cost);
 		
 		
 	}

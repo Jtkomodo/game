@@ -128,7 +128,7 @@ public class BattleEnemyField {
 			if(Select==1) {
 			if(!this.ListOfEnemies.isEmpty()) {
 				
-				Start.source.play(Start.Select);
+				//Start.source.play(Start.Select);
 				////BattleSystem.UseAttack(Start.currentlyUsedMove, Start.p, this.ListOfEnemiesI.get(selector.getCurrentPosition()));
 				return true;
 			}else {

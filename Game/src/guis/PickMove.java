@@ -7,12 +7,12 @@ import gameEngine.Start;
 
 public class PickMove extends GUIfunction {
 
-	BattleEntity p;
+	
 	String move;
 	
-	public PickMove(BattleEntity p,String move) {
+	public PickMove(String move) {
 		
-		this.p=p;
+	
 		this.move=move;
 		
 	}
@@ -21,6 +21,7 @@ public class PickMove extends GUIfunction {
 	
 	@Override
 	public void invoke() {
+		 BattleEntity p=BattleSystem.getCurrentEntity();
 		 Moves m=p.getmoveFromString(move);
 		 Start.soundPlay=true;
 		 if(m!=null) {

@@ -6,12 +6,14 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value=",Enemies.E1.getHP()," key="selection"/>
+		<item value="play" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="play"/>
+			<item value="sound"/>
 			<item value=",20,"/>
 			<item value="isHeal()"/>
 			<item value="int gradeofmove,"/>
@@ -25,8 +27,6 @@
 			<item value="enemy"/>
 			<item value="x"/>
 			<item value="y"/>
-			<item value="4"/>
-			<item value="static"/>
 		</list>
 		<list key="replacehistory">
 			<item value=",Enemies.E1.getHP(),"/>

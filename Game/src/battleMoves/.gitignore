@@ -3,3 +3,6 @@
 /SingleDamageComponent.class
 /SingleHealComponent.class
 /SpCostComponent.class
+/SelfHealComponent.class
+/SingleSelectedHealComponent.class
+/SoundFXComponent.class

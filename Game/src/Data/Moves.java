@@ -3,12 +3,16 @@ package Data;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+import org.joml.Vector2f;
+
 import battleClasses.TimedButton;
 import battleClasses.TimedButtonCombo;
 import battleClasses.TimedButtonPress;
 import battleClasses.TimedButtonHold;
 import battleMoves.*;
-
+import ScripterCommands.PlaySoundEffect;
+import audio.Sound;
+import audio.Source;
 public enum Moves {
 //OLD WAY OF DOING IT KEEPING IT HEAR AS A REFRENCE
 //	punch("punch",33,0,false,false,new TimedButtonPress(.5,1,GLFW_KEY_A)),//damage,special,cost,healing move
@@ -22,10 +26,16 @@ public enum Moves {
 	
 	
 	punch("punch",new Move(new MoveComponent[] {
-			new SingleDamageComponent(33)
+			new SingleDamageComponent(10),
+			new SelfHealComponent(20),
+			new SpCostComponent(30), 
+			new SoundFXComponent(new PlaySoundEffect[] {
+					new PlaySoundEffect(new Source(new Vector2f(0),1,1, 1,200, 0), new Sound("Lazer"),1),
+					new PlaySoundEffect(new Source(new Vector2f(0),1,1, 1,200, 0), new Sound("Timed_Button_BAD"),0.5f)
+			})
 	})),
 	heal("heal",new Move(new MoveComponent[] {
-	       new SingleHealComponent(25),		
+	       new SingleSelectedHealComponent(25),		
 		   new SpCostComponent(25)
 	})),
 	Doublekick("double kick",new Move(new MoveComponent[] {
@@ -33,7 +43,7 @@ public enum Moves {
 			new SpCostComponent(33) 
 	})),
 	SupprHeal("SuperHeal",new Move(new MoveComponent[] {
-	        new SingleHealComponent(100),
+	        new SingleSelectedHealComponent(100),
 	        new SpCostComponent(40)		
 	        
 	}))

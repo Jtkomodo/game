@@ -200,7 +200,7 @@ public class BattlePlayerField {
 			if(Select==1) {
 			
 				if(!this.ListOfpcs.isEmpty()) {
-				Start.source.play(Start.Select);
+				
 				////BattleSystem.UseAttack(Start.currentlyUsedMove, Start.p, this.ListOfEnemiesI.get(selector.getCurrentPosition()));
 				return true;
 				}else {
@@ -251,11 +251,20 @@ public void draw(boolean selecting) {
 	             Vector2f position=entry.getValue();
 	             text.setZ(900);
 		            p.setZ(800);
-	             text.setString("HP:"+Math.round(p.getHp())+"/"+Math.round(p.getMaxHP()));
+	      
+	            
+	           	    text.setString("SP: "+Math.round(p.getSp())+"/"+Math.round(p.getMaxsp()));
+	            	p.drawSPBAR(new Vector2f(position.x,position.y+100), text);
+	                text.setString("HP:"+Math.round(p.getHp())+"/"+Math.round(p.getMaxHP()));      	
 	            if(this.ListOfpcsI.get(selector.getCurrentPosition())==p || !selecting) {
 	           
-	            	p.draw(position, text,true);}else  {
+	            	p.draw(position, text,true);
+	            	
+	       	 	 
+}else  {
 	            	 p.draw(position, text,Constants.SPRITE_NOT_SELECTED_COLOR,true);
+	            
+	            
 	             }
 	              
 	        } 

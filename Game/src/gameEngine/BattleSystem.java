@@ -39,7 +39,8 @@ public class BattleSystem {
 
 	private static BattleEnemyField enemyField;
 	private static BattlePlayerField playerField;
-	private static BattleEntity currentEntity;
+	private static BattleEntity currentEntity=Start.p;
+	private static BattleEntity currentSelectedEntity=Start.p;
 	private static LinkedList<BattleEntity> turnOrder=new LinkedList<BattleEntity>();
 	private static UIBox battleBox;
 	private static Model backgroundModel;
@@ -92,7 +93,7 @@ public class BattleSystem {
 	
 	
 	public static void battleUpdate() {
-		
+		currentEntity=playerField.getPCs()[0];	
 	//hide gui box if selecting a enemy or 
 		if(EnemySelected || PCSelected) {
 			battleBox.hide();
@@ -115,10 +116,15 @@ public class BattleSystem {
 		
 		
 		drawBattle();
-		currentEntity=playerField.getPCs()[0];	
+		
+		
+		
+		
+		
 		if(PCSelected) {
 			if(playerField.selectPC()) {
-			    currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,playerField.getCurrentPC());
+				  currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,playerField.getCurrentPC());
+				  currentSelectedEntity=playerField.getCurrentPC();
 			}
 			
 		}
@@ -126,7 +132,7 @@ public class BattleSystem {
 		if(EnemySelected && !Start.StartBox.isActive()) {
 		if(enemyField.selectEnemy()) {
 			   currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,enemyField.getCurrentEnemy());
-			
+			   currentSelectedEntity=enemyField.getCurrentEnemy();
 		}
 		}
 	
@@ -272,6 +278,35 @@ public static void setSelectingPC(boolean b) {
     	 
      }
 	
+}
+
+
+
+
+public static BattleEntity getCurrentEntity() {
+	return currentEntity;
+}
+
+
+
+
+public static BattleEnemyField getEnemyField() {
+	return enemyField;
+}
+
+
+
+
+public static BattlePlayerField getPlayerField() {
+	return playerField;
+}
+
+
+
+
+public static BattleEntity getSelectedEntity() {
+	
+	return currentSelectedEntity;
 }
 
 

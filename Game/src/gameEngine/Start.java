@@ -137,6 +137,7 @@ public class Start {
 	private static MapLoader currentMap;
    // public static Entity teste;
 	public static boolean soundPlay=true;
+    public static BattleEntity p;
     
     
 	public static void main(String[] args) {
@@ -368,8 +369,9 @@ public class Start {
 		 
 		 playersInventory= new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore},new int[] {1,3,2});
 		 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore,Items.spSuperRestore},new int[] {3,1,4,2});
-		
-	BattleEntity	p=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
+	
+ 
+		p=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
 	BattleEntity    p2=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
 //	BattleEntity	p3=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
 		
@@ -438,14 +440,14 @@ public class Start {
 			Moves heal=p.getmoveFromString(Moves.heal.getName());
 			
 			UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
-					new UIStringElement(punch.getName(),new Vector2f(-54,5),.15f,Constants.BLACK,new PickMove(p,punch.getName()))
+					new UIStringElement(punch.getName(),new Vector2f(-54,5),.15f,Constants.BLACK,new PickMove(punch.getName()))
 					
 			};
 			
 			
 			
 			UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
-					new UIStringElement(heal.getName()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,new PickMove(p,heal.name()))
+					new UIStringElement(heal.getName()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,new PickMove(heal.name()))
 					
 			};
 			
@@ -468,12 +470,12 @@ public class Start {
 		
 		//teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
 		
-		p.setHp(10);
+	
 	
 		BattleSystem.INIT(battleBox);
 
 		
-		
+		 p2.setHp(10);	 
 	
 	while(!w.isExited()) {
 		
@@ -487,7 +489,7 @@ public class Start {
 			UIElement[] elementlist=new UIElement[ITM.length];	
 			
 			for(int i=0;i<ITM.length;i++) {
-				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(p,ITM[i]));
+				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(ITM[i]));
 			}
 
 		

@@ -16,13 +16,13 @@ public class UseItem extends GUIfunction {
 	
 	
 	
-	private BattleEntity p;
+
 	private Items item;
 
 
 
-	public UseItem(BattleEntity p,Items item) {
-	this.p=p;
+	public UseItem(Items item) {
+
 	this.item=item;
 		
 		
@@ -33,7 +33,7 @@ public class UseItem extends GUIfunction {
 	@Override
 	public void invoke() {
 		 Start.soundPlay=true;
-		 
+		 BattleEntity p= BattleSystem.getCurrentEntity();
 			boolean used= p.useItem(item);
 			 if(used) {
 				 Start.DebugPrint("used "+item.Item.getName());

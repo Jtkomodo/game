@@ -4,26 +4,28 @@ import battleClasses.BattleEnemyField;
 import battleClasses.BattleEntity;
 import battleClasses.BattlePlayerField;
 
-public class SingleHealComponent extends MoveComponent {
-    
-	final static int COMPID=2;
-	int heal;
+public class SelfHealComponent extends MoveComponent {
+
+	//heals only self
 	
 	
-	public SingleHealComponent(int heal) {
-		super(COMPID);
-		this.heal=heal;
+    final static int COMPID=4;
 		
+	private float hp;
+	
+	
+	public SelfHealComponent(float hp) {
+		super(COMPID);
+		this.hp=hp;
 	}
+
+
 	
 	
 	@Override
 	void useMove(BattlePlayerField pcs, BattleEnemyField enemies, BattleEntity entityUsingMove,BattleEntity entitySelected) {
-		
-	      entitySelected.IncreseHp(heal);
-		
-		
-
+		entityUsingMove.IncreseHp(hp);
+	
 	}
 
 }

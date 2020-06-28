@@ -36,22 +36,24 @@ public class Proccesor {
 	if(!Commands.isEmpty()) {//if the queue isn't empty then find the command currently running
 		
 	    setUserInputallowed(!Commands.peek().isStopsInput());//halt player input if this is a command that stops player input
-	if(!Commands.peek().iscompleted()) {//if the command has not been completed then start it or update it
+	
 		if(!Commands.peek().HasBeenStarted()) {
 			
 			Commands.peek().Start();
 		}else {
+			if(!Commands.peek().iscompleted()) {//if the command has not been completed then start it or update it
 			Commands.peek().Update(time2);
+			}else {//if it has been completed remove it from the queue
+				Commands.peek().Reset();
+				Start.DebugPrint("removed command "+Commands.peek().getClass().getName(),Proccesor.class);
+				Commands.poll();
+				
+			}
 		}
 		
 		
 		
-	}else {//if it has been completed remove it from the queue
-		Commands.peek().Reset();
-		Start.DebugPrint("removed command "+Commands.peek().getClass().getName(),Proccesor.class);
-		Commands.poll();
-		
-	}
+	
 	}else {
 		UserInputallowed=true;
 	}
@@ -63,23 +65,25 @@ public class Proccesor {
 		if(UserInputallowed) {
 	    setUserInputallowed(!command.isStopsInput());//halt player input if this is a command that stops player input
 		}
-		if(!command.iscompleted()) {//if the command has not been completed then start it or update it
+	
 			if(!command.HasBeenStarted()) {
 				
 				command.Start();
-			}else {
-				command.Update(time2);
+			}else{
+				if(!command.iscompleted()) {//if the command has not been completed then start it or update it
+				command.Update(time2);}
+				else {//if it has been completed remove it from the queue
+					
+					Start.DebugPrint("removed command "+command.getClass().getName()+" from Itor",Proccesor.class);
+					command.Reset();
+					CommandsItor.remove(i);
+					
+				}	
 			}
 			
 			
 			
-		}else {//if it has been completed remove it from the queue
-			
-			Start.DebugPrint("removed command "+command.getClass().getName()+" from Itor",Proccesor.class);
-			command.Reset();
-			CommandsItor.remove(i);
-			
-		}
+		
 		
 		
 	}

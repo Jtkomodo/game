@@ -18,7 +18,7 @@ public enum Enemies {
 			30,//Defense
 			180,   //hp
 			70, //sp
-			48//speed
+			0//48//speed
 			
 	},new Moves[]{
 		Moves.punch,

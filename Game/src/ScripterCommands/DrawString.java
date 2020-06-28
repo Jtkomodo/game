@@ -44,6 +44,7 @@ public class DrawString extends Commands {
 	public void Start() {
 		this.StartTime=Timer.getTIme();
 		this.completed=false;
+		this.hasBeenReset=false;
 		this.hasBeenStarted=true;
 	}
 
@@ -51,7 +52,7 @@ public class DrawString extends Commands {
 	public void Update(double time2) {
 		if(((time2-StartTime)>=Time)) {
 			this.completed=true;
-			this.hasBeenStarted=false;
+		
 		
 			
 		}

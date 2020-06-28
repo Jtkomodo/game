@@ -120,6 +120,8 @@ public class BattleEnemyField {
 				Selected=true;
 				this.time=Timer.getTIme();
 			}
+			
+			
 		 int up=input.getStateofButtonInstanced(GLFW_KEY_UP),down=input.getStateofButtonInstanced(GLFW_KEY_DOWN)
 					,left=input.getStateofButtonInstanced(GLFW_KEY_LEFT),right=input.getStateofButtonInstanced(GLFW_KEY_RIGHT)
 							,Back=input.getStateofButtonInstanced(GLFW_KEY_BACKSPACE),Select=input.getStateofButtonInstanced(GLFW_KEY_ENTER);
@@ -278,6 +280,11 @@ public class BattleEnemyField {
 	public int getAmountOfEnemies() {
 		
 		return this.ListOfEnemies.size();
+	}
+
+	public void ResetSelected() {
+		this.Selected=false;
+		
 	}
 	
 

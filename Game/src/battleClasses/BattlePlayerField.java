@@ -281,6 +281,11 @@ public BattleEntity[] getPCs() {
 public BattleEntity getCurrentPC() {
 	return this.ListOfpcsI.get(selector.getCurrentPosition());
 }
+
+public void ResetSelected() {
+	this.Selected=false;
+	
+}
 	
 	
 	

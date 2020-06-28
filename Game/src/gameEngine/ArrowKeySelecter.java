@@ -321,7 +321,7 @@ public void setBySameOffset() {
 	    }
 		        	
 		
-		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionX+" indexs="+this.xPos.size()+","+this.yPos.size());
+	//	Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionX+" indexs="+this.xPos.size()+","+this.yPos.size());
 		}
 		return found;
 	}
@@ -366,7 +366,7 @@ public void setBySameOffset() {
 		    }
 				         	
 		   
-		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indexs="+this.xPos.size()+","+this.yPos.size());
+	//	Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indexs="+this.xPos.size()+","+this.yPos.size());
 		}
 		return found;
 		
@@ -422,7 +422,7 @@ public void setBySameOffset() {
 				    }
 				         	
 		   
-		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indeys="+this.xPos.size()+","+this.yPos.size());
+	//	Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indeys="+this.xPos.size()+","+this.yPos.size());
 		}
 		return found;
 		
@@ -479,7 +479,7 @@ public void setBySameOffset() {
 				    }
 				         	
 		   
-		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indeys="+this.xPos.size()+","+this.yPos.size());
+	//	Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indeys="+this.xPos.size()+","+this.yPos.size());
 		}
 		return found;
 				

@@ -5,10 +5,8 @@ import static org.lwjgl.glfw.GLFW.*;
 
 import org.joml.Vector2f;
 
-import battleClasses.TimedButton;
-import battleClasses.TimedButtonCombo;
+
 import battleClasses.TimedButtonPress;
-import battleClasses.TimedButtonHold;
 import battleMoves.*;
 import ScripterCommands.PlaySoundEffect;
 import audio.Sound;
@@ -25,22 +23,27 @@ public enum Moves {
 //	;
 	
 	
-	punch("punch",new Move(new MoveComponent[] {
-			new SingleDamageComponent(10),
-			new SelfHealComponent(20),
+	punch("Lazer",new Move(new MoveComponent[] {
+			new SingleDamageComponent(50),
+			//new SelfHealComponent(20),
 			new SpCostComponent(30), 
 			new SoundFXComponent(new PlaySoundEffect[] {
-					new PlaySoundEffect(new Source(new Vector2f(0),1,1, 1,200, 0), new Sound("Lazer"),1),
-					new PlaySoundEffect(new Source(new Vector2f(0),1,1, 1,200, 0), new Sound("Timed_Button_BAD"),0.5f)
+					new PlaySoundEffect(new Source(new Vector2f(0),1,1, 1,200, 0), new Sound("Lazer"),0.5f),
+					new PlaySoundEffect(new Source(new Vector2f(0),1,1, 1,200, 0), new Sound("FIreOrDamage"),2.5f)
 			})
 	})),
 	heal("heal",new Move(new MoveComponent[] {
 	       new SingleSelectedHealComponent(25),		
-		   new SpCostComponent(25)
+		   new SpCostComponent(25),
+			new SoundFXComponent(new PlaySoundEffect[] {
+					new PlaySoundEffect(new Source(new Vector2f(0),1,1, 1,200, 0), new Sound("healing sound"),0.0f),
+				
+			}),
 	})),
 	Doublekick("double kick",new Move(new MoveComponent[] {
 			new SingleDamageComponent(50),
-			new SpCostComponent(33) 
+			new SpCostComponent(33),
+		
 	})),
 	SupprHeal("SuperHeal",new Move(new MoveComponent[] {
 	        new SingleSelectedHealComponent(100),

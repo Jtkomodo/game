@@ -200,7 +200,7 @@ public class BattleFormulas {
           public int compare(Entry<BattleEntity, Float> e1, Entry<BattleEntity, Float> e2) {
               Float v1 = e1.getValue();
               Float v2 = e2.getValue();
-              return v1.compareTo(v2);
+              return -v1.compareTo(v2);
           }
       };
       	  

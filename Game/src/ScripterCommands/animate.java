@@ -45,6 +45,7 @@ public class animate extends Commands {
 		animation.addAnimation();
          this.StartTime=Timer.getTIme();
          this.hasBeenStarted=true;
+         this.hasBeenReset=false;
 	}
 
 	@Override

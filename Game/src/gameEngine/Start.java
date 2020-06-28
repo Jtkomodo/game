@@ -56,7 +56,6 @@ import battleClasses.BattlePlayerField;
 import battleClasses.BattleSlot;
 import battleClasses.Enemy;
 import battleClasses.HpBar;
-import battleClasses.TimedButton;
 import guis.BarElement;
 import guis.CloseWindow;
 import guis.FullHeal;

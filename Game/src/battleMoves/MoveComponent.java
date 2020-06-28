@@ -33,6 +33,12 @@ public abstract class MoveComponent {
 		
 		
 	}
+	public boolean isComponentDone(BattlePlayerField pcs,BattleEnemyField enemies,BattleEntity entityUsingMove,BattleEntity entitySelected) {
+		
+		return true;
+	}
+	
+	
     
 	
 	public int getID() {
@@ -44,7 +50,10 @@ public abstract class MoveComponent {
 	public boolean isTimedButtonDependent() {
 		return timedButtonDependent;
 	}
-   
+
+
+
+	
 
 
 	

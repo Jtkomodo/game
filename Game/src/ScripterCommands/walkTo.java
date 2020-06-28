@@ -22,7 +22,6 @@ public class walkTo extends Commands {
 		this.begin=begin;
 		this.end=end;
 		this.time=time;
-		
 		this.e=e;
 	}
 	
@@ -35,6 +34,7 @@ public class walkTo extends Commands {
 	
 	@Override
 	public void Start() {
+	  this.hasBeenReset=false;
 		this.hasBeenStarted=true;
 		this.StartTime=Timer.getTIme();
 		gameEngine.Start.DebugPrint("the walkto ("+this.begin+","+this.end+","+time+") command has started at aprox "+(this.StartTime-gameEngine.Start.startTime)+" seconds into the program",this.getClass());
@@ -47,14 +47,14 @@ public class walkTo extends Commands {
 		if(timeTaken>=time) {
 			this.completed=true;
 			gameEngine.Start.DebugPrint("the walkTo is over ",this.getClass());
-			this.hasBeenStarted=false;
+			
 			}else {
 				Vector2f v=new Vector2f();
 				
 			v=VectorMath.Lerp(begin,end, (float) (timeTaken/this.time));
 						
 			
-				e.setPosition(new Vector3f(v,e.getPosition().z));
+				e.setPosition(new Vector3f(v,1000000));
 			
 			}
 	}

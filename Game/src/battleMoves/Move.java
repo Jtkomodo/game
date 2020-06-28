@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import battleClasses.BattleEnemyField;
 import battleClasses.BattleEntity;
 import battleClasses.BattlePlayerField;
-import battleClasses.TimedButtonCombo;
 import battleClasses.TimedButtonPress;
 import gameEngine.Start;
 
@@ -16,7 +15,7 @@ public class Move {
 
    private HashMap<Integer,MoveComponent> components=new HashMap<Integer,MoveComponent>();
  
-   private TimedButtonCombo TimedButton;
+   private TimedButtonPress TimedButton;
    private boolean timedPress;
    
    
@@ -32,7 +31,7 @@ public class Move {
    
 
   
-public Move(MoveComponent[] components,TimedButtonCombo TimedButton) {
+public Move(MoveComponent[] components,TimedButtonPress TimedButton) {
 	      this.TimedButton=TimedButton;
 	      this.timedPress=true;
 	      constuct(components);
@@ -57,7 +56,23 @@ public Move(MoveComponent[] components,TimedButtonCombo TimedButton) {
    
    
    
+public boolean isMoveDone(BattlePlayerField pcs,BattleEnemyField enemies,BattleEntity entityUsingMove,BattleEntity entitySelected) {
+   boolean moveDone=true;
+  
+   Iterator<MoveComponent> i=this.components.values().iterator();
    
+   
+   while(i.hasNext()) {
+	   MoveComponent component=i.next();
+	   if(!component.isComponentDone(pcs, enemies, entityUsingMove, entitySelected)){
+		   moveDone=false;
+		   break;
+	   }
+	   
+   }
+   return moveDone;
+	
+}
   
 
 
@@ -127,7 +142,7 @@ public boolean testIfMoveCanBeUsed(BattlePlayerField pcs,BattleEnemyField enemie
    public boolean update(BattlePlayerField pcs,BattleEnemyField enemies,BattleEntity entityUsingMove,BattleEntity SelectedEntity) {
 	   int state=this.TimedButton.update();
 	   boolean timedButtonDOne=false;
-	   if(state!=TimedButton.NOTPUSHED) {
+	   if(state!=TimedButton.NOT_PUSHED) {
 		   
 		   timedButtonDOne=true;
 		   

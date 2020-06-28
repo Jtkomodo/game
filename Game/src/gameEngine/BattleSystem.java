@@ -19,7 +19,6 @@ import battleClasses.BattleFormulas;
 import battleClasses.BattlePlayerField;
 import battleClasses.Enemy;
 import battleClasses.HpBar;
-import battleClasses.TimedButton;
 import guis.UIBox;
 import guis.UIElement;
 import guis.UIStringElement;
@@ -48,14 +47,20 @@ public class BattleSystem {
 	private static Inventory playersInventory=Start.playersInventory, enemyTestInventory=Start.enemyTestInventory;
 	private static TextBuilder text1=Start.text1;
 	private static HpBar playersSPBAr=Start.playersSPBAr;
+	
+	
+	private static boolean MoveUsed=false;
+	private static boolean turnFinshed=true;
 	private static boolean PlayersTurn=true;
 	private static boolean TurnFinished=false;
 	private static boolean MoveCalled=false;
 	private static boolean EnemySelected=false;
 	private static boolean PCSelected=false;
-	private static boolean endedRound=false;
+	
+	
+	
 	private static Moves currentlyUsedMove;
-	private static TimedButton Button;
+
 	
 	private static boolean BattleEnded=false;
 	private static Source source=Start.source;
@@ -93,15 +98,9 @@ public class BattleSystem {
 	
 	
 	public static void battleUpdate() {
-		currentEntity=playerField.getPCs()[0];	
+	
 	//hide gui box if selecting a enemy or 
-		if(EnemySelected || PCSelected) {
-			battleBox.hide();
-			
-		}else {
-			battleBox.show();
-		}
-		
+	
 	
 		boolean enemiesdead=enemyField.updateField();
 		boolean PCsdead=playerField.updateField();
@@ -113,29 +112,61 @@ public class BattleSystem {
 		if(enemiesdead) {
 			EndBattleAsWin();
 		}
+		if(TurnFinished) {
+		currentEntity=StartBattleTurn();	
+		}
+		
+		if(EnemySelected || PCSelected || !PlayersTurn) {
+			battleBox.hide();
+			
+		}else {
+			battleBox.show();
+		}
 		
 		
 		drawBattle();
 		
-		
-		
-		
-		
-		if(PCSelected) {
-			if(playerField.selectPC()) {
-				  currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,playerField.getCurrentPC());
-				  currentSelectedEntity=playerField.getCurrentPC();
-			}
+		if(MoveUsed) {
+			TurnFinished=currentlyUsedMove.getMove().isMoveDone(playerField, enemyField, currentEntity,currentEntity);
 			
 		}
 		
-		if(EnemySelected && !Start.StartBox.isActive()) {
-		if(enemyField.selectEnemy()) {
-			   currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,enemyField.getCurrentEnemy());
-			   currentSelectedEntity=enemyField.getCurrentEnemy();
+		
+		if(TurnFinished) {
+			MoveUsed=false;
+			MoveCalled=false;
+		    PCSelected=false;
+		    EnemySelected=false;
+		    currentSelectedEntity=null;
+		    battleBox.reset();
+		    playerField.ResetSelected();
+		    enemyField.ResetSelected();
 		}
+		
+		//If players turn then check if we are in the selecting stage and if we have already selected a Entity to use the move or item on
+		if(PlayersTurn) {
+			if(PCSelected) {
+				if(playerField.selectPC()) {
+					if(MoveCalled) {
+						currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,playerField.getCurrentPC());
+						currentSelectedEntity=playerField.getCurrentPC();
+						MoveUsed=true;
+						}
+					}
+			
+		}
+		
+			if(EnemySelected && !Start.StartBox.isActive()) {
+				if(enemyField.selectEnemy()) {
+					if(MoveCalled) {
+						currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,enemyField.getCurrentEnemy());
+						currentSelectedEntity=enemyField.getCurrentEnemy();
+						MoveUsed=true;
+					}
+				}
 		}
 	
+		}
 		
 		
 		
@@ -155,20 +186,42 @@ public class BattleSystem {
 
 
 
-	private static void StartBattleTurn(BattleEntity  currentPC) {
-	  if(currentPC.isEnemy()) {
-		  Enemy e=(Enemy)currentPC;
-		  
-	  }else{
+	private static BattleEntity StartBattleTurn() {//this goes down the turn order list making sure to
+		//set any values needed to be set before the game turn begins and returns the next entity that is taking it's turn now 
+    TurnFinished=false; 
+	
+    Start.DebugPrint("NEW_TURN");
+    BattleEntity newCurrentEntity;
+     //if we have not reached the end of the turnOrder list then the new current entity is the next one on the list
+     if(!turnOrder.isEmpty()) {
+    	 newCurrentEntity=turnOrder.poll();
+     }else {//else we neeed to make a new list
+    	 StartBattleRound(playerField,enemyField);
+    	 newCurrentEntity=turnOrder.poll();
+     }
+     
+     //now that we have the current Entity we need to check if is a pc or a enemy
+     
+     if(newCurrentEntity.isEnemy()) {
+    	 Start.DebugPrint("ENEMY'S TURN");
+    	 PlayersTurn=false;
+    	 
+     }else {
+    	 PlayersTurn=true;
+    	 
+     }
+     
+     
+     
+     
+     
+     return newCurrentEntity;
 		
-		  
-		  
-	  }
 		
 	}
 	
 private static void StartBattleRound(BattlePlayerField  p,BattleEnemyField e) {
-		
+	   Start.DebugPrint("NEW_ROUND");
 		turnOrder=BattleFormulas.calcuateTurnOrder(p.getPCs(),e.getEnemies());
 	
 	}
@@ -213,6 +266,8 @@ public static void StartBattle(BattleEnemyField enemies,BattlePlayerField p,Text
 	Start.StateOfStartBOx=false;
 	enemyField=enemies;
 	playerField=p;
+	TurnFinished=true;
+	
 	  
 }
 
@@ -245,16 +300,6 @@ public static boolean isPlayersTurn() {
 
 public static void setPlayersTurn(boolean playersTurn) {
 	PlayersTurn = playersTurn;
-}
-
-
-public static TimedButton getButton() {
-	return Button;
-}
-
-
-public static void setButton(TimedButton button) {
-	Button = button;
 }
 
 

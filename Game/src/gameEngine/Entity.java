@@ -144,7 +144,9 @@ public class Entity {
 		
 		
 		
-		
+	public Vector2f getPosition2f() {
+		return new Vector2f(this.position.x,this.position.y);
+	}
 	
 	
 	public void setModel(ModelFramwork model) {
@@ -245,6 +247,14 @@ this.hasNonSqaureSize=false;
 	}
 	public float[] getUvs() {
 		return uvs;
+	}
+	public void setz(float z) {
+	 this.position= new Vector3f(this.position.x,this.position.y,z);
+		
+	}
+	public void setPosition(Vector2f position) {
+		this.position=new Vector3f(position,this.position.z );
+		
 	}
 
 	

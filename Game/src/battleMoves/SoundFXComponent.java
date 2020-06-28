@@ -5,6 +5,7 @@ import ScripterCommands.PlaySoundEffect;
 import battleClasses.BattleEnemyField;
 import battleClasses.BattleEntity;
 import battleClasses.BattlePlayerField;
+import gameEngine.Start;
 
 public class SoundFXComponent extends MoveComponent {
 
@@ -28,5 +29,29 @@ public class SoundFXComponent extends MoveComponent {
 	        }
 
 	}
+	@Override
+    public boolean isComponentDone(BattlePlayerField pcs,BattleEnemyField enemies,BattleEntity entityUsingMove,BattleEntity entitySelected) {
+	     boolean moveDone=true;
+		for(int i=0;i<this.sounds.length;i++) {
+			  PlaySoundEffect sounfx=sounds[i];
+			if(!sounfx.iscompleted() || !sounfx.hasBeeenReset()) {//if any of these have not been completed break and set return value to false
+				moveDone=false;
+				Start.DebugPrint("SOUNDFX_COMPONENT_NOT_FINISHED");
+				
+				
+			}
+			
+		}
+		
+		if(moveDone) {
+			Start.DebugPrint("SOUNDFX_COMPONENT_FINISHED");
+		    
+		}
+		
+		
+		return moveDone;
+	
+	}
+	
 
 }

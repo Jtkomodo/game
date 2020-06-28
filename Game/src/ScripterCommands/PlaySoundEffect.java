@@ -25,8 +25,10 @@ public class PlaySoundEffect extends Commands {
 	
 	@Override
 	public void Start() {
+    gameEngine.Start.DebugPrint("STARTED");
     this.completed=false;
 	this.hasBeenStarted=true;
+	this.hasBeenReset=false;
 	this.StartTime=Timer.getTIme();
 
 	}
@@ -34,7 +36,6 @@ public class PlaySoundEffect extends Commands {
 	@Override
 	public void Update(double time2) {
 		if((time2-StartTime)>=timeToTakeBeforePlaying) {
-	     this.hasBeenStarted=false;
 	     this.source.play(this.sound);
 	     this.completed=true;
 		}

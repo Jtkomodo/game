@@ -37,7 +37,7 @@ public class SoundFXComponent extends MoveComponent {
 			if(!sounfx.iscompleted() || !sounfx.hasBeeenReset()) {//if any of these have not been completed break and set return value to false
 				moveDone=false;
 				Start.DebugPrint("SOUNDFX_COMPONENT_NOT_FINISHED");
-				
+				break;
 				
 			}
 			

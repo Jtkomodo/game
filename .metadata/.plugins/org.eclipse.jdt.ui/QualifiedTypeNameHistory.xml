@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.Float"/>
-    <fullyQualifiedTypeName name="java.util.Iterator"/>
-    <fullyQualifiedTypeName name="gameEngine.MainBatchRender"/>
-    <fullyQualifiedTypeName name="gameEngine.Render"/>
-    <fullyQualifiedTypeName name="gameEngine.MainRenderHandler"/>
-    <fullyQualifiedTypeName name="gameEngine.MultipleTextureBatchedModel"/>
-    <fullyQualifiedTypeName name="input.CharCallback"/>
-    <fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
-    <fullyQualifiedTypeName name="org.lwjgl.opengl.GL15"/>
-    <fullyQualifiedTypeName name="org.joml.Math"/>
-    <fullyQualifiedTypeName name="gameEngine.VectorMath"/>
     <fullyQualifiedTypeName name="org.joml.Vector3f"/>
     <fullyQualifiedTypeName name="guis.UIBox"/>
     <fullyQualifiedTypeName name="gameEngine.Texture"/>
@@ -26,7 +15,6 @@
     <fullyQualifiedTypeName name="guis.CloseWindow"/>
     <fullyQualifiedTypeName name="guis.UseItem"/>
     <fullyQualifiedTypeName name="com.sun.tools.javac.util.ArrayUtils"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="rendering.Model"/>
     <fullyQualifiedTypeName name="rendering.MainRenderHandler"/>
     <fullyQualifiedTypeName name="java.nio.FloatBuffer"/>
@@ -36,10 +24,6 @@
     <fullyQualifiedTypeName name="Collisions.ColisionHandeler"/>
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="battleClasses.BattleSlotList"/>
-    <fullyQualifiedTypeName name="gameEngine.BattleSystem"/>
-    <fullyQualifiedTypeName name="java.util.LinkedList"/>
-    <fullyQualifiedTypeName name="battleClasses.BattlePlayerField"/>
-    <fullyQualifiedTypeName name="battleClasses.BattleEnemyField"/>
     <fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
     <fullyQualifiedTypeName name="battleClasses.BattleFormulas"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButtonPress"/>
@@ -47,7 +31,6 @@
     <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
     <fullyQualifiedTypeName name="battleMoves.MoveComponent"/>
     <fullyQualifiedTypeName name="battleMoves.Move"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.util.UUID"/>
     <fullyQualifiedTypeName name="battleMoves.SingleDamageComponent"/>
     <fullyQualifiedTypeName name="battleMoves.SpCostComponent"/>
@@ -59,5 +42,22 @@
     <fullyQualifiedTypeName name="gameEngine.Entity"/>
     <fullyQualifiedTypeName name="Scripter.Proccesor"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="battleClasses.BattleEnemyField"/>
+    <fullyQualifiedTypeName name="battleClasses.BattlePlayerField"/>
+    <fullyQualifiedTypeName name="Items.Item"/>
+    <fullyQualifiedTypeName name="battleClasses.Enemy"/>
+    <fullyQualifiedTypeName name="Data.Moves"/>
+    <fullyQualifiedTypeName name="com.sun.tools.javac.jvm.Items"/>
+    <fullyQualifiedTypeName name="Items.Items"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
+    <fullyQualifiedTypeName name="java.util.Comparator"/>
+    <fullyQualifiedTypeName name="java.util.Collections"/>
+    <fullyQualifiedTypeName name="enemyAI.EnemyAI"/>
+    <fullyQualifiedTypeName name="enemyAI.EnemyAIComponent"/>
     <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="enemyAI.EnemyAIMoveComponent"/>
+    <fullyQualifiedTypeName name="gameEngine.BattleSystem"/>
 </qualifiedTypeNameHistroy>

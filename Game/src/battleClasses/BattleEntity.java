@@ -417,6 +417,14 @@ public void addItemToInventory(Items item) {
 	
 	
 }
+
+public Items[] getItems() {
+	return this.inventory.getItems();
+	
+}
+
+
+
 public float getSpeed() {
 	return speed;
 }

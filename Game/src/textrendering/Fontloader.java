@@ -183,6 +183,36 @@ private void loadFile() {
 	
 	     
    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public void setLoader(String fontFileName, float atlusSize) {
+	// TODO Auto-generated method stub this.Font=Font;
+	 this.tex= new Texture(fontFileName);
+	 loadFile();
+	 this.Texwidth=atlusSize;
+	 this.Texheight=atlusSize;
+
+	
+}
 	 
   
 	

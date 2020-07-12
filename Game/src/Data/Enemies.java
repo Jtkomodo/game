@@ -3,8 +3,9 @@ package Data;
 import animation.Animate;
 import customExceptions.EnemyHasToManyMoves;
 import customExceptions.EnemyStatsNotCorrectFormat;
+import enemyAI.EnemyAI;
 import gameEngine.Start;
-
+import enemyAI.*;
 public enum Enemies {
 	
 	
@@ -14,11 +15,11 @@ public enum Enemies {
 	
 	
 	E1("E1",new float[]{
-			0,//attack
+			10,//attack
 			30,//Defense
 			180,   //hp
 			70, //sp
-			0//48//speed
+			48-48//speed
 			
 	},new Moves[]{
 		Moves.punch,
@@ -26,7 +27,12 @@ public enum Enemies {
 		Moves.heal,
 		Moves.SupprHeal
 	
-	});
+	},new EnemyAI(
+		new EnemyAIComponent[]{
+				new SelfHealthCheckMoveAI(1,.50f)
+			})
+			
+    );
 		
 	private final int amountOfstats=5;
     private final int maxAmountOfMoves=4;
@@ -40,10 +46,10 @@ public enum Enemies {
 	private String name;
 	private int amountOfMoves;
 	private Moves[] moves;
+	private EnemyAI enemyAI;
 	
-	
-	Enemies(String name,float[] stats ,Moves[] moves){
-		
+	Enemies(String name,float[] stats ,Moves[] moves,EnemyAI enemyAI){
+		this.enemyAI=enemyAI;
 		try{
 		if(stats.length!=amountOfstats) {
 			throw new EnemyStatsNotCorrectFormat(name);
@@ -122,6 +128,10 @@ public enum Enemies {
 
 	public void setMoves(Moves[] moves) {
 		this.moves = moves;
+	}
+
+	public EnemyAI getEnemyAI() {
+		return enemyAI;
 	}
 	
 	

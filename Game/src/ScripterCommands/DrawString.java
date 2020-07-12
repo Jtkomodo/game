@@ -8,7 +8,7 @@ import textrendering.TextBuilder;
 
 public class DrawString extends Commands {
 
-	private TextBuilder textModel=new TextBuilder(gameEngine.Start.aakar);
+	private TextBuilder textModel=gameEngine.Start.text1;
     private Vector2f position;
 	private float size;
 	private double Time,StartTime;
@@ -23,7 +23,7 @@ public class DrawString extends Commands {
 	
 	
 	public DrawString(String text,Vector2f position,float size,String FontFileName,float AtlusSize,boolean stopsInput,double time) {
-		textModel=new TextBuilder(FontFileName,AtlusSize);
+		textModel.getLoader().setLoader(FontFileName,AtlusSize);
 	    textModel.setString(text);
 		this.StopsInput=stopsInput;
 		this.position=position;

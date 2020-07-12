@@ -34,9 +34,9 @@ public class SoundFXComponent extends MoveComponent {
 	     boolean moveDone=true;
 		for(int i=0;i<this.sounds.length;i++) {
 			  PlaySoundEffect sounfx=sounds[i];
-			if(!sounfx.iscompleted() || !sounfx.hasBeeenReset()) {//if any of these have not been completed break and set return value to false
+			if(!sounfx.iscompleted() || !sounfx.hasBeeenReset() || sounfx.isPlayingSound()) {//if any of these have not been completed break and set return value to false
 				moveDone=false;
-				Start.DebugPrint("SOUNDFX_COMPONENT_NOT_FINISHED");
+				//Start.DebugPrint("SOUNDFX_COMPONENT_NOT_FINISHED");
 				break;
 				
 			}

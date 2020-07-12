@@ -2,4 +2,5 @@
 <typeInfoHistroy>
     <typeInfo handle="=Game/src&lt;ScripterCommands{Commands.java[Commands" modifiers="1025" timestamp="1593380282952"/>
     <typeInfo handle="=Game/src&lt;battleMoves{MoveComponent.java[MoveComponent" modifiers="1025" timestamp="1593374868693"/>
+    <typeInfo handle="=Game/src&lt;enemyAI{EnemyAIMoveComponent.java[EnemyAIMoveComponent" modifiers="1025" timestamp="1594528673779"/>
 </typeInfoHistroy>

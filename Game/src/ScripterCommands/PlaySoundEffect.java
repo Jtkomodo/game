@@ -41,4 +41,9 @@ public class PlaySoundEffect extends Commands {
 		}
 	}
 
+   public boolean isPlayingSound() {
+	  return this.source.isPlaying();
+   }
+
+
 }

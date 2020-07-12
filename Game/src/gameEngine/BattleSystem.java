@@ -64,6 +64,7 @@ public class BattleSystem {
 	
 	private static boolean BattleEnded=false;
 	private static Source source=Start.source;
+	private static boolean EnemyHasTakenAction=false;
 	
 	
 	
@@ -112,65 +113,85 @@ public class BattleSystem {
 		if(enemiesdead) {
 			EndBattleAsWin();
 		}
-		if(TurnFinished) {
-		currentEntity=StartBattleTurn();	
-		}
 		
-		if(EnemySelected || PCSelected || !PlayersTurn) {
-			battleBox.hide();
+		
+		
+		
+		//BattleLoop
+		
+		if(!BattleEnded) {
+		
+			if(TurnFinished) {
+			currentEntity=StartBattleTurn();	
+			}
 			
-		}else {
-			battleBox.show();
-		}
-		
-		
-		drawBattle();
-		
-		if(MoveUsed) {
-			TurnFinished=currentlyUsedMove.getMove().isMoveDone(playerField, enemyField, currentEntity,currentEntity);
+			if(EnemySelected || PCSelected || !PlayersTurn || MoveUsed) {
+				battleBox.hide();
+				
+			}else {
+				battleBox.show();
+			}
 			
-		}
-		
-		
-		if(TurnFinished) {
-			MoveUsed=false;
-			MoveCalled=false;
-		    PCSelected=false;
-		    EnemySelected=false;
-		    currentSelectedEntity=null;
-		    battleBox.reset();
-		    playerField.ResetSelected();
-		    enemyField.ResetSelected();
-		}
-		
-		//If players turn then check if we are in the selecting stage and if we have already selected a Entity to use the move or item on
-		if(PlayersTurn) {
-			if(PCSelected) {
-				if(playerField.selectPC()) {
-					if(MoveCalled) {
-						currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,playerField.getCurrentPC());
-						currentSelectedEntity=playerField.getCurrentPC();
-						MoveUsed=true;
+			
+			drawBattle();
+			
+			if(MoveUsed) {
+				TurnFinished=currentlyUsedMove.getMove().isMoveDone(playerField, enemyField, currentEntity,currentEntity);
+				PCSelected=false;
+	        
+	        	
+			}
+			
+			if(TurnFinished) {
+				MoveUsed=false;
+				MoveCalled=false;
+			    PCSelected=false;
+			    EnemySelected=false;
+			    currentSelectedEntity=null;
+			    battleBox.reset();
+			    playerField.ResetSelected();
+			    enemyField.ResetSelected();
+				
+			}
+	
+					
+			//If players turn then check if we are in the selecting stage and if we have already selected a Entity to use the move or item on
+		   if(PlayersTurn) {
+				if(PCSelected) {
+					if(playerField.selectPC()) {
+						if(MoveCalled) {
+							currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,playerField.getCurrentPC());
+							currentSelectedEntity=playerField.getCurrentPC();
+							MoveUsed=true;
+							}
+						}
+				
+			}
+			
+				if(EnemySelected && !Start.StartBox.isActive()) {
+					if(enemyField.selectEnemy()) {
+						if(MoveCalled) {
+							currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,enemyField.getCurrentEnemy());
+							currentSelectedEntity=enemyField.getCurrentEnemy();
+							MoveUsed=true;
 						}
 					}
-			
-		}
+			}
 		
-			if(EnemySelected && !Start.StartBox.isActive()) {
-				if(enemyField.selectEnemy()) {
-					if(MoveCalled) {
-						currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,enemyField.getCurrentEnemy());
-						currentSelectedEntity=enemyField.getCurrentEnemy();
-						MoveUsed=true;
-					}
-				}
-		}
+			}
+	
+			
+			//ENEMY'S TURN
+			else if(!EnemyHasTakenAction && !PlayersTurn && currentEntity.isEnemy()){
+				
+				Enemy e=(Enemy)currentEntity;
+				e.takeTurn(enemyField, playerField);
+				EnemyHasTakenAction=true;
+				
+			}
+		
 	
 		}
-		
-		
-		
-		
 		
 	}
 	
@@ -181,6 +202,7 @@ public class BattleSystem {
 	
 	public static void setCurrentlyUsedMove(Moves currentlyUsedMove) {
 		BattleSystem.currentlyUsedMove = currentlyUsedMove;
+	//	BattleSystem.MoveUsed=true;
 	}
 
 
@@ -189,17 +211,29 @@ public class BattleSystem {
 	private static BattleEntity StartBattleTurn() {//this goes down the turn order list making sure to
 		//set any values needed to be set before the game turn begins and returns the next entity that is taking it's turn now 
     TurnFinished=false; 
-	
+    EnemyHasTakenAction=false;
     Start.DebugPrint("NEW_TURN");
     BattleEntity newCurrentEntity;
-     //if we have not reached the end of the turnOrder list then the new current entity is the next one on the list
-     if(!turnOrder.isEmpty()) {
+     //if we have not reached the end of the turnOrder list then the new current entity is the next one on the list 
+     
+    
+    
+    if(!turnOrder.isEmpty()) {
     	 newCurrentEntity=turnOrder.poll();
      }else {//else we neeed to make a new list
     	 StartBattleRound(playerField,enemyField);
     	 newCurrentEntity=turnOrder.poll();
      }
      
+    //this just makes sure the entity has not been 
+    while(newCurrentEntity.isDead()) {
+        
+        if(!turnOrder.isEmpty()) {
+        	 newCurrentEntity=turnOrder.poll();
+         }else {//else we neeed to make a new list
+        	 StartBattleRound(playerField,enemyField);
+        	 newCurrentEntity=turnOrder.poll();
+         }
      //now that we have the current Entity we need to check if is a pc or a enemy
      
      if(newCurrentEntity.isEnemy()) {
@@ -211,7 +245,7 @@ public class BattleSystem {
     	 
      }
      
-     
+    }
      
      
      
@@ -352,6 +386,13 @@ public static BattlePlayerField getPlayerField() {
 public static BattleEntity getSelectedEntity() {
 	
 	return currentSelectedEntity;
+}
+
+
+
+
+public static void setMoveUsed(boolean moveUsed) {
+	MoveUsed = moveUsed;
 }
 
 

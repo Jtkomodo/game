@@ -9,14 +9,26 @@
 		<item value="1162" key="dialogWidth"/>
 		<list key="textEntries">
 			<item value="1"/>
+			<item value="1"/>
+			<item value="1"/>
+			<item value="1"/>
 		</list>
 		<list key="orderedElements">
+			<item value="org.eclipse.epp.mpc.ui.command.showMarketplaceWizard"/>
+			<item value="org.eclipse.ui.views.AllMarkersView"/>
+			<item value="org.eclipse.ui.preferencePages.Startup"/>
 			<item value="org.eclipse.ui.window.preferences(preferencePageId=org.eclipse.jdt.ui.preferences.ProblemSeveritiesPreferencePage)"/>
 		</list>
 		<list key="orderedProviders">
 			<item value="org.eclipse.ui.commands"/>
+			<item value="org.eclipse.e4.ui.parts"/>
+			<item value="org.eclipse.ui.preferences"/>
+			<item value="org.eclipse.ui.commands"/>
 		</list>
 		<list key="textArray">
+			<item value="eclipse"/>
+			<item value="marke"/>
+			<item value="plugin"/>
 			<item value="warnin"/>
 		</list>
 	</section>

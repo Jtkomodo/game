@@ -374,16 +374,16 @@ public class Start {
 	BattleEntity    p2=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
 //	BattleEntity	p3=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
 		
-		Enemy enemy=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
-		Enemy enemy2=new Enemy(new Vector2f(50,10),player, playerTex,96,"E2",Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
-		Enemy enemy3=new Enemy(new Vector2f(50,10),player, playerTex,96,"E3",Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
-		Enemy enemy4=new Enemy(new Vector2f(50,10),player, playerTex,96,"E4",Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
-		Enemy enemy5=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),15,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
-		Enemy enemy6=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),15,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory);
+		Enemy enemy=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
+		Enemy enemy2=new Enemy(new Vector2f(50,10),player, playerTex,96,"E2",Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
+		Enemy enemy3=new Enemy(new Vector2f(50,10),player, playerTex,96,"E3",Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
+		Enemy enemy4=new Enemy(new Vector2f(50,10),player, playerTex,96,"E4",Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
+		Enemy enemy5=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),15,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
+		Enemy enemy6=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),15,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
 		
 		
 		
-		
+	
 		
 		enemyField=new BattleEnemyField(new BattleSlot[] {new BattleSlot(new Vector2f(140,-20),enemy),new BattleSlot(new Vector2f(202,-88),enemy2),new BattleSlot(new Vector2f(202,10),enemy3),new BattleSlot(new Vector2f(260,-20),enemy4)});
 	    playerField=new BattlePlayerField(new BattleSlot[] {new BattleSlot(new Vector2f(-90,40),p),new BattleSlot(new Vector2f(-100,-40),p2)});
@@ -469,7 +469,10 @@ public class Start {
 		
 		//teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
 		
-	
+		enemy.setHp(10);
+		enemy2.setHp(10);
+		enemy3.setHp(10);
+		enemy4.setHp(10);
 	
 		BattleSystem.INIT(battleBox);
 

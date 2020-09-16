@@ -1,6 +1,7 @@
 package Items;
 
 import battleClasses.BattleEntity;
+import gameEngine.Start;
 
 public class RestoreSPItem extends Item {
 
@@ -18,6 +19,7 @@ public class RestoreSPItem extends Item {
 	  
 		if(entity.getSp()!=entity.getMaxsp()) {
 		entity.IncreseSp(this.howMuchItRestores);
+		Start.source.play(Start.Heal);
 		return true;
 		}
 		else {

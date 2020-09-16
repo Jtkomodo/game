@@ -1,10 +1,13 @@
 package audio;
 
 import org.joml.Vector2f;
+
+import gameEngine.Start;
+
 import static org.lwjgl.openal.AL10.*;
 public class Source {
-
-	
+   
+	private static boolean SOUNDON=true;//just so I can have my sound on for other stuff but mute my game
 	private Vector2f position;
 	private int sourceID;
 	private float gain,pitch,rollOff,refrenceDistance,MaxDistance;
@@ -77,10 +80,12 @@ public class Source {
 
 
 	public void play(Sound sound){
-		
+		if(SOUNDON) {
 		  alSourcei(sourceID, AL_BUFFER, sound.getSoundId());
 		  alSourcePlay(sourceID);
-		
+		}else {
+			Start.DebugPrint("SOUND IS OFF------------------------------\nChange SOUNDON=true in Source.java for sound------------------------------");
+		}
 	  }
 	
 	  public void SetPosition(Vector2f position) {

@@ -425,6 +425,10 @@ public Items[] getItems() {
 
 
 
+public int getAmountOfItem(Item item) {
+	return this.inventory.getAmountOfItem(item);
+}
+
 public float getSpeed() {
 	return speed;
 }

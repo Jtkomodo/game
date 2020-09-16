@@ -20,7 +20,7 @@ public class TextBuilder{
 
 	private OneTextureBatchedModel 	textModel;
 	private Fontloader loader;
-
+    private float stringLength,stringHieght;
 	private Entity e;
 	
 	public TextBuilder(String Font, float AtlusSize) {
@@ -49,7 +49,8 @@ public class TextBuilder{
 	
 	public void setString(String text) {//this makes our string model from a string to be drawn with drawstring()
 		//this just checks to see if it is the same string as the last rendered 
-		
+		float lengthOfString=0;
+		float heightOfString=0;
 		//------------init values-------------------	
 	   textModel.flushBuffers();;//important this makes sure that we start with a clean state so that nothing will go wrong
 		
@@ -58,11 +59,11 @@ public class TextBuilder{
 		float[] l;//uv coords (don't know why I called it l) 
 		float[]  v;//vertex
 	    Vector2f cursor=new Vector2f(0,0);// the curent cursor position 
-	
+	   
 	//actually make the model from values in font file	
 	    
 		for(int i=0;i<text.length();i++) {//simple for loop
-			
+		
 			int a=text.charAt(i);//this gets each char in order and uses it as the key to the hexmap that has all the info we need to draw in the correct place  
 		  
 		   
@@ -83,7 +84,7 @@ public class TextBuilder{
 			float Yz=y/loader.Texheight;
 			float Xo=(x+width)/loader.Texwidth;
 			float Yo=(y+height)/loader.Texheight;
-			 float height2=height/2;
+			 float height2=(height/2);
 			 float width2=(width/2);
 			 cursor.add(offset);//adds the offset to the cursor
 				if((char)a!='\n'){
@@ -101,24 +102,30 @@ public class TextBuilder{
 				   cursor.x+-width2,cursor.y-height2
 				};
 			textModel.addvaluestoVBO(v, l);//this is what actually adds the char into the batched model with the correct uv and vertex pionts
-		}
+			
+				}
 			
 				else {
 				 yoff-=100;
 				cursor=new Vector2f(0,cursor.y);
 				 
 			}
-					
-			
+				
+				
 	
-					 
+				 if((cursor.x+width2)>lengthOfString) {
+						lengthOfString=cursor.x+width2;
+					}
+				
+								
 			 cursor.add(xadv,yoff);//moves the cursor for the next char		 
-			
-			
+			 if((cursor.y+height2+yoff)>heightOfString) {
+					heightOfString=cursor.y+height2+yoff;
+				}
 		}
 	
-		
-		
+	   this.stringLength=lengthOfString;
+	   this.stringHieght=heightOfString;
 		
 		
 	}
@@ -238,7 +245,7 @@ public class TextBuilder{
 	
 	public void drawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
 		
-		   e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+		    e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 			e.setPosition(new Vector3f(x,y,z));
 			e.setColor(color);
 			e.setSize(scale);
@@ -325,6 +332,16 @@ public class TextBuilder{
 
 	public void setZ(float z) {
 		this.z = z;
+	}
+
+
+	public float getStringLength() {
+		return stringLength;
+	}
+
+
+	public float getStringHieght() {
+		return stringHieght;
 	}
 }
 

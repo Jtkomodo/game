@@ -14,28 +14,29 @@ public class Move {
 
 
    private HashMap<Integer,MoveComponent> components=new HashMap<Integer,MoveComponent>();
- 
+   
    private TimedButtonPress TimedButton;
    private boolean timedPress;
-   
-   
+    
+   private String name;
  
    
    
-   public Move(MoveComponent[] components) {
+   public Move(String name,MoveComponent[] components) {
 	    this.timedPress=false;
 	    constuct(components);
+	    this.name=name;
 	   
    }
    
    
 
   
-public Move(MoveComponent[] components,TimedButtonPress TimedButton) {
+public Move(String name,MoveComponent[] components,TimedButtonPress TimedButton) {
 	      this.TimedButton=TimedButton;
 	      this.timedPress=true;
 	      constuct(components);
-	   
+	      this.name=name;
    }
    
    
@@ -115,9 +116,9 @@ public boolean testIfMoveCanBeUsed(BattlePlayerField pcs,BattleEnemyField enemie
    public void useMove(BattlePlayerField pcs,BattleEnemyField enemies,BattleEntity entityUsingMove,BattleEntity SelectedEntity) {
 	   
 	   
-        Iterator<MoveComponent> i=this.components.values().iterator();
+    Iterator<MoveComponent> i=this.components.values().iterator();
 	   
-	if(testIfMoveCanBeUsed(pcs, enemies, entityUsingMove, SelectedEntity)) {   
+	if(testIfMoveCanBeUsed(pcs, enemies, entityUsingMove, SelectedEntity)) {
 	   while(i.hasNext()) {
 		   MoveComponent c=i.next();
 	  
@@ -142,7 +143,7 @@ public boolean testIfMoveCanBeUsed(BattlePlayerField pcs,BattleEnemyField enemie
    public boolean update(BattlePlayerField pcs,BattleEnemyField enemies,BattleEntity entityUsingMove,BattleEntity SelectedEntity) {
 	   int state=this.TimedButton.update();
 	   boolean timedButtonDOne=false;
-	   if(state!=TimedButton.NOT_PUSHED) {
+	   if(state!=TimedButtonPress.NOT_PUSHED) {
 		   
 		   timedButtonDOne=true;
 		   
@@ -187,6 +188,13 @@ public boolean testIfMoveCanBeUsed(BattlePlayerField pcs,BattleEnemyField enemie
    public SpCostComponent getSpCostComponent() {
 	   return (SpCostComponent) this.components.get(SpCostComponent.COMPID);
    }
+
+
+
+
+public String getName() {
+	return this.name;
+}
 	
 }
 

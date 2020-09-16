@@ -43,8 +43,8 @@ public class Inventory {
 		return result;
 	}
 	
-	public int getAmountOfItem(Items iTM) {
-		return items.getOrDefault(iTM.Item.getName(),0);
+	public int getAmountOfItem(Item iTM) {
+		return items.getOrDefault(iTM.getName(),0);
 		
 	}
 	

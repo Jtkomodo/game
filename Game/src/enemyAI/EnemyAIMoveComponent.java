@@ -27,10 +27,13 @@ public abstract class EnemyAIMoveComponent extends EnemyAIComponent {
 	
 	public abstract Moves FindMove(BattlePlayerField pcs,BattleEnemyField enemies,Enemy entityUsingMove,Moves[] moves);//this is called first to find a move and store it	
 	public void UsefoundMove(BattlePlayerField pcs, BattleEnemyField enemies, Enemy entityUsingMove) {
+		
+		
+		if(this.usedMove!=null) {
 		this.usedMove.getMove().useMove(pcs, enemies, entityUsingMove, this.EntityToUseMoveON);
 	    BattleSystem.setCurrentlyUsedMove(this.usedMove);
 	    BattleSystem.setMoveUsed(true);
-	    
+		}
 	}
 	
 	//getters

@@ -29,7 +29,8 @@ public class BattlePlayerField {
     
 	
 	private HashMap<BattleEntity,Vector2f> ListOfpcs=new HashMap<BattleEntity,Vector2f>();
-	private HashMap<Vector2f,BattleEntity> ListOfpcsI=new HashMap<Vector2f,BattleEntity>();//the inverse of the list so that we can get the pc by the position
+	private HashMap<Vector2f,BattleEntity> ListOfpcsI=new HashMap<Vector2f,BattleEntity>();//the inverse of the list so that we can get the pc by the positionVector
+	private HashMap<Vector2f,BattleEntity> ListOfDeadPcs=new HashMap<Vector2f,BattleEntity>();//this is a list that we will use so that we can revive dead pcs if need be
 	private TextBuilder text=new TextBuilder(Start.aakar);
     private GetInput input=new GetInput();
 	private boolean Selected=false;
@@ -168,20 +169,39 @@ public class BattlePlayerField {
          if(p.isDead()) {
         
 			itr.remove();
+			this.ListOfpcs.remove(p);
 		    this.ListOfpcsI.remove(v);
 		    this.selector.removePosition(v);
-		    
+		    this.ListOfDeadPcs.put(v, p);
+		}
+		
+	}
+    Iterator<Map.Entry<Vector2f,BattleEntity>> itr2 = this.ListOfDeadPcs.entrySet().iterator(); 
+	while(itr2.hasNext()) {
+		Map.Entry<Vector2f,BattleEntity> entry=itr2.next();
+	    BattleEntity p=entry.getValue();
+	    Vector2f v=entry.getKey();
+	    
+	    if(!p.isDead()) {
+			this.ListOfDeadPcs.remove(v);
+			this.ListOfpcs.put(p, v);
+			this.ListOfpcsI.put(v, p);
+			this.selector.addPosition(v);
 		}
 		
 		
 	}
 	 
 	 
+	 
+	 
+	 
 
         return this.ListOfpcs.isEmpty();
 	}
 	
-  
+	
+	
 	
 	public boolean selectPC() {
 		//this is where we will select which enemy we are doing a attack on
@@ -272,11 +292,13 @@ public void draw(boolean selecting) {
 	}
 	
 	
-public BattleEntity[] getPCs() {
+public BattleEntity[] getAlivePCs() {
 	
 	return this.ListOfpcsI.values().toArray(new BattleEntity[this.ListOfpcsI.size()]);
 }
-
+public BattleEntity[] getDeadPCs() {
+	return this.ListOfDeadPcs.values().toArray(new BattleEntity[this.ListOfDeadPcs.size()]);
+}
 
 public BattleEntity getCurrentPC() {
 	return this.ListOfpcsI.get(selector.getCurrentPosition());

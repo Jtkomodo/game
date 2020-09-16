@@ -4,10 +4,13 @@ package guis;
 
 import java.lang.reflect.Method;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 
-
+import Data.Constants;
+import gameEngine.Entity;
 import gameEngine.Start;
+import rendering.MainRenderHandler;
 import textrendering.TextBuilder;
 
 public class UIStringElement extends UIElement{
@@ -120,16 +123,20 @@ public class UIStringElement extends UIElement{
 	protected void drawElement(Vector2f Position) {
 	
 	Vector2f noffset=new Vector2f();offset.add(Position,noffset);
-		
-		
-		if(!hasColor) {
-			Start.text1.setString(string);
+   
+	     Start.text1.setString(string);
+	     float stringL=(Start.text1.getStringLength())*scale;
+	     float stringh=(Start.text1.getStringHieght())*scale;
+	     if(!hasColor) {
 	     Start.text1.drawString(noffset.x, noffset.y,0, scale);	
 		}else {
-			Start.text1.setString(string);
+			
 			Start.text1.drawString(noffset.x, noffset.y, scale,color);
+			 
 		}
 		
+		MainRenderHandler.addEntity(new Entity(Start.background, new Vector3f(noffset.x+stringL,noffset.y,1000000), 0, 1,Start.COLTEX,Constants.RED));
+		MainRenderHandler.addEntity(new Entity(Start.background, new Vector3f(noffset.x,noffset.y-stringh,1000000), 0, 1,Start.COLTEX,Constants.RED));
 	}
 
 	

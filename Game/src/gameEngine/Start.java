@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import  org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
+import org.lwjgl.glfw.GLFW;
 
 import Collisions.AABB;
 import Collisions.CircleColision;
@@ -59,6 +60,8 @@ import battleClasses.HpBar;
 import guis.BarElement;
 import guis.CloseWindow;
 import guis.FullHeal;
+import guis.GUIManeger;
+import guis.GUINode;
 import guis.PickMove;
 import guis.UIBox;
 import guis.UIBoxState;
@@ -137,7 +140,7 @@ public class Start {
    // public static Entity teste;
 	public static boolean soundPlay=true;
     public static BattleEntity p;
-    
+    private static double BackSpaceHoldStart=0;
     
 	public static void main(String[] args) {
 	
@@ -400,7 +403,7 @@ public class Start {
 			new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,1),
 			new UIStringElement("Heal",new Vector2f(-17,-5),.2f,Constants.BLACK,new FullHeal(p)),
 			new UIStringElement("Quit",new Vector2f(-17,-25),.2f,Constants.BLACK,new CloseWindow(w))
-			
+		
 			};
 		
 		
@@ -469,15 +472,26 @@ public class Start {
 		
 		//teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
 		
-		enemy.setHp(10);
-		enemy2.setHp(10);
-		enemy3.setHp(10);
-		enemy4.setHp(10);
+//		enemy.setHp(10);
+//		enemy2.setHp(10);
+//		enemy3.setHp(10);
+//		enemy4.setHp(10);
+		enemy.setSp(1);
+		enemy2.setSp(1);
+		enemy3.setSp(1);
+		enemy4.setSp(1);
+		
 	
 		BattleSystem.INIT(battleBox);
-
 		
-		 p2.setHp(10);	 
+        
+		GUINode Nodeheal=new GUINode("item",new PickMove(heal.getName()));
+		GUINode NodePunch=new GUINode("item",new PickMove(punch.getName()));
+		GUINode Nodeitem3=new GUINode("item",new PickMove(heal.getName()));
+		GUINode Nodeitem4=new GUINode("item",new PickMove(punch.getName()));
+		
+		GUINode root=new GUINode(new GUINode[]{Nodeheal,NodePunch,Nodeitem3,Nodeitem4,Nodeheal,Nodeitem3,Nodeitem3,Nodeitem3},3,4);
+		GUIManeger m=new GUIManeger(root);
 	
 	while(!w.isExited()) {
 		
@@ -491,7 +505,7 @@ public class Start {
 			UIElement[] elementlist=new UIElement[ITM.length];	
 			
 			for(int i=0;i<ITM.length;i++) {
-				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i]),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(ITM[i]));
+				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i].Item),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(ITM[i]));
 			}
 
 		
@@ -619,7 +633,8 @@ public class Start {
 	      textD.setString("circCol:"+circCol);
 	      textC.setString("xmap="+gridx+" ymap="+gridy);
 	    
-	   
+	      m.draw(new Vector2f(screencoordx,screencoordy),0.2f,new Vector2f(50,80));
+		   
 	    
 	      
 		if(HideSprite==false) 
@@ -744,12 +759,16 @@ MainBatchRender.flushModel();
 		
 		w.update();//this is needed to actually poll events from keyboard 
 		
-
-	    		
-		    	
+//		boolean isPresent=GLFW.glfwJoystickPresent(GLFW.GLFW_JOYSTICK_1);
+//		
+//			DebugPrint(""+isPresent);
+//		
+//		    	
 		 
 		    	InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_ENTER,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
-		    	
+		    if(CharCallback.takeInput) {
+		    	InputHandler.EnableButton(GLFW_KEY_BACKSPACE);
+		    }
 		    
 
 		StartBox.Update();
@@ -769,9 +788,19 @@ MainBatchRender.flushModel();
 		CONTROLLEFT=InputHandler.getStateofButton(GLFW_KEY_LEFT_CONTROL),F=InputHandler.getStateofButton(GLFW_KEY_F),H=InputHandler.getStateofButton(GLFW_KEY_H);
 		
 		
-		
-	    
-	   
+	 
+	  double time=Timer.getTIme();
+	  double timeHeld=time-BackSpaceHoldStart;
+	  
+	   if(CharCallback.takeInput && BACKSPACE==1) {
+		   CharCallback.backspace();
+		   Start.BackSpaceHoldStart=Timer.getTIme();	   
+	   }else if(CharCallback.takeInput && BACKSPACE>1) {
+		   if(timeHeld>=0.5) {
+			   Start.BackSpaceHoldStart=Timer.getTIme();
+			   CharCallback.removeWord();
+		   }
+	   }
 	    
 	    	
 		

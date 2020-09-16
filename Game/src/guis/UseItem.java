@@ -36,8 +36,9 @@ public class UseItem extends GUIfunction {
 		 BattleEntity p= BattleSystem.getCurrentEntity();
 			boolean used= p.useItem(item);
 			 if(used) {
+				 
 				 Start.DebugPrint("used "+item.Item.getName());
-				
+				 BattleSystem.setItemUsed(true);
 				 Proccesor.addComandtoQueue(new DrawString("used "+item.Item.getName(),new Vector2f(-100,40),.5f,true,.5f));
 				if( item.Item.isHealing())
 				 Proccesor.addComandtoQueue(new DrawString("healed "+item.Item.getValue()+"!",new Vector2f(100,40),.5f,true,.5f));

@@ -29,7 +29,8 @@ public enum Enemies {
 	
 	},new EnemyAI(
 		new EnemyAIComponent[]{
-				new SelfHealthCheckMoveAI(1,.50f)
+				new SelfHealthCheckMoveAI(1,.50f),
+				new SelfSPCheckAI(2,.50f)
 			})
 			
     );

@@ -27,4 +27,9 @@ public class SingleSelectedHealComponent extends MoveComponent {
 
 	}
 
+
+	public float getHeal() {
+		return this.heal;
+	}
+
 }

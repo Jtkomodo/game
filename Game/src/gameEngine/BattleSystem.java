@@ -56,6 +56,8 @@ public class BattleSystem {
 	private static boolean MoveCalled=false;
 	private static boolean EnemySelected=false;
 	private static boolean PCSelected=false;
+	private static boolean ItemUsed=false;
+	
 	
 	
 	
@@ -138,9 +140,17 @@ public class BattleSystem {
 			if(MoveUsed) {
 				TurnFinished=currentlyUsedMove.getMove().isMoveDone(playerField, enemyField, currentEntity,currentEntity);
 				PCSelected=false;
-	        
+	            EnemySelected=false;
 	        	
 			}
+			else if(ItemUsed) {
+				
+				TurnFinished=true;
+				PCSelected=false;
+	            EnemySelected=false;
+                ItemUsed=false;
+			}
+			
 			
 			if(TurnFinished) {
 				MoveUsed=false;
@@ -151,7 +161,7 @@ public class BattleSystem {
 			    battleBox.reset();
 			    playerField.ResetSelected();
 			    enemyField.ResetSelected();
-				
+			 
 			}
 	
 					
@@ -235,7 +245,7 @@ public class BattleSystem {
         	 newCurrentEntity=turnOrder.poll();
          }
      //now that we have the current Entity we need to check if is a pc or a enemy
-     
+    } 
      if(newCurrentEntity.isEnemy()) {
     	 Start.DebugPrint("ENEMY'S TURN");
     	 PlayersTurn=false;
@@ -245,7 +255,7 @@ public class BattleSystem {
     	 
      }
      
-    }
+    
      
      
      
@@ -256,7 +266,7 @@ public class BattleSystem {
 	
 private static void StartBattleRound(BattlePlayerField  p,BattleEnemyField e) {
 	   Start.DebugPrint("NEW_ROUND");
-		turnOrder=BattleFormulas.calcuateTurnOrder(p.getPCs(),e.getEnemies());
+		turnOrder=BattleFormulas.calcuateTurnOrder(p.getAlivePCs(),e.getEnemies());
 	
 	}
 	
@@ -393,6 +403,13 @@ public static BattleEntity getSelectedEntity() {
 
 public static void setMoveUsed(boolean moveUsed) {
 	MoveUsed = moveUsed;
+}
+
+
+
+
+public static void setItemUsed(boolean itemUsed) {
+	BattleSystem.ItemUsed=itemUsed;
 }
 
 

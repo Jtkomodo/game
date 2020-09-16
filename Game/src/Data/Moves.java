@@ -8,6 +8,7 @@ import org.joml.Vector2f;
 
 import battleClasses.TimedButtonPress;
 import battleMoves.*;
+import gameEngine.Start;
 import ScripterCommands.PlaySoundEffect;
 import audio.Sound;
 import audio.Source;
@@ -23,7 +24,7 @@ public enum Moves {
 //	;
 	
 	
-	punch("Lazer",new Move(new MoveComponent[] {
+	punch(new Move("lazer",new MoveComponent[] {
 			new SingleDamageComponent(50),
 			//new SelfHealComponent(20),
 			new SpCostComponent(30), 
@@ -32,21 +33,21 @@ public enum Moves {
 					new PlaySoundEffect(new Source(new Vector2f(0),1,1, 1,200, 0), new Sound("FIreOrDamage"),2.5f)
 			})
 	})),
-	heal("heal",new Move(new MoveComponent[] {
-	       new SingleSelectedHealComponent(25),		
+	heal(new Move("heal",new MoveComponent[] {
+	       new SingleSelectedHealComponent(25+150),		
 		   new SpCostComponent(25),
 			new SoundFXComponent(new PlaySoundEffect[] {
 					new PlaySoundEffect(new Source(new Vector2f(0),1,1, 1,200, 0), new Sound("healing sound"),0.0f),
 				
 			}),
 	})),
-	Doublekick("double kick",new Move(new MoveComponent[] {
+	Doublekick(new Move("double kick",new MoveComponent[] {
 			new SingleDamageComponent(50),
 			new SpCostComponent(33),
 		
 	})),
-	SupprHeal("SuperHeal",new Move(new MoveComponent[] {
-	        new SingleSelectedHealComponent(100),
+	SupprHeal(new Move("SuperHeal",new MoveComponent[] {
+	        new SingleSelectedHealComponent(100+100),
 	        new SpCostComponent(40)		
 	        
 	}))
@@ -65,8 +66,8 @@ public enum Moves {
 	private String name;
 	private Move move;
 
-	Moves(String name,Move move){
-		this.name=name;
+	Moves(Move move){
+		this.name=move.getName();
 		this.move=move;
 	}
 
@@ -76,6 +77,19 @@ public enum Moves {
 
 	public Move getMove() {
 		return move;
+	}
+	
+	
+	
+	public float getSingleHealingAmount() {
+		if(this.move.HasSingleHealComponent()) {
+			SingleSelectedHealComponent c=this.move.getSingleHealCompoent();
+			
+			return c.getHeal();
+		}else {
+			return 0;
+		}
+		
 	}
 	
 	

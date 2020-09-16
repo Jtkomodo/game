@@ -3,3 +3,6 @@
 /EnemyAIItemComponent.class
 /EnemyAIMoveComponent.class
 /SelfHealthCheckMoveAI.class
+/SelfSPCheckAI.class
+/EnemyUseMostPowerfulMoveAI.class
+/EnemyUseMostPowerfulMoveOnMostHPAI.class

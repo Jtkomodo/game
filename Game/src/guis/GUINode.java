@@ -15,13 +15,22 @@ public class GUINode {
    private LinkedList<GUINode> childrenNodes=new LinkedList<GUINode>();
    private GUIfunction function=null;
    private int amountOfCollumns=1,amountOfRows=1;
-   private TextBuilder string=new TextBuilder(Start.aakar);
+   private TextBuilder string=Start.text1;
+   private String s;
    
    public GUINode(String string,GUIfunction function) {
 	     this.function=function;
 	     this.string.setString(string);
+	     this.s=string;
+   }
+   public int getAmountOfChildren() {
+	   return this.childrenNodes.size();
    }
    
+   
+   public void setString(String string) {
+	   this.s=string;
+   }
     
    public  GUINode(GUINode[] nodes,int amountOfCollumns,int amountOfRows) {
 	   for(int i=0;i<nodes.length;i++) {
@@ -69,6 +78,7 @@ public class GUINode {
 
 
 public TextBuilder getString() {
+	this.string.setString(s);
 	return this.string;
 }
 
@@ -97,6 +107,16 @@ public int getAmountOfCollumns() {
 
 public int getAmountOfRows() {
 	return amountOfRows;
+}
+public void removeLast() {
+	if(!this.childrenNodes.isEmpty()) {
+	this.childrenNodes.removeLast();
+	}
+}
+public void removeFirst() {
+	if(!this.childrenNodes.isEmpty()) {
+	this.childrenNodes.removeFirst();
+	}
 }
 	
 }

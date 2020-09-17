@@ -6,12 +6,14 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="ENEMY" key="selection"/>
+		<item value="m.draw" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="m.draw"/>
+			<item value="m."/>
 			<item value="Enemy"/>
 			<item value="set"/>
 			<item value="this.sp="/>
@@ -25,8 +27,6 @@
 			<item value="colided"/>
 			<item value="PosBeforeCol"/>
 			<item value="beforemovement"/>
-			<item value="enemy"/>
-			<item value="x"/>
 		</list>
 		<list key="replacehistory">
 			<item value="setsp()"/>

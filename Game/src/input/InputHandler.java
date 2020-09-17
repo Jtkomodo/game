@@ -57,7 +57,15 @@ public class InputHandler {
 		
 	}
 	
-	
+	public static void DisableButtons(int[] Buttons) {
+		
+		
+		for(int i=0;i<Buttons.length;i++) {
+		
+	      DisableButton(Buttons[i]);
+		
+	}
+	}
 	
 	public static void EnableButtons(int[] Buttons) {
 		

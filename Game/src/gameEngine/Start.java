@@ -486,17 +486,19 @@ public class Start {
 		
         
 		GUINode Nodeheal=new GUINode("item",new PickMove(heal.getName()));
-		GUINode NodePunch=new GUINode("item",new PickMove(punch.getName()));
+		GUINode NodePunch=new GUINode("punch",new PickMove(punch.getName()));
 		GUINode Nodeitem3=new GUINode("item",new PickMove(heal.getName()));
 		GUINode Nodeitem4=new GUINode("item",new PickMove(punch.getName()));
 		
-		GUINode root=new GUINode(new GUINode[]{Nodeheal,NodePunch,Nodeitem3,Nodeitem4,Nodeheal,Nodeitem3,Nodeitem3,Nodeitem3},3,4);
-		GUIManeger m=new GUIManeger(root);
-	
+		GUINode root=new GUINode(new GUINode[]{},3,4);
+		GUIManeger m=new GUIManeger(root,new Vector2f(screencoordx,screencoordy),new Vector2f(50,80),0.2f);
+	    int nx=1;
+	    int ny=1;		
+	    int operation=1;
 	while(!w.isExited()) {
 		
 		fps();    
-	    
+	
 	//if(canRender) {
 		BattleSystem.soundPlay=true;
 		
@@ -507,11 +509,34 @@ public class Start {
 			for(int i=0;i<ITM.length;i++) {
 				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i].Item),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(ITM[i]));
 			}
-
+		   if(nx<=0) {
+			   nx=1;
+		   }
+		   if(ny<=0) {
+			   ny=1;
+		   }
+			  
+		   root.setDiminsions(nx, ny);
+		  InputHandler.EnableButtons(new int[] {GLFW_KEY_F1,GLFW.GLFW_KEY_X,GLFW.GLFW_KEY_Y,GLFW.GLFW_KEY_O});
+		if(InputHandler.getStateofButton(GLFW_KEY_F1)==2) {
+			if(operation==1) {
 		
-
-			
-	 	
+			root.addChild(new GUINode("item"+(root.getAmountOfChildren()+1),new PickMove(heal.getName())));
+			}else if(operation==-1) {	
+			root.removeLast();
+			}
+		}
+		if(InputHandler.getStateofButton(GLFW.GLFW_KEY_X)==2) {
+			root.setDiminsions(nx+=operation, ny);
+		}
+		if(InputHandler.getStateofButton(GLFW.GLFW_KEY_Y)==2) {
+			root.setDiminsions(nx, ny+=operation);
+		}
+		if(InputHandler.getStateofButton(GLFW.GLFW_KEY_O)==2) {
+			operation=operation*-1;
+		}
+		InputHandler.DisableButtons(new int[] {GLFW_KEY_F1,GLFW.GLFW_KEY_X,GLFW.GLFW_KEY_Y,GLFW.GLFW_KEY_O});
+		
 				//MainBatchRender.addTexture(textbox);
 	
 		StartBox.getUIState(1).relpaceALLActive(elementlist);
@@ -632,8 +657,9 @@ public class Start {
 	  
 	      textD.setString("circCol:"+circCol);
 	      textC.setString("xmap="+gridx+" ymap="+gridy);
-	    
-	      m.draw(new Vector2f(screencoordx,screencoordy),0.2f,new Vector2f(50,80));
+	      m.SetPositions(new Vector2f(screencoordx,screencoordy),new Vector2f(50,80),0.2f);
+	      m.update();
+	      m.draw();
 		   
 	    
 	      

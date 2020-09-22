@@ -125,10 +125,12 @@ public class GUIManeger {
 //	   		    MainRenderHandler.addEntity(new Entity(Start.background, new Vector3f(x,y,1000000), 0, 1,Start.COLTEX,Constants.RED));
 	   		    
 	   			}
-	   		   height+=(maxHeight+padding.y);
+	   		   height+=(padding.y);
 	   		 
 	   		}
+	   		width+=padding.x;
 	   		width*=sizeOfStrings;
+	   		height+=padding.y;
 	   		height*=sizeOfStrings;
 	   		
 	   
@@ -147,7 +149,7 @@ public class GUIManeger {
 			text.drawString(position.x, position.y, this.sizeOfStrings,color);
 			
 		}
-   		MainRenderHandler.addEntity(new Entity(Start.background,new Vector3f((position.x+width/2)-(padding.x*sizeOfStrings),position.y-(height/2),10000),0,new Vector2f(width+(padding.x*sizeOfStrings),height),Start.COLTEX,Constants.BLACK));
+   		MainRenderHandler.addEntity(new Entity(Start.background,new Vector3f((position.x+width/2)-(padding.x*sizeOfStrings),position.y-(height/2),10000),0,new Vector2f(width,height),Start.COLTEX,Constants.BLACK));
 		}
    		
 		

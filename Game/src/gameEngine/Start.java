@@ -141,6 +141,7 @@ public class Start {
 	public static boolean soundPlay=true;
     public static BattleEntity p;
     private static double BackSpaceHoldStart=0;
+    private static GUIManeger maneger;
     
 	public static void main(String[] args) {
 	
@@ -443,7 +444,9 @@ public class Start {
 			
 			UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
 					new UIStringElement(punch.getName(),new Vector2f(-54,5),.15f,Constants.BLACK,new PickMove(punch.getName()))
-					
+					,new UIStringElement(punch.getName(),new Vector2f(-54,-10),.15f,Constants.BLACK,new PickMove(punch.getName()))
+					,new UIStringElement(punch.getName(),new Vector2f(-4,5),.15f,Constants.BLACK,new PickMove(punch.getName()))
+					,new UIStringElement(punch.getName(),new Vector2f(-4,-10),.15f,Constants.BLACK,new PickMove(punch.getName()))
 			};
 			
 			
@@ -472,10 +475,10 @@ public class Start {
 		
 		//teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
 		
-//		enemy.setHp(10);
-//		enemy2.setHp(10);
-//		enemy3.setHp(10);
-//		enemy4.setHp(10);
+		enemy.setHp(10);
+		enemy2.setHp(10);
+		enemy3.setHp(10);
+		enemy4.setHp(10);
 		enemy.setSp(1);
 		enemy2.setSp(1);
 		enemy3.setSp(1);
@@ -491,7 +494,7 @@ public class Start {
 		GUINode Nodeitem4=new GUINode("item",new PickMove(punch.getName()));
 		
 		GUINode root=new GUINode(new GUINode[]{},3,4);
-		GUIManeger m=new GUIManeger(root,new Vector2f(screencoordx,screencoordy),new Vector2f(50,80),0.2f);
+		maneger=new GUIManeger(root);
 	    int nx=1;
 	    int ny=1;		
 	    int operation=1;
@@ -518,24 +521,36 @@ public class Start {
 			  
 		   root.setDiminsions(nx, ny);
 		  InputHandler.EnableButtons(new int[] {GLFW_KEY_F1,GLFW.GLFW_KEY_X,GLFW.GLFW_KEY_Y,GLFW.GLFW_KEY_O});
+		
+		boolean somthingChanged=false;  
+		  
 		if(InputHandler.getStateofButton(GLFW_KEY_F1)==2) {
 			if(operation==1) {
 		
 			root.addChild(new GUINode("item"+(root.getAmountOfChildren()+1),new PickMove(heal.getName())));
 			}else if(operation==-1) {	
 			root.removeLast();
+		    
 			}
+			somthingChanged=true;
 		}
 		if(InputHandler.getStateofButton(GLFW.GLFW_KEY_X)==2) {
 			root.setDiminsions(nx+=operation, ny);
+			somthingChanged=true;
 		}
 		if(InputHandler.getStateofButton(GLFW.GLFW_KEY_Y)==2) {
 			root.setDiminsions(nx, ny+=operation);
+			somthingChanged=true;
 		}
 		if(InputHandler.getStateofButton(GLFW.GLFW_KEY_O)==2) {
 			operation=operation*-1;
+			somthingChanged=true;
 		}
 		InputHandler.DisableButtons(new int[] {GLFW_KEY_F1,GLFW.GLFW_KEY_X,GLFW.GLFW_KEY_Y,GLFW.GLFW_KEY_O});
+		if(somthingChanged) {
+			maneger.UpdateChanges();
+		}
+		
 		
 				//MainBatchRender.addTexture(textbox);
 	
@@ -657,11 +672,10 @@ public class Start {
 	  
 	      textD.setString("circCol:"+circCol);
 	      textC.setString("xmap="+gridx+" ymap="+gridy);
-	      m.SetPositions(new Vector2f(screencoordx,screencoordy),new Vector2f(50,80),0.2f);
-	      m.update();
-	      m.draw();
-		   
+	     
 	    
+	    maneger.draw( new Vector2f(screencoordx,screencoordy),new Vector2f(100,80),0.1f);
+		
 	      
 		if(HideSprite==false) 
        
@@ -791,7 +805,7 @@ MainBatchRender.flushModel();
 //		
 //		    	
 		 
-		    	InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_ENTER,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
+		    	InputHandler.EnableButtons(new int[] {GLFW.GLFW_KEY_I,GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_ENTER,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
 		    if(CharCallback.takeInput) {
 		    	InputHandler.EnableButton(GLFW_KEY_BACKSPACE);
 		    }
@@ -799,13 +813,13 @@ MainBatchRender.flushModel();
 
 		StartBox.Update();
 		battleBox.Update();
-		
+		maneger.InputUpdate();
 		
 
 	   
 	    int UP=InputHandler.getStateofButton(GLFW_KEY_UP),DOWN=InputHandler.getStateofButton(GLFW_KEY_DOWN),
 	    LEFT=InputHandler.getStateofButton(GLFW_KEY_LEFT),RIGHT=InputHandler.getStateofButton(GLFW_KEY_RIGHT),
-		
+		I=InputHandler.getStateofButton(GLFW.GLFW_KEY_I),
 		F1=InputHandler.getStateofButton(GLFW_KEY_F1),F2=InputHandler.getStateofButton(GLFW_KEY_F2),
 		F3=InputHandler.getStateofButton(GLFW_KEY_F3),F4=InputHandler.getStateofButton(GLFW_KEY_F4),
 	    F12=InputHandler.getStateofButton(GLFW_KEY_F12),C=InputHandler.getStateofButton(GLFW_KEY_C),Y=InputHandler.getStateofButton(GLFW_KEY_Y),W=InputHandler.getStateofButton(GLFW_KEY_W)
@@ -813,10 +827,17 @@ MainBatchRender.flushModel();
 		BACKSPACE=InputHandler.getStateofButton(GLFW_KEY_BACKSPACE),S=InputHandler.getStateofButton(GLFW_KEY_S),CONTROLRIGHT=InputHandler.getStateofButton(GLFW_KEY_RIGHT_CONTROL),
 		CONTROLLEFT=InputHandler.getStateofButton(GLFW_KEY_LEFT_CONTROL),F=InputHandler.getStateofButton(GLFW_KEY_F),H=InputHandler.getStateofButton(GLFW_KEY_H);
 		
-		
-	 
+	
 	  double time=Timer.getTIme();
 	  double timeHeld=time-BackSpaceHoldStart;
+	 
+	  if(I==1) {
+		  if(maneger.isOpen()) {
+			  maneger.close();
+		  }else {
+			  maneger.open();
+		  }
+	  }
 	  
 	   if(CharCallback.takeInput && BACKSPACE==1) {
 		   CharCallback.backspace();
@@ -991,7 +1012,7 @@ MainBatchRender.flushModel();
 		
 	
 		
-		if(!StartBox.isActive()) {
+		if(!StartBox.isActive() && !maneger.isOpen()) {
 		
 		
 		

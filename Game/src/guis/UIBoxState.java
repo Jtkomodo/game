@@ -32,7 +32,7 @@ public class UIBoxState {
 	private List<UIElement> elementlist=new LinkedList<UIElement>();//all of the string elements
     private HashMap<Vector2f,UIElement> values=new HashMap<Vector2f,UIElement>();//holds every active element with it's position as the key 
     
-    private ArrowKeySelecter selector=new ArrowKeySelecter();
+    private ArrowKeySelecter selector=new ArrowKeySelecter(false);
 	
     //these are for detecting what position to move the cursor on based by direction so if we need to go down for instance we just take currentindexpositiony-1
  

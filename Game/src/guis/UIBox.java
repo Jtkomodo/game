@@ -252,7 +252,7 @@ public void Update() {
 	isAnyOpened=true;
 	opended.add(this);
 	
-	InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ENTER,GLFW_KEY_BACKSPACE});
+	//InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ENTER,GLFW_KEY_BACKSPACE});
 	
   }
   

@@ -1,5 +1,12 @@
 package guis;
 
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_BACKSPACE;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
+
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -8,8 +15,11 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import Data.Constants;
+import gameEngine.ArrowKeySelecter;
 import gameEngine.Entity;
 import gameEngine.Start;
+import gameEngine.Texture;
+import input.InputHandler;
 import rendering.MainRenderHandler;
 import textrendering.TextBuilder;
 
@@ -17,159 +27,196 @@ public class GUIManeger {
 
 	
 	private Stack<GUINode> backStack=new Stack<GUINode>();//this will be how we do go back actions
-	private LinkedList<Vector2f> positions=new LinkedList<Vector2f>();
 	private LinkedList<GUINode> ChildrenList;//this is the sub menu of the parent node
 	private GUINode ParrentNode;//this is the node that is the parent of the current sub menu
 	private GUINode currentNode;//this is the node that we currently have the cursor on
 	private int amountOfRows,amountOfCollumns;
 	private int amountOfElements;
 	private int currentRow,currrentCollumn,AmountOfRowsBeforeScroll;
+	private ArrowKeySelecter movement=new ArrowKeySelecter(false);
 	private float widthOfEachStringSpot;
-	private Vector2f position;
-	private Vector2f padding;
 	private float width,height;
-	private float sizeOfStrings;
-   
+	private Texture ArrowTex=Start.testSprite;
+	private boolean currentlyActive=false;
 	
 	
-	public GUIManeger(GUINode rootNode,Vector2f position,Vector2f padding,float sizeOfStrings) {
+	public GUIManeger(GUINode rootNode) {
 	
 			this.ChildrenList=rootNode.getChildren();
 			this.ParrentNode=rootNode;
-		    this.SetPositions(position, padding, sizeOfStrings);
+		    this.UpdateSlots(rootNode);
+		    
 		
 		
 	}
-    
-    public void update() {
-    	UpdatePositions(this.ParrentNode);
+	public void open() {
+		this.currentlyActive=true;
+	}
+    public void close() {
+    	this.currentlyActive=false;
     }
-    
-    
-	public void SetPositions(Vector2f position,Vector2f padding,float sizeOfstrings) {
-		this.position=position;
-		this.padding=padding;
-		this.sizeOfStrings=sizeOfstrings;
+    public boolean isOpen() {
+    	return this.currentlyActive;
+    }
+    public void InputUpdate() {
+    	if(this.currentlyActive) {
+    	
+    	int up=InputHandler.getStateofButton(GLFW_KEY_UP),down=InputHandler.getStateofButton(GLFW_KEY_DOWN)
+    			,left=InputHandler.getStateofButton(GLFW_KEY_LEFT),right=InputHandler.getStateofButton(GLFW_KEY_RIGHT),
+    		    Enter=InputHandler.getStateofButton(GLFW_KEY_ENTER),backspace=InputHandler.getStateofButton(GLFW_KEY_BACKSPACE);
+    		
+    			if(up==1) 
+    				moveUp();
+    			if(down==1)	
+    			   moveDown();
+    			if(left==1)
+    				moveLeft();
+    			if(right==1)
+    				moveRight();
+    	        if(Enter==1) {
+    	        	Select();
+    	        }
+    	
+    	    
+    	
+    	
+    	}
+    } 
+	private void Select() {
+		Vector2f currentSlot=movement.getCurrentPosition();
+		if(currentSlot!=null && !this.ParrentNode.isLeaf()) {
+	    int i=(int)currentSlot.x+this.amountOfCollumns*(int)-currentSlot.y;
+	    this.currentNode=this.ChildrenList.get(i);
+	    this.ParrentNode.remove(this.currentNode);
+	    this.UpdateChanges();
+		}
 		
-		
-		UpdatePositions(this.ParrentNode);
-		
+	}
+	public void UpdateChanges() {
+		UpdateSlots(this.ParrentNode);
 	}
 	
-	private void UpdatePositions(GUINode rootNode) {
-		if(!rootNode.isLeaf()) {
+	
+	private void UpdateSlots(GUINode rootNode) {
+		
+		if(!rootNode.isLeaf() && this.currentlyActive) {
 	     this.ChildrenList=rootNode.getChildren();
 		 this.ParrentNode=rootNode;
-	     this.positions.clear();
 		//find the string that has the highest length
+		 this.movement.removeAllPositions();
 	     if(!rootNode.isLeaf()) {
 		
 			float maxSize=0;
 			LinkedList<GUINode> children=rootNode.getChildren();
-			
-			for(int i=0;i<children.size();i++) {
+			int collumns=rootNode.getAmountOfCollumns();//this is just the value of the amount of columns
+			this.AmountOfRowsBeforeScroll=rootNode.getAmountOfRows();//this is just the value of the amount of rows
+			this.amountOfCollumns=collumns;
+			this.amountOfElements=children.size();
+			 int r=this.amountOfElements/collumns;
+			 if((this.amountOfElements%collumns)!=0) {
+			    	 r++;
+			   }
+			 this.amountOfRows=r;
+			 int amount=this.amountOfCollumns*this.AmountOfRowsBeforeScroll;
+				if(amount>this.ChildrenList.size()) {
+					amount=this.ChildrenList.size();
+				}
+				
+  
+			 Vector2f[] slots=new Vector2f[amount];    
+			for(int i=0;i<amount;i++) {
 				TextBuilder textString=children.get(i).getString();
 				if(textString!=null) { 
 					
 					float size=textString.getStringLength();
-					 
+					slots[i]=(new Vector2f(i%this.amountOfCollumns,-(i/this.amountOfCollumns)));
 					if(size>maxSize) {
 						maxSize=size;
 					}
 				}
 			}
 	      this.widthOfEachStringSpot=maxSize;
-	      this.currentNode=children.getFirst();
-	 
-	      
+	      movement.relpaceAllPositions(slots);
+	     
 	      //calculate the amount of rows needed
-	     int collumns=rootNode.getAmountOfCollumns();//this is just the value of the amount of columns
-	     this.AmountOfRowsBeforeScroll=rootNode.getAmountOfRows();//this is just the value of the amount of rows
-	     this.amountOfCollumns=collumns;
-	     this.amountOfElements=children.size();
-	     int r=this.amountOfElements/collumns;
-	     if((this.amountOfElements%collumns)!=0) {
-	    	 r++;
-	     }
-	     this.amountOfRows=r;
-	     
-	     
-	     }
-	     
-	     
-	 	
-		 height=0;
-		 width=this.amountOfCollumns*(this.widthOfEachStringSpot+padding.x);
-	   		for(int i=0;i<this.AmountOfRowsBeforeScroll;i++) {
-	   			float maxHeight=0;
-	   			for(int j=0;j<this.amountOfCollumns;j++) {
-	   				
-	   				if(i*this.amountOfCollumns+j>=this.ChildrenList.size()) {
-	   					break;
-	   				}
-	   				
-	   				GUINode node=this.ChildrenList.get(i*this.amountOfCollumns+j);
-	   				
-	   				if(node==null) {
-	   					break;
-	   				}
-	   			   TextBuilder text=node.getString();
-	   			   float x=position.x+(sizeOfStrings*(this.widthOfEachStringSpot+padding.x))*j;
-	   			   float y=(position.y-(((padding.y)*sizeOfStrings)*(i+1)));
-	   			   this.positions.add(new Vector2f(x,y));
-	   			//   text.drawString(x,y, sizeOfStrings);
-	   			if(text.getStringHieght()>maxHeight) {
-	   				maxHeight=text.getStringHieght();
-	   			}
-	   				
-//	   		    MainRenderHandler.addEntity(new Entity(Start.background, new Vector3f(x,y,1000000), 0, 1,Start.COLTEX,Constants.RED));
-	   		    
-	   			}
-	   		   height+=(padding.y);
-	   		 
-	   		}
-	   		width+=padding.x;
-	   		width*=sizeOfStrings;
-	   		height+=padding.y;
-	   		height*=sizeOfStrings;
-	   		
 	   
-	   		
-		}
 	     
+	     Start.DebugPrint("UPDATED");
+	     }
+	   	 
+		}
+	   
 	    
 	}
 	
-
-	public void draw(Vector4f color) {
-		if(!this.ParrentNode.isLeaf()) {				
-		for(int i=0;i<this.positions.size();i++) {
-            TextBuilder text=this.ChildrenList.get(i).getString();
-			Vector2f position=this.positions.get(i);
-			text.drawString(position.x, position.y, this.sizeOfStrings,color);
-			
-		}
-   		MainRenderHandler.addEntity(new Entity(Start.background,new Vector3f((position.x+width/2)-(padding.x*sizeOfStrings),position.y-(height/2),10000),0,new Vector2f(width,height),Start.COLTEX,Constants.BLACK));
-		}
-   		
-		
+	
+	
+	private void moveUp() {
+		movement.moveUP();	
+		Start.DebugPrint("UP______________");
+	}
+	private void moveDown() {
+		movement.moveDown();
+		Start.DebugPrint("DOWN______________");
+	}
+	private void moveRight() {
+		movement.moveRight();
+		Start.DebugPrint("RIGHT______________");
+	}
+	private void moveLeft() {
+	  movement.moveLeft();
+	  	Start.DebugPrint("LEFT______________");
 	}
 	
 	
+
+	
+	
    
-	public void draw() {
-		if(!this.ParrentNode.isLeaf()) {
-       for(int i=0;i<this.positions.size();i++) {
-            TextBuilder text=this.ChildrenList.get(i).getString();
-			Vector2f position=this.positions.get(i);
-			text.drawString(position.x, position.y, this.sizeOfStrings);
+	
+		public void draw(Vector2f position,Vector2f padding,float sizeOfStrings) {
+			if(this.currentlyActive) {
+			height=sizeOfStrings*((this.AmountOfRowsBeforeScroll+1)*padding.y);
+			width=sizeOfStrings*(((this.amountOfCollumns)*(this.widthOfEachStringSpot+padding.x))+padding.x);
+			if(!this.ParrentNode.isLeaf()) {
+				float amount=this.amountOfCollumns*this.AmountOfRowsBeforeScroll;
+				if(amount>this.ChildrenList.size()) {
+					amount=this.ChildrenList.size();
+				}
+				
+				
+				for(int i=0;i<(amount);i++) {
+					Vector2f slotOffset=new Vector2f(i%this.amountOfCollumns,(i/this.amountOfCollumns)+1);
+					Vector2f newposition=new Vector2f();
+					TextBuilder text=this.ChildrenList.get(i).getString();
+					slotOffset.y=-(slotOffset.y*padding.y*sizeOfStrings);
+					slotOffset.x=(slotOffset.x*sizeOfStrings*(this.widthOfEachStringSpot+padding.x));
+					position.add(slotOffset,newposition);
+					text.drawString(newposition.x, newposition.y,sizeOfStrings);
+
+				}
+				
+				Vector2f currentSlot=movement.getCurrentPosition();
+				if(currentSlot!=null) {
+			    int i=(int)currentSlot.x+this.amountOfCollumns*(int)-currentSlot.y;
 			
-		}
-   		MainRenderHandler.addEntity(new Entity(Start.background,new Vector3f((position.x+width/2)-(padding.x*sizeOfStrings),position.y-(height/2),10000),0,new Vector2f(width+(padding.x*sizeOfStrings),height),Start.COLTEX,Constants.BLACK));
-		}
-   		
-   		
-   	}
+			    Start.text1.setString("CurrentPosition="+currentSlot);
+			    Start.text1.drawString(Start.screencoordx-300, Start.screencoordy-100,0.2f);
+				Vector2f slotOffset=new Vector2f(i%this.amountOfCollumns,(i/this.amountOfCollumns)+1);
+			    slotOffset.y=(-(slotOffset.y*padding.y*sizeOfStrings));
+				slotOffset.x=(slotOffset.x*sizeOfStrings*(this.widthOfEachStringSpot+padding.x))-(padding.x/2)*sizeOfStrings;
+				MainRenderHandler.addEntity(new Entity(Start.Arrow, new Vector3f(position.add(slotOffset,new Vector2f()),100000),0,10,ArrowTex));//draw the arrow
+				}
+				
+				
+				
+			}
+	   	   		MainRenderHandler.addEntity(new Entity(Start.background,new Vector3f((position.x+width/2)-(padding.x*sizeOfStrings),position.y-(height/2),10000),0,new Vector2f(width+(padding.x*sizeOfStrings),height),Start.COLTEX,Constants.BLACK));
+			
+			}
+	   		
+	   		
+	   	}
 	
 	
   

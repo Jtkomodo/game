@@ -64,7 +64,7 @@ public class BattlePlayerField {
 				}
 			}
 		  
-		   this.selector=new ArrowKeySelecter(ListOfpcsI.keySet().toArray(new Vector2f[ListOfpcsI.size()]));
+		   this.selector=new ArrowKeySelecter(ListOfpcsI.keySet().toArray(new Vector2f[ListOfpcsI.size()]),true);
 		   
 	    
 	}

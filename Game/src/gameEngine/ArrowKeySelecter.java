@@ -17,7 +17,7 @@ public class ArrowKeySelecter {
 	private List<Float> yPos=new LinkedList<Float>();//list of each unique yPosition sorted
 	private List<Vector2f> positions=new LinkedList<Vector2f>();	
 	
-	
+	private boolean FieldMode=false;
 	
 	
 	private Vector2f currentPosition=null;
@@ -28,12 +28,12 @@ public class ArrowKeySelecter {
 	
 	
 
-	public ArrowKeySelecter(Vector2f[] positions) {
-	
+	public ArrowKeySelecter(Vector2f[] positions,boolean FieldMode) {
+	     this.FieldMode=FieldMode;
 		addPositions(positions);
 	}
-	public ArrowKeySelecter() {
-		
+	public ArrowKeySelecter(boolean FieldMode) {
+		this.FieldMode=FieldMode;
 	}
 
 	public void addPositions(Vector2f[] positions) {
@@ -282,6 +282,8 @@ public void setBySameOffset() {
 	public boolean moveLeft() {
 		boolean found=false;
 		if(this.currentPosition!=null) {
+			  //this.setActivePosition(this.currentPosition);
+
 		float x=this.xPos.get(this.CurrentIndexPositionX);
 
 	
@@ -294,34 +296,39 @@ public void setBySameOffset() {
 		    	Vector2f vector=positions.get(i);
 		    	if(!vector.equals(this.currentPosition) && x>vector.x) {
 		    	   float value=x-vector.x;
-		    	
-		    	 if(vector.y!=this.currentPosition.y) {
-		    	if(value<=closestx || closestx==0) {
+		    	if(this.FieldMode) {
+		    		if(vector.y!=this.currentPosition.y) {
+		    			if(value<=closestx || closestx==0) {
+
+		    				if(closestx!=value || closest.y<vector.y ) {
+		    					closestx=value;
+		    					closest=vector;
+		    					found=true;
+		    				}}
+		    		}}else {
+		    			if(vector.y==this.currentPosition.y) {
+			    			if(value<=closestx || closestx==0) {
+
+			    				if(closestx!=value || closest.y<vector.y ) {
+			    					closestx=value;
+			    					closest=vector;
+			    					found=true;
+			    				}
+			    				}
 		    		
-		    		if(closestx!=value || closest.y<vector.y ) {
-		    		closestx=value;
-		    		closest=vector;
-		    		found=true;
+		    		
+		    		
 		    		}
-		    			
-		    			
-		    		}
-		    	}
 		    	
-		    	}
-		
-		
-		
-		
+		    	}}
 		    }
-		    
 		    if(found) {
 		    
 		    	 setActivePosition(closest);
 	    }
 		        	
 		
-	//	Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionX+" indexs="+this.xPos.size()+","+this.yPos.size());
+		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionX+" indexs="+this.xPos.size()+","+this.yPos.size());
 		}
 		return found;
 	}
@@ -329,8 +336,9 @@ public void setBySameOffset() {
 	public boolean moveRight() {
 		boolean found=false;
 		if(this.currentPosition!=null) {
-
-		float x=this.xPos.get(this.CurrentIndexPositionX);
+		
+      //  this.setActivePosition(this.currentPosition);
+		    float x=this.xPos.get(this.CurrentIndexPositionX);
 
 	
 	
@@ -343,16 +351,34 @@ public void setBySameOffset() {
 		    	if(!vector.equals(this.currentPosition) && x<vector.x) {
 		    	   float value=vector.x-x;
 		    	
-		    	   
-		    	   if(vector.y!=this.currentPosition.y) {
-				    	if(value<=closestx || closestx==0) {
-				    		if(value!=closestx|| closest.y>vector.y) {
-				    		closestx=value;
-				    		closest=vector;
-				    		found=true;
-				    		}
-				    	}
+		    		if(this.FieldMode) {
+		    			if(vector.y!=this.currentPosition.y) {
+		    				if(value<=closestx || closestx==0) {
+		    					if(value!=closestx|| closest.y>vector.y) {
+		    						closestx=value;
+		    						closest=vector;
+		    						found=true;
+		    					}
+		    				}
+		    	   }}else {
+				    	if(!vector.equals(this.currentPosition) && x<vector.x) {
+							if(vector.y==this.currentPosition.y) {
+								if(value<=closestx || closestx==0) {
+						    		if(value!=closestx|| closest.y>vector.y) {
+						    		closestx=value;
+						    		closest=vector;
+						    		found=true;
+						    		}
+						    	
+						    	}
+								
+							
+				    	
+				    	
+				    	
+				    	
 				    	 }
+		    	   }
 		    	}
 		
 		
@@ -366,8 +392,14 @@ public void setBySameOffset() {
 		    }
 				         	
 		   
-	//	Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indexs="+this.xPos.size()+","+this.yPos.size());
-		}
+		
+			
+			 
+				
+			}
+			Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indexs="+this.xPos.size()+","+this.yPos.size());
+			}
+		
 		return found;
 		
 	
@@ -377,6 +409,8 @@ public void setBySameOffset() {
 	public boolean moveUP() {
 		boolean found=false;
 		if(this.currentPosition!=null) {
+			//  this.setActivePosition(this.currentPosition);
+
 		float y=this.yPos.get(this.CurrentIndexPositionY);
 
 		
@@ -422,7 +456,7 @@ public void setBySameOffset() {
 				    }
 				         	
 		   
-	//	Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indeys="+this.xPos.size()+","+this.yPos.size());
+		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indeys="+this.xPos.size()+","+this.yPos.size());
 		}
 		return found;
 		
@@ -433,7 +467,8 @@ public void setBySameOffset() {
 		
 		boolean found=false;
 		if(this.currentPosition!=null) {
-		
+			//  this.setActivePosition(this.currentPosition);
+
 		float y=this.yPos.get(this.CurrentIndexPositionY);
 
 		
@@ -479,7 +514,7 @@ public void setBySameOffset() {
 				    }
 				         	
 		   
-	//	Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indeys="+this.xPos.size()+","+this.yPos.size());
+		Start.DebugPrint("current="+this.CurrentIndexPositionX+","+this.CurrentIndexPositionY+" indeys="+this.xPos.size()+","+this.yPos.size());
 		}
 		return found;
 				

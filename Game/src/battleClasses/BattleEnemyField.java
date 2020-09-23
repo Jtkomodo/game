@@ -26,6 +26,7 @@ import Data.Constants;
 import gameEngine.ArrowKeySelecter;
 import gameEngine.BattleSystem;
 import gameEngine.Start;
+import gameEngine.Texture;
 import gameEngine.Timer;
 
 import input.GetInput;
@@ -67,7 +68,7 @@ public class BattleEnemyField {
 				}
 			}
 		  
-		   this.selector=new ArrowKeySelecter(ListOfEnemiesI.keySet().toArray(new Vector2f[ListOfEnemiesI.size()]));
+		   this.selector=new ArrowKeySelecter(ListOfEnemiesI.keySet().toArray(new Vector2f[ListOfEnemiesI.size()]),true);
 		   
 	}
 	

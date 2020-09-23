@@ -7,7 +7,7 @@ import gameEngine.Start;
 import static org.lwjgl.openal.AL10.*;
 public class Source {
    
-	private static boolean SOUNDON=true;//just so I can have my sound on for other stuff but mute my game
+	private static boolean SOUNDON=false;//just so I can have my sound on for other stuff but mute my game
 	private Vector2f position;
 	private int sourceID;
 	private float gain,pitch,rollOff,refrenceDistance,MaxDistance;

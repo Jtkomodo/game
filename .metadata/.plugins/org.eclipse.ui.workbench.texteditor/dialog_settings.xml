@@ -6,29 +6,32 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="collumns" key="selection"/>
+		<item value="maneger" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="maneger"/>
+			<item value="position"/>
+			<item value="manager.update"/>
+			<item value="UpdatePositions"/>
+			<item value="ParrentNode"/>
+			<item value="Changed"/>
+			<item value=" m."/>
+			<item value="ChildrenChanged"/>
+			<item value="m."/>
+			<item value="m.update"/>
+			<item value="Go"/>
+			<item value="draw"/>
 			<item value="collumns"/>
 			<item value="amountOfCollums"/>
 			<item value="thi"/>
-			<item value="m.draw"/>
-			<item value="m."/>
-			<item value="Enemy"/>
-			<item value="set"/>
-			<item value="this.sp="/>
-			<item value="play"/>
-			<item value="sound"/>
-			<item value=",20,"/>
-			<item value="isHeal()"/>
-			<item value="int gradeofmove,"/>
-			<item value="gradeofmove,"/>
-			<item value="gradeofmove"/>
 		</list>
 		<list key="replacehistory">
+			<item value="ChangedFlag"/>
+			<item value="move"/>
+			<item value="Move"/>
 			<item value="setsp()"/>
 			<item value=",Enemies.E1.getHP(),"/>
 			<item value=",E1.getHP(),"/>
@@ -41,9 +44,6 @@
 			<item value="float[] cuvs,float[] LocalVerts,"/>
 			<item value="setModel(model)"/>
 			<item value="Float"/>
-			<item value="height"/>
-			<item value="LinkedList"/>
-			<item value="BAR_COLOR_GREEN"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

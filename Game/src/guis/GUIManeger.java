@@ -29,7 +29,6 @@ public class GUIManeger {
 	private Stack<GUINode> backStack=new Stack<GUINode>();//this will be how we do go back actions
 	private LinkedList<GUINode> ChildrenList;//this is the sub menu of the parent node
 	private GUINode ParrentNode;//this is the node that is the parent of the current sub menu
-	private GUINode currentNode;//this is the node that we currently have the cursor on
 	private int amountOfRows,amountOfCollumns;
 	private int currentTopRow,AmountOfRowsBeforeScroll;
 	private ArrowKeySelecter movement=new ArrowKeySelecter(false);
@@ -51,8 +50,12 @@ public class GUIManeger {
 	}
 	public void open() {
 		this.currentlyActive=true;
+		UpdateChanges();
 	}
     public void close() {
+    	if(!this.backStack.isEmpty()) {
+    		this.changeParentNode(backStack.firstElement());
+    	}
     	this.currentlyActive=false;
     }
     public boolean isOpen() {
@@ -60,7 +63,7 @@ public class GUIManeger {
     }
     public void InputUpdate() {
     	if(this.currentlyActive) {
-    	
+    		InputHandler.EnableButton(GLFW_KEY_BACKSPACE);
     	int up=InputHandler.getStateofButton(GLFW_KEY_UP),down=InputHandler.getStateofButton(GLFW_KEY_DOWN)
     			,left=InputHandler.getStateofButton(GLFW_KEY_LEFT),right=InputHandler.getStateofButton(GLFW_KEY_RIGHT),
     		    Enter=InputHandler.getStateofButton(GLFW_KEY_ENTER),backspace=InputHandler.getStateofButton(GLFW_KEY_BACKSPACE);
@@ -75,6 +78,9 @@ public class GUIManeger {
     				moveRight();
     	        if(Enter==1) {
     	        	Select();
+    	        }
+    	        if(backspace==1) {
+    	        	goBack();
     	        }
     	 
     	        CheckScroll();
@@ -104,16 +110,34 @@ public class GUIManeger {
 	   }
    }
     
-    
-    
+    private void changeParentNode(GUINode node) {
+    	this.ChildrenList=node.getChildren();
+		this.ParrentNode=node;
+		this.currentTopRow=0;
+		this.movement.resetCurrentPosition();
+		this.UpdateSlots(node);
+	 
+    }
+    private void goBack() {
+    	if(!this.backStack.isEmpty()) {
+    		this.movement.resetCurrentPosition();
+    		changeParentNode(this.backStack.pop()); 		
+    	}
+    	Start.DebugPrint("WENT BACK");
+    	}
     
     private void Select() {
 		Vector2f currentSlot=movement.getCurrentPosition();
 		if(currentSlot!=null && !this.ParrentNode.isLeaf()) {
 	    int i=(int)currentSlot.x+this.amountOfCollumns*(int)-currentSlot.y;
-	    this.currentNode=this.ChildrenList.get(i);
-	    this.ParrentNode.remove(this.currentNode);
-	    this.UpdateChanges();
+	    GUINode currentNode=this.ChildrenList.get(i);
+	    if(currentNode.isLeaf()) {
+	    	currentNode.InvoleFunction();
+	    	this.UpdateChanges();
+	    }else {
+	    	this.backStack.add(ParrentNode);
+	    	changeParentNode(currentNode);
+	    }
 		}
 		
 	}
@@ -222,8 +246,9 @@ public class GUIManeger {
 					slotOffset.y=-((slotOffset.y-this.currentTopRow)*padding.y*sizeOfStrings);
 					slotOffset.x=(slotOffset.x*sizeOfStrings*(this.widthOfEachStringSpot+padding.x));
 					position.add(slotOffset,newposition);
-					text.drawString(newposition.x, newposition.y,sizeOfStrings);
-
+					
+				    text.drawString(newposition.x, newposition.y,sizeOfStrings);
+					
 				}
 				
 				Vector2f currentSlot=movement.getCurrentPosition();

@@ -32,10 +32,11 @@ public class GUINode {
 	   this.s=string;
    }
     
-   public  GUINode(GUINode[] nodes,int amountOfCollumns,int amountOfRows) {
+   public  GUINode(GUINode[] nodes,String string,int amountOfCollumns,int amountOfRows) {
 	   for(int i=0;i<nodes.length;i++) {
 		   this.addChild(nodes[i]);
 	   }
+	   this.s=string;
 	  setDiminsions(amountOfCollumns,amountOfRows);
    }
    
@@ -44,8 +45,10 @@ public class GUINode {
 	   this.function=function;
    }
    
-   public GUIfunction getFunction() {
-	   return this.function;
+   public void InvoleFunction() {
+	   if(this.function!=null) {
+	    this.function.invoke();;
+	   }
    }
    public void addChild(GUINode node) {
 	   this.childrenNodes.add(node);
@@ -78,7 +81,12 @@ public class GUINode {
 
 
 public TextBuilder getString() {
-	this.string.setString(s);
+	
+	if(!this.isLeaf()) {
+		this.string.setString(s+"->");
+	}else {
+		this.string.setString(s);
+	}
 	return this.string;
 }
 

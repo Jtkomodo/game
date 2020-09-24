@@ -370,12 +370,24 @@ public class Start {
      
 		a1=new Animate(7,player,sloader,0,7);
 		 
-		 playersInventory= new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore},new int[] {1,3,2});
-		 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore,Items.spSuperRestore},new int[] {3,1,4,2});
 	
- 
-		p=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
-	BattleEntity    p2=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
+		  
+		   GUINode bag=new GUINode(new GUINode[] {},"bag",1,2);
+		
+
+			
+			 playersInventory= new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore},new int[] {1,3,2},bag);
+			 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore,Items.spSuperRestore},new int[] {3,1,4,2});
+			 p=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
+
+			 GUINode healn=new GUINode("heal",new FullHeal(p));		
+		    GUINode stats=new GUINode("stats",new guis.DebugPrint("stats"));
+			GUINode quit=new GUINode("Quit",new CloseWindow(w));
+			GUINode root=new GUINode(new GUINode[]{stats,bag,healn,quit},"root",1,4);
+			
+			maneger=new GUIManeger(root);
+		 	
+			BattleEntity    p2=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
 //	BattleEntity	p3=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
 		
 		Enemy enemy=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
@@ -475,6 +487,9 @@ public class Start {
 		
 		//teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
 		
+		
+		p.setHp(1);
+		p.setSp(1);
 		enemy.setHp(10);
 		enemy2.setHp(10);
 		enemy3.setHp(10);
@@ -487,16 +502,11 @@ public class Start {
 	
 		BattleSystem.INIT(battleBox);
 		
-        
-		GUINode Nodeheal=new GUINode("item",new PickMove(heal.getName()));
-		GUINode NodePunch=new GUINode("punch",new PickMove(punch.getName()));
-		GUINode Nodeitem3=new GUINode("item",new PickMove(heal.getName()));
-		GUINode Nodeitem4=new GUINode("item",new PickMove(punch.getName()));
-		
-		GUINode root=new GUINode(new GUINode[]{},3,4);
-		maneger=new GUIManeger(root);
-	    int nx=1;
-	    int ny=1;		
+//		new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,new guis.DebugPrint("stats")),
+//		new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,1),
+//		new UIStringElement("Heal",new Vector2f(-17,-5),.2f,Constants.BLACK,new FullHeal(p)),
+//		new UIStringElement("Quit",new Vector2f(-17,-25),.2f,Constants.BLACK,new CloseWindow(w))
+	
 	    int operation=1;
 	while(!w.isExited()) {
 		
@@ -508,51 +518,24 @@ public class Start {
 		//----------------------GAME--LOOP------------------------------
  		Items[] ITM= playersInventory.getItems();		
 			UIElement[] elementlist=new UIElement[ITM.length];	
+			GUINode[] items=new GUINode[ITM.length];
+			
+			
 			
 			for(int i=0;i<ITM.length;i++) {
 				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i].Item),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(ITM[i]));
+			    items[i]=new GUINode(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i].Item),new UseItem(ITM[i]) );
+			
 			}
-		   if(nx<=0) {
-			   nx=1;
-		   }
-		   if(ny<=0) {
-			   ny=1;
-		   }
-			  
-		   root.setDiminsions(nx, ny);
+		  
+		
+			
 		  InputHandler.EnableButtons(new int[] {GLFW_KEY_F1,GLFW.GLFW_KEY_X,GLFW.GLFW_KEY_Y,GLFW.GLFW_KEY_O});
 		
 		boolean somthingChanged=false;  
 		  
-		if(maneger.isOpen()) {
-		if(InputHandler.getStateofButton(GLFW_KEY_F1)==2) {
-			if(operation==1) {
+	
 		
-			root.addChild(new GUINode("item"+(root.getAmountOfChildren()+1),new PickMove(heal.getName())));
-			}else if(operation==-1) {	
-			root.removeLast();
-		    
-			}
-			somthingChanged=true;
-		}
-		if(InputHandler.getStateofButton(GLFW.GLFW_KEY_X)==2) {
-			root.setDiminsions(nx+=operation, ny);
-			somthingChanged=true;
-		}
-		if(InputHandler.getStateofButton(GLFW.GLFW_KEY_Y)==2) {
-			root.setDiminsions(nx, ny+=operation);
-			somthingChanged=true;
-		}
-		if(InputHandler.getStateofButton(GLFW.GLFW_KEY_O)==2) {
-			operation=operation*-1;
-			somthingChanged=true;
-		}
-		InputHandler.DisableButtons(new int[] {GLFW_KEY_F1,GLFW.GLFW_KEY_X,GLFW.GLFW_KEY_Y,GLFW.GLFW_KEY_O});
-		if(somthingChanged) {
-			maneger.UpdateChanges();
-		}
-		
-		}
 				//MainBatchRender.addTexture(textbox);
 	
 		StartBox.getUIState(1).relpaceALLActive(elementlist);
@@ -561,7 +544,7 @@ public class Start {
 		
 	
 	
-
+   
 		
  	
 			//MainBatchRender.addTexture(textbox);

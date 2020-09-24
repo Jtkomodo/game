@@ -31,8 +31,7 @@ public class GUIManeger {
 	private GUINode ParrentNode;//this is the node that is the parent of the current sub menu
 	private GUINode currentNode;//this is the node that we currently have the cursor on
 	private int amountOfRows,amountOfCollumns;
-	private int amountOfElements;
-	private int currentRow,currrentCollumn,AmountOfRowsBeforeScroll;
+	private int currentTopRow,AmountOfRowsBeforeScroll;
 	private ArrowKeySelecter movement=new ArrowKeySelecter(false);
 	private float widthOfEachStringSpot;
 	private float width,height;
@@ -44,6 +43,7 @@ public class GUIManeger {
 	
 			this.ChildrenList=rootNode.getChildren();
 			this.ParrentNode=rootNode;
+			this.currentTopRow=0;
 		    this.UpdateSlots(rootNode);
 		    
 		
@@ -76,13 +76,38 @@ public class GUIManeger {
     	        if(Enter==1) {
     	        	Select();
     	        }
-    	
-    	    
+    	 
+    	        CheckScroll();
     	
     	
     	}
     } 
-	private void Select() {
+    
+   
+   private void CheckScroll() {
+	   
+	   Vector2f slot=this.movement.getCurrentPosition();
+	   if(slot!=null) {
+		   int row=(int)-slot.y;
+		   int collum=(int)slot.x;
+		   if((row)>=this.AmountOfRowsBeforeScroll) {
+			   this.currentTopRow=(row+1)-this.AmountOfRowsBeforeScroll;
+		   }
+		   else {
+			   this.currentTopRow=0;
+		   }
+		   float amount=((this.currentTopRow*this.amountOfCollumns)+(this.amountOfCollumns*this.AmountOfRowsBeforeScroll));
+		   if(amount>this.ChildrenList.size()) {
+			   amount=this.ChildrenList.size();
+		   }
+
+	   }
+   }
+    
+    
+    
+    
+    private void Select() {
 		Vector2f currentSlot=movement.getCurrentPosition();
 		if(currentSlot!=null && !this.ParrentNode.isLeaf()) {
 	    int i=(int)currentSlot.x+this.amountOfCollumns*(int)-currentSlot.y;
@@ -111,9 +136,9 @@ public class GUIManeger {
 			int collumns=rootNode.getAmountOfCollumns();//this is just the value of the amount of columns
 			this.AmountOfRowsBeforeScroll=rootNode.getAmountOfRows();//this is just the value of the amount of rows
 			this.amountOfCollumns=collumns;
-			this.amountOfElements=children.size();
-			 int r=this.amountOfElements/collumns;
-			 if((this.amountOfElements%collumns)!=0) {
+			int amountOfElements=children.size();
+			 int r=amountOfElements/collumns;
+			 if((amountOfElements%collumns)!=0) {
 			    	 r++;
 			   }
 			 this.amountOfRows=r;
@@ -123,8 +148,8 @@ public class GUIManeger {
 				}
 				
   
-			 Vector2f[] slots=new Vector2f[amount];    
-			for(int i=0;i<amount;i++) {
+			 Vector2f[] slots=new Vector2f[children.size()];    
+			 for(int i=0;i<children.size();i++) {
 				TextBuilder textString=children.get(i).getString();
 				if(textString!=null) { 
 					
@@ -169,8 +194,14 @@ public class GUIManeger {
 	}
 	
 	
-
 	
+	
+	
+	
+	
+	
+	
+
 	
    
 	
@@ -179,17 +210,16 @@ public class GUIManeger {
 			height=sizeOfStrings*((this.AmountOfRowsBeforeScroll+1)*padding.y);
 			width=sizeOfStrings*(((this.amountOfCollumns)*(this.widthOfEachStringSpot+padding.x))+padding.x);
 			if(!this.ParrentNode.isLeaf()) {
-				float amount=this.amountOfCollumns*this.AmountOfRowsBeforeScroll;
-				if(amount>this.ChildrenList.size()) {
-					amount=this.ChildrenList.size();
-				}
+				  float amount=((this.currentTopRow*this.amountOfCollumns)+(this.amountOfCollumns*this.AmountOfRowsBeforeScroll));
+				   if(amount>this.ChildrenList.size()) {
+					   amount=this.ChildrenList.size();
+				   }
 				
-				
-				for(int i=0;i<(amount);i++) {
+				for(int i=this.currentTopRow*this.amountOfCollumns;i<(amount);i++) {
 					Vector2f slotOffset=new Vector2f(i%this.amountOfCollumns,(i/this.amountOfCollumns)+1);
 					Vector2f newposition=new Vector2f();
 					TextBuilder text=this.ChildrenList.get(i).getString();
-					slotOffset.y=-(slotOffset.y*padding.y*sizeOfStrings);
+					slotOffset.y=-((slotOffset.y-this.currentTopRow)*padding.y*sizeOfStrings);
 					slotOffset.x=(slotOffset.x*sizeOfStrings*(this.widthOfEachStringSpot+padding.x));
 					position.add(slotOffset,newposition);
 					text.drawString(newposition.x, newposition.y,sizeOfStrings);
@@ -200,10 +230,9 @@ public class GUIManeger {
 				if(currentSlot!=null) {
 			    int i=(int)currentSlot.x+this.amountOfCollumns*(int)-currentSlot.y;
 			
-			    Start.text1.setString("CurrentPosition="+currentSlot);
-			    Start.text1.drawString(Start.screencoordx-300, Start.screencoordy-100,0.2f);
+			  
 				Vector2f slotOffset=new Vector2f(i%this.amountOfCollumns,(i/this.amountOfCollumns)+1);
-			    slotOffset.y=(-(slotOffset.y*padding.y*sizeOfStrings));
+			    slotOffset.y=(-((slotOffset.y-this.currentTopRow)*padding.y*sizeOfStrings));
 				slotOffset.x=(slotOffset.x*sizeOfStrings*(this.widthOfEachStringSpot+padding.x))-(padding.x/2)*sizeOfStrings;
 				MainRenderHandler.addEntity(new Entity(Start.Arrow, new Vector3f(position.add(slotOffset,new Vector2f()),100000),0,10,ArrowTex));//draw the arrow
 				}

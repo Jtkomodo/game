@@ -524,6 +524,7 @@ public class Start {
 		
 		boolean somthingChanged=false;  
 		  
+		if(maneger.isOpen()) {
 		if(InputHandler.getStateofButton(GLFW_KEY_F1)==2) {
 			if(operation==1) {
 		
@@ -551,7 +552,7 @@ public class Start {
 			maneger.UpdateChanges();
 		}
 		
-		
+		}
 				//MainBatchRender.addTexture(textbox);
 	
 		StartBox.getUIState(1).relpaceALLActive(elementlist);
@@ -674,7 +675,7 @@ public class Start {
 	      textC.setString("xmap="+gridx+" ymap="+gridy);
 	     
 	    
-	    maneger.draw( new Vector2f(screencoordx,screencoordy),new Vector2f(100,80),0.1f);
+	    maneger.draw( new Vector2f(screencoordx-100,screencoordy),new Vector2f(100,80),0.2f);
 		
 	      
 		if(HideSprite==false) 

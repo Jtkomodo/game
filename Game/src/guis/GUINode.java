@@ -16,6 +16,7 @@ public class GUINode {
    private GUIfunction function=null;
    private int amountOfCollumns=1,amountOfRows=1;
    private TextBuilder string=Start.text1;
+   private GUINodeFunction Nodefunction;
    private String s;
    
    public GUINode(String string,GUIfunction function) {
@@ -23,6 +24,12 @@ public class GUINode {
 	     this.string.setString(string);
 	     this.s=string;
    }
+   public GUINode(String string,GUIfunction function,GUINodeFunction NodeFunction) {
+	     this.function=function;
+	     this.string.setString(string);
+	     this.Nodefunction=NodeFunction;
+	     this.s=string;
+ }
    public int getAmountOfChildren() {
 	   return this.childrenNodes.size();
    }
@@ -44,6 +51,14 @@ public class GUINode {
    public void setFunctuin(GUIfunction function) {
 	   this.function=function;
    }
+   
+   public void InvokeGUINodeFuntion(Vector2f position,Vector2f padding,float size) {
+	   if(this.Nodefunction!=null) {
+		   this.Nodefunction.invoke(position,padding,size);
+	   }
+   }
+   
+   
    
    public void InvoleFunction() {
 	   if(this.function!=null) {

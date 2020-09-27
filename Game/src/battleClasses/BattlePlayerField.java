@@ -38,11 +38,15 @@ public class BattlePlayerField {
 	private ArrowKeySelecter selector;
 	
 	
+	public boolean EntityIsOnField(BattleEntity e) {
+		return this.ListOfpcs.containsKey(e);
+	}
 	
-	
-	
-	
-
+	public Vector2f getPositionOfEntity(BattleEntity e) {
+		
+			return this.ListOfpcs.get(e);
+		
+	}
 	
 	
 	public BattlePlayerField(BattleSlot[] slots) {

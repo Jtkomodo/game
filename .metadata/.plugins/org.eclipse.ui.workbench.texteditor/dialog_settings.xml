@@ -6,29 +6,30 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="maneger" key="selection"/>
+		<item value="UI" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="UI"/>
+			<item value="reset("/>
+			<item value="reset"/>
+			<item value="punch"/>
+			<item value="lazer"/>
+			<item value="p."/>
+			<item value=".is"/>
+			<item value=".isSpecial"/>
+			<item value="width"/>
+			<item value="playerField"/>
+			<item value="battlesystem."/>
+			<item value="BattleSystem"/>
+			<item value="Maneger"/>
 			<item value="maneger"/>
-			<item value="position"/>
-			<item value="manager.update"/>
-			<item value="UpdatePositions"/>
-			<item value="ParrentNode"/>
-			<item value="Changed"/>
-			<item value=" m."/>
-			<item value="ChildrenChanged"/>
-			<item value="m."/>
-			<item value="m.update"/>
-			<item value="Go"/>
-			<item value="draw"/>
-			<item value="collumns"/>
-			<item value="amountOfCollums"/>
-			<item value="thi"/>
+			<item value="backstack"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Lazer"/>
 			<item value="ChangedFlag"/>
 			<item value="move"/>
 			<item value="Move"/>
@@ -43,7 +44,6 @@
 			<item value="e.getUvs(),e.getVerts(),"/>
 			<item value="float[] cuvs,float[] LocalVerts,"/>
 			<item value="setModel(model)"/>
-			<item value="Float"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

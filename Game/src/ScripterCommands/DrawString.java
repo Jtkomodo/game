@@ -10,11 +10,13 @@ public class DrawString extends Commands {
 
 	private TextBuilder textModel=gameEngine.Start.text1;
     private Vector2f position;
+    private String string;
 	private float size;
 	private double Time,StartTime;
 	
 	public DrawString(String text,Vector2f position,float size,boolean stopsInput,double time) {
 		textModel.setString(text);
+		this.string=text;
 		this.StopsInput=stopsInput;
 		this.position=position;
 		this.size=size;
@@ -56,7 +58,7 @@ public class DrawString extends Commands {
 		
 			
 		}
-	 
+	    this.textModel.setString(string);
 		this.textModel.drawString(position.x, position.y, size);
 		
 		

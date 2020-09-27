@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import guis.GUINode;
+import guis.GUINodeDisplayItemInfo;
 import guis.UseItem;
 
 public class Inventory {
@@ -50,7 +51,7 @@ public class Inventory {
 			this.items.put(item.Item.getName(),amount);
 			this.itemNames.add(item.Item.getName());
 			this.itemsList.add(item);
-			GUINode node=new GUINode(item.Item.getName()+"  "+amount,new UseItem(item));
+			GUINode node=new GUINode(item.Item.getName(),new UseItem(item),new GUINodeDisplayItemInfo(this,item));
 			itemNodes.put(item.Item.getName(), node);
 			bagNode.addChild(node);}
 			
@@ -85,14 +86,12 @@ public class Inventory {
 		if(items.containsKey(item.Item.getName())) {
 			int amount=items.get(item.Item.getName());
 			items.put(item.Item.getName(),amount+1);
-			if(this.bagNode!=null) {
-			itemNodes.get(item.Item.getName()).setString(item.Item.getName()+"  "+(amount+1));}
 		}else {
 			itemNames.add(item.Item.getName());
 			itemsList.add(item);
 			items.put(item.Item.getName(),1);
 			if(this.bagNode!=null) {
-			GUINode node=new GUINode(item.Item.getName(),new UseItem(item));
+			GUINode node=new GUINode(item.Item.getName(),new UseItem(item),new GUINodeDisplayItemInfo(this,item));
 			itemNodes.put(item.Item.getName(), node);
 			bagNode.addChild(node);}
 		}
@@ -114,10 +113,6 @@ public class Inventory {
 				bagNode.remove(node);}
 	       }else {
 	    	   items.put(item.Item.getName(),amount-1);
-	    		if(this.bagNode!=null) {
-	    	       GUINode node=itemNodes.get(item.Item.getName());
-	    	       node.setString(item.Item.getName()+"  "+(amount-1));
-	    		}
 	       }
 			
 		}

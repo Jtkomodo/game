@@ -66,7 +66,14 @@ if(!entities.isEmpty()) {
 		}
 		 
 	}
-
+	public static void addUIEntity(Entity e) {
+		e.setUIPojeection(true);
+		entities.add(e);
+		if(e.isDrawDrawLine() && Start.showDrawLines) {
+			entities.add( new Entity(Start.background,new Vector3f(e.getPosition().x,e.getPosition().y+e.getDrawLineOffset(),100),0,new Vector2f(64,1),Start.COLTEX,Constants.RED));
+		}
+		 
+	}
 	
 	
 	public static void SortEntities() {

@@ -17,9 +17,22 @@ public enum Pcs {
 			50//speed
 			
 	},new Moves[]{
-		Moves.punch,
+		Moves.lazer,
 		Moves.heal
-	});
+	}),
+	C2(new float[]{
+			20,//attack
+			30,//Defense
+			200,   //hp
+			100, //sp
+			50//speed
+			
+	},new Moves[]{
+		Moves.Doublekick,
+		Moves.lazer,
+		Moves.SupprHeal,
+		Moves.heal
+	});;
 		
 		
 	private float atk;	

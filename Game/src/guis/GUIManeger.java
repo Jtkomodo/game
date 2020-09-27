@@ -27,6 +27,7 @@ public class GUIManeger {
 
 	
 	private Stack<GUINode> backStack=new Stack<GUINode>();//this will be how we do go back actions
+	private Stack<Vector2f> posStack=new Stack<Vector2f>();//this will be how we do go back actions
 	private LinkedList<GUINode> ChildrenList;//this is the sub menu of the parent node
 	private GUINode ParrentNode;//this is the node that is the parent of the current sub menu
 	private int amountOfRows,amountOfCollumns;
@@ -35,11 +36,11 @@ public class GUIManeger {
 	private float widthOfEachStringSpot;
 	private float width,height;
 	private Texture ArrowTex=Start.testSprite;
+	private Vector4f backgroundColor;
 	private boolean currentlyActive=false;
 	
-	
-	public GUIManeger(GUINode rootNode) {
-	
+	public GUIManeger(GUINode rootNode,Vector4f backgroundColor) {
+	        this.backgroundColor=backgroundColor;
 			this.ChildrenList=rootNode.getChildren();
 			this.ParrentNode=rootNode;
 			this.currentTopRow=0;
@@ -49,14 +50,19 @@ public class GUIManeger {
 		
 	}
 	public void open() {
-		this.currentlyActive=true;
-		UpdateChanges();
+		if(!this.currentlyActive) {
+			this.currentlyActive=true;
+			UpdateChanges();
+		}
 	}
     public void close() {
-    	if(!this.backStack.isEmpty()) {
-    		this.changeParentNode(backStack.firstElement());
+    	if(this.currentlyActive) {
+    		if(!this.backStack.isEmpty()) {
+    			this.changeParentNode(backStack.firstElement());
+    			backStack.clear();
+    		}
+    		this.currentlyActive=false;
     	}
-    	this.currentlyActive=false;
     }
     public boolean isOpen() {
     	return this.currentlyActive;
@@ -69,19 +75,32 @@ public class GUIManeger {
     		    Enter=InputHandler.getStateofButton(GLFW_KEY_ENTER),backspace=InputHandler.getStateofButton(GLFW_KEY_BACKSPACE);
     		
     			if(up==1) 
-    				moveUp();
+    				if(moveUp()) {
+    					Start.source.play(Start.Move);
+    				};
     			if(down==1)	
-    			   moveDown();
+    				if(moveDown()) {
+    					Start.source.play(Start.Move);
+    				};
     			if(left==1)
-    				moveLeft();
+    				if(moveLeft()) {
+    					Start.source.play(Start.Move);
+    				};
     			if(right==1)
-    				moveRight();
+    				if(moveRight()) {
+    					Start.source.play(Start.Move);
+    				};
     	        if(Enter==1) {
+    	        	
+    				Start.source.play(Start.Select);
+    				
     	        	Select();
     	        }
     	        if(backspace==1) {
+    	        	Start.source.play(Start.Back);
     	        	goBack();
     	        }
+    	        
     	 
     	        CheckScroll();
     	
@@ -121,23 +140,43 @@ public class GUIManeger {
     private void goBack() {
     	if(!this.backStack.isEmpty()) {
     		this.movement.resetCurrentPosition();
-    		changeParentNode(this.backStack.pop()); 		
+    		changeParentNode(this.backStack.pop());
+    		this.movement.setCurrentPosition(this.posStack.pop());
     	}
     	Start.DebugPrint("WENT BACK");
     	}
-    
-    private void Select() {
-		Vector2f currentSlot=movement.getCurrentPosition();
+  
+    private GUINode getCurrentNodeFromSelector() {
+    	Vector2f currentSlot=movement.getCurrentPosition();
 		if(currentSlot!=null && !this.ParrentNode.isLeaf()) {
 	    int i=(int)currentSlot.x+this.amountOfCollumns*(int)-currentSlot.y;
-	    GUINode currentNode=this.ChildrenList.get(i);
+	   if(i<this.ChildrenList.size()) {
+	    return this.ChildrenList.get(i);
+	   }else {
+		   return null;
+	   }
+	   }
+		else {
+			return null;
+		}
+    }
+    
+    
+    private void Select() {
+	  if(!this.ParrentNode.isLeaf()) {
+	   
+	    GUINode currentNode=this.getCurrentNodeFromSelector();
+	  if(currentNode!=null) {
 	    if(currentNode.isLeaf()) {
 	    	currentNode.InvoleFunction();
 	    	this.UpdateChanges();
 	    }else {
 	    	this.backStack.add(ParrentNode);
+	    	this.posStack.add(this.movement.getCurrentPosition());
+	    	this.movement.resetCurrentPosition();
 	    	changeParentNode(currentNode);
 	    }
+	  }
 		}
 		
 	}
@@ -200,21 +239,21 @@ public class GUIManeger {
 	
 	
 	
-	private void moveUp() {
-		movement.moveUP();	
-		Start.DebugPrint("UP______________");
+	private boolean moveUp() {
+		return movement.moveUP();	
+	
 	}
-	private void moveDown() {
-		movement.moveDown();
-		Start.DebugPrint("DOWN______________");
+	private boolean moveDown() {
+		return movement.moveDown();
+		
 	}
-	private void moveRight() {
-		movement.moveRight();
-		Start.DebugPrint("RIGHT______________");
+	private boolean moveRight() {
+		return movement.moveRight();
+	
 	}
-	private void moveLeft() {
-	  movement.moveLeft();
-	  	Start.DebugPrint("LEFT______________");
+	private boolean moveLeft() {
+	  return movement.moveLeft();
+	  
 	}
 	
 	
@@ -258,19 +297,39 @@ public class GUIManeger {
 			  
 				Vector2f slotOffset=new Vector2f(i%this.amountOfCollumns,(i/this.amountOfCollumns)+1);
 			    slotOffset.y=(-((slotOffset.y-this.currentTopRow)*padding.y*sizeOfStrings));
-				slotOffset.x=(slotOffset.x*sizeOfStrings*(this.widthOfEachStringSpot+padding.x))-(padding.x/2)*sizeOfStrings;
-				MainRenderHandler.addEntity(new Entity(Start.Arrow, new Vector3f(position.add(slotOffset,new Vector2f()),100000),0,10,ArrowTex));//draw the arrow
+				slotOffset.x=(slotOffset.x*sizeOfStrings*(this.widthOfEachStringSpot+padding.x))-30*sizeOfStrings;
+				MainRenderHandler.addEntity(new Entity(Start.Arrow, new Vector3f(position.add(slotOffset,new Vector2f()),100000),0,sizeOfStrings*50,ArrowTex));//draw the arrow
 				}
 				
 				
 				
 			}
-	   	   		MainRenderHandler.addEntity(new Entity(Start.background,new Vector3f((position.x+width/2)-(padding.x*sizeOfStrings),position.y-(height/2),10000),0,new Vector2f(width+(padding.x*sizeOfStrings),height),Start.COLTEX,Constants.BLACK));
+			    GUINode node=this.getCurrentNodeFromSelector();
+			    if(node!=null){
+			    	node.InvokeGUINodeFuntion(position,padding,sizeOfStrings);
+			    }
+	   	   		MainRenderHandler.addEntity(new Entity(Start.background,new Vector3f((position.x+width/2)-(padding.x*sizeOfStrings),position.y-(height/2),10000),0,new Vector2f(width+(padding.x*sizeOfStrings),height),Start.COLTEX,this.backgroundColor));
 			
 			}
 	   		
 	   		
 	   	}
+		public void reset() {
+		    if(!this.backStack.isEmpty()) {
+		    	this.changeParentNode(this.backStack.firstElement());
+		    	this.backStack.clear();
+		    	this.posStack.clear();
+		    }
+			this.movement.resetCurrentPosition();
+			Start.DebugPrint("RESET");
+		}
+		public void setBackgroundColor(Vector4f backgroundColor) {
+			this.backgroundColor = backgroundColor;
+		}
+		public float getWidth(float sizeOfStrings,Vector2f padding) {
+			
+			return 	sizeOfStrings*(((this.amountOfCollumns)*(this.widthOfEachStringSpot+padding.x))+padding.x);
+		}
 	
 	
   

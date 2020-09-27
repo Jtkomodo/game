@@ -63,8 +63,6 @@ import guis.FullHeal;
 import guis.GUIManeger;
 import guis.GUINode;
 import guis.PickMove;
-import guis.UIBox;
-import guis.UIBoxState;
 import guis.UIElement;
 import guis.UIStringElement;
 import guis.UseItem;
@@ -116,7 +114,6 @@ public class Start {
     public static CircleColision circle1, circle2;
     public static float PHP;
     public static float[] uvtextbox,uvArrow,vert; 
-    public static UIBox battleBox,StartBox,ShowBox;
  
     public static int amountOfMoves,amountOfSPMoves,function;
     public static HpBar playersSPBAr;
@@ -142,6 +139,8 @@ public class Start {
     public static BattleEntity p;
     private static double BackSpaceHoldStart=0;
     private static GUIManeger maneger;
+	public static GUINode specials;
+	public static GUINode moves;
     
 	public static void main(String[] args) {
 	
@@ -372,22 +371,22 @@ public class Start {
 		 
 	
 		  
-		   GUINode bag=new GUINode(new GUINode[] {},"bag",1,2);
-		
+		   GUINode bag=new GUINode(new GUINode[] {},"bag",2,2);
+		   
 
 			
 			 playersInventory= new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore},new int[] {1,3,2},bag);
 			 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore,Items.spSuperRestore},new int[] {3,1,4,2});
 			 p=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
 
-			 GUINode healn=new GUINode("heal",new FullHeal(p));		
+			GUINode healn=new GUINode("heal",new FullHeal(p));		
 		    GUINode stats=new GUINode("stats",new guis.DebugPrint("stats"));
 			GUINode quit=new GUINode("Quit",new CloseWindow(w));
 			GUINode root=new GUINode(new GUINode[]{stats,bag,healn,quit},"root",1,4);
 			
-			maneger=new GUIManeger(root);
+			maneger=new GUIManeger(root,Constants.COL_COLOR_BLUE);
 		 	
-			BattleEntity    p2=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
+			BattleEntity    p2=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C2.getAtk(),Pcs.C2.getDef(),Pcs.C2.getHp(),Pcs.C2.getSp(),Pcs.C2.getSpeed(),Pcs.C2.getMoves(),playersInventory);
 //	BattleEntity	p3=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
 		
 		Enemy enemy=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
@@ -424,21 +423,6 @@ public class Start {
 		UIStringElement BagElements[]= {new UIStringElement("-------bag------",new Vector2f(-38,40), .15f,Constants.BLACK)
 		};
 			 
-		UIBoxState StartBoxs[]= {
-				new UIBoxState(new Vector2f(0,0),30,50,StartElements,Start.COLTEX,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,-50),new Vector4f(0))),
-				new UIBoxState(new Vector2f(-200,0),w.getWidth()-200,w.getHeight()-200,BagElements,Start.textbox,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,80),new Vector4f(0)))
-		};
-			 
-		UIStringElement Elements[]= {new UIStringElement("event walked\n into colision\n Box",new Vector2f(-38,30), .15f,Constants.BLACK)
-		};
-		UIBoxState showBoxStates[]= {
-			
-				new UIBoxState(new Vector2f(-200,0),100,41,Elements,Start.textbox,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,50,80),new Vector4f(0)))
-		};
-		
-	   ShowBox=new UIBox(new Vector2f(0,50),showBoxStates);	
-	   StartBox=new UIBox(new Vector2f(screencoordx,screencoordy),StartBoxs); 
-	 
 
 			 
 			 
@@ -451,14 +435,14 @@ public class Start {
 			};
 			
 			
-			Moves punch=p.getmoveFromString(Moves.punch.getName());
+			Moves lazer=p.getmoveFromString(Moves.lazer.getName());
 			Moves heal=p.getmoveFromString(Moves.heal.getName());
 			
 			UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
-					new UIStringElement(punch.getName(),new Vector2f(-54,5),.15f,Constants.BLACK,new PickMove(punch.getName()))
-					,new UIStringElement(punch.getName(),new Vector2f(-54,-10),.15f,Constants.BLACK,new PickMove(punch.getName()))
-					,new UIStringElement(punch.getName(),new Vector2f(-4,5),.15f,Constants.BLACK,new PickMove(punch.getName()))
-					,new UIStringElement(punch.getName(),new Vector2f(-4,-10),.15f,Constants.BLACK,new PickMove(punch.getName()))
+					new UIStringElement(lazer.getName(),new Vector2f(-54,5),.15f,Constants.BLACK,new PickMove(lazer.getName()))
+					,new UIStringElement(lazer.getName(),new Vector2f(-54,-10),.15f,Constants.BLACK,new PickMove(lazer.getName()))
+					,new UIStringElement(lazer.getName(),new Vector2f(-4,5),.15f,Constants.BLACK,new PickMove(lazer.getName()))
+					,new UIStringElement(lazer.getName(),new Vector2f(-4,-10),.15f,Constants.BLACK,new PickMove(lazer.getName()))
 			};
 			
 			
@@ -469,23 +453,26 @@ public class Start {
 			};
 			
 			
-			UIBoxState boxs[]= {new UIBoxState(new Vector2f(),71,28,MenuElements,textbox,true),new UIBoxState(new Vector2f(150,10f),71,28,MoveElements,textbox),
-					new UIBoxState(new Vector2f(150,10),71,50,BagElements,Start.COLTEX,Constants.COL_COLOR_BLUE.add(new Vector4f(0,0,29,50),new Vector4f(0))),new UIBoxState(new Vector2f(150,10f),71,28,SPElements,textbox)
-			};
 		
+		
+		 specials=new GUINode(new GUINode[]{},"specials",2,2);
+         moves=new GUINode(new GUINode[]{},"moves",2,2);
+		 GUINode battleRoot=new GUINode(new GUINode[]{bag,moves,specials},"root",1,3);	
+			
+	 
+	    GUIManeger battleManeger=new GUIManeger(battleRoot,Constants.COL_COLOR_BLUE.add(0,0,0,50,new Vector4f()));
+		
+		BattleSystem.INIT(battleManeger);	
 		
 	
-		
-		
-		
-		
-		battleBox=new UIBox(new Vector2f(100,0),boxs);//this is the UIbox for the battle UI
-        StartBox.getUIState(1).addElement(new BarElement("HP:",p.getHpbar(),new Vector2f(-17,65)));
         source1=new Source(new Vector2f(0),1,1, 1,200, 0);
         source=new Source(new Vector2f(0), 1, 1, 0, 0,0);
 		source.setSourceRelitive(true);	
 		
 		//teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
+		
+		
+		
 		
 		
 		p.setHp(1);
@@ -499,8 +486,12 @@ public class Start {
 		enemy3.setSp(1);
 		enemy4.setSp(1);
 		
+		
+		
+		
+		
 	
-		BattleSystem.INIT(battleBox);
+	
 		
 //		new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,new guis.DebugPrint("stats")),
 //		new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,1),
@@ -538,11 +529,6 @@ public class Start {
 		
 				//MainBatchRender.addTexture(textbox);
 	
-		StartBox.getUIState(1).relpaceALLActive(elementlist);
-		battleBox.getUIState(2).relpaceALLActive(elementlist);
-			
-		
-	
 	
    
 		
@@ -561,7 +547,7 @@ public class Start {
 	
 	if(overworld==true) {	
 		
-		ShowBox.hide();
+	
 		 // MainRenderHandler.addEntity(new Entity(background,new Vector3f(100,100,100),0,64, COLTEX,Constants.BLACK,10,true));
 		
 		  
@@ -658,7 +644,7 @@ public class Start {
 	      textC.setString("xmap="+gridx+" ymap="+gridy);
 	     
 	    
-	    maneger.draw( new Vector2f(screencoordx-100,screencoordy),new Vector2f(100,80),0.2f);
+	   
 		
 	      
 		if(HideSprite==false) 
@@ -694,10 +680,7 @@ public class Start {
 
 }
 	
-     	 StartBox.setPosition(new Vector2f(screencoordx+300,screencoordy));
-     	StartBox.draw(); 
-      
-	  ShowBox.draw();
+	   maneger.draw( new Vector2f(screencoordx+(640/2)+50-maneger.getWidth(0.2f,new Vector2f(100,80)),screencoordy),new Vector2f(100,80),0.2f);
 	  textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
 		
 	  if(showFps)
@@ -788,17 +771,16 @@ MainBatchRender.flushModel();
 //			DebugPrint(""+isPresent);
 //		
 //		    	
-		 
+		
 		    	InputHandler.EnableButtons(new int[] {GLFW.GLFW_KEY_I,GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_ENTER,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
 		    if(CharCallback.takeInput) {
 		    	InputHandler.EnableButton(GLFW_KEY_BACKSPACE);
 		    }
 		    
 
-		StartBox.Update();
-		battleBox.Update();
+	
 		maneger.InputUpdate();
-		
+	    BattleSystem.updateInput();
 
 	   
 	    int UP=InputHandler.getStateofButton(GLFW_KEY_UP),DOWN=InputHandler.getStateofButton(GLFW_KEY_DOWN),
@@ -815,14 +797,6 @@ MainBatchRender.flushModel();
 	  double time=Timer.getTIme();
 	  double timeHeld=time-BackSpaceHoldStart;
 	 
-	  if(I==1) {
-		  if(maneger.isOpen()) {
-			  maneger.close();
-		  }else {
-			  maneger.open();
-		  }
-	  }
-	  
 	   if(CharCallback.takeInput && BACKSPACE==1) {
 		   CharCallback.backspace();
 		   Start.BackSpaceHoldStart=Timer.getTIme();	   
@@ -860,18 +834,18 @@ MainBatchRender.flushModel();
 	    
 	    
 	    }
-	    ESCAPEBOXUP=StartBox.isActive();
+	 
 	       if(ESCAPE==1) {
-			if(StartBox.isActive()) {
-				StartBox.hide();
+			if(maneger.isOpen()) {
+				maneger.close();
 				InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
 	
 			}else {
-				
-				StartBox.show();
+			    maneger.reset();
+				maneger.open();
 				a1.Pause();
 			    InputHandler.DisableAllBut(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_BACKSPACE,GLFW_KEY_ENTER});
-			    StartBox.reset();
+			
 			 
 			}
 			
@@ -886,10 +860,10 @@ MainBatchRender.flushModel();
 				if (overworld==false) {
 					overworld=true;
 					a1.addAnimation();
-			         battleBox.hide();
+			         BattleSystem.closeBattleGUI();
 					
 				}else {
-					
+					maneger.close();
 					BattleSystem.StartBattle(enemyField,playerField, bg, background);
 					
 				
@@ -996,7 +970,7 @@ MainBatchRender.flushModel();
 		
 	
 		
-		if(!StartBox.isActive() && !maneger.isOpen()) {
+		if(!maneger.isOpen()) {
 		
 		
 		
@@ -1262,11 +1236,6 @@ private static void initializeFPS() {
 
 }	
 
-public static void ShowBox(Vector2f position) {
-   ShowBox.setPosition(position.add(new Vector2f(Rendercamx,Rendercamy),new Vector2f(0)));
-   ShowBox.show();
-    	
-}
 
 
 	

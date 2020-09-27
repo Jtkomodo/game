@@ -22,7 +22,7 @@ public enum Enemies {
 			48-48//speed
 			
 	},new Moves[]{
-		Moves.punch,
+		Moves.lazer,
 		Moves.Doublekick,
 		Moves.heal,
 		Moves.SupprHeal

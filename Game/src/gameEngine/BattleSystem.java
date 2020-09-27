@@ -19,7 +19,8 @@ import battleClasses.BattleFormulas;
 import battleClasses.BattlePlayerField;
 import battleClasses.Enemy;
 import battleClasses.HpBar;
-import guis.UIBox;
+import guis.GUIManeger;
+import guis.GUINode;
 import guis.UIElement;
 import guis.UIStringElement;
 import guis.UseItem;
@@ -41,7 +42,6 @@ public class BattleSystem {
 	private static BattleEntity currentEntity=Start.p;
 	private static BattleEntity currentSelectedEntity=Start.p;
 	private static LinkedList<BattleEntity> turnOrder=new LinkedList<BattleEntity>();
-	private static UIBox battleBox;
 	private static Model backgroundModel;
 	private static Texture backgroundTexture;
 	private static Inventory playersInventory=Start.playersInventory, enemyTestInventory=Start.enemyTestInventory;
@@ -49,6 +49,7 @@ public class BattleSystem {
 	private static HpBar playersSPBAr=Start.playersSPBAr;
 	
 	
+	private static GUIManeger Maneger;
 	private static boolean MoveUsed=false;
 	private static boolean turnFinshed=true;
 	private static boolean PlayersTurn=true;
@@ -68,14 +69,15 @@ public class BattleSystem {
 	private static Source source=Start.source;
 	private static boolean EnemyHasTakenAction=false;
 	
-	
+	public static void closeBattleGUI() {
+		Maneger.close();
+	}
 	
 	
 
-	public static void INIT(UIBox BattleBox) {
-		//this is called before the game loop
-		
-	     battleBox=BattleBox;
+	public static void INIT(GUIManeger maneger) {
+		  Maneger=maneger;
+	  
 	   
 		 
 	}
@@ -87,8 +89,9 @@ public class BattleSystem {
 		MainRenderHandler.addEntity(new Entity(backgroundModel,new Vector3f(0,0,-10), 0, 64*40, backgroundTexture));
 		enemyField.draw(EnemySelected);
 		playerField.draw(PCSelected);
-		battleBox.draw();
-		
+		if(playerField.EntityIsOnField(currentEntity)) {
+		   Maneger.draw(playerField.getPositionOfEntity(currentEntity).add(20,100,new Vector2f()),new Vector2f(50,80),0.2f);
+		}
 	}
 	
 	
@@ -98,12 +101,14 @@ public class BattleSystem {
 	
 	
 	
-	
+	public static void updateInput() {
+		   Maneger.InputUpdate();	
+	}
 	
 	public static void battleUpdate() {
 	
 	//hide gui box if selecting a enemy or 
-	
+	 
 	
 		boolean enemiesdead=enemyField.updateField();
 		boolean PCsdead=playerField.updateField();
@@ -128,10 +133,10 @@ public class BattleSystem {
 			}
 			
 			if(EnemySelected || PCSelected || !PlayersTurn || MoveUsed) {
-				battleBox.hide();
+				Maneger.close();
 				
 			}else {
-				battleBox.show();
+				Maneger.open();
 			}
 			
 			
@@ -158,7 +163,7 @@ public class BattleSystem {
 			    PCSelected=false;
 			    EnemySelected=false;
 			    currentSelectedEntity=null;
-			    battleBox.reset();
+			    Maneger.reset();
 			    playerField.ResetSelected();
 			    enemyField.ResetSelected();
 			 
@@ -178,7 +183,7 @@ public class BattleSystem {
 				
 			}
 			
-				if(EnemySelected && !Start.StartBox.isActive()) {
+				if(EnemySelected) {
 					if(enemyField.selectEnemy()) {
 						if(MoveCalled) {
 							currentlyUsedMove.getMove().useMove(playerField, enemyField, currentEntity,enemyField.getCurrentEnemy());
@@ -252,7 +257,7 @@ public class BattleSystem {
     	 
      }else {
     	 PlayersTurn=true;
-    	 
+    	 addMovesToGUINodes(newCurrentEntity);
      }
      
     
@@ -304,9 +309,8 @@ public static void StartBattle(BattleEnemyField enemies,BattlePlayerField p,Text
 	backgroundModel=BackgroundModel;
 	backgroundTexture=background;
 	Start.overworld=false;
-	battleBox.reset();
+	Maneger.reset();
 	Start.a1.removeAnimation();
-	Start.StartBox.reset();
 	Start.StateOfStartBOx=false;
 	enemyField=enemies;
 	playerField=p;
@@ -314,6 +318,24 @@ public static void StartBattle(BattleEnemyField enemies,BattlePlayerField p,Text
 	
 	  
 }
+
+private static void addMovesToGUINodes(BattleEntity pc) {
+	Moves[] Moves=pc.getmoves();	
+	Start.moves.removeAllChildren();
+	Start.specials.removeAllChildren();
+	for(int i=0;i<Moves.length;i++) {
+		Moves move=Moves[i];
+		if(move.isSpecailMove()) {
+			Start.specials.addChild(new GUINode(move.getName(),new guis.PickMove(move.getName())));
+		}else {
+			Start.moves.addChild(new GUINode(move.getName(),new guis.PickMove(move.getName())));
+		}
+		
+		}
+
+	Maneger.UpdateChanges();
+}
+
 
 
 

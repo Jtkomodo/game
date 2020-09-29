@@ -1,8 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy>
-    <typeInfo handle="=Game/src&lt;ScripterCommands{Commands.java[Commands" modifiers="1025" timestamp="1593380282952"/>
-    <typeInfo handle="=Game/src&lt;battleMoves{MoveComponent.java[MoveComponent" modifiers="1025" timestamp="1593374868693"/>
-    <typeInfo handle="=Game/src&lt;enemyAI{EnemyAIItemComponent.java[EnemyAIItemComponent" modifiers="1025" timestamp="1596496177831"/>
-    <typeInfo handle="=Game/src&lt;enemyAI{EnemyAIMoveComponent.java[EnemyAIMoveComponent" modifiers="1025" timestamp="1596415508830"/>
-    <typeInfo handle="=Game/src&lt;guis{GUINodeFunction.java[GUINodeFunction" modifiers="1025" timestamp="1601087883768"/>
-</typeInfoHistroy>
+<typeInfoHistroy/>

@@ -273,18 +273,24 @@ public class Start {
 		NO=new Sound("NO_GUI");
 		TimedBad=new Sound("Timed_Button_BAD");
 		
+
+        source1=new Source(new Vector2f(0),1,1, 1,200, 0);
+        source=new Source(new Vector2f(0), 1, 1, 0, 0,0);
+		source.setSourceRelitive(true);	
+         
+		source1.play(Select);
 		
 		DebugPrint("Making Textures....");
 		//Define texturesbr.close();
 		//font=new Fontloader("aakar",512);    
-		sloader= new SpriteSheetLoader("playerSpriteSheet",138);//loads the sprite sheet info
+	
 		tex=new Texture("newsprite");
 		textbox=new Texture("textbox");
 		bg= new Texture("testBackground");
 		HealthBarBackground=new Texture("HealthBarBackground");
-	    VectorTex=new Texture("vector");
+	    VectorTex=new Texture("Vector");
 		
-		
+		sloader= new SpriteSheetLoader("playerSpriteSheet",138);//loads the sprite sheet info	
 		
 		
 		aakar=new Fontloader("aakar",512);    
@@ -302,9 +308,9 @@ public class Start {
 		piont2= new Texture("Point2");
 		circleCol1=new Texture("Circle");
 	//	MAP=new Texture("map3");
-	    playerTex= new Texture("SpriteSheets/playerSpriteSheet");
+	    playerTex= new Texture("Spritesheets/playerSpriteSheet");
 	    col2= new Texture("ColTex2");
-	    COLTEX=new Texture("Whitebox");
+	    COLTEX=new Texture("whitebox");
 	    testSprite=new Texture("testSprites");
 		//map=new Texture("map1"); 
 		//Define models
@@ -338,7 +344,7 @@ public class Start {
 		//map1=new WorldLoader("map3",true);
 		
 	    //currentMap=new MapLoader(map1.Getmap(),scaleOfMapTiles);
-		MapFIle map=new MapFIle("map1TEST");
+		MapFIle map=new MapFIle("Map1TEST");
 		map.readMap();
 	    currentMap=new MapLoader(tex,map,scaleOfMapTiles);
       
@@ -464,11 +470,7 @@ public class Start {
 		
 		BattleSystem.INIT(battleManeger);	
 		
-	
-        source1=new Source(new Vector2f(0),1,1, 1,200, 0);
-        source=new Source(new Vector2f(0), 1, 1, 0, 0,0);
-		source.setSourceRelitive(true);	
-		
+			
 		//teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
 		
 		

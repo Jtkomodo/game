@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 
 import org.joml.Vector2f;
@@ -213,13 +214,16 @@ public class MapFIle {
 		
 	
 		DataInputStream stream;
-		try {
-			stream = new DataInputStream(new FileInputStream("src/res/Maps/"+name+".bin"));
-		} catch (FileNotFoundException e1) {
+		    String location=("/res/Maps/"+name+".bin");
+			InputStream inputs=getClass().getResourceAsStream(location);
+			if(inputs==null) {
+				System.err.println("Sorrry the mapfile "+location+" was not found");
+			}else {
+				stream = new DataInputStream(inputs);
+			
+	
 		    
-			System.err.print("Sorrry the mapfile "+name+" is not found in /res/maps");
-			return;
-		}
+		
 	
 		try {
 		while(stream.available()>0) {
@@ -297,6 +301,7 @@ public class MapFIle {
 		
 			e.printStackTrace();
 		}
+			}
 	}
 		
 		

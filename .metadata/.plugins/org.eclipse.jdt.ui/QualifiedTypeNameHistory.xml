@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="guis.FullHeal"/>
-    <fullyQualifiedTypeName name="guis.CloseWindow"/>
-    <fullyQualifiedTypeName name="guis.UseItem"/>
     <fullyQualifiedTypeName name="com.sun.tools.javac.util.ArrayUtils"/>
     <fullyQualifiedTypeName name="rendering.Model"/>
     <fullyQualifiedTypeName name="java.nio.FloatBuffer"/>
@@ -57,7 +54,10 @@
     <fullyQualifiedTypeName name="Data.Constants"/>
     <fullyQualifiedTypeName name="guis.GUINodeDisplayItemInfo"/>
     <fullyQualifiedTypeName name="gameEngine.BattleSystem"/>
-    <fullyQualifiedTypeName name="gameEngine.Texture"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="guis.GUINode"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="java.util.stream.Stream"/>
+    <fullyQualifiedTypeName name="gameEngine.Texture"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.io.InputStream"/>
 </qualifiedTypeNameHistroy>

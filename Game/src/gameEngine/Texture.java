@@ -13,6 +13,7 @@ import static org.lwjgl.opengl.GL11.glTexParameterf;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -58,15 +59,19 @@ public Texture(String path) {
 		
        
 		ByteBuffer data;
-			    
+		String location="/res/"+path+".png";	    
 	                                   //load our texture 
 		try {
 			
-			String location=new String("/res/"+path+".png");
+			
 			
 		//data=stbi_load(location,width,height,comp,4);
 			InputStream stream=getClass().getResourceAsStream(location);
-			 PNGDecoder decoder = new PNGDecoder(stream);
+			if(stream==null) {
+				System.err.println("stream is null");
+			}
+			  stream = new BufferedInputStream(stream); 
+			PNGDecoder decoder = new PNGDecoder(stream);
 			
 
 			    //create a byte buffer big enough to store RGBA values
@@ -106,9 +111,10 @@ public Texture(String path) {
 	    textures.add(this);
 	  loadTexture(data);
 	  MemoryUtil.memFree(data);
+	  System.out.println("[OK]Texture "+location+" loaded");
 	  } catch (IOException e) {
-			System.out.println(e.getMessage());
-			System.out.println("didn't work");
+		     System.err.println("[ERROR]Texture "+location+" failed");
+		     e.printStackTrace();
 		}
 		
 		

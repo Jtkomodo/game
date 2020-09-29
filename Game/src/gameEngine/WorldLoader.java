@@ -1,6 +1,7 @@
 package gameEngine;
 
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +43,7 @@ public class WorldLoader {
 		
 try {
 	InputStream stream=getClass().getResourceAsStream(location);
+    stream = new BufferedInputStream(stream);
 	PNGDecoder decoder = new PNGDecoder(stream);
 	 
 

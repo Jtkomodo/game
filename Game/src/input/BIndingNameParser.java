@@ -1,5 +1,6 @@
 package input;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +25,7 @@ public class BIndingNameParser {
 		String   location=new String("/res/"+name+".ButtonBInd");
 		
 	InputStream ist=getClass().getResourceAsStream(location);
-		
+    ist = new BufferedInputStream(ist);
 		
 		
 		if(ist==null) {

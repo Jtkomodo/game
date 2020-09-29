@@ -19,7 +19,7 @@ public class SpriteSheetLoader {
 	
 	public SpriteSheetLoader(String name,float size) {
 		ReadFile(name);
-		texture=new Texture("SpriteSheets/"+name);
+		texture=new Texture("Spritesheets/"+name);
 		this.size=size;
 		
 	}
@@ -34,7 +34,7 @@ public class SpriteSheetLoader {
 	private void  ReadFile(String name) {
 		
 		
-		InputStream ist=this.getClass().getResourceAsStream("/res/SpriteSheets/"+name+".data");//loads the spriter sheet data file
+		InputStream ist=this.getClass().getResourceAsStream("/res/Spritesheets/"+name+".data");//loads the spriter sheet data file
 		
 		
 		
@@ -81,6 +81,7 @@ public class SpriteSheetLoader {
 		} catch (IOException e) {
 			
 			e.printStackTrace();
+			//System.exit(0);
 		}
 
 		}

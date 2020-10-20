@@ -326,9 +326,9 @@ private static void addMovesToGUINodes(BattleEntity pc) {
 	for(int i=0;i<Moves.length;i++) {
 		Moves move=Moves[i];
 		if(move.isSpecailMove()) {
-			Start.specials.addChild(new GUINode(move.getName(),new guis.PickMove(move.getName())));
+			Start.specials.addChild(new GUINode(move.getName(),new guis.PickMove(move.getName()),new guis.GUINodeDisplayMoveInfo(move)));
 		}else {
-			Start.moves.addChild(new GUINode(move.getName(),new guis.PickMove(move.getName())));
+			Start.moves.addChild(new GUINode(move.getName(),new guis.PickMove(move.getName()),new guis.GUINodeDisplayMoveInfo(move)));
 		}
 		
 		}

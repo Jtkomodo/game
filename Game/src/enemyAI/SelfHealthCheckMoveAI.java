@@ -38,14 +38,14 @@ public class SelfHealthCheckMoveAI extends EnemyAIMoveComponent {
 		
 			for(int i=0;i<moves.length;i++) {
 				Moves move=moves[i];
-				if(move.isSingleHeal()) {
+				if(move.isSinglSelectedeHeal()) {
 					healingMoves.add(move);
 				}	 
 			}
 			
 			
 			
-	        Comparator<Moves> c=Comparator.comparing(Moves::getSingleHealingAmount);
+	        Comparator<Moves> c=Comparator.comparing(Moves::getSingleSelectedHealingAmount);
 	        Collections.sort(healingMoves,c);
 		    
 	        float amountNeededToHeal=maxHP-hp;
@@ -62,7 +62,7 @@ public class SelfHealthCheckMoveAI extends EnemyAIMoveComponent {
 	        		foundMove=move;
 	        		}else {
 	        			float costF=foundMove.getCost();
-	        			if((move.getCost()<costF) && (move.getSingleHealingAmount()>=(amountNeededToHeal-(amountNeededToHeal*.05)))){//if the cost is less than the last move and heals at least 95%
+	        			if((move.getCost()<costF) && (move.getSingleSelectedHealingAmount()>=(amountNeededToHeal-(amountNeededToHeal*.05)))){//if the cost is less than the last move and heals at least 95%
 	        				//of the amount needed to heal then replace the last move with this one
 	        				
 	        				foundMove=move;

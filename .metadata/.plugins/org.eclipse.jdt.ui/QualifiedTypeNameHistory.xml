@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.sun.tools.javac.util.ArrayUtils"/>
     <fullyQualifiedTypeName name="rendering.Model"/>
     <fullyQualifiedTypeName name="java.nio.FloatBuffer"/>
     <fullyQualifiedTypeName name="org.lwjgl.system.MemoryUtil"/>
@@ -13,7 +12,6 @@
     <fullyQualifiedTypeName name="battleClasses.TimedButtonCombo"/>
     <fullyQualifiedTypeName name="battleClasses.TimedButton"/>
     <fullyQualifiedTypeName name="battleMoves.MoveComponent"/>
-    <fullyQualifiedTypeName name="battleMoves.Move"/>
     <fullyQualifiedTypeName name="java.util.UUID"/>
     <fullyQualifiedTypeName name="battleMoves.SingleDamageComponent"/>
     <fullyQualifiedTypeName name="battleMoves.SpCostComponent"/>
@@ -36,10 +34,8 @@
     <fullyQualifiedTypeName name="enemyAI.EnemyAIComponent"/>
     <fullyQualifiedTypeName name="enemyAI.EnemyAIMoveComponent"/>
     <fullyQualifiedTypeName name="input.CharCallback"/>
-    <fullyQualifiedTypeName name="Data.Moves"/>
     <fullyQualifiedTypeName name="gameEngine.ArrowKeySelecter"/>
     <fullyQualifiedTypeName name="java.util.Stack"/>
-    <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="org.joml.Vector4f"/>
     <fullyQualifiedTypeName name="gameEngine.Entity"/>
     <fullyQualifiedTypeName name="rendering.MainRenderHandler"/>
@@ -52,7 +48,6 @@
     <fullyQualifiedTypeName name="Items.Item"/>
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
     <fullyQualifiedTypeName name="Data.Constants"/>
-    <fullyQualifiedTypeName name="guis.GUINodeDisplayItemInfo"/>
     <fullyQualifiedTypeName name="gameEngine.BattleSystem"/>
     <fullyQualifiedTypeName name="guis.GUINode"/>
     <fullyQualifiedTypeName name="gameEngine.Start"/>
@@ -60,4 +55,9 @@
     <fullyQualifiedTypeName name="gameEngine.Texture"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
+    <fullyQualifiedTypeName name="Data.Moves"/>
+    <fullyQualifiedTypeName name="battleMoves.Move"/>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
+    <fullyQualifiedTypeName name="guis.GUINodeDisplayItemInfo"/>
+    <fullyQualifiedTypeName name="guis.GUINodeDisplayMoveInfo"/>
 </qualifiedTypeNameHistroy>

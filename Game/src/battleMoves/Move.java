@@ -161,18 +161,20 @@ public boolean testIfMoveCanBeUsed(BattlePlayerField pcs,BattleEnemyField enemie
 	   
    }
    
-   
-
-    public boolean HasSingleHealComponent() {
-    	
-    	
+    
+    public boolean hasSingleSelectedHealComponent() {
     	return this.components.containsKey(SingleSelectedHealComponent.COMPID);
-    }
+    	}
 
-   public SingleSelectedHealComponent getSingleHealCompoent() {
+    public SingleSelectedHealComponent getSingleHealCompoent() {
 	   return (SingleSelectedHealComponent)this.components.get(SingleSelectedHealComponent.COMPID);
+    }
+    public boolean HasSelfHealComponent() {
+	return this.components.containsKey(SelfHealComponent.COMPID);   
    }
-   
+    public SelfHealComponent getSelfHealCompoenent() {
+    	return (SelfHealComponent) this.components.get(SelfHealComponent.COMPID);
+    }
    
    public boolean HaSingleDamageComponent() {
 	   return this.components.containsKey(SingleDamageComponent.COMPID);
@@ -181,6 +183,8 @@ public boolean testIfMoveCanBeUsed(BattlePlayerField pcs,BattleEnemyField enemie
    public SingleDamageComponent getSingleDamageComponent() {
 	   return (SingleDamageComponent) this.components.get(SingleDamageComponent.COMPID);
    }
+   
+  
    
    public boolean HasSpCostComponent() {
 	   return this.components.containsKey(SpCostComponent.COMPID);

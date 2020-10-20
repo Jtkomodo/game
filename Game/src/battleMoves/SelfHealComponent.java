@@ -11,10 +11,10 @@ public class SelfHealComponent extends MoveComponent {
 	
     final static int COMPID=4;
 		
-	private float hp;
+	private int hp;
 	
 	
-	public SelfHealComponent(float hp) {
+	public SelfHealComponent(int hp) {
 		super(COMPID);
 		this.hp=hp;
 	}
@@ -27,5 +27,10 @@ public class SelfHealComponent extends MoveComponent {
 		entityUsingMove.IncreseHp(hp);
 	
 	}
+	
+	public int getHp() {
+		return this.getHp();
+	}
+	
 
 }

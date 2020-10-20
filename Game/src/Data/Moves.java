@@ -74,15 +74,16 @@ public enum Moves {
 	public String getName() {
 		return name;
 	}
-
+	
 	public Move getMove() {
 		return move;
 	}
 	
 	
+
 	
-	public float getSingleHealingAmount() {
-		if(this.move.HasSingleHealComponent()) {
+	public int getSingleSelectedHealingAmount() {
+		if(this.move.hasSingleSelectedHealComponent()) {
 			SingleSelectedHealComponent c=this.move.getSingleHealCompoent();
 			
 			return c.getHeal();
@@ -92,8 +93,19 @@ public enum Moves {
 		
 	}
 	
+	public int getSelfHealAmount() {
+		if(this.move.HasSelfHealComponent()) {
+			SelfHealComponent c=this.move.getSelfHealCompoenent();
+			return c.getHp();
+		}else {
+			return 0;
+		}
+	}
 	
-	public float getDamage() {
+	
+	
+	
+	public int getDamage() {
 		
 		if(this.move.HaSingleDamageComponent()) {
 		     SingleDamageComponent c=this.move.getSingleDamageComponent();
@@ -116,16 +128,22 @@ public enum Moves {
 			return 0;
 		}
 	}
+     
 
+	public boolean isSelfHealMove() {
+		return this.move.HasSelfHealComponent();
+	}
+	
 
 	public boolean isSpecailMove() {
 		return this.move.HasSpCostComponent();
 	}
 
 
-	public boolean isSingleHeal() {
-		return this.move.HasSingleHealComponent();
+	public boolean isSinglSelectedeHeal() {
+		return this.move.hasSingleSelectedHealComponent();
 	}
+	
 
 		
 }

@@ -29,7 +29,7 @@ public class SelfHealComponent extends MoveComponent {
 	}
 	
 	public int getHp() {
-		return this.getHp();
+		return this.hp;
 	}
 	
 

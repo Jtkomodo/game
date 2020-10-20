@@ -26,7 +26,7 @@ public enum Moves {
 	
 	lazer(new Move("lazer",new MoveComponent[] {
 			new SingleDamageComponent(50),
-			//new SelfHealComponent(20),
+			new SelfHealComponent(20),
 			//new SpCostComponent(30), 
 			new SoundFXComponent(new PlaySoundEffect[] {
 					new PlaySoundEffect(new Source(new Vector2f(0),1,1, 1,200, 0), new Sound("Lazer"),0.5f),

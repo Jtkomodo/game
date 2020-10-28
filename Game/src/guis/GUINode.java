@@ -37,6 +37,7 @@ public class GUINode {
    
    public void setString(String string) {
 	   this.s=string;
+	   
    }
     
    public  GUINode(GUINode[] nodes,String string,int amountOfCollumns,int amountOfRows) {
@@ -60,10 +61,11 @@ public class GUINode {
    
    
    
-   public void InvoleFunction() {
+   public boolean InvoleFunction() {
 	   if(this.function!=null) {
-	    this.function.invoke();;
+		   return  this.function.invoke();
 	   }
+	   return false;
    }
    public void addChild(GUINode node) {
 	   this.childrenNodes.add(node);
@@ -105,6 +107,11 @@ public TextBuilder getString() {
 	return this.string;
 }
 
+public String getS() {
+	
+
+	return this.s;
+}
 
 
 
@@ -141,5 +148,9 @@ public void removeFirst() {
 	this.childrenNodes.removeFirst();
 	}
 }
-	
+public boolean hasFunction() {
+	return !(this.function==null);
+}
+
+
 }

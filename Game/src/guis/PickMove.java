@@ -20,7 +20,7 @@ public class PickMove extends GUIfunction {
 	
 	
 	@Override
-	public void invoke() {
+	public boolean invoke() {
 		 BattleEntity p=BattleSystem.getCurrentEntity();
 		 Moves m=p.getmoveFromString(move);
 		 Start.soundPlay=true;
@@ -46,15 +46,15 @@ public class PickMove extends GUIfunction {
 			
 			
 		}
+		return true;
 		}else {
-			 Start.soundPlay=false;
-			 Start.source.play(Start.NO);
+			return false;
 		 }
 		 }else {
 			 
 			 
 			 Start.DebugPrint("move "+move+" does not exist in this player's("+ p+") moveset");
-			 
+			 return false;
 		 }
 
 	}

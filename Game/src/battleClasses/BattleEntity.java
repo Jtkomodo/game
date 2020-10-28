@@ -50,9 +50,9 @@ public class BattleEntity {
 	protected float scale;
 	protected Texture texture;
 	protected  float z=1000;
-
+    protected String name;
 	
-	public BattleEntity( Model model,Texture texture,float scale, Vector2f sizeForHealthBar, float atk,float def,float hp,float sp,float speed,Moves[] moves,Inventory inventory) {
+	public BattleEntity(String name,Model model,Texture texture,float scale, Vector2f sizeForHealthBar, float atk,float def,float hp,float sp,float speed,Moves[] moves,Inventory inventory) {
 	this.inventory=inventory;	
     this.atk=atk;
     this.def=def;
@@ -67,6 +67,7 @@ public class BattleEntity {
     this.speed=speed;
     this.model=model;
     this.texture=texture;
+    this.name=name;
 
     this.hpbar=new HpBar(maxHP,hp, sizeForHealthBar, Start.HealthBarBackground, Start.COLTEX);
     this.SPBAr=new  HpBar(maxsp,sp,new Vector2f(80,10),Start.HealthBarBackground, Start.COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
@@ -319,10 +320,12 @@ public boolean useItem(Items item) {
 	boolean used=item.Item.useItem(this);
 	if(used) {
 	this.inventory.removeItem(item);
-	Start.DebugPrint(this.toString()+"used item "+item.Item.getName());
+	Start.DebugPrint(this.name+" used item "+item.Item.getName());
 	if(item.Item.isHealing()) {
 		Start.source.play(Start.Heal);
 	}
+	}else {
+		Start.source.play(Start.NO);
 	}
 	
 	
@@ -442,6 +445,18 @@ public float getZ() {
 
 public void setZ(float z) {
 	this.z = z;
+}
+
+
+
+public String getName() {
+	return name;
+}
+
+
+
+public void setName(String name) {
+	this.name = name;
 }
 
 }

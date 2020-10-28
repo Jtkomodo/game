@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import battleClasses.BattleEntity;
 import guis.GUINode;
 import guis.GUINodeDisplayItemInfo;
-import guis.UseItem;
+import guis.CallItemToBeUsed;
 
 public class Inventory {
 
@@ -17,6 +18,8 @@ public class Inventory {
 	private List<String> itemNames=new  LinkedList<String>();
 	private List<Items> itemsList=new LinkedList<Items>();
 	private GUINode bagNode=null;
+	private boolean UseItemCalled=false;
+	private Items currentlyUsingItem;
 	
 	public Inventory(Items[] ListOfUniqueItems,int[] itemAmount) {
 		if(ListOfUniqueItems.length==itemAmount.length) {
@@ -51,7 +54,7 @@ public class Inventory {
 			this.items.put(item.Item.getName(),amount);
 			this.itemNames.add(item.Item.getName());
 			this.itemsList.add(item);
-			GUINode node=new GUINode(item.Item.getName(),new UseItem(item),new GUINodeDisplayItemInfo(this,item));
+			GUINode node=new GUINode(item.Item.getName(),new CallItemToBeUsed(item,this),new GUINodeDisplayItemInfo(this,item));
 			itemNodes.put(item.Item.getName(), node);
 			bagNode.addChild(node);}
 			
@@ -91,7 +94,7 @@ public class Inventory {
 			itemsList.add(item);
 			items.put(item.Item.getName(),1);
 			if(this.bagNode!=null) {
-			GUINode node=new GUINode(item.Item.getName(),new UseItem(item),new GUINodeDisplayItemInfo(this,item));
+			GUINode node=new GUINode(item.Item.getName(),new CallItemToBeUsed(item,this),new GUINodeDisplayItemInfo(this,item));
 			itemNodes.put(item.Item.getName(), node);
 			bagNode.addChild(node);}
 		}
@@ -124,6 +127,45 @@ public class Inventory {
 	public boolean isEmpty() {
 		return itemsList.isEmpty();
 		
+	}
+
+	
+	
+	public boolean UseCurrentIem(BattleEntity e) {
+		if(this.currentlyUsingItem!=null && e!=null) {
+		return e.useItem(currentlyUsingItem);
+		}else {
+			return  false;
+		}
+		
+		}
+	
+	
+	
+	
+	
+	
+
+	public Items getCurrentlyUsingItem() {
+		return currentlyUsingItem;
+	}
+
+
+	public void setCurrentlyUsingItem(Items currentlyUsingItem) {
+		this.currentlyUsingItem = currentlyUsingItem;
+	}
+
+   
+	
+	
+	
+	public boolean isUseItemCalled() {
+		return UseItemCalled;
+	}
+
+
+	public void setUseItemCalled(boolean useItemCalled) {
+		UseItemCalled = useItemCalled;
 	}
 	
 	

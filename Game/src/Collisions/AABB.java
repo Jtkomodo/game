@@ -21,32 +21,18 @@ public class AABB extends Collisions{
 	private Model aabb,piont;
 	private float z=50;
 	private boolean colide=false,COLIDECHECK=false;
-	private boolean pushable;
 	private boolean hasFunction=false;
 	private Event function;
 	
 	
-	public AABB(Vector2f position ,float widthR,float heightR,float resistance,Event function,boolean Pushable) {
-		this.function=function;
-		this.hasFunction=true;
-		construct(position,widthR,heightR,resistance);
-       this.pushable=Pushable;
-		}
 	
 	
 	
-	
-	
-	public AABB(Vector2f position ,float widthR,float heightR,float resistance,boolean Pushable) {
-	
-	construct(position,widthR,heightR,resistance);
-	   this.pushable=Pushable;
-	}
-	
+
 	
 	public AABB(Vector2f position, float widthR, float heightR, float resistance) {
 		construct(position,widthR,heightR,resistance);
-		this.pushable=false;
+		
 	}
 
 
@@ -280,48 +266,10 @@ public class AABB extends Collisions{
 			MainRenderHandler.addEntity( new Entity(piont,new Vector3f(closestb,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
 	     closestb.sub(closesta, penetration);
 	     
-		 if(!box.isPushable()) {
+
 			 
           
 			 currentmovement.sub(penetration.add(direction.mul(.001f,new Vector2f()),new Vector2f()), newMOvement); 
-		 }else {
-			// boolean checkColision=ColisionHandeler.updateCollsionCheck(this,currentmovement, position, movement, direction,box);
-			//	if(!checkColision) { 
-				 PosBeforeCol.set(position);
-		//		}
-				 
-			
-			 
-			 boolean save=ColisionHandeler.getColided();//saving the old  value
-			 ColisionHandeler.setColided(false);//setting to false so that we can use it to check for collision
-
-			 Vector2f saveVector=new Vector2f(box.getPosition());
-		     box.setPosBeforeCol(saveVector);//posbeforecol set to current position
-		     Vector2f boxPosition=push(currentmovement, closestb, penetration, direction, box);//this is the movement after push
-		  
-		    box.setCenterPosition(boxPosition);//setting position to the bocx position after push so we can check collisons
-		     Vector2f d=new Vector2f();boxPosition.sub(saveVector,d);//this is the movement vector
-		   
-		   
-		   
-		  
-		 
-		     Vector2f dir=VectorMath.normalize(d);
-		     
-            
-		 
-		   currentmovement.sub(penetration, newMOvement); 
-		//  this.setPosition(newMOvement);
-		   
-		   
-		   Vector2f newBoxPosition= ColisionHandeler.updateVector(box, boxPosition, saveVector, d,dir,this);//this is doing the next collision
-		
-	
-		   box.setCenterPosition(newBoxPosition);
-	  
-		   ColisionHandeler.setColided(save);//restoring the old value 
-		 }
-		 
 		 
 
 		 
@@ -352,10 +300,7 @@ public class AABB extends Collisions{
   
 	   
 	  
-   public boolean isPushable() {
-	return pushable;
-}
-
+ 
 
 
 
@@ -474,25 +419,7 @@ public void debug() {
 
 
 
-   public Vector2f push(Vector2f currentmovement, Vector2f closestb,Vector2f penetration,Vector2f direction,AABB box) {
-	   
-	   Vector2f lc=new Vector2f();
-		Vector2f rc=new Vector2f();
-	   currentmovement.add(this.r,lc);
-	   currentmovement.sub(this.r,rc);  
-	
-		Vector2f newMOvement=new Vector2f();
-		if((closestb.x==lc.x || closestb.x== rc.x )) {//if on the left or right side
-       	  box.getPosition().add(penetration.x,0, newMOvement);
-        }
-		  
-		else if((closestb.y==lc.y || closestb.y==rc.y)) {//if on top or bottom
-      	  box.getPosition().add(0,penetration.y, newMOvement);
-       }
-    
-	   return newMOvement;
-   }
-
+ 
 	public void setPosBeforeCol(Vector2f posBeforeCol) {
 		PosBeforeCol = posBeforeCol;
 	}

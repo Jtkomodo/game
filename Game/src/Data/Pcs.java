@@ -9,7 +9,7 @@ public enum Pcs {
 	
 	
 	
-	C1(new float[]{
+	C1("C1",new float[]{
 			20,//attack
 			30,//Defense
 			200,   //hp
@@ -20,7 +20,7 @@ public enum Pcs {
 		Moves.lazer,
 		Moves.heal
 	}),
-	C2(new float[]{
+	C2("C2",new float[]{
 			20,//attack
 			30,//Defense
 			200,   //hp
@@ -42,9 +42,10 @@ public enum Pcs {
 	private float speed;
 	private int amountOfMoves;
 	private Moves[] moves;
+	private String name;
 	
 	
-	Pcs(float[] stats ,Moves[] moves ){
+	Pcs(String name,float[] stats ,Moves[] moves ){
 		this.atk=stats[0];
 		this.def=stats[1];
 		this.hp=stats[2];
@@ -52,7 +53,7 @@ public enum Pcs {
 		this.speed=stats[4];
 		this.moves=moves;
 		this.amountOfMoves=moves.length;
-		
+		this.name=name;
 		
 	}
 
@@ -95,6 +96,14 @@ public enum Pcs {
 
 	public void setMoves(Moves[] moves) {
 		this.moves = moves;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

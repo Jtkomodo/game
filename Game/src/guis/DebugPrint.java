@@ -18,9 +18,9 @@ public class DebugPrint extends GUIfunction {
 	
 	
 	@Override
-	public void invoke() {
+	public boolean invoke() {
 	   Start.DebugPrint(string);
-
+       return true;
 	}
 
 }

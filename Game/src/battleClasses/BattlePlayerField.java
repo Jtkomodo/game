@@ -239,7 +239,7 @@ public class BattlePlayerField {
 						Start.source.play(Start.Back);
 						BattleSystem.setSelectingPC(false);
 						BattleSystem.setMoveCalled(false); 
-						
+						BattleSystem.setItemUsed(false);
 						this.Selected=false;
 					}
 					if(up==1) 

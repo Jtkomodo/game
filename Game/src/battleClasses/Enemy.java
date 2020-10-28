@@ -28,14 +28,13 @@ import textrendering.TextBuilder;
 
 public class Enemy extends BattleEntity{
 
-	private String name;
+
 	private EnemyAI enemyAI;
 
 
 	public Enemy(Vector2f sizeForBar,Model model,Texture texture,float scale,String name,float atk, float def, float hp,float sp,float speed, Moves[] moves,Inventory inventory,EnemyAI enemyAI) {
-		super(model,texture,scale, sizeForBar,atk, def, hp,sp,speed, moves,inventory);
-		this.name=name;
-	   
+		super(name,model,texture,scale, sizeForBar,atk, def, hp,sp,speed, moves,inventory);
+		
 	    this.texture=texture;
 	 
 	    super.isEnemy=true;
@@ -51,10 +50,6 @@ public class Enemy extends BattleEntity{
 	
 	
 	
-
-	public String getName() {
-		return name;
-	}
 
 	
 

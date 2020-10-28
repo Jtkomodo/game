@@ -23,7 +23,7 @@ import guis.GUIManeger;
 import guis.GUINode;
 import guis.UIElement;
 import guis.UIStringElement;
-import guis.UseItem;
+import guis.CallItemToBeUsed;
 import rendering.MainRenderHandler;
 import rendering.Model;
 import textrendering.TextBuilder;
@@ -106,7 +106,7 @@ public class BattleSystem {
 	}
 	
 	public static void battleUpdate() {
-	
+	 
 	//hide gui box if selecting a enemy or 
 	 
 	
@@ -132,7 +132,12 @@ public class BattleSystem {
 			currentEntity=StartBattleTurn();	
 			}
 			
-			if(EnemySelected || PCSelected || !PlayersTurn || MoveUsed) {
+			if(PlayersTurn && playersInventory.isUseItemCalled()) {
+				 PCSelected=true;
+			}
+			
+			
+			if(EnemySelected || PCSelected || !PlayersTurn || MoveUsed ||ItemUsed) {
 				Maneger.close();
 				
 			}else {
@@ -154,6 +159,8 @@ public class BattleSystem {
 				PCSelected=false;
 	            EnemySelected=false;
                 ItemUsed=false;
+                playersInventory.setUseItemCalled(false);
+                
 			}
 			
 			
@@ -179,6 +186,12 @@ public class BattleSystem {
 							currentSelectedEntity=playerField.getCurrentPC();
 							MoveUsed=true;
 							}
+						else if(playersInventory.isUseItemCalled()) {
+							
+						   
+						      ItemUsed=playersInventory.UseCurrentIem(playerField.getCurrentPC());
+						}
+						
 						}
 				
 			}
@@ -314,6 +327,7 @@ public static void StartBattle(BattleEnemyField enemies,BattlePlayerField p,Text
 	Start.StateOfStartBOx=false;
 	enemyField=enemies;
 	playerField=p;
+	playersInventory.setUseItemCalled(false);
 	TurnFinished=true;
 	
 	  
@@ -431,6 +445,7 @@ public static void setMoveUsed(boolean moveUsed) {
 
 
 public static void setItemUsed(boolean itemUsed) {
+	playersInventory.setUseItemCalled(itemUsed);
 	BattleSystem.ItemUsed=itemUsed;
 }
 

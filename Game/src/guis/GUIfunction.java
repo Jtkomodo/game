@@ -8,7 +8,7 @@ public abstract class GUIfunction {
 	
 	
 	
-	public abstract void invoke();
+	public abstract boolean invoke();
 	
 	
 	

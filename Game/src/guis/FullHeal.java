@@ -22,10 +22,10 @@ public class FullHeal extends GUIfunction {
 	
 	
 	@Override
-	public void invoke() {
+	public boolean invoke() {
 		e.setHp(e.getMaxHP());
 		e.setSp(e.getMaxsp());
-		
+		return true;
 
 	}
 

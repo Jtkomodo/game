@@ -17,9 +17,9 @@ public class CloseWindow extends GUIfunction {
 
 
 	@Override
-	public void invoke() {
+	public boolean invoke() {
 		w.CloseWIndow();
-		
+		return true;
 	}
 
 

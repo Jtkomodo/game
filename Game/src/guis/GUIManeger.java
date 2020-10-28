@@ -53,6 +53,9 @@ public class GUIManeger {
 		if(!this.currentlyActive) {
 			this.currentlyActive=true;
 			UpdateChanges();
+			if(this.ParrentNode.isLeaf()) {
+				goBack();
+			}
 		}
 	}
     public void close() {
@@ -64,6 +67,12 @@ public class GUIManeger {
     		this.currentlyActive=false;
     	}
     }
+    public void hide() {
+    	this.currentlyActive=false;
+    }
+    
+    
+    
     public boolean isOpen() {
     	return this.currentlyActive;
     }
@@ -91,8 +100,6 @@ public class GUIManeger {
     					Start.source.play(Start.Move);
     				};
     	        if(Enter==1) {
-    	        	
-    				Start.source.play(Start.Select);
     				
     	        	Select();
     	        }
@@ -163,23 +170,34 @@ public class GUIManeger {
     
     
     private void Select() {
-	  if(!this.ParrentNode.isLeaf()) {
-	   
-	    GUINode currentNode=this.getCurrentNodeFromSelector();
-	  if(currentNode!=null) {
-	    if(currentNode.isLeaf()) {
-	    	currentNode.InvoleFunction();
-	    	this.UpdateChanges();
-	    }else {
-	    	this.backStack.add(ParrentNode);
-	    	this.posStack.add(this.movement.getCurrentPosition());
-	    	this.movement.resetCurrentPosition();
-	    	changeParentNode(currentNode);
-	    }
-	  }
-		}
-		
-	}
+    	if(!this.ParrentNode.isLeaf()) {
+
+    		GUINode currentNode=this.getCurrentNodeFromSelector();
+    		if(currentNode!=null) {
+    			if(currentNode.isLeaf()) {
+
+    				if(currentNode.InvoleFunction()) {
+                        Start.source.play(Start.Select);
+    				}else {
+    					Start.source.play(Start.NO);
+    				}
+    				this.UpdateChanges();
+
+    				if(this.ParrentNode.isLeaf()) {
+    					goBack();
+    				}
+
+    			}else {
+    				this.backStack.add(ParrentNode);
+    				this.posStack.add(this.movement.getCurrentPosition());
+    				this.movement.resetCurrentPosition();
+    				changeParentNode(currentNode);
+    				Start.source.play(Start.Select);
+    			}
+    		}
+    	}
+
+    }
 	public void UpdateChanges() {
 		UpdateSlots(this.ParrentNode);
 	}
@@ -332,7 +350,18 @@ public class GUIManeger {
 		}
 	
 	
-  
+		
+		
+		
+   public GUINode GetCurrentNode() {
+	   return this.getCurrentNodeFromSelector();
+   }
+public GUINode getParrentNode() {
+	return ParrentNode;
+}
+public void setParrentNode(GUINode parrentNode) {
+	ParrentNode = parrentNode;
+}
 	
 	
 	

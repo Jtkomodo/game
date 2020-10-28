@@ -6,12 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Maps" key="selection"/>
+		<item value="p2." key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="p."/>
+			<item value="Start.source"/>
+			<item value="maneger.draw"/>
+			<item value="setRootNode"/>
+			<item value="step"/>
+			<item value="colisionHandeler"/>
+			<item value="collisionHandler"/>
+			<item value="aabb"/>
 			<item value="maps"/>
 			<item value="map"/>
 			<item value="close()"/>
@@ -19,16 +27,9 @@
 			<item value="reset("/>
 			<item value="reset"/>
 			<item value="punch"/>
-			<item value="lazer"/>
-			<item value="p."/>
-			<item value=".is"/>
-			<item value=".isSpecial"/>
-			<item value="width"/>
-			<item value="playerField"/>
-			<item value="battlesystem."/>
-			<item value="BattleSystem"/>
 		</list>
 		<list key="replacehistory">
+			<item value="p2."/>
 			<item value="Lazer"/>
 			<item value="ChangedFlag"/>
 			<item value="move"/>
@@ -43,7 +44,6 @@
 			<item value="x"/>
 			<item value="e.getUvs(),e.getVerts(),"/>
 			<item value="float[] cuvs,float[] LocalVerts,"/>
-			<item value="setModel(model)"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

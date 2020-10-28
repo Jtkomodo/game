@@ -62,10 +62,11 @@ import guis.CloseWindow;
 import guis.FullHeal;
 import guis.GUIManeger;
 import guis.GUINode;
+import guis.GUIUseCurrentItemOnPC;
 import guis.PickMove;
 import guis.UIElement;
 import guis.UIStringElement;
-import guis.UseItem;
+import guis.CallItemToBeUsed;
 import input.BIndingNameParser;
 import input.CharCallback;
 import input.GetInput;
@@ -138,9 +139,11 @@ public class Start {
 	public static boolean soundPlay=true;
     public static BattleEntity p;
     private static double BackSpaceHoldStart=0;
-    private static GUIManeger maneger;
+    private static GUIManeger maneger,PARTY_SELECT;
+    private static GUINode rootForBattleScreen,root;
 	public static GUINode specials;
 	public static GUINode moves;
+	private static boolean USEITEM_INITIALIZED=false;
     
 	public static void main(String[] args) {
 	
@@ -278,7 +281,7 @@ public class Start {
         source=new Source(new Vector2f(0), 1, 1, 0, 0,0);
 		source.setSourceRelitive(true);	
          
-		source1.play(Select);
+		//source1.play(Select);
 		
 		DebugPrint("Making Textures....");
 		//Define texturesbr.close();
@@ -314,7 +317,7 @@ public class Start {
 	    testSprite=new Texture("testSprites");
 		//map=new Texture("map1"); 
 		//Define models
-	   DebugPrint("Making Models....");
+	    DebugPrint("Making Models....");
 		
 		player= new Model(vertPlayer,uvPlayer);
 	    background=new Model(vert,uvBg);
@@ -350,13 +353,13 @@ public class Start {
       
 	
 		DebugPrint("Settign Colisions....");
-		playerCol=new AABB(new Vector2f(0,0),64,64,0,false);
+		playerCol=new AABB(new Vector2f(0,0),64,64,0);
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0,false);
-		Col=new AABB(new Vector2f(0,0),32,32,0,true);
-	AABB	Col3=new AABB(new Vector2f(100,0),16,32,0,true);
-	AABB	Col4=new AABB(new Vector2f(200,0),32,32,0,true);
-	AABB	Col5=new AABB(new Vector2f(400,0),32,32,0,true);
-        COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0,false);
+		Col=new AABB(new Vector2f(0,0),32,32,0);
+		AABB	Col3=new AABB(new Vector2f(100,0),16,32,0);
+		AABB	Col4=new AABB(new Vector2f(200,0),32,32,0);
+		AABB	Col5=new AABB(new Vector2f(400,0),32,32,0);
+        COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
 	    buttonNamses = new BIndingNameParser("GLFW");
 		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2,Col3,Col4,Col5});
 	
@@ -377,25 +380,24 @@ public class Start {
 		 
 	
 		  
-		   GUINode bag=new GUINode(new GUINode[] {},"bag",2,2);
+	    GUINode bag=new GUINode(new GUINode[] {},"bag",2,2);
 		   
 
 			
 			 playersInventory= new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore},new int[] {1,3,2},bag);
 			 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore,Items.spSuperRestore},new int[] {3,1,4,2});
-			 p=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
+			 p=new BattleEntity("PC_1",player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
 
 			GUINode healn=new GUINode("heal",new FullHeal(p));		
 		    GUINode stats=new GUINode("stats",new guis.DebugPrint("stats"));
 			GUINode quit=new GUINode("Quit",new CloseWindow(w));
-			GUINode root=new GUINode(new GUINode[]{stats,bag,healn,quit},"root",1,4);
+			 root=new GUINode(new GUINode[]{stats,bag,healn,quit},"root",1,4);
 			
-			maneger=new GUIManeger(root,Constants.COL_COLOR_BLUE);
-		 	
-			BattleEntity    p2=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C2.getAtk(),Pcs.C2.getDef(),Pcs.C2.getHp(),Pcs.C2.getSp(),Pcs.C2.getSpeed(),Pcs.C2.getMoves(),playersInventory);
-//	BattleEntity	p3=new BattleEntity(player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
 		
-		Enemy enemy=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
+		 	
+	    BattleEntity  p2=new BattleEntity("PC_2",player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C2.getAtk(),Pcs.C2.getDef(),Pcs.C2.getHp(),Pcs.C2.getSp(),Pcs.C2.getSpeed(),Pcs.C2.getMoves(),playersInventory);
+        
+	    Enemy enemy=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
 		Enemy enemy2=new Enemy(new Vector2f(50,10),player, playerTex,96,"E2",Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
 		Enemy enemy3=new Enemy(new Vector2f(50,10),player, playerTex,96,"E3",Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
 		Enemy enemy4=new Enemy(new Vector2f(50,10),player, playerTex,96,"E4",Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
@@ -416,57 +418,23 @@ public class Start {
 		
 		
 		 
-		UIElement StartElements[] ={
-			new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,new guis.DebugPrint("stats")),
-			new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,1),
-			new UIStringElement("Heal",new Vector2f(-17,-5),.2f,Constants.BLACK,new FullHeal(p)),
-			new UIStringElement("Quit",new Vector2f(-17,-25),.2f,Constants.BLACK,new CloseWindow(w))
+	
 		
-			};
-		
-		
-		
-		UIStringElement BagElements[]= {new UIStringElement("-------bag------",new Vector2f(-38,40), .15f,Constants.BLACK)
-		};
-			 
-
-			 
-			 
-			 
-			 
-			UIStringElement MenuElements[]= {
-					new UIStringElement("bag",new Vector2f(-35,-5), .15f,Constants.BLACK,2),
-					new UIStringElement("moves",new Vector2f(-17,15), .15f,Constants.BLACK,1),
-					new UIStringElement("specials",new Vector2f(1,-5), .15f,Constants.BLACK,3)
-			};
 			
-			
-			Moves lazer=p.getmoveFromString(Moves.lazer.getName());
-			Moves heal=p.getmoveFromString(Moves.heal.getName());
-			
-			UIElement MoveElements[]= {new UIStringElement("---moves---",new Vector2f(-28.5f,23), .15f,Constants.BLACK),
-					new UIStringElement(lazer.getName(),new Vector2f(-54,5),.15f,Constants.BLACK,new PickMove(lazer.getName()))
-					,new UIStringElement(lazer.getName(),new Vector2f(-54,-10),.15f,Constants.BLACK,new PickMove(lazer.getName()))
-					,new UIStringElement(lazer.getName(),new Vector2f(-4,5),.15f,Constants.BLACK,new PickMove(lazer.getName()))
-					,new UIStringElement(lazer.getName(),new Vector2f(-4,-10),.15f,Constants.BLACK,new PickMove(lazer.getName()))
-			};
-			
-			
-			
-			UIStringElement SPElements[]= {new UIStringElement("---specials---",new Vector2f(-34,23), .15f,Constants.BLACK),
-					new UIStringElement(heal.getName()+"sp",new Vector2f(-54,5), .15f,Constants.BLACK,new PickMove(heal.name()))
-					
-			};
-			
-			
+	    rootForBattleScreen=new GUINode(new GUINode[] {quit},"root",1,1);
 		
 		
 		 specials=new GUINode(new GUINode[]{},"specials",2,2);
          moves=new GUINode(new GUINode[]{},"moves",2,2);
+         
+         
 		 GUINode battleRoot=new GUINode(new GUINode[]{bag,moves,specials},"root",1,3);	
-			
-	 
+		
+	
 	    GUIManeger battleManeger=new GUIManeger(battleRoot,Constants.COL_COLOR_BLUE.add(0,0,0,50,new Vector4f()));
+		maneger=new GUIManeger(root,Constants.COL_COLOR_BLUE);
+		PARTY_SELECT=new GUIManeger(new GUINode(new GUINode[] {},"root",2,2),Constants.COL_COLOR_BLUE);
+		
 		
 		BattleSystem.INIT(battleManeger);	
 		
@@ -502,30 +470,30 @@ public class Start {
 	
 	    int operation=1;
 	while(!w.isExited()) {
-		
+	
 		fps();    
 	
 	//if(canRender) {
+		
 		BattleSystem.soundPlay=true;
 		
 		//----------------------GAME--LOOP------------------------------
- 		Items[] ITM= playersInventory.getItems();		
-			UIElement[] elementlist=new UIElement[ITM.length];	
-			GUINode[] items=new GUINode[ITM.length];
-			
-			
-			
-			for(int i=0;i<ITM.length;i++) {
-				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i].Item),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(ITM[i]));
-			    items[i]=new GUINode(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i].Item),new UseItem(ITM[i]) );
-			
-			}
-		  
-		
+// 		Items[] ITM= playersInventory.getItems();		
+//			UIElement[] elementlist=new UIElement[ITM.length];	
+//			GUINode[] items=new GUINode[ITM.length];
+//			
+//			
+//			
+//			for(int i=0;i<ITM.length;i++) {
+//				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i].Item),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(ITM[i]));
+//			    items[i]=new GUINode(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i].Item),new UseItem(ITM[i]) );
+//			
+//			}
+//		  
+//		
 			
 		  InputHandler.EnableButtons(new int[] {GLFW_KEY_F1,GLFW.GLFW_KEY_X,GLFW.GLFW_KEY_Y,GLFW.GLFW_KEY_O});
-		
-		boolean somthingChanged=false;  
+  
 		  
 	
 		
@@ -552,7 +520,7 @@ public class Start {
 	
 		 // MainRenderHandler.addEntity(new Entity(background,new Vector3f(100,100,100),0,64, COLTEX,Constants.BLACK,10,true));
 		
-		  
+		
 		 
 		  //  MainRenderHandler.addEntity(new Entity(background,new Vector3f(new Vector2f(x,y).add(quarterStepVelocity.mul(3,new Vector2f())),200),0,5, COLTEX,Constants.YELLOW));
 		  if(!ESCAPEBOXUP) {    
@@ -598,7 +566,8 @@ public class Start {
 			
 				
 			}
-			  
+			 
+		
 		    
 			x=vector.x; y=vector.y;	
 		    playerCol.setCenterPosition(vector);	
@@ -644,8 +613,44 @@ public class Start {
 	  
 	      textD.setString("circCol:"+circCol);
 	      textC.setString("xmap="+gridx+" ymap="+gridy);
-	     
-	    
+	      text1.setString("PC_1");
+	      text1.drawString(x-100, y+200, .12f);
+	      text1.setString("SP: "+Math.round(p.getSp())+"/"+Math.round(p.getMaxsp()));
+	      p.drawSPBAR(new Vector2f(x-100,y+160),text1);
+	      text1.setString("HP:"+Math.round(p.getHp())+"/"+Math.round(p.getMaxHP()));      
+	      p.getHpbar().draw(new Vector2f(x-100,y+180),text1);
+	      
+	      
+	      text1.setString("PC_1");
+	      text1.drawString(x+100, y+200, .12f);
+	      text1.setString("SP: "+Math.round(p2.getSp())+"/"+Math.round(p2.getMaxsp()));
+	      p2.drawSPBAR(new Vector2f(x+100,y+160),text1);
+	      text1.setString("HP:"+Math.round(p2.getHp())+"/"+Math.round(p2.getMaxHP()));      
+	      p2.getHpbar().draw(new Vector2f(x+100,y+180),text1);
+	      
+	  	if(playersInventory.isUseItemCalled()) {
+			maneger.hide();
+			;
+			if(!USEITEM_INITIALIZED) {
+			
+				USEITEM_INIT(playerField,PARTY_SELECT);
+			}
+			drawPartyScreen(PARTY_SELECT, new Vector2f(screencoordx+(640/2)+50-maneger.getWidth(0.2f,new Vector2f(100,80)),screencoordy),new Vector2f(100,80),0.2f);
+			if(InputHandler.getStateofButton(GLFW_KEY_BACKSPACE)>0) {
+				playersInventory.setUseItemCalled(false);
+				maneger.open();
+				maneger.UpdateChanges();
+				PARTY_SELECT.close();
+				USEITEM_INITIALIZED=false;
+			}
+		}else if(PARTY_SELECT.isOpen()){
+			maneger.open();
+			//maneger.UpdateChanges();
+			USEITEM_INITIALIZED=false;
+			PARTY_SELECT.close();
+		
+		}
+		
 	   
 		
 	      
@@ -681,6 +686,7 @@ public class Start {
 
 
 }
+
 	
 	   maneger.draw( new Vector2f(screencoordx+(640/2)+50-maneger.getWidth(0.2f,new Vector2f(100,80)),screencoordy),new Vector2f(100,80),0.2f);
 	  textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
@@ -762,6 +768,48 @@ MainBatchRender.flushModel();
 		
 		
 	}
+	
+	
+	
+	
+	private static void USEITEM_INIT(BattlePlayerField field,GUIManeger maneger) {
+	    maneger.reset();
+		maneger.open();
+		USEITEM_INITIALIZED=true;
+	    boolean allDead=field.updateField();
+	    if(!allDead) {
+	    	BattleEntity entities[]=field.getAlivePCs();
+	    	GUINode root=new GUINode(new GUINode[] {},"root",2,2);
+	    	GUINode partyMembers[]=new GUINode[entities.length];
+	    	for(int i=0;i<entities.length;i++) {
+                BattleEntity e=entities[(entities.length-1)-i];
+                String name=e.getName();
+                partyMembers[i]=new GUINode(name, new GUIUseCurrentItemOnPC(e,Start.playersInventory));
+
+	    	}
+	    	root.addChildren(partyMembers);
+	    	maneger.setParrentNode(root);
+	    	maneger.UpdateChanges();
+	    	
+	    }else {
+	    	playersInventory.setUseItemCalled(false);
+			Start.maneger.open();
+			USEITEM_INITIALIZED=false;
+			maneger.close();
+	    }
+	       	
+	       	
+	       	
+	}
+	private static void drawPartyScreen(GUIManeger maneger,Vector2f position,Vector2f padding,float sizeOfStrings) {
+	       
+		    
+		      maneger.draw(position, padding, sizeOfStrings);	
+		      
+	}
+	
+	
+	
 
 	private static void Inputupdate() {
 	
@@ -778,10 +826,8 @@ MainBatchRender.flushModel();
 		    if(CharCallback.takeInput) {
 		    	InputHandler.EnableButton(GLFW_KEY_BACKSPACE);
 		    }
-		    
-
-	
 		maneger.InputUpdate();
+		PARTY_SELECT.InputUpdate();
 	    BattleSystem.updateInput();
 
 	   
@@ -838,11 +884,15 @@ MainBatchRender.flushModel();
 	    }
 	 
 	       if(ESCAPE==1) {
-			if(maneger.isOpen()) {
+			if(maneger.isOpen() || PARTY_SELECT.isOpen()) {
 				maneger.close();
+				PARTY_SELECT.close();
+				USEITEM_INITIALIZED=false;
+				Start.playersInventory.setUseItemCalled(false);
 				InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
 	
 			}else {
+				PARTY_SELECT.reset();
 			    maneger.reset();
 				maneger.open();
 				a1.Pause();
@@ -862,12 +912,12 @@ MainBatchRender.flushModel();
 				if (overworld==false) {
 					overworld=true;
 					a1.addAnimation();
-			         BattleSystem.closeBattleGUI();
-					
+			        BattleSystem.closeBattleGUI();
+					maneger.setParrentNode(Start.root);
 				}else {
 					maneger.close();
 					BattleSystem.StartBattle(enemyField,playerField, bg, background);
-					
+					maneger.setParrentNode(Start.rootForBattleScreen);
 				
 				}
 				
@@ -972,7 +1022,7 @@ MainBatchRender.flushModel();
 		
 	
 		
-		if(!maneger.isOpen()) {
+		if(!maneger.isOpen() && !PARTY_SELECT.isOpen()) {
 		
 		
 		

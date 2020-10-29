@@ -131,6 +131,11 @@ public abstract class Bars {
 		this.z = z;
 	}
 
+
+	public Vector2f getBackgroundScale() {
+		return backgroundScale;
+	}
+
 	
 	
 	

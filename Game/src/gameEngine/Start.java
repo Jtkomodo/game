@@ -59,6 +59,7 @@ import battleClasses.Enemy;
 import battleClasses.HpBar;
 import guis.BarElement;
 import guis.CloseWindow;
+import guis.DisplayPCInfo;
 import guis.FullHeal;
 import guis.GUIManeger;
 import guis.GUINode;
@@ -613,21 +614,21 @@ public class Start {
 	  
 	      textD.setString("circCol:"+circCol);
 	      textC.setString("xmap="+gridx+" ymap="+gridy);
-	      text1.setString("PC_1");
-	      text1.drawString(x-100, y+200, .12f);
-	      text1.setString("SP: "+Math.round(p.getSp())+"/"+Math.round(p.getMaxsp()));
-	      p.drawSPBAR(new Vector2f(x-100,y+160),text1);
-	      text1.setString("HP:"+Math.round(p.getHp())+"/"+Math.round(p.getMaxHP()));      
-	      p.getHpbar().draw(new Vector2f(x-100,y+180),text1);
-	      
-	      
-	      text1.setString("PC_1");
-	      text1.drawString(x+100, y+200, .12f);
-	      text1.setString("SP: "+Math.round(p2.getSp())+"/"+Math.round(p2.getMaxsp()));
-	      p2.drawSPBAR(new Vector2f(x+100,y+160),text1);
-	      text1.setString("HP:"+Math.round(p2.getHp())+"/"+Math.round(p2.getMaxHP()));      
-	      p2.getHpbar().draw(new Vector2f(x+100,y+180),text1);
-	      
+//	      text1.setString("PC_1");
+//	      text1.drawString(x-100, y+200, .12f);
+//	      text1.setString("SP: "+Math.round(p.getSp())+"/"+Math.round(p.getMaxsp()));
+//	      p.drawSPBAR(new Vector2f(x-100,y+160),text1);
+//	      text1.setString("HP:"+Math.round(p.getHp())+"/"+Math.round(p.getMaxHP()));      
+//	      p.getHpbar().draw(new Vector2f(x-100,y+180),text1);
+//	      
+//	      
+//	      text1.setString("PC_1");
+//	      text1.drawString(x+100, y+200, .12f);
+//	      text1.setString("SP: "+Math.round(p2.getSp())+"/"+Math.round(p2.getMaxsp()));
+//	      p2.drawSPBAR(new Vector2f(x+100,y+160),text1);
+//	      text1.setString("HP:"+Math.round(p2.getHp())+"/"+Math.round(p2.getMaxHP()));      
+//	      p2.getHpbar().draw(new Vector2f(x+100,y+180),text1);
+//	      
 	  	if(playersInventory.isUseItemCalled()) {
 			maneger.hide();
 			;
@@ -688,7 +689,7 @@ public class Start {
 }
 
 	
-	   maneger.draw( new Vector2f(screencoordx+(640/2)+50-maneger.getWidth(0.2f,new Vector2f(100,80)),screencoordy),new Vector2f(100,80),0.2f);
+	  maneger.draw( new Vector2f(screencoordx+(640/2)+50-maneger.getWidth(0.2f,new Vector2f(100,80)),screencoordy),new Vector2f(100,80),0.2f);
 	  textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
 		
 	  if(showFps)
@@ -784,7 +785,7 @@ MainBatchRender.flushModel();
 	    	for(int i=0;i<entities.length;i++) {
                 BattleEntity e=entities[(entities.length-1)-i];
                 String name=e.getName();
-                partyMembers[i]=new GUINode(name, new GUIUseCurrentItemOnPC(e,Start.playersInventory));
+                partyMembers[i]=new GUINode(name, new GUIUseCurrentItemOnPC(e,Start.playersInventory),new DisplayPCInfo(e));
 
 	    	}
 	    	root.addChildren(partyMembers);
@@ -1098,6 +1099,9 @@ MainBatchRender.flushModel();
 						
 				
 					}
+		}else {
+			velocity=new Vector2f(0);
+			quarterStepVelocity=new Vector2f();
 		}
 					
 				

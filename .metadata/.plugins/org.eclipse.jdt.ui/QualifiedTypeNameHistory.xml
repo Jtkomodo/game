@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="Collisions.ColisionHandeler"/>
 <fullyQualifiedTypeName name="battleClasses.BattleSlotList"/>
 <fullyQualifiedTypeName name="battleClasses.BattleFormulas"/>
@@ -55,9 +54,10 @@
 <fullyQualifiedTypeName name="animation.AnimationHandler"/>
 <fullyQualifiedTypeName name="guis.GUINode"/>
 <fullyQualifiedTypeName name="guis.GUIManeger"/>
-<fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
 <fullyQualifiedTypeName name="Items.Inventory"/>
 <fullyQualifiedTypeName name="Data.Pcs"/>
 <fullyQualifiedTypeName name="guis.GUIUseCurrentItemOnPC"/>
+<fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
 <fullyQualifiedTypeName name="gameEngine.Start"/>
+<fullyQualifiedTypeName name="guis.DisplayPCInfo"/>
 </qualifiedTypeNameHistroy>

@@ -32,7 +32,7 @@ public class DisplayPCInfo extends GUINodeFunction {
 		float h=text.getStringHieght();
 		float width=((scale.x+padding.x*sizeOfStrings)*2)+(padding.x*sizeOfStrings);
 		float height=(scale.y+(h*sizeOfStrings)+(padding.y()*sizeOfStrings));
-		p.getHpbar().draw(new Vector2f(x-scale.x,(y-(scale.y+(padding.y*sizeOfStrings))+(h/2*sizeOfStrings))),text);
+		p.drawSPBAR(new Vector2f(x-scale.x,(y-(scale.y+(padding.y*sizeOfStrings))+(h/2*sizeOfStrings))),text);
 		text.setString("HP:"+Math.round(p.getHp())+"/"+Math.round(p.getMaxHP()));      
 		p.getHpbar().draw(new Vector2f((x-((scale.x+padding.x*sizeOfStrings)*2)),(y-(scale.y+(padding.y*sizeOfStrings))+(h/2*sizeOfStrings))),text);
 	    Vector2f newPosition=new Vector2f();

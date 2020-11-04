@@ -88,7 +88,7 @@ public class Enemy extends BattleEntity{
 	
 	//this is the generic ai for enemies later we will make different kinds of enemies that will extend this class and we will override the take turn method
 	
-	public void takeTurn(BattleEnemyField enemyField,BattlePlayerField players) {
+	public boolean takeTurn(BattleEnemyField enemyField,BattlePlayerField players) {
 		//this is going to be the method that is called when it is this enemy's turn it will do all the calculations to find out whether to attack or use a item
 		
 	
@@ -101,7 +101,7 @@ public class Enemy extends BattleEntity{
            Start.DebugPrint("no Action Taken");	    
 	    	
 	    }
-	 
+	 return actionTaken;
 	
 	
 		

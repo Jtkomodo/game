@@ -21,6 +21,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_T;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_Y;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_P;
 
 import java.util.ArrayList;
 
@@ -57,6 +58,8 @@ import battleClasses.BattlePlayerField;
 import battleClasses.BattleSlot;
 import battleClasses.Enemy;
 import battleClasses.HpBar;
+import events.EventManager;
+import events.OpenGUI;
 import guis.BarElement;
 import guis.CloseWindow;
 import guis.DisplayPCInfo;
@@ -144,7 +147,9 @@ public class Start {
     private static GUINode rootForBattleScreen,root;
 	public static GUINode specials;
 	public static GUINode moves;
+	public static Vector2f playerPostion=new Vector2f();
 	private static boolean USEITEM_INITIALIZED=false;
+	public static boolean STOP_PLAYER_MOVEMENT=false;
     
 	public static void main(String[] args) {
 	
@@ -354,15 +359,14 @@ public class Start {
       
 	
 		DebugPrint("Settign Colisions....");
-		playerCol=new AABB(new Vector2f(0,0),64,64,0);
+		playerCol=new AABB(new Vector2f(0,0),16,42,0);
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0,false);
 		Col=new AABB(new Vector2f(0,0),32,32,0);
 		AABB	Col3=new AABB(new Vector2f(100,0),16,32,0);
 		AABB	Col4=new AABB(new Vector2f(200,0),32,32,0);
-		AABB	Col5=new AABB(new Vector2f(400,0),32,32,0);
         COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
 	    buttonNamses = new BIndingNameParser("GLFW");
-		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2,Col3,Col4,Col5});
+		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2,Col3,Col4});
 	
 		
 		initializeFPS();
@@ -427,19 +431,26 @@ public class Start {
 		
 		 specials=new GUINode(new GUINode[]{},"specials",2,2);
          moves=new GUINode(new GUINode[]{},"moves",2,2);
-         
+         GUINode buy=new GUINode(new GUINode[] {},"Buy items",5,5);
+         GUINode sell=new GUINode(new GUINode[] {},"Sell items",5,5);
+         GUINode rootForTrigger=new GUINode(new GUINode[] {buy,sell},"root",1,3);
          
 		 GUINode battleRoot=new GUINode(new GUINode[]{bag,moves,specials},"root",1,3);	
 		
 	
 	    GUIManeger battleManeger=new GUIManeger(battleRoot,Constants.COL_COLOR_BLUE.add(0,0,0,50,new Vector4f()));
 		maneger=new GUIManeger(root,Constants.COL_COLOR_BLUE);
+		GUIManeger m=new GUIManeger(rootForTrigger,Constants.BLACK);
 		PARTY_SELECT=new GUIManeger(new GUINode(new GUINode[] {},"root",2,2),Constants.COL_COLOR_BLUE);
 		
 		
 		BattleSystem.INIT(battleManeger);	
 		
-			
+		
+		
+	AABB	Col5=new AABB(new Vector2f(400,0),32,32,1,new OpenGUI(new Vector2f(0,0), m,new Vector2f(100,80),0.2f,GLFW_KEY_P));
+		
+	ColisionHandeler.addCollision(Col5);		
 		//teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
 		
 		
@@ -473,6 +484,7 @@ public class Start {
 	while(!w.isExited()) {
 	
 		fps();    
+		
 	
 	//if(canRender) {
 		
@@ -532,36 +544,36 @@ public class Start {
            new Vector2f(x,y).add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);//take step
 		 
-		    Vector2f vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);//check colisions
+		   playerPostion=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);//check colisions
 		  //  MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.GREEN));//put marker to indicate where this step ended at
 		    Start.text1.setString("bc: "+Math.round(playerCol.getPosBeforeCol().x)+", "+Math.round(playerCol.getPosBeforeCol().y));
 			   Start.text1.UIdrawString((640/2)+Start.screencoordx-100,(480/2)+Start.screencoordy-80,.2f);			  
 		    
 		    //step 2
-			oldpos.set(vector);
-		    vector.add(quarterStepVelocity,step);
+			oldpos.set(playerPostion);
+		    playerPostion.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
-			vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
+			playerPostion=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
 		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.BLUE));
 		    
 			
 		   //step3
-			oldpos.set(vector);
-		    vector.add(quarterStepVelocity,step);
+			oldpos.set(playerPostion);
+		    playerPostion.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
-			vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
+			playerPostion=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
 		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.RED));
 			
 		    //step4
-			oldpos.set(vector);
-		    vector.add(quarterStepVelocity,step);
+			oldpos.set(playerPostion);
+		    playerPostion.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
-			vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
+			playerPostion=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
 		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.YELLOW));
 		
 			if(!ColisionHandeler.getColided()) {
 				
-				playerCol.setPosBeforeCol(vector);
+				playerCol.setPosBeforeCol(playerPostion);
 				
 				
 			
@@ -570,10 +582,10 @@ public class Start {
 			 
 		
 		    
-			x=vector.x; y=vector.y;	
-		    playerCol.setCenterPosition(vector);	
+			x=playerPostion.x; y=playerPostion.y;	
+		    playerCol.setCenterPosition(playerPostion);	
 			
-			
+			EventManager.Update(playerPostion);
 			
 		
 			     
@@ -629,21 +641,22 @@ public class Start {
 //	      text1.setString("HP:"+Math.round(p2.getHp())+"/"+Math.round(p2.getMaxHP()));      
 //	      p2.getHpbar().draw(new Vector2f(x+100,y+180),text1);
 //	      
-	  	if(playersInventory.isUseItemCalled()) {
-			maneger.hide();
-			;
-			if(!USEITEM_INITIALIZED) {
-			
-				USEITEM_INIT(playerField,PARTY_SELECT);
-			}
-			drawPartyScreen(PARTY_SELECT, new Vector2f(screencoordx+(640/2)+50-maneger.getWidth(0.2f,new Vector2f(100,80)),screencoordy),new Vector2f(100,80),0.2f);
-			if(InputHandler.getStateofButton(GLFW_KEY_BACKSPACE)>0) {
-				playersInventory.setUseItemCalled(false);
-				maneger.open();
-				maneger.UpdateChanges();
-				PARTY_SELECT.close();
-				USEITEM_INITIALIZED=false;
-			}
+	      if(playersInventory.isUseItemCalled()) {
+	    	  maneger.hide();
+	    	  ;
+	    	  if(!USEITEM_INITIALIZED) {
+
+	    		  USEITEM_INIT(playerField,PARTY_SELECT);
+	    	  }else {
+	    		  drawPartyScreen(PARTY_SELECT, new Vector2f(screencoordx+(640/2)+50-maneger.getWidth(0.2f,new Vector2f(100,80)),screencoordy),new Vector2f(100,80),0.2f);
+	    		  if(InputHandler.getStateofButton(GLFW_KEY_BACKSPACE)>0) {
+	    			  playersInventory.setUseItemCalled(false);
+	    			  maneger.open();
+	    			  maneger.UpdateChanges();
+	    			  PARTY_SELECT.close();
+	    			  USEITEM_INITIALIZED=false;
+	    		  }
+	    	  }
 		}else if(PARTY_SELECT.isOpen()){
 			maneger.open();
 			//maneger.UpdateChanges();
@@ -826,9 +839,10 @@ MainBatchRender.flushModel();
 		    	InputHandler.EnableButtons(new int[] {GLFW.GLFW_KEY_I,GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_ENTER,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
 		    if(CharCallback.takeInput) {
 		    	InputHandler.EnableButton(GLFW_KEY_BACKSPACE);
-		    }
+		    }    
 		maneger.InputUpdate();
 		PARTY_SELECT.InputUpdate();
+		EventManager.UpdateInput();
 	    BattleSystem.updateInput();
 
 	   
@@ -1020,10 +1034,12 @@ MainBatchRender.flushModel();
 	
 	if(overworld) {
 	
-		
+		if((maneger.isOpen() || PARTY_SELECT.isOpen())){
+			Start.STOP_PLAYER_MOVEMENT=true;
+		}
 	
 		
-		if(!maneger.isOpen() && !PARTY_SELECT.isOpen()) {
+		if(!Start.STOP_PLAYER_MOVEMENT) {
 		
 		
 		
@@ -1108,7 +1124,7 @@ MainBatchRender.flushModel();
 		 
 	}
 	
-		 
+	Start.STOP_PLAYER_MOVEMENT=false;
 			 }
 	
 	

@@ -6,29 +6,31 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="p2." key="selection"/>
+		<item value="getStateofButtonInstanced" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="public "/>
+			<item value="getStateofButton"/>
+			<item value="inputhandler"/>
+			<item value="playerPostion"/>
+			<item value="playerposition"/>
+			<item value="playerPosition"/>
+			<item value="enemyHasTaken"/>
+			<item value="action"/>
+			<item value="no Action Taken"/>
+			<item value="no ac"/>
+			<item value="no"/>
 			<item value="p."/>
 			<item value="Start.source"/>
 			<item value="maneger.draw"/>
 			<item value="setRootNode"/>
-			<item value="step"/>
-			<item value="colisionHandeler"/>
-			<item value="collisionHandler"/>
-			<item value="aabb"/>
-			<item value="maps"/>
-			<item value="map"/>
-			<item value="close()"/>
-			<item value="UI"/>
-			<item value="reset("/>
-			<item value="reset"/>
-			<item value="punch"/>
 		</list>
 		<list key="replacehistory">
+			<item value="getStateofButtonInstanced"/>
+			<item value="i"/>
 			<item value="p2."/>
 			<item value="Lazer"/>
 			<item value="ChangedFlag"/>
@@ -42,15 +44,13 @@
 			<item value="BattleEntity"/>
 			<item value="y"/>
 			<item value="x"/>
-			<item value="e.getUvs(),e.getVerts(),"/>
-			<item value="float[] cuvs,float[] LocalVerts,"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="575" key="DIALOG_WIDTH"/>
+		<item value="712" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="1080" key="DIALOG_HEIGHT"/>
-		<item value="1277" key="DIALOG_X_ORIGIN"/>
+		<item value="1217" key="DIALOG_X_ORIGIN"/>
 		<item value="9" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

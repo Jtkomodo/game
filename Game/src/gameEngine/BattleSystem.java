@@ -19,6 +19,7 @@ import battleClasses.BattleFormulas;
 import battleClasses.BattlePlayerField;
 import battleClasses.Enemy;
 import battleClasses.HpBar;
+import events.EventManager;
 import guis.GUIManeger;
 import guis.GUINode;
 import guis.UIElement;
@@ -213,9 +214,12 @@ public class BattleSystem {
 			else if(!EnemyHasTakenAction && !PlayersTurn && currentEntity.isEnemy()){
 				
 				Enemy e=(Enemy)currentEntity;
-				e.takeTurn(enemyField, playerField);
-				EnemyHasTakenAction=true;
-				
+				if(e.takeTurn(enemyField, playerField)) {
+					EnemyHasTakenAction=true;
+				}else
+				{
+				TurnFinished=true;
+				}
 			}
 		
 	
@@ -330,7 +334,7 @@ public static void StartBattle(BattleEnemyField enemies,BattlePlayerField p,Text
 	playersInventory.setUseItemCalled(false);
 	TurnFinished=true;
 	
-	  
+    EventManager.endAllEvents();
 }
 
 private static void addMovesToGUINodes(BattleEntity pc) {

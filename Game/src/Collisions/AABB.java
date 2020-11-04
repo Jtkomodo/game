@@ -7,6 +7,8 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import Data.Constants;
+import events.Event;
+import events.EventManager;
 import gameEngine.Entity;
 import gameEngine.Start;
 import gameEngine.VectorMath;
@@ -21,8 +23,7 @@ public class AABB extends Collisions{
 	private Model aabb,piont;
 	private float z=50;
 	private boolean colide=false,COLIDECHECK=false;
-	private boolean hasFunction=false;
-	private Event function;
+	private Event event;
 	
 	
 	
@@ -34,8 +35,12 @@ public class AABB extends Collisions{
 		construct(position,widthR,heightR,resistance);
 		
 	}
-
-
+    
+	public AABB(Vector2f position, float widthR, float heightR, float resistance,Event event) {
+		this.event=event;
+		construct(position,widthR,heightR,resistance);
+		
+	}
 
 
 
@@ -149,13 +154,17 @@ public class AABB extends Collisions{
 		
 		*/
 		if((rcA.x<lcB.x) || (rcB.x<lcA.x)) {// if the right side of A comes before the left side of B or vice versa return false(they can not be colliding)
-		
+			if(box.hasEvent()) {
+				box.getEvent().call_To_Finish_Early();
+			}
 			
 			return false;
 		}
 		else if((rcA.y<lcB.y) || (rcB.y<lcA.y)) {//if the Bottom side of A comes before the top side of B or vice versa return false
 		
-			
+			if(box.hasEvent()) {
+				box.getEvent().call_To_Finish_Early();
+			}
 			
 			
 			return false;
@@ -164,9 +173,10 @@ public class AABB extends Collisions{
 		else {//if both all sides have been checked and not resulted in no collision then there must be a collision
 			this.colide=true;
 			
-			if(box.hasFunction) {
+			if(box.hasEvent()) {
 		
-				box.getFunction().Invoke();}
+				EventManager.addEvent(box.getEvent());
+			}
 			return true;
 		}
 	  
@@ -177,16 +187,16 @@ public class AABB extends Collisions{
 		
 	
 	}
-	public Event getFunction() {
-		return function;
+	public Event getEvent() {
+		return this.event;
 	}
 
 
 
 
 
-	public void setFunction(Event function) {
-		this.function = function;
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 
 
@@ -426,7 +436,9 @@ public void debug() {
 
 	
 
-
+   public boolean hasEvent() {
+	   return !(this.event==null);
+   }
 
 
 	

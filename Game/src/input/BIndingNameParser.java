@@ -29,7 +29,7 @@ public class BIndingNameParser {
 		
 		
 		if(ist==null) {
-		 System.out.println("SpriteSheet "+name+" can't be found");
+		 System.out.println("BindingFile "+name+" can't be found");
 		}
 		else {	
 		InputStreamReader isr = new InputStreamReader(ist);

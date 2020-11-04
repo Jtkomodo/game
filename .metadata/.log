@@ -1921,3 +1921,3336 @@ Caused by: org.eclipse.aether.transfer.ArtifactNotFoundException: Could not find
 
 !ENTRY org.eclipse.recommenders.models.rcp 1 0 2020-10-28 20:25:35.703
 !MESSAGE org.eclipse.recommenders:index::zip:0.0.0 could not be resolved from the model repositories. Are you offline?
+!SESSION 2020-10-28 20:26:49.606 -----------------------------------------------
+eclipse.buildId=4.13.0.I20190916-1045
+java.version=1.8.0_271
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.equinox.simpleconfigurator 4 0 2020-10-28 20:26:50.728
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Exception in org.eclipse.equinox.internal.simpleconfigurator.Activator.start() of bundle org.eclipse.equinox.simpleconfigurator.
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:800)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+Caused by: java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	... 24 more
+Root exception:
+java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+
+!ENTRY org.eclipse.osgi 4 0 2020-10-28 20:26:51.317
+!MESSAGE Bundle org.eclipse.equinox.simpleconfigurator_1.3.0.v20180502-1828 [2] is not active.
+
+!ENTRY org.eclipse.jface 2 0 2020-10-28 20:26:54.108
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-10-28 20:26:54.108
+!MESSAGE A conflict occurred for ALT+T:
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.TimelineShowView,Timeline / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5600a278,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.GraphShowView,Graph / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@549d14fe,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.mylyn.tasks.core 4 0 2020-10-28 20:26:58.396
+!MESSAGE Unexpected error while loading repository template extensions
+!SUBENTRY 1 org.eclipse.mylyn.tasks.core 4 0 2020-10-28 20:26:58.396
+!MESSAGE Could not load repository template extension contributed by 'org.eclipse.mylyn.bugzilla.ide' with connectorKind 'bugzilla'
+
+!ENTRY org.eclipse.egit.ui 2 0 2020-10-28 20:27:02.127
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\jtkom'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 17 2020-10-28 20:27:03.803
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $. ; version: 2.0.7.v20170906-1327
+!STACK 0
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:224)
+	at com.google.gson.Gson.fromJson(Gson.java:888)
+	at com.google.gson.Gson.fromJson(Gson.java:853)
+	at com.google.gson.Gson.fromJson(Gson.java:802)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.json.Json.deserialize(Json.java:91)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:66)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:124)
+	at com.google.common.util.concurrent.AbstractIdleService$DelegateService$1.run(AbstractIdleService.java:62)
+	at com.google.common.util.concurrent.Callables$4.run(Callables.java:122)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:385)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:213)
+	... 9 more
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-10-28 20:27:03.981
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-10-28 20:27:03.993
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-10-28 20:27:04.004
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-10-28 20:38:33.379
+!MESSAGE Failed to download org.eclipse.recommenders:index::zip:0.0.0
+!STACK 0
+org.eclipse.aether.resolution.ArtifactResolutionException: Could not find artifact org.eclipse.recommenders:index:zip:0.0.0-SNAPSHOT in models (http://download.eclipse.org/recommenders/models/photon/)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolve(DefaultArtifactResolver.java:453)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolveArtifacts(DefaultArtifactResolver.java:255)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolveArtifact(DefaultArtifactResolver.java:232)
+	at org.eclipse.aether.internal.impl.DefaultRepositorySystem.resolveArtifact(DefaultRepositorySystem.java:303)
+	at org.eclipse.recommenders.models.ModelRepository.resolveInternal(ModelRepository.java:193)
+	at org.eclipse.recommenders.models.ModelRepository.resolve(ModelRepository.java:172)
+	at org.eclipse.recommenders.internal.models.rcp.EclipseModelRepository.resolve(EclipseModelRepository.java:168)
+	at org.eclipse.recommenders.internal.models.rcp.DownloadModelArchiveJob.run(DownloadModelArchiveJob.java:76)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: org.eclipse.aether.transfer.ArtifactNotFoundException: Could not find artifact org.eclipse.recommenders:index:zip:0.0.0-SNAPSHOT in models (http://download.eclipse.org/recommenders/models/photon/)
+	at org.eclipse.aether.connector.basic.ArtifactTransportListener.transferFailed(ArtifactTransportListener.java:48)
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector$TaskRunner.run(BasicRepositoryConnector.java:364)
+	at org.eclipse.aether.util.concurrency.RunnableErrorForwarder$1.run(RunnableErrorForwarder.java:76)
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector$DirectExecutor.execute(BasicRepositoryConnector.java:590)
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector.get(BasicRepositoryConnector.java:258)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.performDownloads(DefaultArtifactResolver.java:529)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolve(DefaultArtifactResolver.java:430)
+	... 8 more
+
+!ENTRY org.eclipse.recommenders.models.rcp 1 0 2020-10-28 20:38:33.387
+!MESSAGE org.eclipse.recommenders:index::zip:0.0.0 could not be resolved from the model repositories. Are you offline?
+!SESSION 2020-10-28 20:40:16.094 -----------------------------------------------
+eclipse.buildId=4.13.0.I20190916-1045
+java.version=1.8.0_271
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.equinox.simpleconfigurator 4 0 2020-10-28 20:40:17.379
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Exception in org.eclipse.equinox.internal.simpleconfigurator.Activator.start() of bundle org.eclipse.equinox.simpleconfigurator.
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:800)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+Caused by: java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	... 24 more
+Root exception:
+java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+
+!ENTRY org.eclipse.osgi 4 0 2020-10-28 20:40:18.063
+!MESSAGE Bundle org.eclipse.equinox.simpleconfigurator_1.3.0.v20180502-1828 [2] is not active.
+
+!ENTRY org.eclipse.jface 2 0 2020-10-28 20:40:21.284
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-10-28 20:40:21.284
+!MESSAGE A conflict occurred for ALT+T:
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.TimelineShowView,Timeline / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1818390b,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.GraphShowView,Graph / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@67a38,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.mylyn.tasks.core 4 0 2020-10-28 20:40:26.080
+!MESSAGE Unexpected error while loading repository template extensions
+!SUBENTRY 1 org.eclipse.mylyn.tasks.core 4 0 2020-10-28 20:40:26.080
+!MESSAGE Could not load repository template extension contributed by 'org.eclipse.mylyn.bugzilla.ide' with connectorKind 'bugzilla'
+
+!ENTRY org.eclipse.egit.ui 2 0 2020-10-28 20:40:30.345
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\jtkom'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 17 2020-10-28 20:40:32.190
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $. ; version: 2.0.7.v20170906-1327
+!STACK 0
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:224)
+	at com.google.gson.Gson.fromJson(Gson.java:888)
+	at com.google.gson.Gson.fromJson(Gson.java:853)
+	at com.google.gson.Gson.fromJson(Gson.java:802)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.json.Json.deserialize(Json.java:91)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:66)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:124)
+	at com.google.common.util.concurrent.AbstractIdleService$DelegateService$1.run(AbstractIdleService.java:62)
+	at com.google.common.util.concurrent.Callables$4.run(Callables.java:122)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:385)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:213)
+	... 9 more
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-10-28 20:41:52.429
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-10-28 20:41:52.437
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-10-28 20:41:52.444
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.ui 4 0 2020-10-28 20:41:52.875
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.debug.internal.ui.contexts.DebugContextManager.addDebugContextListener(DebugContextManager.java:187)
+	at org.eclipse.jdt.internal.debug.ui.EvaluationContextManager.<init>(EvaluationContextManager.java:69)
+	at org.eclipse.jdt.internal.debug.ui.EvaluationContextManager.<init>(EvaluationContextManager.java:68)
+	at org.eclipse.jdt.internal.debug.ui.EvaluationContextManager$1.run(EvaluationContextManager.java:77)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:37)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:182)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3906)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3537)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.runEventLoop(EventLoopProgressMonitor.java:125)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.isCanceled(EventLoopProgressMonitor.java:99)
+	at org.eclipse.core.runtime.SubMonitor$RootInfo.isCanceled(SubMonitor.java:236)
+	at org.eclipse.core.runtime.SubMonitor.isCanceled(SubMonitor.java:583)
+	at org.eclipse.core.runtime.ProgressMonitorWrapper.isCanceled(ProgressMonitorWrapper.java:111)
+	at org.eclipse.ui.internal.dialogs.EventLoopProgressMonitor.isCanceled(EventLoopProgressMonitor.java:100)
+	at org.eclipse.core.runtime.ProgressMonitorWrapper.isCanceled(ProgressMonitorWrapper.java:111)
+	at org.eclipse.core.runtime.ProgressMonitorWrapper.isCanceled(ProgressMonitorWrapper.java:111)
+	at org.eclipse.core.runtime.ProgressMonitorWrapper.isCanceled(ProgressMonitorWrapper.java:111)
+	at org.eclipse.core.runtime.SubMonitor$RootInfo.isCanceled(SubMonitor.java:236)
+	at org.eclipse.core.runtime.SubMonitor.isCanceled(SubMonitor.java:583)
+	at org.eclipse.core.runtime.ProgressMonitorWrapper.isCanceled(ProgressMonitorWrapper.java:111)
+	at org.eclipse.core.runtime.SubMonitor$RootInfo.checkForCancellation(SubMonitor.java:275)
+	at org.eclipse.core.runtime.SubMonitor.split(SubMonitor.java:984)
+	at org.eclipse.core.runtime.SubMonitor.split(SubMonitor.java:897)
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.write(FileSystemResourceManager.java:1157)
+	at org.eclipse.core.internal.resources.File.internalSetContents(File.java:303)
+	at org.eclipse.core.internal.resources.File.setContents(File.java:339)
+	at org.eclipse.core.internal.resources.File.setContents(File.java:434)
+	at org.eclipse.core.internal.filebuffers.ResourceTextFileBuffer.commitFileBufferContent(ResourceTextFileBuffer.java:365)
+	at org.eclipse.core.internal.filebuffers.ResourceFileBuffer.commit(ResourceFileBuffer.java:314)
+	at org.eclipse.jdt.internal.ui.javaeditor.DocumentAdapter.save(DocumentAdapter.java:513)
+	at org.eclipse.jdt.internal.core.CommitWorkingCopyOperation.executeOperation(CommitWorkingCopyOperation.java:124)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:733)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2289)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2316)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:804)
+	at org.eclipse.jdt.internal.core.CompilationUnit.commitWorkingCopy(CompilationUnit.java:403)
+	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitDocumentProvider.commitWorkingCopy(CompilationUnitDocumentProvider.java:1408)
+	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitDocumentProvider$4.execute(CompilationUnitDocumentProvider.java:1488)
+	at org.eclipse.ui.editors.text.TextFileDocumentProvider$DocumentProviderOperation.run(TextFileDocumentProvider.java:130)
+	at org.eclipse.ui.actions.WorkspaceModifyDelegatingOperation.execute(WorkspaceModifyDelegatingOperation.java:68)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.lambda$0(WorkspaceModifyOperation.java:107)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2289)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2316)
+	at org.eclipse.ui.actions.WorkspaceModifyOperation.run(WorkspaceModifyOperation.java:128)
+	at org.eclipse.ui.internal.editors.text.WorkspaceOperationRunner.run(WorkspaceOperationRunner.java:73)
+	at org.eclipse.ui.internal.editors.text.WorkspaceOperationRunner.run(WorkspaceOperationRunner.java:63)
+	at org.eclipse.ui.editors.text.TextFileDocumentProvider.executeOperation(TextFileDocumentProvider.java:458)
+	at org.eclipse.ui.editors.text.TextFileDocumentProvider.saveDocument(TextFileDocumentProvider.java:761)
+	at org.eclipse.ui.texteditor.AbstractTextEditor.performSave(AbstractTextEditor.java:5050)
+	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor.performSave(CompilationUnitEditor.java:1272)
+	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor.doSave(CompilationUnitEditor.java:1326)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$TextEditorSavable.doSave(AbstractTextEditor.java:7168)
+	at org.eclipse.ui.Saveable.doSave(Saveable.java:220)
+	at org.eclipse.ui.internal.SaveableHelper.doSaveModel(SaveableHelper.java:340)
+	at org.eclipse.ui.internal.SaveablesList.lambda$2(SaveablesList.java:791)
+	at org.eclipse.ui.internal.SaveableHelper.lambda$3(SaveableHelper.java:271)
+	at org.eclipse.jface.operation.ModalContext.runInCurrentThread(ModalContext.java:437)
+	at org.eclipse.jface.operation.ModalContext.run(ModalContext.java:353)
+	at org.eclipse.ui.internal.WorkbenchWindow$14.run(WorkbenchWindow.java:2212)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:71)
+	at org.eclipse.ui.internal.WorkbenchWindow.run(WorkbenchWindow.java:2208)
+	at org.eclipse.ui.internal.SaveableHelper.runProgressMonitorOperation(SaveableHelper.java:278)
+	at org.eclipse.ui.internal.SaveablesList.saveModels(SaveablesList.java:800)
+	at org.eclipse.ui.internal.SaveablesList.saveModels(SaveablesList.java:760)
+	at org.eclipse.ui.internal.Workbench.saveAll(Workbench.java:3528)
+	at org.eclipse.ui.ide.IDE$1.run(IDE.java:1513)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.ide.IDE.saveAllEditors(IDE.java:1501)
+	at org.eclipse.debug.internal.ui.launchConfigurations.SaveScopeResourcesHandler.doSave(SaveScopeResourcesHandler.java:257)
+	at org.eclipse.debug.internal.ui.launchConfigurations.SaveScopeResourcesHandler.handleStatus(SaveScopeResourcesHandler.java:211)
+	at org.eclipse.debug.internal.ui.sourcelookup.Prompter$1.run(Prompter.java:72)
+	at org.eclipse.ui.internal.PendingSyncExec.run(PendingSyncExec.java:58)
+	at org.eclipse.ui.internal.UILockListener.doPendingWork(UILockListener.java:168)
+	at org.eclipse.ui.internal.UISynchronizer.lambda$0(UISynchronizer.java:150)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:37)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:182)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3906)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3537)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1170)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1059)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:667)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:597)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:148)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+!SESSION 2020-10-29 21:13:14.863 -----------------------------------------------
+eclipse.buildId=4.13.0.I20190916-1045
+java.version=1.8.0_271
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.equinox.simpleconfigurator 4 0 2020-10-29 21:13:16.019
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Exception in org.eclipse.equinox.internal.simpleconfigurator.Activator.start() of bundle org.eclipse.equinox.simpleconfigurator.
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:800)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+Caused by: java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	... 24 more
+Root exception:
+java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+
+!ENTRY org.eclipse.osgi 4 0 2020-10-29 21:13:16.667
+!MESSAGE Bundle org.eclipse.equinox.simpleconfigurator_1.3.0.v20180502-1828 [2] is not active.
+
+!ENTRY org.eclipse.jface 2 0 2020-10-29 21:13:19.652
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-10-29 21:13:19.652
+!MESSAGE A conflict occurred for ALT+T:
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.TimelineShowView,Timeline / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5600a278,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.GraphShowView,Graph / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@549d14fe,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.mylyn.tasks.core 4 0 2020-10-29 21:13:24.225
+!MESSAGE Unexpected error while loading repository template extensions
+!SUBENTRY 1 org.eclipse.mylyn.tasks.core 4 0 2020-10-29 21:13:24.225
+!MESSAGE Could not load repository template extension contributed by 'org.eclipse.mylyn.bugzilla.ide' with connectorKind 'bugzilla'
+
+!ENTRY org.eclipse.egit.ui 2 0 2020-10-29 21:13:28.266
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\jtkom'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 17 2020-10-29 21:13:30.730
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $. ; version: 2.0.7.v20170906-1327
+!STACK 0
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:224)
+	at com.google.gson.Gson.fromJson(Gson.java:888)
+	at com.google.gson.Gson.fromJson(Gson.java:853)
+	at com.google.gson.Gson.fromJson(Gson.java:802)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.json.Json.deserialize(Json.java:91)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:66)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:124)
+	at com.google.common.util.concurrent.AbstractIdleService$DelegateService$1.run(AbstractIdleService.java:62)
+	at com.google.common.util.concurrent.Callables$4.run(Callables.java:122)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:385)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:213)
+	... 9 more
+!SESSION 2020-11-01 09:43:09.804 -----------------------------------------------
+eclipse.buildId=4.13.0.I20190916-1045
+java.version=1.8.0_271
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.equinox.simpleconfigurator 4 0 2020-11-01 09:43:11.452
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Exception in org.eclipse.equinox.internal.simpleconfigurator.Activator.start() of bundle org.eclipse.equinox.simpleconfigurator.
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:800)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+Caused by: java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	... 24 more
+Root exception:
+java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+
+!ENTRY org.eclipse.osgi 4 0 2020-11-01 09:43:14.493
+!MESSAGE Bundle org.eclipse.equinox.simpleconfigurator_1.3.0.v20180502-1828 [2] is not active.
+
+!ENTRY org.eclipse.jface 2 0 2020-11-01 09:43:21.220
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-11-01 09:43:21.220
+!MESSAGE A conflict occurred for ALT+T:
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.TimelineShowView,Timeline / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@23e9dd78,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.GraphShowView,Graph / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@470c4229,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.mylyn.tasks.core 4 0 2020-11-01 09:43:27.211
+!MESSAGE Unexpected error while loading repository template extensions
+!SUBENTRY 1 org.eclipse.mylyn.tasks.core 4 0 2020-11-01 09:43:27.211
+!MESSAGE Could not load repository template extension contributed by 'org.eclipse.mylyn.bugzilla.ide' with connectorKind 'bugzilla'
+
+!ENTRY org.eclipse.egit.ui 2 0 2020-11-01 09:43:32.243
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\jtkom'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 17 2020-11-01 09:43:34.613
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $. ; version: 2.0.7.v20170906-1327
+!STACK 0
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:224)
+	at com.google.gson.Gson.fromJson(Gson.java:888)
+	at com.google.gson.Gson.fromJson(Gson.java:853)
+	at com.google.gson.Gson.fromJson(Gson.java:802)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.json.Json.deserialize(Json.java:91)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:66)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:124)
+	at com.google.common.util.concurrent.AbstractIdleService$DelegateService$1.run(AbstractIdleService.java:62)
+	at com.google.common.util.concurrent.Callables$4.run(Callables.java:122)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:385)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:213)
+	... 9 more
+
+!ENTRY org.eclipse.ui 4 0 2020-11-01 09:43:37.571
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader.getMemberTypes(ClassFileReader.java:705)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.cachePartsFrom(BinaryTypeBinding.java:433)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1038)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1024)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1019)
+	at org.eclipse.jdt.internal.core.hierarchy.HierarchyResolver.accept(HierarchyResolver.java:116)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.askForType(LookupEnvironment.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding.resolve(UnresolvedReferenceBinding.java:111)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.resolveType(BinaryTypeBinding.java:228)
+	at org.eclipse.jdt.internal.compiler.lookup.PackageBinding.getType(PackageBinding.java:202)
+	at org.eclipse.jdt.internal.compiler.lookup.SplitPackageBinding.getType(SplitPackageBinding.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.findType(Scope.java:1985)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getTypeOrPackage(Scope.java:3313)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getType(Scope.java:3005)
+	at org.eclipse.jdt.internal.compiler.ast.SingleTypeReference.getTypeBinding(SingleTypeReference.java:54)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.internalResolveType(TypeReference.java:511)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:612)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:608)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesWithSuspendedTempErrorHandlingPolicy(SourceTypeBinding.java:1971)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesFor(SourceTypeBinding.java:1873)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.methods(SourceTypeBinding.java:1561)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.internalFaultInTypeForFieldsAndMethods(SourceTypeBinding.java:909)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.faultInTypesForFieldsAndMethods(SourceTypeBinding.java:904)
+	at org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope.faultInTypes(CompilationUnitScope.java:509)
+	at org.eclipse.jdt.internal.core.hierarchy.HierarchyResolver.resolve(HierarchyResolver.java:858)
+	at org.eclipse.jdt.internal.core.hierarchy.HierarchyResolver.resolve(HierarchyResolver.java:657)
+	at org.eclipse.jdt.internal.core.hierarchy.HierarchyBuilder.buildSupertypes(HierarchyBuilder.java:126)
+	at org.eclipse.jdt.internal.core.hierarchy.IndexBasedHierarchyBuilder.build(IndexBasedHierarchyBuilder.java:166)
+	at org.eclipse.jdt.internal.core.hierarchy.TypeHierarchy.compute(TypeHierarchy.java:320)
+	at org.eclipse.jdt.internal.core.hierarchy.TypeHierarchy.refresh(TypeHierarchy.java:1316)
+	at org.eclipse.jdt.internal.core.CreateTypeHierarchyOperation.executeOperation(CreateTypeHierarchyOperation.java:91)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:733)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:799)
+	at org.eclipse.jdt.internal.core.SourceType.newSupertypeHierarchy(SourceType.java:792)
+	at org.eclipse.jdt.internal.core.SourceType.newSupertypeHierarchy(SourceType.java:743)
+	at org.eclipse.jdt.internal.launching.JavaLaunchableTester.hasSuperclass(JavaLaunchableTester.java:468)
+	at org.eclipse.jdt.internal.launching.JavaLaunchableTester.test(JavaLaunchableTester.java:612)
+	at org.eclipse.core.internal.expressions.Property.test(Property.java:58)
+	at org.eclipse.core.internal.expressions.TestExpression.evaluate(TestExpression.java:100)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:51)
+	at org.eclipse.core.internal.expressions.AndExpression.evaluate(AndExpression.java:31)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:51)
+	at org.eclipse.core.internal.expressions.IterateExpression.evaluate(IterateExpression.java:160)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:51)
+	at org.eclipse.core.internal.expressions.WithExpression.evaluate(WithExpression.java:75)
+	at org.eclipse.core.internal.expressions.CompositeExpression.evaluateAnd(CompositeExpression.java:51)
+	at org.eclipse.core.internal.expressions.EnablementExpression.evaluate(EnablementExpression.java:55)
+	at org.eclipse.debug.internal.ui.launchConfigurations.LaunchShortcutExtension.evalEnablementExpression(LaunchShortcutExtension.java:281)
+	at org.eclipse.debug.internal.ui.contextlaunching.LaunchingResourceManager.getShortcutsForSelection(LaunchingResourceManager.java:454)
+	at org.eclipse.debug.internal.ui.contextlaunching.ContextRunner.selectAndLaunch(ContextRunner.java:164)
+	at org.eclipse.debug.internal.ui.contextlaunching.ContextRunner.launch(ContextRunner.java:98)
+	at org.eclipse.debug.ui.actions.AbstractLaunchToolbarAction.runInternal(AbstractLaunchToolbarAction.java:87)
+	at org.eclipse.debug.ui.actions.AbstractLaunchHistoryAction.runWithEvent(AbstractLaunchHistoryAction.java:420)
+	at org.eclipse.ui.internal.PluginAction.runWithEvent(PluginAction.java:237)
+	at org.eclipse.ui.internal.WWinPluginAction.runWithEvent(WWinPluginAction.java:219)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:565)
+	at org.eclipse.jface.action.ActionContributionItem.lambda$5(ActionContributionItem.java:436)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:86)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4118)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1052)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3931)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3534)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1170)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1059)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:667)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:597)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:148)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-01 09:43:37.861
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-01 09:43:37.880
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-01 09:43:37.897
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+!SESSION 2020-11-01 09:58:26.018 -----------------------------------------------
+eclipse.buildId=4.13.0.I20190916-1045
+java.version=1.8.0_271
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.equinox.simpleconfigurator 4 0 2020-11-01 09:58:26.972
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Exception in org.eclipse.equinox.internal.simpleconfigurator.Activator.start() of bundle org.eclipse.equinox.simpleconfigurator.
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:800)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+Caused by: java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	... 24 more
+Root exception:
+java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+
+!ENTRY org.eclipse.osgi 4 0 2020-11-01 09:58:27.504
+!MESSAGE Bundle org.eclipse.equinox.simpleconfigurator_1.3.0.v20180502-1828 [2] is not active.
+
+!ENTRY org.eclipse.jface 2 0 2020-11-01 09:58:30.418
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-11-01 09:58:30.419
+!MESSAGE A conflict occurred for ALT+T:
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.TimelineShowView,Timeline / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@23e9dd78,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.GraphShowView,Graph / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@470c4229,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.mylyn.tasks.core 4 0 2020-11-01 09:58:35.269
+!MESSAGE Unexpected error while loading repository template extensions
+!SUBENTRY 1 org.eclipse.mylyn.tasks.core 4 0 2020-11-01 09:58:35.269
+!MESSAGE Could not load repository template extension contributed by 'org.eclipse.mylyn.bugzilla.ide' with connectorKind 'bugzilla'
+
+!ENTRY org.eclipse.egit.ui 2 0 2020-11-01 09:58:39.781
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\jtkom'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 17 2020-11-01 09:58:42.027
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $. ; version: 2.0.7.v20170906-1327
+!STACK 0
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:224)
+	at com.google.gson.Gson.fromJson(Gson.java:888)
+	at com.google.gson.Gson.fromJson(Gson.java:853)
+	at com.google.gson.Gson.fromJson(Gson.java:802)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.json.Json.deserialize(Json.java:91)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:66)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:124)
+	at com.google.common.util.concurrent.AbstractIdleService$DelegateService$1.run(AbstractIdleService.java:62)
+	at com.google.common.util.concurrent.Callables$4.run(Callables.java:122)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:385)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:213)
+	... 9 more
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-01 09:58:42.232
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-01 09:58:42.244
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-01 09:58:42.258
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+!SESSION 2020-11-01 10:02:48.158 -----------------------------------------------
+eclipse.buildId=4.13.0.I20190916-1045
+java.version=1.8.0_271
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -data D:\game3 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.equinox.simpleconfigurator 4 0 2020-11-01 10:02:49.290
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Exception in org.eclipse.equinox.internal.simpleconfigurator.Activator.start() of bundle org.eclipse.equinox.simpleconfigurator.
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:800)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+Caused by: java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	... 24 more
+Root exception:
+java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+
+!ENTRY org.eclipse.osgi 4 0 2020-11-01 10:02:49.936
+!MESSAGE Bundle org.eclipse.equinox.simpleconfigurator_1.3.0.v20180502-1828 [2] is not active.
+
+!ENTRY org.eclipse.jface 2 0 2020-11-01 10:02:53.186
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-11-01 10:02:53.186
+!MESSAGE A conflict occurred for ALT+T:
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.TimelineShowView,Timeline / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@153c6603,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.GraphShowView,Graph / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@24e2355c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.mylyn.tasks.core 4 0 2020-11-01 10:02:57.913
+!MESSAGE Unexpected error while loading repository template extensions
+!SUBENTRY 1 org.eclipse.mylyn.tasks.core 4 0 2020-11-01 10:02:57.913
+!MESSAGE Could not load repository template extension contributed by 'org.eclipse.mylyn.bugzilla.ide' with connectorKind 'bugzilla'
+
+!ENTRY org.eclipse.egit.ui 2 0 2020-11-01 10:03:02.608
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\jtkom'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 17 2020-11-01 10:03:04.193
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $. ; version: 2.0.7.v20170906-1327
+!STACK 0
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:224)
+	at com.google.gson.Gson.fromJson(Gson.java:888)
+	at com.google.gson.Gson.fromJson(Gson.java:853)
+	at com.google.gson.Gson.fromJson(Gson.java:802)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.json.Json.deserialize(Json.java:91)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:66)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:124)
+	at com.google.common.util.concurrent.AbstractIdleService$DelegateService$1.run(AbstractIdleService.java:62)
+	at com.google.common.util.concurrent.Callables$4.run(Callables.java:122)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:385)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:213)
+	... 9 more
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-01 10:03:25.211
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-01 10:03:25.223
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-01 10:03:25.233
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+!SESSION 2020-11-03 10:30:25.186 -----------------------------------------------
+eclipse.buildId=4.13.0.I20190916-1045
+java.version=1.8.0_271
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.equinox.simpleconfigurator 4 0 2020-11-03 10:30:26.620
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Exception in org.eclipse.equinox.internal.simpleconfigurator.Activator.start() of bundle org.eclipse.equinox.simpleconfigurator.
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:800)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+Caused by: java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	... 24 more
+Root exception:
+java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+
+!ENTRY org.eclipse.osgi 4 0 2020-11-03 10:30:29.797
+!MESSAGE Bundle org.eclipse.equinox.simpleconfigurator_1.3.0.v20180502-1828 [2] is not active.
+
+!ENTRY org.eclipse.jface 2 0 2020-11-03 10:30:36.242
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-11-03 10:30:36.242
+!MESSAGE A conflict occurred for ALT+T:
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.TimelineShowView,Timeline / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@470c4229,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.GraphShowView,Graph / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6408be5,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.mylyn.tasks.core 4 0 2020-11-03 10:30:41.841
+!MESSAGE Unexpected error while loading repository template extensions
+!SUBENTRY 1 org.eclipse.mylyn.tasks.core 4 0 2020-11-03 10:30:41.841
+!MESSAGE Could not load repository template extension contributed by 'org.eclipse.mylyn.bugzilla.ide' with connectorKind 'bugzilla'
+
+!ENTRY org.eclipse.egit.ui 2 0 2020-11-03 10:30:46.636
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\jtkom'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 17 2020-11-03 10:30:48.932
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $. ; version: 2.0.7.v20170906-1327
+!STACK 0
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:224)
+	at com.google.gson.Gson.fromJson(Gson.java:888)
+	at com.google.gson.Gson.fromJson(Gson.java:853)
+	at com.google.gson.Gson.fromJson(Gson.java:802)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.json.Json.deserialize(Json.java:91)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:66)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:124)
+	at com.google.common.util.concurrent.AbstractIdleService$DelegateService$1.run(AbstractIdleService.java:62)
+	at com.google.common.util.concurrent.Callables$4.run(Callables.java:122)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:385)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:213)
+	... 9 more
+
+!ENTRY org.eclipse.jdt.core 4 4 2020-11-03 10:30:52.411
+!MESSAGE Exception occurred during problem detection:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package gameEngine;
+
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_BACKSPACE;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_C;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F1;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F12;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F2;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F3;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F4;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_H;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_S;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_T;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_Y;
+
+import java.util.ArrayList;
+
+import  org.joml.Vector2f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
+import org.lwjgl.glfw.GLFW;
+
+import Collisions.AABB;
+import Collisions.CircleColision;
+import Collisions.ColisionHandeler;
+import Collisions.Collisions;
+import Data.Constants;
+import Data.Enemies;
+import Data.Moves;
+import Data.Pcs;
+import Items.Inventory;
+import Items.Items;
+import  Scripter.Proccesor;
+import ScripterCommands.DrawModel;
+import ScripterCommands.DrawString;
+import ScripterCommands.walkTo;
+import animation.Animate;
+import animation.AnimationHandler;
+import animation.SpriteSheetLoader;
+import audio.AudioInit;
+import audio.Listener;
+import audio.Sound;
+import audio.Source;
+import battleClasses.BattleEnemyField;
+import battleClasses.BattleEntity;
+import battleClasses.BattleFormulas;
+import battleClasses.BattlePlayerField;
+import battleClasses.BattleSlot;
+import battleClasses.Enemy;
+import battleClasses.HpBar;
+import guis.BarElement;
+import guis.CloseWindow;
+import guis.DisplayPCInfo;
+import guis.FullHeal;
+import guis.GUIManeger;
+import guis.GUINode;
+import guis.GUIUseCurrentItemOnPC;
+import guis.PickMove;
+import guis.UIElement;
+import guis.UIStringElement;
+import guis.CallItemToBeUsed;
+import input.BIndingNameParser;
+import input.CharCallback;
+import input.GetInput;
+import input.InputHandler;
+import rendering.MainBatchRender;
+import rendering.MainRenderHandler;
+import rendering.Model;
+import rendering.ModelFramwork;
+import rendering.OneTextureBatchedModel;
+import rendering.Render;
+import textrendering.Fontloader;
+import textrendering.TextBuilder;
+public class Start {
+    
+	
+	public static Window w;
+	public static final int width=640,height=480;
+    public static int lowFPS=60000,HighFPs=0;
+	
+	
+	public static int  location2,Projection2,UIProjection,RTS2,location,Projection,Color,RTS,frames=0,j=0,i=0,fps,gridx,gridy,Aframes,drawcalls=0,drawcallsFrame=0;
+    public static byte dKeys,testKey;
+    
+   
+    public static BIndingNameParser buttonNamses;
+    public static boolean JustStarted=true;//,MoveInprogress=false,MoveCalled=false,TurnFinished=false,BattleEnded=false;
+  //  public static TimedButton Button;
+    public static ShaderProgram s,Batcheds;
+    public static float scaleOfMapTiles=128,Rendercamx,Rendercamy;
+    public static int amountWidth=Math.round((width/scaleOfMapTiles)),amountHeight=Math.round((height/scaleOfMapTiles));
+    public static Camera cam,DebugCam;
+    public static float screencoordx=0,screencoordy=0;
+    public static InputHandler I;
+    public static Fontloader font;
+    public static int step=0;
+    public static boolean canRender,overworld=true,test=false,testcol,circCol,GLDEBUG=false,LOG=true,DEBUGCOLISIONS=true,HideSprite=false,DebugPrint=true,Debugdraw=false,showFps=true,StateOfStartBOx=false,showDrawLines=true;
+    public static double time,frameTime=0,lastFrame=0,DeltaTime;
+    public static Texture tex,MAP,bg,playerTex,COLTEX,piont,piont2,col2,circleCol1,circleCol2,textbox,testSprite,HealthBarBackground,VectorTex;
+    public static float x2,y2,camx,camy,x,y,Playerscale=64;
+    public static Model background,player,textboxM,Arrow;
+    public static OneTextureBatchedModel testM;
+    public static TextBuilder textB,textA,textC,textD,text1,textDrawCalls,textR;
+    public static Vector2f currentmovement,quarterStepVelocity=new Vector2f(),oldpos,direction,BattleBoxPosition,velocity;
+   // public static BattleEntity p;
+ 
+    public static CircleColision circle1, circle2;
+    public static float PHP;
+    public static float[] uvtextbox,uvArrow,vert; 
+ 
+    public static int amountOfMoves,amountOfSPMoves,function;
+    public static HpBar playersSPBAr;
+    public static double startTime;
+    public static Inventory playersInventory, enemyTestInventory;
+    public static Moves currentlyUsedMove;
+    public static AABB playerCol,Col,COl2;
+    public static Animate a1;
+    public static SpriteSheetLoader sloader;
+    public static BattleEnemyField enemyField;
+    public static BattlePlayerField playerField;
+  //  public static BattleEntity currentEntity;
+    public static Sound lazer,Heal,Select,Move,Back,NO,TimedBad;
+    public static Source source1;
+	public static  Source source;
+    public static Fontloader aakar;
+   // public static ArrayList<BattleEntity> turnOrder= new ArrayList<BattleEntity>();
+    public static boolean facingLeft,running,ESCAPEBOXUP;
+	private static WorldLoader map1;
+	private static MapLoader currentMap;
+   // public static Entity teste;
+	public static boolean soundPlay=true;
+    public static BattleEntity p;
+    private static double BackSpaceHoldStart=0;
+    private static GUIManeger maneger,PARTY_SELECT;
+    private static GUINode rootForBattleScreen,root;
+	public static GUINode specials;
+	public static GUINode moves;
+	private static boolean USEITEM_INITIALIZED=false;
+    
+	public static void main(String[] args) {
+	
+	AudioInit.InitAudio();
+	Listener.InitListener();	
+		
+		
+		DebugPrint("Starting.....");
+	 startTime=Timer.getTIme();
+	
+	
+	
+	
+	
+	
+	
+	DebugPrint("intialzing vars....");
+	vert=new float[]{
+				-0.5f,+0.5f,
+				0.5f,0.5f,
+				0.5f,-0.5f,
+				-0.5f,-0.5f
+			};
+		
+	
+		
+	
+		
+		
+		
+		
+
+		
+		
+		float[] uvBg={
+				0,0,
+				1,0,
+				1,1,
+				0,1
+				
+				};
+		
+	
+	    float  Texwidth=192;
+		float Texheight=192;		
+		float  wi=71;
+		float  h=28;
+		float  Texx=0;
+		float Texy=0;		
+		
+		 uvtextbox=new float[]{
+				Texx/Texwidth,Texy/Texheight,
+				(Texx+wi)/Texwidth,Texy/Texheight,
+				(Texx+wi)/Texwidth,(Texy+h)/Texheight,
+				Texx/Texwidth,(Texy+h)/Texheight
+				};
+		
+		 float[] vertText={
+				   -wi,+h,
+					wi,h,
+					wi,-h,
+					-wi,-h};
+
+	
+		
+		
+		
+		
+			
+	
+	   Texwidth=138;
+	   Texheight=138;		
+	   wi=32;
+	   h=46;
+	   Texx=0;
+	   Texy=0;	
+	   float height2=h/Playerscale;
+	   float width2=wi/Playerscale;     
+	 
+	   float[] vertPlayer={
+			   -width2,+height2,
+				width2,height2,
+				width2,-height2,
+				-width2,-height2
+
+
+	   };
+	   
+	   
+
+       float[] uvPlayer={
+		Texx/Texwidth,Texy/Texheight,
+		(Texx+wi)/Texwidth,Texy/Texheight,
+		(Texx+wi)/Texwidth,(Texy+h)/Texheight,
+		Texx/Texwidth,(Texy+h)/Texheight  };
+
+       Texwidth=128;
+	   Texheight=128;		
+	   wi=62;
+	   h=64;
+	   Texx=66;
+	   Texy=0;	
+	    height2=h;
+	    width2=wi;     
+	 
+	     uvArrow=new float[]{
+	    		Texx/Texwidth,Texy/Texheight,
+	    		(Texx+wi)/Texwidth,Texy/Texheight,
+	    		(Texx+wi)/Texwidth,(Texy+h)/Texheight,
+	    		Texx/Texwidth,(Texy+h)/Texheight  };
+
+
+
+		//for(int i=0;i<8;i++) {
+		///System.out.println(uv[i]);
+		//} 
+        DebugPrint("Creating window....");
+		//make our window and attach shaders
+		createWindow("shader");
+		Batcheds=new ShaderProgram("BatchShader");
+		
+			Batcheds.makeAttribLocation("colors");
+			Batcheds.makeAttribLocation("translation");
+		DebugPrint("loading Sounds");
+		lazer=new Sound("Lazer");
+		Heal=new Sound("healing sound");
+		Select=new Sound("select_GUI");
+		Move=new Sound("move_GUI");
+		Back=new Sound("Back_GUI");
+		NO=new Sound("NO_GUI");
+		TimedBad=new Sound("Timed_Button_BAD");
+		
+
+        source1=new Source(new Vector2f(0),1,1, 1,200, 0);
+        source=new Source(new Vector2f(0), 1, 1, 0, 0,0);
+		source.setSourceRelitive(true);	
+         
+		//source1.play(Select);
+		
+		DebugPrint("Making Textures....");
+		//Define texturesbr.close();
+		//font=new Fontloader("aakar",512);    
+	
+		tex=new Texture("newsprite");
+		textbox=new Texture("textbox");
+		bg= new Texture("testBackground");
+		HealthBarBackground=new Texture("HealthBarBackground");
+	    VectorTex=new Texture("Vector");
+		
+		sloader= new SpriteSheetLoader("playerSpriteSheet",138);//loads the sprite sheet info	
+		
+		
+		aakar=new Fontloader("aakar",512);    
+	    textB= new TextBuilder(aakar); 
+		textA= new TextBuilder(aakar);
+		textC= new TextBuilder(aakar);
+		textD= new TextBuilder(aakar);
+		text1= new TextBuilder(aakar);
+		textR=new TextBuilder(aakar);
+		textDrawCalls= new TextBuilder("aakar",512);
+	//	TextBuilder textCircle= new TextBuilder("aakar",512);
+		testM= new OneTextureBatchedModel();
+		piont= new Texture("Point");
+
+		piont2= new Texture("Point2");
+		circleCol1=new Texture("Circle");
+	//	MAP=new Texture("map3");
+	    playerTex= new Texture("Spritesheets/playerSpriteSheet");
+	    col2= new Texture("ColTex2");
+	    COLTEX=new Texture("whitebox");
+	    testSprite=new Texture("testSprites");
+		//map=new Texture("map1"); 
+		//Define models
+	    DebugPrint("Making Models....");
+		
+		player= new Model(vertPlayer,uvPlayer);
+	    background=new Model(vert,uvBg);
+	    textboxM=new Model(vertText,uvtextbox);
+	    Arrow=new Model(vert,uvArrow);
+		
+	
+		DebugPrint("Making Shader Uniforms....");
+		//make shader locations so we can use uniforms
+		try {
+			location=s.makeLocation("sampler");
+			Projection=s.makeLocation("projection");
+			RTS=s.makeLocation("rts");
+			Color=s.makeLocation("color");
+			
+			
+			location2=Start.Batcheds.makeLocation("sampler");
+			Projection2=Batcheds.makeLocation("projection");
+			RTS2=Batcheds.makeLocation("rts");
+			UIProjection=Batcheds.makeLocation("UIProjection");
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		DebugPrint("Loading world....");
+		//map1=new WorldLoader("map3",true);
+		
+	    //currentMap=new MapLoader(map1.Getmap(),scaleOfMapTiles);
+		MapFIle map=new MapFIle("Map1TEST");
+		map.readMap();
+	    currentMap=new MapLoader(tex,map,scaleOfMapTiles);
+      
+	
+		DebugPrint("Settign Colisions....");
+		playerCol=new AABB(new Vector2f(0,0),64,64,0);
+		//playerCol=new AABB(new Vector2f(0,0),15,44,0,false);
+		Col=new AABB(new Vector2f(0,0),32,32,0);
+		AABB	Col3=new AABB(new Vector2f(100,0),16,32,0);
+		AABB	Col4=new AABB(new Vector2f(200,0),32,32,0);
+		AABB	Col5=new AABB(new Vector2f(400,0),32,32,0);
+        COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
+	    buttonNamses = new BIndingNameParser("GLFW");
+		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2,Col3,Col4,Col5});
+	
+		
+		initializeFPS();
+		x=100;
+		y=100;	
+		double ENDTime=Timer.getTIme();
+		double timeTaken=ENDTime-startTime;
+		DebugPrint("Tiem to load--- "+timeTaken+" seconds");
+		
+		DebugPrint("Starting Game loop.....");
+		
+		
+		s.loadVec4(Color, new Vector4f(1,1,1,1));
+     
+		a1=new Animate(7,player,sloader,0,7);
+		 
+	
+		  
+	    GUINode bag=new GUINode(new GUINode[] {},"bag",2,2);
+		   
+
+			
+			 playersInventory= new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore},new int[] {1,3,2},bag);
+			 enemyTestInventory = new Inventory(new Items[] {Items.hpPotion,Items.SuperHpPotion,Items.spRestore,Items.spSuperRestore},new int[] {3,1,4,2});
+			 p=new BattleEntity("PC_1",player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C1.getAtk(),Pcs.C1.getDef(),Pcs.C1.getHp(),Pcs.C1.getSp(),Pcs.C1.getSpeed(),Pcs.C1.getMoves(),playersInventory);
+
+			GUINode healn=new GUINode("heal",new FullHeal(p));		
+		    GUINode stats=new GUINode("stats",new guis.DebugPrint("stats"));
+			GUINode quit=new GUINode("Quit",new CloseWindow(w));
+			 root=new GUINode(new GUINode[]{stats,bag,healn,quit},"root",1,4);
+			
+		
+		 	
+	    BattleEntity  p2=new BattleEntity("PC_2",player, playerTex,64*1.5f, new Vector2f(100,10),Pcs.C2.getAtk(),Pcs.C2.getDef(),Pcs.C2.getHp(),Pcs.C2.getSp(),Pcs.C2.getSpeed(),Pcs.C2.getMoves(),playersInventory);
+        
+	    Enemy enemy=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
+		Enemy enemy2=new Enemy(new Vector2f(50,10),player, playerTex,96,"E2",Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
+		Enemy enemy3=new Enemy(new Vector2f(50,10),player, playerTex,96,"E3",Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
+		Enemy enemy4=new Enemy(new Vector2f(50,10),player, playerTex,96,"E4",Enemies.E1.getAtk(),Enemies.E1.getDef(),Enemies.E1.getHp(),Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
+		Enemy enemy5=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),15,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
+		Enemy enemy6=new Enemy(new Vector2f(50,10),player, playerTex, 96,Enemies.E1.getName(),Enemies.E1.getAtk(),Enemies.E1.getDef(),15,Enemies.E1.getSp(),Enemies.E1.getSpeed(),Enemies.E1.getMoves(),enemyTestInventory,Enemies.E1.getEnemyAI());
+		
+		
+		
+	
+		
+		enemyField=new BattleEnemyField(new BattleSlot[] {new BattleSlot(new Vector2f(140,-20),enemy),new BattleSlot(new Vector2f(202,-88),enemy2),new BattleSlot(new Vector2f(202,10),enemy3),new BattleSlot(new Vector2f(260,-20),enemy4)});
+	    playerField=new BattlePlayerField(new BattleSlot[] {new BattleSlot(new Vector2f(-90,40),p),new BattleSlot(new Vector2f(-100,-40),p2)});
+		
+		
+		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
+		
+	
+		
+		
+		 
+	
+		
+			
+	    rootForBattleScreen=new GUINode(new GUINode[] {quit},"root",1,1);
+		
+		
+		 specials=new GUINode(new GUINode[]{},"specials",2,2);
+         moves=new GUINode(new GUINode[]{},"moves",2,2);
+         
+         
+		 GUINode battleRoot=new GUINode(new GUINode[]{bag,moves,specials},"root",1,3);	
+		
+	
+	    GUIManeger battleManeger=new GUIManeger(battleRoot,Constants.COL_COLOR_BLUE.add(0,0,0,50,new Vector4f()));
+		maneger=new GUIManeger(root,Constants.COL_COLOR_BLUE);
+		PARTY_SELECT=new GUIManeger(new GUINode(new GUINode[] {},"root",2,2),Constants.COL_COLOR_BLUE);
+		
+		
+		BattleSystem.INIT(battleManeger);	
+		
+			
+		//teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
+		
+		
+		
+		
+		
+		p.setHp(1);
+		p.setSp(1);
+		enemy.setHp(10);
+		enemy2.setHp(10);
+		enemy3.setHp(10);
+		enemy4.setHp(10);
+		enemy.setSp(1);
+		enemy2.setSp(1);
+		enemy3.setSp(1);
+		enemy4.setSp(1);
+		
+		
+		
+		
+		
+	
+	
+		
+//		new UIStringElement("Stats",new Vector2f(-17,35),.2f,Constants.BLACK,new guis.DebugPrint("stats")),
+//		new UIStringElement("Bag",new Vector2f(-17,15),.2f,Constants.BLACK,1),
+//		new UIStringElement("Heal",new Vector2f(-17,-5),.2f,Constants.BLACK,new FullHeal(p)),
+//		new UIStringElement("Quit",new Vector2f(-17,-25),.2f,Constants.BLACK,new CloseWindow(w))
+	
+	    int operation=1;
+	while(!w.isExited()) {
+	
+		fps();    
+	
+	//if(canRender) {
+		
+		BattleSystem.soundPlay=true;
+		
+		//----------------------GAME--LOOP------------------------------
+// 		Items[] ITM= playersInventory.getItems();		
+//			UIElement[] elementlist=new UIElement[ITM.length];	
+//			GUINode[] items=new GUINode[ITM.length];
+//			
+//			
+//			
+//			for(int i=0;i<ITM.length;i++) {
+//				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i].Item),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(ITM[i]));
+//			    items[i]=new GUINode(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i].Item),new UseItem(ITM[i]) );
+//			
+//			}
+//		  
+//		
+			
+		  InputHandler.EnableButtons(new int[] {GLFW_KEY_F1,GLFW.GLFW_KEY_X,GLFW.GLFW_KEY_Y,GLFW.GLFW_KEY_O});
+  
+		  
+	
+		
+				//MainBatchRender.addTexture(textbox);
+	
+	
+   
+		
+ 	
+			//MainBatchRender.addTexture(textbox);
+
+	
+	  // TextureUpdate(MAP)
+//Render.enable();//enables render
+
+
+		
+	//if(test==false) {
+
+
+	
+	if(overworld==true) {	
+		
+	
+		 // MainRenderHandler.addEntity(new Entity(background,new Vector3f(100,100,100),0,64, COLTEX,Constants.BLACK,10,true));
+		
+		
+		 
+		  //  MainRenderHandler.addEntity(new Entity(background,new Vector3f(new Vector2f(x,y).add(quarterStepVelocity.mul(3,new Vector2f())),200),0,5, COLTEX,Constants.YELLOW));
+		  if(!ESCAPEBOXUP) {    
+		   Vector2f step=new Vector2f();
+	
+		  //step 1
+		   ColisionHandeler.setColided(false);
+           new Vector2f(x,y).add(quarterStepVelocity,step);
+		    playerCol.setCenterPosition(step);//take step
+		 
+		    Vector2f vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);//check colisions
+		  //  MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.GREEN));//put marker to indicate where this step ended at
+		    Start.text1.setString("bc: "+Math.round(playerCol.getPosBeforeCol().x)+", "+Math.round(playerCol.getPosBeforeCol().y));
+			   Start.text1.UIdrawString((640/2)+Start.screencoordx-100,(480/2)+Start.screencoordy-80,.2f);			  
+		    
+		    //step 2
+			oldpos.set(vector);
+		    vector.add(quarterStepVelocity,step);
+		    playerCol.setCenterPosition(step);
+			vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
+		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.BLUE));
+		    
+			
+		   //step3
+			oldpos.set(vector);
+		    vector.add(quarterStepVelocity,step);
+		    playerCol.setCenterPosition(step);
+			vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
+		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.RED));
+			
+		    //step4
+			oldpos.set(vector);
+		    vector.add(quarterStepVelocity,step);
+		    playerCol.setCenterPosition(step);
+			vector=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
+		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.YELLOW));
+		
+			if(!ColisionHandeler.getColided()) {
+				
+				playerCol.setPosBeforeCol(vector);
+				
+				
+			
+				
+			}
+			 
+		
+		    
+			x=vector.x; y=vector.y;	
+		    playerCol.setCenterPosition(vector);	
+			
+			
+			
+		
+			     
+				    camx=-x;
+					camy=-y;
+							
+		screencoordx=-camx;
+	    screencoordy=-camy;
+		
+		  }	
+		//  textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-80,.2f);
+		//DebugPrint("x="+x+","+y);
+		
+	     cam.setPosition((new Vector2f(camx,camy)));
+	   //  DebugPrint(""+cam.getPosition());		
+		//screencoordx=-camx;
+	   // screencoordy=-camy;
+	//   MainRenderHandler.addEntity(test);
+	 //   MainRenderHandler.addEntity(test2);
+	    		
+	     //cam.setPosition((new Vector2f(camx,camy)));s.bind();
+	     //cam.setPosition((new Vector2f(camx,camy)));s.bind();
+		
+		       
+		    //   testcol=playerCol.AABBwAABB(Col); 
+	   
+	  
+	  
+	     Listener.ChangePosition(oldpos);
+
+	      textB.setString("x="+x+" y="+y);
+	      Vector2f camPos=cam.getPosition();
+	     Rendercamx=-(camPos.x);
+	     Rendercamy=-(camPos.y);
+	      Vector2f newvec=currentMap.findPositionOnMap(Rendercamx,Rendercamy);
+	      gridx= Math.round(newvec.x);gridy=Math.round(newvec.y);
+	    drawmap(currentMap,gridx,gridy);		     
+	  
+	      textD.setString("circCol:"+circCol);
+	      textC.setString("xmap="+gridx+" ymap="+gridy);
+//	      text1.setString("PC_1");
+//	      text1.drawString(x-100, y+200, .12f);
+//	      text1.setString("SP: "+Math.round(p.getSp())+"/"+Math.round(p.getMaxsp()));
+//	      p.drawSPBAR(new Vector2f(x-100,y+160),text1);
+//	      text1.setString("HP:"+Math.round(p.getHp())+"/"+Math.round(p.getMaxHP()));      
+//	      p.getHpbar().draw(new Vector2f(x-100,y+180),text1);
+//	      
+//	      
+//	      text1.setString("PC_1");
+//	      text1.drawString(x+100, y+200, .12f);
+//	      text1.setString("SP: "+Math.round(p2.getSp())+"/"+Math.round(p2.getMaxsp()));
+//	      p2.drawSPBAR(new Vector2f(x+100,y+160),text1);
+//	      text1.setString("HP:"+Math.round(p2.getHp())+"/"+Math.round(p2.getMaxHP()));      
+//	      p2.getHpbar().draw(new Vector2f(x+100,y+180),text1);
+//	      
+	  	if(playersInventory.isUseItemCalled()) {
+			maneger.hide();
+			;
+			if(!USEITEM_INITIALIZED) {
+			
+				USEITEM_INIT(playerField,PARTY_SELECT);
+			}
+			drawPartyScreen(PARTY_SELECT, new Vector2f(screencoordx+(640/2)+50-maneger.getWidth(0.2f,new Vector2f(100,80)),screencoordy),new Vector2f(100,80),0.2f);
+			if(InputHandler.getStateofButton(GLFW_KEY_BACKSPACE)>0) {
+				playersInventory.setUseItemCalled(false);
+				maneger.open();
+				maneger.UpdateChanges();
+				PARTY_SELECT.close();
+				USEITEM_INITIALIZED=false;
+			}
+		}else if(PARTY_SELECT.isOpen()){
+			maneger.open();
+			//maneger.UpdateChanges();
+			USEITEM_INITIALIZED=false;
+			PARTY_SELECT.close();
+		
+		}
+		
+	   
+		
+	      
+		if(HideSprite==false) 
+       
+		a1.drawAnimatedModel(new Vector3f(x,y,100),0,Playerscale,!facingLeft);
+		
+	
+		//SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
+	
+
+		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.2f);
+		
+		textC.UIDebugdrawString(screencoordx+100,screencoordy-220,.2f);
+      
+		 ColisionHandeler.Debug();
+
+}else {
+	//---------------------battle loop---------------------
+	
+
+	BattleSystem.battleUpdate();
+	
+    screencoordx=0;
+	screencoordy=0;
+	
+	
+   
+
+
+
+
+
+
+}
+
+	
+	  maneger.draw( new Vector2f(screencoordx+(640/2)+50-maneger.getWidth(0.2f,new Vector2f(100,80)),screencoordy),new Vector2f(100,80),0.2f);
+	  textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
+		
+	  if(showFps)
+		  textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-20,.2f);
+	
+
+
+if(CharCallback.takeInput) {
+	
+   MainRenderHandler.addEntity(new Entity(textboxM,new Vector3f(screencoordx,screencoordy,text1.getZ()-1),0,3, COLTEX,Constants.BLACK));
+    text1.setString("TAKING INPUT");
+	text1.drawString(screencoordx-75, screencoordy+70, .2f,Constants.RED);
+    text1.setString(CharCallback.string);
+    text1.drawString(screencoordx-100, screencoordy, .15f);
+}
+
+
+
+
+
+
+Proccesor.proccesCommands(time);
+MainRenderHandler.SortEntities(); 
+textDrawCalls.setString("\n"+"Entities "+MainRenderHandler.getAmountOfEntities());
+textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-90,.25f);
+MainRenderHandler.addToBatchedRender();
+
+textDrawCalls.setString("Drawcalls(S:"+drawcalls+ "\nF:"+drawcallsFrame+")\nAnimations: "+AnimationHandler.amountInList()+"\nQuads"+MainBatchRender.getQuads());
+
+textDrawCalls.UIDebugdrawString((640/2)+screencoordx-625,(480/2)+screencoordy-20,.25f);
+
+
+MainRenderHandler.addToBatchedRender();
+MainBatchRender.draw();
+MainBatchRender.flushModel();
+//MainRenderHandler.clear();
+		    w.render();
+		    w.clear();
+		  
+		 
+			
+		}
+	//	}
+//--------------------------------------------------------------	
+		DebugPrint("Closing.....");
+		DebugPrint("Highest fps="+HighFPs+" Lowest fps="+lowFPS);
+		w.destroy();
+		AudioInit.destroy();
+		MainBatchRender.deleteResources();
+		System.exit(0);
+		
+		
+	}
+
+	
+		
+	
+
+	private static void createWindow(String Shader) {
+		
+
+		
+		DebugPrint("Making Camera....");
+			//set camera
+			cam= new Camera(width,height);
+		w=new Window(width,height,cam,"Game");
+	
+		
+	
+       //load our shaders 
+	 DebugPrint("Making Shader Program....");
+		s= new ShaderProgram(Shader);
+		
+		
+		//bind shader
+		s.bind();	
+		
+		
+	}
+	
+	
+	
+	
+	private static void USEITEM_INIT(BattlePlayerField field,GUIManeger maneger) {
+	    maneger.reset();
+		maneger.open();
+		USEITEM_INITIALIZED=true;
+	    boolean allDead=field.updateField();
+	    if(!allDead) {
+	    	BattleEntity entities[]=field.getAlivePCs();
+	    	GUINode root=new GUINode(new GUINode[] {},"root",2,2);
+	    	GUINode partyMembers[]=new GUINode[entities.length];
+	    	for(int i=0;i<entities.length;i++) {
+                BattleEntity e=entities[(entities.length-1)-i];
+                String name=e.getName();
+                partyMembers[i]=new GUINode(name, new GUIUseCurrentItemOnPC(e,Start.playersInventory),new DisplayPCInfo(e));
+
+	    	}
+	    	root.addChildren(partyMembers);
+	    	maneger.setParrentNode(root);
+	    	maneger.UpdateChanges();
+	    	
+	    }else {
+	    	playersInventory.setUseItemCalled(false);
+			Start.maneger.open();
+			USEITEM_INITIALIZED=false;
+			maneger.close();
+	    }
+	       	
+	       	
+	       	
+	}
+	private static void drawPartyScreen(GUIManeger maneger,Vector2f position,Vector2f padding,float sizeOfStrings) {
+	       
+		    
+		      maneger.draw(position, padding, sizeOfStrings);	
+		      
+	}
+	
+	
+	
+
+	private static void Inputupdate() {
+	
+		
+		w.update();//this is needed to actually poll events from keyboard 
+		
+//		boolean isPresent=GLFW.glfwJoystickPresent(GLFW.GLFW_JOYSTICK_1);
+//		
+//			DebugPrint(""+isPresent);
+//		
+//		    	
+		
+		    	InputHandler.EnableButtons(new int[] {GLFW.GLFW_KEY_I,GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_ENTER,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
+		    if(CharCallback.takeInput) {
+		    	InputHandler.EnableButton(GLFW_KEY_BACKSPACE);
+		    }
+		maneger.InputUpdate();
+		PARTY_SELECT.InputUpdate();
+	    BattleSystem.updateInput();
+
+	   
+	    int UP=InputHandler.getStateofButton(GLFW_KEY_UP),DOWN=InputHandler.getStateofButton(GLFW_KEY_DOWN),
+	    LEFT=InputHandler.getStateofButton(GLFW_KEY_LEFT),RIGHT=InputHandler.getStateofButton(GLFW_KEY_RIGHT),
+		I=InputHandler.getStateofButton(GLFW.GLFW_KEY_I),
+		F1=InputHandler.getStateofButton(GLFW_KEY_F1),F2=InputHandler.getStateofButton(GLFW_KEY_F2),
+		F3=InputHandler.getStateofButton(GLFW_KEY_F3),F4=InputHandler.getStateofButton(GLFW_KEY_F4),
+	    F12=InputHandler.getStateofButton(GLFW_KEY_F12),C=InputHandler.getStateofButton(GLFW_KEY_C),Y=InputHandler.getStateofButton(GLFW_KEY_Y),W=InputHandler.getStateofButton(GLFW_KEY_W)
+		,ESCAPE=InputHandler.getStateofButton(GLFW_KEY_ESCAPE),ENTER=InputHandler.getStateofButton(GLFW_KEY_ENTER),
+		BACKSPACE=InputHandler.getStateofButton(GLFW_KEY_BACKSPACE),S=InputHandler.getStateofButton(GLFW_KEY_S),CONTROLRIGHT=InputHandler.getStateofButton(GLFW_KEY_RIGHT_CONTROL),
+		CONTROLLEFT=InputHandler.getStateofButton(GLFW_KEY_LEFT_CONTROL),F=InputHandler.getStateofButton(GLFW_KEY_F),H=InputHandler.getStateofButton(GLFW_KEY_H);
+		
+	
+	  double time=Timer.getTIme();
+	  double timeHeld=time-BackSpaceHoldStart;
+	 
+	   if(CharCallback.takeInput && BACKSPACE==1) {
+		   CharCallback.backspace();
+		   Start.BackSpaceHoldStart=Timer.getTIme();	   
+	   }else if(CharCallback.takeInput && BACKSPACE>1) {
+		   if(timeHeld>=0.5) {
+			   Start.BackSpaceHoldStart=Timer.getTIme();
+			   CharCallback.removeWord();
+		   }
+	   }
+	    
+	    	
+		
+		
+	    if(H==1 && CONTROLLEFT>0) {
+	    boolean i=CharCallback.takeInput;
+       if(!i) {
+	    	
+	    	CharCallback.takeInput=true;
+	        
+	    
+       }else {
+    	   try {
+    		
+    	    
+    	   }catch(NullPointerException e) {
+    		   
+    	   }
+    	   
+    	   
+    	    CharCallback.clearString();
+	    	CharCallback.takeInput=false;
+	    	
+	     
+	    }
+	    
+	    
+	    }
+	 
+	       if(ESCAPE==1) {
+			if(maneger.isOpen() || PARTY_SELECT.isOpen()) {
+				maneger.close();
+				PARTY_SELECT.close();
+				USEITEM_INITIALIZED=false;
+				Start.playersInventory.setUseItemCalled(false);
+				InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
+	
+			}else {
+				PARTY_SELECT.reset();
+			    maneger.reset();
+				maneger.open();
+				a1.Pause();
+			    InputHandler.DisableAllBut(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_BACKSPACE,GLFW_KEY_ENTER});
+			
+			 
+			}
+			
+		}
+	    
+	    
+		
+		
+		
+		if(testKey==2) {
+			//	x=0;y=0;
+				if (overworld==false) {
+					overworld=true;
+					a1.addAnimation();
+			        BattleSystem.closeBattleGUI();
+					maneger.setParrentNode(Start.root);
+				}else {
+					maneger.close();
+					BattleSystem.StartBattle(enemyField,playerField, bg, background);
+					maneger.setParrentNode(Start.rootForBattleScreen);
+				
+				}
+				
+				
+				
+			}
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		testKey=InputHandler.getStateofButton(GLFW_KEY_T);
+	   
+	   float speed=1;
+	    		
+		
+	      if(((CONTROLRIGHT==1 || CONTROLRIGHT==3)||(CONTROLLEFT==1||CONTROLLEFT==3)) && (F==1)) {//if the fuscreenCode is just pressed toggle full screen
+			 w.toggleFullscreen();}
+	  
+		
+		
+	
+
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	
+		
+		
+		if(F2==1) {
+			if(Start.DebugPrint==false) {
+				
+			Start.DebugPrint=true;
+			}
+
+			else{
+				
+			Start.DebugPrint=false;
+			}
+
+			}
+		
+		if( F3==1) {
+			if(Start.DEBUGCOLISIONS==false) {
+				
+			Start.DEBUGCOLISIONS=true;
+			}
+
+			else{
+				
+			Start.DEBUGCOLISIONS=false;
+			}
+
+			}
+		
+		if(F4==1) {
+			if(Start.Debugdraw==false) {
+				
+			Start.Debugdraw=true;
+			}
+
+			else{
+					
+			Start.Debugdraw=false;
+			}
+
+			}
+		if( F12==1) {
+			if(showFps==false) {
+				showFps=true;
+			
+			}
+
+			else{
+				showFps=false;	
+			
+			}
+
+			}
+					
+			
+
+
+	
+	
+	
+	if(overworld) {
+	
+		
+	
+		
+		if(!maneger.isOpen() && !PARTY_SELECT.isOpen()) {
+		
+		
+		
+		        if(W==1 ||W==3) {
+		        	speed=5;
+		        	running=true;
+		        	
+		        }else {
+		        	speed=1f;
+		        	a1.changefps(7);
+		        	running=false;
+		        }
+		     float speedx=0,speedy=0;
+		
+		    // speed=5*speed;
+				{ 
+						
+						
+						
+						if(UP==1 || UP==3) {//up
+						
+							speedy=1;
+							 a1.Play();
+							
+						}
+						if(DOWN==1||DOWN==3) {//down
+							speedy=-1;
+							
+							 a1.Play();
+									
+						}if(LEFT==1||LEFT==3) {//left
+					        facingLeft=true;
+					        a1.Play();
+							speedx=-1;
+							
+						}if(RIGHT==1||RIGHT==3) {//right
+						
+						   speedx=1;
+						   a1.Play();
+						   facingLeft=false;
+						   
+						}	
+						if(speedx==0&&speedy==0) {
+							a1.Stop();
+						}else if(running==true) {
+							a1.changefps(12);
+						}
+					
+						//speedx*=(float)DeltaTime;
+						//speedy*=(float)DeltaTime;
+					
+					
+						direction=(VectorMath.normalize(new Vector2f(speedx,speedy)));
+						
+						velocity=new Vector2f();
+					    direction.mul(speed,velocity);
+									
+						 
+						velocity.mul(50*5);
+						
+						velocity.mul((float) DeltaTime);						
+						
+						
+						
+						
+						velocity.mul(1/4f,quarterStepVelocity);//this is the movement that needs to be added to the position vector
+                       
+                    	oldpos=new Vector2f(x,y);
+					 
+					
+                    
+    								
+						
+				
+					}
+		}else {
+			velocity=new Vector2f(0);
+			quarterStepVelocity=new Vector2f();
+		}
+					
+				
+		 
+	}
+	
+		 
+			 }
+	
+	
+	
+	
+	
+	 	   
+	 	   
+
+
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	 	   
+	private static void fps() {
+	       step=0;
+		   // Render.disable();
+		   // canRender=false;//don't allow rendering until time
+			double time2=Timer.getTIme();//gets current time
+		    DeltaTime=time2-time;//this is the time since the last time through the loop
+		    AnimationHandler.update();
+			
+		  
+		
+			frameTime+=DeltaTime;//this is the time since the last second
+			time=time2;
+		
+			
+			
+			
+		
+		//	if(unproccesed>=framCap) {//when the time we have not rendered is greater than or equal to our frame target we allow rendering
+				
+				
+				//System.out.println(DeltaTime);
+			//	unproccesed-=framCap;//this is like reseting 
+				//take input
+				
+				
+				
+				if(Proccesor.isUserInputallowed()) {
+				 Inputupdate();}else {
+						w.update();//this is needed to still allow exiting
+				       
+				 }
+				 
+			     canRender=true;//now we render	
+			 	frames++;
+			 	lastFrame=time2;
+			 
+			      if(frameTime>=1.0) {//if a second has passed print fps
+			    	 
+  
+			    	  
+			    	if(!JustStarted) {
+			    	 
+                      fps=frames;
+                    
+                      if(fps<lowFPS)
+                    	  lowFPS=fps;
+                      if(fps>HighFPs)
+                    	  HighFPs=fps;  
+                    	  
+                      
+                      //reset frame time and frames  
+			    	}else {
+			    		JustStarted=false;
+			    	}
+			    	
+			    	  drawcalls=Render.getDrawcalls();
+			    
+			    	  drawcallsFrame=drawcalls/frames;
+			    	 Start.DebugPrint("FPS="+fps);
+			    	  
+			    	  Render.resetDrawCalls();
+			    	  frameTime=0;
+			    	  frames=0;  
+			    	  
+			    	  
+			    	  
+			   //   }
+			      
+			     
+					}
+			
+			
+	}
+
+
+private static void drawmap(MapLoader loader,int gridx,int gridy) {
+	 // loader.loadTile(0,0);
+
+	  for(int i=-amountHeight+2;i<amountHeight-1;i++) {
+		for(int j=-amountWidth+2;j<amountWidth-1;j++) {
+			   loader.loadTile(gridx+j,gridy+i);
+		
+			    }
+	}
+	
+ //   loader.getModel().setDrawMethod(GL_LINES);
+	  loader.drawtiles(tex);
+	   currentMap.flushModel();
+}
+
+
+
+
+private static Vector2f updateColisions(AABB colision,Vector2f position,Vector2f oldposition,Vector2f movement,Vector2f direction) {
+	
+	step++;
+    
+   
+	 ColisionHandeler.amountThrough=0;
+	 ColisionHandeler.FlushPushList();
+	   ColisionHandeler.updateTriggers(colision);
+	
+
+	   
+	   
+	   return  ColisionHandeler.updateVector(colision,position,oldposition,movement, direction);
+}
+
+
+
+
+
+
+
+
+
+	
+	
+public static void DebugPrint(String string) {
+if(DebugPrint)	
+System.out.println(string);}	
+		
+public static void DebugPrint(String string,Class calledFrom) {
+if(DebugPrint)	
+System.out.println("["+calledFrom.getName()+"]---"+string);}	
+		
+
+	
+public static void UseMove(Moves move) {
+	System.out.println("move "+move.name());
+	
+}
+	
+
+
+	
+	
+
+
+
+	
+private static void initializeFPS() {
+	time=Timer.getTIme();
+
+    frameTime=0;
+    frames=0;
+	
+	
+	
+	
+	InputHandler.EnableButtons(new int[] {GLFW_KEY_UP,GLFW_KEY_DOWN,GLFW_KEY_RIGHT,GLFW_KEY_LEFT,GLFW_KEY_ESCAPE,GLFW_KEY_W,GLFW_KEY_T,GLFW_KEY_RIGHT_CONTROL,GLFW_KEY_LEFT_CONTROL,GLFW_KEY_F,GLFW_KEY_H});
+	
+	
+	
+	
+	
+
+	
+
+}	
+
+
+
+	
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader.getMemberTypes(ClassFileReader.java:705)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.cachePartsFrom(BinaryTypeBinding.java:433)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1038)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1019)
+	at org.eclipse.jdt.internal.compiler.Compiler.accept(Compiler.java:305)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.askForType(LookupEnvironment.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding.resolve(UnresolvedReferenceBinding.java:111)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.resolveType(BinaryTypeBinding.java:228)
+	at org.eclipse.jdt.internal.compiler.lookup.PackageBinding.getType(PackageBinding.java:202)
+	at org.eclipse.jdt.internal.compiler.lookup.SplitPackageBinding.getType(SplitPackageBinding.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.findType(Scope.java:1985)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getTypeOrPackage(Scope.java:3313)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getType(Scope.java:3005)
+	at org.eclipse.jdt.internal.compiler.ast.SingleTypeReference.getTypeBinding(SingleTypeReference.java:54)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.internalResolveType(TypeReference.java:511)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:612)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:608)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesWithSuspendedTempErrorHandlingPolicy(SourceTypeBinding.java:1971)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesFor(SourceTypeBinding.java:1873)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.methods(SourceTypeBinding.java:1561)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.internalFaultInTypeForFieldsAndMethods(SourceTypeBinding.java:909)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.faultInTypesForFieldsAndMethods(SourceTypeBinding.java:904)
+	at org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope.faultInTypes(CompilationUnitScope.java:509)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1045)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1097)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:277)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:343)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:190)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:91)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:733)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:799)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:128)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:110)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:90)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:87)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.initialReconcile(JavaReconcilingStrategy.java:185)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:119)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.initialReconcile(JavaCompositeReconcilingStrategy.java:136)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:95)
+	at org.eclipse.jdt.internal.ui.text.JavaReconciler.initialProcess(JavaReconciler.java:420)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:174)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2020-11-03 10:30:52.456
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 1
+Java Model Exception: java.lang.NullPointerException
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:321)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:343)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:190)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:91)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:733)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:799)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:128)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:110)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:90)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:87)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.initialReconcile(JavaReconcilingStrategy.java:185)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:119)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.initialReconcile(JavaCompositeReconcilingStrategy.java:136)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:95)
+	at org.eclipse.jdt.internal.ui.text.JavaReconciler.initialProcess(JavaReconciler.java:420)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:174)
+Caused by: java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader.getMemberTypes(ClassFileReader.java:705)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.cachePartsFrom(BinaryTypeBinding.java:433)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1038)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1019)
+	at org.eclipse.jdt.internal.compiler.Compiler.accept(Compiler.java:305)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.askForType(LookupEnvironment.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding.resolve(UnresolvedReferenceBinding.java:111)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.resolveType(BinaryTypeBinding.java:228)
+	at org.eclipse.jdt.internal.compiler.lookup.PackageBinding.getType(PackageBinding.java:202)
+	at org.eclipse.jdt.internal.compiler.lookup.SplitPackageBinding.getType(SplitPackageBinding.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.findType(Scope.java:1985)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getTypeOrPackage(Scope.java:3313)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getType(Scope.java:3005)
+	at org.eclipse.jdt.internal.compiler.ast.SingleTypeReference.getTypeBinding(SingleTypeReference.java:54)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.internalResolveType(TypeReference.java:511)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:612)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:608)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesWithSuspendedTempErrorHandlingPolicy(SourceTypeBinding.java:1971)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesFor(SourceTypeBinding.java:1873)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.methods(SourceTypeBinding.java:1561)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.internalFaultInTypeForFieldsAndMethods(SourceTypeBinding.java:909)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.faultInTypesForFieldsAndMethods(SourceTypeBinding.java:904)
+	at org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope.faultInTypes(CompilationUnitScope.java:509)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1045)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1097)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:277)
+	... 17 more
+Caused by: java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader.getMemberTypes(ClassFileReader.java:705)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.cachePartsFrom(BinaryTypeBinding.java:433)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1038)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1019)
+	at org.eclipse.jdt.internal.compiler.Compiler.accept(Compiler.java:305)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.askForType(LookupEnvironment.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding.resolve(UnresolvedReferenceBinding.java:111)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.resolveType(BinaryTypeBinding.java:228)
+	at org.eclipse.jdt.internal.compiler.lookup.PackageBinding.getType(PackageBinding.java:202)
+	at org.eclipse.jdt.internal.compiler.lookup.SplitPackageBinding.getType(SplitPackageBinding.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.findType(Scope.java:1985)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getTypeOrPackage(Scope.java:3313)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getType(Scope.java:3005)
+	at org.eclipse.jdt.internal.compiler.ast.SingleTypeReference.getTypeBinding(SingleTypeReference.java:54)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.internalResolveType(TypeReference.java:511)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:612)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:608)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesWithSuspendedTempErrorHandlingPolicy(SourceTypeBinding.java:1971)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesFor(SourceTypeBinding.java:1873)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.methods(SourceTypeBinding.java:1561)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.internalFaultInTypeForFieldsAndMethods(SourceTypeBinding.java:909)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.faultInTypesForFieldsAndMethods(SourceTypeBinding.java:904)
+	at org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope.faultInTypes(CompilationUnitScope.java:509)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1045)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1097)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:277)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:343)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:190)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:91)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:733)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:799)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:128)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:110)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:90)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:87)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.initialReconcile(JavaReconcilingStrategy.java:185)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:119)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.initialReconcile(JavaCompositeReconcilingStrategy.java:136)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:95)
+	at org.eclipse.jdt.internal.ui.text.JavaReconciler.initialProcess(JavaReconciler.java:420)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:174)
+!SUBENTRY 1 org.eclipse.jdt.core 4 1005 2020-11-03 10:30:52.457
+!MESSAGE java.lang.NullPointerException
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader.getMemberTypes(ClassFileReader.java:705)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.cachePartsFrom(BinaryTypeBinding.java:433)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1038)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1019)
+	at org.eclipse.jdt.internal.compiler.Compiler.accept(Compiler.java:305)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.askForType(LookupEnvironment.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding.resolve(UnresolvedReferenceBinding.java:111)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.resolveType(BinaryTypeBinding.java:228)
+	at org.eclipse.jdt.internal.compiler.lookup.PackageBinding.getType(PackageBinding.java:202)
+	at org.eclipse.jdt.internal.compiler.lookup.SplitPackageBinding.getType(SplitPackageBinding.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.findType(Scope.java:1985)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getTypeOrPackage(Scope.java:3313)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getType(Scope.java:3005)
+	at org.eclipse.jdt.internal.compiler.ast.SingleTypeReference.getTypeBinding(SingleTypeReference.java:54)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.internalResolveType(TypeReference.java:511)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:612)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:608)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesWithSuspendedTempErrorHandlingPolicy(SourceTypeBinding.java:1971)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesFor(SourceTypeBinding.java:1873)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.methods(SourceTypeBinding.java:1561)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.internalFaultInTypeForFieldsAndMethods(SourceTypeBinding.java:909)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.faultInTypesForFieldsAndMethods(SourceTypeBinding.java:904)
+	at org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope.faultInTypes(CompilationUnitScope.java:509)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1045)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1097)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:277)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:343)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:190)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:91)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:733)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:799)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:128)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:110)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:90)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:87)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.initialReconcile(JavaReconcilingStrategy.java:185)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:119)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.initialReconcile(JavaCompositeReconcilingStrategy.java:136)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:95)
+	at org.eclipse.jdt.internal.ui.text.JavaReconciler.initialProcess(JavaReconciler.java:420)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:174)
+!SUBENTRY 1 org.eclipse.jdt.core 4 1005 2020-11-03 10:30:52.458
+!MESSAGE java.lang.NullPointerException
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader.getMemberTypes(ClassFileReader.java:705)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.cachePartsFrom(BinaryTypeBinding.java:433)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1038)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1019)
+	at org.eclipse.jdt.internal.compiler.Compiler.accept(Compiler.java:305)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.askForType(LookupEnvironment.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding.resolve(UnresolvedReferenceBinding.java:111)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.resolveType(BinaryTypeBinding.java:228)
+	at org.eclipse.jdt.internal.compiler.lookup.PackageBinding.getType(PackageBinding.java:202)
+	at org.eclipse.jdt.internal.compiler.lookup.SplitPackageBinding.getType(SplitPackageBinding.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.findType(Scope.java:1985)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getTypeOrPackage(Scope.java:3313)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getType(Scope.java:3005)
+	at org.eclipse.jdt.internal.compiler.ast.SingleTypeReference.getTypeBinding(SingleTypeReference.java:54)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.internalResolveType(TypeReference.java:511)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:612)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:608)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesWithSuspendedTempErrorHandlingPolicy(SourceTypeBinding.java:1971)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesFor(SourceTypeBinding.java:1873)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.methods(SourceTypeBinding.java:1561)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.internalFaultInTypeForFieldsAndMethods(SourceTypeBinding.java:909)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.faultInTypesForFieldsAndMethods(SourceTypeBinding.java:904)
+	at org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope.faultInTypes(CompilationUnitScope.java:509)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1045)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1097)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:277)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:343)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:190)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:91)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:733)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:799)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:128)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:110)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:90)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:87)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.initialReconcile(JavaReconcilingStrategy.java:185)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:119)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.initialReconcile(JavaCompositeReconcilingStrategy.java:136)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:95)
+	at org.eclipse.jdt.internal.ui.text.JavaReconciler.initialProcess(JavaReconciler.java:420)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:174)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2020-11-03 10:30:52.473
+!MESSAGE Error in JDT Core during reconcile
+!STACK 1
+Java Model Exception: java.lang.NullPointerException
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:321)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:343)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:190)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:91)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:733)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:799)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:128)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:110)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:90)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:87)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.initialReconcile(JavaReconcilingStrategy.java:185)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:119)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.initialReconcile(JavaCompositeReconcilingStrategy.java:136)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:95)
+	at org.eclipse.jdt.internal.ui.text.JavaReconciler.initialProcess(JavaReconciler.java:420)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:174)
+Caused by: java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader.getMemberTypes(ClassFileReader.java:705)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.cachePartsFrom(BinaryTypeBinding.java:433)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1038)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1019)
+	at org.eclipse.jdt.internal.compiler.Compiler.accept(Compiler.java:305)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.askForType(LookupEnvironment.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding.resolve(UnresolvedReferenceBinding.java:111)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.resolveType(BinaryTypeBinding.java:228)
+	at org.eclipse.jdt.internal.compiler.lookup.PackageBinding.getType(PackageBinding.java:202)
+	at org.eclipse.jdt.internal.compiler.lookup.SplitPackageBinding.getType(SplitPackageBinding.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.findType(Scope.java:1985)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getTypeOrPackage(Scope.java:3313)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getType(Scope.java:3005)
+	at org.eclipse.jdt.internal.compiler.ast.SingleTypeReference.getTypeBinding(SingleTypeReference.java:54)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.internalResolveType(TypeReference.java:511)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:612)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:608)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesWithSuspendedTempErrorHandlingPolicy(SourceTypeBinding.java:1971)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesFor(SourceTypeBinding.java:1873)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.methods(SourceTypeBinding.java:1561)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.internalFaultInTypeForFieldsAndMethods(SourceTypeBinding.java:909)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.faultInTypesForFieldsAndMethods(SourceTypeBinding.java:904)
+	at org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope.faultInTypes(CompilationUnitScope.java:509)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1045)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1097)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:277)
+	... 17 more
+Caused by: java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader.getMemberTypes(ClassFileReader.java:705)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.cachePartsFrom(BinaryTypeBinding.java:433)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1038)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1019)
+	at org.eclipse.jdt.internal.compiler.Compiler.accept(Compiler.java:305)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.askForType(LookupEnvironment.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding.resolve(UnresolvedReferenceBinding.java:111)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.resolveType(BinaryTypeBinding.java:228)
+	at org.eclipse.jdt.internal.compiler.lookup.PackageBinding.getType(PackageBinding.java:202)
+	at org.eclipse.jdt.internal.compiler.lookup.SplitPackageBinding.getType(SplitPackageBinding.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.findType(Scope.java:1985)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getTypeOrPackage(Scope.java:3313)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getType(Scope.java:3005)
+	at org.eclipse.jdt.internal.compiler.ast.SingleTypeReference.getTypeBinding(SingleTypeReference.java:54)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.internalResolveType(TypeReference.java:511)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:612)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:608)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesWithSuspendedTempErrorHandlingPolicy(SourceTypeBinding.java:1971)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesFor(SourceTypeBinding.java:1873)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.methods(SourceTypeBinding.java:1561)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.internalFaultInTypeForFieldsAndMethods(SourceTypeBinding.java:909)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.faultInTypesForFieldsAndMethods(SourceTypeBinding.java:904)
+	at org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope.faultInTypes(CompilationUnitScope.java:509)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1045)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1097)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:277)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:343)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:190)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:91)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:733)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:799)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:128)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:110)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:90)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:87)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.initialReconcile(JavaReconcilingStrategy.java:185)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:119)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.initialReconcile(JavaCompositeReconcilingStrategy.java:136)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:95)
+	at org.eclipse.jdt.internal.ui.text.JavaReconciler.initialProcess(JavaReconciler.java:420)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:174)
+!SUBENTRY 1 org.eclipse.jdt.core 4 1005 2020-11-03 10:30:52.473
+!MESSAGE java.lang.NullPointerException
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader.getMemberTypes(ClassFileReader.java:705)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.cachePartsFrom(BinaryTypeBinding.java:433)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1038)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.createBinaryTypeFrom(LookupEnvironment.java:1019)
+	at org.eclipse.jdt.internal.compiler.Compiler.accept(Compiler.java:305)
+	at org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment.askForType(LookupEnvironment.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding.resolve(UnresolvedReferenceBinding.java:111)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.resolveType(BinaryTypeBinding.java:228)
+	at org.eclipse.jdt.internal.compiler.lookup.PackageBinding.getType(PackageBinding.java:202)
+	at org.eclipse.jdt.internal.compiler.lookup.SplitPackageBinding.getType(SplitPackageBinding.java:246)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.findType(Scope.java:1985)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getTypeOrPackage(Scope.java:3313)
+	at org.eclipse.jdt.internal.compiler.lookup.Scope.getType(Scope.java:3005)
+	at org.eclipse.jdt.internal.compiler.ast.SingleTypeReference.getTypeBinding(SingleTypeReference.java:54)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.internalResolveType(TypeReference.java:511)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:612)
+	at org.eclipse.jdt.internal.compiler.ast.TypeReference.resolveType(TypeReference.java:608)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesWithSuspendedTempErrorHandlingPolicy(SourceTypeBinding.java:1971)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.resolveTypesFor(SourceTypeBinding.java:1873)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.methods(SourceTypeBinding.java:1561)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.internalFaultInTypeForFieldsAndMethods(SourceTypeBinding.java:909)
+	at org.eclipse.jdt.internal.compiler.lookup.SourceTypeBinding.faultInTypesForFieldsAndMethods(SourceTypeBinding.java:904)
+	at org.eclipse.jdt.internal.compiler.lookup.CompilationUnitScope.faultInTypes(CompilationUnitScope.java:509)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1045)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1097)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:277)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:343)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:190)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:91)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:733)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:799)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:128)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.access$0(JavaReconcilingStrategy.java:110)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:90)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:87)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.initialReconcile(JavaReconcilingStrategy.java:185)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:119)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.initialReconcile(JavaCompositeReconcilingStrategy.java:136)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:95)
+	at org.eclipse.jdt.internal.ui.text.JavaReconciler.initialProcess(JavaReconciler.java:420)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:174)
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-03 10:30:52.534
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-03 10:30:52.544
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-03 10:30:52.555
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-11-03 12:42:45.869
+!MESSAGE Failed to download org.eclipse.recommenders:index::zip:0.0.0
+!STACK 0
+org.eclipse.aether.resolution.ArtifactResolutionException: Could not find artifact org.eclipse.recommenders:index:zip:0.0.0-SNAPSHOT in models (http://download.eclipse.org/recommenders/models/photon/)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolve(DefaultArtifactResolver.java:453)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolveArtifacts(DefaultArtifactResolver.java:255)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolveArtifact(DefaultArtifactResolver.java:232)
+	at org.eclipse.aether.internal.impl.DefaultRepositorySystem.resolveArtifact(DefaultRepositorySystem.java:303)
+	at org.eclipse.recommenders.models.ModelRepository.resolveInternal(ModelRepository.java:193)
+	at org.eclipse.recommenders.models.ModelRepository.resolve(ModelRepository.java:172)
+	at org.eclipse.recommenders.internal.models.rcp.EclipseModelRepository.resolve(EclipseModelRepository.java:168)
+	at org.eclipse.recommenders.internal.models.rcp.DownloadModelArchiveJob.run(DownloadModelArchiveJob.java:76)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: org.eclipse.aether.transfer.ArtifactNotFoundException: Could not find artifact org.eclipse.recommenders:index:zip:0.0.0-SNAPSHOT in models (http://download.eclipse.org/recommenders/models/photon/)
+	at org.eclipse.aether.connector.basic.ArtifactTransportListener.transferFailed(ArtifactTransportListener.java:48)
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector$TaskRunner.run(BasicRepositoryConnector.java:364)
+	at org.eclipse.aether.util.concurrency.RunnableErrorForwarder$1.run(RunnableErrorForwarder.java:76)
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector$DirectExecutor.execute(BasicRepositoryConnector.java:590)
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector.get(BasicRepositoryConnector.java:258)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.performDownloads(DefaultArtifactResolver.java:529)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolve(DefaultArtifactResolver.java:430)
+	... 8 more
+
+!ENTRY org.eclipse.recommenders.models.rcp 1 0 2020-11-03 12:42:45.910
+!MESSAGE org.eclipse.recommenders:index::zip:0.0.0 could not be resolved from the model repositories. Are you offline?
+
+!ENTRY org.eclipse.ui 4 0 2020-11-03 17:04:32.191
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Graphic is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4552)
+	at org.eclipse.swt.SWT.error(SWT.java:4467)
+	at org.eclipse.swt.SWT.error(SWT.java:4438)
+	at org.eclipse.swt.graphics.Image.getBounds(Image.java:1263)
+	at org.eclipse.swt.custom.CLabel.getTotalSize(CLabel.java:266)
+	at org.eclipse.swt.custom.CLabel.onPaint(CLabel.java:429)
+	at org.eclipse.swt.custom.CLabel.lambda$0(CLabel.java:119)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:231)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:86)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4118)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1052)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1076)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1061)
+	at org.eclipse.swt.widgets.Composite.WM_PAINT(Composite.java:1561)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4822)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:345)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4765)
+	at org.eclipse.swt.internal.win32.OS.VtblCall(Native Method)
+	at org.eclipse.swt.internal.ole.win32.IOleInPlaceObject.InPlaceDeactivate(IOleInPlaceObject.java:21)
+	at org.eclipse.swt.ole.win32.OleClientSite.deactivateInPlaceClient(OleClientSite.java:609)
+	at org.eclipse.swt.ole.win32.OleClientSite.onDispose(OleClientSite.java:959)
+	at org.eclipse.swt.ole.win32.OleClientSite.access$1(OleClientSite.java:946)
+	at org.eclipse.swt.ole.win32.OleClientSite$1.handleEvent(OleClientSite.java:128)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:86)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4118)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1052)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1076)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1057)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:809)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:929)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:812)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:929)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:812)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:929)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:812)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:929)
+	at org.eclipse.swt.widgets.Canvas.releaseChildren(Canvas.java:171)
+	at org.eclipse.swt.widgets.Decorations.releaseChildren(Decorations.java:728)
+	at org.eclipse.swt.widgets.Shell.releaseChildren(Shell.java:1340)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:812)
+	at org.eclipse.swt.widgets.Widget.dispose(Widget.java:426)
+	at org.eclipse.swt.widgets.Decorations.dispose(Decorations.java:405)
+	at org.eclipse.swt.widgets.Shell.dispose(Shell.java:729)
+	at org.eclipse.jface.text.AbstractInformationControl.dispose(AbstractInformationControl.java:521)
+	at org.eclipse.jface.text.AbstractInformationControlManager.disposeInformationControl(AbstractInformationControlManager.java:1319)
+	at org.eclipse.jface.text.AbstractInformationControlManager.dispose(AbstractInformationControlManager.java:1334)
+	at org.eclipse.jface.text.AbstractHoverInformationControlManager.dispose(AbstractHoverInformationControlManager.java:929)
+	at org.eclipse.jface.text.TextViewerHoverManager.dispose(TextViewerHoverManager.java:378)
+	at org.eclipse.jface.text.TextViewer.handleDispose(TextViewer.java:1874)
+	at org.eclipse.jface.text.source.SourceViewer.handleDispose(SourceViewer.java:788)
+	at org.eclipse.jface.text.source.projection.ProjectionViewer.handleDispose(ProjectionViewer.java:1296)
+	at org.eclipse.jdt.internal.ui.javaeditor.JavaSourceViewer.handleDispose(JavaSourceViewer.java:509)
+	at org.eclipse.jface.text.TextViewer$2.widgetDisposed(TextViewer.java:1731)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:124)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:86)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4118)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1052)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1076)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1061)
+	at org.eclipse.swt.widgets.Widget.notifyListeners(Widget.java:775)
+	at org.eclipse.swt.custom.StyledText.handleDispose(StyledText.java:5918)
+	at org.eclipse.swt.custom.StyledText.lambda$1(StyledText.java:5739)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:86)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4118)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1052)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1076)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1057)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:809)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:929)
+	at org.eclipse.swt.widgets.Canvas.releaseChildren(Canvas.java:171)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:812)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:929)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:812)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:929)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:812)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:929)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:812)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:929)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:812)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:929)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:812)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:929)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:812)
+	at org.eclipse.swt.widgets.Widget.dispose(Widget.java:426)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.disposeWidget(SWTPartRenderer.java:173)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ContributedPartRenderer.disposeWidget(ContributedPartRenderer.java:270)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:955)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:910)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:917)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.workbench.renderers.swt.ElementReferenceRenderer.disposeWidget(ElementReferenceRenderer.java:112)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:955)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:917)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:917)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:917)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:917)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:917)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:917)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:917)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:917)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:917)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:883)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:878)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:862)
+	at org.eclipse.ui.internal.WorkbenchWindow.hardClose(WorkbenchWindow.java:1994)
+	at org.eclipse.ui.internal.WorkbenchWindow.busyClose(WorkbenchWindow.java:1610)
+	at org.eclipse.ui.internal.WorkbenchWindow.access$18(WorkbenchWindow.java:1552)
+	at org.eclipse.ui.internal.WorkbenchWindow$11.run(WorkbenchWindow.java:1638)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:71)
+	at org.eclipse.ui.internal.WorkbenchWindow.close(WorkbenchWindow.java:1635)
+	at org.eclipse.ui.internal.Workbench$10.run(Workbench.java:1165)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.ui.internal.Workbench.busyClose(Workbench.java:1148)
+	at org.eclipse.ui.internal.Workbench.lambda$4(Workbench.java:1430)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:71)
+	at org.eclipse.ui.internal.Workbench.close(Workbench.java:1430)
+	at org.eclipse.ui.internal.Workbench.close(Workbench.java:1403)
+	at org.eclipse.ui.internal.WorkbenchWindow.busyClose(WorkbenchWindow.java:1606)
+	at org.eclipse.ui.internal.WorkbenchWindow.access$18(WorkbenchWindow.java:1552)
+	at org.eclipse.ui.internal.WorkbenchWindow$11.run(WorkbenchWindow.java:1638)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:71)
+	at org.eclipse.ui.internal.WorkbenchWindow.close(WorkbenchWindow.java:1635)
+	at org.eclipse.ui.internal.WorkbenchWindow.close(WorkbenchWindow.java:1649)
+	at org.eclipse.ui.internal.WorkbenchWindow$6.close(WorkbenchWindow.java:531)
+	at org.eclipse.e4.ui.workbench.renderers.swt.WBWRenderer.lambda$4(WBWRenderer.java:612)
+	at org.eclipse.swt.events.ShellListener$2.shellClosed(ShellListener.java:99)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:99)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:86)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4118)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1052)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1076)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1061)
+	at org.eclipse.swt.widgets.Decorations.closeWidget(Decorations.java:281)
+	at org.eclipse.swt.widgets.Decorations.WM_CLOSE(Decorations.java:1571)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4767)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:345)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1499)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2159)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4757)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2298)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:505)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4863)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:345)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1499)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2159)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4757)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2298)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:505)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4863)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:345)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1499)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2159)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4757)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2303)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3532)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1170)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1059)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:667)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:597)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:148)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+!SESSION 2020-11-04 12:49:02.442 -----------------------------------------------
+eclipse.buildId=4.13.0.I20190916-1045
+java.version=1.8.0_271
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.equinox.simpleconfigurator 4 0 2020-11-04 12:49:03.582
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Exception in org.eclipse.equinox.internal.simpleconfigurator.Activator.start() of bundle org.eclipse.equinox.simpleconfigurator.
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:800)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+Caused by: java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	... 24 more
+Root exception:
+java.lang.IllegalStateException: The System Bundle was updated. The framework must be restarted to finalize the configuration change
+	at org.eclipse.equinox.internal.simpleconfigurator.ConfigApplier.install(ConfigApplier.java:80)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:186)
+	at org.eclipse.equinox.internal.simpleconfigurator.SimpleConfiguratorImpl.applyConfiguration(SimpleConfiguratorImpl.java:201)
+	at org.eclipse.equinox.internal.simpleconfigurator.Activator.start(Activator.java:61)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:779)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:772)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:729)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:1002)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:354)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1682)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1662)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1624)
+	at org.eclipse.osgi.container.SystemModule.startWorker(SystemModule.java:264)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:581)
+	at org.eclipse.osgi.container.Module.start(Module.java:449)
+	at org.eclipse.osgi.container.SystemModule.start(SystemModule.java:188)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:428)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:447)
+	at org.eclipse.osgi.launch.Equinox.start(Equinox.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.startup(EclipseStarter.java:326)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:239)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:656)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:592)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1498)
+
+!ENTRY org.eclipse.osgi 4 0 2020-11-04 12:49:06.274
+!MESSAGE Bundle org.eclipse.equinox.simpleconfigurator_1.3.0.v20180502-1828 [2] is not active.
+
+!ENTRY org.eclipse.jface 2 0 2020-11-04 12:49:12.115
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-11-04 12:49:12.115
+!MESSAGE A conflict occurred for ALT+T:
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.TimelineShowView,Timeline / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@52eca410,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+T,
+	ParameterizedCommand(Command(org.synthclipse.ide.command.GraphShowView,Graph / Show View,
+		,
+		Category(org.synthclipse.category,Synthclipse,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@63d0e8d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.mylyn.tasks.core 4 0 2020-11-04 12:49:18.077
+!MESSAGE Unexpected error while loading repository template extensions
+!SUBENTRY 1 org.eclipse.mylyn.tasks.core 4 0 2020-11-04 12:49:18.077
+!MESSAGE Could not load repository template extension contributed by 'org.eclipse.mylyn.bugzilla.ide' with connectorKind 'bugzilla'
+
+!ENTRY org.eclipse.egit.ui 2 0 2020-11-04 12:49:24.108
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\jtkom'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 17 2020-11-04 12:49:26.243
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $. ; version: 2.0.7.v20170906-1327
+!STACK 0
+com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:224)
+	at com.google.gson.Gson.fromJson(Gson.java:888)
+	at com.google.gson.Gson.fromJson(Gson.java:853)
+	at com.google.gson.Gson.fromJson(Gson.java:802)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.json.Json.deserialize(Json.java:91)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:66)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:124)
+	at com.google.common.util.concurrent.AbstractIdleService$DelegateService$1.run(AbstractIdleService.java:62)
+	at com.google.common.util.concurrent.Callables$4.run(Callables.java:122)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING at line 1 column 1 path $
+	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:385)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:213)
+	... 9 more
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-04 12:49:56.106
+!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-04 12:49:56.115
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.launchbar.core 2 0 2020-11-04 12:49:56.125
+!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-11-04 12:53:16.392
+!MESSAGE Failed to download org.eclipse.recommenders:index::zip:0.0.0
+!STACK 0
+org.eclipse.aether.resolution.ArtifactResolutionException: Could not find artifact org.eclipse.recommenders:index:zip:0.0.0-SNAPSHOT in models (http://download.eclipse.org/recommenders/models/photon/)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolve(DefaultArtifactResolver.java:453)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolveArtifacts(DefaultArtifactResolver.java:255)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolveArtifact(DefaultArtifactResolver.java:232)
+	at org.eclipse.aether.internal.impl.DefaultRepositorySystem.resolveArtifact(DefaultRepositorySystem.java:303)
+	at org.eclipse.recommenders.models.ModelRepository.resolveInternal(ModelRepository.java:193)
+	at org.eclipse.recommenders.models.ModelRepository.resolve(ModelRepository.java:172)
+	at org.eclipse.recommenders.internal.models.rcp.EclipseModelRepository.resolve(EclipseModelRepository.java:168)
+	at org.eclipse.recommenders.internal.models.rcp.DownloadModelArchiveJob.run(DownloadModelArchiveJob.java:76)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:60)
+Caused by: org.eclipse.aether.transfer.ArtifactNotFoundException: Could not find artifact org.eclipse.recommenders:index:zip:0.0.0-SNAPSHOT in models (http://download.eclipse.org/recommenders/models/photon/)
+	at org.eclipse.aether.connector.basic.ArtifactTransportListener.transferFailed(ArtifactTransportListener.java:48)
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector$TaskRunner.run(BasicRepositoryConnector.java:364)
+	at org.eclipse.aether.util.concurrency.RunnableErrorForwarder$1.run(RunnableErrorForwarder.java:76)
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector$DirectExecutor.execute(BasicRepositoryConnector.java:590)
+	at org.eclipse.aether.connector.basic.BasicRepositoryConnector.get(BasicRepositoryConnector.java:258)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.performDownloads(DefaultArtifactResolver.java:529)
+	at org.eclipse.aether.internal.impl.DefaultArtifactResolver.resolve(DefaultArtifactResolver.java:430)
+	... 8 more
+
+!ENTRY org.eclipse.recommenders.models.rcp 1 0 2020-11-04 12:53:16.399
+!MESSAGE org.eclipse.recommenders:index::zip:0.0.0 could not be resolved from the model repositories. Are you offline?

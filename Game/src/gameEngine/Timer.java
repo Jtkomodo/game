@@ -10,31 +10,68 @@ public class Timer {
 	}
 	
 	
-	private double TimeStarted,time;
-	private boolean isGoing=false;
+	private double timeToWaitFor;
+	private double timeAlreadyPassed,time1;
+	private boolean paused=false;
+	private boolean hasFinishd=false;
+	
+	public Timer(double timeToWaitFor) {
+		this.timeToWaitFor=timeToWaitFor;
+		this.time1=getTIme();
+	}
 	
 	
-	
-	public void seTimer(double time) {
-		TimeStarted=getTIme();
-		isGoing=true;
-		this.time=time;
+	public void pause() {
+		this.paused=true;
+		this.timeAlreadyPassed=(getTIme()+this.timeAlreadyPassed)-time1;
+	}
+	public void play() {
+		this.paused=false;
+	}
+	public boolean isPaused() {
+		return this.paused;
 	}
 	
 	public boolean update() {
-		if(isGoing) {
 		boolean finished=false;
-		double Time2=getTIme();
-		if((Time2-TimeStarted)>=time) {
-			isGoing=false;
-			return true;
+		if(!this.hasFinishd) {
+			double time2=getTIme();
+			if(!paused) {	
+				if(((time2+this.timeAlreadyPassed)-time1)>=timeToWaitFor) {
+					finished=true;
+
+				}
+
+
+			}else {
+				time1=getTIme();
+			}
 			
-		}else return false;
-		
-		
-		
-		
-		}else return false;
+		}else {
+			finished=true;
+		}
+		this.hasFinishd=finished;
+		return finished;
+
 	}
+	public double getTimeTaken() {
+		return (getTIme()+this.timeAlreadyPassed)-time1;
+	}
+
+	public void setTimer(float timeToWaitFor) {
+		this.timeToWaitFor=timeToWaitFor;
+		resetTimer();
+	}
+	
+	
+	public void resetTimer() {
+		this.timeAlreadyPassed=0;
+		this.time1=getTIme();
+		this.hasFinishd=false;
+		this.paused=false;
+	}
+    public boolean hasFinished() {
+    	return this.hasFinishd;
+    }
 	
 }

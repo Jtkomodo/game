@@ -30,7 +30,7 @@ public class Animate {
 	private boolean going=true,eachTimed=false;
 	private Texture texture;
 	private Entity e;
-	
+	private Timer timer;
 	
 
 
@@ -82,37 +82,37 @@ public class Animate {
 	
 	
 	public void updateTime() {
-	
-	    time2=Timer.getTIme();
-	if(going) {//if the sprite is supposed to be animated at this time start the animation timing
-	    timepassed=time2-time;//this is the just the difference form the last time through the game loop to now
-		unp+=timepassed;//this is just the time taken since a animation frame was changed
-		frametime+=timepassed;//same thing but this is to actually tell when a second has passed only for debugging purposes 
-	  
-		
-		 if(unp>=frameTiming) {//if the time since the last frame time has reached our target time change frame
+
+		time2=Timer.getTIme();
+		if(going) {//if the sprite is supposed to be animated at this time start the animation timing
+			timepassed=time2-time;//this is the just the difference form the last time through the game loop to now
+			unp+=timepassed;//this is just the time taken since a animation frame was changed
+			frametime+=timepassed;//same thing but this is to actually tell when a second has passed only for debugging purposes 
+
+
+			if(unp>=frameTiming) {//if the time since the last frame time has reached our target time change frame
 				unp-=frameTiming;//resets the time in a way it doesn't lose frames
-				
-				
-				
+
+
+
 				if(this.eachTimed) {
-				
-				if(frameAnmount>=this.HowlongEachFrameLasts[this.currentframe]) {
-				changeFrame();//change the sprite
-				this.frameAnmount=0;
-				}
-				this.frameAnmount++;
-				
+
+					if(frameAnmount>=this.HowlongEachFrameLasts[this.currentframe]) {
+						changeFrame();//change the sprite
+						this.frameAnmount=0;
+					}
+					this.frameAnmount++;
+
 				}else {
 					changeFrame();//change the sprite
 				}
 				if(frametime>=1.0) {
-                  
+
 					frametime=0;
-         }
-		 }  }time=time2;//allows us to know next frame what the time was last		 
-		 }
-	
+				}
+			}  }time=time2;//allows us to know next frame what the time was last		 
+	}
+
 	
 	
 	private void changeFrame() {

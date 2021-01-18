@@ -22,7 +22,6 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_Y;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_P;
-
 import java.util.ArrayList;
 
 import  org.joml.Vector2f;
@@ -58,8 +57,10 @@ import battleClasses.BattlePlayerField;
 import battleClasses.BattleSlot;
 import battleClasses.Enemy;
 import battleClasses.HpBar;
-import events.EventManager;
-import events.OpenGUI;
+import events.Condition;
+import events.EventActionDebugPrint;
+import events.Events;
+import events.FlagHandler;
 import guis.BarElement;
 import guis.CloseWindow;
 import guis.DisplayPCInfo;
@@ -147,6 +148,7 @@ public class Start {
     private static GUINode rootForBattleScreen,root;
 	public static GUINode specials;
 	public static GUINode moves;
+	public static AABB col4;
 	public static Vector2f playerPostion=new Vector2f();
 	private static boolean USEITEM_INITIALIZED=false;
 	public static boolean STOP_PLAYER_MOVEMENT=false;
@@ -363,10 +365,10 @@ public class Start {
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0,false);
 		Col=new AABB(new Vector2f(0,0),32,32,0);
 		AABB	Col3=new AABB(new Vector2f(100,0),16,32,0);
-		AABB	Col4=new AABB(new Vector2f(200,0),32,32,0);
+			col4=new AABB(new Vector2f(200,0),64,64,1);
         COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
 	    buttonNamses = new BIndingNameParser("GLFW");
-		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2,Col3,Col4});
+		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2,Col3,col4});
 	
 		
 		initializeFPS();
@@ -420,12 +422,17 @@ public class Start {
 		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
 		
 	
+		Events event=new Events(new Condition[] {new Condition(col4.colide_flag,true)}, new EventActionDebugPrint("test"));
 		
 		
-		 
-	
 		
-			
+		
+		
+		
+		event.ActivateFlags(); 
+	   
+		
+		
 	    rootForBattleScreen=new GUINode(new GUINode[] {quit},"root",1,1);
 		
 		
@@ -448,9 +455,9 @@ public class Start {
 		
 		
 		
-	AABB	Col5=new AABB(new Vector2f(400,0),32,32,1,new OpenGUI(new Vector2f(0,0), m,new Vector2f(100,80),0.2f,GLFW_KEY_P));
+//	AABB	Col5=new AABB(new Vector2f(400,0),32,32,1,new OpenGUI(new Vector2f(0,0), m,new Vector2f(100,80),0.2f,GLFW_KEY_P));
 		
-	ColisionHandeler.addCollision(Col5);		
+//	ColisionHandeler.addCollision(Col5);		
 		//teste=new Entity(player,new Vector3f(0,0,200),0,64, playerTex);
 		
 		
@@ -485,7 +492,7 @@ public class Start {
 	
 		fps();    
 		
-	
+	  
 	//if(canRender) {
 		
 		BattleSystem.soundPlay=true;
@@ -526,6 +533,8 @@ public class Start {
 		
 	//if(test==false) {
 
+		  FlagHandler.updateFlags();
+		  Start.DebugPrint("COL4_FLAG="+col4.colide_flag.State());
 
 	
 	if(overworld==true) {	
@@ -585,7 +594,7 @@ public class Start {
 			x=playerPostion.x; y=playerPostion.y;	
 		    playerCol.setCenterPosition(playerPostion);	
 			
-			EventManager.Update(playerPostion);
+		
 			
 		
 			     
@@ -701,8 +710,7 @@ public class Start {
 
 }
 
-	
-	  maneger.draw( new Vector2f(screencoordx+(640/2)+50-maneger.getWidth(0.2f,new Vector2f(100,80)),screencoordy),new Vector2f(100,80),0.2f);
+	 	  maneger.draw( new Vector2f(screencoordx+(640/2)+50-maneger.getWidth(0.2f,new Vector2f(100,80)),screencoordy),new Vector2f(100,80),0.2f);
 	  textA.setString("FPS="+(int)fps+"\nH:"+HighFPs+" L:"+lowFPS);
 		
 	  if(showFps)
@@ -842,7 +850,6 @@ MainBatchRender.flushModel();
 		    }    
 		maneger.InputUpdate();
 		PARTY_SELECT.InputUpdate();
-		EventManager.UpdateInput();
 	    BattleSystem.updateInput();
 
 	   

@@ -7,8 +7,7 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import Data.Constants;
-import events.Event;
-import events.EventManager;
+import events.Flag;
 import gameEngine.Entity;
 import gameEngine.Start;
 import gameEngine.VectorMath;
@@ -22,9 +21,9 @@ public class AABB extends Collisions{
 	private Vector2f PosBeforeCol=new Vector2f();
 	private Model aabb,piont;
 	private float z=50;
-	private boolean colide=false,COLIDECHECK=false;
-	private Event event;
-	
+	private boolean COLIDECHECK=false;
+	public Flag colide_flag=new Flag(false);
+    public boolean collide= false;
 	
 	
 	
@@ -36,12 +35,6 @@ public class AABB extends Collisions{
 		
 	}
     
-	public AABB(Vector2f position, float widthR, float heightR, float resistance,Event event) {
-		this.event=event;
-		construct(position,widthR,heightR,resistance);
-		
-	}
-
 
 
 	private void construct(Vector2f position,float widthR,float heightR,float resistance) {
@@ -120,14 +113,14 @@ public class AABB extends Collisions{
 		Vector2f rcA=new Vector2f(0,0);
 	
 		this.COLIDECHECK=true;
-		this.colide=false;
+		
 		lcA=this.lc;
 		rcA=this.rc;
 		lcB=box.getLc();
 		rcB=box.getRc();
 		
 		
-	
+	   this.collide=false;
 	
 //		
 //		 MainRenderHandler.addEntity(new Entity(piont, new Vector3f(lc,200), 0, 3,Start.COLTEX,Constants.RED));
@@ -154,29 +147,22 @@ public class AABB extends Collisions{
 		
 		*/
 		if((rcA.x<lcB.x) || (rcB.x<lcA.x)) {// if the right side of A comes before the left side of B or vice versa return false(they can not be colliding)
-			if(box.hasEvent()) {
-				box.getEvent().call_To_Finish_Early();
-			}
-			
+		
+			this.colide_flag.setState(false);
 			return false;
+			
 		}
 		else if((rcA.y<lcB.y) || (rcB.y<lcA.y)) {//if the Bottom side of A comes before the top side of B or vice versa return false
 		
-			if(box.hasEvent()) {
-				box.getEvent().call_To_Finish_Early();
-			}
-			
+			this.colide_flag.setState(false);
 			
 			return false;
 		}
 		
 		else {//if both all sides have been checked and not resulted in no collision then there must be a collision
-			this.colide=true;
+			this.colide_flag.setState(true);
+			this.collide=true;
 			
-			if(box.hasEvent()) {
-		
-				EventManager.addEvent(box.getEvent());
-			}
 			return true;
 		}
 	  
@@ -187,21 +173,6 @@ public class AABB extends Collisions{
 		
 	
 	}
-	public Event getEvent() {
-		return this.event;
-	}
-
-
-
-
-
-	public void setEvent(Event event) {
-		this.event = event;
-	}
-
-
-
-
 
 	@Override
 	public Vector2f findVector(Vector2f position, Vector2f movement, Vector2f direction, CircleColision circle) {
@@ -258,7 +229,7 @@ public class AABB extends Collisions{
 	   }else if(amount==0) {
 				   
 		
-	if(this.colide) {
+	if(this.collide) {
 	
 	    
 		Vector2f d3= new Vector2f(0,0);
@@ -436,10 +407,7 @@ public void debug() {
 
 	
 
-   public boolean hasEvent() {
-	   return !(this.event==null);
-   }
-
+   
 
 	
 	

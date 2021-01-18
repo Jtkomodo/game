@@ -316,6 +316,16 @@ public static boolean PushedListEmpty() {
 	return ColsPushed.isEmpty();
 }
 
+
+public static int getAmountThrough() {
+	return amountThrough;
+}
+
+
+public static void setAmountThrough(int amountThrough) {
+	ColisionHandeler.amountThrough = amountThrough;
+}
+
 }	
 	
 	

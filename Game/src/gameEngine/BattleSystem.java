@@ -19,7 +19,6 @@ import battleClasses.BattleFormulas;
 import battleClasses.BattlePlayerField;
 import battleClasses.Enemy;
 import battleClasses.HpBar;
-import events.EventManager;
 import guis.GUIManeger;
 import guis.GUINode;
 import guis.UIElement;
@@ -334,7 +333,7 @@ public static void StartBattle(BattleEnemyField enemies,BattlePlayerField p,Text
 	playersInventory.setUseItemCalled(false);
 	TurnFinished=true;
 	
-    EventManager.endAllEvents();
+   
 }
 
 private static void addMovesToGUINodes(BattleEntity pc) {

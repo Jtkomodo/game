@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="WorkbenchPreferenceDialogSettings">
-		<item value="546" key="DIALOG_X_ORIGIN"/>
-		<item value="9" key="DIALOG_Y_ORIGIN"/>
+		<item key="DIALOG_X_ORIGIN" value="546"/>
+		<item key="DIALOG_Y_ORIGIN" value="9"/>
 	</section>
 	<section name="EditorSelectionDialog">
 	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
-		<item value="988" key="dialogHeight"/>
-		<item value="1162" key="dialogWidth"/>
+		<item key="dialogHeight" value="988"/>
+		<item key="dialogWidth" value="1162"/>
+		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_WIDTH" value="600"/>
+		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_HEIGHT" value="675"/>
+		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_SIZE" value="true"/>
+		<item key="org.eclipse.ui.internal.quickaccess.QuickAccessDialogDIALOG_USE_PERSISTED_LOCATION" value="false"/>
 		<list key="textEntries">
-			<item value="2"/>
+			<item value="1"/>
 			<item value="1"/>
 			<item value="1"/>
 			<item value="1"/>
 			<item value="1"/>
 		</list>
 		<list key="orderedElements">
-			<item value="org.eclipse.ui.window.preferences(preferencePageId=org.eclipse.jdt.ui.preferences.ProblemSeveritiesPreferencePage)"/>
+			<item value="search.in.help"/>
 			<item value="org.eclipse.ui.preferencePages.Views"/>
 			<item value="org.eclipse.epp.mpc.ui.command.showMarketplaceWizard"/>
 			<item value="org.eclipse.ui.views.AllMarkersView"/>
 			<item value="org.eclipse.ui.preferencePages.Startup"/>
 		</list>
 		<list key="orderedProviders">
-			<item value="org.eclipse.ui.commands"/>
+			<item value="search.help"/>
 			<item value="org.eclipse.ui.preferences"/>
 			<item value="org.eclipse.ui.commands"/>
 			<item value="org.eclipse.e4.ui.parts"/>
 			<item value="org.eclipse.ui.preferences"/>
 		</list>
 		<list key="textArray">
-			<item value="warnin"/>
-			<item value="java"/>
+			<item value="propals"/>
 			<item value="theme"/>
 			<item value="eclipse"/>
 			<item value="marke"/>
@@ -42,8 +45,8 @@
 	<section name="NewWizardAction">
 	</section>
 	<section name="ImportExportAction">
-		<item value="org.eclipse.jdt.internal.ui.fatjarpackager.JarPackageWizard" key="ImportExportPage.STORE_SELECTED_EXPORT_WIZARD_ID"/>
-		<item value="org.eclipse.ui.wizards.import.ExternalProject" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
+		<item key="ImportExportPage.STORE_SELECTED_EXPORT_WIZARD_ID" value="org.eclipse.jdt.internal.ui.fatjarpackager.JarPackageWizard"/>
+		<item key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID" value="org.eclipse.ui.wizards.import.ExternalProject"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
 		</list>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=Game/src&lt;guis{GUIfunction.java[GUIfunction" modifiers="1025" timestamp="1603920779540"/>
-<typeInfo handle="=Game/src&lt;guis{GUINodeFunction.java[GUINodeFunction" modifiers="1025" timestamp="1603920779517"/>
-<typeInfo handle="=Game/src&lt;events{Event.java[Event" modifiers="1025" timestamp="1604446883584"/>
+    <typeInfo handle="=Game/src&lt;battleSoftware{SoftwareComponent.java[SoftwareComponent" modifiers="1025" timestamp="1610519561188"/>
+    <typeInfo handle="=Game/src&lt;battleSoftware{Routines.java[Routines" modifiers="1025" timestamp="1610767620517"/>
+    <typeInfo handle="=Game/C:\/Program Files\/Java\/jdk-13.0.2\/lib\/jrt-fs.jar`java.desktop=/module=/true=/=/javadoc_location=/https:\/\/docs.oracle.com\/en\/java\/javase\/13\/docs\/api\/=/&lt;java.awt.event(ActionEvent.class[ActionEvent" modifiers="33" timestamp="1579906373238"/>
+    <typeInfo handle="=Game/src&lt;events{EventAction.java[EventAction" modifiers="513" timestamp="1610690589550"/>
 </typeInfoHistroy>

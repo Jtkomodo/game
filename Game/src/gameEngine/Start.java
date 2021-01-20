@@ -60,6 +60,7 @@ import battleClasses.HpBar;
 import events.Condition;
 import events.EventActionDebugPrint;
 import events.Events;
+import events.Flag;
 import events.FlagHandler;
 import guis.BarElement;
 import guis.CloseWindow;
@@ -152,6 +153,7 @@ public class Start {
 	public static Vector2f playerPostion=new Vector2f();
 	private static boolean USEITEM_INITIALIZED=false;
 	public static boolean STOP_PLAYER_MOVEMENT=false;
+	public static Flag flag=new Flag(false);
     
 	public static void main(String[] args) {
 	
@@ -422,7 +424,10 @@ public class Start {
 		playersSPBAr=new HpBar(p.getMaxsp(),p.getSp(),new Vector2f(80,10),HealthBarBackground, COLTEX,Constants.BAR_COLOR_YELLOW,Constants.BAR_COLOR_YELLOW); 
 		
 	
-		Events event=new Events(new Condition[] {new Condition(col4.colide_flag,true)}, new EventActionDebugPrint("test"));
+		
+		
+		
+		Events event=new Events(new Condition[] {new Condition(flag,true)}, new EventActionDebugPrint("test_EVENT"));
 		
 		
 		
@@ -532,10 +537,8 @@ public class Start {
 
 		
 	//if(test==false) {
-
 		  FlagHandler.updateFlags();
-		  Start.DebugPrint("COL4_FLAG="+col4.colide_flag.State());
-
+		
 	
 	if(overworld==true) {	
 		
@@ -578,8 +581,13 @@ public class Start {
 		    playerPostion.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
 			playerPostion=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
+			
+			
+			
 		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.YELLOW));
 		
+
+			  
 			if(!ColisionHandeler.getColided()) {
 				
 				playerCol.setPosBeforeCol(playerPostion);
@@ -863,6 +871,11 @@ MainBatchRender.flushModel();
 		BACKSPACE=InputHandler.getStateofButton(GLFW_KEY_BACKSPACE),S=InputHandler.getStateofButton(GLFW_KEY_S),CONTROLRIGHT=InputHandler.getStateofButton(GLFW_KEY_RIGHT_CONTROL),
 		CONTROLLEFT=InputHandler.getStateofButton(GLFW_KEY_LEFT_CONTROL),F=InputHandler.getStateofButton(GLFW_KEY_F),H=InputHandler.getStateofButton(GLFW_KEY_H);
 		
+	    
+	    if(I==2) {
+	    	flag.setState(!flag.State());
+	    }
+	    
 	
 	  double time=Timer.getTIme();
 	  double timeHeld=time-BackSpaceHoldStart;

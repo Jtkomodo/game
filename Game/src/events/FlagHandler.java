@@ -38,10 +38,6 @@ public class FlagHandler {
 			
 			}
 		}
-		//debug
-		for(int i=0;i<flags.size();i++) {
-			Start.DebugPrint("FLAG_"+1+"="+flags.get(i).State());
-		}
 		
 		
 		

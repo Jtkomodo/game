@@ -6,12 +6,15 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="colide_flag"/>
+		<item key="selection" value="i="/>
 		<item key="casesensitive" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="wrap" value="true"/>
 		<item key="wholeword" value="false"/>
 		<list key="findhistory">
+			<item value="I="/>
+			<item value="i"/>
+			<item value="flag"/>
 			<item value="colide_flag"/>
 			<item value="statechanged"/>
 			<item value="collide"/>
@@ -24,9 +27,6 @@
 			<item value="playerPostion"/>
 			<item value="playerposition"/>
 			<item value="playerPosition"/>
-			<item value="enemyHasTaken"/>
-			<item value="action"/>
-			<item value="no Action Taken"/>
 		</list>
 		<list key="replacehistory">
 			<item value="getStateofButtonInstanced"/>

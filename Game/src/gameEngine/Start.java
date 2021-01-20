@@ -427,7 +427,7 @@ public class Start {
 		
 		
 		
-		Events event=new Events(new Condition[] {new Condition(flag,true)}, new EventActionDebugPrint("test_EVENT"));
+		Events event=new Events(new Condition[] {new Condition(col4.colide_flag,true)}, new EventActionDebugPrint("test_EVENT"));
 		
 		
 		

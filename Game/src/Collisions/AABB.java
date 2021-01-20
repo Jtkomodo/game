@@ -148,19 +148,19 @@ public class AABB extends Collisions{
 		*/
 		if((rcA.x<lcB.x) || (rcB.x<lcA.x)) {// if the right side of A comes before the left side of B or vice versa return false(they can not be colliding)
 		
-			this.colide_flag.setState(false);
+			box.colide_flag.setState(false);
 			return false;
 			
 		}
 		else if((rcA.y<lcB.y) || (rcB.y<lcA.y)) {//if the Bottom side of A comes before the top side of B or vice versa return false
 		
-			this.colide_flag.setState(false);
+		   box.colide_flag.setState(false);
 			
 			return false;
 		}
 		
 		else {//if both all sides have been checked and not resulted in no collision then there must be a collision
-			this.colide_flag.setState(true);
+			box.colide_flag.setState(true);
 			this.collide=true;
 			
 			return true;

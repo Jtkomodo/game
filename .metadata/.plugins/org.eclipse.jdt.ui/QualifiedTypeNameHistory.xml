@@ -46,7 +46,6 @@
     <fullyQualifiedTypeName name="events.Event"/>
     <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="events.OpenGUI"/>
-    <fullyQualifiedTypeName name="input.GetInput"/>
     <fullyQualifiedTypeName name="rendering.MainRenderHandler"/>
     <fullyQualifiedTypeName name="org.joml.Vector3f"/>
     <fullyQualifiedTypeName name="gameEngine.Entity"/>
@@ -54,10 +53,11 @@
     <fullyQualifiedTypeName name="events.EventManager"/>
     <fullyQualifiedTypeName name="gameEngine.Timer"/>
     <fullyQualifiedTypeName name="battleClasses.BattleEntity"/>
-    <fullyQualifiedTypeName name="java.util.LinkedList"/>
     <fullyQualifiedTypeName name="events.FlagHandler"/>
     <fullyQualifiedTypeName name="events.Events"/>
     <fullyQualifiedTypeName name="events.EventActionDebugPrint"/>
-    <fullyQualifiedTypeName name="events.Flag"/>
     <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="events.Flag"/>
+    <fullyQualifiedTypeName name="input.GetInput"/>
+    <fullyQualifiedTypeName name="java.util.LinkedList"/>
 </qualifiedTypeNameHistroy>

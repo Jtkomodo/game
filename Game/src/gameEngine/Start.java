@@ -23,7 +23,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_W;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_Y;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_P;
 import java.util.ArrayList;
-
+import static input.GetInput.*;
 import  org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -154,6 +154,7 @@ public class Start {
 	private static boolean USEITEM_INITIALIZED=false;
 	public static boolean STOP_PLAYER_MOVEMENT=false;
 	public static Flag flag=new Flag(false);
+	private static Events event;
     
 	public static void main(String[] args) {
 	
@@ -367,7 +368,7 @@ public class Start {
 		//playerCol=new AABB(new Vector2f(0,0),15,44,0,false);
 		Col=new AABB(new Vector2f(0,0),32,32,0);
 		AABB	Col3=new AABB(new Vector2f(100,0),16,32,0);
-			col4=new AABB(new Vector2f(200,0),64,64,1);
+		col4=new AABB(new Vector2f(200,0),64,64,1);
         COl2=new AABB(new Vector2f(-64,1026-64),2048,64,0);
 	    buttonNamses = new BIndingNameParser("GLFW");
 		ColisionHandeler.addCollisions(new Collisions[] {playerCol,Col,COl2,Col3,col4});
@@ -427,17 +428,13 @@ public class Start {
 		
 		
 		
-		Events event=new Events(new Condition[] {new Condition(col4.colide_flag,true)}, new EventActionDebugPrint("test_EVENT"));
+		 event=new Events(new Condition[] {new Condition(col4.colide_flag,true),new Condition(flag,true)}, new EventActionDebugPrint("test_EVENT"));
 		
 		
 		
 		
 		
-		
-		event.ActivateFlags(); 
-	   
-		
-		
+				
 	    rootForBattleScreen=new GUINode(new GUINode[] {quit},"root",1,1);
 		
 		
@@ -872,18 +869,35 @@ MainBatchRender.flushModel();
 		CONTROLLEFT=InputHandler.getStateofButton(GLFW_KEY_LEFT_CONTROL),F=InputHandler.getStateofButton(GLFW_KEY_F),H=InputHandler.getStateofButton(GLFW_KEY_H);
 		
 	    
-	    if(I==2) {
-	    	flag.setState(!flag.State());
+	    if(H==1) {
+	    	
+	    	if(!event.isActivated()) {
+	    		event.ActivateFlags();
+	    	}else {
+	    		event.deactivateFlags();
+	    	}
+	    	
+	    	
+	    }
+	    
+	    
+	    
+	    
+	    if(I==JUST_PUSHED) {
+	    	flag.setState(true);
+	   	   }else {
+	    	//Start.DebugPrint("false");
+	    	flag.setState(false);
 	    }
 	    
 	
 	  double time=Timer.getTIme();
 	  double timeHeld=time-BackSpaceHoldStart;
 	 
-	   if(CharCallback.takeInput && BACKSPACE==1) {
+	   if(CharCallback.takeInput && BACKSPACE==JUST_PUSHED) {
 		   CharCallback.backspace();
 		   Start.BackSpaceHoldStart=Timer.getTIme();	   
-	   }else if(CharCallback.takeInput && BACKSPACE>1) {
+	   }else if(CharCallback.takeInput && BACKSPACE>JUST_PUSHED) {
 		   if(timeHeld>=0.5) {
 			   Start.BackSpaceHoldStart=Timer.getTIme();
 			   CharCallback.removeWord();
@@ -893,7 +907,7 @@ MainBatchRender.flushModel();
 	    	
 		
 		
-	    if(H==1 && CONTROLLEFT>0) {
+	    if(H==JUST_PUSHED && CONTROLLEFT==HELD) {
 	    boolean i=CharCallback.takeInput;
        if(!i) {
 	    	
@@ -918,7 +932,7 @@ MainBatchRender.flushModel();
 	    
 	    }
 	 
-	       if(ESCAPE==1) {
+	       if(ESCAPE==JUST_PUSHED) {
 			if(maneger.isOpen() || PARTY_SELECT.isOpen()) {
 				maneger.close();
 				PARTY_SELECT.close();
@@ -942,7 +956,7 @@ MainBatchRender.flushModel();
 		
 		
 		
-		if(testKey==2) {
+		if(testKey==JUST_REALESED) {
 			//	x=0;y=0;
 				if (overworld==false) {
 					overworld=true;
@@ -973,7 +987,7 @@ MainBatchRender.flushModel();
 	   float speed=1;
 	    		
 		
-	      if(((CONTROLRIGHT==1 || CONTROLRIGHT==3)||(CONTROLLEFT==1||CONTROLLEFT==3)) && (F==1)) {//if the fuscreenCode is just pressed toggle full screen
+	      if(((CONTROLRIGHT==JUST_PUSHED || CONTROLRIGHT==HELD)||(CONTROLLEFT==JUST_PUSHED||CONTROLLEFT==HELD)) && (F==JUST_PUSHED)) {//if the fuscreenCode is just pressed toggle full screen
 			 w.toggleFullscreen();}
 	  
 		
@@ -995,7 +1009,7 @@ MainBatchRender.flushModel();
 	
 		
 		
-		if(F2==1) {
+		if(F2==JUST_PUSHED) {
 			if(Start.DebugPrint==false) {
 				
 			Start.DebugPrint=true;
@@ -1008,7 +1022,7 @@ MainBatchRender.flushModel();
 
 			}
 		
-		if( F3==1) {
+		if( F3==JUST_PUSHED) {
 			if(Start.DEBUGCOLISIONS==false) {
 				
 			Start.DEBUGCOLISIONS=true;
@@ -1021,7 +1035,7 @@ MainBatchRender.flushModel();
 
 			}
 		
-		if(F4==1) {
+		if(F4==JUST_PUSHED) {
 			if(Start.Debugdraw==false) {
 				
 			Start.Debugdraw=true;
@@ -1033,7 +1047,7 @@ MainBatchRender.flushModel();
 			}
 
 			}
-		if( F12==1) {
+		if( F12==JUST_PUSHED) {
 			if(showFps==false) {
 				showFps=true;
 			
@@ -1063,7 +1077,7 @@ MainBatchRender.flushModel();
 		
 		
 		
-		        if(W==1 ||W==3) {
+		        if(W>=JUST_PUSHED) {
 		        	speed=5;
 		        	running=true;
 		        	
@@ -1079,23 +1093,23 @@ MainBatchRender.flushModel();
 						
 						
 						
-						if(UP==1 || UP==3) {//up
+						if(UP>=JUST_PUSHED) {//up
 						
 							speedy=1;
 							 a1.Play();
 							
 						}
-						if(DOWN==1||DOWN==3) {//down
+						if(DOWN>=JUST_PUSHED) {//down
 							speedy=-1;
 							
 							 a1.Play();
 									
-						}if(LEFT==1||LEFT==3) {//left
+						}if(LEFT>=JUST_PUSHED) {//left
 					        facingLeft=true;
 					        a1.Play();
 							speedx=-1;
 							
-						}if(RIGHT==1||RIGHT==3) {//right
+						}if(RIGHT>=JUST_PUSHED) {//right
 						
 						   speedx=1;
 						   a1.Play();
@@ -1169,6 +1183,7 @@ MainBatchRender.flushModel();
 	 	   
 	private static void fps() {
 	       step=0;
+	       GetInput.newFrame();
 		   // Render.disable();
 		   // canRender=false;//don't allow rendering until time
 			double time2=Timer.getTIme();//gets current time
@@ -1231,7 +1246,7 @@ MainBatchRender.flushModel();
 			    	  frameTime=0;
 			    	  frames=0;  
 			    	  
-			    	  
+			    	 
 			    	  
 			   //   }
 			      

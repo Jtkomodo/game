@@ -17,11 +17,15 @@ public class FlagHandler {
 	}
 	
 	public static void removeFlag(Flag flag) {
-		flags.remove(flag);
+		if(flags.remove(flag)) {
+			Start.DebugPrint("flag removed");
+		}
 	}
 	
-	public static void SetFlag_Changed(boolean state) {
-		Flag_Changed=state;
+	public static void Flag_Changed(Flag flag) {
+		if(flags.contains(flag)) {
+		     Flag_Changed=true;
+		}
 	}
 	public static boolean contatins_Flag(Flag flag) {
 		return flags.contains(flag);

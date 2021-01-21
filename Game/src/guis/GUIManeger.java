@@ -19,6 +19,7 @@ import gameEngine.ArrowKeySelecter;
 import gameEngine.Entity;
 import gameEngine.Start;
 import gameEngine.Texture;
+import static input.GetInput.*;
 import input.InputHandler;
 import rendering.MainRenderHandler;
 import textrendering.TextBuilder;
@@ -83,27 +84,27 @@ public class GUIManeger {
     			,left=InputHandler.getStateofButton(GLFW_KEY_LEFT),right=InputHandler.getStateofButton(GLFW_KEY_RIGHT),
     		    Enter=InputHandler.getStateofButton(GLFW_KEY_ENTER),backspace=InputHandler.getStateofButton(GLFW_KEY_BACKSPACE);
     		
-    			if(up==1) 
+    			if(up==JUST_PUSHED) 
     				if(moveUp()) {
     					Start.source.play(Start.Move);
     				};
-    			if(down==1)	
+    			if(down==JUST_PUSHED)	
     				if(moveDown()) {
     					Start.source.play(Start.Move);
     				};
-    			if(left==1)
+    			if(left==JUST_PUSHED)
     				if(moveLeft()) {
     					Start.source.play(Start.Move);
     				};
-    			if(right==1)
+    			if(right==JUST_PUSHED)
     				if(moveRight()) {
     					Start.source.play(Start.Move);
     				};
-    	        if(Enter==1) {
+    	        if(Enter==JUST_PUSHED) {
     				
     	        	Select();
     	        }
-    	        if(backspace==1) {
+    	        if(backspace==JUST_PUSHED) {
     	        	Start.source.play(Start.Back);
     	        	goBack();
     	        }

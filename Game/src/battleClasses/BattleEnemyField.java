@@ -123,9 +123,9 @@ public class BattleEnemyField {
 			}
 			
 			
-		 int up=input.getStateofButtonInstanced(GLFW_KEY_UP),down=input.getStateofButtonInstanced(GLFW_KEY_DOWN)
-					,left=input.getStateofButtonInstanced(GLFW_KEY_LEFT),right=input.getStateofButtonInstanced(GLFW_KEY_RIGHT)
-							,Back=input.getStateofButtonInstanced(GLFW_KEY_BACKSPACE),Select=input.getStateofButtonInstanced(GLFW_KEY_ENTER);
+		 int up=input.getStateofButton(GLFW_KEY_UP),down=input.getStateofButton(GLFW_KEY_DOWN)
+					,left=input.getStateofButton(GLFW_KEY_LEFT),right=input.getStateofButton(GLFW_KEY_RIGHT)
+							,Back=input.getStateofButton(GLFW_KEY_BACKSPACE),Select=input.getStateofButton(GLFW_KEY_ENTER);
 				    
 			if(TimeTaken>=.1) {			
 			if(Select==1) {

@@ -1,10 +1,13 @@
 package events;
 
+import gameEngine.Start;
+
 public class Events {
 
 
 	private Condition[] conditions;
 	private EventAction action;
+	private boolean Activated=false;
 
 	public Events(Condition[] conditions,EventAction action) {
 		this.conditions=conditions;
@@ -13,16 +16,20 @@ public class Events {
 
 	public void ActivateFlags() {
 		for(int i=0;i<this.conditions.length;i++) {
-			FlagHandler.addFlag(conditions[i].getFlag());
+			Start.DebugPrint("flag added");
+		
 			Condition condition=this.conditions[i];
+			FlagHandler.addFlag(condition.getFlag());
 			condition.getFlag().addEvent(this);
 		}
+		this.Activated=true;
 	}
 	public void deactivateFlags() {
 		for(int i=0;i<this.conditions.length;i++) {
 			Condition condition=this.conditions[i];
 			condition.getFlag().removeEvent(this);
 		}
+		this.Activated=false;
 	}
 	
 	
@@ -49,6 +56,10 @@ public class Events {
 
 		return return_true;
 
+	}
+
+	public boolean isActivated() {
+		return Activated;
 	}
 
 

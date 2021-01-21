@@ -26,7 +26,11 @@ public class AABB extends Collisions{
     public boolean collide= false;
 	
 	
-	
+    public AABB(Vector2f position, float widthR, float heightR, float resistance,Flag flag) {
+		this.colide_flag=flag;
+    	construct(position,widthR,heightR,resistance);
+		
+	}
 	
 
 	

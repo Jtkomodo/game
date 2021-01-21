@@ -6,12 +6,14 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="i="/>
+		<item key="selection" value="JUST_PUSHED"/>
 		<item key="casesensitive" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="wrap" value="true"/>
 		<item key="wholeword" value="false"/>
 		<list key="findhistory">
+			<item value="1"/>
+			<item value="3"/>
 			<item value="I="/>
 			<item value="i"/>
 			<item value="flag"/>
@@ -25,10 +27,10 @@
 			<item value="getStateofButton"/>
 			<item value="inputhandler"/>
 			<item value="playerPostion"/>
-			<item value="playerposition"/>
-			<item value="playerPosition"/>
 		</list>
 		<list key="replacehistory">
+			<item value="JUST_PUSHED"/>
+			<item value="HELD"/>
 			<item value="getStateofButtonInstanced"/>
 			<item value="i"/>
 			<item value="p2."/>
@@ -42,8 +44,6 @@
 			<item value="isSingleHeal()"/>
 			<item value=""/>
 			<item value="BattleEntity"/>
-			<item value="y"/>
-			<item value="x"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

@@ -23,7 +23,9 @@ public class Move {
    
    
    public Move(String name,MoveComponent[] components) {
-	    this.timedPress=false;
+	
+	   
+	   this.timedPress=false;
 	    constuct(components);
 	    this.name=name;
 	   

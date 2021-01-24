@@ -9,7 +9,7 @@ import Data.Constants;
 import Data.Moves;
 import Items.Item;
 import battleMoves.Move;
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.Start;
 import rendering.MainRenderHandler;
 import textrendering.TextBuilder;
@@ -86,7 +86,7 @@ public class GUINodeDisplayMoveInfo extends GUINodeFunction {
 				
 			}
 			
-		  MainRenderHandler.addEntity(new Entity(Start.background,new Vector3f((newPosition.x+width/2)-(padding.x*sizeOfStrings),newPosition.y-(height/2),1000000),0,new Vector2f(width+(padding.x*sizeOfStrings),height),Start.COLTEX,Constants.BLACK));
+		  MainRenderHandler.addEntity(new RenderEntity(Start.background,new Vector3f((newPosition.x+width/2)-(padding.x*sizeOfStrings),newPosition.y-(height/2),1000000),0,new Vector2f(width+(padding.x*sizeOfStrings),height),Start.COLTEX,Constants.BLACK));
 			
 
 		    

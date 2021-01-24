@@ -7,7 +7,7 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.Start;
 import gameEngine.Texture;
 import gameEngine.Timer;
@@ -29,7 +29,7 @@ public class Animate {
     private SpriteSheetLoader animation;
 	private boolean going=true,eachTimed=false;
 	private Texture texture;
-	private Entity e;
+	private RenderEntity e;
 	private Timer timer;
 	
 
@@ -48,7 +48,7 @@ public class Animate {
 		
 		SetStartAndEnd(start,end);
 		texture=animation.getTexture();
-		e=new Entity(model, new Vector3f(0),0,0,texture);
+		e=new RenderEntity(model, new Vector3f(0),0,0,texture);
 		this.animation=animation;
 	}
 	
@@ -75,7 +75,7 @@ public class Animate {
 		
 		SetStartAndEnd(start,(start+HowlongEachFramelasts.length)-1);
 		texture=animation.getTexture();
-		e=new Entity(model, new Vector3f(0),0,0,texture);
+		e=new RenderEntity(model, new Vector3f(0),0,0,texture);
 		this.animation=animation;
 	}
 	
@@ -263,142 +263,23 @@ public class Animate {
 		this.animation=animation;
 	}
 	
-	public void drawAnimatedModel(Vector3f position,float angle,float scale) {
-		
-		if(AnimationHandler.exsits(this)){
-			//e=(model, position, angle, scale,texture);
-		     e.setPosition(position);
-		     e.setAngle(angle);
-		     e.setSize(scale);
-		     e.RemoveColor();
-		     e.setMirror(false);
-		     
-		       MainRenderHandler.addEntity(e);
-		}
-		
-		
-	}
-	
-	public void drawAnimatedModel(Vector3f position,float angle,float scale,boolean mirror) {
-		
-		
-		if(AnimationHandler.exsits(this)){
-			 e.setPosition(position);
-		     e.setAngle(angle);
-		     e.setSize(scale);
-		     e.RemoveColor();
-		     e.setMirror(mirror);		
-	
+    public RenderEntity getRenderEntity() {
+    	return this.e;
+    }
     
-       MainRenderHandler.addEntity(e);
-       
-		}
-		
-	}
-	
-	
-public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale) {
-		
-		if(AnimationHandler.exsits(this)){
-			 e.setPosition(position);
-		     e.setAngle(angle);
-		     e.setSize(scale);
-		     e.RemoveColor();
-		     e.setMirror(false);
-		      
-		       MainRenderHandler.addEntity(e);
-		       
-		}
-		
-		
-	}
-	
-	public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale,boolean mirror) {
-		
-		
-		if(AnimationHandler.exsits(this)){
-			 e.setPosition(position);
-		     e.setAngle(angle);
-		     e.setSize(scale);
-		     e.RemoveColor();
-		     e.setMirror(mirror);
-		       MainRenderHandler.addEntity(e);
-		       
-		
-		}
-		
-		
-	}
-	
-	
-	
-	//color
-public void drawAnimatedModel(Vector3f position,float angle,float scale,Vector4f color) {
-		
-		if(AnimationHandler.exsits(this)){
-			//e=(model, position, angle, scale,texture);
-		     e.setPosition(position);
-		     e.setAngle(angle);
-		     e.setSize(scale);
-		     e.setColor(color);
-		     e.setMirror(false);
-		     
-		       MainRenderHandler.addEntity(e);
-		}
-		
-		
-	}
-	
-	public void drawAnimatedModel(Vector3f position,float angle,float scale,Vector4f color,boolean mirror) {
-		
-		
-		if(AnimationHandler.exsits(this)){
-			 e.setPosition(position);
-		     e.setAngle(angle);
-		     e.setSize(scale);
-		     e.setColor(color);
-		     e.setMirror(mirror);		
-	
     
-       MainRenderHandler.addEntity(e);
-       
-		}
+    public void draw() {
 		
-	}
-	
-	
-public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale,Vector4f color) {
-		
-		if(AnimationHandler.exsits(this)){
-			 e.setPosition(position);
-		     e.setAngle(angle);
-		     e.setSize(scale);
-		     e.setColor(color);
-		     e.setMirror(false);
-		      
-		       MainRenderHandler.addEntity(e);
+		if(AnimationHandler.exsits(this)) {
+           MainRenderHandler.addEntity(e);
 		       
 		}
 		
 		
 	}
 	
-	public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale,Vector4f color,boolean mirror) {
-		
-		
-		if(AnimationHandler.exsits(this)){
-			 e.setPosition(position);
-		     e.setAngle(angle);
-		     e.setSize(scale);
-		     e.setColor(color);
-		     e.setMirror(mirror);
-		       MainRenderHandler.addEntity(e);
-		       
-		
-		}
-		
-		
-	}
+
+	
 	
 	public int getCurrentframe() {
 		return this.currentframe;
@@ -420,18 +301,19 @@ public void drawAnimatedModel(Vector3f position,float angle,Vector2f scale,Vecto
     public boolean exists() {
     	return AnimationHandler.exsits(this);
     }
-
+    
 
 	public long getKey() {
 		return AnimationHandler.getIndex(this);
 	}
 
-	public Entity getE() {
+	public RenderEntity getE() {
 		return e;
 	}
 
 
    
+	
 
 
 

@@ -2,16 +2,24 @@ package textrendering;
 
 import java.util.LinkedList;
 
+
 import org.joml.*;
 
 import Data.Constants;
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.MatrixMath;
 import gameEngine.Start;
 import rendering.MainRenderHandler;
 import rendering.OneTextureBatchedModel;
 import rendering.Render;
-
+/**This is a class that will allow us to draw a string to the screen.
+ * Once the the class is initiated by loading a new {@link Fontloader} or using a existing one
+ * ,use {@link #setString(String)} to set the string then use the various draw() methods to draw 
+ * in the desired way.
+ *
+ * @author Jesse Talbot
+ *
+ */
 public class TextBuilder{
 
 	private String text;
@@ -21,8 +29,13 @@ public class TextBuilder{
 	private OneTextureBatchedModel 	textModel;
 	private Fontloader loader;
     private float stringLength,stringHieght;
-	private Entity e;
-	
+	private RenderEntity e;
+	/**
+	 * *Creates a new TextBuilder  that has the specified font
+	 * @param Font The name of the font texture file to load
+	 * @param AtlusSize the size of the font texture
+	 *
+	 */
 	public TextBuilder(String Font, float AtlusSize) {
 		loader=new Fontloader(Font, AtlusSize);//actually loads the the font file to be used
 	    textModel=new OneTextureBatchedModel();
@@ -33,7 +46,9 @@ public class TextBuilder{
 	public Fontloader getLoader() {
 		return loader;
 	}
-
+    /**Creates a new TextBuilder using a already loaded Font
+     * @param loader the already loaded font
+     */
 
 	public TextBuilder(Fontloader loader) {
 		this.loader=loader;//actually loads the the font file to be used
@@ -46,7 +61,10 @@ public class TextBuilder{
 	
 	
 	
-	
+	/**Sets the string to have it ready to be drawn to the screen
+	 * 
+	 * @param text the text we will want to draw
+	 */
 	public void setString(String text) {//this makes our string model from a string to be drawn with drawstring()
 		//this just checks to see if it is the same string as the last rendered 
 		float lengthOfString=0;
@@ -134,10 +152,10 @@ public class TextBuilder{
 		return this.textModel;
 	}
 
-
+   
 	public void UIdrawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
 		
-	Entity	e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+	RenderEntity	e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 		e.setPosition(new Vector3f(x,y,z));
 		e.setColor(color);
 		e.setSize(scale);
@@ -147,7 +165,7 @@ public class TextBuilder{
 	}
 	public void UIDebugdrawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
 		if(Start.Debugdraw) {
-		Entity	 e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+		RenderEntity	 e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 		e.setPosition(new Vector3f(x,y,z));
 		e.setColor(color);
 		e.setSize(scale);
@@ -158,7 +176,7 @@ public class TextBuilder{
 	}
 	public void UIDebugdrawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
 		if(Start.Debugdraw) {
-		Entity	 e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+		RenderEntity	 e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 		e.setPosition(new Vector3f(x,y,z));
 		e.setSize(scale);
 		e.setUIPojeection(true);
@@ -167,7 +185,7 @@ public class TextBuilder{
 	}
 	
 	public void UIdrawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
-		e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+		e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 		e.setPosition(new Vector3f(x,y,z));
 		e.setSize(scale);
 		e.setUIPojeection(true);
@@ -177,7 +195,7 @@ public class TextBuilder{
 	}
 	
 	public void UIdrawString(float x,float y,float angle,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
-		e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+		e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 		e.setPosition(new Vector3f(x,y,z));
 		e.setColor(color);
 		e.setAngle(angle);
@@ -189,7 +207,7 @@ public class TextBuilder{
 	public void UIDebugdrawString(float x,float y,float angle,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
 	
 		if(Start.Debugdraw) {
-			e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+			e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 			e.setPosition(new Vector3f(x,y,z));
 		e.setColor(color);
 		e.setAngle(angle);
@@ -201,7 +219,7 @@ public class TextBuilder{
 	public void UIDebugdrawString(float x,float y,float angle,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
 	
 		if(Start.Debugdraw) {
-			e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+			e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 			e.setPosition(new Vector3f(x,y,z));
 			e.setAngle(angle);
 			e.setSize(scale);
@@ -212,7 +230,7 @@ public class TextBuilder{
 	
 	public void UIdrawString(float x,float y,float angle,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
 	
-		e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+		e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 			e.setPosition(new Vector3f(x,y,z));
 		    e.setAngle(angle);
 			e.setSize(scale);
@@ -245,7 +263,7 @@ public class TextBuilder{
 	
 	public void drawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
 		
-		    e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+		    e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 			e.setPosition(new Vector3f(x,y,z));
 			e.setColor(color);
 			e.setSize(scale);
@@ -256,7 +274,7 @@ public class TextBuilder{
 	public void DebugdrawString(float x,float y,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
 	
 		if(Start.Debugdraw) {
-			e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+			e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 			e.setPosition(new Vector3f(x,y,z));
 			e.setColor(color);
 			e.setSize(scale);
@@ -265,7 +283,7 @@ public class TextBuilder{
 		
 	}
 	public void DebugdrawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
-		 e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+		 e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 		if(Start.Debugdraw) {
 			e.setPosition(new Vector3f(x,y,z));
 			e.setSize(scale);
@@ -275,7 +293,7 @@ public class TextBuilder{
 	
 	public void drawString(float x,float y,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
 	
-		 e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+		 e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 			e.setPosition(new Vector3f(x,y,z));
 			e.setSize(scale);
 			MainRenderHandler.addEntity(e);
@@ -284,7 +302,7 @@ public class TextBuilder{
 	
 	public void drawString(float x,float y,float angle,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
 		
-		 e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+		 e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 			e.setPosition(new Vector3f(x,y,z));
 			e.setColor(color);
 			e.setAngle(angle);
@@ -296,7 +314,7 @@ public class TextBuilder{
 	public void DebugdrawString(float x,float y,float angle,float scale,Vector4f color) {//this is the method that actually draws the text to the screen at the desired location and scale
 	
 		if(Start.Debugdraw) {
-				 e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+				 e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 			e.setPosition(new Vector3f(x,y,z));
 			e.setColor(color);
 			e.setAngle(angle);
@@ -308,7 +326,7 @@ public class TextBuilder{
 	public void DebugdrawString(float x,float y,float angle,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
 	
 			if(Start.Debugdraw) {
-				 e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+				 e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 				e.setPosition(new Vector3f(x,y,z));
 				e.setAngle(angle);
 				e.setSize(scale);
@@ -318,7 +336,7 @@ public class TextBuilder{
 	}
 	
 	public void drawString(float x,float y,float angle,float scale) {//this is the method that actually draws the text to the screen at the desired location and scale
-	 e=new Entity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
+	 e=new RenderEntity(textModel,new Vector3f(0,0,z),0,1,loader.tex);
 			e.setPosition(new Vector3f(x,y,z));
 			e.setAngle(angle);
 			e.setSize(scale);

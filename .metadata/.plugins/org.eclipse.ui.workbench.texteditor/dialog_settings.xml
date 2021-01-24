@@ -6,12 +6,19 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="JUST_PUSHED"/>
+		<item key="selection" value="setDraw"/>
 		<item key="casesensitive" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="wrap" value="true"/>
 		<item key="wholeword" value="false"/>
 		<list key="findhistory">
+			<item value="setdraw"/>
+			<item value=".reload"/>
+			<item value=".select"/>
+			<item value="uidraw"/>
+			<item value="public"/>
+			<item value=".draw"/>
+			<item value="RenderEntity"/>
 			<item value="1"/>
 			<item value="3"/>
 			<item value="I="/>
@@ -20,15 +27,9 @@
 			<item value="colide_flag"/>
 			<item value="statechanged"/>
 			<item value="collide"/>
-			<item value="collide_flag"/>
-			<item value="collisde_flag"/>
-			<item value="colide"/>
-			<item value="public "/>
-			<item value="getStateofButton"/>
-			<item value="inputhandler"/>
-			<item value="playerPostion"/>
 		</list>
 		<list key="replacehistory">
+			<item value="protected"/>
 			<item value="JUST_PUSHED"/>
 			<item value="HELD"/>
 			<item value="getStateofButtonInstanced"/>
@@ -43,7 +44,6 @@
 			<item value=",E1.getHP(),"/>
 			<item value="isSingleHeal()"/>
 			<item value=""/>
-			<item value="BattleEntity"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

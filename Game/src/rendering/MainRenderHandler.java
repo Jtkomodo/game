@@ -12,24 +12,34 @@ import gameEngine.Start;
 import Data.Constants;
 import Data.Moves;
 import battleClasses.Enemy;
-import gameEngine.Entity;
-
+import gameEngine.RenderEntity;
+/**This is where we will add all our render entities to be drawn({@link #addEntity(RenderEntity) addEntity()},{@link #addUIEntity(RenderEntity) addUIEntity()})
+ * .Once all entities are added it will sort them by the z coord({@link #SortEntities()})
+ * it they will be sent to the {@link MainBatchRender} where it will batch all the
+ * models to draw them in as few draw calls as possible.({@link #addToBatchedRender()})
+ * 
+ * 
+ * @author Jesse Talbot
+ *
+ */
 public class MainRenderHandler {
 
 	
 	
-	private static LinkedList<Entity> entities=new LinkedList<Entity>();
+	private static LinkedList<RenderEntity> entities=new LinkedList<RenderEntity>();
     
-	
+	/**
+	 * This will move the entities to the Batched render to be batched into as few draw calls as possible.
+	 */
 	public static void addToBatchedRender() {
 		
-	    Iterator<Entity> i=entities.iterator();	
+	    Iterator<RenderEntity> i=entities.iterator();	
 		
 if(!entities.isEmpty()) {
 	//Start.DebugPrint(" Number of entities="+ entities.size());
 		while(i.hasNext()) {
 			
-			Entity e=i.next();
+			RenderEntity e=i.next();
 			Vector3f p= e.getPosition();
 			if(e.isMirror()) {
 				MainBatchRender.Mirror();
@@ -58,31 +68,36 @@ if(!entities.isEmpty()) {
 		entities.clear();
 }
 	}
-	
-	public static void addEntity(Entity e) {
+	/**
+	 * Adds the entity to be drawn to the list
+	 * @param e Entity to be drawn
+	 */
+	public static void addEntity(RenderEntity e) {
 		entities.add(e);
 		if(e.isDrawDrawLine() && Start.showDrawLines) {
-			entities.add( new Entity(Start.background,new Vector3f(e.getPosition().x,e.getPosition().y+e.getDrawLineOffset(),100),0,new Vector2f(64,1),Start.COLTEX,Constants.RED));
+			entities.add( new RenderEntity(Start.background,new Vector3f(e.getPosition().x,e.getPosition().y+e.getDrawLineOffset(),100),0,new Vector2f(64,1),Start.COLTEX,Constants.RED));
 		}
 		 
 	}
-	public static void addUIEntity(Entity e) {
+	public static void addUIEntity(RenderEntity e) {
 		e.setUIPojeection(true);
 		entities.add(e);
 		if(e.isDrawDrawLine() && Start.showDrawLines) {
-			entities.add( new Entity(Start.background,new Vector3f(e.getPosition().x,e.getPosition().y+e.getDrawLineOffset(),100),0,new Vector2f(64,1),Start.COLTEX,Constants.RED));
+			entities.add( new RenderEntity(Start.background,new Vector3f(e.getPosition().x,e.getPosition().y+e.getDrawLineOffset(),100),0,new Vector2f(64,1),Start.COLTEX,Constants.RED));
 		}
 		 
 	}
 	
-	
+	/**
+	 * Sorts the Entities by the z coords
+	 */
 	public static void SortEntities() {
 		
 		if(!entities.isEmpty()) {
-			Comparator<Entity> byZvalue = new Comparator<Entity>() {
+			Comparator<RenderEntity> byZvalue = new Comparator<RenderEntity>() {
 		          
 		          @Override
-		          public int compare(Entity e1,Entity e2) {
+		          public int compare(RenderEntity e1,RenderEntity e2) {
 		              Float v1 = e1.getPosition().z;
 		              Float v2 = e2.getPosition().z;
 		              int result=v1.compareTo(v2);

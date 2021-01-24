@@ -3,7 +3,11 @@ package battleClasses;
 import org.joml.Vector2f;
 
 import textrendering.TextBuilder;
-
+/**This reserves a spot in one of the fields({@link BattlePlayerField},{@link BattleEnemyField}
+ * and places the {@link BattleEntity} in it. 
+ * @author Jesse Talbot
+ *
+ */
 public class BattleSlot {
 
 	

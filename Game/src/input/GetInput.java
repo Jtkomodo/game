@@ -71,9 +71,6 @@ public class GetInput {
 
 		}
 
-		Start.DebugPrint(Start.buttonNamses.getNameofKey(button)+"="+state);
-
-
 		return state;
 	}
 

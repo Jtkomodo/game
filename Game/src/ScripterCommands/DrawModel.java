@@ -5,7 +5,7 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import Data.Constants;
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.Texture;
 import gameEngine.Timer;
 import rendering.MainRenderHandler;
@@ -69,7 +69,7 @@ public class DrawModel extends Commands {
 			
 		}
 		float z=10000;
-		MainRenderHandler.addEntity(new Entity(model,new Vector3f(position,z),0f,size,texture,color));
+		MainRenderHandler.addEntity(new RenderEntity(model,new Vector3f(position,z),0f,size,texture,color));
 		
 		
 	}

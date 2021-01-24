@@ -18,7 +18,7 @@ import ScripterCommands.DrawModel;
 import ScripterCommands.DrawString;
 import enemyAI.EnemyAI;
 import enemyAI.EnemyAIComponent;
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.Start;
 import gameEngine.Texture;
 import rendering.MainRenderHandler;

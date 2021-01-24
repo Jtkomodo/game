@@ -17,7 +17,7 @@ import Items.Inventory;
 import Items.Item;
 import Items.Items;
 import animation.Animate;
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.Start;
 import gameEngine.Texture;
 import rendering.MainRenderHandler;
@@ -367,7 +367,7 @@ if(move.getCost()<=this.sp) {
 
 public void draw(Vector2f position,TextBuilder text) {
 	
-	MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture));
+	MainRenderHandler.addEntity(new RenderEntity(model, new Vector3f(position,z), 0, scale, texture));
 	this.hpbar.draw(position.add(0,80,new Vector2f()),text);
 	
 	
@@ -376,7 +376,7 @@ public void draw(Vector2f position,TextBuilder text) {
 
 public void draw(Vector2f position,TextBuilder text,Vector4f color) {
 	
-    MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture,color));
+    MainRenderHandler.addEntity(new RenderEntity(model, new Vector3f(position,z), 0, scale, texture,color));
 	this.hpbar.draw(position.add(0,80,new Vector2f()),text);
 	
 	
@@ -385,7 +385,7 @@ public void draw(Vector2f position,TextBuilder text,Vector4f color) {
 
 public void draw(Vector2f position,TextBuilder text,boolean Mirror) {
 	
-	MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture,Mirror));
+	MainRenderHandler.addEntity(new RenderEntity(model, new Vector3f(position,z), 0, scale, texture,Mirror));
 	this.hpbar.draw(position.add(0,80,new Vector2f()),text);
 	
 	
@@ -394,7 +394,7 @@ public void draw(Vector2f position,TextBuilder text,boolean Mirror) {
 
 public void draw(Vector2f position,TextBuilder text,Vector4f color,boolean Mirror) {
 	
-    MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z), 0, scale, texture,color,Mirror));
+    MainRenderHandler.addEntity(new RenderEntity(model, new Vector3f(position,z), 0, scale, texture,color,Mirror));
 	this.hpbar.draw(position.add(0,80,new Vector2f()),text);
 	
 	

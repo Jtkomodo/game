@@ -11,7 +11,28 @@ import Data.Constants;
 import gameEngine.MatrixMath;
 import gameEngine.Start;
 import gameEngine.Texture;
-
+/**
+ * This will handle drawing all the {@linkplain ModelFramwork models} in as few calls as possible
+ * we will add the models using the various add model() methods
+ * then when all the models are added we use {@link #draw} to draw them to the screen.
+ * <p>
+ * <Strong>AddModelFunctions:<Strong>
+ * <p>
+ * {@linkplain #addModel(float[], float[], Vector2f, float, float, Texture, boolean) addModel(float[] cuvs,
+ * float[] LocalVerts,Vector2f position,float angle,float scale,Texture texture, boolean UIprojection)};
+ * <P>
+ * {@link #addModel(float[], float[], Vector2f, float, Vector2f, Texture, boolean)  addModel(float[] cuvs,float[] LocalVerts, Vector2f position, float angle, Vector2f scale,
+			Texture texture, boolean UIprojection)};
+ * <p>
+ * {@linkplain #addModel(float[], float[], Vector2f, float, float, Texture, Vector4f, boolean) addModel(float[] cuvs,float[] LocalVerts,Vector2f position,float angle,
+ * float scale,Texture texture,Vector4f color,boolean UIprojection)};
+ * <p>
+ * {@link #addModel(float[], float[], Vector2f, float, Vector2f, Texture, Vector4f, boolean)  addModel(float[] cuvs,float LocalVerts[], Vector2f position, float angle
+ * , Vector2f size,Texture texture, Vector4f color, boolean UIprojection)};
+ * 
+ * @author jtkom
+ *
+ */
 public class MainBatchRender {
 
 	private static LinkedList<Texture> textures=new LinkedList<Texture>();
@@ -21,8 +42,10 @@ public class MainBatchRender {
 	
 	
 	
-	
-	
+	/**
+	 * 
+	 */
+
 	public static void draw() {
 	    
 	//	Start.DebugPrint(" Number of BatchedModels="+ models.size());
@@ -283,10 +306,6 @@ addDataToBatch(verts,uvs,colors,translations);
 		 }
 		
 	}
-	public static void UiDraw() {
-		
-		
-	}
 	
 	public static void Mirror() {
 		
@@ -496,7 +515,7 @@ addDataToBatch(verts,uvs,colors,translations);
 	  uvs[i3+3]=(cuvs[i2+2]);uvs[i3+4]=(cuvs[i2+3]);    uvs[i3+5]=(TextureSampler);
 	  uvs[i3+6]=(cuvs[i2+4]);uvs[i3+7]=(cuvs[i2+5]);    uvs[i3+8]=(TextureSampler);
 	  uvs[i3+9]=(cuvs[i2+6]);uvs[i3+10]=(cuvs[i2+7]);    uvs[i3+11]=(TextureSampler);
-	Vector4f newcolor=Constants.DEFAULT_COLOR;
+	  Vector4f newcolor=Constants.DEFAULT_COLOR;
 			
 		
 		

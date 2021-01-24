@@ -8,7 +8,7 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import Data.Constants;
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.Start;
 import rendering.MainRenderHandler;
 import textrendering.TextBuilder;
@@ -135,8 +135,8 @@ public class UIStringElement extends UIElement{
 			 
 		}
 		
-		MainRenderHandler.addEntity(new Entity(Start.background, new Vector3f(noffset.x+stringL,noffset.y,1000000), 0, 1,Start.COLTEX,Constants.RED));
-		MainRenderHandler.addEntity(new Entity(Start.background, new Vector3f(noffset.x,noffset.y-stringh,1000000), 0, 1,Start.COLTEX,Constants.RED));
+		MainRenderHandler.addEntity(new RenderEntity(Start.background, new Vector3f(noffset.x+stringL,noffset.y,1000000), 0, 1,Start.COLTEX,Constants.RED));
+		MainRenderHandler.addEntity(new RenderEntity(Start.background, new Vector3f(noffset.x,noffset.y-stringh,1000000), 0, 1,Start.COLTEX,Constants.RED));
 	}
 
 	

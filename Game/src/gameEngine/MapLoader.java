@@ -209,7 +209,7 @@ if(tileIndex !=0) {
 	}
 	public void drawtiles(Texture tex) {
 
-		MainRenderHandler.addEntity(new Entity(model,new Vector3f(0,0,-1000),0, sizeOfEachTile,tex));
+		MainRenderHandler.addEntity(new RenderEntity(model,new Vector3f(0,0,-1000),0, sizeOfEachTile,tex));
 tilesRenderd=a;
 		a=0;
 

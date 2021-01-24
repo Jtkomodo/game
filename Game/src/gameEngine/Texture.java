@@ -25,7 +25,13 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryUtil;
 import org.newdawn.slick.opengl.PNGDecoder;
 
-
+/**Create a texture using {@linkplain #Texture(String)}
+ * and then bind it to the gpu's texture location using
+ * {@link #bind(int)}
+ * 
+ * @author Jesse Talbot
+ *
+ */
 public class Texture {
 private  int TEXid;
 
@@ -35,20 +41,10 @@ private int h,w;
 
 private String Path;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**Creates a new texture using the file path for the texture
+ * 
+ * @param file path path to the texture from "/res/"
+ */
 
 public Texture(String path) {
 		
@@ -122,7 +118,11 @@ public Texture(String path) {
 	}
 	
 	
-	
+	/**
+	 * binds the texture to a sampler location2d to allow the GPU to use it
+	 * <strong> only 31 locations<strong>
+	 * @param sampler the location to bind the texture to
+	 */
 	public void bind(int sampler) {
 		  
 		if(sampler>=0 && sampler<=31) {
@@ -135,10 +135,15 @@ public Texture(String path) {
 		
 		
 	}
+	/**
+	 * unbinds the texture from the GPU
+	 */
 	public void  unbind() {
 		glBindTexture(GL_TEXTURE_2D,0);
 	}
-
+ /**'
+  * deletes the textures from GPU memory
+  */
   public void delete() {
       GL11.glDeleteTextures(this.TEXid);
   }
@@ -159,6 +164,9 @@ private void loadTexture(ByteBuffer data) {
    
   
 }
+/**
+ * deletes all the textures from GPU memory
+ */
 public static void deleteAllTextures() {
 	for(int i=0;i<textures.size();i++) {
 	textures.get(i).delete();
@@ -168,12 +176,18 @@ public static void deleteAllTextures() {
 
 
 
-
+/**
+ * gets the height of the texture
+ * @return the height of the texture
+ */
 public int getH() {
 	return h;
 }
 
-
+/**
+ * gets the width of the texture
+ * @return the width of the textue
+ */
 
 public int getW() {
 	return w;

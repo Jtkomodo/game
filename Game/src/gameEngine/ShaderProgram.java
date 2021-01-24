@@ -15,15 +15,35 @@ import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL20;
 
-/*1.we first have to create a shader and have our id call it	
-2.we then need to show the shader where the source code is for the shader
-*  we do this by glShaderSource(our id,a string that has all of our source code)
-*3.next we compile the shader so the graphics card can understand it
-*4.we check if the compile failed if it did tell us which one and print the info log
-*5.we then attach the shader to the program and bind the program's attributes with a variable names we can use later 
-*6.lastly when link and validate the program so it can be called on later
-*
-*/
+/**The constructor for the ShaderProgram can be either {@link #ShaderProgram(String)}
+ * with a single path to both shaders(vs,and frag) both with the same name and format IE
+ * name.vs name.fs or {@link #ShaderProgram(String, String)} different names for the vs 
+ * and frag shaders we bind the shader program to the gpu using {@link #bind()} once the
+ * shaders  are compiled and linked we can add uniform variables using {@link #makeLocation(String)}
+ * we can also add attributes using {@link #makeAttribLocation(String)} to set a value in a shader
+ * you need to use the various load methods.(the integer location is the value returned from makeLocation(String)) 
+ * <p>
+ * <strong> Load Methods:<strong>
+ * <p>
+ * {@link #loadFloat(int, float)}; for float
+ * <p>
+ * {@link #loadInt(int, int)}; for integers
+ * <p>
+ * {@link #loadIntegers(int, int[])}; for integer arrays
+ * <p>
+ * {@link #loadMat(int, Matrix4f)}; for matrix4fs
+ * <p>
+ * {@link #loadVec2(int, Vector2f)}; for 2d vectors
+ * <p>
+ * {@link #loadVec4(int, Vector4f)} for 4d vectors(this is used for rgba colors mostly)
+ * 
+ * 
+ * 
+ * 
+ * 
+ * @author Jesse Talbot
+ *
+ */
 public  class ShaderProgram {
 private int program,vs,fs,locationSlot;
 //private File file=new File(System.getProperty("user.dir"));	

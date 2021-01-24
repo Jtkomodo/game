@@ -3,7 +3,7 @@ package ScripterCommands;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.Start;
 import gameEngine.Timer;
 import gameEngine.VectorMath;
@@ -13,12 +13,12 @@ public class walkTo extends Commands {
 	
 	private Vector2f begin;
 	private Vector2f end;
-	private Entity e;
+	private RenderEntity e;
 	private double time,StartTime;
 	
 	
 	
-	public walkTo(Entity e,Vector2f begin,Vector2f end,double time) {
+	public walkTo(RenderEntity e,Vector2f begin,Vector2f end,double time) {
 		this.begin=begin;
 		this.end=end;
 		this.time=time;

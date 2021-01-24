@@ -250,6 +250,29 @@ private static boolean checkTriger(Collisions a,CircleColision b) {
 		
 		
 	}
+  
+  public static boolean remove(Collisions collision) {  
+	  boolean removed=false;
+	  if(allCollisions.contains(collision)) {
+
+		  removed=allCollisions.remove(collision);
+
+		  if(Triggers.contains(collision)) {
+			  Triggers.remove(collision);
+
+		  }
+		  if(Cols.contains(collision)) {
+			  Cols.remove(collision);
+
+
+
+		  }
+	  }
+	  return removed;
+  }
+  
+  
+  
 public static void remove(int index) {
 	
 	if(index<allCollisions.size()) {

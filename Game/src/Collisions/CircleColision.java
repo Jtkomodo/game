@@ -3,7 +3,7 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import Data.Constants;
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.Start;
 import gameEngine.VectorMath;
 import rendering.MainRenderHandler;
@@ -173,17 +173,17 @@ private Model Circle,piont;
 		if(debug) {
 		
 		
-			MainRenderHandler.addEntity( new Entity(Circle, new Vector3f(position,z), 0, 1,Start.circleCol1));
+			MainRenderHandler.addEntity( new RenderEntity(Circle, new Vector3f(position,z), 0, 1,Start.circleCol1));
 		   
 		 
 		  if(this.isCheccked)
-		MainRenderHandler.addEntity( new Entity(piont, new Vector3f(closest,z),0, 3, Start.COLTEX,Constants.YELLOW));
+		MainRenderHandler.addEntity( new RenderEntity(piont, new Vector3f(closest,z),0, 3, Start.COLTEX,Constants.YELLOW));
 		  
 			  
 		  
 		 
-			MainRenderHandler.addEntity( new Entity(piont,new Vector3f(closest2,z),0, 2, Start.COLTEX,Constants.BLACK));
-			MainRenderHandler.addEntity( new Entity(piont, new Vector3f(closest3,z),0, 2, Start.COLTEX,Constants.BLACK));
+			MainRenderHandler.addEntity( new RenderEntity(piont,new Vector3f(closest2,z),0, 2, Start.COLTEX,Constants.BLACK));
+			MainRenderHandler.addEntity( new RenderEntity(piont, new Vector3f(closest3,z),0, 2, Start.COLTEX,Constants.BLACK));
 	   
 		}
 	

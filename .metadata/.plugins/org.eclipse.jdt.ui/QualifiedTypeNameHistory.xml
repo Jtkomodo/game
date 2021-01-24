@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="battleMoves.SpCostComponent"/>
-    <fullyQualifiedTypeName name="audio.Sound"/>
-    <fullyQualifiedTypeName name="ScripterCommands.PlaySoundEffect"/>
-    <fullyQualifiedTypeName name="audio.Source"/>
     <fullyQualifiedTypeName name="ScripterCommands.walkTo"/>
     <fullyQualifiedTypeName name="Scripter.Proccesor"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="battleClasses.BattleEnemyField"/>
     <fullyQualifiedTypeName name="battleClasses.BattlePlayerField"/>
-    <fullyQualifiedTypeName name="battleClasses.Enemy"/>
     <fullyQualifiedTypeName name="com.sun.tools.javac.jvm.Items"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="java.util.Comparator"/>
     <fullyQualifiedTypeName name="java.util.Collections"/>
@@ -29,7 +23,6 @@
     <fullyQualifiedTypeName name="textrendering.TextBuilder"/>
     <fullyQualifiedTypeName name="gameEngine.BattleSystem"/>
     <fullyQualifiedTypeName name="java.util.stream.Stream"/>
-    <fullyQualifiedTypeName name="gameEngine.Texture"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="Data.Moves"/>
@@ -44,10 +37,7 @@
     <fullyQualifiedTypeName name="guis.DisplayPCInfo"/>
     <fullyQualifiedTypeName name="guis.GUIManeger"/>
     <fullyQualifiedTypeName name="events.Event"/>
-    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="events.OpenGUI"/>
-    <fullyQualifiedTypeName name="rendering.MainRenderHandler"/>
-    <fullyQualifiedTypeName name="org.joml.Vector3f"/>
     <fullyQualifiedTypeName name="gameEngine.Entity"/>
     <fullyQualifiedTypeName name="Data.Constants"/>
     <fullyQualifiedTypeName name="events.EventManager"/>
@@ -56,8 +46,18 @@
     <fullyQualifiedTypeName name="events.FlagHandler"/>
     <fullyQualifiedTypeName name="events.Events"/>
     <fullyQualifiedTypeName name="events.EventActionDebugPrint"/>
-    <fullyQualifiedTypeName name="gameEngine.Start"/>
     <fullyQualifiedTypeName name="events.Flag"/>
     <fullyQualifiedTypeName name="input.GetInput"/>
+    <fullyQualifiedTypeName name="Collisions.AABB"/>
+    <fullyQualifiedTypeName name="Collisions.ColisionHandeler"/>
+    <fullyQualifiedTypeName name="org.joml.Vector2f"/>
     <fullyQualifiedTypeName name="java.util.LinkedList"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="gameEngine.Start"/>
+    <fullyQualifiedTypeName name="rendering.MainRenderHandler"/>
+    <fullyQualifiedTypeName name="gameEngine.Texture"/>
+    <fullyQualifiedTypeName name="org.joml.Vector3f"/>
+    <fullyQualifiedTypeName name="entities.Entity"/>
+    <fullyQualifiedTypeName name="gameEngine.RenderEntity"/>
+    <fullyQualifiedTypeName name="battleClasses.Enemy"/>
 </qualifiedTypeNameHistroy>

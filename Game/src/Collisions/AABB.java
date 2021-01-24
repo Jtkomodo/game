@@ -8,7 +8,7 @@ import org.joml.Vector4f;
 
 import Data.Constants;
 import events.Flag;
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.Start;
 import gameEngine.VectorMath;
 import rendering.MainRenderHandler;
@@ -248,7 +248,7 @@ public class AABB extends Collisions{
 		   Vector2f d2=new Vector2f();
 			closesta.sub(this.PosBeforeCol,d2);
 			closestb=new Vector2f(clamp(currentmovement.x+d2.x,lc.x,rc.x),clamp(currentmovement.y+d2.y,lc.y,rc.y));
-			MainRenderHandler.addEntity( new Entity(piont,new Vector3f(closestb,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
+			MainRenderHandler.addEntity( new RenderEntity(piont,new Vector3f(closestb,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
 	     closestb.sub(closesta, penetration);
 	     
 
@@ -294,7 +294,7 @@ public void debug() {
 	   if(Start.DEBUGCOLISIONS) {
 		
 
-		   MainRenderHandler.addEntity(new Entity(aabb, new Vector3f(position,z), 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE));
+		   MainRenderHandler.addEntity(new RenderEntity(aabb, new Vector3f(position,z), 0, 1,Start.COLTEX,Constants.COL_COLOR_BLUE));
 		    
 	//	  MainRenderHandler.addEntity( new Entity(piont,new Vector3f( ClosestPosition,200), 0,3,Start.COLTEX,Constants.BAR_COLOR_ORANGE));
 			

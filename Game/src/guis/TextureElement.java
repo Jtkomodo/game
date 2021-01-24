@@ -3,7 +3,7 @@ package guis;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.Texture;
 import rendering.MainRenderHandler;
 import rendering.Model;
@@ -43,7 +43,7 @@ public class TextureElement extends UIElement {
 	public void drawElement(Vector2f Position) {
 		Vector3f noffset=new Vector3f();new Vector3f(offset,0).add(new Vector3f(Position,z),noffset);
 		
-	   MainRenderHandler.addEntity(new Entity(model,noffset,0, scale, texture));
+	   MainRenderHandler.addEntity(new RenderEntity(model,noffset,0, scale, texture));
 		
 	}
 	

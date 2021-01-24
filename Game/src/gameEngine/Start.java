@@ -494,58 +494,18 @@ public class Start {
 	
 		fps();    
 		
-	  
-	//if(canRender) {
-		
 		BattleSystem.soundPlay=true;
 		
 		//----------------------GAME--LOOP------------------------------
-// 		Items[] ITM= playersInventory.getItems();		
-//			UIElement[] elementlist=new UIElement[ITM.length];	
-//			GUINode[] items=new GUINode[ITM.length];
-//			
-//			
-//			
-//			for(int i=0;i<ITM.length;i++) {
-//				elementlist[i]=new UIStringElement(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i].Item),new Vector2f(-54,5-(i*14)), .15f,Constants.BLACK,new UseItem(ITM[i]));
-//			    items[i]=new GUINode(ITM[i].Item.getName()+"  "+playersInventory.getAmountOfItem(ITM[i].Item),new UseItem(ITM[i]) );
-//			
-//			}
-//		  
-//		
 			
 		  InputHandler.EnableButtons(new int[] {GLFW_KEY_F1,GLFW.GLFW_KEY_X,GLFW.GLFW_KEY_Y,GLFW.GLFW_KEY_O});
   
-		  
-	
-		
-				//MainBatchRender.addTexture(textbox);
-	
-	
-   
-		
- 	
-			//MainBatchRender.addTexture(textbox);
-
-	
-	  // TextureUpdate(MAP)
-//Render.enable();//enables render
-
-
-		
-	//if(test==false) {
 		  FlagHandler.updateFlags();
 		
 	
 	if(overworld==true) {	
 		
-	
-		 // MainRenderHandler.addEntity(new Entity(background,new Vector3f(100,100,100),0,64, COLTEX,Constants.BLACK,10,true));
-		
-		
-		 
-		  //  MainRenderHandler.addEntity(new Entity(background,new Vector3f(new Vector2f(x,y).add(quarterStepVelocity.mul(3,new Vector2f())),200),0,5, COLTEX,Constants.YELLOW));
-		  if(!ESCAPEBOXUP) {    
+	  if(!ESCAPEBOXUP) {    
 		   Vector2f step=new Vector2f();
 	
 		  //step 1
@@ -554,25 +514,22 @@ public class Start {
 		    playerCol.setCenterPosition(step);//take step
 		 
 		   playerPostion=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);//check colisions
-		  //  MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.GREEN));//put marker to indicate where this step ended at
+		 
 		    Start.text1.setString("bc: "+Math.round(playerCol.getPosBeforeCol().x)+", "+Math.round(playerCol.getPosBeforeCol().y));
-			   Start.text1.UIdrawString((640/2)+Start.screencoordx-100,(480/2)+Start.screencoordy-80,.2f);			  
+			Start.text1.UIdrawString((640/2)+Start.screencoordx-100,(480/2)+Start.screencoordy-80,.2f);			  
 		    
 		    //step 2
 			oldpos.set(playerPostion);
 		    playerPostion.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
 			playerPostion=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
-		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.BLUE));
-		    
-			
+	
 		   //step3
 			oldpos.set(playerPostion);
 		    playerPostion.add(quarterStepVelocity,step);
 		    playerCol.setCenterPosition(step);
 			playerPostion=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
-		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.RED));
-			
+	
 		    //step4
 			oldpos.set(playerPostion);
 		    playerPostion.add(quarterStepVelocity,step);
@@ -580,10 +537,7 @@ public class Start {
 			playerPostion=updateColisions(playerCol,step,oldpos, quarterStepVelocity, direction);
 			
 			
-			
-		//    MainRenderHandler.addEntity(new Entity(background,new Vector3f(vector,200),0,5, COLTEX,Constants.YELLOW));
-		
-
+	
 			  
 			if(!ColisionHandeler.getColided()) {
 				
@@ -610,23 +564,7 @@ public class Start {
 	    screencoordy=-camy;
 		
 		  }	
-		//  textA.UIdrawString((640/2)+screencoordx-100,(480/2)+screencoordy-80,.2f);
-		//DebugPrint("x="+x+","+y);
-		
 	     cam.setPosition((new Vector2f(camx,camy)));
-	   //  DebugPrint(""+cam.getPosition());		
-		//screencoordx=-camx;
-	   // screencoordy=-camy;
-	//   MainRenderHandler.addEntity(test);
-	 //   MainRenderHandler.addEntity(test2);
-	    		
-	     //cam.setPosition((new Vector2f(camx,camy)));s.bind();
-	     //cam.setPosition((new Vector2f(camx,camy)));s.bind();
-		
-		       
-		    //   testcol=playerCol.AABBwAABB(Col); 
-	   
-	  
 	  
 	     Listener.ChangePosition(oldpos);
 
@@ -640,21 +578,6 @@ public class Start {
 	  
 	      textD.setString("circCol:"+circCol);
 	      textC.setString("xmap="+gridx+" ymap="+gridy);
-//	      text1.setString("PC_1");
-//	      text1.drawString(x-100, y+200, .12f);
-//	      text1.setString("SP: "+Math.round(p.getSp())+"/"+Math.round(p.getMaxsp()));
-//	      p.drawSPBAR(new Vector2f(x-100,y+160),text1);
-//	      text1.setString("HP:"+Math.round(p.getHp())+"/"+Math.round(p.getMaxHP()));      
-//	      p.getHpbar().draw(new Vector2f(x-100,y+180),text1);
-//	      
-//	      
-//	      text1.setString("PC_1");
-//	      text1.drawString(x+100, y+200, .12f);
-//	      text1.setString("SP: "+Math.round(p2.getSp())+"/"+Math.round(p2.getMaxsp()));
-//	      p2.drawSPBAR(new Vector2f(x+100,y+160),text1);
-//	      text1.setString("HP:"+Math.round(p2.getHp())+"/"+Math.round(p2.getMaxHP()));      
-//	      p2.getHpbar().draw(new Vector2f(x+100,y+180),text1);
-//	      
 	      if(playersInventory.isUseItemCalled()) {
 	    	  maneger.hide();
 	    	  ;
@@ -678,17 +601,15 @@ public class Start {
 			PARTY_SELECT.close();
 		
 		}
-		
-	   
-		
+	  
 	      
-		if(HideSprite==false) 
-       
-		a1.drawAnimatedModel(new Vector3f(x,y,100),0,Playerscale,!facingLeft);
-		
-	
-		//SpriteUpdate(player,playerTex,x,y,Playerscale,facingLeft);
-	
+	      if(HideSprite==false) {
+	    	  RenderEntity playerE=a1.getE();	
+	    	  playerE.setPosition(new Vector3f(x,y,100));
+	    	  playerE.setSize(Playerscale);
+	    	  playerE.setMirror(!facingLeft);
+	    	  a1.draw();
+	      }
 
 		textB.UIDebugdrawString(screencoordx-300,screencoordy-220,.2f);
 		
@@ -725,7 +646,7 @@ public class Start {
 
 if(CharCallback.takeInput) {
 	
-   MainRenderHandler.addEntity(new Entity(textboxM,new Vector3f(screencoordx,screencoordy,text1.getZ()-1),0,3, COLTEX,Constants.BLACK));
+   MainRenderHandler.addEntity(new RenderEntity(textboxM,new Vector3f(screencoordx,screencoordy,text1.getZ()-1),0,3, COLTEX,Constants.BLACK));
     text1.setString("TAKING INPUT");
 	text1.drawString(screencoordx-75, screencoordy+70, .2f,Constants.RED);
     text1.setString(CharCallback.string);
@@ -1266,8 +1187,8 @@ private static void drawmap(MapLoader loader,int gridx,int gridy) {
 		
 			    }
 	}
-	
- //   loader.getModel().setDrawMethod(GL_LINES);
+	  
+    //loader.getModel().setDrawMethod(GL_LINES);
 	  loader.drawtiles(tex);
 	   currentMap.flushModel();
 }
@@ -1277,16 +1198,7 @@ private static void drawmap(MapLoader loader,int gridx,int gridy) {
 
 private static Vector2f updateColisions(AABB colision,Vector2f position,Vector2f oldposition,Vector2f movement,Vector2f direction) {
 	
-	step++;
-    
-   
-	 ColisionHandeler.amountThrough=0;
-	 ColisionHandeler.FlushPushList();
 	   ColisionHandeler.updateTriggers(colision);
-	
-
-	   
-	   
 	   return  ColisionHandeler.updateVector(colision,position,oldposition,movement, direction);
 }
 

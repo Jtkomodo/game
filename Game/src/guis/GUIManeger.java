@@ -16,7 +16,7 @@ import org.joml.Vector4f;
 
 import Data.Constants;
 import gameEngine.ArrowKeySelecter;
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.Start;
 import gameEngine.Texture;
 import static input.GetInput.*;
@@ -79,7 +79,6 @@ public class GUIManeger {
     }
     public void InputUpdate() {
     	if(this.currentlyActive) {
-    		InputHandler.EnableButton(GLFW_KEY_BACKSPACE);
     	int up=InputHandler.getStateofButton(GLFW_KEY_UP),down=InputHandler.getStateofButton(GLFW_KEY_DOWN)
     			,left=InputHandler.getStateofButton(GLFW_KEY_LEFT),right=InputHandler.getStateofButton(GLFW_KEY_RIGHT),
     		    Enter=InputHandler.getStateofButton(GLFW_KEY_ENTER),backspace=InputHandler.getStateofButton(GLFW_KEY_BACKSPACE);
@@ -317,7 +316,7 @@ public class GUIManeger {
 				Vector2f slotOffset=new Vector2f(i%this.amountOfCollumns,(i/this.amountOfCollumns)+1);
 			    slotOffset.y=(-((slotOffset.y-this.currentTopRow)*padding.y*sizeOfStrings));
 				slotOffset.x=(slotOffset.x*sizeOfStrings*(this.widthOfEachStringSpot+padding.x))-30*sizeOfStrings;
-				MainRenderHandler.addEntity(new Entity(Start.Arrow, new Vector3f(position.add(slotOffset,new Vector2f()),100000),0,sizeOfStrings*50,ArrowTex));//draw the arrow
+				MainRenderHandler.addEntity(new RenderEntity(Start.Arrow, new Vector3f(position.add(slotOffset,new Vector2f()),100000),0,sizeOfStrings*50,ArrowTex));//draw the arrow
 				}
 				
 				
@@ -327,7 +326,7 @@ public class GUIManeger {
 			    if(node!=null){
 			    	node.InvokeGUINodeFuntion(position,padding,sizeOfStrings);
 			    }
-	   	   		MainRenderHandler.addEntity(new Entity(Start.background,new Vector3f((position.x+width/2)-(padding.x*sizeOfStrings),position.y-(height/2),10000),0,new Vector2f(width+(padding.x*sizeOfStrings),height),Start.COLTEX,this.backgroundColor));
+	   	   		MainRenderHandler.addEntity(new RenderEntity(Start.background,new Vector3f((position.x+width/2)-(padding.x*sizeOfStrings),position.y-(height/2),10000),0,new Vector2f(width+(padding.x*sizeOfStrings),height),Start.COLTEX,this.backgroundColor));
 			
 			}
 	   		

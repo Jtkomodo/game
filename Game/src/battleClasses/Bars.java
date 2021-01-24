@@ -5,7 +5,7 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import Data.Constants;
-import gameEngine.Entity;
+import gameEngine.RenderEntity;
 import gameEngine.Texture;
 import rendering.MainRenderHandler;
 import rendering.Model;
@@ -94,8 +94,8 @@ public abstract class Bars {
 		
 		
 		
-		MainRenderHandler.addEntity(new Entity(model, new Vector3f(position,z),0,new Vector2f(backgroundScale.x+2,backgroundScale.y+2),background));
-		MainRenderHandler.addEntity(new Entity(model, new Vector3f(position.x-((this.backgroundScale.x-(scaleX))/2),position.y,z+1), 0 ,new Vector2f(scaleX,backgroundScale.y), texture,color));
+		MainRenderHandler.addEntity(new RenderEntity(model, new Vector3f(position,z),0,new Vector2f(backgroundScale.x+2,backgroundScale.y+2),background));
+		MainRenderHandler.addEntity(new RenderEntity(model, new Vector3f(position.x-((this.backgroundScale.x-(scaleX))/2),position.y,z+1), 0 ,new Vector2f(scaleX,backgroundScale.y), texture,color));
 		text.drawString(position.x-(this.backgroundScale.x/2),position.y+(this.backgroundScale.y/2)+6,0f,.12f);
 		
 	}

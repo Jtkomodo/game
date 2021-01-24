@@ -5,6 +5,7 @@ import org.joml.Vector3f;
 
 import animation.Animate;
 import animation.AnimationHandler;
+import gameEngine.RenderEntity;
 import gameEngine.Timer;
 import rendering.Render;
 
@@ -60,9 +61,15 @@ public class animate extends Commands {
 		}
 		
 	    
-		if(Draw) 
-		animation.drawAnimatedModel(position,angle, scale,false);
 		
+		
+		if(Draw) {
+		    RenderEntity e=animation.getE();
+		    e.setPosition(position);
+		    e.setAngle(angle);
+		    e.setSize(scale);
+		    e.setMirror(false);
+		}
 	
 		
 	}

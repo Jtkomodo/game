@@ -38,6 +38,7 @@ public class BattlePlayerField {
 	private ArrowKeySelecter selector;
 	
 	
+	
 	public boolean EntityIsOnField(BattleEntity e) {
 		return this.ListOfpcs.containsKey(e);
 	}

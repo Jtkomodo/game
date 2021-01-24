@@ -12,7 +12,24 @@ import org.lwjgl.system.MemoryUtil;
 
 import gameEngine.Start;
 
-
+/**This is the class that makes the model for the gpu to use
+ * every thing that is drawn to the screen has some sort of model whether it be
+ * this one or {@link OneTextureBatchedModel} we make a model by using the constructors
+ * then we draw it using the {@link #draw()} method.We can change the uvs and vertices using the
+ * change methods(this will delete and reallocate buffers)
+ * <p>
+ * 
+ * <strong>Constructors:<strong>
+ * {@link #Model(float[], float[])  Model(float[] vertices,float[] uv_coords)},<P>{@link #Model(float[], float[], int[]) Model(float[] vertices,float[] uv_coords,int[] indeces)}
+ * ,<P>{@link #Model(float, float, float, float, float, float)  Model(float width,float height,float u,float v,float texWidth,float texHeight)}
+ * 
+ * 
+ * 
+ * 
+ * 
+ * @author Jesse Talbot
+ *
+ */
 public class Model extends ModelFramwork{
     private int drawCount;
 	private int vao_id,v_id,tex_id,ind_id;
@@ -27,8 +44,16 @@ public class Model extends ModelFramwork{
 
 		
 
-		
-		
+/**
+ * Since this is a 2D game this treats the model as just a rectangle sprite we will us this one mostly.
+ * This automatically generates the verts,uvs and indices based off of the parameters.	
+ * @param width the width of the sprite on the texture
+ * @param height the height of the sprite on the texture
+ * @param u the x position on the texture
+ * @param v the y position on the texture
+ * @param texWidth the width of the texture
+ * @param texHeight the height of the textrure
+ */
 public Model(float width,float height,float u,float v,float texWidth,float texHeight) {
 		 
 	        float  Texwidth=texWidth;
@@ -60,14 +85,24 @@ public Model(float width,float height,float u,float v,float texWidth,float texHe
 		
 		
 		
-		
+	/**
+	 * makes a new models with the specified verts and uvs
+	 * Indices will act ass though it is two triangles	
+	 * @param vertices the verts of the model
+	 * @param uv_coords the uvs of the model
+	 */
 	public Model(float[] vertices,float[] uv_coords) {
 		
 	 MakeModel(vertices,uv_coords,indeces);
 		
 	}
 		
-		
+	/**
+	 * Makes a new Model with the specified verts,uv_coords,and indices	
+	 * @param vertices the vertices of the model
+	 * @param uv_coords the uvs of the model
+	 * @param indeces the indeces of the model
+	 */
 	public Model(float[] vertices,float[] uv_coords,int[] indeces) {
 		
 		 MakeModel(vertices,uv_coords,indeces);
@@ -77,7 +112,11 @@ public Model(float width,float height,float u,float v,float texWidth,float texHe
 		
 
 	
-	
+/**
+ * Changes both vertices and UVs<strong> this deletes and reallocates buffers<strong>	
+ * @param vertices the new vertices
+ * @param uv_coords the new uv_coords
+ */
 public void changeValues(float[] vertices,float[] uv_coords) {
 	
 	changeVert(vertices);
@@ -157,26 +196,16 @@ Start.DebugPrint("made new model");
 		return Vertices;
 	}
 
-	public void setVertices(float[] vertices) {
-		this.Vertices = vertices;
-	}
+	
 
 	public float[] getUv_coords() {
 		return UV_coords;
 	}
 
-	public void setUv_coords(float[] uv_coords) {
-		this.UV_coords = uv_coords;
-	}
-
 	public int[] getIndeces() {
 		return indeces;
 	}
-
-	public void setIndeces(int[] indeces) {
-		this.indeces = indeces;
-	}
-
+	
 	protected void draw() {
 	if(draw) {	
 		
@@ -194,7 +223,10 @@ Start.DebugPrint("made new model");
 	
 	
 	//make buffers and put data in them
-		
+	/**
+	 * Change the UV's data.<strong> this will delete and deallocate buffers<string>
+	 * @param data the new UV data
+	 */
 		public void  changeUV(float[] data) {
 		 glBindBuffer(GL_ARRAY_BUFFER,tex_id);
 		FloatBuffer buffer= MemoryUtil.memAllocFloat(data.length);
@@ -206,6 +238,10 @@ Start.DebugPrint("made new model");
 		 MemoryUtil.memFree(buffer);
 		  this.UV_coords=data;
 			}
+	/**
+	 * Change the vertice's data.<strong> this will delete and deallocate buffers<string>
+	 * @param data the new vertices data
+	 */
 	public void  changeVert(float[] data) {
 		  glBindBuffer(GL_ARRAY_BUFFER,v_id);
 		  FloatBuffer buffer= MemoryUtil.memAllocFloat(data.length);

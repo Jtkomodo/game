@@ -86,7 +86,7 @@ public class BattleSystem {
 	
 	
 	private static void drawBattle() {
-		MainRenderHandler.addEntity(new Entity(backgroundModel,new Vector3f(0,0,-10), 0, 64*40, backgroundTexture));
+		MainRenderHandler.addEntity(new RenderEntity(backgroundModel,new Vector3f(0,0,-10), 0, 64*40, backgroundTexture));
 		enemyField.draw(EnemySelected);
 		playerField.draw(PCSelected);
 		if(playerField.EntityIsOnField(currentEntity)) {
@@ -121,8 +121,7 @@ public class BattleSystem {
 			EndBattleAsWin();
 		}
 		
-		
-		
+				
 		
 		//BattleLoop
 		
